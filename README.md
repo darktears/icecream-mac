@@ -64,8 +64,14 @@ $ make && make install
 
 If you're using a Debian-based distro, or basically any distro that uses sysv rc files to start iceccd and reads icecc.conf to configure the daemon, you can tell it to use your iceccd binary instead of the system-wide one. As root:
 
-Stop iceccd if it's running. > sudo service iceccd stop
+Stop iceccd if it's running.
+```bash
+$ sudo service iceccd stop
+```
 Edit icecc.conf and add a line like this: DAEMON="/path/to/your/new/iceccd"
-Restart iceccd. > sudo service iceccd start
+Restart iceccd.
+```bash
+> sudo service iceccd start
+```
 
 That's it.

@@ -71,7 +71,7 @@ $ sudo service iceccd stop
 Edit icecc.conf and add a line like this: DAEMON="/path/to/your/new/iceccd"
 Restart iceccd.
 ```bash
-> sudo service iceccd start
+$ sudo service iceccd start
 ```
 
 That's it.

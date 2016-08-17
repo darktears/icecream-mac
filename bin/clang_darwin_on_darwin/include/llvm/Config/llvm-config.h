@@ -43,7 +43,7 @@
 #define LLVM_HAS_ATOMICS 1
 
 /* Host triple LLVM will be executed on */
-#define LLVM_HOST_TRIPLE "x86_64-apple-darwin15.3.0"
+#define LLVM_HOST_TRIPLE "x86_64-apple-darwin15.6.0"
 
 /* Installation directory for include files */
 /* #undef LLVM_INCLUDEDIR */
@@ -82,7 +82,7 @@
 /* #undef LLVM_ON_WIN32 */
 
 /* Installation prefix directory */
-#define LLVM_PREFIX "/Users/bgirard/ben/llvm/install"
+#define LLVM_PREFIX "/Users/alexisme/Development/llvm/install"
 
 /* Define if we have the Intel JIT API runtime support library */
 /* #undef LLVM_USE_INTEL_JITEVENTS */
@@ -91,16 +91,16 @@
 /* #undef LLVM_USE_OPROFILE */
 
 /* Major version of the LLVM API */
-#define LLVM_VERSION_MAJOR 3
+#define LLVM_VERSION_MAJOR 4
 
 /* Minor version of the LLVM API */
-#define LLVM_VERSION_MINOR 8
+#define LLVM_VERSION_MINOR 0
 
 /* Patch version of the LLVM API */
 #define LLVM_VERSION_PATCH 0
 
 /* LLVM version string */
-#define LLVM_VERSION_STRING "3.8.0"
+#define LLVM_VERSION_STRING "4.0.0svn"
 
 /* Define if we link Polly to the tools */
 /* #undef LINK_POLLY_INTO_TOOLS */

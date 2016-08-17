@@ -1251,18 +1251,35 @@ streamsize
 basic_istream<_CharT, _Traits>::readsome(char_type* __s, streamsize __n)
 {
     __gc_ = 0;
-    streamsize __c = this->rdbuf()->in_avail();
-    switch (__c)
+#ifndef _LIBCPP_NO_EXCEPTIONS
+    try
     {
-    case -1:
-        this->setstate(ios_base::eofbit);
-        break;
-    case 0:
-        break;
-    default:
-        read(__s, _VSTD::min(__c, __n));
-        break;
+#endif  // _LIBCPP_NO_EXCEPTIONS
+        sentry __sen(*this, true);
+        if (__sen)
+        {
+            streamsize __c = this->rdbuf()->in_avail();
+            switch (__c)
+            {
+            case -1:
+                this->setstate(ios_base::eofbit);
+                break;
+            case 0:
+                break;
+            default:
+                read(__s, _VSTD::min(__c, __n));
+                break;
+            }
+        }
+        else
+            this->setstate(ios_base::failbit);
+#ifndef _LIBCPP_NO_EXCEPTIONS
     }
+    catch (...)
+    {
+        this->__set_badbit_and_consider_rethrow();
+    }
+#endif  // _LIBCPP_NO_EXCEPTIONS
     return __gc_;
 }
 
@@ -1464,9 +1481,9 @@ ws(basic_istream<_CharT, _Traits>& __is)
 template <class _CharT, class _Traits, class _Tp>
 inline _LIBCPP_INLINE_VISIBILITY
 basic_istream<_CharT, _Traits>&
-operator>>(basic_istream<_CharT, _Traits>&& __is, _Tp& __x)
+operator>>(basic_istream<_CharT, _Traits>&& __is, _Tp&& __x)
 {
-    __is >> __x;
+    __is >> _VSTD::forward<_Tp>(__x);
     return __is;
 }
 

@@ -51,6 +51,18 @@ clang_use_chrome_plugins = false
 cc_wrapper="icecc"
 ```
 
+## Using icemon to monitor the cluster.
+
+Install the prerequisites (I recommend using homebrew)
+```bash
+$ brew install qt5
+```
+
+Then run the icemon binary in this repo :
+```bash
+$ USE_SCHEDULER=10.7.197.223 icemon -n chromium
+```
+
 ## Setup the Linux nodes
 
 At the moment you need a custom version of icecream to be able to build the jobs sent from macOS. This is so that icecream

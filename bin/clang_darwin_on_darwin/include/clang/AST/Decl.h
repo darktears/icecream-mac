@@ -251,7 +251,7 @@ public:
   // FIXME: Deprecated, move clients to getName().
   std::string getNameAsString() const { return Name.getAsString(); }
 
-  void printName(raw_ostream &os) const { os << Name; }
+  virtual void printName(raw_ostream &os) const;
 
   /// getDeclName - Get the actual, stored name of the declaration,
   /// which may be a special name.
@@ -1025,7 +1025,7 @@ public:
   ///   void foo() { int x; static int y; extern int z; }
   ///
   bool isLocalVarDecl() const {
-    if (getKind() != Decl::Var)
+    if (getKind() != Decl::Var && getKind() != Decl::Decomposition)
       return false;
     if (const DeclContext *DC = getLexicalDeclContext())
       return DC->getRedeclContext()->isFunctionOrMethod();
@@ -1040,7 +1040,7 @@ public:
   /// isFunctionOrMethodVarDecl - Similar to isLocalVarDecl, but
   /// excludes variables declared in blocks.
   bool isFunctionOrMethodVarDecl() const {
-    if (getKind() != Decl::Var)
+    if (getKind() != Decl::Var && getKind() != Decl::Decomposition)
       return false;
     const DeclContext *DC = getLexicalDeclContext()->getRedeclContext();
     return DC->isFunctionOrMethod() && DC->getDeclKind() != Decl::Block;
@@ -2270,6 +2270,14 @@ public:
   /// the corresponding Builtin ID. If the function is not a memory function,
   /// returns 0.
   unsigned getMemoryFunctionKind() const;
+
+  /// Add a diagnostic to be emitted if and when this function is codegen'ed.
+  void addDeferredDiag(PartialDiagnosticAt PD);
+
+  /// Gets this object's list of deferred diagnostics, if there are any.
+  ///
+  /// Although this is logically const, it clears our list of deferred diags.
+  std::vector<PartialDiagnosticAt> takeDeferredDiags() const;
 
   // Implement isa/cast/dyncast/etc.
   static bool classof(const Decl *D) { return classofKind(D->getKind()); }

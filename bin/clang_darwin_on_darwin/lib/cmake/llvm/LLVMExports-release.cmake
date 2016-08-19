@@ -1395,6 +1395,15 @@ set_target_properties(llvm-link PROPERTIES
 list(APPEND _IMPORT_CHECK_TARGETS llvm-link )
 list(APPEND _IMPORT_CHECK_FILES_FOR_llvm-link "${_IMPORT_PREFIX}/bin/llvm-link" )
 
+# Import target "llvm-lto2" for configuration "Release"
+set_property(TARGET llvm-lto2 APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
+set_target_properties(llvm-lto2 PROPERTIES
+  IMPORTED_LOCATION_RELEASE "${_IMPORT_PREFIX}/bin/llvm-lto2"
+  )
+
+list(APPEND _IMPORT_CHECK_TARGETS llvm-lto2 )
+list(APPEND _IMPORT_CHECK_FILES_FOR_llvm-lto2 "${_IMPORT_PREFIX}/bin/llvm-lto2" )
+
 # Import target "llvm-mc" for configuration "Release"
 set_property(TARGET llvm-mc APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
 set_target_properties(llvm-mc PROPERTIES

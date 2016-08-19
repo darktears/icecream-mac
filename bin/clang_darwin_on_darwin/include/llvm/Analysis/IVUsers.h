@@ -16,6 +16,7 @@
 #define LLVM_ANALYSIS_IVUSERS_H
 
 #include "llvm/Analysis/LoopPass.h"
+#include "llvm/Analysis/LoopPassManager.h"
 #include "llvm/Analysis/ScalarEvolutionNormalization.h"
 #include "llvm/IR/ValueHandle.h"
 
@@ -90,32 +91,9 @@ private:
   void deleted() override;
 };
 
-template<> struct ilist_traits<IVStrideUse>
-  : public ilist_default_traits<IVStrideUse> {
-  // createSentinel is used to get hold of a node that marks the end of
-  // the list...
-  // The sentinel is relative to this instance, so we use a non-static
-  // method.
-  IVStrideUse *createSentinel() const {
-    // since i(p)lists always publicly derive from the corresponding
-    // traits, placing a data member in this class will augment i(p)list.
-    // But since the NodeTy is expected to publicly derive from
-    // ilist_node<NodeTy>, there is a legal viable downcast from it
-    // to NodeTy. We use this trick to superpose i(p)list with a "ghostly"
-    // NodeTy, which becomes the sentinel. Dereferencing the sentinel is
-    // forbidden (save the ilist_node<NodeTy>) so no one will ever notice
-    // the superposition.
-    return static_cast<IVStrideUse*>(&Sentinel);
-  }
-  static void destroySentinel(IVStrideUse*) {}
-
-  IVStrideUse *provideInitialHead() const { return createSentinel(); }
-  IVStrideUse *ensureHead(IVStrideUse*) const { return createSentinel(); }
-  static void noteHead(IVStrideUse*, IVStrideUse*) {}
-
-private:
-  mutable ilist_node<IVStrideUse> Sentinel;
-};
+template <>
+struct ilist_sentinel_traits<IVStrideUse>
+    : public ilist_embedded_sentinel_traits<IVStrideUse> {};
 
 class IVUsers {
   friend class IVStrideUse;
@@ -208,7 +186,7 @@ class IVUsersAnalysis : public AnalysisInfoMixin<IVUsersAnalysis> {
 public:
   typedef IVUsers Result;
 
-  IVUsers run(Loop &L, AnalysisManager<Loop> &AM);
+  IVUsers run(Loop &L, LoopAnalysisManager &AM);
 };
 
 /// Printer pass for the \c IVUsers for a loop.
@@ -217,7 +195,7 @@ class IVUsersPrinterPass : public PassInfoMixin<IVUsersPrinterPass> {
 
 public:
   explicit IVUsersPrinterPass(raw_ostream &OS) : OS(OS) {}
-  PreservedAnalyses run(Loop &L, AnalysisManager<Loop> &AM);
+  PreservedAnalyses run(Loop &L, LoopAnalysisManager &AM);
 };
 }
 

@@ -904,7 +904,7 @@ public:
   void replaceElements(DINodeArray Elements) {
 #ifndef NDEBUG
     for (DINode *Op : getElements())
-      assert(std::find(Elements->op_begin(), Elements->op_end(), Op) &&
+      assert(is_contained(Elements->operands(), Op) &&
              "Lost a member during member list replacement");
 #endif
     replaceOperandWith(4, Elements.get());
@@ -2155,6 +2155,11 @@ public:
   static bool classof(const Metadata *MD) {
     return MD->getMetadataID() == DIExpressionKind;
   }
+
+  /// \brief Is the first element a DW_OP_deref?.
+  bool startsWithDeref() const {
+    return getNumElements() > 0 && getElement(0) == dwarf::DW_OP_deref;
+  }
 };
 
 class DIObjCProperty : public DINode {
@@ -2433,7 +2438,7 @@ public:
   void replaceElements(DIMacroNodeArray Elements) {
 #ifndef NDEBUG
     for (DIMacroNode *Op : getElements())
-      assert(std::find(Elements->op_begin(), Elements->op_end(), Op) &&
+      assert(is_contained(Elements->operands(), Op) &&
              "Lost a macro node during macro node list replacement");
 #endif
     replaceOperandWith(1, Elements.get());

@@ -120,6 +120,8 @@ OPTION(prefix_1, "analyzer-inline-max-stack-depth", analyzer_inline_max_stack_de
 OPTION(prefix_1, "analyzer-inlining-mode=", analyzer_inlining_mode_EQ, Joined, INVALID, analyzer_inlining_mode, nullptr, CC1Option | NoDriverOption, 0, nullptr, nullptr)
 OPTION(prefix_1, "analyzer-inlining-mode", analyzer_inlining_mode, Separate, INVALID, INVALID, nullptr, CC1Option | NoDriverOption, 0,
        "Specify the function selection heuristic used during inlining", nullptr)
+OPTION(prefix_1, "analyzer-list-enabled-checkers", analyzer_list_enabled_checkers, Flag, INVALID, INVALID, nullptr, CC1Option | NoDriverOption, 0,
+       "Display the list of enabled analyzer checkers", nullptr)
 OPTION(prefix_1, "analyzer-max-loop", analyzer_max_loop, Separate, INVALID, INVALID, nullptr, CC1Option | NoDriverOption, 0,
        "The maximum number of times the analyzer will go through a loop", nullptr)
 OPTION(prefix_3, "analyzer-no-default-checks", _analyzer_no_default_checks, Flag, INVALID, INVALID, nullptr, DriverOption, 0, nullptr, nullptr)
@@ -237,6 +239,8 @@ OPTION(prefix_1, "cl-fast-relaxed-math", cl_fast_relaxed_math, Flag, opencl_Grou
        "OpenCL only. Sets -cl-finite-math-only and -cl-unsafe-math-optimizations, and defines __FAST_RELAXED_MATH__.", nullptr)
 OPTION(prefix_1, "cl-finite-math-only", cl_finite_math_only, Flag, opencl_Group, INVALID, nullptr, CC1Option, 0,
        "OpenCL only. Allow floating-point optimizations that assume arguments and results are not NaNs or +-Inf.", nullptr)
+OPTION(prefix_1, "cl-fp32-correctly-rounded-divide-sqrt", cl_fp32_correctly_rounded_divide_sqrt, Flag, opencl_Group, INVALID, nullptr, CC1Option, 0,
+       "OpenCL only. Specify that single precision floating-point divide and sqrt used in the program source are correctly rounded.", nullptr)
 OPTION(prefix_1, "cl-kernel-arg-info", cl_kernel_arg_info, Flag, opencl_Group, INVALID, nullptr, CC1Option, 0,
        "OpenCL only. Generate kernel argument metadata.", nullptr)
 OPTION(prefix_1, "cl-mad-enable", cl_mad_enable, Flag, opencl_Group, INVALID, nullptr, CC1Option, 0,
@@ -1088,11 +1092,13 @@ OPTION(prefix_1, "fno-reroll-loops", fno_reroll_loops, Flag, f_Group, INVALID, n
        "Turn off loop reroller", nullptr)
 OPTION(prefix_1, "fno-rewrite-includes", fno_rewrite_includes, Flag, f_Group, INVALID, nullptr, 0, 0, nullptr, nullptr)
 OPTION(prefix_1, "fno-ripa", ripa_fno, Flag, clang_ignored_f_Group, INVALID, nullptr, 0, 0, nullptr, nullptr)
+OPTION(prefix_1, "fno-ropi", fno_ropi, Flag, f_Group, INVALID, nullptr, 0, 0, nullptr, nullptr)
 OPTION(prefix_1, "fno-rounding-math", rounding_math_fno, Flag, clang_ignored_gcc_optimization_f_Group, INVALID, nullptr, 0, 0, nullptr, nullptr)
 OPTION(prefix_1, "fno-rtti-data", fno_rtti_data, Flag, INVALID, INVALID, nullptr, CC1Option | NoDriverOption, 0,
        "Control emission of RTTI data", nullptr)
 OPTION(prefix_1, "fno-rtti", fno_rtti, Flag, f_Group, INVALID, nullptr, CC1Option, 0,
        "Disable generation of rtti information", nullptr)
+OPTION(prefix_1, "fno-rwpi", fno_rwpi, Flag, f_Group, INVALID, nullptr, 0, 0, nullptr, nullptr)
 OPTION(prefix_1, "fno-sanitize-blacklist", fno_sanitize_blacklist, Flag, f_clang_Group, INVALID, nullptr, 0, 0,
        "Don't use blacklist file for sanitizers", nullptr)
 OPTION(prefix_1, "fno-sanitize-cfi-cross-dso", fno_sanitize_cfi_cross_dso, Flag, f_clang_Group, INVALID, nullptr, CC1Option, 0,
@@ -1351,8 +1357,10 @@ OPTION(prefix_1, "frewrite-includes", frewrite_includes, Flag, f_Group, INVALID,
 OPTION(prefix_1, "frewrite-map-file=", frewrite_map_file_EQ, Joined, f_Group, INVALID, nullptr, DriverOption, 0, nullptr, nullptr)
 OPTION(prefix_1, "frewrite-map-file", frewrite_map_file, Separate, f_Group, INVALID, nullptr, DriverOption | CC1Option, 0, nullptr, nullptr)
 OPTION(prefix_1, "fripa", ripa_f, Flag, clang_ignored_f_Group, INVALID, nullptr, 0, 0, nullptr, nullptr)
+OPTION(prefix_1, "fropi", fropi, Flag, f_Group, INVALID, nullptr, 0, 0, nullptr, nullptr)
 OPTION(prefix_1, "frounding-math", rounding_math_f, Flag, clang_ignored_gcc_optimization_f_Group, INVALID, nullptr, 0, 0, nullptr, nullptr)
 OPTION(prefix_1, "frtti", frtti, Flag, f_Group, INVALID, nullptr, 0, 0, nullptr, nullptr)
+OPTION(prefix_1, "frwpi", frwpi, Flag, f_Group, INVALID, nullptr, 0, 0, nullptr, nullptr)
 OPTION(prefix_2, "FR", _SLASH_FR, Joined, cl_Group, INVALID, nullptr, CLOption | DriverOption, 0, nullptr, nullptr)
 OPTION(prefix_2, "Fr", _SLASH_Fr, Joined, cl_Group, INVALID, nullptr, CLOption | DriverOption, 0, nullptr, nullptr)
 OPTION(prefix_1, "fsanitize-address-field-padding=", fsanitize_address_field_padding, Joined, f_clang_Group, INVALID, nullptr, CC1Option, 0,

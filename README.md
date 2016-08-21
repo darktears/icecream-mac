@@ -87,5 +87,9 @@ Restart iceccd.
 ```bash
 $ sudo service iceccd start
 ```
-
+If your icemon can't find the schedulder, try to run it as follows:
+```
+$ USE_SCHEDULER=IP_OF_SCHEDULER icemon -n NAME_OF_SCHEDULER
+```
 That's it.
+

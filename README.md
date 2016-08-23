@@ -89,3 +89,5 @@ $ sudo service iceccd start
 ```
 
 That's it.
+
+![alt tag](https://raw.githubusercontent.com/darktears/icecream-mac/master/Screen%20Shot%202016-08-19%20at%203.24.27%20PM.png)

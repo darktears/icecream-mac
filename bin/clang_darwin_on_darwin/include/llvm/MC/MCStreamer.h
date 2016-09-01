@@ -569,6 +569,34 @@ public:
   void EmitSymbolValue(const MCSymbol *Sym, unsigned Size,
                        bool IsSectionRelative = false);
 
+  /// \brief Emit the expression \p Value into the output as a dtprel
+  /// (64-bit DTP relative) value.
+  ///
+  /// This is used to implement assembler directives such as .dtpreldword on
+  /// targets that support them.
+  virtual void EmitDTPRel64Value(const MCExpr *Value);
+
+  /// \brief Emit the expression \p Value into the output as a dtprel
+  /// (32-bit DTP relative) value.
+  ///
+  /// This is used to implement assembler directives such as .dtprelword on
+  /// targets that support them.
+  virtual void EmitDTPRel32Value(const MCExpr *Value);
+
+  /// \brief Emit the expression \p Value into the output as a tprel
+  /// (64-bit TP relative) value.
+  ///
+  /// This is used to implement assembler directives such as .tpreldword on
+  /// targets that support them.
+  virtual void EmitTPRel64Value(const MCExpr *Value);
+
+  /// \brief Emit the expression \p Value into the output as a tprel
+  /// (32-bit TP relative) value.
+  ///
+  /// This is used to implement assembler directives such as .tprelword on
+  /// targets that support them.
+  virtual void EmitTPRel32Value(const MCExpr *Value);
+
   /// \brief Emit the expression \p Value into the output as a gprel64 (64-bit
   /// GP relative) value.
   ///
@@ -681,8 +709,9 @@ public:
                                      StringRef FileName);
 
   /// \brief Associate a filename with a specified logical file number.  This
-  /// implements the '.cv_file 4 "foo.c"' assembler directive.
-  virtual unsigned EmitCVFileDirective(unsigned FileNo, StringRef Filename);
+  /// implements the '.cv_file 4 "foo.c"' assembler directive. Returns true on
+  /// success.
+  virtual bool EmitCVFileDirective(unsigned FileNo, StringRef Filename);
 
   /// \brief This implements the CodeView '.cv_loc' assembler directive.
   virtual void EmitCVLocDirective(unsigned FunctionId, unsigned FileNo,

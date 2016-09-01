@@ -18,7 +18,7 @@
 
 // Extend the underlying scalar type of an operation, leaving the high bits
 // unspecified.
-def G_ANYEXTEND : Instruction {
+def G_ANYEXT : Instruction {
   let OutOperandList = (outs unknown:$dst);
   let InOperandList = (ins unknown:$src);
   let hasSideEffects = 0;
@@ -79,6 +79,12 @@ def G_CONSTANT : Instruction {
   let hasSideEffects = 0;
 }
 
+def G_FCONSTANT : Instruction {
+  let OutOperandList = (outs unknown:$dst);
+  let InOperandList = (ins unknown:$imm);
+  let hasSideEffects = 0;
+}
+
 //------------------------------------------------------------------------------
 // Binary ops.
 //------------------------------------------------------------------------------
@@ -107,12 +113,36 @@ def G_MUL : Instruction {
   let isCommutable = 1;
 }
 
-// Generic addition consuming and producing a carry flag.
-def G_ADDE : Instruction {
-  let OutOperandList = (outs unknown:$dst, unknown:$carry_out);
-  let InOperandList = (ins unknown:$src1, unknown:$src2, unknown:$carry_in);
+// Generic signed division.
+def G_SDIV : Instruction {
+  let OutOperandList = (outs unknown:$dst);
+  let InOperandList = (ins unknown:$src1, unknown:$src2);
   let hasSideEffects = 0;
-  let isCommutable = 1;
+  let isCommutable = 0;
+}
+
+// Generic unsigned division.
+def G_UDIV : Instruction {
+  let OutOperandList = (outs unknown:$dst);
+  let InOperandList = (ins unknown:$src1, unknown:$src2);
+  let hasSideEffects = 0;
+  let isCommutable = 0;
+}
+
+// Generic signed remainder.
+def G_SREM : Instruction {
+  let OutOperandList = (outs unknown:$dst);
+  let InOperandList = (ins unknown:$src1, unknown:$src2);
+  let hasSideEffects = 0;
+  let isCommutable = 0;
+}
+
+// Generic unsigned remainder.
+def G_UREM : Instruction {
+  let OutOperandList = (outs unknown:$dst);
+  let InOperandList = (ins unknown:$src1, unknown:$src2);
+  let hasSideEffects = 0;
+  let isCommutable = 0;
 }
 
 // Generic bitwise and.
@@ -160,6 +190,158 @@ def G_ASHR : Instruction {
   let hasSideEffects = 0;
 }
 
+// Generic integer comparison.
+def G_ICMP : Instruction {
+  let OutOperandList = (outs unknown:$dst);
+  let InOperandList = (ins unknown:$tst, unknown:$src1, unknown:$src2);
+  let hasSideEffects = 0;
+}
+
+// Generic floating-point comparison.
+def G_FCMP : Instruction {
+  let OutOperandList = (outs unknown:$dst);
+  let InOperandList = (ins unknown:$tst, unknown:$src1, unknown:$src2);
+  let hasSideEffects = 0;
+}
+
+// Generic select
+def G_SELECT : Instruction {
+  let OutOperandList = (outs unknown:$dst);
+  let InOperandList = (ins unknown:$tst, unknown:$src1, unknown:$src2);
+  let hasSideEffects = 0;
+}
+
+//------------------------------------------------------------------------------
+// Overflow ops
+//------------------------------------------------------------------------------
+
+// Generic unsigned addition consuming and producing a carry flag.
+def G_UADDE : Instruction {
+  let OutOperandList = (outs unknown:$dst, unknown:$carry_out);
+  let InOperandList = (ins unknown:$src1, unknown:$src2, unknown:$carry_in);
+  let hasSideEffects = 0;
+}
+
+// Generic signed addition producing a carry flag.
+def G_SADDO : Instruction {
+  let OutOperandList = (outs unknown:$dst, unknown:$carry_out);
+  let InOperandList = (ins unknown:$src1, unknown:$src2);
+  let hasSideEffects = 0;
+  let isCommutable = 1;
+}
+
+// Generic unsigned subtraction consuming and producing a carry flag.
+def G_USUBE : Instruction {
+  let OutOperandList = (outs unknown:$dst, unknown:$carry_out);
+  let InOperandList = (ins unknown:$src1, unknown:$src2, unknown:$carry_in);
+  let hasSideEffects = 0;
+}
+
+// Generic unsigned subtraction producing a carry flag.
+def G_SSUBO : Instruction {
+  let OutOperandList = (outs unknown:$dst, unknown:$carry_out);
+  let InOperandList = (ins unknown:$src1, unknown:$src2);
+  let hasSideEffects = 0;
+}
+
+// Generic unsigned multiplication producing a carry flag.
+def G_UMULO : Instruction {
+  let OutOperandList = (outs unknown:$dst, unknown:$carry_out);
+  let InOperandList = (ins unknown:$src1, unknown:$src2);
+  let hasSideEffects = 0;
+  let isCommutable = 1;
+}
+
+// Generic signed multiplication producing a carry flag.
+def G_SMULO : Instruction {
+  let OutOperandList = (outs unknown:$dst, unknown:$carry_out);
+  let InOperandList = (ins unknown:$src1, unknown:$src2);
+  let hasSideEffects = 0;
+  let isCommutable = 1;
+}
+
+//------------------------------------------------------------------------------
+// Floating Point Unary Ops.
+//------------------------------------------------------------------------------
+
+def G_FPEXT : Instruction {
+  let OutOperandList = (outs unknown:$dst);
+  let InOperandList = (ins unknown:$src);
+  let hasSideEffects = 0;
+}
+
+def G_FPTRUNC : Instruction {
+  let OutOperandList = (outs unknown:$dst);
+  let InOperandList = (ins unknown:$src);
+  let hasSideEffects = 0;
+}
+
+def G_FPTOSI : Instruction {
+  let OutOperandList = (outs unknown:$dst);
+  let InOperandList = (ins unknown:$src);
+  let hasSideEffects = 0;
+}
+
+def G_FPTOUI : Instruction {
+  let OutOperandList = (outs unknown:$dst);
+  let InOperandList = (ins unknown:$src);
+  let hasSideEffects = 0;
+}
+
+def G_SITOFP : Instruction {
+  let OutOperandList = (outs unknown:$dst);
+  let InOperandList = (ins unknown:$src);
+  let hasSideEffects = 0;
+}
+
+def G_UITOFP : Instruction {
+  let OutOperandList = (outs unknown:$dst);
+  let InOperandList = (ins unknown:$src);
+  let hasSideEffects = 0;
+}
+
+//------------------------------------------------------------------------------
+// Floating Point Binary ops.
+//------------------------------------------------------------------------------
+
+// Generic FP addition.
+def G_FADD : Instruction {
+  let OutOperandList = (outs unknown:$dst);
+  let InOperandList = (ins unknown:$src1, unknown:$src2);
+  let hasSideEffects = 0;
+  let isCommutable = 1;
+}
+
+// Generic FP subtraction.
+def G_FSUB : Instruction {
+  let OutOperandList = (outs unknown:$dst);
+  let InOperandList = (ins unknown:$src1, unknown:$src2);
+  let hasSideEffects = 0;
+  let isCommutable = 0;
+}
+
+// Generic FP multiplication.
+def G_FMUL : Instruction {
+  let OutOperandList = (outs unknown:$dst);
+  let InOperandList = (ins unknown:$src1, unknown:$src2);
+  let hasSideEffects = 0;
+  let isCommutable = 1;
+}
+
+// Generic FP division.
+def G_FDIV : Instruction {
+  let OutOperandList = (outs unknown:$dst);
+  let InOperandList = (ins unknown:$src1, unknown:$src2);
+  let hasSideEffects = 0;
+}
+
+// Generic FP remainder.
+def G_FREM : Instruction {
+  let OutOperandList = (outs unknown:$dst);
+  let InOperandList = (ins unknown:$src1, unknown:$src2);
+  let hasSideEffects = 0;
+}
+
 //------------------------------------------------------------------------------
 // Memory ops
 //------------------------------------------------------------------------------
@@ -193,8 +375,18 @@ def G_EXTRACT : Instruction {
   let hasSideEffects = 0;
 }
 
+// Insert a sequence of smaller registers into a larger one at the specified
+// indices (interleaved with the values in the operand list "op0, bit0, op1,
+// bit1, ...")).
+def G_INSERT : Instruction {
+  let OutOperandList = (outs unknown:$dst);
+  let InOperandList = (ins unknown:$src, variable_ops);
+  let hasSideEffects = 0;
+}
+
 // Combine a sequence of generic vregs into a single larger value (starting at
-// bit 0).
+// bit 0). Essentially a G_INSERT where $src is an IMPLICIT_DEF, but it's so
+// important to legalization it probably deserves its own instruction.
 def G_SEQUENCE : Instruction {
   let OutOperandList = (outs unknown:$dst);
   let InOperandList = (ins variable_ops);

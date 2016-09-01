@@ -29,6 +29,7 @@ DIAG(err_module_lock_failure, CLASS_ERROR, (unsigned)diag::Severity::Fatal, "cou
 DIAG(err_module_lock_timeout, CLASS_ERROR, (unsigned)diag::Severity::Fatal, "timed out waiting to acquire lock file for module '%0'", 0, SFINAE_SubstitutionFailure, false, true, 4)
 DIAG(err_module_not_built, CLASS_ERROR, (unsigned)diag::Severity::Fatal, "could not build module '%0'", 0, SFINAE_SubstitutionFailure, false, true, 4)
 DIAG(err_module_not_found, CLASS_ERROR, (unsigned)diag::Severity::Fatal, "module '%0' not found", 0, SFINAE_SubstitutionFailure, false, true, 4)
+DIAG(err_module_prebuilt, CLASS_ERROR, (unsigned)diag::Severity::Fatal, "error in loading module '%0' from prebuilt module path", 0, SFINAE_SubstitutionFailure, false, true, 4)
 DIAG(err_module_unavailable, CLASS_ERROR, (unsigned)diag::Severity::Error, "module '%0' %select{is incompatible with|requires}1 feature '%2'", 0, SFINAE_SubstitutionFailure, false, true, 4)
 DIAG(err_mt_message, CLASS_ERROR, (unsigned)diag::Severity::Error, "[rewriter] %0", 0, SFINAE_SubstitutionFailure, false, false, 0)
 DIAG(err_nullability_conflicting, CLASS_ERROR, (unsigned)diag::Severity::Error, "nullability specifier %0 conflicts with existing specifier %1", 0, SFINAE_SubstitutionFailure, false, true, 17)

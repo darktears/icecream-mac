@@ -145,6 +145,10 @@ public:
     return getTLI()->getScalingFactorCost(DL, AM, Ty, AddrSpace);
   }
 
+  bool isFoldableMemAccessOffset(Instruction *I, int64_t Offset) {
+    return getTLI()->isFoldableMemAccessOffset(I, Offset);
+  }
+
   bool isTruncateFree(Type *Ty1, Type *Ty2) {
     return getTLI()->isTruncateFree(Ty1, Ty2);
   }
@@ -281,7 +285,11 @@ public:
 
     // Enable runtime and partial unrolling up to the specified size.
     UP.Partial = UP.Runtime = true;
-    UP.PartialThreshold = UP.PartialOptSizeThreshold = MaxOps;
+    UP.PartialThreshold = MaxOps;
+
+    // Avoid unrolling when optimizing for size.
+    UP.OptSizeThreshold = 0;
+    UP.PartialOptSizeThreshold = 0;
   }
 
   /// @}

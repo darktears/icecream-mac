@@ -106,6 +106,7 @@ DIAG(warn_drv_ps4_sdk_dir, CLASS_WARNING, (unsigned)diag::Severity::Warning, "en
 DIAG(warn_drv_treating_input_as_cxx, CLASS_WARNING, (unsigned)diag::Severity::Warning, "treating '%0' input as '%1' when in C++ mode, this behavior is deprecated", 132, SFINAE_Suppress, false, false, 25)
 DIAG(warn_drv_unable_to_find_directory_expected, CLASS_WARNING, (unsigned)diag::Severity::Ignored, "unable to find %0 directory, expected to be in '%1'", 289, SFINAE_Suppress, false, false, 0)
 DIAG(warn_drv_unknown_argument_clang_cl, CLASS_WARNING, (unsigned)diag::Severity::Warning, "unknown argument ignored in clang-cl: '%0'", 591, SFINAE_Suppress, false, false, 0)
+DIAG(warn_drv_unsupported_opt_for_target, CLASS_WARNING, (unsigned)diag::Severity::Warning, "optimization flag '%0' is not supported for target '%1'", 241, SFINAE_Suppress, false, false, 0)
 DIAG(warn_drv_unused_argument, CLASS_WARNING, (unsigned)diag::Severity::Warning, "argument unused during compilation: '%0'", 613, SFINAE_Suppress, false, false, 0)
 DIAG(warn_drv_yc_multiple_inputs_clang_cl, CLASS_WARNING, (unsigned)diag::Severity::Warning, "support for '/Yc' with more than one source file not implemented yet; flag ignored", 100, SFINAE_Suppress, false, false, 0)
 DIAG(warn_drv_ycyu_different_arg_clang_cl, CLASS_WARNING, (unsigned)diag::Severity::Warning, "support for '/Yc' and '/Yu' with different filenames not implemented yet; flags ignored", 100, SFINAE_Suppress, false, false, 0)

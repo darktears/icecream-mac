@@ -35,6 +35,9 @@
 /* Define if we have libxml2 */
 #define CLANG_HAVE_LIBXML 1
 
+/* Define if we have sys/resource.h (rlimits) */
+#define CLANG_HAVE_RLIMITS 1
+
 /* The LLVM product name and version */
 #define BACKEND_PACKAGE_STRING "LLVM 4.0.0svn"
 

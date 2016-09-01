@@ -174,8 +174,8 @@ public:
       } else {
         GO = cast<GlobalObject>(GV);
       }
-      if (GV)
-        return GV->getComdat();
+      if (GO)
+        return GO->getComdat();
       return nullptr;
     }
     uint64_t getCommonSize() const {
@@ -228,6 +228,10 @@ public:
   StringRef getSourceFileName() const {
     return Obj->getModule().getSourceFileName();
   }
+
+  MemoryBufferRef getMemoryBufferRef() const {
+    return Obj->getMemoryBufferRef();
+  }
 };
 
 /// A ThinBackend defines what happens after the thin-link phase during ThinLTO.
@@ -236,7 +240,7 @@ public:
 typedef std::function<std::unique_ptr<ThinBackendProc>(
     Config &C, ModuleSummaryIndex &CombinedIndex,
     StringMap<GVSummaryMapTy> &ModuleToDefinedGVSummaries,
-    AddStreamFn AddStream)>
+    AddOutputFn AddOutput)>
     ThinBackend;
 
 /// This ThinBackend runs the individual backend jobs in-process.
@@ -269,7 +273,7 @@ ThinBackend createWriteIndexesThinBackend(std::string OldPrefix,
 ///   and pass it and an array of symbol resolutions to the add() function.
 /// - Call the getMaxTasks() function to get an upper bound on the number of
 ///   native object files that LTO may add to the link.
-/// - Call the run() function. This function will use the supplied AddStream
+/// - Call the run() function. This function will use the supplied AddOutput
 ///   function to add up to getMaxTasks() native object files to the link.
 class LTO {
   friend InputFile;
@@ -293,21 +297,26 @@ public:
   /// full description of tasks see LTOBackend.h.
   unsigned getMaxTasks() const;
 
-  /// Runs the LTO pipeline. This function calls the supplied AddStream function
+  /// Runs the LTO pipeline. This function calls the supplied AddOutput function
   /// to add native object files to the link.
-  Error run(AddStreamFn AddStream);
+  Error run(AddOutputFn AddOutput);
 
 private:
   Config Conf;
 
   struct RegularLTOState {
     RegularLTOState(unsigned ParallelCodeGenParallelismLevel, Config &Conf);
+    struct CommonResolution {
+      uint64_t Size = 0;
+      unsigned Align = 0;
+    };
+    std::map<std::string, CommonResolution> Commons;
 
     unsigned ParallelCodeGenParallelismLevel;
     LTOLLVMContext Ctx;
     bool HasModule = false;
     std::unique_ptr<Module> CombinedModule;
-    IRMover Mover;
+    std::unique_ptr<IRMover> Mover;
   } RegularLTO;
 
   struct ThinLTOState {
@@ -359,8 +368,6 @@ private:
   // Global mapping from mangled symbol names to resolutions.
   StringMap<GlobalResolution> GlobalResolutions;
 
-  void writeToResolutionFile(InputFile *Input, ArrayRef<SymbolResolution> Res);
-
   void addSymbolToGlobalRes(object::IRObjectFile *Obj,
                             SmallPtrSet<GlobalValue *, 8> &Used,
                             const InputFile::Symbol &Sym, SymbolResolution Res,
@@ -371,8 +378,8 @@ private:
   Error addThinLTO(std::unique_ptr<InputFile> Input,
                    ArrayRef<SymbolResolution> Res);
 
-  Error runRegularLTO(AddStreamFn AddStream);
-  Error runThinLTO(AddStreamFn AddStream);
+  Error runRegularLTO(AddOutputFn AddOutput);
+  Error runThinLTO(AddOutputFn AddOutput);
 
   mutable bool CalledGetMaxTasks = false;
 };

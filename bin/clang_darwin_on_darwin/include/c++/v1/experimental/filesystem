@@ -453,6 +453,9 @@ class _LIBCPP_TYPE_VIS directory_entry;
 template <class _Tp> struct __can_convert_char {
   static const bool value = false;
 };
+template <class _Tp> struct __can_convert_char<const _Tp>
+    : public __can_convert_char<_Tp> {
+};
 template <> struct __can_convert_char<char> {
     static const bool value = true;
     using __char_type = char;
@@ -1175,6 +1178,17 @@ private:
     typedef pair<path, path> _Storage;
     shared_ptr<_Storage> __paths_;
 };
+
+template <class... _Args>
+_LIBCPP_NORETURN inline _LIBCPP_ALWAYS_INLINE
+void __throw_filesystem_error(_Args && ...__args)
+{
+#ifndef _LIBCPP_NO_EXCEPTIONS
+    throw filesystem_error(std::forward<_Args>(__args)...);
+#else
+    _VSTD::abort();
+#endif
+}
 
 // operational functions
 

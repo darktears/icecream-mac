@@ -21,6 +21,8 @@
 #include "llvm/CodeGen/LowLevelType.h"
 #include "llvm/IR/DebugLoc.h"
 
+#include <queue>
+
 namespace llvm {
 
 // Forward declarations.
@@ -47,10 +49,14 @@ class MachineIRBuilder {
   bool Before;
   /// @}
 
+  std::function<void(MachineInstr *)> InsertedInstr;
+
   const TargetInstrInfo &getTII() {
     assert(TII && "TargetInstrInfo is not set");
     return *TII;
   }
+
+  void validateTruncExt(ArrayRef<LLT> Tys, bool IsExtend);
 
 public:
   /// Getter for the function we currently build.
@@ -82,6 +88,13 @@ public:
   /// (\p Before = false) \p MI.
   /// \pre MI must be in getMF().
   void setInstr(MachineInstr &MI, bool Before = true);
+  /// @}
+
+  /// Control where instructions we create are recorded (typically for
+  /// visiting again later during legalization).
+  /// @{
+  void recordInsertions(std::function<void(MachineInstr *)> InsertedInstr);
+  void stopRecordingInsertions();
   /// @}
 
   /// Set the debug location to \p DL for all the next build instructions.
@@ -131,22 +144,45 @@ public:
   MachineInstrBuilder buildAdd(LLT Ty, unsigned Res, unsigned Op0,
                                 unsigned Op1);
 
-  /// Build and insert \p Res<def>, \p CarryOut = G_ADDE \p Ty \p Op0, \p Op1,
+  /// Build and insert \p Res<def> = G_SUB \p Ty \p Op0, \p Op1
+  ///
+  /// G_SUB sets \p Res to the sum of integer parameters \p Op0 and \p Op1,
+  /// truncated to their width.
+  ///
+  /// \pre setBasicBlock or setMI must have been called.
+  ///
+  /// \return a MachineInstrBuilder for the newly created instruction.
+  MachineInstrBuilder buildSub(LLT Ty, unsigned Res, unsigned Op0,
+                               unsigned Op1);
+
+  /// Build and insert \p Res<def> = G_MUL \p Ty \p Op0, \p Op1
+  ///
+  /// G_MUL sets \p Res to the sum of integer parameters \p Op0 and \p Op1,
+  /// truncated to their width.
+  ///
+  /// \pre setBasicBlock or setMI must have been called.
+  ///
+  /// \return a MachineInstrBuilder for the newly created instruction.
+  MachineInstrBuilder buildMul(LLT Ty, unsigned Res, unsigned Op0,
+                               unsigned Op1);
+
+  /// Build and insert \p Res<def>, \p CarryOut = G_UADDE \p Tys \p Op0, \p Op1,
   /// \p CarryIn
   ///
-  /// G_ADDE sets \p Res to \p Op0 + \p Op1 + \p CarryIn (truncated to the bit
-  /// width) and sets \p CarryOut to 1 if the result overflowed in 2s-complement
+  /// G_UADDE sets \p Res to \p Op0 + \p Op1 + \p CarryIn (truncated to the bit
+  /// width) and sets \p CarryOut to 1 if the result overflowed in unsigned
   /// arithmetic.
   ///
   /// \pre setBasicBlock or setMI must have been called.
   ///
   /// \return The newly created instruction.
-  MachineInstrBuilder buildAdde(LLT Ty, unsigned Res, unsigned CarryOut,
-                                unsigned Op0, unsigned Op1, unsigned CarryIn);
+  MachineInstrBuilder buildUAdde(ArrayRef<LLT> Tys, unsigned Res,
+                                 unsigned CarryOut, unsigned Op0, unsigned Op1,
+                                 unsigned CarryIn);
 
-  /// Build and insert \p Res<def> = G_ANYEXTEND \p Ty \p Op0
+  /// Build and insert \p Res<def> = G_ANYEXT \p { DstTy, SrcTy } \p Op0
   ///
-  /// G_ANYEXTEND produces a register of the specified width, with bits 0 to
+  /// G_ANYEXT produces a register of the specified width, with bits 0 to
   /// sizeof(\p Ty) * 8 set to \p Op. The remaining bits are unspecified
   /// (i.e. this is neither zero nor sign-extension). For a vector register,
   /// each element is extended individually.
@@ -154,7 +190,29 @@ public:
   /// \pre setBasicBlock or setMI must have been called.
   ///
   /// \return The newly created instruction.
-  MachineInstrBuilder buildAnyExtend(LLT Ty, unsigned Res, unsigned Op);
+  MachineInstrBuilder buildAnyExt(ArrayRef<LLT> Tys, unsigned Res, unsigned Op);
+
+  /// Build and insert \p Res<def> = G_SEXT \p { DstTy, SrcTy }\p Op
+  ///
+  /// G_SEXT produces a register of the specified width, with bits 0 to
+  /// sizeof(\p Ty) * 8 set to \p Op. The remaining bits are duplicated from the
+  /// high bit of \p Op (i.e. 2s-complement sign extended).
+  ///
+  /// \pre setBasicBlock or setMI must have been called.
+  ///
+  /// \return The newly created instruction.
+  MachineInstrBuilder buildSExt(ArrayRef<LLT> Tys, unsigned Res, unsigned Op);
+
+  /// Build and insert \p Res<def> = G_ZEXT \p { DstTy, SrcTy } \p Op
+  ///
+  /// G_ZEXT produces a register of the specified width, with bits 0 to
+  /// sizeof(\p Ty) * 8 set to \p Op. The remaining bits are 0. For a vector
+  /// register, each element is extended individually.
+  ///
+  /// \pre setBasicBlock or setMI must have been called.
+  ///
+  /// \return The newly created instruction.
+  MachineInstrBuilder buildZExt(ArrayRef<LLT> Tys, unsigned Res, unsigned Op);
 
   /// Build and insert G_BR unsized \p Dest
   ///
@@ -169,7 +227,8 @@ public:
   ///
   /// G_BRCOND is a conditional branch to \p Dest. At the beginning of
   /// legalization, \p Ty will be a single bit (s1). Targets with interesting
-  /// flags registers may change this.
+  /// flags registers may change this. For a wider type, whether the branch is
+  /// taken must only depend on bit 0 (for now).
   ///
   /// \pre setBasicBlock or setMI must have been called.
   ///
@@ -184,6 +243,17 @@ public:
   ///
   /// \return The newly created instruction.
   MachineInstrBuilder buildConstant(LLT Ty, unsigned Res, int64_t Val);
+
+  /// Build and insert \p Res = G_FCONSTANT \p Ty \p Val
+  ///
+  /// G_FCONSTANT is a floating-point constant with the specified size and
+  /// value.
+  ///
+  /// \pre setBasicBlock or setMI must have been called.
+  ///
+  /// \return The newly created instruction.
+  MachineInstrBuilder buildFConstant(LLT Ty, unsigned Res,
+                                     const ConstantFP &Val);
 
   /// Build and insert \p Res<def> = COPY Op
   ///
@@ -216,28 +286,67 @@ public:
   MachineInstrBuilder buildStore(LLT VTy, LLT PTy, unsigned Val, unsigned Addr,
                                  MachineMemOperand &MMO);
 
-  /// Build and insert `Res0<def>, ... = G_EXTRACT Ty Src, Idx0, ...`.
+  /// Build and insert `Res0<def>, ... = G_EXTRACT { ResTys, SrcTy } Src, Idx0,
+  /// ...`.
   ///
-  /// If \p Ty has size N bits, G_EXTRACT sets \p Res[0] to bits `[Idxs[0],
+  /// If \p SrcTy has size N bits, G_EXTRACT sets \p Res[0] to bits `[Idxs[0],
   /// Idxs[0] + N)` of \p Src and similarly for subsequent bit-indexes.
   ///
   /// \pre setBasicBlock or setMI must have been called.
   ///
   /// \return a MachineInstrBuilder for the newly created instruction.
-  MachineInstrBuilder buildExtract(LLT Ty, ArrayRef<unsigned> Results,
-                                   unsigned Src, ArrayRef<unsigned> Indexes);
+  MachineInstrBuilder buildExtract(ArrayRef<LLT> ResTys,
+                                   ArrayRef<unsigned> Results,
+                                   ArrayRef<uint64_t> Indices, LLT SrcTy,
+                                   unsigned Src);
 
-  /// Build and insert \p Res<def> = G_SEQUENCE \p Ty \p Ops[0], ...
+  /// Build and insert \p Res<def> = G_SEQUENCE \p { \pResTy, \p Op0Ty, ... }
+  /// \p Op0, \p Idx0...
   ///
-  /// G_SEQUENCE concatenates each element in Ops into a single register, where
-  /// Ops[0] starts at bit 0 of \p Res.
+  /// G_SEQUENCE inserts each element of Ops into an IMPLICIT_DEF register,
+  /// where each entry starts at the bit-index specified by \p Indices.
   ///
   /// \pre setBasicBlock or setMI must have been called.
-  /// \pre The sum of the input sizes must equal the result's size.
+  /// \pre The final element of the sequence must not extend past the end of the
+  ///      destination register.
+  /// \pre The bits defined by each Op (derived from index and scalar size) must
+  ///      not overlap.
+  /// \pre Each source operand must have a
   ///
   /// \return a MachineInstrBuilder for the newly created instruction.
-  MachineInstrBuilder buildSequence(LLT Ty, unsigned Res,
-                                    ArrayRef<unsigned> Ops);
+  MachineInstrBuilder buildSequence(LLT ResTy, unsigned Res,
+                                    ArrayRef<LLT> OpTys,
+                                    ArrayRef<unsigned> Ops,
+                                    ArrayRef<unsigned> Indices);
+
+  void addUsesWithIndices(MachineInstrBuilder MIB) {}
+
+  template <typename... ArgTys>
+  void addUsesWithIndices(MachineInstrBuilder MIB, LLT Ty, unsigned Reg,
+                          unsigned BitIndex, ArgTys... Args) {
+    MIB.addUse(Reg).addImm(BitIndex);
+    MIB->setType(Ty, MIB->getNumTypes());
+
+    addUsesWithIndices(MIB, Args...);
+  }
+
+  template <typename... ArgTys>
+  MachineInstrBuilder buildSequence(LLT Ty, unsigned Res, LLT OpTy, unsigned Op,
+                                    unsigned Index, ArgTys... Args) {
+    MachineInstrBuilder MIB =
+        buildInstr(TargetOpcode::G_SEQUENCE, Ty).addDef(Res);
+    addUsesWithIndices(MIB, OpTy, Op, Index, Args...);
+    return MIB;
+  }
+
+  template <typename... ArgTys>
+  MachineInstrBuilder buildInsert(LLT Ty, unsigned Res, unsigned Src, LLT OpTy,
+                                  unsigned Op, unsigned Index, ArgTys... Args) {
+    MachineInstrBuilder MIB =
+        buildInstr(TargetOpcode::G_INSERT, Ty).addDef(Res).addUse(Src);
+    addUsesWithIndices(MIB, OpTy, Op, Index, Args...);
+    return MIB;
+  }
 
   /// Build and insert either a G_INTRINSIC (if \p HasSideEffects is false) or
   /// G_INTRINSIC_W_SIDE_EFFECTS instruction. Its first operand will be the
@@ -252,7 +361,16 @@ public:
   MachineInstrBuilder buildIntrinsic(ArrayRef<LLT> Tys, Intrinsic::ID ID,
                                      unsigned Res, bool HasSideEffects);
 
-  /// Build and insert \p Res<def> = G_TRUNC \p Ty \p Op
+  /// Build and insert \p Res<def> = G_FPTRUNC \p { DstTy, SrcTy } \p Op
+  ///
+  /// G_FPTRUNC converts a floating-point value into one with a smaller type.
+  ///
+  /// \pre setBasicBlock or setMI must have been called.
+  ///
+  /// \return The newly created instruction.
+  MachineInstrBuilder buildFPTrunc(ArrayRef<LLT> Ty, unsigned Res, unsigned Op);
+
+  /// Build and insert \p Res<def> = G_TRUNC \p { DstTy, SrcTy } \p Op
   ///
   /// G_TRUNC extracts the low bits of a type. For a vector type each element is
   /// truncated independently before being packed into the destination.
@@ -260,7 +378,31 @@ public:
   /// \pre setBasicBlock or setMI must have been called.
   ///
   /// \return The newly created instruction.
-  MachineInstrBuilder buildTrunc(LLT Ty, unsigned Res, unsigned Op);
+  MachineInstrBuilder buildTrunc(ArrayRef<LLT> Tys, unsigned Res, unsigned Op);
+
+  /// Build and insert a G_ICMP
+  ///
+  /// \pre setBasicBlock or setMI must have been called.
+  ///
+  /// \return a MachineInstrBuilder for the newly created instruction.
+  MachineInstrBuilder buildICmp(ArrayRef<LLT> Tys, CmpInst::Predicate Pred,
+                                unsigned Res, unsigned Op0, unsigned Op1);
+
+  /// Build and insert a G_FCMP
+  ///
+  /// \pre setBasicBlock or setMI must have been called.
+  ///
+  /// \return a MachineInstrBuilder for the newly created instruction.
+  MachineInstrBuilder buildFCmp(ArrayRef<LLT> Tys, CmpInst::Predicate Pred,
+                                unsigned Res, unsigned Op0, unsigned Op1);
+
+  /// Build and insert a \p Res = G_SELECT { \p Ty, s1 } \p Tst, \p Op0, \p Op1
+  ///
+  /// \pre setBasicBlock or setMI must have been called.
+  ///
+  /// \return a MachineInstrBuilder for the newly created instruction.
+  MachineInstrBuilder buildSelect(LLT Ty, unsigned Res, unsigned Tst,
+                                  unsigned Op0, unsigned Op1);
 };
 
 } // End namespace llvm.

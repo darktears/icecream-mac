@@ -23,7 +23,7 @@ Install the daemon. This will create a launchd plist which will be run on startu
 The argument passed to the `install.sh` script is the scheduler to connect to.
 
 ```bash
-$ sudo /path/to/chromium/src/icecream/install.sh IP_OF_SCHEDULER
+$ sudo /path/to/chromium/src/icecream/install.sh HOSTNAME_OF_SCHEDULER
 ```
 You can uninstall it with :
 ```bash
@@ -58,10 +58,14 @@ Install the prerequisites (I recommend using homebrew)
 $ brew install qt5
 ```
 
-Then run the icemon binary in this repo :
+Then run the icemon to monitor the cluser :
+
+Make sure you set the scheduler hostname in your .bashrc :
 ```bash
-$ USE_SCHEDULER=10.7.197.223 icemon -n chromium
+USE_SCHEDULER=HOSTNAME_OR_IP_OF_SCHEDULER
 ```
+
+Copy the Icemon.app into your /Applications folder. Then just run it.
 
 ## Setup the Linux nodes
 

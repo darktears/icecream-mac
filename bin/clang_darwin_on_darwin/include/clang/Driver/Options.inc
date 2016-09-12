@@ -282,13 +282,16 @@ OPTION(prefix_1, "compress-debug-sections", compress_debug_sections, Flag, INVAL
 OPTION(prefix_3, "constant-cfstrings", _constant_cfstrings, Flag, INVALID, INVALID, nullptr, 0, 0, nullptr, nullptr)
 OPTION(prefix_1, "coverage-cfg-checksum", coverage_cfg_checksum, Flag, INVALID, INVALID, nullptr, CC1Option | NoDriverOption, 0,
        "Emit CFG checksum for functions in .gcno files.", nullptr)
+OPTION(prefix_1, "coverage-data-file=", coverage_data_file_EQ, Joined, INVALID, coverage_data_file, nullptr, CC1Option | NoDriverOption, 0, nullptr, nullptr)
+OPTION(prefix_1, "coverage-data-file", coverage_data_file, Separate, INVALID, INVALID, nullptr, CC1Option | NoDriverOption, 0,
+       "Emit coverage data to this filename.", nullptr)
 OPTION(prefix_1, "coverage-exit-block-before-body", coverage_exit_block_before_body, Flag, INVALID, INVALID, nullptr, CC1Option | NoDriverOption, 0,
        "Emit the exit block before the body blocks in .gcno files.", nullptr)
-OPTION(prefix_1, "coverage-file=", coverage_file_EQ, Joined, INVALID, coverage_file, nullptr, CC1Option | NoDriverOption, 0, nullptr, nullptr)
-OPTION(prefix_1, "coverage-file", coverage_file, Separate, INVALID, INVALID, nullptr, CC1Option | NoDriverOption, 0,
-       "Emit coverage data to this filename. The extension will be replaced.", nullptr)
 OPTION(prefix_1, "coverage-no-function-names-in-data", coverage_no_function_names_in_data, Flag, INVALID, INVALID, nullptr, CC1Option | NoDriverOption, 0,
        "Emit function names in .gcda files.", nullptr)
+OPTION(prefix_1, "coverage-notes-file=", coverage_notes_file_EQ, Joined, INVALID, coverage_notes_file, nullptr, CC1Option | NoDriverOption, 0, nullptr, nullptr)
+OPTION(prefix_1, "coverage-notes-file", coverage_notes_file, Separate, INVALID, INVALID, nullptr, CC1Option | NoDriverOption, 0,
+       "Emit coverage notes to this filename.", nullptr)
 OPTION(prefix_1, "coverage-version=", coverage_version_EQ, Joined, INVALID, INVALID, nullptr, CC1Option | NoDriverOption, 0,
        "Four-byte version string for gcov files.", nullptr)
 OPTION(prefix_4, "coverage", coverage, Flag, INVALID, INVALID, nullptr, 0, 0, nullptr, nullptr)
@@ -838,7 +841,7 @@ OPTION(prefix_1, "fmodules-search-all", fmodules_search_all, Flag, f_Group, INVA
        "Search even non-imported modules to resolve references", nullptr)
 OPTION(prefix_1, "fmodules-strict-decluse", fmodules_strict_decluse, Flag, f_Group, INVALID, nullptr, DriverOption | CC1Option, 0,
        "Like -fmodules-decluse but requires all headers to be in modules", nullptr)
-OPTION(prefix_1, "fmodules-ts", fmodules_ts, Flag, f_Group, INVALID, nullptr, CC1Option | NoDriverOption, 0,
+OPTION(prefix_1, "fmodules-ts", fmodules_ts, Flag, f_Group, INVALID, nullptr, CC1Option, 0,
        "Enable support for the C++ Modules TS", nullptr)
 OPTION(prefix_1, "fmodules-user-build-path", fmodules_user_build_path, Separate, i_Group, INVALID, nullptr, DriverOption | CC1Option, 0,
        "Specify the module user build path", "<directory>")
@@ -1310,7 +1313,7 @@ OPTION(prefix_1, "fpreserve-as-comments", fpreserve_as_comments, Flag, f_Group, 
 OPTION(prefix_1, "fprintf", printf_f, Flag, clang_ignored_f_Group, INVALID, nullptr, 0, 0, nullptr, nullptr)
 OPTION(prefix_1, "fprofile-arcs", fprofile_arcs, Flag, f_Group, INVALID, nullptr, 0, 0, nullptr, nullptr)
 OPTION(prefix_1, "fprofile-correction", profile_correction_f, Flag, clang_ignored_gcc_optimization_f_Group, INVALID, nullptr, 0, 0, nullptr, nullptr)
-OPTION(prefix_1, "fprofile-dir=", fprofile_dir, Joined, clang_ignored_gcc_optimization_f_Group, INVALID, nullptr, 0, 0, nullptr, nullptr)
+OPTION(prefix_1, "fprofile-dir=", fprofile_dir, Joined, f_Group, INVALID, nullptr, 0, 0, nullptr, nullptr)
 OPTION(prefix_1, "fprofile-generate-sampling", profile_generate_sampling_f, Flag, clang_ignored_f_Group, INVALID, nullptr, 0, 0, nullptr, nullptr)
 OPTION(prefix_1, "fprofile-generate=", fprofile_generate_EQ, Joined, f_Group, INVALID, nullptr, DriverOption, 0,
        "Generate instrumented code to collect execution counts into <directory>/default.profraw (overridden by LLVM_PROFILE_FILE env var)", "<directory>")
@@ -2388,6 +2391,8 @@ OPTION(prefix_1, "preamble-bytes=", preamble_bytes_EQ, Joined, INVALID, INVALID,
        "Assume that the precompiled header is a precompiled preamble covering the first N bytes of the main file", nullptr)
 OPTION(prefix_1, "prebind_all_twolevel_modules", prebind__all__twolevel__modules, Flag, INVALID, INVALID, nullptr, 0, 0, nullptr, nullptr)
 OPTION(prefix_1, "prebind", prebind, Flag, INVALID, INVALID, nullptr, 0, 0, nullptr, nullptr)
+OPTION(prefix_3, "precompile", _precompile, Flag, Action_Group, INVALID, nullptr, DriverOption, 0,
+       "Only precompile the input", nullptr)
 OPTION(prefix_3, "prefix=", _prefix_EQ, Joined, INVALID, B, nullptr, 0, 0, nullptr, nullptr)
 OPTION(prefix_3, "prefix", _prefix, Separate, INVALID, B, nullptr, 0, 0, nullptr, nullptr)
 OPTION(prefix_1, "preload", preload, Flag, INVALID, INVALID, nullptr, 0, 0, nullptr, nullptr)

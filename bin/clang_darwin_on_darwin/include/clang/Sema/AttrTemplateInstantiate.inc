@@ -760,6 +760,10 @@ Attr *instantiateTemplateAttribute(const Attr *At, ASTContext &C, Sema &S,
       const auto *A = cast<ReqdWorkGroupSizeAttr>(At);
       return A->clone(C);
     }
+    case attr::RequireConstantInit: {
+      const auto *A = cast<RequireConstantInitAttr>(At);
+      return A->clone(C);
+    }
     case attr::RequiresCapability: {
       const auto *A = cast<RequiresCapabilityAttr>(At);
       auto *tempInstArgs = new (C, 16) Expr *[A->args_size()];

@@ -5,6 +5,16 @@
 # Commands may need to know the format version.
 set(CMAKE_IMPORT_FILE_VERSION 1)
 
+# Import target "LLVMDemangle" for configuration "Release"
+set_property(TARGET LLVMDemangle APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
+set_target_properties(LLVMDemangle PROPERTIES
+  IMPORTED_LINK_INTERFACE_LANGUAGES_RELEASE "CXX"
+  IMPORTED_LOCATION_RELEASE "${_IMPORT_PREFIX}/lib/libLLVMDemangle.a"
+  )
+
+list(APPEND _IMPORT_CHECK_TARGETS LLVMDemangle )
+list(APPEND _IMPORT_CHECK_FILES_FOR_LLVMDemangle "${_IMPORT_PREFIX}/lib/libLLVMDemangle.a" )
+
 # Import target "LLVMSupport" for configuration "Release"
 set_property(TARGET LLVMSupport APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
 set_target_properties(LLVMSupport PROPERTIES
@@ -680,6 +690,15 @@ set_target_properties(llvm-cxxdump PROPERTIES
 
 list(APPEND _IMPORT_CHECK_TARGETS llvm-cxxdump )
 list(APPEND _IMPORT_CHECK_FILES_FOR_llvm-cxxdump "${_IMPORT_PREFIX}/bin/llvm-cxxdump" )
+
+# Import target "llvm-cxxfilt" for configuration "Release"
+set_property(TARGET llvm-cxxfilt APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
+set_target_properties(llvm-cxxfilt PROPERTIES
+  IMPORTED_LOCATION_RELEASE "${_IMPORT_PREFIX}/bin/llvm-cxxfilt"
+  )
+
+list(APPEND _IMPORT_CHECK_TARGETS llvm-cxxfilt )
+list(APPEND _IMPORT_CHECK_FILES_FOR_llvm-cxxfilt "${_IMPORT_PREFIX}/bin/llvm-cxxfilt" )
 
 # Import target "llvm-diff" for configuration "Release"
 set_property(TARGET llvm-diff APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)

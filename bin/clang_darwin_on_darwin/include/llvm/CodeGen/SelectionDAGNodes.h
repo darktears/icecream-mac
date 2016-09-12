@@ -49,7 +49,6 @@ class Value;
 class MCSymbol;
 template <typename T> struct DenseMapInfo;
 template <typename T> struct simplify_type;
-template <typename T> struct ilist_traits;
 
 void checkForCycles(const SDNode *N, const SelectionDAG *DAG = nullptr,
                     bool force = false);
@@ -503,7 +502,6 @@ private:
   static const EVT *getValueTypeList(EVT VT);
 
   friend class SelectionDAG;
-  friend struct ilist_traits<SDNode>;
   // TODO: unfriend HandleSDNode once we fix its operand handling.
   friend class HandleSDNode;
 
@@ -2108,11 +2106,11 @@ public:
 template <> struct GraphTraits<SDNode*> {
   typedef SDNode *NodeRef;
   typedef SDNodeIterator ChildIteratorType;
-  static inline NodeRef getEntryNode(SDNode *N) { return N; }
-  static inline ChildIteratorType child_begin(NodeRef N) {
+  static NodeRef getEntryNode(SDNode *N) { return N; }
+  static ChildIteratorType child_begin(NodeRef N) {
     return SDNodeIterator::begin(N);
   }
-  static inline ChildIteratorType child_end(NodeRef N) {
+  static ChildIteratorType child_end(NodeRef N) {
     return SDNodeIterator::end(N);
   }
 };

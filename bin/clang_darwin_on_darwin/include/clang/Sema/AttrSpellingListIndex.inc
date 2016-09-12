@@ -78,9 +78,9 @@
         return 1;
     if (Name == "align" && SyntaxUsed == 2 && Scope == "")
         return 2;
-    if (Name == "alignas" && SyntaxUsed == 3 && Scope == "")
+    if (Name == "alignas" && SyntaxUsed == 4 && Scope == "")
         return 3;
-    if (Name == "_Alignas" && SyntaxUsed == 3 && Scope == "")
+    if (Name == "_Alignas" && SyntaxUsed == 4 && Scope == "")
         return 4;
     break;
   }
@@ -89,7 +89,7 @@
         return 0;
     if (Name == "always_inline" && SyntaxUsed == 1 && Scope == "gnu")
         return 1;
-    if (Name == "__forceinline" && SyntaxUsed == 3 && Scope == "")
+    if (Name == "__forceinline" && SyntaxUsed == 4 && Scope == "")
         return 2;
     break;
   }
@@ -158,9 +158,9 @@
         return 0;
     if (Name == "cdecl" && SyntaxUsed == 1 && Scope == "gnu")
         return 1;
-    if (Name == "__cdecl" && SyntaxUsed == 3 && Scope == "")
+    if (Name == "__cdecl" && SyntaxUsed == 4 && Scope == "")
         return 2;
-    if (Name == "_cdecl" && SyntaxUsed == 3 && Scope == "")
+    if (Name == "_cdecl" && SyntaxUsed == 4 && Scope == "")
         return 3;
     break;
   }
@@ -379,9 +379,9 @@
         return 0;
     if (Name == "fastcall" && SyntaxUsed == 1 && Scope == "gnu")
         return 1;
-    if (Name == "__fastcall" && SyntaxUsed == 3 && Scope == "")
+    if (Name == "__fastcall" && SyntaxUsed == 4 && Scope == "")
         return 2;
-    if (Name == "_fastcall" && SyntaxUsed == 3 && Scope == "")
+    if (Name == "_fastcall" && SyntaxUsed == 4 && Scope == "")
         return 3;
     break;
   }
@@ -500,11 +500,11 @@
     break;
   }
   case AT_LoopHint: {
-    if (Name == "loop" && SyntaxUsed == 4 && Scope == "clang")
+    if (Name == "loop" && SyntaxUsed == 5 && Scope == "clang")
         return 0;
-    if (Name == "unroll" && SyntaxUsed == 4 && Scope == "")
+    if (Name == "unroll" && SyntaxUsed == 5 && Scope == "")
         return 1;
-    if (Name == "nounroll" && SyntaxUsed == 4 && Scope == "")
+    if (Name == "nounroll" && SyntaxUsed == 5 && Scope == "")
         return 2;
     break;
   }
@@ -516,13 +516,13 @@
     break;
   }
   case AT_MSInheritance: {
-    if (Name == "__single_inheritance" && SyntaxUsed == 3 && Scope == "")
+    if (Name == "__single_inheritance" && SyntaxUsed == 4 && Scope == "")
         return 0;
-    if (Name == "__multiple_inheritance" && SyntaxUsed == 3 && Scope == "")
+    if (Name == "__multiple_inheritance" && SyntaxUsed == 4 && Scope == "")
         return 1;
-    if (Name == "__virtual_inheritance" && SyntaxUsed == 3 && Scope == "")
+    if (Name == "__virtual_inheritance" && SyntaxUsed == 4 && Scope == "")
         return 2;
-    if (Name == "__unspecified_inheritance" && SyntaxUsed == 3 && Scope == "")
+    if (Name == "__unspecified_inheritance" && SyntaxUsed == 4 && Scope == "")
         return 3;
     break;
   }
@@ -771,7 +771,7 @@
     break;
   }
   case AT_ObjCKindOf: {
-    if (Name == "__kindof" && SyntaxUsed == 3 && Scope == "")
+    if (Name == "__kindof" && SyntaxUsed == 4 && Scope == "")
         return 0;
     break;
   }
@@ -826,52 +826,52 @@
     break;
   }
   case AT_OpenCLAccess: {
-    if (Name == "__read_only" && SyntaxUsed == 3 && Scope == "")
+    if (Name == "__read_only" && SyntaxUsed == 4 && Scope == "")
         return 0;
-    if (Name == "read_only" && SyntaxUsed == 3 && Scope == "")
+    if (Name == "read_only" && SyntaxUsed == 4 && Scope == "")
         return 1;
-    if (Name == "__write_only" && SyntaxUsed == 3 && Scope == "")
+    if (Name == "__write_only" && SyntaxUsed == 4 && Scope == "")
         return 2;
-    if (Name == "write_only" && SyntaxUsed == 3 && Scope == "")
+    if (Name == "write_only" && SyntaxUsed == 4 && Scope == "")
         return 3;
-    if (Name == "__read_write" && SyntaxUsed == 3 && Scope == "")
+    if (Name == "__read_write" && SyntaxUsed == 4 && Scope == "")
         return 4;
-    if (Name == "read_write" && SyntaxUsed == 3 && Scope == "")
+    if (Name == "read_write" && SyntaxUsed == 4 && Scope == "")
         return 5;
     break;
   }
   case AT_OpenCLConstantAddressSpace: {
-    if (Name == "__constant" && SyntaxUsed == 3 && Scope == "")
+    if (Name == "__constant" && SyntaxUsed == 4 && Scope == "")
         return 0;
-    if (Name == "constant" && SyntaxUsed == 3 && Scope == "")
+    if (Name == "constant" && SyntaxUsed == 4 && Scope == "")
         return 1;
     break;
   }
   case AT_OpenCLGenericAddressSpace: {
-    if (Name == "__generic" && SyntaxUsed == 3 && Scope == "")
+    if (Name == "__generic" && SyntaxUsed == 4 && Scope == "")
         return 0;
-    if (Name == "generic" && SyntaxUsed == 3 && Scope == "")
+    if (Name == "generic" && SyntaxUsed == 4 && Scope == "")
         return 1;
     break;
   }
   case AT_OpenCLGlobalAddressSpace: {
-    if (Name == "__global" && SyntaxUsed == 3 && Scope == "")
+    if (Name == "__global" && SyntaxUsed == 4 && Scope == "")
         return 0;
-    if (Name == "global" && SyntaxUsed == 3 && Scope == "")
+    if (Name == "global" && SyntaxUsed == 4 && Scope == "")
         return 1;
     break;
   }
   case AT_OpenCLKernel: {
-    if (Name == "__kernel" && SyntaxUsed == 3 && Scope == "")
+    if (Name == "__kernel" && SyntaxUsed == 4 && Scope == "")
         return 0;
-    if (Name == "kernel" && SyntaxUsed == 3 && Scope == "")
+    if (Name == "kernel" && SyntaxUsed == 4 && Scope == "")
         return 1;
     break;
   }
   case AT_OpenCLLocalAddressSpace: {
-    if (Name == "__local" && SyntaxUsed == 3 && Scope == "")
+    if (Name == "__local" && SyntaxUsed == 4 && Scope == "")
         return 0;
-    if (Name == "local" && SyntaxUsed == 3 && Scope == "")
+    if (Name == "local" && SyntaxUsed == 4 && Scope == "")
         return 1;
     break;
   }
@@ -881,9 +881,9 @@
     break;
   }
   case AT_OpenCLPrivateAddressSpace: {
-    if (Name == "__private" && SyntaxUsed == 3 && Scope == "")
+    if (Name == "__private" && SyntaxUsed == 4 && Scope == "")
         return 0;
-    if (Name == "private" && SyntaxUsed == 3 && Scope == "")
+    if (Name == "private" && SyntaxUsed == 4 && Scope == "")
         return 1;
     break;
   }
@@ -928,9 +928,9 @@
   case AT_Pascal: {
     if (Name == "pascal" && SyntaxUsed == 0 && Scope == "")
         return 0;
-    if (Name == "__pascal" && SyntaxUsed == 3 && Scope == "")
+    if (Name == "__pascal" && SyntaxUsed == 4 && Scope == "")
         return 1;
-    if (Name == "_pascal" && SyntaxUsed == 3 && Scope == "")
+    if (Name == "_pascal" && SyntaxUsed == 4 && Scope == "")
         return 2;
     break;
   }
@@ -967,12 +967,12 @@
     break;
   }
   case AT_Ptr32: {
-    if (Name == "__ptr32" && SyntaxUsed == 3 && Scope == "")
+    if (Name == "__ptr32" && SyntaxUsed == 4 && Scope == "")
         return 0;
     break;
   }
   case AT_Ptr64: {
-    if (Name == "__ptr64" && SyntaxUsed == 3 && Scope == "")
+    if (Name == "__ptr64" && SyntaxUsed == 4 && Scope == "")
         return 0;
     break;
   }
@@ -1015,6 +1015,13 @@
   case AT_ReqdWorkGroupSize: {
     if (Name == "reqd_work_group_size" && SyntaxUsed == 0 && Scope == "")
         return 0;
+    break;
+  }
+  case AT_RequireConstantInit: {
+    if (Name == "require_constant_initialization" && SyntaxUsed == 0 && Scope == "")
+        return 0;
+    if (Name == "require_constant_initialization" && SyntaxUsed == 1 && Scope == "clang")
+        return 1;
     break;
   }
   case AT_RequiresCapability: {
@@ -1061,7 +1068,7 @@
     break;
   }
   case AT_SPtr: {
-    if (Name == "__sptr" && SyntaxUsed == 3 && Scope == "")
+    if (Name == "__sptr" && SyntaxUsed == 4 && Scope == "")
         return 0;
     break;
   }
@@ -1106,9 +1113,9 @@
         return 0;
     if (Name == "stdcall" && SyntaxUsed == 1 && Scope == "gnu")
         return 1;
-    if (Name == "__stdcall" && SyntaxUsed == 3 && Scope == "")
+    if (Name == "__stdcall" && SyntaxUsed == 4 && Scope == "")
         return 2;
-    if (Name == "_stdcall" && SyntaxUsed == 3 && Scope == "")
+    if (Name == "_stdcall" && SyntaxUsed == 4 && Scope == "")
         return 3;
     break;
   }
@@ -1171,9 +1178,9 @@
         return 0;
     if (Name == "thiscall" && SyntaxUsed == 1 && Scope == "gnu")
         return 1;
-    if (Name == "__thiscall" && SyntaxUsed == 3 && Scope == "")
+    if (Name == "__thiscall" && SyntaxUsed == 4 && Scope == "")
         return 2;
-    if (Name == "_thiscall" && SyntaxUsed == 3 && Scope == "")
+    if (Name == "_thiscall" && SyntaxUsed == 4 && Scope == "")
         return 3;
     break;
   }
@@ -1201,17 +1208,17 @@
     break;
   }
   case AT_TypeNonNull: {
-    if (Name == "_Nonnull" && SyntaxUsed == 3 && Scope == "")
+    if (Name == "_Nonnull" && SyntaxUsed == 4 && Scope == "")
         return 0;
     break;
   }
   case AT_TypeNullUnspecified: {
-    if (Name == "_Null_unspecified" && SyntaxUsed == 3 && Scope == "")
+    if (Name == "_Null_unspecified" && SyntaxUsed == 4 && Scope == "")
         return 0;
     break;
   }
   case AT_TypeNullable: {
-    if (Name == "_Nullable" && SyntaxUsed == 3 && Scope == "")
+    if (Name == "_Nullable" && SyntaxUsed == 4 && Scope == "")
         return 0;
     break;
   }
@@ -1228,7 +1235,7 @@
     break;
   }
   case AT_UPtr: {
-    if (Name == "__uptr" && SyntaxUsed == 3 && Scope == "")
+    if (Name == "__uptr" && SyntaxUsed == 4 && Scope == "")
         return 0;
     break;
   }
@@ -1256,6 +1263,8 @@
   case AT_Uuid: {
     if (Name == "uuid" && SyntaxUsed == 2 && Scope == "")
         return 0;
+    if (Name == "uuid" && SyntaxUsed == 3 && Scope == "")
+        return 1;
     break;
   }
   case AT_VecReturn: {
@@ -1271,9 +1280,9 @@
   case AT_VectorCall: {
     if (Name == "vectorcall" && SyntaxUsed == 0 && Scope == "")
         return 0;
-    if (Name == "__vectorcall" && SyntaxUsed == 3 && Scope == "")
+    if (Name == "__vectorcall" && SyntaxUsed == 4 && Scope == "")
         return 1;
-    if (Name == "_vectorcall" && SyntaxUsed == 3 && Scope == "")
+    if (Name == "_vectorcall" && SyntaxUsed == 4 && Scope == "")
         return 2;
     break;
   }

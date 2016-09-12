@@ -5796,6 +5796,30 @@ public:
   static bool classof(const Attr *A) { return A->getKind() == attr::ReqdWorkGroupSize; }
 };
 
+class RequireConstantInitAttr : public InheritableAttr {
+public:
+  static RequireConstantInitAttr *CreateImplicit(ASTContext &Ctx, SourceRange Loc = SourceRange()) {
+    auto *A = new (Ctx) RequireConstantInitAttr(Loc, Ctx, 0);
+    A->setImplicit(true);
+    return A;
+  }
+
+  RequireConstantInitAttr(SourceRange R, ASTContext &Ctx
+              , unsigned SI
+             )
+    : InheritableAttr(attr::RequireConstantInit, R, SI, false, false)
+  {
+  }
+
+  RequireConstantInitAttr *clone(ASTContext &C) const;
+  void printPretty(raw_ostream &OS,
+                   const PrintingPolicy &Policy) const;
+  const char *getSpelling() const;
+
+
+  static bool classof(const Attr *A) { return A->getKind() == attr::RequireConstantInit; }
+};
+
 class RequiresCapabilityAttr : public InheritableAttr {
   unsigned args_Size;
   Expr * *args_;

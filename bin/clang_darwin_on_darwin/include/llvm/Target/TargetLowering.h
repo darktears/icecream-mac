@@ -335,6 +335,12 @@ public:
     return false;
   }
 
+  /// \brief Return true if it is cheaper to split the store of a merged int val
+  /// from a pair of smaller values into multiple stores.
+  virtual bool isMultiStoresCheaperThanBitsMerge(SDValue Lo, SDValue Hi) const {
+    return false;
+  }
+
   /// \brief Return if the target supports combining a
   /// chain like:
   /// \code
@@ -1403,15 +1409,12 @@ protected:
   /// that class natively.
   void addRegisterClass(MVT VT, const TargetRegisterClass *RC) {
     assert((unsigned)VT.SimpleTy < array_lengthof(RegClassForVT));
-    AvailableRegClasses.push_back(std::make_pair(VT, RC));
     RegClassForVT[VT.SimpleTy] = RC;
   }
 
   /// Remove all register classes.
   void clearRegisterClasses() {
     std::fill(std::begin(RegClassForVT), std::end(RegClassForVT), nullptr);
-
-    AvailableRegClasses.clear();
   }
 
   /// \brief Remove all operation actions.
@@ -2058,7 +2061,6 @@ private:
   LegalizeKind getTypeConversion(LLVMContext &Context, EVT VT) const;
 
 private:
-  std::vector<std::pair<MVT, const TargetRegisterClass*> > AvailableRegClasses;
 
   /// Targets can specify ISD nodes that they would like PerformDAGCombine
   /// callbacks for by calling setTargetDAGCombine(), which sets a bit in this

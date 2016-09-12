@@ -1560,6 +1560,15 @@
     New->setImplicit(isImplicit);
     break;
   }
+  case attr::RequireConstantInit: {
+    bool isInherited = Record[Idx++];
+    bool isImplicit = Record[Idx++];
+    unsigned Spelling = Record[Idx++];
+    New = new (Context) RequireConstantInitAttr(Range, Context, Spelling);
+    cast<InheritableAttr>(New)->setInherited(isInherited);
+    New->setImplicit(isImplicit);
+    break;
+  }
   case attr::RequiresCapability: {
     bool isInherited = Record[Idx++];
     bool isImplicit = Record[Idx++];

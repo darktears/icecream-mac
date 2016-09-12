@@ -832,6 +832,9 @@
     OS << " " << SA->getZDim();
     break;
   }
+  case attr::RequireConstantInit: {
+    break;
+  }
   case attr::RequiresCapability: {
     OS << " " << A->getSpelling();
     const auto *SA = cast<RequiresCapabilityAttr>(A);

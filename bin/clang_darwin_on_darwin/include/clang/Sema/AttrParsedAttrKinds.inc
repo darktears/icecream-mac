@@ -1204,6 +1204,10 @@ static AttributeList::Kind getAttrKind(StringRef Name, AttributeList::Syntax Syn
     if (memcmp(Name.data()+0, "try_acquire_shared_capability", 29))
       break;
     return AttributeList::AT_TryAcquireCapability;	 // "try_acquire_shared_capability"
+  case 31:	 // 1 string to match.
+    if (memcmp(Name.data()+0, "require_constant_initialization", 31))
+      break;
+    return AttributeList::AT_RequireConstantInit;	 // "require_constant_initialization"
   case 34:	 // 1 string to match.
     if (memcmp(Name.data()+0, "objc_requires_property_definitions", 34))
       break;
@@ -1328,6 +1332,14 @@ static AttributeList::Kind getAttrKind(StringRef Name, AttributeList::Syntax Syn
     if (memcmp(Name.data()+0, "layout_version", 14))
       break;
     return AttributeList::AT_LayoutVersion;	 // "layout_version"
+  }
+  } else if (AttributeList::AS_Microsoft == Syntax) {
+  switch (Name.size()) {
+  default: break;
+  case 4:	 // 1 string to match.
+    if (memcmp(Name.data()+0, "uuid", 4))
+      break;
+    return AttributeList::AT_Uuid;	 // "uuid"
   }
   } else if (AttributeList::AS_CXX11 == Syntax) {
   switch (Name.size()) {
@@ -1989,6 +2001,10 @@ static AttributeList::Kind getAttrKind(StringRef Name, AttributeList::Syntax Syn
     if (memcmp(Name.data()+0, "clang::try_acquire_shared_capability", 36))
       break;
     return AttributeList::AT_TryAcquireCapability;	 // "clang::try_acquire_shared_capability"
+  case 38:	 // 1 string to match.
+    if (memcmp(Name.data()+0, "clang::require_constant_initialization", 38))
+      break;
+    return AttributeList::AT_RequireConstantInit;	 // "clang::require_constant_initialization"
   }
   } else if (AttributeList::AS_Keyword == Syntax || AttributeList::AS_ContextSensitiveKeyword == Syntax) {
   switch (Name.size()) {

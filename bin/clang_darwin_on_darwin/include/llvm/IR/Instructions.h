@@ -2160,19 +2160,22 @@ public:
     return cast<Constant>(getOperand(2));
   }
 
-  /// Return the index from the shuffle mask for the specified
-  /// output result.  This is either -1 if the element is undef or a number less
-  /// than 2*numelements.
-  static int getMaskValue(Constant *Mask, unsigned i);
+  /// Return the shuffle mask value for the specified element of the mask.
+  /// Return -1 if the element is undef.
+  static int getMaskValue(Constant *Mask, unsigned Elt);
 
-  int getMaskValue(unsigned i) const {
-    return getMaskValue(getMask(), i);
+  /// Return the shuffle mask value of this instruction for the given element
+  /// index. Return -1 if the element is undef.
+  int getMaskValue(unsigned Elt) const {
+    return getMaskValue(getMask(), Elt);
   }
 
-  /// Return the full mask for this instruction, where each
-  /// element is the element number and undef's are returned as -1.
+  /// Convert the input shuffle mask operand to a vector of integers. Undefined
+  /// elements of the mask are returned as -1.
   static void getShuffleMask(Constant *Mask, SmallVectorImpl<int> &Result);
 
+  /// Return the mask for this instruction as a vector of integers. Undefined
+  /// elements of the mask are returned as -1.
   void getShuffleMask(SmallVectorImpl<int> &Result) const {
     return getShuffleMask(getMask(), Result);
   }
@@ -3270,10 +3273,8 @@ DEFINE_TRANSPARENT_OPERAND_ACCESSORS(SwitchInst, Value)
 class IndirectBrInst : public TerminatorInst {
   void *operator new(size_t, unsigned) = delete;
   unsigned ReservedSpace;
-  // Operand[0]    = Value to switch on
-  // Operand[1]    = Default basic block destination
-  // Operand[2n  ] = Value to match
-  // Operand[2n+1] = BasicBlock to go to on match
+  // Operand[0]   = Address to jump to
+  // Operand[n+1] = n-th destination
   IndirectBrInst(const IndirectBrInst &IBI);
   void init(Value *Address, unsigned NumDests);
   void growOperands();

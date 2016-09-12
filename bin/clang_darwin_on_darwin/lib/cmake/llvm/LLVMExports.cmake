@@ -16,7 +16,7 @@ set(CMAKE_IMPORT_FILE_VERSION 1)
 set(_targetsDefined)
 set(_targetsNotDefined)
 set(_expectedTargets)
-foreach(_expectedTarget LLVMSupport LLVMTableGen llvm-tblgen LLVMCore LLVMIRReader LLVMCodeGen LLVMSelectionDAG LLVMAsmPrinter LLVMMIRParser LLVMGlobalISel LLVMBitReader LLVMBitWriter LLVMTransformUtils LLVMInstrumentation LLVMInstCombine LLVMScalarOpts LLVMipo LLVMVectorize LLVMHello LLVMObjCARCOpts LLVMCoroutines LLVMLinker LLVMAnalysis LLVMLTO LLVMMC LLVMMCParser LLVMMCDisassembler LLVMObject LLVMObjectYAML LLVMOption LLVMDebugInfoDWARF LLVMDebugInfoMSF LLVMDebugInfoCodeView LLVMDebugInfoPDB LLVMSymbolize LLVMExecutionEngine LLVMInterpreter LLVMMCJIT LLVMOrcJIT LLVMRuntimeDyld LLVMTarget LLVMX86CodeGen LLVMX86AsmParser LLVMX86Disassembler LLVMX86AsmPrinter LLVMX86Desc LLVMX86Info LLVMX86Utils LLVMAsmParser LLVMLineEditor LLVMProfileData LLVMCoverage LLVMPasses LLVMLibDriver LTO llvm-ar llvm-config llvm-lto llvm-profdata bugpoint BugpointPasses llvm-dsymutil llc lli llvm-as llvm-bcanalyzer llvm-c-test llvm-cov llvm-cxxdump llvm-diff llvm-dis llvm-dwarfdump llvm-dwp llvm-extract llvm-link llvm-lto2 llvm-mc llvm-mcmarkup llvm-nm llvm-objdump llvm-pdbdump llvm-readobj llvm-rtdyld llvm-size llvm-split llvm-stress llvm-symbolizer obj2yaml opt sancov sanstats verify-uselistorder yaml2obj)
+foreach(_expectedTarget LLVMDemangle LLVMSupport LLVMTableGen llvm-tblgen LLVMCore LLVMIRReader LLVMCodeGen LLVMSelectionDAG LLVMAsmPrinter LLVMMIRParser LLVMGlobalISel LLVMBitReader LLVMBitWriter LLVMTransformUtils LLVMInstrumentation LLVMInstCombine LLVMScalarOpts LLVMipo LLVMVectorize LLVMHello LLVMObjCARCOpts LLVMCoroutines LLVMLinker LLVMAnalysis LLVMLTO LLVMMC LLVMMCParser LLVMMCDisassembler LLVMObject LLVMObjectYAML LLVMOption LLVMDebugInfoDWARF LLVMDebugInfoMSF LLVMDebugInfoCodeView LLVMDebugInfoPDB LLVMSymbolize LLVMExecutionEngine LLVMInterpreter LLVMMCJIT LLVMOrcJIT LLVMRuntimeDyld LLVMTarget LLVMX86CodeGen LLVMX86AsmParser LLVMX86Disassembler LLVMX86AsmPrinter LLVMX86Desc LLVMX86Info LLVMX86Utils LLVMAsmParser LLVMLineEditor LLVMProfileData LLVMCoverage LLVMPasses LLVMLibDriver LTO llvm-ar llvm-config llvm-lto llvm-profdata bugpoint BugpointPasses llvm-dsymutil llc lli llvm-as llvm-bcanalyzer llvm-c-test llvm-cov llvm-cxxdump llvm-cxxfilt llvm-diff llvm-dis llvm-dwarfdump llvm-dwp llvm-extract llvm-link llvm-lto2 llvm-mc llvm-mcmarkup llvm-nm llvm-objdump llvm-pdbdump llvm-readobj llvm-rtdyld llvm-size llvm-split llvm-stress llvm-symbolizer obj2yaml opt sancov sanstats verify-uselistorder yaml2obj)
   list(APPEND _expectedTargets ${_expectedTarget})
   if(NOT TARGET ${_expectedTarget})
     list(APPEND _targetsNotDefined ${_expectedTarget})
@@ -47,11 +47,14 @@ get_filename_component(_IMPORT_PREFIX "${_IMPORT_PREFIX}" PATH)
 get_filename_component(_IMPORT_PREFIX "${_IMPORT_PREFIX}" PATH)
 get_filename_component(_IMPORT_PREFIX "${_IMPORT_PREFIX}" PATH)
 
+# Create imported target LLVMDemangle
+add_library(LLVMDemangle STATIC IMPORTED)
+
 # Create imported target LLVMSupport
 add_library(LLVMSupport STATIC IMPORTED)
 
 set_target_properties(LLVMSupport PROPERTIES
-  INTERFACE_LINK_LIBRARIES "curses;z;m"
+  INTERFACE_LINK_LIBRARIES "curses;z;m;LLVMDemangle"
 )
 
 # Create imported target LLVMTableGen
@@ -204,7 +207,7 @@ set_target_properties(LLVMAnalysis PROPERTIES
 add_library(LLVMLTO STATIC IMPORTED)
 
 set_target_properties(LLVMLTO PROPERTIES
-  INTERFACE_LINK_LIBRARIES "LLVMAnalysis;LLVMBitReader;LLVMBitWriter;LLVMCodeGen;LLVMCore;LLVMInstCombine;LLVMLinker;LLVMMC;LLVMObjCARCOpts;LLVMObject;LLVMScalarOpts;LLVMSupport;LLVMTarget;LLVMTransformUtils;LLVMipo"
+  INTERFACE_LINK_LIBRARIES "LLVMAnalysis;LLVMBitReader;LLVMBitWriter;LLVMCodeGen;LLVMCore;LLVMInstCombine;LLVMLinker;LLVMMC;LLVMObjCARCOpts;LLVMObject;LLVMPasses;LLVMScalarOpts;LLVMSupport;LLVMTarget;LLVMTransformUtils;LLVMipo"
 )
 
 # Create imported target LLVMMC
@@ -476,6 +479,9 @@ add_executable(llvm-cov IMPORTED)
 
 # Create imported target llvm-cxxdump
 add_executable(llvm-cxxdump IMPORTED)
+
+# Create imported target llvm-cxxfilt
+add_executable(llvm-cxxfilt IMPORTED)
 
 # Create imported target llvm-diff
 add_executable(llvm-diff IMPORTED)

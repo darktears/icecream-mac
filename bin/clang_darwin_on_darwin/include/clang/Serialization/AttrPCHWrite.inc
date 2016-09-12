@@ -1211,6 +1211,13 @@ Record.push_back(SA->getPCS());
     Record.push_back(SA->getZDim());
     break;
   }
+  case attr::RequireConstantInit: {
+    const auto *SA = cast<RequireConstantInitAttr>(A);
+    Record.push_back(SA->isInherited());
+    Record.push_back(A->isImplicit());
+    Record.push_back(A->getSpellingListIndex());
+    break;
+  }
   case attr::RequiresCapability: {
     const auto *SA = cast<RequiresCapabilityAttr>(A);
     Record.push_back(SA->isInherited());

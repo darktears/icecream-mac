@@ -632,6 +632,10 @@
   bool VisitReqdWorkGroupSizeAttr(ReqdWorkGroupSizeAttr *A) {
     return true; 
   }
+  bool TraverseRequireConstantInitAttr(RequireConstantInitAttr *A);
+  bool VisitRequireConstantInitAttr(RequireConstantInitAttr *A) {
+    return true; 
+  }
   bool TraverseRequiresCapabilityAttr(RequiresCapabilityAttr *A);
   bool VisitRequiresCapabilityAttr(RequiresCapabilityAttr *A) {
     return true; 
@@ -2338,6 +2342,15 @@ bool VISITORCLASS<Derived>::TraverseReqdWorkGroupSizeAttr(ReqdWorkGroupSizeAttr 
 }
 
 template <typename Derived>
+bool VISITORCLASS<Derived>::TraverseRequireConstantInitAttr(RequireConstantInitAttr *A) {
+  if (!getDerived().VisitAttr(A))
+    return false;
+  if (!getDerived().VisitRequireConstantInitAttr(A))
+    return false;
+  return true;
+}
+
+template <typename Derived>
 bool VISITORCLASS<Derived>::TraverseRequiresCapabilityAttr(RequiresCapabilityAttr *A) {
   if (!getDerived().VisitAttr(A))
     return false;
@@ -3061,6 +3074,8 @@ bool VISITORCLASS<Derived>::TraverseAttr(Attr *A) {
       return getDerived().TraverseRenderScriptKernelAttr(cast<RenderScriptKernelAttr>(A));
     case attr::ReqdWorkGroupSize:
       return getDerived().TraverseReqdWorkGroupSizeAttr(cast<ReqdWorkGroupSizeAttr>(A));
+    case attr::RequireConstantInit:
+      return getDerived().TraverseRequireConstantInitAttr(cast<RequireConstantInitAttr>(A));
     case attr::RequiresCapability:
       return getDerived().TraverseRequiresCapabilityAttr(cast<RequiresCapabilityAttr>(A));
     case attr::Restrict:

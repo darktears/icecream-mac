@@ -5435,6 +5435,42 @@ const char *ReqdWorkGroupSizeAttr::getSpelling() const {
   }
 }
 
+RequireConstantInitAttr *RequireConstantInitAttr::clone(ASTContext &C) const {
+  auto *A = new (C) RequireConstantInitAttr(getLocation(), C, getSpellingListIndex());
+  A->Inherited = Inherited;
+  A->IsPackExpansion = IsPackExpansion;
+  A->Implicit = Implicit;
+  return A;
+}
+
+void RequireConstantInitAttr::printPretty(raw_ostream &OS, const PrintingPolicy &Policy) const {
+  switch (SpellingListIndex) {
+  default:
+    llvm_unreachable("Unknown attribute spelling!");
+    break;
+  case 0 : {
+    OS << " __attribute__((require_constant_initialization))";
+    break;
+  }
+  case 1 : {
+    OS << " [[clang::require_constant_initialization]]";
+    break;
+  }
+}
+}
+
+const char *RequireConstantInitAttr::getSpelling() const {
+  switch (SpellingListIndex) {
+  default:
+    llvm_unreachable("Unknown attribute spelling!");
+    return "(No spelling)";
+  case 0:
+    return "require_constant_initialization";
+  case 1:
+    return "require_constant_initialization";
+  }
+}
+
 RequiresCapabilityAttr *RequiresCapabilityAttr::clone(ASTContext &C) const {
   auto *A = new (C) RequiresCapabilityAttr(getLocation(), C, args_, args_Size, getSpellingListIndex());
   A->Inherited = Inherited;
@@ -6597,6 +6633,10 @@ void UuidAttr::printPretty(raw_ostream &OS, const PrintingPolicy &Policy) const 
     OS << " __declspec(uuid(\"" << getGuid() << "\"))";
     break;
   }
+  case 1 : {
+    OS << "[uuid(\"" << getGuid() << "\")]";
+    break;
+  }
 }
 }
 
@@ -6606,6 +6646,8 @@ const char *UuidAttr::getSpelling() const {
     llvm_unreachable("Unknown attribute spelling!");
     return "(No spelling)";
   case 0:
+    return "uuid";
+  case 1:
     return "uuid";
   }
 }
@@ -7350,6 +7392,8 @@ const char *Attr::getSpelling() const {
     return cast<RenderScriptKernelAttr>(this)->getSpelling();
   case attr::ReqdWorkGroupSize:
     return cast<ReqdWorkGroupSizeAttr>(this)->getSpelling();
+  case attr::RequireConstantInit:
+    return cast<RequireConstantInitAttr>(this)->getSpelling();
   case attr::RequiresCapability:
     return cast<RequiresCapabilityAttr>(this)->getSpelling();
   case attr::Restrict:
@@ -7752,6 +7796,8 @@ Attr *Attr::clone(ASTContext &C) const {
     return cast<RenderScriptKernelAttr>(this)->clone(C);
   case attr::ReqdWorkGroupSize:
     return cast<ReqdWorkGroupSizeAttr>(this)->clone(C);
+  case attr::RequireConstantInit:
+    return cast<RequireConstantInitAttr>(this)->clone(C);
   case attr::RequiresCapability:
     return cast<RequiresCapabilityAttr>(this)->clone(C);
   case attr::Restrict:
@@ -8154,6 +8200,8 @@ void Attr::printPretty(raw_ostream &OS, const PrintingPolicy &Policy) const {
     return cast<RenderScriptKernelAttr>(this)->printPretty(OS, Policy);
   case attr::ReqdWorkGroupSize:
     return cast<ReqdWorkGroupSizeAttr>(this)->printPretty(OS, Policy);
+  case attr::RequireConstantInit:
+    return cast<RequireConstantInitAttr>(this)->printPretty(OS, Policy);
   case attr::RequiresCapability:
     return cast<RequiresCapabilityAttr>(this)->printPretty(OS, Policy);
   case attr::Restrict:

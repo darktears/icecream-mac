@@ -222,6 +222,7 @@ case AttrSyntax::GNU:
     .Case("unlock_function", 1)
     .Case("kernel", 1)
     .Case("reqd_work_group_size", 1)
+    .Case("require_constant_initialization", 1)
     .Case("requires_capability", 1)
     .Case("exclusive_locks_required", 1)
     .Case("requires_shared_capability", 1)
@@ -305,6 +306,10 @@ case AttrSyntax::Declspec:
     .Case("uuid", 1)
     .Case("property", 1)
     .Default(0);
+case AttrSyntax::Microsoft:
+  return llvm::StringSwitch<int>(Name)
+    .Case("uuid", 1)
+    .Default(0);
 case AttrSyntax::Pragma:
   return llvm::StringSwitch<int>(Name)
     .Case("init_seg", 1)
@@ -366,6 +371,7 @@ if (!Scope || Scope->getName() == "") {
     .Case("release_capability", LangOpts.CPlusPlus11 ? 1 : 0)
     .Case("release_shared_capability", LangOpts.CPlusPlus11 ? 1 : 0)
     .Case("release_generic_capability", LangOpts.CPlusPlus11 ? 1 : 0)
+    .Case("require_constant_initialization", LangOpts.CPlusPlus11 ? 1 : 0)
     .Case("requires_capability", LangOpts.CPlusPlus11 ? 1 : 0)
     .Case("requires_shared_capability", LangOpts.CPlusPlus11 ? 1 : 0)
     .Case("requires_capability", LangOpts.CPlusPlus11 ? 1 : 0)

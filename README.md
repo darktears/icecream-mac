@@ -73,10 +73,11 @@ At the moment you need a custom version of icecream to be able to build the jobs
 can handle compiling with clang.
 
 ```bash
+$ sudo apt-get install libcap-ng-dev liblzo2-dev
 $ git clone https://github.com/darktears/icecream.git
 $ cd icecream
 $ ./autogen.sh
-$ ./configure --prefix=/where/you/want/to/install
+$ ./configure --prefix=/where/you/want/to/install --without-man
 $ make && make install
 ```
 

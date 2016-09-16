@@ -32,8 +32,6 @@ cat > "$PLIST" << EOF
     <key>ProgramArguments</key>
     <array>
         <string>$DIR/bin/icecc/iceccd</string>
-        <string>-m</string>
-	<string>2</string>
 	<string>-s</string>
         <string>$1</string>
     </array>

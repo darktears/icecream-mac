@@ -1,7 +1,6 @@
 # Icecream Setup for macOS to build Chromium
 
 This instructions shows how to use icecream on macOS to distribute build jobs on Linux nodes in the network.
-Right now it does not explain how to share the build jobs on other macOS machines in the network.
 
 ## Instructions on macOS
 
@@ -34,7 +33,7 @@ With this the icecream daemon is launched when macOS starts or if it stops.
 You now need to setup some environment variable. In your .bashrc add :
 
 ```bash
-$ export ICECC_VERSION=x86_64:/path/to/chromium/src/icecream/clang_darwin_on_linux.tar.gz
+$ export ICECC_VERSION=/path/to/chromium/src/icecream/clang_darwin_on_darwin.tar.gz,x86_64:/path/to/chromium/src/icecream/clang_darwin_on_linux.tar.gz
 $ export ICECC_CLANG_REMOTE_CPP=1
 $ export PATH=path/to/chromium/src/icecream/bin/icecc/:$PATH
 ```
@@ -50,6 +49,22 @@ clang_base_path = "//icecream"
 clang_use_chrome_plugins = false
 cc_wrapper="icecc"
 ```
+
+You may want to disable NaCl if you build the chrome target as it's not working with icecream. Just add in your GN args :
+
+```bash
+enable_nacl = false
+```
+## Enabling your macOS machine to be a build node.
+You will need to create an icecc account on your mac so that the icecream scheduler can send jobs over.
+Go into "System Preferences" then "Users and Groups" then create a new account by clicking the "+" icon (You may need to unlock first).
+Type "icecc" as the full name and account name. Type any password (we will remove the password after).
+
+Open a terminal then type :
+```bash
+sudo dscl . -passwd /Users/icecc ""
+```
+This will remove the password so that icecream can log in to execute the build jobs. Make sure you keep the Account as "standard".
 
 ## Using icemon to monitor the cluster.
 

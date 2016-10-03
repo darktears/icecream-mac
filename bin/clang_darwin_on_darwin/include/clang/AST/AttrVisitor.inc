@@ -8,12 +8,20 @@
 
 #ifdef ATTR_VISITOR_DECLS_ONLY
 
+  bool TraverseAMDGPUFlatWorkGroupSizeAttr(AMDGPUFlatWorkGroupSizeAttr *A);
+  bool VisitAMDGPUFlatWorkGroupSizeAttr(AMDGPUFlatWorkGroupSizeAttr *A) {
+    return true; 
+  }
   bool TraverseAMDGPUNumSGPRAttr(AMDGPUNumSGPRAttr *A);
   bool VisitAMDGPUNumSGPRAttr(AMDGPUNumSGPRAttr *A) {
     return true; 
   }
   bool TraverseAMDGPUNumVGPRAttr(AMDGPUNumVGPRAttr *A);
   bool VisitAMDGPUNumVGPRAttr(AMDGPUNumVGPRAttr *A) {
+    return true; 
+  }
+  bool TraverseAMDGPUWavesPerEUAttr(AMDGPUWavesPerEUAttr *A);
+  bool VisitAMDGPUWavesPerEUAttr(AMDGPUWavesPerEUAttr *A) {
     return true; 
   }
   bool TraverseARMInterruptAttr(ARMInterruptAttr *A);
@@ -808,6 +816,15 @@
 #else // ATTR_VISITOR_DECLS_ONLY
 
 template <typename Derived>
+bool VISITORCLASS<Derived>::TraverseAMDGPUFlatWorkGroupSizeAttr(AMDGPUFlatWorkGroupSizeAttr *A) {
+  if (!getDerived().VisitAttr(A))
+    return false;
+  if (!getDerived().VisitAMDGPUFlatWorkGroupSizeAttr(A))
+    return false;
+  return true;
+}
+
+template <typename Derived>
 bool VISITORCLASS<Derived>::TraverseAMDGPUNumSGPRAttr(AMDGPUNumSGPRAttr *A) {
   if (!getDerived().VisitAttr(A))
     return false;
@@ -821,6 +838,15 @@ bool VISITORCLASS<Derived>::TraverseAMDGPUNumVGPRAttr(AMDGPUNumVGPRAttr *A) {
   if (!getDerived().VisitAttr(A))
     return false;
   if (!getDerived().VisitAMDGPUNumVGPRAttr(A))
+    return false;
+  return true;
+}
+
+template <typename Derived>
+bool VISITORCLASS<Derived>::TraverseAMDGPUWavesPerEUAttr(AMDGPUWavesPerEUAttr *A) {
+  if (!getDerived().VisitAttr(A))
+    return false;
+  if (!getDerived().VisitAMDGPUWavesPerEUAttr(A))
     return false;
   return true;
 }
@@ -2762,10 +2788,14 @@ bool VISITORCLASS<Derived>::TraverseAttr(Attr *A) {
     return true;
 
   switch (A->getKind()) {
+    case attr::AMDGPUFlatWorkGroupSize:
+      return getDerived().TraverseAMDGPUFlatWorkGroupSizeAttr(cast<AMDGPUFlatWorkGroupSizeAttr>(A));
     case attr::AMDGPUNumSGPR:
       return getDerived().TraverseAMDGPUNumSGPRAttr(cast<AMDGPUNumSGPRAttr>(A));
     case attr::AMDGPUNumVGPR:
       return getDerived().TraverseAMDGPUNumVGPRAttr(cast<AMDGPUNumVGPRAttr>(A));
+    case attr::AMDGPUWavesPerEU:
+      return getDerived().TraverseAMDGPUWavesPerEUAttr(cast<AMDGPUWavesPerEUAttr>(A));
     case attr::ARMInterrupt:
       return getDerived().TraverseARMInterruptAttr(cast<ARMInterruptAttr>(A));
     case attr::AbiTag:

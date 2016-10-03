@@ -42,5 +42,5 @@ DIAG(note_module_odr_violation_no_possible_decls, CLASS_NOTE, (unsigned)diag::Se
 DIAG(note_module_odr_violation_possible_decl, CLASS_NOTE, (unsigned)diag::Severity::Fatal, "declaration of %0 does not match", 0, SFINAE_Suppress, false, false, 16)
 DIAG(note_pch_rebuild_required, CLASS_NOTE, (unsigned)diag::Severity::Fatal, "please rebuild precompiled header '%0'", 0, SFINAE_Suppress, false, false, 16)
 DIAG(note_pch_required_by, CLASS_NOTE, (unsigned)diag::Severity::Fatal, "'%0' required by '%1'", 0, SFINAE_Suppress, false, false, 16)
-DIAG(warn_duplicate_module_file_extension, CLASS_WARNING, (unsigned)diag::Severity::Warning, "duplicate module file extension block name '%0'", 364, SFINAE_Suppress, false, false, 16)
-DIAG(warn_module_uses_date_time, CLASS_WARNING, (unsigned)diag::Severity::Warning, "%select{precompiled header|module}0 uses __DATE__ or __TIME__", 453, SFINAE_Suppress, false, false, 16)
+DIAG(warn_duplicate_module_file_extension, CLASS_WARNING, (unsigned)diag::Severity::Warning, "duplicate module file extension block name '%0'", 365, SFINAE_Suppress, false, false, 16)
+DIAG(warn_module_uses_date_time, CLASS_WARNING, (unsigned)diag::Severity::Warning, "%select{precompiled header|module}0 uses __DATE__ or __TIME__", 454, SFINAE_Suppress, false, false, 16)

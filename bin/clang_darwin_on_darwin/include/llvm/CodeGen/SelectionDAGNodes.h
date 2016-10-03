@@ -371,14 +371,6 @@ public:
   bool hasAllowReciprocal() const { return AllowReciprocal; }
   bool hasVectorReduction() const { return VectorReduction; }
 
-  /// Return a raw encoding of the flags.
-  /// This function should only be used to add data to the NodeID value.
-  unsigned getRawFlags() const {
-    return (NoUnsignedWrap << 0) | (NoSignedWrap << 1) | (Exact << 2) |
-    (UnsafeAlgebra << 3) | (NoNaNs << 4) | (NoInfs << 5) |
-    (NoSignedZeros << 6) | (AllowReciprocal << 7);
-  }
-
   /// Clear any flags in this flag set that aren't also set in Flags.
   void intersectWith(const SDNodeFlags *Flags) {
     NoUnsignedWrap &= Flags->NoUnsignedWrap;
@@ -430,11 +422,12 @@ protected:
 
     uint16_t IsVolatile : 1;
     uint16_t IsNonTemporal : 1;
+    uint16_t IsDereferenceable : 1;
     uint16_t IsInvariant : 1;
     uint16_t SynchScope : 1; // enum SynchronizationScope
     uint16_t Ordering : 4;   // enum AtomicOrdering
   };
-  enum { NumMemSDNodeBits = NumSDNodeBits + 8 };
+  enum { NumMemSDNodeBits = NumSDNodeBits + 9 };
 
   class LSBaseSDNodeBitfields {
     friend class LSBaseSDNode;
@@ -460,9 +453,11 @@ protected:
     uint16_t : NumLSBaseSDNodeBits;
 
     uint16_t IsTruncating : 1;
+    uint16_t IsCompressing : 1;
   };
 
   union {
+    char RawSDNodeBits[sizeof(uint16_t)];
     SDNodeBitfields SDNodeBits;
     ConstantSDNodeBitfields ConstantSDNodeBits;
     MemSDNodeBitfields MemSDNodeBits;
@@ -470,6 +465,16 @@ protected:
     LoadSDNodeBitfields LoadSDNodeBits;
     StoreSDNodeBitfields StoreSDNodeBits;
   };
+
+  // RawSDNodeBits must cover the entirety of the union.  This means that all of
+  // the union's members must have size <= RawSDNodeBits.  We write the RHS as
+  // "2" instead of sizeof(RawSDNodeBits) because MSVC can't handle the latter.
+  static_assert(sizeof(SDNodeBitfields) <= 2, "field too wide");
+  static_assert(sizeof(ConstantSDNodeBitfields) <= 2, "field too wide");
+  static_assert(sizeof(MemSDNodeBitfields) <= 2, "field too wide");
+  static_assert(sizeof(LSBaseSDNodeBitfields) <= 2, "field too wide");
+  static_assert(sizeof(LoadSDNodeBitfields) <= 2, "field too wide");
+  static_assert(sizeof(StoreSDNodeBitfields) <= 2, "field too wide");
 
 private:
   /// Unique id per SDNode in the DAG.
@@ -876,7 +881,7 @@ protected:
       : NodeType(Opc), NodeId(-1), OperandList(nullptr), ValueList(VTs.VTs),
         UseList(nullptr), NumOperands(0), NumValues(VTs.NumVTs), IROrder(Order),
         debugLoc(std::move(dl)) {
-    memset(&SDNodeBits, 0, sizeof(SDNodeBits));
+    memset(&RawSDNodeBits, 0, sizeof(RawSDNodeBits));
     assert(debugLoc.hasTrivialDestructor() && "Expected trivial destructor");
     assert(NumValues == VTs.NumVTs &&
            "NumValues wasn't wide enough for its operands!");
@@ -1095,16 +1100,13 @@ public:
   /// function should only be used to compute a FoldingSetNodeID value.
   unsigned getRawSubclassData() const {
     uint16_t Data;
-    memcpy(&Data, &SDNodeBits, sizeof(SDNodeBits));
-    static_assert(sizeof(SDNodeBits) <= sizeof(uint16_t),
-                  "SDNodeBits field too large?");
+    memcpy(&Data, &RawSDNodeBits, sizeof(RawSDNodeBits));
     return Data;
   }
 
-  // We access subclass data here so that we can check consistency
-  // with MachineMemOperand information.
   bool isVolatile() const { return MemSDNodeBits.IsVolatile; }
   bool isNonTemporal() const { return MemSDNodeBits.IsNonTemporal; }
+  bool isDereferenceable() const { return MemSDNodeBits.IsDereferenceable; }
   bool isInvariant() const { return MemSDNodeBits.IsInvariant; }
 
   AtomicOrdering getOrdering() const {
@@ -1958,14 +1960,22 @@ class MaskedStoreSDNode : public MaskedLoadStoreSDNode {
 public:
   friend class SelectionDAG;
   MaskedStoreSDNode(unsigned Order, const DebugLoc &dl, SDVTList VTs,
-                    bool isTrunc, EVT MemVT, MachineMemOperand *MMO)
+                    bool isTrunc, bool isCompressing, EVT MemVT, 
+                    MachineMemOperand *MMO)
       : MaskedLoadStoreSDNode(ISD::MSTORE, Order, dl, VTs, MemVT, MMO) {
     StoreSDNodeBits.IsTruncating = isTrunc;
+    StoreSDNodeBits.IsCompressing = isCompressing;
   }
   /// Return true if the op does a truncation before store.
   /// For integers this is the same as doing a TRUNCATE and storing the result.
   /// For floats, it is the same as doing an FP_ROUND and storing the result.
   bool isTruncatingStore() const { return StoreSDNodeBits.IsTruncating; }
+
+  /// Returns true if the op does a compression to the vector before storing.
+  /// The node contiguously stores the active elements (integers or floats) 
+  /// in src (those with their respective bit set in writemask k) to unaligned 
+  /// memory at base_addr.
+  bool isCompressingStore() const { return StoreSDNodeBits.IsCompressing; }
 
   const SDValue &getValue() const { return getOperand(3); }
 

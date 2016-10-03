@@ -42,7 +42,7 @@
 #define BACKEND_PACKAGE_STRING "LLVM 4.0.0svn"
 
 /* Linker version detected at compile time. */
-#define HOST_LINK_VERSION "264.3.102"
+#define HOST_LINK_VERSION "274.1"
 
 /* pass --build-id to ld */
 /* #undef ENABLE_LINKER_BUILD_ID */

@@ -10,9 +10,11 @@ const llvm::Triple &T = Target.getTriple();
 switch (Syntax) {
 case AttrSyntax::GNU:
   return llvm::StringSwitch<int>(Name)
+    .Case("amdgpu_flat_work_group_size", 1)
     .Case("amdgpu_num_sgpr", 1)
     .Case("amdgpu_num_vgpr", 1)
-    .Case("interrupt", (T.getArch() == llvm::Triple::arm || T.getArch() == llvm::Triple::thumb) ? 1 : 0)
+    .Case("amdgpu_waves_per_eu", 1)
+    .Case("interrupt", (T.getArch() == llvm::Triple::arm || T.getArch() == llvm::Triple::thumb || T.getArch() == llvm::Triple::armeb || T.getArch() == llvm::Triple::thumbeb) ? 1 : 0)
     .Case("abi_tag", 1)
     .Case("acquire_capability", 1)
     .Case("acquire_shared_capability", 1)

@@ -43,7 +43,7 @@
 #define LLVM_HAS_ATOMICS 1
 
 /* Host triple LLVM will be executed on */
-#define LLVM_HOST_TRIPLE "x86_64-apple-darwin15.6.0"
+#define LLVM_HOST_TRIPLE "x86_64-apple-darwin16.0.0"
 
 /* Installation directory for include files */
 /* #undef LLVM_INCLUDEDIR */

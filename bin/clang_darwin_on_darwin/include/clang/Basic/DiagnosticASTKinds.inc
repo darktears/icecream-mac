@@ -106,5 +106,5 @@ DIAG(note_odr_template_parameter_list, CLASS_NOTE, (unsigned)diag::Severity::Fat
 DIAG(note_odr_value_here, CLASS_NOTE, (unsigned)diag::Severity::Fatal, "declared here with type %0", 0, SFINAE_Suppress, false, false, 0)
 DIAG(note_odr_virtual_base, CLASS_NOTE, (unsigned)diag::Severity::Fatal, "%select{non-virtual|virtual}0 derivation here", 0, SFINAE_Suppress, false, false, 0)
 DIAG(note_unimplemented_constexpr_lambda_feature_ast, CLASS_NOTE, (unsigned)diag::Severity::Fatal, "unimplemented constexpr lambda feature: %0 (coming soon!)", 0, SFINAE_Suppress, false, false, 0)
-DIAG(warn_integer_constant_overflow, CLASS_WARNING, (unsigned)diag::Severity::Warning, "overflow in expression; result is %0 with type %1", 283, SFINAE_Suppress, false, false, 0)
-DIAG(warn_odr_tag_type_inconsistent, CLASS_WARNING, (unsigned)diag::Severity::Warning, "type %0 has incompatible definitions in different translation units", 427, SFINAE_Suppress, false, false, 0)
+DIAG(warn_integer_constant_overflow, CLASS_WARNING, (unsigned)diag::Severity::Warning, "overflow in expression; result is %0 with type %1", 284, SFINAE_Suppress, false, false, 0)
+DIAG(warn_odr_tag_type_inconsistent, CLASS_WARNING, (unsigned)diag::Severity::Warning, "type %0 has incompatible definitions in different translation units", 428, SFINAE_Suppress, false, false, 0)

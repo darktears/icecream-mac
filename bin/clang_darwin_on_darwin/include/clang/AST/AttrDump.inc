@@ -7,6 +7,12 @@
 \*===----------------------------------------------------------------------===*/
 
   switch (A->getKind()) {
+  case attr::AMDGPUFlatWorkGroupSize: {
+    const auto *SA = cast<AMDGPUFlatWorkGroupSizeAttr>(A);
+    OS << " " << SA->getMin();
+    OS << " " << SA->getMax();
+    break;
+  }
   case attr::AMDGPUNumSGPR: {
     const auto *SA = cast<AMDGPUNumSGPRAttr>(A);
     OS << " " << SA->getNumSGPR();
@@ -15,6 +21,12 @@
   case attr::AMDGPUNumVGPR: {
     const auto *SA = cast<AMDGPUNumVGPRAttr>(A);
     OS << " " << SA->getNumVGPR();
+    break;
+  }
+  case attr::AMDGPUWavesPerEU: {
+    const auto *SA = cast<AMDGPUWavesPerEUAttr>(A);
+    OS << " " << SA->getMin();
+    OS << " " << SA->getMax();
     break;
   }
   case attr::ARMInterrupt: {

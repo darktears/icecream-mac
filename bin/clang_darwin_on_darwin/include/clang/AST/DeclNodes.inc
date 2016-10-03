@@ -47,6 +47,12 @@ CLASSSCOPEFUNCTIONSPECIALIZATION(ClassScopeFunctionSpecialization, Decl)
 EMPTY(Empty, Decl)
 #undef EMPTY
 
+#ifndef EXPORT
+#  define EXPORT(Type, Base) DECL(Type, Base)
+#endif
+EXPORT(Export, Decl)
+#undef EXPORT
+
 #ifndef EXTERNCCONTEXT
 #  define EXTERNCCONTEXT(Type, Base) DECL(Type, Base)
 #endif
@@ -560,6 +566,7 @@ DECL_CONTEXT_BASE(Tag)
 DECL_CONTEXT_BASE(ObjCContainer)
 DECL_CONTEXT(Block)
 DECL_CONTEXT(Captured)
+DECL_CONTEXT(Export)
 DECL_CONTEXT(ExternCContext)
 DECL_CONTEXT(LinkageSpec)
 DECL_CONTEXT(Namespace)

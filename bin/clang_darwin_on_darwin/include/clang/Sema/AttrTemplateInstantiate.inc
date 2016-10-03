@@ -12,12 +12,20 @@ namespace sema {
 Attr *instantiateTemplateAttribute(const Attr *At, ASTContext &C, Sema &S,
         const MultiLevelTemplateArgumentList &TemplateArgs) {
   switch (At->getKind()) {
+    case attr::AMDGPUFlatWorkGroupSize: {
+      const auto *A = cast<AMDGPUFlatWorkGroupSizeAttr>(At);
+      return A->clone(C);
+    }
     case attr::AMDGPUNumSGPR: {
       const auto *A = cast<AMDGPUNumSGPRAttr>(At);
       return A->clone(C);
     }
     case attr::AMDGPUNumVGPR: {
       const auto *A = cast<AMDGPUNumVGPRAttr>(At);
+      return A->clone(C);
+    }
+    case attr::AMDGPUWavesPerEU: {
+      const auto *A = cast<AMDGPUWavesPerEUAttr>(At);
       return A->clone(C);
     }
     case attr::ARMInterrupt: {

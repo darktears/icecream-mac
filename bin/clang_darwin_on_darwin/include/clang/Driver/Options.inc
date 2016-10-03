@@ -611,6 +611,8 @@ OPTION(prefix_1, "fdiagnostics-print-source-range-info", fdiagnostics_print_sour
 OPTION(prefix_1, "fdiagnostics-show-category=", fdiagnostics_show_category_EQ, Joined, f_clang_Group, INVALID, nullptr, 0, 0, nullptr, nullptr)
 OPTION(prefix_1, "fdiagnostics-show-category", fdiagnostics_show_category, Separate, INVALID, INVALID, nullptr, CC1Option | NoDriverOption, 0,
        "Print diagnostic category", nullptr)
+OPTION(prefix_1, "fdiagnostics-show-hotness", fdiagnostics_show_hotness, Flag, f_Group, INVALID, nullptr, CC1Option, 0,
+       "Enable profile hotness information in diagnostic line", nullptr)
 OPTION(prefix_1, "fdiagnostics-show-location=", fdiagnostics_show_location_EQ, Joined, clang_ignored_f_Group, INVALID, nullptr, 0, 0, nullptr, nullptr)
 OPTION(prefix_1, "fdiagnostics-show-note-include-stack", fdiagnostics_show_note_include_stack, Flag, f_Group, INVALID, nullptr, CC1Option, 0,
        "Display include stacks for diagnostic notes", nullptr)
@@ -775,8 +777,10 @@ OPTION(prefix_1, "fjump-tables", fjump_tables, Flag, f_Group, INVALID, nullptr, 
 OPTION(prefix_1, "fkeep-inline-functions", anonymous_20_f, Flag, clang_ignored_gcc_optimization_f_Group, INVALID, nullptr, 0, 0, nullptr, nullptr)
 OPTION(prefix_1, "flat_namespace", flat__namespace, Flag, INVALID, INVALID, nullptr, 0, 0, nullptr, nullptr)
 OPTION(prefix_1, "flax-vector-conversions", flax_vector_conversions, Flag, f_Group, INVALID, nullptr, 0, 0, nullptr, nullptr)
-OPTION(prefix_1, "flimit-debug-info", flimit_debug_info, Flag, INVALID, fno_standalone_debug, nullptr, 0, 0, nullptr, nullptr)
+OPTION(prefix_1, "flimit-debug-info", flimit_debug_info, Flag, INVALID, fno_standalone_debug, nullptr, CoreOption, 0, nullptr, nullptr)
 OPTION(prefix_1, "flimited-precision=", flimited_precision_EQ, Joined, f_Group, INVALID, nullptr, 0, 0, nullptr, nullptr)
+OPTION(prefix_1, "flto-jobs=", flto_jobs_EQ, Joined, f_Group, INVALID, nullptr, CC1Option, 0,
+       "Controls the backend parallelism of -flto=thin (default of 0 means the number of threads will be derived from the number of CPUs detected)", nullptr)
 OPTION(prefix_1, "flto-visibility-public-std", flto_visibility_public_std, Flag, INVALID, INVALID, nullptr, CC1Option | NoDriverOption, 0,
        "Use public LTO visibility for classes in std and stdext namespaces", nullptr)
 OPTION(prefix_1, "flto=", flto_EQ, Joined, f_Group, INVALID, nullptr, CC1Option, 0,
@@ -946,6 +950,7 @@ OPTION(prefix_1, "fno-devirtualize", devirtualize_fno, Flag, clang_ignored_gcc_o
 OPTION(prefix_1, "fno-diagnostics-color", fno_diagnostics_color, Flag, f_Group, INVALID, nullptr, CoreOption | DriverOption, 0, nullptr, nullptr)
 OPTION(prefix_1, "fno-diagnostics-fixit-info", fno_diagnostics_fixit_info, Flag, f_Group, INVALID, nullptr, CC1Option, 0,
        "Do not include fixit information in diagnostics", nullptr)
+OPTION(prefix_1, "fno-diagnostics-show-hotness", fno_diagnostics_show_hotness, Flag, f_Group, INVALID, nullptr, 0, 0, nullptr, nullptr)
 OPTION(prefix_1, "fno-diagnostics-show-note-include-stack", fno_diagnostics_show_note_include_stack, Flag, f_Group, INVALID, nullptr, CC1Option, 0, nullptr, nullptr)
 OPTION(prefix_1, "fno-diagnostics-show-option", fno_diagnostics_show_option, Flag, f_Group, INVALID, nullptr, 0, 0, nullptr, nullptr)
 OPTION(prefix_1, "fno-diagnostics-use-presumed-location", fno_diagnostics_use_presumed_location, Flag, INVALID, INVALID, nullptr, CC1Option | NoDriverOption, 0,
@@ -1016,7 +1021,7 @@ OPTION(prefix_1, "fno-jump-tables", fno_jump_tables, Flag, f_Group, INVALID, nul
 OPTION(prefix_1, "fno-keep-inline-functions", anonymous_20_fno, Flag, clang_ignored_gcc_optimization_f_Group, INVALID, nullptr, 0, 0, nullptr, nullptr)
 OPTION(prefix_1, "fno-lax-vector-conversions", fno_lax_vector_conversions, Flag, f_Group, INVALID, nullptr, CC1Option, 0,
        "Disallow implicit conversions between vectors with a different number of elements or different element types", nullptr)
-OPTION(prefix_1, "fno-limit-debug-info", fno_limit_debug_info, Flag, INVALID, fstandalone_debug, nullptr, 0, 0, nullptr, nullptr)
+OPTION(prefix_1, "fno-limit-debug-info", fno_limit_debug_info, Flag, INVALID, fstandalone_debug, nullptr, CoreOption, 0, nullptr, nullptr)
 OPTION(prefix_1, "fno-lto", fno_lto, Flag, f_Group, INVALID, nullptr, 0, 0,
        "Disable LTO mode (default)", nullptr)
 OPTION(prefix_1, "fno-math-builtin", fno_math_builtin, Flag, INVALID, INVALID, nullptr, CC1Option | CC1AsOption | NoDriverOption, 0,
@@ -1156,7 +1161,7 @@ OPTION(prefix_1, "fno-stack-arrays", stack_arrays_fno, Flag, gfortran_Group, INV
 OPTION(prefix_1, "fno-stack-check", stack_check_fno, Flag, clang_ignored_f_Group, INVALID, nullptr, 0, 0, nullptr, nullptr)
 OPTION(prefix_1, "fno-stack-protector", fno_stack_protector, Flag, f_Group, INVALID, nullptr, 0, 0,
        "Disable the use of stack protectors", nullptr)
-OPTION(prefix_1, "fno-standalone-debug", fno_standalone_debug, Flag, f_Group, INVALID, nullptr, 0, 0,
+OPTION(prefix_1, "fno-standalone-debug", fno_standalone_debug, Flag, f_Group, INVALID, nullptr, CoreOption, 0,
        "Limit debug information produced to reduce size of debug binary", nullptr)
 OPTION(prefix_1, "fno-strength-reduce", strength_reduce_fno, Flag, clang_ignored_gcc_optimization_f_Group, INVALID, nullptr, 0, 0, nullptr, nullptr)
 OPTION(prefix_1, "fno-strict-aliasing", fno_strict_aliasing, Flag, f_Group, INVALID, nullptr, DriverOption | CoreOption, 0, nullptr, nullptr)
@@ -1396,6 +1401,8 @@ OPTION(prefix_1, "fsanitize-coverage-trace-div", fsanitize_coverage_trace_div, F
        "Enable div instruction tracing in sanitizer coverage", nullptr)
 OPTION(prefix_1, "fsanitize-coverage-trace-gep", fsanitize_coverage_trace_gep, Flag, INVALID, INVALID, nullptr, CC1Option | NoDriverOption, 0,
        "Enable gep instruction tracing in sanitizer coverage", nullptr)
+OPTION(prefix_1, "fsanitize-coverage-trace-pc-guard", fsanitize_coverage_trace_pc_guard, Flag, INVALID, INVALID, nullptr, CC1Option | NoDriverOption, 0,
+       "Enable PC tracing with guard in sanitizer coverage", nullptr)
 OPTION(prefix_1, "fsanitize-coverage-trace-pc", fsanitize_coverage_trace_pc, Flag, INVALID, INVALID, nullptr, CC1Option | NoDriverOption, 0,
        "Enable PC tracing in sanitizer coverage", nullptr)
 OPTION(prefix_1, "fsanitize-coverage-type=", fsanitize_coverage_type, Joined, INVALID, INVALID, nullptr, CC1Option | NoDriverOption, 0,
@@ -1465,7 +1472,7 @@ OPTION(prefix_1, "fstack-protector-strong", fstack_protector_strong, Flag, f_Gro
        "Use a strong heuristic to apply stack protectors to functions", nullptr)
 OPTION(prefix_1, "fstack-protector", fstack_protector, Flag, f_Group, INVALID, nullptr, 0, 0,
        "Enable stack protectors for functions potentially vulnerable to stack smashing", nullptr)
-OPTION(prefix_1, "fstandalone-debug", fstandalone_debug, Flag, f_Group, INVALID, nullptr, 0, 0,
+OPTION(prefix_1, "fstandalone-debug", fstandalone_debug, Flag, f_Group, INVALID, nullptr, CoreOption, 0,
        "Emit full debug info for all types used by the program", nullptr)
 OPTION(prefix_1, "fstrength-reduce", strength_reduce_f, Flag, clang_ignored_gcc_optimization_f_Group, INVALID, nullptr, 0, 0, nullptr, nullptr)
 OPTION(prefix_1, "fstrict-aliasing", fstrict_aliasing, Flag, f_Group, INVALID, nullptr, DriverOption | CoreOption, 0, nullptr, nullptr)
@@ -2079,6 +2086,7 @@ OPTION(prefix_1, "mno-pku", mno_pku, Flag, m_x86_Features_Group, INVALID, nullpt
 OPTION(prefix_1, "mno-popcntd", mno_popcntd, Flag, m_ppc_Features_Group, INVALID, nullptr, 0, 0, nullptr, nullptr)
 OPTION(prefix_1, "mno-popcnt", mno_popcnt, Flag, m_x86_Features_Group, INVALID, nullptr, CoreOption, 0, nullptr, nullptr)
 OPTION(prefix_1, "mno-power8-vector", mno_power8_vector, Flag, m_ppc_Features_Group, INVALID, nullptr, 0, 0, nullptr, nullptr)
+OPTION(prefix_1, "mno-power9-vector", mno_power9_vector, Flag, m_ppc_Features_Group, INVALID, nullptr, 0, 0, nullptr, nullptr)
 OPTION(prefix_1, "mno-prfchw", mno_prfchw, Flag, m_x86_Features_Group, INVALID, nullptr, CoreOption, 0, nullptr, nullptr)
 OPTION(prefix_1, "mno-qpx", mno_qpx, Flag, m_ppc_Features_Group, INVALID, nullptr, 0, 0, nullptr, nullptr)
 OPTION(prefix_1, "mno-rdrnd", mno_rdrnd, Flag, m_x86_Features_Group, INVALID, nullptr, CoreOption, 0, nullptr, nullptr)
@@ -2138,6 +2146,7 @@ OPTION(prefix_1, "mpku", mpku, Flag, m_x86_Features_Group, INVALID, nullptr, Cor
 OPTION(prefix_1, "mpopcntd", mpopcntd, Flag, m_ppc_Features_Group, INVALID, nullptr, 0, 0, nullptr, nullptr)
 OPTION(prefix_1, "mpopcnt", mpopcnt, Flag, m_x86_Features_Group, INVALID, nullptr, CoreOption, 0, nullptr, nullptr)
 OPTION(prefix_1, "mpower8-vector", mpower8_vector, Flag, m_ppc_Features_Group, INVALID, nullptr, 0, 0, nullptr, nullptr)
+OPTION(prefix_1, "mpower9-vector", mpower9_vector, Flag, m_ppc_Features_Group, INVALID, nullptr, 0, 0, nullptr, nullptr)
 OPTION(prefix_1, "mprfchw", mprfchw, Flag, m_x86_Features_Group, INVALID, nullptr, CoreOption, 0, nullptr, nullptr)
 OPTION(prefix_1, "MP", MP, Flag, M_Group, INVALID, nullptr, CC1Option, 0,
        "Create phony target for each dependency (other than main file)", nullptr)
@@ -2453,7 +2462,7 @@ OPTION(prefix_4, "relocatable-pch", relocatable_pch, Flag, INVALID, INVALID, nul
 OPTION(prefix_1, "remap-file", remap_file, Separate, INVALID, INVALID, nullptr, CC1Option | NoDriverOption, 0,
        "Replace the contents of the <from> file with the contents of the <to> file", "<from>;<to>")
 OPTION(prefix_1, "remap", remap, Flag, INVALID, INVALID, nullptr, 0, 0, nullptr, nullptr)
-OPTION(prefix_1, "resource-dir=", resource_dir_EQ, Joined, INVALID, resource_dir, nullptr, DriverOption, 0, nullptr, nullptr)
+OPTION(prefix_1, "resource-dir=", resource_dir_EQ, Joined, INVALID, resource_dir, nullptr, DriverOption | CoreOption, 0, nullptr, nullptr)
 OPTION(prefix_1, "resource-dir", resource_dir, Separate, INVALID, INVALID, nullptr, DriverOption | CC1Option | CoreOption | HelpHidden, 0,
        "The directory which holds the compiler resource files", nullptr)
 OPTION(prefix_3, "resource=", _resource_EQ, Joined, INVALID, fcompile_resource_EQ, nullptr, 0, 0, nullptr, nullptr)
@@ -2476,11 +2485,16 @@ OPTION(prefix_1, "rpath", rpath, Separate, INVALID, INVALID, nullptr, LinkerInpu
 OPTION(prefix_3, "rsp-quoting=", rsp_quoting, Joined, internal_driver_Group, INVALID, nullptr, CoreOption | DriverOption | HelpHidden, 0,
        "Set the rsp quoting to either 'posix', or 'windows'", nullptr)
 OPTION(prefix_2, "RTC", _SLASH_RTC, Joined, cl_ignored_Group, INVALID, nullptr, CLOption | DriverOption | HelpHidden, 0, nullptr, nullptr)
-OPTION(prefix_4, "rtlib=", rtlib_EQ, Joined, INVALID, INVALID, nullptr, 0, 0, nullptr, nullptr)
+OPTION(prefix_4, "rtlib=", rtlib_EQ, Joined, INVALID, INVALID, nullptr, 0, 0,
+       "Compiler runtime library to use", nullptr)
 OPTION(prefix_3, "rtlib", _rtlib, Separate, INVALID, rtlib_EQ, nullptr, 0, 0, nullptr, nullptr)
 OPTION(prefix_1, "R", R_Joined, Joined, R_Group, INVALID, nullptr, CC1Option | CoreOption, 0,
        "Enable the specified remark", "<remark>")
 OPTION(prefix_1, "r", r, Flag, INVALID, INVALID, nullptr, LinkerInput | NoArgumentUnused, 0, nullptr, nullptr)
+OPTION(prefix_4, "save-stats=", save_stats_EQ, Joined, INVALID, INVALID, nullptr, DriverOption, 0,
+       "Save llvm statistics.", nullptr)
+OPTION(prefix_4, "save-stats", save_stats, Flag, INVALID, save_stats_EQ, "cwd\0", DriverOption, 0,
+       "Save llvm statistics.", nullptr)
 OPTION(prefix_4, "save-temps=", save_temps_EQ, Joined, INVALID, INVALID, nullptr, DriverOption, 0,
        "Save intermediate compilation results.", nullptr)
 OPTION(prefix_4, "save-temps", save_temps, Flag, INVALID, save_temps_EQ, "cwd\0", DriverOption, 0,
@@ -2538,6 +2552,8 @@ OPTION(prefix_1, "static-libgcc", static_libgcc, Flag, INVALID, INVALID, nullptr
 OPTION(prefix_1, "static-libgfortran", static_libgfortran, Flag, gfortran_Group, INVALID, nullptr, 0, 0, nullptr, nullptr)
 OPTION(prefix_1, "static-libstdc++", static_libstdcxx, Flag, INVALID, INVALID, nullptr, 0, 0, nullptr, nullptr)
 OPTION(prefix_4, "static", static, Flag, INVALID, INVALID, nullptr, NoArgumentUnused, 0, nullptr, nullptr)
+OPTION(prefix_1, "stats-file=", stats_file, Joined, INVALID, INVALID, nullptr, CC1Option | NoDriverOption, 0,
+       "Filename to write statistics to", nullptr)
 OPTION(prefix_1, "std-default=", std_default_EQ, Joined, INVALID, INVALID, nullptr, 0, 0, nullptr, nullptr)
 OPTION(prefix_2, "std:", _SLASH_std, Joined, cl_compile_Group, INVALID, nullptr, CLOption | DriverOption, 0,
        "Language standard to compile for", nullptr)

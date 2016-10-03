@@ -7,6 +7,15 @@
 \*===----------------------------------------------------------------------===*/
 
   switch (A->getKind()) {
+  case attr::AMDGPUFlatWorkGroupSize: {
+    const auto *SA = cast<AMDGPUFlatWorkGroupSizeAttr>(A);
+    Record.push_back(SA->isInherited());
+    Record.push_back(A->isImplicit());
+    Record.push_back(A->getSpellingListIndex());
+    Record.push_back(SA->getMin());
+    Record.push_back(SA->getMax());
+    break;
+  }
   case attr::AMDGPUNumSGPR: {
     const auto *SA = cast<AMDGPUNumSGPRAttr>(A);
     Record.push_back(SA->isInherited());
@@ -21,6 +30,15 @@
     Record.push_back(A->isImplicit());
     Record.push_back(A->getSpellingListIndex());
     Record.push_back(SA->getNumVGPR());
+    break;
+  }
+  case attr::AMDGPUWavesPerEU: {
+    const auto *SA = cast<AMDGPUWavesPerEUAttr>(A);
+    Record.push_back(SA->isInherited());
+    Record.push_back(A->isImplicit());
+    Record.push_back(A->getSpellingListIndex());
+    Record.push_back(SA->getMin());
+    Record.push_back(SA->getMax());
     break;
   }
   case attr::ARMInterrupt: {

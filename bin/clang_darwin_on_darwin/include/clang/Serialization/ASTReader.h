@@ -284,6 +284,21 @@ private:
   void Error(const char *Msg);
 };
 
+/// \brief ASTReaderListenter implementation to set SuggestedPredefines of
+/// ASTReader which is required to use a pch file. This is the replacement
+/// of PCHValidator or SimplePCHValidator when using a pch file without
+/// validating it.
+class SimpleASTReaderListener : public ASTReaderListener {
+  Preprocessor &PP;
+
+public:
+  SimpleASTReaderListener(Preprocessor &PP)
+    : PP(PP) {}
+
+  bool ReadPreprocessorOptions(const PreprocessorOptions &PPOpts, bool Complain,
+                               std::string &SuggestedPredefines) override;
+};
+
 namespace serialization {
 
 class ReadMethodPoolVisitor;
@@ -1404,6 +1419,10 @@ public:
 
   /// \brief Make the names within this set of hidden names visible.
   void makeNamesVisible(const HiddenNames &Names, Module *Owner);
+
+  /// \brief Note that MergedDef is a redefinition of the canonical definition
+  /// Def, so Def should be visible whenever MergedDef is.
+  void mergeDefinitionVisibility(NamedDecl *Def, NamedDecl *MergedDef);
 
   /// \brief Take the AST callbacks listener.
   std::unique_ptr<ASTReaderListener> takeListener() {

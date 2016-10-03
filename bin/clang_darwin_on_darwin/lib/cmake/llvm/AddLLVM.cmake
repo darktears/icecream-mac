@@ -533,27 +533,30 @@ endfunction()
 
 macro(add_llvm_library name)
   cmake_parse_arguments(ARG
-    "SHARED"
+    "SHARED;BUILDTREE_ONLY"
     ""
     ""
     ${ARGN})
-  if( BUILD_SHARED_LIBS )
-    llvm_add_library(${name} SHARED ${ARGN})
+  if( BUILD_SHARED_LIBS OR ARG_SHARED )
+    llvm_add_library(${name} SHARED ${ARG_UNPARSED_ARGUMENTS})
   else()
-    llvm_add_library(${name} ${ARGN})
+    llvm_add_library(${name} ${ARG_UNPARSED_ARGUMENTS})
   endif()
-  # The gtest libraries should not be installed or exported as a target
-  if ("${name}" STREQUAL gtest OR "${name}" STREQUAL gtest_main)
-    set(_is_gtest TRUE)
-  else()
-    set(_is_gtest FALSE)
+
+  # Libraries that are meant to only be exposed via the build tree only are
+  # never installed and are only exported as a target in the special build tree
+  # config file.
+  if (NOT ARG_BUILDTREE_ONLY)
     set_property( GLOBAL APPEND PROPERTY LLVM_LIBS ${name} )
   endif()
 
   if( EXCLUDE_FROM_ALL )
     set_target_properties( ${name} PROPERTIES EXCLUDE_FROM_ALL ON)
-  elseif(NOT _is_gtest)
-    if (NOT LLVM_INSTALL_TOOLCHAIN_ONLY OR ${name} STREQUAL "LTO")
+  elseif(ARG_BUILDTREE_ONLY)
+    set_property(GLOBAL APPEND PROPERTY LLVM_EXPORTS_BUILDTREE_ONLY ${name})
+  else()
+    if (NOT LLVM_INSTALL_TOOLCHAIN_ONLY OR ${name} STREQUAL "LTO" OR
+        (LLVM_LINK_LLVM_DYLIB AND ${name} STREQUAL "LLVM"))
       set(install_dir lib${LLVM_LIBDIR_SUFFIX})
       if(ARG_SHARED OR BUILD_SHARED_LIBS)
         if(WIN32 OR CYGWIN OR MINGW)
@@ -1243,6 +1246,12 @@ function(add_llvm_tool_symlink name dest)
 
   set(output_path "${LLVM_RUNTIME_OUTPUT_INTDIR}/${name}${CMAKE_EXECUTABLE_SUFFIX}")
 
+  set(target_name ${name})
+  if(TARGET ${name})
+    set(target_name ${name}-link)
+  endif()
+
+
   if(ARG_ALWAYS_GENERATE)
     set_property(DIRECTORY APPEND PROPERTY
       ADDITIONAL_MAKE_CLEAN_FILES ${dest_binary})
@@ -1252,8 +1261,8 @@ function(add_llvm_tool_symlink name dest)
     add_custom_command(OUTPUT ${output_path}
                      COMMAND ${CMAKE_COMMAND} -E ${LLVM_LINK_OR_COPY} "${dest_binary}" "${output_path}"
                      DEPENDS ${dest})
-    add_custom_target(${name} ALL DEPENDS ${output_path})
-    set_target_properties(${name} PROPERTIES FOLDER Tools)
+    add_custom_target(${target_name} ALL DEPENDS ${output_path})
+    set_target_properties(${target_name} PROPERTIES FOLDER Tools)
 
     # Make sure the parent tool is a toolchain tool, otherwise exclude this tool
     list(FIND LLVM_TOOLCHAIN_TOOLS ${dest} LLVM_IS_${dest}_TOOLCHAIN_TOOL)

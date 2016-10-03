@@ -902,7 +902,9 @@ namespace clang {
       /// \brief An AdjustedType record.
       TYPE_ADJUSTED              = 42,
       /// \brief A PipeType record.
-      TYPE_PIPE                  = 43
+      TYPE_PIPE                  = 43,
+      /// \brief An ObjCTypeParamType record.
+      TYPE_OBJC_TYPE_PARAM       = 44
     };
 
     /// \brief The type IDs for special types constructed by semantic
@@ -1103,6 +1105,8 @@ namespace clang {
       DECL_UNRESOLVED_USING_TYPENAME,
       /// \brief A LinkageSpecDecl record.
       DECL_LINKAGE_SPEC,
+      /// \brief An ExportDecl record.
+      DECL_EXPORT,
       /// \brief A CXXRecordDecl record.
       DECL_CXX_RECORD,
       /// \brief A CXXMethodDecl record.

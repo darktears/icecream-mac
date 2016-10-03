@@ -915,9 +915,13 @@ static AttributeList::Kind getAttrKind(StringRef Name, AttributeList::Syntax Syn
       return AttributeList::AT_WarnUnusedResult;	 // "warn_unused_result"
     }
     break;
-  case 19:	 // 9 strings to match.
+  case 19:	 // 10 strings to match.
     switch (Name[0]) {
     default: break;
+    case 'a':	 // 1 string to match.
+      if (memcmp(Name.data()+1, "mdgpu_waves_per_eu", 18))
+        break;
+      return AttributeList::AT_AMDGPUWavesPerEU;	 // "amdgpu_waves_per_eu"
     case 'c':	 // 3 strings to match.
       if (memcmp(Name.data()+1, "f_", 2))
         break;
@@ -1172,9 +1176,13 @@ static AttributeList::Kind getAttrKind(StringRef Name, AttributeList::Syntax Syn
       break;
     }
     break;
-  case 27:	 // 3 strings to match.
+  case 27:	 // 4 strings to match.
     switch (Name[0]) {
     default: break;
+    case 'a':	 // 1 string to match.
+      if (memcmp(Name.data()+1, "mdgpu_flat_work_group_size", 26))
+        break;
+      return AttributeList::AT_AMDGPUFlatWorkGroupSize;	 // "amdgpu_flat_work_group_size"
     case 'd':	 // 2 strings to match.
       if (memcmp(Name.data()+1, "evice_builtin_", 14))
         break;

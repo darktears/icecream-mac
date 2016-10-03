@@ -7,6 +7,11 @@
 \*===----------------------------------------------------------------------===*/
 
   switch (AttrKind) {
+  case AT_AMDGPUFlatWorkGroupSize: {
+    if (Name == "amdgpu_flat_work_group_size" && SyntaxUsed == 0 && Scope == "")
+        return 0;
+    break;
+  }
   case AT_AMDGPUNumSGPR: {
     if (Name == "amdgpu_num_sgpr" && SyntaxUsed == 0 && Scope == "")
         return 0;
@@ -14,6 +19,11 @@
   }
   case AT_AMDGPUNumVGPR: {
     if (Name == "amdgpu_num_vgpr" && SyntaxUsed == 0 && Scope == "")
+        return 0;
+    break;
+  }
+  case AT_AMDGPUWavesPerEU: {
+    if (Name == "amdgpu_waves_per_eu" && SyntaxUsed == 0 && Scope == "")
         return 0;
     break;
   }

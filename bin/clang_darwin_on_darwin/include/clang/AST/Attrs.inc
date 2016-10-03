@@ -9,6 +9,46 @@
 #ifndef LLVM_CLANG_ATTR_CLASSES_INC
 #define LLVM_CLANG_ATTR_CLASSES_INC
 
+class AMDGPUFlatWorkGroupSizeAttr : public InheritableAttr {
+unsigned min;
+
+unsigned max;
+
+public:
+  static AMDGPUFlatWorkGroupSizeAttr *CreateImplicit(ASTContext &Ctx, unsigned Min, unsigned Max, SourceRange Loc = SourceRange()) {
+    auto *A = new (Ctx) AMDGPUFlatWorkGroupSizeAttr(Loc, Ctx, Min, Max, 0);
+    A->setImplicit(true);
+    return A;
+  }
+
+  AMDGPUFlatWorkGroupSizeAttr(SourceRange R, ASTContext &Ctx
+              , unsigned Min
+              , unsigned Max
+              , unsigned SI
+             )
+    : InheritableAttr(attr::AMDGPUFlatWorkGroupSize, R, SI, false, false)
+              , min(Min)
+              , max(Max)
+  {
+  }
+
+  AMDGPUFlatWorkGroupSizeAttr *clone(ASTContext &C) const;
+  void printPretty(raw_ostream &OS,
+                   const PrintingPolicy &Policy) const;
+  const char *getSpelling() const;
+  unsigned getMin() const {
+    return min;
+  }
+
+  unsigned getMax() const {
+    return max;
+  }
+
+
+
+  static bool classof(const Attr *A) { return A->getKind() == attr::AMDGPUFlatWorkGroupSize; }
+};
+
 class AMDGPUNumSGPRAttr : public InheritableAttr {
 unsigned numSGPR;
 
@@ -71,6 +111,56 @@ public:
 
 
   static bool classof(const Attr *A) { return A->getKind() == attr::AMDGPUNumVGPR; }
+};
+
+class AMDGPUWavesPerEUAttr : public InheritableAttr {
+unsigned min;
+
+unsigned max;
+
+public:
+  static AMDGPUWavesPerEUAttr *CreateImplicit(ASTContext &Ctx, unsigned Min, unsigned Max, SourceRange Loc = SourceRange()) {
+    auto *A = new (Ctx) AMDGPUWavesPerEUAttr(Loc, Ctx, Min, Max, 0);
+    A->setImplicit(true);
+    return A;
+  }
+
+  AMDGPUWavesPerEUAttr(SourceRange R, ASTContext &Ctx
+              , unsigned Min
+              , unsigned Max
+              , unsigned SI
+             )
+    : InheritableAttr(attr::AMDGPUWavesPerEU, R, SI, false, false)
+              , min(Min)
+              , max(Max)
+  {
+  }
+
+  AMDGPUWavesPerEUAttr(SourceRange R, ASTContext &Ctx
+              , unsigned Min
+              , unsigned SI
+             )
+    : InheritableAttr(attr::AMDGPUWavesPerEU, R, SI, false, false)
+              , min(Min)
+              , max()
+  {
+  }
+
+  AMDGPUWavesPerEUAttr *clone(ASTContext &C) const;
+  void printPretty(raw_ostream &OS,
+                   const PrintingPolicy &Policy) const;
+  const char *getSpelling() const;
+  unsigned getMin() const {
+    return min;
+  }
+
+  unsigned getMax() const {
+    return max;
+  }
+
+
+
+  static bool classof(const Attr *A) { return A->getKind() == attr::AMDGPUWavesPerEU; }
 };
 
 class ARMInterruptAttr : public InheritableAttr {

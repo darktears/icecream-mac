@@ -7,6 +7,17 @@
 \*===----------------------------------------------------------------------===*/
 
   switch (Kind) {
+  case attr::AMDGPUFlatWorkGroupSize: {
+    bool isInherited = Record[Idx++];
+    bool isImplicit = Record[Idx++];
+    unsigned Spelling = Record[Idx++];
+    unsigned min = Record[Idx++];
+    unsigned max = Record[Idx++];
+    New = new (Context) AMDGPUFlatWorkGroupSizeAttr(Range, Context, min, max, Spelling);
+    cast<InheritableAttr>(New)->setInherited(isInherited);
+    New->setImplicit(isImplicit);
+    break;
+  }
   case attr::AMDGPUNumSGPR: {
     bool isInherited = Record[Idx++];
     bool isImplicit = Record[Idx++];
@@ -23,6 +34,17 @@
     unsigned Spelling = Record[Idx++];
     unsigned numVGPR = Record[Idx++];
     New = new (Context) AMDGPUNumVGPRAttr(Range, Context, numVGPR, Spelling);
+    cast<InheritableAttr>(New)->setInherited(isInherited);
+    New->setImplicit(isImplicit);
+    break;
+  }
+  case attr::AMDGPUWavesPerEU: {
+    bool isInherited = Record[Idx++];
+    bool isImplicit = Record[Idx++];
+    unsigned Spelling = Record[Idx++];
+    unsigned min = Record[Idx++];
+    unsigned max = Record[Idx++];
+    New = new (Context) AMDGPUWavesPerEUAttr(Range, Context, min, max, Spelling);
     cast<InheritableAttr>(New)->setInherited(isInherited);
     New->setImplicit(isImplicit);
     break;

@@ -22,6 +22,15 @@ static unsigned defaultSpellingIndexToSemanticSpelling(const AttributeList &Attr
   return UINT_MAX;
 }
 
+static bool checkAMDGPUFlatWorkGroupSizeAppertainsTo(Sema &S, const AttributeList &Attr, const Decl *D) {
+  if (!isa<FunctionDecl>(D)) {
+    S.Diag(Attr.getLoc(), diag::err_attribute_wrong_decl_type)
+      << Attr.getName() << ExpectedKernelFunction;
+    return false;
+  }
+  return true;
+}
+
 static bool checkAMDGPUNumSGPRAppertainsTo(Sema &S, const AttributeList &Attr, const Decl *D) {
   if (!isa<FunctionDecl>(D)) {
     S.Diag(Attr.getLoc(), diag::err_attribute_wrong_decl_type)
@@ -40,9 +49,18 @@ static bool checkAMDGPUNumVGPRAppertainsTo(Sema &S, const AttributeList &Attr, c
   return true;
 }
 
-static bool isTargetarmthumbx86x86_64msp430mipsmipsel(const TargetInfo &Target) {
+static bool checkAMDGPUWavesPerEUAppertainsTo(Sema &S, const AttributeList &Attr, const Decl *D) {
+  if (!isa<FunctionDecl>(D)) {
+    S.Diag(Attr.getLoc(), diag::err_attribute_wrong_decl_type)
+      << Attr.getName() << ExpectedKernelFunction;
+    return false;
+  }
+  return true;
+}
+
+static bool isTargetarmthumbarmebthumbebx86x86_64msp430mipsmipsel(const TargetInfo &Target) {
   const llvm::Triple &T = Target.getTriple();
-  return (T.getArch() == llvm::Triple::arm || T.getArch() == llvm::Triple::thumb || T.getArch() == llvm::Triple::x86 || T.getArch() == llvm::Triple::x86_64 || T.getArch() == llvm::Triple::msp430 || T.getArch() == llvm::Triple::mips || T.getArch() == llvm::Triple::mipsel);
+  return (T.getArch() == llvm::Triple::arm || T.getArch() == llvm::Triple::thumb || T.getArch() == llvm::Triple::armeb || T.getArch() == llvm::Triple::thumbeb || T.getArch() == llvm::Triple::x86 || T.getArch() == llvm::Triple::x86_64 || T.getArch() == llvm::Triple::msp430 || T.getArch() == llvm::Triple::mips || T.getArch() == llvm::Triple::mipsel);
 }
 
 static bool isStruct(const Decl *D) {
@@ -1713,9 +1731,11 @@ static unsigned XRayInstrumentAttrSpellingMap(const AttributeList &Attr) {
 }
 
 static const ParsedAttrInfo AttrInfoMap[AttributeList::UnknownAttribute + 1] = {
+  { 2, 0, 0, 0, 0, 0, 0, checkAMDGPUFlatWorkGroupSizeAppertainsTo, defaultDiagnoseLangOpts, defaultTargetRequirements, defaultSpellingIndexToSemanticSpelling },  // AT_AMDGPUFlatWorkGroupSize
   { 1, 0, 0, 0, 0, 0, 0, checkAMDGPUNumSGPRAppertainsTo, defaultDiagnoseLangOpts, defaultTargetRequirements, defaultSpellingIndexToSemanticSpelling },  // AT_AMDGPUNumSGPR
   { 1, 0, 0, 0, 0, 0, 0, checkAMDGPUNumVGPRAppertainsTo, defaultDiagnoseLangOpts, defaultTargetRequirements, defaultSpellingIndexToSemanticSpelling },  // AT_AMDGPUNumVGPR
-  { 0, 1, 1, 1, 0, 0, 0, defaultAppertainsTo, defaultDiagnoseLangOpts, isTargetarmthumbx86x86_64msp430mipsmipsel, defaultSpellingIndexToSemanticSpelling },  // AT_Interrupt
+  { 1, 1, 0, 0, 0, 0, 0, checkAMDGPUWavesPerEUAppertainsTo, defaultDiagnoseLangOpts, defaultTargetRequirements, defaultSpellingIndexToSemanticSpelling },  // AT_AMDGPUWavesPerEU
+  { 0, 1, 1, 1, 0, 0, 0, defaultAppertainsTo, defaultDiagnoseLangOpts, isTargetarmthumbarmebthumbebx86x86_64msp430mipsmipsel, defaultSpellingIndexToSemanticSpelling },  // AT_Interrupt
   { 0, 15, 0, 0, 0, 0, 1, checkAbiTagAppertainsTo, defaultDiagnoseLangOpts, defaultTargetRequirements, defaultSpellingIndexToSemanticSpelling },  // AT_AbiTag
   { 0, 15, 0, 0, 0, 0, 0, checkAcquireCapabilityAppertainsTo, defaultDiagnoseLangOpts, defaultTargetRequirements, AcquireCapabilityAttrSpellingMap },  // AT_AcquireCapability
   { 0, 15, 0, 0, 0, 0, 0, checkAcquiredAfterAppertainsTo, defaultDiagnoseLangOpts, defaultTargetRequirements, defaultSpellingIndexToSemanticSpelling },  // AT_AcquiredAfter

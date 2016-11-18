@@ -377,6 +377,8 @@ function(llvm_add_library name)
     endif()
   endif()
 
+  setup_dependency_debugging(${name} ${LLVM_COMMON_DEPENDS})
+
   # Generate objlib
   if((ARG_SHARED AND ARG_STATIC) OR ARG_OBJECT)
     # Generate an obj library for both targets.
@@ -415,6 +417,9 @@ function(llvm_add_library name)
   elseif(ARG_SHARED)
     add_windows_version_resource_file(ALL_FILES ${ALL_FILES})
     add_library(${name} SHARED ${ALL_FILES})
+
+    llvm_setup_rpath(${name})
+
   else()
     add_library(${name} STATIC ${ALL_FILES})
   endif()
@@ -449,6 +454,18 @@ function(llvm_add_library name)
       set_target_properties(${name} PROPERTIES
         PREFIX ""
         )
+    endif()
+
+    # Set SOVERSION on shared libraries that lack explicit SONAME
+    # specifier, on *nix systems that are not Darwin.
+    if(UNIX AND NOT APPLE AND NOT ARG_SONAME)
+      set_target_properties(${name}
+        PROPERTIES
+		# Concatenate the version numbers since ldconfig expects exactly
+		# one component indicating the ABI version, while LLVM uses
+		# major+minor for that.
+        SOVERSION ${LLVM_VERSION_MAJOR}${LLVM_VERSION_MINOR}
+        VERSION ${LLVM_VERSION_MAJOR}${LLVM_VERSION_MINOR}.${LLVM_VERSION_PATCH}${LLVM_VERSION_SUFFIX})
     endif()
   endif()
 
@@ -569,10 +586,16 @@ macro(add_llvm_library name)
         set(install_type ARCHIVE)
       endif()
 
+      if(${name} IN_LIST LLVM_DISTRIBUTION_COMPONENTS OR
+          NOT LLVM_DISTRIBUTION_COMPONENTS)
+        set(export_to_llvmexports EXPORT LLVMExports)
+        set_property(GLOBAL PROPERTY LLVM_HAS_EXPORTS True)
+      endif()
+
       install(TARGETS ${name}
-            EXPORT LLVMExports
-            ${install_type} DESTINATION ${install_dir}
-            COMPONENT ${name})
+              ${export_to_llvmexports}
+              ${install_type} DESTINATION ${install_dir}
+              COMPONENT ${name})
 
       if (NOT CMAKE_CONFIGURATION_TYPES)
         add_custom_target(install-${name}
@@ -603,10 +626,17 @@ macro(add_llvm_loadable_module name)
         else()
           set(dlldir "lib${LLVM_LIBDIR_SUFFIX}")
         endif()
+
+        if(${name} IN_LIST LLVM_DISTRIBUTION_COMPONENTS OR
+            NOT LLVM_DISTRIBUTION_COMPONENTS)
+          set(export_to_llvmexports EXPORT LLVMExports)
+          set_property(GLOBAL PROPERTY LLVM_HAS_EXPORTS True)
+        endif()
+
         install(TARGETS ${name}
-          EXPORT LLVMExports
-          LIBRARY DESTINATION ${dlldir}
-          ARCHIVE DESTINATION lib${LLVM_LIBDIR_SUFFIX})
+                ${export_to_llvmexports}
+                LIBRARY DESTINATION ${dlldir}
+                ARCHIVE DESTINATION lib${LLVM_LIBDIR_SUFFIX})
       endif()
       set_property(GLOBAL APPEND PROPERTY LLVM_EXPORTS ${name})
     endif()
@@ -617,8 +647,10 @@ endmacro(add_llvm_loadable_module name)
 
 
 macro(add_llvm_executable name)
-  cmake_parse_arguments(ARG "DISABLE_LLVM_LINK_LLVM_DYLIB;IGNORE_EXTERNALIZE_DEBUGINFO" "" "" ${ARGN})
+  cmake_parse_arguments(ARG "DISABLE_LLVM_LINK_LLVM_DYLIB;IGNORE_EXTERNALIZE_DEBUGINFO;NO_INSTALL_RPATH" "" "DEPENDS" ${ARGN})
   llvm_process_sources( ALL_FILES ${ARG_UNPARSED_ARGUMENTS} )
+
+  list(APPEND LLVM_COMMON_DEPENDS ${ARG_DEPENDS})
 
   # Generate objlib
   if(LLVM_ENABLE_OBJLIB)
@@ -641,10 +673,16 @@ macro(add_llvm_executable name)
     list(APPEND ALL_FILES "${LLVM_MAIN_SRC_DIR}/cmake/dummy.cpp")
   endif()
 
+  setup_dependency_debugging(${name} ${LLVM_COMMON_DEPENDS})
+  
   if( EXCLUDE_FROM_ALL )
     add_executable(${name} EXCLUDE_FROM_ALL ${ALL_FILES})
   else()
     add_executable(${name} ${ALL_FILES})
+  endif()
+
+  if(NOT ARG_NO_INSTALL_RPATH)
+    llvm_setup_rpath(${name})
   endif()
 
   if(DEFINED windows_resource_file)
@@ -776,11 +814,16 @@ macro(add_llvm_tool name)
   endif()
   add_llvm_executable(${name} ${ARGN})
 
-  list(FIND LLVM_TOOLCHAIN_TOOLS ${name} LLVM_IS_${name}_TOOLCHAIN_TOOL)
-  if (LLVM_IS_${name}_TOOLCHAIN_TOOL GREATER -1 OR NOT LLVM_INSTALL_TOOLCHAIN_ONLY)
+  if ( ${name} IN_LIST LLVM_TOOLCHAIN_TOOLS OR NOT LLVM_INSTALL_TOOLCHAIN_ONLY)
     if( LLVM_BUILD_TOOLS )
+      if(${name} IN_LIST LLVM_DISTRIBUTION_COMPONENTS OR
+          NOT LLVM_DISTRIBUTION_COMPONENTS)
+        set(export_to_llvmexports EXPORT LLVMExports)
+        set_property(GLOBAL PROPERTY LLVM_HAS_EXPORTS True)
+      endif()
+
       install(TARGETS ${name}
-              EXPORT LLVMExports
+              ${export_to_llvmexports}
               RUNTIME DESTINATION ${LLVM_TOOLS_INSTALL_DIR}
               COMPONENT ${name})
 
@@ -974,7 +1017,7 @@ function(add_unittest test_suite test_name)
   set(LLVM_REQUIRES_RTTI OFF)
 
   list(APPEND LLVM_LINK_COMPONENTS Support) # gtest needs it for raw_ostream
-  add_llvm_executable(${test_name} IGNORE_EXTERNALIZE_DEBUGINFO ${ARGN})
+  add_llvm_executable(${test_name} IGNORE_EXTERNALIZE_DEBUGINFO NO_INSTALL_RPATH ${ARGN})
   set(outdir ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_CFG_INTDIR})
   set_output_directory(${test_name} BINARY_DIR ${outdir} LIBRARY_DIR ${outdir})
   # libpthreads overrides some standard library symbols, so main
@@ -1084,10 +1127,16 @@ function(add_lit_target target comment)
   if (NOT CMAKE_CFG_INTDIR STREQUAL ".")
     list(APPEND LIT_ARGS --param build_mode=${CMAKE_CFG_INTDIR})
   endif ()
-  if (LLVM_MAIN_SRC_DIR)
-    set (LIT_COMMAND ${PYTHON_EXECUTABLE} ${LLVM_MAIN_SRC_DIR}/utils/lit/lit.py)
+  if (EXISTS ${LLVM_MAIN_SRC_DIR}/utils/lit/lit.py)
+    # reset cache after erraneous r283029
+    # TODO: remove this once all buildbots run
+    if (LIT_COMMAND STREQUAL "${PYTHON_EXECUTABLE} ${LLVM_MAIN_SRC_DIR}/utils/lit/lit.py")
+      unset(LIT_COMMAND CACHE)
+    endif()
+    set (LIT_COMMAND "${PYTHON_EXECUTABLE};${LLVM_MAIN_SRC_DIR}/utils/lit/lit.py"
+         CACHE STRING "Command used to spawn llvm-lit")
   else()
-    find_program(LIT_COMMAND llvm-lit)
+    find_program(LIT_COMMAND NAMES llvm-lit lit.py lit)
   endif ()
   list(APPEND LIT_COMMAND ${LIT_ARGS})
   foreach(param ${ARG_PARAMS})
@@ -1264,20 +1313,13 @@ function(add_llvm_tool_symlink name dest)
     add_custom_target(${target_name} ALL DEPENDS ${output_path})
     set_target_properties(${target_name} PROPERTIES FOLDER Tools)
 
-    # Make sure the parent tool is a toolchain tool, otherwise exclude this tool
-    list(FIND LLVM_TOOLCHAIN_TOOLS ${dest} LLVM_IS_${dest}_TOOLCHAIN_TOOL)
-    if (NOT LLVM_IS_${dest}_TOOLCHAIN_TOOL GREATER -1)
-      set(LLVM_IS_${name}_TOOLCHAIN_TOOL ${LLVM_IS_${dest}_TOOLCHAIN_TOOL})
-    else()
-      list(FIND LLVM_TOOLCHAIN_TOOLS ${name} LLVM_IS_${name}_TOOLCHAIN_TOOL)
+    # Make sure both the link and target are toolchain tools
+    if (${name} IN_LIST LLVM_TOOLCHAIN_TOOLS AND ${dest} IN_LIST LLVM_TOOLCHAIN_TOOLS)
+      set(TOOL_IS_TOOLCHAIN ON)
     endif()
 
-    # LLVM_IS_${name}_TOOLCHAIN_TOOL will only be greater than -1 if both this
-    # tool and its parent tool are in LLVM_TOOLCHAIN_TOOLS
-    if (LLVM_IS_${name}_TOOLCHAIN_TOOL GREATER -1 OR NOT LLVM_INSTALL_TOOLCHAIN_ONLY)
-      if( LLVM_BUILD_TOOLS )
-        llvm_install_symlink(${name} ${dest})
-      endif()
+    if ((TOOL_IS_TOOLCHAIN OR NOT LLVM_INSTALL_TOOLCHAIN_ONLY) AND LLVM_BUILD_TOOLS)
+      llvm_install_symlink(${name} ${dest})
     endif()
   endif()
 endfunction()
@@ -1306,4 +1348,54 @@ function(llvm_externalize_debuginfo name)
   else()
     message(FATAL_ERROR "LLVM_EXTERNALIZE_DEBUGINFO isn't implemented for non-darwin platforms!")
   endif()
+endfunction()
+
+function(llvm_setup_rpath name)
+  if(CMAKE_INSTALL_RPATH)
+    return()
+  endif()
+
+  if(LLVM_INSTALL_PREFIX AND NOT (LLVM_INSTALL_PREFIX STREQUAL CMAKE_INSTALL_PREFIX))
+    set(extra_libdir ${LLVM_LIBRARY_DIR})
+  elseif(LLVM_BUILD_LIBRARY_DIR)
+    set(extra_libdir ${LLVM_LIBRARY_DIR})
+  endif()
+
+  if (APPLE)
+    set(_install_name_dir INSTALL_NAME_DIR "@rpath")
+    set(_install_rpath "@loader_path/../lib" ${extra_libdir})
+  elseif(UNIX)
+    set(_install_rpath "\$ORIGIN/../lib${LLVM_LIBDIR_SUFFIX}" ${extra_libdir})
+    if(${CMAKE_SYSTEM_NAME} MATCHES "(FreeBSD|DragonFly)")
+      set_property(TARGET ${name} APPEND_STRING PROPERTY
+                   LINK_FLAGS " -Wl,-z,origin ")
+    elseif(${CMAKE_SYSTEM_NAME} STREQUAL "Linux" AND NOT LLVM_LINKER_IS_GOLD)
+      # $ORIGIN is not interpreted at link time by ld.bfd
+      set_property(TARGET ${name} APPEND_STRING PROPERTY
+                   LINK_FLAGS " -Wl,-rpath-link,${LLVM_LIBRARY_OUTPUT_INTDIR} ")
+    endif()
+  else()
+    return()
+  endif()
+
+  set_target_properties(${name} PROPERTIES
+                        BUILD_WITH_INSTALL_RPATH On
+                        INSTALL_RPATH "${_install_rpath}"
+                        ${_install_name_dir})
+endfunction()
+
+function(setup_dependency_debugging name)
+  if(NOT LLVM_DEPENDENCY_DEBUGGING)
+    return()
+  endif()
+
+  if("intrinsics_gen" IN_LIST ARGN)
+    return()
+  endif()
+
+  set(deny_attributes_gen "(deny file* (literal \"${LLVM_BINARY_DIR}/include/llvm/IR/Attributes.gen\"))")
+  set(deny_intrinsics_gen "(deny file* (literal \"${LLVM_BINARY_DIR}/include/llvm/IR/Intrinsics.gen\"))")
+
+  set(sandbox_command "sandbox-exec -p '(version 1) (allow default) ${deny_attributes_gen} ${deny_intrinsics_gen}'")
+  set_property(DIRECTORY PROPERTY RULE_LAUNCH_COMPILE ${sandbox_command})
 endfunction()

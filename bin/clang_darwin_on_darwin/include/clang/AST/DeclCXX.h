@@ -993,7 +993,11 @@ public:
            !hasUserDeclaredCopyConstructor() &&
            !hasUserDeclaredCopyAssignment() &&
            !hasUserDeclaredMoveConstructor() &&
-           !hasUserDeclaredDestructor();
+           !hasUserDeclaredDestructor() &&
+           // C++1z [expr.prim.lambda]p21: "the closure type has a deleted copy
+           // assignment operator". The intent is that this counts as a user
+           // declared copy assignment, but we do not model it that way.
+           !isLambda();
   }
 
   /// \brief Determine whether we need to eagerly declare a move assignment
@@ -2957,11 +2961,10 @@ class ConstructorUsingShadowDecl final : public UsingShadowDecl {
             dyn_cast<ConstructorUsingShadowDecl>(Target)),
         ConstructedBaseClassShadowDecl(NominatedBaseClassShadowDecl),
         IsVirtual(TargetInVirtualBase) {
-    // If we found a constructor for a non-virtual base class, but it chains to
-    // a constructor for a virtual base, we should directly call the virtual
-    // base constructor instead.
+    // If we found a constructor that chains to a constructor for a virtual
+    // base, we should directly call that virtual base constructor instead.
     // FIXME: This logic belongs in Sema.
-    if (!TargetInVirtualBase && NominatedBaseClassShadowDecl &&
+    if (NominatedBaseClassShadowDecl &&
         NominatedBaseClassShadowDecl->constructsVirtualBase()) {
       ConstructedBaseClassShadowDecl =
           NominatedBaseClassShadowDecl->ConstructedBaseClassShadowDecl;

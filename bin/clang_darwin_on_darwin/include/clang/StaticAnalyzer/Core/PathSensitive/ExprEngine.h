@@ -262,7 +262,8 @@ public:
   /// Called by CoreEngine.  Used to notify checkers that processing a
   /// function has ended. Called for both inlined and and top-level functions.
   void processEndOfFunction(NodeBuilderContext& BC,
-                            ExplodedNode *Pred) override;
+                            ExplodedNode *Pred,
+                            const ReturnStmt *RS = nullptr) override;
 
   /// Remove dead bindings/symbols before exiting a function.
   void removeDeadOnEndOfFunction(NodeBuilderContext& BC,
@@ -284,10 +285,6 @@ public:
   ///  making assumptions about state values.
   ProgramStateRef processAssume(ProgramStateRef state, SVal cond,
                                 bool assumption) override;
-
-  /// wantsRegionChangeUpdate - Called by ProgramStateManager to determine if a
-  ///  region change should trigger a processRegionChanges update.
-  bool wantsRegionChangeUpdate(ProgramStateRef state) override;
 
   /// processRegionChanges - Called by ProgramStateManager whenever a change is made
   ///  to the store. Used to update checkers that track region values.

@@ -360,6 +360,17 @@ let TargetPrefix = "ppc" in {  // All intrinsics start with "llvm.ppc.".
   def int_ppc_altivec_vcmpnezb_p : GCCBuiltin<"__builtin_altivec_vcmpnezb_p">,
               Intrinsic<[llvm_i32_ty],[llvm_i32_ty,llvm_v16i8_ty,llvm_v16i8_ty],
                         [IntrNoMem]>;
+  def int_ppc_altivec_vclzlsbb : GCCBuiltin<"__builtin_altivec_vclzlsbb">,
+              Intrinsic<[llvm_i32_ty],[llvm_v16i8_ty],[IntrNoMem]>;
+  def int_ppc_altivec_vctzlsbb : GCCBuiltin<"__builtin_altivec_vctzlsbb">,
+              Intrinsic<[llvm_i32_ty],[llvm_v16i8_ty],[IntrNoMem]>;
+  def int_ppc_altivec_vprtybw : GCCBuiltin<"__builtin_altivec_vprtybw">,
+              Intrinsic<[llvm_v4i32_ty],[llvm_v4i32_ty],[IntrNoMem]>;
+  def int_ppc_altivec_vprtybd : GCCBuiltin<"__builtin_altivec_vprtybd">,
+              Intrinsic<[llvm_v2i64_ty],[llvm_v2i64_ty],[IntrNoMem]>;
+  def int_ppc_altivec_vprtybq : GCCBuiltin<"__builtin_altivec_vprtybq">,
+              Intrinsic<[llvm_v1i128_ty],[llvm_v1i128_ty],[IntrNoMem]>;
+
 }
 
 // Vector average.
@@ -611,6 +622,8 @@ def int_ppc_altivec_vsl   : PowerPC_Vec_WWW_Intrinsic<"vsl">;
 def int_ppc_altivec_vslo  : PowerPC_Vec_WWW_Intrinsic<"vslo">;
 
 def int_ppc_altivec_vslb  : PowerPC_Vec_BBB_Intrinsic<"vslb">;
+def int_ppc_altivec_vslv  : PowerPC_Vec_BBB_Intrinsic<"vslv">;
+def int_ppc_altivec_vsrv  : PowerPC_Vec_BBB_Intrinsic<"vsrv">;
 def int_ppc_altivec_vslh  : PowerPC_Vec_HHH_Intrinsic<"vslh">;
 def int_ppc_altivec_vslw  : PowerPC_Vec_WWW_Intrinsic<"vslw">;
 
@@ -693,6 +706,27 @@ def int_ppc_altivec_crypto_vpmsumw :
 def int_ppc_altivec_crypto_vpmsumd :
             PowerPC_Vec_DDD_Intrinsic<"crypto_vpmsumd">;
 
+// Absolute Difference intrinsics
+def int_ppc_altivec_vabsdub : PowerPC_Vec_BBB_Intrinsic<"vabsdub">;
+def int_ppc_altivec_vabsduh : PowerPC_Vec_HHH_Intrinsic<"vabsduh">;
+def int_ppc_altivec_vabsduw : PowerPC_Vec_WWW_Intrinsic<"vabsduw">;
+
+// Vector rotates
+def int_ppc_altivec_vrlwnm :
+      PowerPC_Vec_Intrinsic<"vrlwnm", [llvm_v4i32_ty],
+                            [llvm_v4i32_ty, llvm_v4i32_ty], [IntrNoMem]>;
+def int_ppc_altivec_vrlwmi :
+      PowerPC_Vec_Intrinsic<"vrlwmi", [llvm_v4i32_ty],
+                            [llvm_v4i32_ty, llvm_v4i32_ty, llvm_v4i32_ty],
+                            [IntrNoMem]>;
+def int_ppc_altivec_vrldnm :
+      PowerPC_Vec_Intrinsic<"vrldnm", [llvm_v2i64_ty],
+                            [llvm_v2i64_ty, llvm_v2i64_ty], [IntrNoMem]>;
+def int_ppc_altivec_vrldmi :
+      PowerPC_Vec_Intrinsic<"vrldmi", [llvm_v2i64_ty],
+                            [llvm_v2i64_ty, llvm_v2i64_ty, llvm_v2i64_ty],
+                            [IntrNoMem]>;
+
 //===----------------------------------------------------------------------===//
 // PowerPC VSX Intrinsic Definitions.
 
@@ -703,13 +737,32 @@ def int_ppc_vsx_lxvw4x :
       Intrinsic<[llvm_v4i32_ty], [llvm_ptr_ty], [IntrReadMem, IntrArgMemOnly]>;
 def int_ppc_vsx_lxvd2x :
       Intrinsic<[llvm_v2f64_ty], [llvm_ptr_ty], [IntrReadMem, IntrArgMemOnly]>;
+def int_ppc_vsx_lxvw4x_be :
+      Intrinsic<[llvm_v4i32_ty], [llvm_ptr_ty], [IntrReadMem, IntrArgMemOnly]>;
+def int_ppc_vsx_lxvd2x_be :
+      Intrinsic<[llvm_v2f64_ty], [llvm_ptr_ty], [IntrReadMem, IntrArgMemOnly]>;
+def int_ppc_vsx_lxvl :
+      Intrinsic<[llvm_v4i32_ty], [llvm_ptr_ty, llvm_i64_ty], [IntrReadMem,
+      IntrArgMemOnly]>;
+def int_ppc_vsx_lxvll :
+      Intrinsic<[llvm_v4i32_ty], [llvm_ptr_ty, llvm_i64_ty], [IntrReadMem,
+      IntrArgMemOnly]>;
+def int_ppc_vsx_stxvl :
+      Intrinsic<[], [llvm_v4i32_ty, llvm_ptr_ty, llvm_i64_ty],
+      [IntrArgMemOnly]>;
+def int_ppc_vsx_stxvll :
+      Intrinsic<[], [llvm_v4i32_ty, llvm_ptr_ty, llvm_i64_ty],
+      [IntrArgMemOnly]>;
 
 // Vector store.
 def int_ppc_vsx_stxvw4x :
       Intrinsic<[], [llvm_v4i32_ty, llvm_ptr_ty], [IntrArgMemOnly]>;
 def int_ppc_vsx_stxvd2x :
       Intrinsic<[], [llvm_v2f64_ty, llvm_ptr_ty], [IntrArgMemOnly]>;
-
+def int_ppc_vsx_stxvw4x_be :
+      Intrinsic<[], [llvm_v4i32_ty, llvm_ptr_ty], [IntrArgMemOnly]>;
+def int_ppc_vsx_stxvd2x_be :
+      Intrinsic<[], [llvm_v2f64_ty, llvm_ptr_ty], [IntrArgMemOnly]>;
 // Vector and scalar maximum.
 def int_ppc_vsx_xvmaxdp : PowerPC_VSX_Vec_DDD_Intrinsic<"xvmaxdp">;
 def int_ppc_vsx_xvmaxsp : PowerPC_VSX_Vec_FFF_Intrinsic<"xvmaxsp">;
@@ -782,6 +835,60 @@ def int_ppc_vsx_xvcmpgtsp_p : GCCBuiltin<"__builtin_vsx_xvcmpgtsp_p">,
 def int_ppc_vsx_xxleqv :
       PowerPC_VSX_Intrinsic<"xxleqv", [llvm_v4i32_ty],
                             [llvm_v4i32_ty, llvm_v4i32_ty], [IntrNoMem]>;
+def int_ppc_vsx_xviexpdp :
+      PowerPC_VSX_Intrinsic<"xviexpdp",[llvm_v2f64_ty],
+                            [llvm_v2i64_ty, llvm_v2i64_ty],[IntrNoMem]>;
+def int_ppc_vsx_xviexpsp :
+      PowerPC_VSX_Intrinsic<"xviexpsp",[llvm_v4f32_ty],
+                            [llvm_v4i32_ty, llvm_v4i32_ty],[IntrNoMem]>;
+def int_ppc_vsx_xvcvdpsxws :
+      PowerPC_VSX_Intrinsic<"xvcvdpsxws", [llvm_v4i32_ty],
+                            [llvm_v2f64_ty], [IntrNoMem]>;
+def int_ppc_vsx_xvcvdpuxws :
+      PowerPC_VSX_Intrinsic<"xvcvdpuxws", [llvm_v4i32_ty],
+                            [llvm_v2f64_ty], [IntrNoMem]>;
+def int_ppc_vsx_xvcvsxwdp :
+      PowerPC_VSX_Intrinsic<"xvcvsxwdp", [llvm_v2f64_ty],
+                            [llvm_v4i32_ty], [IntrNoMem]>;
+def int_ppc_vsx_xvcvuxwdp :
+      PowerPC_VSX_Intrinsic<"xvcvuxwdp", [llvm_v2f64_ty],
+                            [llvm_v4i32_ty], [IntrNoMem]>;
+def int_ppc_vsx_xvcvspdp :
+      PowerPC_VSX_Intrinsic<"xvcvspdp", [llvm_v2f64_ty],
+                            [llvm_v4f32_ty], [IntrNoMem]>;
+def int_ppc_vsx_xvcvsxdsp :
+      PowerPC_VSX_Intrinsic<"xvcvsxdsp", [llvm_v4f32_ty],
+                            [llvm_v2i64_ty], [IntrNoMem]>;
+def int_ppc_vsx_xvcvuxdsp :
+      PowerPC_VSX_Intrinsic<"xvcvuxdsp", [llvm_v4f32_ty],
+                            [llvm_v2i64_ty], [IntrNoMem]>;
+def int_ppc_vsx_xvcvdpsp :
+      PowerPC_VSX_Intrinsic<"xvcvdpsp", [llvm_v4f32_ty],
+                            [llvm_v2f64_ty], [IntrNoMem]>;
+def int_ppc_vsx_xvcvsphp :
+      PowerPC_VSX_Intrinsic<"xvcvsphp", [llvm_v4f32_ty],
+                            [llvm_v4f32_ty], [IntrNoMem]>;
+def int_ppc_vsx_xvxexpdp :
+      PowerPC_VSX_Intrinsic<"xvxexpdp", [llvm_v2i64_ty],
+                            [llvm_v2f64_ty], [IntrNoMem]>;
+def int_ppc_vsx_xvxexpsp :
+      PowerPC_VSX_Intrinsic<"xvxexpsp", [llvm_v4i32_ty],
+                            [llvm_v4f32_ty], [IntrNoMem]>;
+def int_ppc_vsx_xvxsigdp :
+      PowerPC_VSX_Intrinsic<"xvxsigdp", [llvm_v2i64_ty],
+                            [llvm_v2f64_ty], [IntrNoMem]>;
+def int_ppc_vsx_xvxsigsp :
+      PowerPC_VSX_Intrinsic<"xvxsigsp", [llvm_v4i32_ty],
+                            [llvm_v4f32_ty], [IntrNoMem]>;
+def int_ppc_vsx_xvtstdcdp :
+      PowerPC_VSX_Intrinsic<"xvtstdcdp", [llvm_v2i64_ty],
+                            [llvm_v2f64_ty, llvm_i32_ty], [IntrNoMem]>;
+def int_ppc_vsx_xvtstdcsp :
+      PowerPC_VSX_Intrinsic<"xvtstdcsp", [llvm_v4i32_ty],
+                            [llvm_v4f32_ty,llvm_i32_ty], [IntrNoMem]>;
+def int_ppc_vsx_xvcvhpsp :
+      PowerPC_VSX_Intrinsic<"xvcvhpsp", [llvm_v4f32_ty],
+                            [llvm_v8i16_ty],[IntrNoMem]>;
 }
 
 //===----------------------------------------------------------------------===//

@@ -314,6 +314,13 @@
         return 0;
     break;
   }
+  case AT_Convergent: {
+    if (Name == "convergent" && SyntaxUsed == 0 && Scope == "")
+        return 0;
+    if (Name == "convergent" && SyntaxUsed == 1 && Scope == "clang")
+        return 1;
+    break;
+  }
   case AT_DLLExport: {
     if (Name == "dllexport" && SyntaxUsed == 2 && Scope == "")
         return 0;
@@ -835,6 +842,11 @@
         return 0;
     break;
   }
+  case AT_ObjCSubclassingRestricted: {
+    if (Name == "objc_subclassing_restricted" && SyntaxUsed == 0 && Scope == "")
+        return 0;
+    break;
+  }
   case AT_OpenCLAccess: {
     if (Name == "__read_only" && SyntaxUsed == 4 && Scope == "")
         return 0;
@@ -991,6 +1003,15 @@
         return 0;
     if (Name == "pure" && SyntaxUsed == 1 && Scope == "gnu")
         return 1;
+    break;
+  }
+  case AT_RegCall: {
+    if (Name == "regcall" && SyntaxUsed == 0 && Scope == "")
+        return 0;
+    if (Name == "regcall" && SyntaxUsed == 1 && Scope == "gnu")
+        return 1;
+    if (Name == "__regcall" && SyntaxUsed == 4 && Scope == "")
+        return 2;
     break;
   }
   case AT_Regparm: {

@@ -447,11 +447,6 @@ public:
   virtual const MCPhysReg*
   getCalleeSavedRegs(const MachineFunction *MF) const = 0;
 
-  virtual const MCPhysReg*
-  getCalleeSavedRegsViaCopy(const MachineFunction *MF) const {
-    return nullptr;
-  }
-
   /// Return a mask of call-preserved registers for the given calling convention
   /// on the current function. The mask should include all call-preserved
   /// aliases. This is used by the register allocator to determine which
@@ -494,6 +489,10 @@ public:
   /// considered unavailable at all times, e.g. SP, RA. This is
   /// used by register scavenger to determine what registers are free.
   virtual BitVector getReservedRegs(const MachineFunction &MF) const = 0;
+
+  /// Returns true if PhysReg is unallocatable and constant throughout the
+  /// function.  Used by MachineRegisterInfo::isConstantPhysReg().
+  virtual bool isConstantPhysReg(unsigned PhysReg) const { return false; }
 
   /// Prior to adding the live-out mask to a stackmap or patchpoint
   /// instruction, provide the target the opportunity to adjust it (mainly to

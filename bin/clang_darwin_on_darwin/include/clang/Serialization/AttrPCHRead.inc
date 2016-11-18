@@ -556,6 +556,15 @@
     New->setImplicit(isImplicit);
     break;
   }
+  case attr::Convergent: {
+    bool isInherited = Record[Idx++];
+    bool isImplicit = Record[Idx++];
+    unsigned Spelling = Record[Idx++];
+    New = new (Context) ConvergentAttr(Range, Context, Spelling);
+    cast<InheritableAttr>(New)->setInherited(isInherited);
+    New->setImplicit(isImplicit);
+    break;
+  }
   case attr::DLLExport: {
     bool isInherited = Record[Idx++];
     bool isImplicit = Record[Idx++];
@@ -1389,6 +1398,15 @@
     New->setImplicit(isImplicit);
     break;
   }
+  case attr::ObjCSubclassingRestricted: {
+    bool isInherited = Record[Idx++];
+    bool isImplicit = Record[Idx++];
+    unsigned Spelling = Record[Idx++];
+    New = new (Context) ObjCSubclassingRestrictedAttr(Range, Context, Spelling);
+    cast<InheritableAttr>(New)->setInherited(isInherited);
+    New->setImplicit(isImplicit);
+    break;
+  }
   case attr::OpenCLAccess: {
     bool isImplicit = Record[Idx++];
     unsigned Spelling = Record[Idx++];
@@ -1545,6 +1563,15 @@
     bool isImplicit = Record[Idx++];
     unsigned Spelling = Record[Idx++];
     New = new (Context) PureAttr(Range, Context, Spelling);
+    cast<InheritableAttr>(New)->setInherited(isInherited);
+    New->setImplicit(isImplicit);
+    break;
+  }
+  case attr::RegCall: {
+    bool isInherited = Record[Idx++];
+    bool isImplicit = Record[Idx++];
+    unsigned Spelling = Record[Idx++];
+    New = new (Context) RegCallAttr(Range, Context, Spelling);
     cast<InheritableAttr>(New)->setInherited(isInherited);
     New->setImplicit(isImplicit);
     break;

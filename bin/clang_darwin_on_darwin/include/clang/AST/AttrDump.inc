@@ -295,6 +295,9 @@
   case attr::ConsumableSetOnRead: {
     break;
   }
+  case attr::Convergent: {
+    break;
+  }
   case attr::DLLExport: {
     break;
   }
@@ -743,6 +746,9 @@
   case attr::ObjCRuntimeVisible: {
     break;
   }
+  case attr::ObjCSubclassingRestricted: {
+    break;
+  }
   case attr::OpenCLAccess: {
     OS << " " << A->getSpelling();
     break;
@@ -825,6 +831,9 @@
     break;
   }
   case attr::Pure: {
+    break;
+  }
+  case attr::RegCall: {
     break;
   }
   case attr::ReleaseCapability: {

@@ -2105,6 +2105,30 @@ public:
   static bool classof(const Attr *A) { return A->getKind() == attr::ConsumableSetOnRead; }
 };
 
+class ConvergentAttr : public InheritableAttr {
+public:
+  static ConvergentAttr *CreateImplicit(ASTContext &Ctx, SourceRange Loc = SourceRange()) {
+    auto *A = new (Ctx) ConvergentAttr(Loc, Ctx, 0);
+    A->setImplicit(true);
+    return A;
+  }
+
+  ConvergentAttr(SourceRange R, ASTContext &Ctx
+              , unsigned SI
+             )
+    : InheritableAttr(attr::Convergent, R, SI, false, false)
+  {
+  }
+
+  ConvergentAttr *clone(ASTContext &C) const;
+  void printPretty(raw_ostream &OS,
+                   const PrintingPolicy &Policy) const;
+  const char *getSpelling() const;
+
+
+  static bool classof(const Attr *A) { return A->getKind() == attr::Convergent; }
+};
+
 class DLLExportAttr : public InheritableAttr {
 public:
   static DLLExportAttr *CreateImplicit(ASTContext &Ctx, SourceRange Loc = SourceRange()) {
@@ -5163,6 +5187,30 @@ public:
   static bool classof(const Attr *A) { return A->getKind() == attr::ObjCRuntimeVisible; }
 };
 
+class ObjCSubclassingRestrictedAttr : public InheritableAttr {
+public:
+  static ObjCSubclassingRestrictedAttr *CreateImplicit(ASTContext &Ctx, SourceRange Loc = SourceRange()) {
+    auto *A = new (Ctx) ObjCSubclassingRestrictedAttr(Loc, Ctx, 0);
+    A->setImplicit(true);
+    return A;
+  }
+
+  ObjCSubclassingRestrictedAttr(SourceRange R, ASTContext &Ctx
+              , unsigned SI
+             )
+    : InheritableAttr(attr::ObjCSubclassingRestricted, R, SI, false, false)
+  {
+  }
+
+  ObjCSubclassingRestrictedAttr *clone(ASTContext &C) const;
+  void printPretty(raw_ostream &OS,
+                   const PrintingPolicy &Policy) const;
+  const char *getSpelling() const;
+
+
+  static bool classof(const Attr *A) { return A->getKind() == attr::ObjCSubclassingRestricted; }
+};
+
 class OpenCLAccessAttr : public Attr {
 public:
   enum Spelling {
@@ -5740,6 +5788,30 @@ public:
 
 
   static bool classof(const Attr *A) { return A->getKind() == attr::Pure; }
+};
+
+class RegCallAttr : public InheritableAttr {
+public:
+  static RegCallAttr *CreateImplicit(ASTContext &Ctx, SourceRange Loc = SourceRange()) {
+    auto *A = new (Ctx) RegCallAttr(Loc, Ctx, 0);
+    A->setImplicit(true);
+    return A;
+  }
+
+  RegCallAttr(SourceRange R, ASTContext &Ctx
+              , unsigned SI
+             )
+    : InheritableAttr(attr::RegCall, R, SI, false, false)
+  {
+  }
+
+  RegCallAttr *clone(ASTContext &C) const;
+  void printPretty(raw_ostream &OS,
+                   const PrintingPolicy &Policy) const;
+  const char *getSpelling() const;
+
+
+  static bool classof(const Attr *A) { return A->getKind() == attr::RegCall; }
 };
 
 class ReleaseCapabilityAttr : public InheritableAttr {

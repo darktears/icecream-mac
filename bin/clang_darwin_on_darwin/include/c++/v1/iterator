@@ -89,57 +89,60 @@ public:
     typedef typename iterator_traits<Iterator>::reference       reference;
     typedef typename iterator_traits<Iterator>::pointer         pointer;
 
-    reverse_iterator();
-    explicit reverse_iterator(Iterator x);
-    template <class U> reverse_iterator(const reverse_iterator<U>& u);
-    Iterator base() const;
-    reference operator*() const;
-    pointer   operator->() const;
-    reverse_iterator& operator++();
-    reverse_iterator  operator++(int);
-    reverse_iterator& operator--();
-    reverse_iterator  operator--(int);
-    reverse_iterator  operator+ (difference_type n) const;
-    reverse_iterator& operator+=(difference_type n);
-    reverse_iterator  operator- (difference_type n) const;
-    reverse_iterator& operator-=(difference_type n);
-    reference         operator[](difference_type n) const;
+    constexpr reverse_iterator();
+    constexpr explicit reverse_iterator(Iterator x);
+    template <class U> constexpr reverse_iterator(const reverse_iterator<U>& u);
+    template <class U> constexpr reverse_iterator& operator=(const reverse_iterator<U>& u);
+    constexpr Iterator base() const;
+    constexpr reference operator*() const;
+    constexpr pointer   operator->() const;
+    constexpr reverse_iterator& operator++();
+    constexpr reverse_iterator  operator++(int);
+    constexpr reverse_iterator& operator--();
+    constexpr reverse_iterator  operator--(int);
+    constexpr reverse_iterator  operator+ (difference_type n) const;
+    constexpr reverse_iterator& operator+=(difference_type n);
+    constexpr reverse_iterator  operator- (difference_type n) const;
+    constexpr reverse_iterator& operator-=(difference_type n);
+    constexpr reference         operator[](difference_type n) const;
 };
 
 template <class Iterator1, class Iterator2>
-bool
+constexpr bool                          // constexpr in C++17
 operator==(const reverse_iterator<Iterator1>& x, const reverse_iterator<Iterator2>& y);
 
 template <class Iterator1, class Iterator2>
-bool
+constexpr bool                          // constexpr in C++17
 operator<(const reverse_iterator<Iterator1>& x, const reverse_iterator<Iterator2>& y);
 
 template <class Iterator1, class Iterator2>
-bool
+constexpr bool                          // constexpr in C++17
 operator!=(const reverse_iterator<Iterator1>& x, const reverse_iterator<Iterator2>& y);
 
 template <class Iterator1, class Iterator2>
-bool
+constexpr bool                          // constexpr in C++17
 operator>(const reverse_iterator<Iterator1>& x, const reverse_iterator<Iterator2>& y);
 
 template <class Iterator1, class Iterator2>
-bool
+constexpr bool                          // constexpr in C++17
 operator>=(const reverse_iterator<Iterator1>& x, const reverse_iterator<Iterator2>& y);
 
 template <class Iterator1, class Iterator2>
-bool
+constexpr bool                          // constexpr in C++17
 operator<=(const reverse_iterator<Iterator1>& x, const reverse_iterator<Iterator2>& y);
 
 template <class Iterator1, class Iterator2>
-auto
+constexpr auto
 operator-(const reverse_iterator<Iterator1>& x, const reverse_iterator<Iterator2>& y)
--> decltype(__y.base() - __x.base());
+-> decltype(__y.base() - __x.base());   // constexpr in C++17
 
 template <class Iterator>
-reverse_iterator<Iterator>
-operator+(typename reverse_iterator<Iterator>::difference_type n, const reverse_iterator<Iterator>& x);
+constexpr reverse_iterator<Iterator>
+operator+(typename reverse_iterator<Iterator>::difference_type n, 
+          const reverse_iterator<Iterator>& x);   // constexpr in C++17
 
-template <class Iterator> reverse_iterator<Iterator> make_reverse_iterator(Iterator i); // C++14
+template <class Iterator>
+constexpr reverse_iterator<Iterator> make_reverse_iterator(Iterator i); // C++14, constexpr in C++17
 
 template <class Container>
 class back_insert_iterator
@@ -216,61 +219,64 @@ public:
     typedef typename iterator_traits<Iterator>::iterator_category iterator_category;
     typedef value_type&&                                          reference;
  
-    move_iterator();
-    explicit move_iterator(Iterator i);
-    template <class U> move_iterator(const move_iterator<U>& u);
-    template <class U> move_iterator& operator=(const move_iterator<U>& u);
-    iterator_type base() const;
-    reference operator*() const;
-    pointer operator->() const;
-    move_iterator& operator++();
-    move_iterator operator++(int);
-    move_iterator& operator--();
-    move_iterator operator--(int);
-    move_iterator operator+(difference_type n) const; 
-    move_iterator& operator+=(difference_type n); 
-    move_iterator operator-(difference_type n) const; 
-    move_iterator& operator-=(difference_type n); 
-    unspecified operator[](difference_type n) const;
+    constexpr move_iterator();  // all the constexprs are in C++17
+    constexpr explicit move_iterator(Iterator i);
+    template <class U>
+      constexpr move_iterator(const move_iterator<U>& u);
+    template <class U>
+      constexpr move_iterator& operator=(const move_iterator<U>& u);
+    constexpr iterator_type base() const;
+    constexpr reference operator*() const;
+    constexpr pointer operator->() const;
+    constexpr move_iterator& operator++();
+    constexpr move_iterator operator++(int);
+    constexpr move_iterator& operator--();
+    constexpr move_iterator operator--(int);
+    constexpr move_iterator operator+(difference_type n) const; 
+    constexpr move_iterator& operator+=(difference_type n); 
+    constexpr move_iterator operator-(difference_type n) const; 
+    constexpr move_iterator& operator-=(difference_type n); 
+    constexpr unspecified operator[](difference_type n) const;
 private:
     Iterator current; // exposition only
 };
 
 template <class Iterator1, class Iterator2>
-bool
+constexpr bool   // constexpr in C++17
 operator==(const move_iterator<Iterator1>& x, const move_iterator<Iterator2>& y);
 
 template <class Iterator1, class Iterator2>
-bool
+constexpr bool   // constexpr in C++17
 operator!=(const move_iterator<Iterator1>& x, const move_iterator<Iterator2>& y);
 
 template <class Iterator1, class Iterator2>
-bool
+constexpr bool   // constexpr in C++17
 operator<(const move_iterator<Iterator1>& x, const move_iterator<Iterator2>& y);
 
 template <class Iterator1, class Iterator2>
-bool
+constexpr bool   // constexpr in C++17
 operator<=(const move_iterator<Iterator1>& x, const move_iterator<Iterator2>& y);
 
 template <class Iterator1, class Iterator2>
-bool
+constexpr bool   // constexpr in C++17
 operator>(const move_iterator<Iterator1>& x, const move_iterator<Iterator2>& y);
 
 template <class Iterator1, class Iterator2>
-bool
+constexpr bool   // constexpr in C++17
 operator>=(const move_iterator<Iterator1>& x, const move_iterator<Iterator2>& y);
 
 template <class Iterator1, class Iterator2>
-auto
+constexpr auto   // constexpr in C++17
 operator-(const move_iterator<Iterator1>& x,
           const move_iterator<Iterator2>& y) -> decltype(x.base() - y.base());
 
 template <class Iterator>
-move_iterator<Iterator> operator+(typename move_iterator<Iterator>::difference_type n, 
-                                     const move_iterator<Iterator>& x);
+constexpr move_iterator<Iterator> operator+(   // constexpr in C++17
+            typename move_iterator<Iterator>::difference_type n, 
+            const move_iterator<Iterator>& x);
 
-template <class Iterator>
-move_iterator<Iterator> make_move_iterator(const Iterator& i);
+template <class Iterator>   // constexpr in C++17
+constexpr  move_iterator<Iterator> make_move_iterator(const Iterator& i);
 
 
 template <class T, class charT = char, class traits = char_traits<charT>, class Distance = ptrdiff_t>
@@ -508,8 +514,8 @@ struct __is_random_access_iterator : public __has_iterator_category_convertible_
 template <class _Tp>
 struct __is_exactly_input_iterator
     : public integral_constant<bool, 
-    	 __has_iterator_category_convertible_to<_Tp, input_iterator_tag>::value && 
-    	!__has_iterator_category_convertible_to<_Tp, forward_iterator_tag>::value> {};
+         __has_iterator_category_convertible_to<_Tp, input_iterator_tag>::value && 
+        !__has_iterator_category_convertible_to<_Tp, forward_iterator_tag>::value> {};
 
 template<class _Category, class _Tp, class _Distance = ptrdiff_t,
          class _Pointer = _Tp*, class _Reference = _Tp&>
@@ -618,7 +624,7 @@ class _LIBCPP_TYPE_VIS_ONLY reverse_iterator
                       typename iterator_traits<_Iter>::reference>
 {
 private:
-    mutable _Iter __t;  // no longer used as of LWG #2360, not removed due to ABI break
+    /*mutable*/ _Iter __t;  // no longer used as of LWG #2360, not removed due to ABI break
 protected:
     _Iter current;
 public:
@@ -627,33 +633,45 @@ public:
     typedef typename iterator_traits<_Iter>::reference       reference;
     typedef typename iterator_traits<_Iter>::pointer         pointer;
 
-    _LIBCPP_INLINE_VISIBILITY reverse_iterator() : current() {}
-    _LIBCPP_INLINE_VISIBILITY explicit reverse_iterator(_Iter __x) : __t(__x), current(__x) {}
-    template <class _Up> _LIBCPP_INLINE_VISIBILITY reverse_iterator(const reverse_iterator<_Up>& __u)
-        : __t(__u.base()), current(__u.base()) {}
-    _LIBCPP_INLINE_VISIBILITY _Iter base() const {return current;}
-    _LIBCPP_INLINE_VISIBILITY reference operator*() const {_Iter __tmp = current; return *--__tmp;}
-    _LIBCPP_INLINE_VISIBILITY pointer  operator->() const {return _VSTD::addressof(operator*());}
-    _LIBCPP_INLINE_VISIBILITY reverse_iterator& operator++() {--current; return *this;}
-    _LIBCPP_INLINE_VISIBILITY reverse_iterator  operator++(int)
-        {reverse_iterator __tmp(*this); --current; return __tmp;}
-    _LIBCPP_INLINE_VISIBILITY reverse_iterator& operator--() {++current; return *this;}
-    _LIBCPP_INLINE_VISIBILITY reverse_iterator  operator--(int)
-        {reverse_iterator __tmp(*this); ++current; return __tmp;}
-    _LIBCPP_INLINE_VISIBILITY reverse_iterator  operator+ (difference_type __n) const
-        {return reverse_iterator(current - __n);}
-    _LIBCPP_INLINE_VISIBILITY reverse_iterator& operator+=(difference_type __n)
-        {current -= __n; return *this;}
-    _LIBCPP_INLINE_VISIBILITY reverse_iterator  operator- (difference_type __n) const
-        {return reverse_iterator(current + __n);}
-    _LIBCPP_INLINE_VISIBILITY reverse_iterator& operator-=(difference_type __n)
-        {current += __n; return *this;}
-    _LIBCPP_INLINE_VISIBILITY reference         operator[](difference_type __n) const
-        {return *(*this + __n);}
+    _LIBCPP_INLINE_VISIBILITY _LIBCPP_CONSTEXPR_AFTER_CXX14
+    reverse_iterator() : __t(), current() {}
+    _LIBCPP_INLINE_VISIBILITY _LIBCPP_CONSTEXPR_AFTER_CXX14
+    explicit reverse_iterator(_Iter __x) : __t(__x), current(__x) {}
+    template <class _Up>
+        _LIBCPP_INLINE_VISIBILITY _LIBCPP_CONSTEXPR_AFTER_CXX14
+        reverse_iterator(const reverse_iterator<_Up>& __u) : __t(__u.base()), current(__u.base()) {}
+    template <class _Up>
+        _LIBCPP_INLINE_VISIBILITY _LIBCPP_CONSTEXPR_AFTER_CXX14
+        reverse_iterator& operator=(const reverse_iterator<_Up>& __u)
+            { __t = current = __u.base(); return *this; }
+    _LIBCPP_INLINE_VISIBILITY _LIBCPP_CONSTEXPR_AFTER_CXX14
+    _Iter base() const {return current;}
+    _LIBCPP_INLINE_VISIBILITY _LIBCPP_CONSTEXPR_AFTER_CXX14
+    reference operator*() const {_Iter __tmp = current; return *--__tmp;}
+    _LIBCPP_INLINE_VISIBILITY _LIBCPP_CONSTEXPR_AFTER_CXX14
+    pointer  operator->() const {return _VSTD::addressof(operator*());}
+    _LIBCPP_INLINE_VISIBILITY _LIBCPP_CONSTEXPR_AFTER_CXX14
+    reverse_iterator& operator++() {--current; return *this;}
+    _LIBCPP_INLINE_VISIBILITY _LIBCPP_CONSTEXPR_AFTER_CXX14
+    reverse_iterator  operator++(int) {reverse_iterator __tmp(*this); --current; return __tmp;}
+    _LIBCPP_INLINE_VISIBILITY _LIBCPP_CONSTEXPR_AFTER_CXX14
+    reverse_iterator& operator--() {++current; return *this;}
+    _LIBCPP_INLINE_VISIBILITY _LIBCPP_CONSTEXPR_AFTER_CXX14
+    reverse_iterator  operator--(int) {reverse_iterator __tmp(*this); ++current; return __tmp;}
+    _LIBCPP_INLINE_VISIBILITY _LIBCPP_CONSTEXPR_AFTER_CXX14
+    reverse_iterator  operator+ (difference_type __n) const {return reverse_iterator(current - __n);}
+    _LIBCPP_INLINE_VISIBILITY _LIBCPP_CONSTEXPR_AFTER_CXX14
+    reverse_iterator& operator+=(difference_type __n) {current -= __n; return *this;}
+    _LIBCPP_INLINE_VISIBILITY _LIBCPP_CONSTEXPR_AFTER_CXX14
+    reverse_iterator  operator- (difference_type __n) const {return reverse_iterator(current + __n);}
+    _LIBCPP_INLINE_VISIBILITY _LIBCPP_CONSTEXPR_AFTER_CXX14
+    reverse_iterator& operator-=(difference_type __n) {current += __n; return *this;}
+    _LIBCPP_INLINE_VISIBILITY _LIBCPP_CONSTEXPR_AFTER_CXX14
+    reference         operator[](difference_type __n) const {return *(*this + __n);}
 };
 
 template <class _Iter1, class _Iter2>
-inline _LIBCPP_INLINE_VISIBILITY
+inline _LIBCPP_INLINE_VISIBILITY _LIBCPP_CONSTEXPR_AFTER_CXX14
 bool
 operator==(const reverse_iterator<_Iter1>& __x, const reverse_iterator<_Iter2>& __y)
 {
@@ -661,7 +679,7 @@ operator==(const reverse_iterator<_Iter1>& __x, const reverse_iterator<_Iter2>& 
 }
 
 template <class _Iter1, class _Iter2>
-inline _LIBCPP_INLINE_VISIBILITY
+inline _LIBCPP_INLINE_VISIBILITY _LIBCPP_CONSTEXPR_AFTER_CXX14
 bool
 operator<(const reverse_iterator<_Iter1>& __x, const reverse_iterator<_Iter2>& __y)
 {
@@ -669,7 +687,7 @@ operator<(const reverse_iterator<_Iter1>& __x, const reverse_iterator<_Iter2>& _
 }
 
 template <class _Iter1, class _Iter2>
-inline _LIBCPP_INLINE_VISIBILITY
+inline _LIBCPP_INLINE_VISIBILITY _LIBCPP_CONSTEXPR_AFTER_CXX14
 bool
 operator!=(const reverse_iterator<_Iter1>& __x, const reverse_iterator<_Iter2>& __y)
 {
@@ -677,7 +695,7 @@ operator!=(const reverse_iterator<_Iter1>& __x, const reverse_iterator<_Iter2>& 
 }
 
 template <class _Iter1, class _Iter2>
-inline _LIBCPP_INLINE_VISIBILITY
+inline _LIBCPP_INLINE_VISIBILITY _LIBCPP_CONSTEXPR_AFTER_CXX14
 bool
 operator>(const reverse_iterator<_Iter1>& __x, const reverse_iterator<_Iter2>& __y)
 {
@@ -685,7 +703,7 @@ operator>(const reverse_iterator<_Iter1>& __x, const reverse_iterator<_Iter2>& _
 }
 
 template <class _Iter1, class _Iter2>
-inline _LIBCPP_INLINE_VISIBILITY
+inline _LIBCPP_INLINE_VISIBILITY _LIBCPP_CONSTEXPR_AFTER_CXX14
 bool
 operator>=(const reverse_iterator<_Iter1>& __x, const reverse_iterator<_Iter2>& __y)
 {
@@ -693,7 +711,7 @@ operator>=(const reverse_iterator<_Iter1>& __x, const reverse_iterator<_Iter2>& 
 }
 
 template <class _Iter1, class _Iter2>
-inline _LIBCPP_INLINE_VISIBILITY
+inline _LIBCPP_INLINE_VISIBILITY _LIBCPP_CONSTEXPR_AFTER_CXX14
 bool
 operator<=(const reverse_iterator<_Iter1>& __x, const reverse_iterator<_Iter2>& __y)
 {
@@ -702,7 +720,7 @@ operator<=(const reverse_iterator<_Iter1>& __x, const reverse_iterator<_Iter2>& 
 
 #ifndef _LIBCPP_CXX03_LANG
 template <class _Iter1, class _Iter2>
-inline _LIBCPP_INLINE_VISIBILITY
+inline _LIBCPP_INLINE_VISIBILITY _LIBCPP_CONSTEXPR_AFTER_CXX14
 auto
 operator-(const reverse_iterator<_Iter1>& __x, const reverse_iterator<_Iter2>& __y)
 -> decltype(__y.base() - __x.base())
@@ -720,7 +738,7 @@ operator-(const reverse_iterator<_Iter1>& __x, const reverse_iterator<_Iter2>& _
 #endif
 
 template <class _Iter>
-inline _LIBCPP_INLINE_VISIBILITY
+inline _LIBCPP_INLINE_VISIBILITY _LIBCPP_CONSTEXPR_AFTER_CXX14
 reverse_iterator<_Iter>
 operator+(typename reverse_iterator<_Iter>::difference_type __n, const reverse_iterator<_Iter>& __x)
 {
@@ -729,7 +747,7 @@ operator+(typename reverse_iterator<_Iter>::difference_type __n, const reverse_i
 
 #if _LIBCPP_STD_VER > 11
 template <class _Iter>
-inline _LIBCPP_INLINE_VISIBILITY
+inline _LIBCPP_INLINE_VISIBILITY _LIBCPP_CONSTEXPR_AFTER_CXX14
 reverse_iterator<_Iter> make_reverse_iterator(_Iter __i)
 {
     return reverse_iterator<_Iter>(__i);
@@ -889,9 +907,9 @@ private:
     ostream_type* __out_stream_;
     const char_type* __delim_;
 public:
-    _LIBCPP_INLINE_VISIBILITY ostream_iterator(ostream_type& __s)
+    _LIBCPP_INLINE_VISIBILITY ostream_iterator(ostream_type& __s) _NOEXCEPT
         : __out_stream_(_VSTD::addressof(__s)), __delim_(0) {}
-    _LIBCPP_INLINE_VISIBILITY ostream_iterator(ostream_type& __s, const _CharT* __delimiter)
+    _LIBCPP_INLINE_VISIBILITY ostream_iterator(ostream_type& __s, const _CharT* __delimiter) _NOEXCEPT
         : __out_stream_(_VSTD::addressof(__s)), __delim_(__delimiter) {}
     _LIBCPP_INLINE_VISIBILITY ostream_iterator& operator=(const _Tp& __value_)
         {
@@ -1040,37 +1058,40 @@ public:
     typedef typename iterator_traits<iterator_type>::reference reference;
 #endif
 
-    _LIBCPP_INLINE_VISIBILITY move_iterator() : __i() {}
-    _LIBCPP_INLINE_VISIBILITY explicit move_iterator(_Iter __x) : __i(__x) {}
-    template <class _Up> _LIBCPP_INLINE_VISIBILITY move_iterator(const move_iterator<_Up>& __u)
-        : __i(__u.base()) {}
-    _LIBCPP_INLINE_VISIBILITY _Iter base() const {return __i;}
-    _LIBCPP_INLINE_VISIBILITY reference operator*() const {
-      return static_cast<reference>(*__i);
-    }
-    _LIBCPP_INLINE_VISIBILITY pointer  operator->() const { return __i;}
-    _LIBCPP_INLINE_VISIBILITY move_iterator& operator++() {++__i; return *this;}
-    _LIBCPP_INLINE_VISIBILITY move_iterator  operator++(int)
-        {move_iterator __tmp(*this); ++__i; return __tmp;}
-    _LIBCPP_INLINE_VISIBILITY move_iterator& operator--() {--__i; return *this;}
-    _LIBCPP_INLINE_VISIBILITY move_iterator  operator--(int)
-        {move_iterator __tmp(*this); --__i; return __tmp;}
-    _LIBCPP_INLINE_VISIBILITY move_iterator  operator+ (difference_type __n) const
-        {return move_iterator(__i + __n);}
-    _LIBCPP_INLINE_VISIBILITY move_iterator& operator+=(difference_type __n)
-        {__i += __n; return *this;}
-    _LIBCPP_INLINE_VISIBILITY move_iterator  operator- (difference_type __n) const
-        {return move_iterator(__i - __n);}
-    _LIBCPP_INLINE_VISIBILITY move_iterator& operator-=(difference_type __n)
-        {__i -= __n; return *this;}
-    _LIBCPP_INLINE_VISIBILITY reference         operator[](difference_type __n) const
-    {
-      return static_cast<reference>(__i[__n]);
-    }
+    _LIBCPP_INLINE_VISIBILITY _LIBCPP_CONSTEXPR_AFTER_CXX14
+    move_iterator() : __i() {}
+    _LIBCPP_INLINE_VISIBILITY _LIBCPP_CONSTEXPR_AFTER_CXX14
+    explicit move_iterator(_Iter __x) : __i(__x) {}
+    template <class _Up>
+      _LIBCPP_INLINE_VISIBILITY _LIBCPP_CONSTEXPR_AFTER_CXX14
+      move_iterator(const move_iterator<_Up>& __u) : __i(__u.base()) {}
+    _LIBCPP_INLINE_VISIBILITY _LIBCPP_CONSTEXPR_AFTER_CXX14 _Iter base() const {return __i;}
+    _LIBCPP_INLINE_VISIBILITY _LIBCPP_CONSTEXPR_AFTER_CXX14 
+    reference operator*() const { return static_cast<reference>(*__i); }
+    _LIBCPP_INLINE_VISIBILITY _LIBCPP_CONSTEXPR_AFTER_CXX14
+    pointer  operator->() const { return __i;}
+    _LIBCPP_INLINE_VISIBILITY _LIBCPP_CONSTEXPR_AFTER_CXX14
+    move_iterator& operator++() {++__i; return *this;}
+    _LIBCPP_INLINE_VISIBILITY _LIBCPP_CONSTEXPR_AFTER_CXX14
+    move_iterator  operator++(int) {move_iterator __tmp(*this); ++__i; return __tmp;}
+    _LIBCPP_INLINE_VISIBILITY _LIBCPP_CONSTEXPR_AFTER_CXX14
+    move_iterator& operator--() {--__i; return *this;}
+    _LIBCPP_INLINE_VISIBILITY _LIBCPP_CONSTEXPR_AFTER_CXX14
+    move_iterator  operator--(int) {move_iterator __tmp(*this); --__i; return __tmp;}
+    _LIBCPP_INLINE_VISIBILITY _LIBCPP_CONSTEXPR_AFTER_CXX14
+    move_iterator  operator+ (difference_type __n) const {return move_iterator(__i + __n);}
+    _LIBCPP_INLINE_VISIBILITY _LIBCPP_CONSTEXPR_AFTER_CXX14
+    move_iterator& operator+=(difference_type __n) {__i += __n; return *this;}
+    _LIBCPP_INLINE_VISIBILITY _LIBCPP_CONSTEXPR_AFTER_CXX14
+    move_iterator  operator- (difference_type __n) const {return move_iterator(__i - __n);}
+    _LIBCPP_INLINE_VISIBILITY _LIBCPP_CONSTEXPR_AFTER_CXX14
+    move_iterator& operator-=(difference_type __n) {__i -= __n; return *this;}
+    _LIBCPP_INLINE_VISIBILITY _LIBCPP_CONSTEXPR_AFTER_CXX14
+    reference operator[](difference_type __n) const { return static_cast<reference>(__i[__n]); }
 };
 
 template <class _Iter1, class _Iter2>
-inline _LIBCPP_INLINE_VISIBILITY
+inline _LIBCPP_INLINE_VISIBILITY _LIBCPP_CONSTEXPR_AFTER_CXX14
 bool
 operator==(const move_iterator<_Iter1>& __x, const move_iterator<_Iter2>& __y)
 {
@@ -1078,7 +1099,7 @@ operator==(const move_iterator<_Iter1>& __x, const move_iterator<_Iter2>& __y)
 }
 
 template <class _Iter1, class _Iter2>
-inline _LIBCPP_INLINE_VISIBILITY
+inline _LIBCPP_INLINE_VISIBILITY _LIBCPP_CONSTEXPR_AFTER_CXX14
 bool
 operator<(const move_iterator<_Iter1>& __x, const move_iterator<_Iter2>& __y)
 {
@@ -1086,7 +1107,7 @@ operator<(const move_iterator<_Iter1>& __x, const move_iterator<_Iter2>& __y)
 }
 
 template <class _Iter1, class _Iter2>
-inline _LIBCPP_INLINE_VISIBILITY
+inline _LIBCPP_INLINE_VISIBILITY _LIBCPP_CONSTEXPR_AFTER_CXX14
 bool
 operator!=(const move_iterator<_Iter1>& __x, const move_iterator<_Iter2>& __y)
 {
@@ -1094,7 +1115,7 @@ operator!=(const move_iterator<_Iter1>& __x, const move_iterator<_Iter2>& __y)
 }
 
 template <class _Iter1, class _Iter2>
-inline _LIBCPP_INLINE_VISIBILITY
+inline _LIBCPP_INLINE_VISIBILITY _LIBCPP_CONSTEXPR_AFTER_CXX14
 bool
 operator>(const move_iterator<_Iter1>& __x, const move_iterator<_Iter2>& __y)
 {
@@ -1102,7 +1123,7 @@ operator>(const move_iterator<_Iter1>& __x, const move_iterator<_Iter2>& __y)
 }
 
 template <class _Iter1, class _Iter2>
-inline _LIBCPP_INLINE_VISIBILITY
+inline _LIBCPP_INLINE_VISIBILITY _LIBCPP_CONSTEXPR_AFTER_CXX14
 bool
 operator>=(const move_iterator<_Iter1>& __x, const move_iterator<_Iter2>& __y)
 {
@@ -1110,7 +1131,7 @@ operator>=(const move_iterator<_Iter1>& __x, const move_iterator<_Iter2>& __y)
 }
 
 template <class _Iter1, class _Iter2>
-inline _LIBCPP_INLINE_VISIBILITY
+inline _LIBCPP_INLINE_VISIBILITY _LIBCPP_CONSTEXPR_AFTER_CXX14
 bool
 operator<=(const move_iterator<_Iter1>& __x, const move_iterator<_Iter2>& __y)
 {
@@ -1119,7 +1140,7 @@ operator<=(const move_iterator<_Iter1>& __x, const move_iterator<_Iter2>& __y)
 
 #ifndef _LIBCPP_CXX03_LANG
 template <class _Iter1, class _Iter2>
-inline _LIBCPP_INLINE_VISIBILITY
+inline _LIBCPP_INLINE_VISIBILITY _LIBCPP_CONSTEXPR_AFTER_CXX14
 auto
 operator-(const move_iterator<_Iter1>& __x, const move_iterator<_Iter2>& __y)
 -> decltype(__x.base() - __y.base())
@@ -1137,7 +1158,7 @@ operator-(const move_iterator<_Iter1>& __x, const move_iterator<_Iter2>& __y)
 #endif
 
 template <class _Iter>
-inline _LIBCPP_INLINE_VISIBILITY
+inline _LIBCPP_INLINE_VISIBILITY _LIBCPP_CONSTEXPR_AFTER_CXX14
 move_iterator<_Iter>
 operator+(typename move_iterator<_Iter>::difference_type __n, const move_iterator<_Iter>& __x)
 {
@@ -1145,7 +1166,7 @@ operator+(typename move_iterator<_Iter>::difference_type __n, const move_iterato
 }
 
 template <class _Iter>
-inline _LIBCPP_INLINE_VISIBILITY
+inline _LIBCPP_INLINE_VISIBILITY _LIBCPP_CONSTEXPR_AFTER_CXX14
 move_iterator<_Iter>
 make_move_iterator(_Iter __i)
 {
@@ -1535,19 +1556,19 @@ operator+(typename __wrap_iter<_Iter>::difference_type __n,
 
 template <class _Iter>
 struct __libcpp_is_trivial_iterator
-	: public _LIBCPP_BOOL_CONSTANT(is_pointer<_Iter>::value) {};
-	
+    : public _LIBCPP_BOOL_CONSTANT(is_pointer<_Iter>::value) {};
+    
 template <class _Iter>
 struct __libcpp_is_trivial_iterator<move_iterator<_Iter> >
-	: public _LIBCPP_BOOL_CONSTANT(__libcpp_is_trivial_iterator<_Iter>::value) {};
+    : public _LIBCPP_BOOL_CONSTANT(__libcpp_is_trivial_iterator<_Iter>::value) {};
 
 template <class _Iter>
 struct __libcpp_is_trivial_iterator<reverse_iterator<_Iter> >
-	: public _LIBCPP_BOOL_CONSTANT(__libcpp_is_trivial_iterator<_Iter>::value) {};
+    : public _LIBCPP_BOOL_CONSTANT(__libcpp_is_trivial_iterator<_Iter>::value) {};
 
 template <class _Iter>
 struct __libcpp_is_trivial_iterator<__wrap_iter<_Iter> >
-	: public _LIBCPP_BOOL_CONSTANT(__libcpp_is_trivial_iterator<_Iter>::value) {};
+    : public _LIBCPP_BOOL_CONSTANT(__libcpp_is_trivial_iterator<_Iter>::value) {};
 
 
 template <class _Tp, size_t _Np>

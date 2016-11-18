@@ -28,6 +28,8 @@ class ByteStream : public ReadableStream {
 public:
   ByteStream() {}
   explicit ByteStream(ArrayRef<uint8_t> Data) : Data(Data) {}
+  explicit ByteStream(StringRef Data)
+      : Data(Data.bytes_begin(), Data.bytes_end()) {}
 
   Error readBytes(uint32_t Offset, uint32_t Size,
                   ArrayRef<uint8_t> &Buffer) const override {
@@ -89,6 +91,9 @@ public:
   uint32_t getLength() const override { return ImmutableStream.getLength(); }
 
   Error writeBytes(uint32_t Offset, ArrayRef<uint8_t> Buffer) const override {
+    if (Buffer.empty())
+      return Error::success();
+
     if (Data.size() < Buffer.size())
       return make_error<MSFError>(msf_error_code::insufficient_buffer);
     if (Offset > Buffer.size() - Data.size())

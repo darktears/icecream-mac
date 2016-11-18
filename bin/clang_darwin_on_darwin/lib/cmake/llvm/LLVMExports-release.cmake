@@ -799,6 +799,15 @@ set_target_properties(llvm-objdump PROPERTIES
 list(APPEND _IMPORT_CHECK_TARGETS llvm-objdump )
 list(APPEND _IMPORT_CHECK_FILES_FOR_llvm-objdump "${_IMPORT_PREFIX}/bin/llvm-objdump" )
 
+# Import target "llvm-opt-report" for configuration "Release"
+set_property(TARGET llvm-opt-report APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
+set_target_properties(llvm-opt-report PROPERTIES
+  IMPORTED_LOCATION_RELEASE "${_IMPORT_PREFIX}/bin/llvm-opt-report"
+  )
+
+list(APPEND _IMPORT_CHECK_TARGETS llvm-opt-report )
+list(APPEND _IMPORT_CHECK_FILES_FOR_llvm-opt-report "${_IMPORT_PREFIX}/bin/llvm-opt-report" )
+
 # Import target "llvm-pdbdump" for configuration "Release"
 set_property(TARGET llvm-pdbdump APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
 set_target_properties(llvm-pdbdump PROPERTIES
@@ -853,6 +862,15 @@ set_target_properties(llvm-stress PROPERTIES
 list(APPEND _IMPORT_CHECK_TARGETS llvm-stress )
 list(APPEND _IMPORT_CHECK_FILES_FOR_llvm-stress "${_IMPORT_PREFIX}/bin/llvm-stress" )
 
+# Import target "llvm-strings" for configuration "Release"
+set_property(TARGET llvm-strings APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
+set_target_properties(llvm-strings PROPERTIES
+  IMPORTED_LOCATION_RELEASE "${_IMPORT_PREFIX}/bin/llvm-strings"
+  )
+
+list(APPEND _IMPORT_CHECK_TARGETS llvm-strings )
+list(APPEND _IMPORT_CHECK_FILES_FOR_llvm-strings "${_IMPORT_PREFIX}/bin/llvm-strings" )
+
 # Import target "llvm-symbolizer" for configuration "Release"
 set_property(TARGET llvm-symbolizer APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
 set_target_properties(llvm-symbolizer PROPERTIES
@@ -861,6 +879,15 @@ set_target_properties(llvm-symbolizer PROPERTIES
 
 list(APPEND _IMPORT_CHECK_TARGETS llvm-symbolizer )
 list(APPEND _IMPORT_CHECK_FILES_FOR_llvm-symbolizer "${_IMPORT_PREFIX}/bin/llvm-symbolizer" )
+
+# Import target "llvm-xray" for configuration "Release"
+set_property(TARGET llvm-xray APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
+set_target_properties(llvm-xray PROPERTIES
+  IMPORTED_LOCATION_RELEASE "${_IMPORT_PREFIX}/bin/llvm-xray"
+  )
+
+list(APPEND _IMPORT_CHECK_TARGETS llvm-xray )
+list(APPEND _IMPORT_CHECK_FILES_FOR_llvm-xray "${_IMPORT_PREFIX}/bin/llvm-xray" )
 
 # Import target "obj2yaml" for configuration "Release"
 set_property(TARGET obj2yaml APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)

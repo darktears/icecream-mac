@@ -623,10 +623,20 @@ struct _PathCVT {
 
 template <>
 struct _PathCVT<char> {
+
     template <class _Iter>
-    static void __append_range(string& __dest, _Iter __b, _Iter __e) {
+    static typename enable_if<
+        __is_exactly_input_iterator<_Iter>::value
+    >::type __append_range(string& __dest, _Iter __b, _Iter __e) {
         for (; __b != __e; ++__b)
             __dest.push_back(*__b);
+    }
+
+    template <class _Iter>
+    static typename enable_if<
+        __is_forward_iterator<_Iter>::value
+    >::type __append_range(string& __dest, _Iter __b, _Iter __e) {
+        __dest.__append_forward_unsafe(__b, __e);
     }
 
     template <class _Iter>
@@ -640,7 +650,8 @@ struct _PathCVT<char> {
     static void __append_source(string& __dest, _Source const& __s)
     {
         using _Traits = __is_pathable<_Source>;
-        __append_range(__dest, _Traits::__range_begin(__s), _Traits::__range_end(__s));
+        __append_range(__dest, _Traits::__range_begin(__s),
+                               _Traits::__range_end(__s));
     }
 };
 
@@ -759,6 +770,8 @@ private:
 public:
     // appends
     path& operator/=(const path& __p) {
+        _LIBCPP_ASSERT(!__p.has_root_name(),
+                      "cannot append to a path with a root name");
         __append_sep_if_needed(__p.empty() ? char{} : __p.__pn_[0]);
         __pn_ += __p.native();
         return *this;
@@ -861,7 +874,15 @@ public:
     }
 
     path& make_preferred() { return *this; }
-    path& remove_filename() { return *this = parent_path(); }
+
+    _LIBCPP_INLINE_VISIBILITY
+    path& remove_filename() {
+      if (__pn_.size() == __root_path_raw().size())
+        clear();
+      else
+        __pn_ = __parent_path();
+      return *this;
+    }
 
     path& replace_filename(const path& __replacement) {
         remove_filename();
@@ -923,6 +944,7 @@ private:
     _LIBCPP_FUNC_VIS int __compare(__string_view) const;
     _LIBCPP_FUNC_VIS __string_view __root_name() const;
     _LIBCPP_FUNC_VIS __string_view __root_directory() const;
+    _LIBCPP_FUNC_VIS __string_view __root_path_raw() const;
     _LIBCPP_FUNC_VIS __string_view __relative_path() const;
     _LIBCPP_FUNC_VIS __string_view __parent_path() const;
     _LIBCPP_FUNC_VIS __string_view __filename() const;
@@ -951,7 +973,7 @@ public:
 
     _LIBCPP_INLINE_VISIBILITY bool has_root_name()      const { return !__root_name().empty(); }
     _LIBCPP_INLINE_VISIBILITY bool has_root_directory() const { return !__root_directory().empty(); }
-    _LIBCPP_INLINE_VISIBILITY bool has_root_path()      const { return !(__root_name().empty() && __root_directory().empty()); }
+    _LIBCPP_INLINE_VISIBILITY bool has_root_path()      const { return !__root_path_raw().empty(); }
     _LIBCPP_INLINE_VISIBILITY bool has_relative_path()  const { return !__relative_path().empty(); }
     _LIBCPP_INLINE_VISIBILITY bool has_parent_path()    const { return !__parent_path().empty(); }
     _LIBCPP_INLINE_VISIBILITY bool has_filename()       const { return !__filename().empty(); }
@@ -1072,7 +1094,8 @@ public:
     typedef const path&                reference;
 public:
     _LIBCPP_INLINE_VISIBILITY
-    iterator() : __elem_(), __path_ptr_(nullptr), __pos_(0) {}
+    iterator() : __stashed_elem_(), __path_ptr_(nullptr),
+                 __entry_(), __state_(__singular) {}
 
     iterator(const iterator&) = default;
     ~iterator() = default;
@@ -1081,16 +1104,20 @@ public:
 
     _LIBCPP_INLINE_VISIBILITY
     reference operator*() const {
-        return __elem_;
+        return __stashed_elem_;
     }
 
     _LIBCPP_INLINE_VISIBILITY
     pointer operator->() const {
-        return &__elem_;
+        return &__stashed_elem_;
     }
 
     _LIBCPP_INLINE_VISIBILITY
     iterator& operator++() {
+        _LIBCPP_ASSERT(__state_ != __singular,
+                       "attempting to increment a singular iterator");
+        _LIBCPP_ASSERT(__state_ != __at_end,
+                      "attempting to increment the end iterator");
         return __increment();
     }
 
@@ -1103,6 +1130,10 @@ public:
 
     _LIBCPP_INLINE_VISIBILITY
     iterator& operator--() {
+        _LIBCPP_ASSERT(__state_ != __singular,
+                       "attempting to decrement a singular iterator");
+        _LIBCPP_ASSERT(__entry_.data() != __path_ptr_->native().data(),
+                       "attempting to decrement the begin iterator");
         return __decrement();
     }
 
@@ -1116,21 +1147,25 @@ public:
 private:
     friend class path;
 
+    static constexpr unsigned char __singular = 0;
+    static constexpr unsigned char __at_end = 6;
+
     inline _LIBCPP_INLINE_VISIBILITY
     friend bool operator==(const iterator&, const iterator&);
 
     _LIBCPP_FUNC_VIS iterator& __increment();
     _LIBCPP_FUNC_VIS iterator& __decrement();
 
-    path __elem_;
+    path __stashed_elem_;
     const path* __path_ptr_;
-    size_t __pos_;
+    path::__string_view __entry_;
+    unsigned char __state_;
 };
 
 inline _LIBCPP_INLINE_VISIBILITY
 bool operator==(const path::iterator& __lhs, const path::iterator& __rhs) {
     return __lhs.__path_ptr_ == __rhs.__path_ptr_ &&
-           __lhs.__pos_      == __rhs.__pos_;
+           __lhs.__entry_.data() == __rhs.__entry_.data();
 }
 
 inline _LIBCPP_INLINE_VISIBILITY

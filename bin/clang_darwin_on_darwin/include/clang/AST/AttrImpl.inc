@@ -1878,6 +1878,42 @@ const char *ConsumableSetOnReadAttr::getSpelling() const {
   }
 }
 
+ConvergentAttr *ConvergentAttr::clone(ASTContext &C) const {
+  auto *A = new (C) ConvergentAttr(getLocation(), C, getSpellingListIndex());
+  A->Inherited = Inherited;
+  A->IsPackExpansion = IsPackExpansion;
+  A->Implicit = Implicit;
+  return A;
+}
+
+void ConvergentAttr::printPretty(raw_ostream &OS, const PrintingPolicy &Policy) const {
+  switch (SpellingListIndex) {
+  default:
+    llvm_unreachable("Unknown attribute spelling!");
+    break;
+  case 0 : {
+    OS << " __attribute__((convergent))";
+    break;
+  }
+  case 1 : {
+    OS << " [[clang::convergent]]";
+    break;
+  }
+}
+}
+
+const char *ConvergentAttr::getSpelling() const {
+  switch (SpellingListIndex) {
+  default:
+    llvm_unreachable("Unknown attribute spelling!");
+    return "(No spelling)";
+  case 0:
+    return "convergent";
+  case 1:
+    return "convergent";
+  }
+}
+
 DLLExportAttr *DLLExportAttr::clone(ASTContext &C) const {
   auto *A = new (C) DLLExportAttr(getLocation(), C, getSpellingListIndex());
   A->Inherited = Inherited;
@@ -4727,6 +4763,36 @@ const char *ObjCRuntimeVisibleAttr::getSpelling() const {
   }
 }
 
+ObjCSubclassingRestrictedAttr *ObjCSubclassingRestrictedAttr::clone(ASTContext &C) const {
+  auto *A = new (C) ObjCSubclassingRestrictedAttr(getLocation(), C, getSpellingListIndex());
+  A->Inherited = Inherited;
+  A->IsPackExpansion = IsPackExpansion;
+  A->Implicit = Implicit;
+  return A;
+}
+
+void ObjCSubclassingRestrictedAttr::printPretty(raw_ostream &OS, const PrintingPolicy &Policy) const {
+  switch (SpellingListIndex) {
+  default:
+    llvm_unreachable("Unknown attribute spelling!");
+    break;
+  case 0 : {
+    OS << " __attribute__((objc_subclassing_restricted))";
+    break;
+  }
+}
+}
+
+const char *ObjCSubclassingRestrictedAttr::getSpelling() const {
+  switch (SpellingListIndex) {
+  default:
+    llvm_unreachable("Unknown attribute spelling!");
+    return "(No spelling)";
+  case 0:
+    return "objc_subclassing_restricted";
+  }
+}
+
 OpenCLAccessAttr *OpenCLAccessAttr::clone(ASTContext &C) const {
   auto *A = new (C) OpenCLAccessAttr(getLocation(), C, getSpellingListIndex());
   A->Inherited = Inherited;
@@ -5345,6 +5411,48 @@ const char *PureAttr::getSpelling() const {
     return "pure";
   case 1:
     return "pure";
+  }
+}
+
+RegCallAttr *RegCallAttr::clone(ASTContext &C) const {
+  auto *A = new (C) RegCallAttr(getLocation(), C, getSpellingListIndex());
+  A->Inherited = Inherited;
+  A->IsPackExpansion = IsPackExpansion;
+  A->Implicit = Implicit;
+  return A;
+}
+
+void RegCallAttr::printPretty(raw_ostream &OS, const PrintingPolicy &Policy) const {
+  switch (SpellingListIndex) {
+  default:
+    llvm_unreachable("Unknown attribute spelling!");
+    break;
+  case 0 : {
+    OS << " __attribute__((regcall))";
+    break;
+  }
+  case 1 : {
+    OS << " [[gnu::regcall]]";
+    break;
+  }
+  case 2 : {
+    OS << " __regcall";
+    break;
+  }
+}
+}
+
+const char *RegCallAttr::getSpelling() const {
+  switch (SpellingListIndex) {
+  default:
+    llvm_unreachable("Unknown attribute spelling!");
+    return "(No spelling)";
+  case 0:
+    return "regcall";
+  case 1:
+    return "regcall";
+  case 2:
+    return "__regcall";
   }
 }
 
@@ -7276,6 +7384,8 @@ const char *Attr::getSpelling() const {
     return cast<ConsumableAutoCastAttr>(this)->getSpelling();
   case attr::ConsumableSetOnRead:
     return cast<ConsumableSetOnReadAttr>(this)->getSpelling();
+  case attr::Convergent:
+    return cast<ConvergentAttr>(this)->getSpelling();
   case attr::DLLExport:
     return cast<DLLExportAttr>(this)->getSpelling();
   case attr::DLLImport:
@@ -7446,6 +7556,8 @@ const char *Attr::getSpelling() const {
     return cast<ObjCRuntimeNameAttr>(this)->getSpelling();
   case attr::ObjCRuntimeVisible:
     return cast<ObjCRuntimeVisibleAttr>(this)->getSpelling();
+  case attr::ObjCSubclassingRestricted:
+    return cast<ObjCSubclassingRestrictedAttr>(this)->getSpelling();
   case attr::OpenCLAccess:
     return cast<OpenCLAccessAttr>(this)->getSpelling();
   case attr::OpenCLKernel:
@@ -7480,6 +7592,8 @@ const char *Attr::getSpelling() const {
     return cast<PtGuardedVarAttr>(this)->getSpelling();
   case attr::Pure:
     return cast<PureAttr>(this)->getSpelling();
+  case attr::RegCall:
+    return cast<RegCallAttr>(this)->getSpelling();
   case attr::ReleaseCapability:
     return cast<ReleaseCapabilityAttr>(this)->getSpelling();
   case attr::RenderScriptKernel:
@@ -7684,6 +7798,8 @@ Attr *Attr::clone(ASTContext &C) const {
     return cast<ConsumableAutoCastAttr>(this)->clone(C);
   case attr::ConsumableSetOnRead:
     return cast<ConsumableSetOnReadAttr>(this)->clone(C);
+  case attr::Convergent:
+    return cast<ConvergentAttr>(this)->clone(C);
   case attr::DLLExport:
     return cast<DLLExportAttr>(this)->clone(C);
   case attr::DLLImport:
@@ -7854,6 +7970,8 @@ Attr *Attr::clone(ASTContext &C) const {
     return cast<ObjCRuntimeNameAttr>(this)->clone(C);
   case attr::ObjCRuntimeVisible:
     return cast<ObjCRuntimeVisibleAttr>(this)->clone(C);
+  case attr::ObjCSubclassingRestricted:
+    return cast<ObjCSubclassingRestrictedAttr>(this)->clone(C);
   case attr::OpenCLAccess:
     return cast<OpenCLAccessAttr>(this)->clone(C);
   case attr::OpenCLKernel:
@@ -7888,6 +8006,8 @@ Attr *Attr::clone(ASTContext &C) const {
     return cast<PtGuardedVarAttr>(this)->clone(C);
   case attr::Pure:
     return cast<PureAttr>(this)->clone(C);
+  case attr::RegCall:
+    return cast<RegCallAttr>(this)->clone(C);
   case attr::ReleaseCapability:
     return cast<ReleaseCapabilityAttr>(this)->clone(C);
   case attr::RenderScriptKernel:
@@ -8092,6 +8212,8 @@ void Attr::printPretty(raw_ostream &OS, const PrintingPolicy &Policy) const {
     return cast<ConsumableAutoCastAttr>(this)->printPretty(OS, Policy);
   case attr::ConsumableSetOnRead:
     return cast<ConsumableSetOnReadAttr>(this)->printPretty(OS, Policy);
+  case attr::Convergent:
+    return cast<ConvergentAttr>(this)->printPretty(OS, Policy);
   case attr::DLLExport:
     return cast<DLLExportAttr>(this)->printPretty(OS, Policy);
   case attr::DLLImport:
@@ -8262,6 +8384,8 @@ void Attr::printPretty(raw_ostream &OS, const PrintingPolicy &Policy) const {
     return cast<ObjCRuntimeNameAttr>(this)->printPretty(OS, Policy);
   case attr::ObjCRuntimeVisible:
     return cast<ObjCRuntimeVisibleAttr>(this)->printPretty(OS, Policy);
+  case attr::ObjCSubclassingRestricted:
+    return cast<ObjCSubclassingRestrictedAttr>(this)->printPretty(OS, Policy);
   case attr::OpenCLAccess:
     return cast<OpenCLAccessAttr>(this)->printPretty(OS, Policy);
   case attr::OpenCLKernel:
@@ -8296,6 +8420,8 @@ void Attr::printPretty(raw_ostream &OS, const PrintingPolicy &Policy) const {
     return cast<PtGuardedVarAttr>(this)->printPretty(OS, Policy);
   case attr::Pure:
     return cast<PureAttr>(this)->printPretty(OS, Policy);
+  case attr::RegCall:
+    return cast<RegCallAttr>(this)->printPretty(OS, Policy);
   case attr::ReleaseCapability:
     return cast<ReleaseCapabilityAttr>(this)->printPretty(OS, Policy);
   case attr::RenderScriptKernel:

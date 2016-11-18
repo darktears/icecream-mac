@@ -22,6 +22,7 @@
 #include "llvm/Analysis/AliasSetTracker.h"
 #include "llvm/Analysis/LoopPassManager.h"
 #include "llvm/Analysis/ScalarEvolutionExpressions.h"
+#include "llvm/IR/DiagnosticInfo.h"
 #include "llvm/IR/ValueHandle.h"
 #include "llvm/Pass.h"
 #include "llvm/Support/raw_ostream.h"
@@ -517,38 +518,6 @@ public:
   LoopAccessInfo(Loop *L, ScalarEvolution *SE, const TargetLibraryInfo *TLI,
                  AliasAnalysis *AA, DominatorTree *DT, LoopInfo *LI);
 
-  // FIXME:
-  // Hack for MSVC 2013 which sems like it can't synthesize this even 
-  // with default keyword:
-  // LoopAccessInfo(LoopAccessInfo &&LAI) = default;
-  LoopAccessInfo(LoopAccessInfo &&LAI)
-      : PSE(std::move(LAI.PSE)), PtrRtChecking(std::move(LAI.PtrRtChecking)),
-        DepChecker(std::move(LAI.DepChecker)), TheLoop(LAI.TheLoop),
-        NumLoads(LAI.NumLoads), NumStores(LAI.NumStores),
-        MaxSafeDepDistBytes(LAI.MaxSafeDepDistBytes), CanVecMem(LAI.CanVecMem),
-        StoreToLoopInvariantAddress(LAI.StoreToLoopInvariantAddress),
-        Report(std::move(LAI.Report)),
-        SymbolicStrides(std::move(LAI.SymbolicStrides)),
-        StrideSet(std::move(LAI.StrideSet)) {}
-  // LoopAccessInfo &operator=(LoopAccessInfo &&LAI) = default;
-  LoopAccessInfo &operator=(LoopAccessInfo &&LAI) {
-    assert(this != &LAI);
-
-    PSE = std::move(LAI.PSE);
-    PtrRtChecking = std::move(LAI.PtrRtChecking);
-    DepChecker = std::move(LAI.DepChecker);
-    TheLoop = LAI.TheLoop;
-    NumLoads = LAI.NumLoads;
-    NumStores = LAI.NumStores;
-    MaxSafeDepDistBytes = LAI.MaxSafeDepDistBytes;
-    CanVecMem = LAI.CanVecMem;
-    StoreToLoopInvariantAddress = LAI.StoreToLoopInvariantAddress;
-    Report = std::move(LAI.Report);
-    SymbolicStrides = std::move(LAI.SymbolicStrides);
-    StrideSet = std::move(LAI.StrideSet);
-    return *this;
-  }
-
   /// Return true we can analyze the memory accesses in the loop and there are
   /// no memory dependence cycles.
   bool canVectorizeMemory() const { return CanVecMem; }
@@ -595,7 +564,7 @@ public:
 
   /// \brief The diagnostics report generated for the analysis.  E.g. why we
   /// couldn't analyze the loop.
-  const Optional<LoopAccessReport> &getReport() const { return Report; }
+  const OptimizationRemarkAnalysis *getReport() const { return Report.get(); }
 
   /// \brief the Memory Dependence Checker which can determine the
   /// loop-independent and loop-carried dependences between memory accesses.
@@ -641,7 +610,13 @@ private:
   /// pass.
   bool canAnalyzeLoop();
 
-  void emitAnalysis(LoopAccessReport &Message);
+  /// \brief Save the analysis remark.
+  ///
+  /// LAA does not directly emits the remarks.  Instead it stores it which the
+  /// client can retrieve and presents as its own analysis
+  /// (e.g. -Rpass-analysis=loop-vectorize).
+  OptimizationRemarkAnalysis &recordAnalysis(StringRef RemarkName,
+                                             Instruction *Instr = nullptr);
 
   /// \brief Collect memory access with loop invariant strides.
   ///
@@ -675,7 +650,7 @@ private:
 
   /// \brief The diagnostics report generated for the analysis.  E.g. why we
   /// couldn't analyze the loop.
-  Optional<LoopAccessReport> Report;
+  std::unique_ptr<OptimizationRemarkAnalysis> Report;
 
   /// \brief If an access has a symbolic strides, this maps the pointer value to
   /// the stride symbol.

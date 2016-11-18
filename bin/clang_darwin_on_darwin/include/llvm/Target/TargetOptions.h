@@ -15,7 +15,6 @@
 #ifndef LLVM_TARGET_TARGETOPTIONS_H
 #define LLVM_TARGET_TARGETOPTIONS_H
 
-#include "llvm/Target/TargetRecip.h"
 #include "llvm/MC/MCTargetOptions.h"
 
 namespace llvm {
@@ -57,7 +56,7 @@ namespace llvm {
   }
 
   namespace FPDenormal {
-    enum DenormalType {
+    enum DenormalMode {
       IEEE,           // IEEE 754 denormal numbers
       PreserveSign,   // the sign of a flushed-to-zero number is preserved in
                       // the sign of 0
@@ -111,10 +110,10 @@ namespace llvm {
           DataSections(false), UniqueSectionNames(true), TrapUnreachable(false),
           EmulatedTLS(false), EnableIPRA(false),
           FloatABIType(FloatABI::Default),
-          AllowFPOpFusion(FPOpFusion::Standard), Reciprocals(TargetRecip()),
-          JTType(JumpTable::Single), ThreadModel(ThreadModel::POSIX),
+          AllowFPOpFusion(FPOpFusion::Standard),
+          ThreadModel(ThreadModel::POSIX),
           EABIVersion(EABI::Default), DebuggerTuning(DebuggerKind::Default),
-          FPDenormalType(FPDenormal::IEEE),
+          FPDenormalMode(FPDenormal::IEEE),
           ExceptionModel(ExceptionHandling::None) {}
 
     /// PrintMachineCode - This flag is enabled when the -print-machineinstrs
@@ -252,13 +251,6 @@ namespace llvm {
     /// the value of this option.
     FPOpFusion::FPOpFusionMode AllowFPOpFusion;
 
-    /// This class encapsulates options for reciprocal-estimate code generation.
-    TargetRecip Reciprocals;
-
-    /// JTType - This flag specifies the type of jump-instruction table to
-    /// create for functions that have the jumptable attribute.
-    JumpTable::JumpTableType JTType;
-
     /// ThreadModel - This flag specifies the type of threading model to assume
     /// for things like atomics
     ThreadModel::Model ThreadModel;
@@ -269,9 +261,9 @@ namespace llvm {
     /// Which debugger to tune for.
     DebuggerKind DebuggerTuning;
 
-    /// FPDenormalType - This flags specificies which denormal numbers the code
+    /// FPDenormalMode - This flags specificies which denormal numbers the code
     /// is permitted to require.
-    FPDenormal::DenormalType FPDenormalType;
+    FPDenormal::DenormalMode FPDenormalMode;
 
     /// What exception model to use
     ExceptionHandling ExceptionModel;
@@ -301,12 +293,10 @@ inline bool operator==(const TargetOptions &LHS,
     ARE_EQUAL(EmulatedTLS) &&
     ARE_EQUAL(FloatABIType) &&
     ARE_EQUAL(AllowFPOpFusion) &&
-    ARE_EQUAL(Reciprocals) &&
-    ARE_EQUAL(JTType) &&
     ARE_EQUAL(ThreadModel) &&
     ARE_EQUAL(EABIVersion) &&
     ARE_EQUAL(DebuggerTuning) &&
-    ARE_EQUAL(FPDenormalType) &&
+    ARE_EQUAL(FPDenormalMode) &&
     ARE_EQUAL(ExceptionModel) &&
     ARE_EQUAL(MCOptions) &&
     ARE_EQUAL(EnableIPRA);

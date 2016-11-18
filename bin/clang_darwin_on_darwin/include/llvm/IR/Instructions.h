@@ -961,8 +961,8 @@ public:
   /// instruction, which may be a vector of pointers.
   static Type *getGEPReturnType(Value *Ptr, ArrayRef<Value *> IdxList) {
     return getGEPReturnType(
-        cast<PointerType>(Ptr->getType()->getScalarType())->getElementType(),
-        Ptr, IdxList);
+      cast<PointerType>(Ptr->getType()->getScalarType())->getElementType(),
+      Ptr, IdxList);
   }
   static Type *getGEPReturnType(Type *ElTy, Value *Ptr,
                                 ArrayRef<Value *> IdxList) {
@@ -1184,10 +1184,6 @@ public:
   static bool isRelational(Predicate P) {
     return !isEquality(P);
   }
-
-  /// Initialize a set of values that all satisfy the predicate with C.
-  /// Make a ConstantRange for a relation with a constant value.
-  static ConstantRange makeConstantRange(Predicate pred, const APInt &C);
 
   /// Exchange the two operands to this instruction in such a way that it does
   /// not modify the semantics of the instruction. The predicate value may be

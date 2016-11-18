@@ -310,7 +310,7 @@ public:
   };
 
   /// Convenient IncrementWrapFlags manipulation methods.
-  static SCEVWrapPredicate::IncrementWrapFlags LLVM_ATTRIBUTE_UNUSED_RESULT
+  LLVM_NODISCARD static SCEVWrapPredicate::IncrementWrapFlags
   clearFlags(SCEVWrapPredicate::IncrementWrapFlags Flags,
              SCEVWrapPredicate::IncrementWrapFlags OffFlags) {
     assert((Flags & IncrementNoWrapMask) == Flags && "Invalid flags value!");
@@ -319,7 +319,7 @@ public:
     return (SCEVWrapPredicate::IncrementWrapFlags)(Flags & ~OffFlags);
   }
 
-  static SCEVWrapPredicate::IncrementWrapFlags LLVM_ATTRIBUTE_UNUSED_RESULT
+  LLVM_NODISCARD static SCEVWrapPredicate::IncrementWrapFlags
   maskFlags(SCEVWrapPredicate::IncrementWrapFlags Flags, int Mask) {
     assert((Flags & IncrementNoWrapMask) == Flags && "Invalid flags value!");
     assert((Mask & IncrementNoWrapMask) == Mask && "Invalid mask value!");
@@ -327,7 +327,7 @@ public:
     return (SCEVWrapPredicate::IncrementWrapFlags)(Flags & Mask);
   }
 
-  static SCEVWrapPredicate::IncrementWrapFlags LLVM_ATTRIBUTE_UNUSED_RESULT
+  LLVM_NODISCARD static SCEVWrapPredicate::IncrementWrapFlags
   setFlags(SCEVWrapPredicate::IncrementWrapFlags Flags,
            SCEVWrapPredicate::IncrementWrapFlags OnFlags) {
     assert((Flags & IncrementNoWrapMask) == Flags && "Invalid flags value!");
@@ -339,7 +339,7 @@ public:
 
   /// Returns the set of SCEVWrapPredicate no wrap flags implied by a
   /// SCEVAddRecExpr.
-  static SCEVWrapPredicate::IncrementWrapFlags
+  LLVM_NODISCARD static SCEVWrapPredicate::IncrementWrapFlags
   getImpliedFlags(const SCEVAddRecExpr *AR, ScalarEvolution &SE);
 
 private:
@@ -432,15 +432,15 @@ public:
 
   /// Convenient NoWrapFlags manipulation that hides enum casts and is
   /// visible in the ScalarEvolution name space.
-  static SCEV::NoWrapFlags LLVM_ATTRIBUTE_UNUSED_RESULT
-  maskFlags(SCEV::NoWrapFlags Flags, int Mask) {
+  LLVM_NODISCARD static SCEV::NoWrapFlags maskFlags(SCEV::NoWrapFlags Flags,
+                                                    int Mask) {
     return (SCEV::NoWrapFlags)(Flags & Mask);
   }
-  static SCEV::NoWrapFlags LLVM_ATTRIBUTE_UNUSED_RESULT
-  setFlags(SCEV::NoWrapFlags Flags, SCEV::NoWrapFlags OnFlags) {
+  LLVM_NODISCARD static SCEV::NoWrapFlags setFlags(SCEV::NoWrapFlags Flags,
+                                                   SCEV::NoWrapFlags OnFlags) {
     return (SCEV::NoWrapFlags)(Flags | OnFlags);
   }
-  static SCEV::NoWrapFlags LLVM_ATTRIBUTE_UNUSED_RESULT
+  LLVM_NODISCARD static SCEV::NoWrapFlags
   clearFlags(SCEV::NoWrapFlags Flags, SCEV::NoWrapFlags OffFlags) {
     return (SCEV::NoWrapFlags)(Flags & ~OffFlags);
   }
@@ -533,7 +533,7 @@ private:
   ValueExprMapType ValueExprMap;
 
   /// Mark predicate values currently being processed by isImpliedCond.
-  DenseSet<Value *> PendingLoopPredicates;
+  SmallPtrSet<Value *, 6> PendingLoopPredicates;
 
   /// Set to true by isLoopBackedgeGuardedByCond when we're walking the set of
   /// conditions dominating the backedge of a loop.
@@ -548,21 +548,41 @@ private:
   /// pair of exact and max expressions that are eventually summarized in
   /// ExitNotTakenInfo and BackedgeTakenInfo.
   struct ExitLimit {
-    const SCEV *ExactNotTaken;
-    const SCEV *MaxNotTaken;
+    const SCEV *ExactNotTaken; // The exit is not taken exactly this many times
+    const SCEV *MaxNotTaken; // The exit is not taken at most this many times
+    bool MaxOrZero; // Not taken either exactly MaxNotTaken or zero times
 
-    /// A predicate union guard for this ExitLimit. The result is only
-    /// valid if this predicate evaluates to 'true' at run-time.
-    SCEVUnionPredicate Predicate;
+    /// A set of predicate guards for this ExitLimit. The result is only valid
+    /// if all of the predicates in \c Predicates evaluate to 'true' at
+    /// run-time.
+    SmallPtrSet<const SCEVPredicate *, 4> Predicates;
 
-    /*implicit*/ ExitLimit(const SCEV *E) : ExactNotTaken(E), MaxNotTaken(E) {}
+    void addPredicate(const SCEVPredicate *P) {
+      assert(!isa<SCEVUnionPredicate>(P) && "Only add leaf predicates here!");
+      Predicates.insert(P);
+    }
 
-    ExitLimit(const SCEV *E, const SCEV *M, SCEVUnionPredicate &P)
-        : ExactNotTaken(E), MaxNotTaken(M), Predicate(P) {
+    /*implicit*/ ExitLimit(const SCEV *E)
+        : ExactNotTaken(E), MaxNotTaken(E), MaxOrZero(false) {}
+
+    ExitLimit(
+        const SCEV *E, const SCEV *M, bool MaxOrZero,
+        ArrayRef<const SmallPtrSetImpl<const SCEVPredicate *> *> PredSetList)
+        : ExactNotTaken(E), MaxNotTaken(M), MaxOrZero(MaxOrZero) {
       assert((isa<SCEVCouldNotCompute>(ExactNotTaken) ||
               !isa<SCEVCouldNotCompute>(MaxNotTaken)) &&
              "Exact is not allowed to be less precise than Max");
+      for (auto *PredSet : PredSetList)
+        for (auto *P : *PredSet)
+          addPredicate(P);
     }
+
+    ExitLimit(const SCEV *E, const SCEV *M, bool MaxOrZero,
+              const SmallPtrSetImpl<const SCEVPredicate *> &PredSet)
+        : ExitLimit(E, M, MaxOrZero, {&PredSet}) {}
+
+    ExitLimit(const SCEV *E, const SCEV *M, bool MaxOrZero)
+        : ExitLimit(E, M, MaxOrZero, None) {}
 
     /// Test whether this ExitLimit contains any computed information, or
     /// whether it's all SCEVCouldNotCompute values.
@@ -592,22 +612,6 @@ private:
                               std::unique_ptr<SCEVUnionPredicate> Predicate)
         : ExitingBlock(ExitingBlock), ExactNotTaken(ExactNotTaken),
           Predicate(std::move(Predicate)) {}
-
-    // Clang builds fine without this, but MSVC does not.
-    ExitNotTakenInfo(const ExitNotTakenInfo &) = delete;
-
-    ExitNotTakenInfo(ExitNotTakenInfo &&Other) {
-      ExitingBlock = std::move(Other.ExitingBlock);
-      ExactNotTaken = std::move(Other.ExactNotTaken);
-      Predicate = std::move(Other.Predicate);
-    }
-
-    ExitNotTakenInfo &operator=(ExitNotTakenInfo &&Other) {
-      ExitingBlock = std::move(Other.ExitingBlock);
-      ExactNotTaken = std::move(Other.ExactNotTaken);
-      Predicate = std::move(Other.Predicate);
-      return *this;
-    }
   };
 
   /// Information about the backedge-taken count of a loop. This currently
@@ -627,6 +631,9 @@ private:
     /// ExitNotTaken has an element for every exiting block in the loop.
     PointerIntPair<const SCEV *, 1> MaxAndComplete;
 
+    /// True iff the backedge is taken either exactly Max or zero times.
+    bool MaxOrZero;
+
     /// \name Helper projection functions on \c MaxAndComplete.
     /// @{
     bool isComplete() const { return MaxAndComplete.getInt(); }
@@ -636,24 +643,14 @@ private:
   public:
     BackedgeTakenInfo() : MaxAndComplete(nullptr, 0) {}
 
-    BackedgeTakenInfo(const BackedgeTakenInfo &) = delete;
-
-    BackedgeTakenInfo(BackedgeTakenInfo &&Other) {
-      ExitNotTaken = std::move(Other.ExitNotTaken);
-      MaxAndComplete = std::move(Other.MaxAndComplete);
-    }
-
-    BackedgeTakenInfo &operator=(BackedgeTakenInfo &&Other) {
-      ExitNotTaken = std::move(Other.ExitNotTaken);
-      MaxAndComplete = std::move(Other.MaxAndComplete);
-      return *this;
-    }
+    BackedgeTakenInfo(BackedgeTakenInfo &&) = default;
+    BackedgeTakenInfo &operator=(BackedgeTakenInfo &&) = default;
 
     typedef std::pair<BasicBlock *, ExitLimit> EdgeExitInfo;
 
     /// Initialize BackedgeTakenInfo from a list of exact exit counts.
     BackedgeTakenInfo(SmallVectorImpl<EdgeExitInfo> &&ExitCounts, bool Complete,
-                      const SCEV *MaxCount);
+                      const SCEV *MaxCount, bool MaxOrZero);
 
     /// Test whether this BackedgeTakenInfo contains any computed information,
     /// or whether it's all SCEVCouldNotCompute values.
@@ -691,6 +688,10 @@ private:
 
     /// Get the max backedge taken count for the loop.
     const SCEV *getMax(ScalarEvolution *SE) const;
+
+    /// Return true if the number of times this backedge is taken is either the
+    /// value returned by getMax or zero.
+    bool isMaxOrZero(ScalarEvolution *SE) const;
 
     /// Return true if any backedge taken count expressions refer to the given
     /// subexpression.
@@ -1187,13 +1188,11 @@ public:
   }
   /// Returns an expression for a GEP
   ///
-  /// \p PointeeType The type used as the basis for the pointer arithmetics
-  /// \p BaseExpr The expression for the pointer operand.
+  /// \p GEP The GEP. The indices contained in the GEP itself are ignored,
+  /// instead we use IndexExprs.
   /// \p IndexExprs The expressions for the indices.
-  /// \p InBounds Whether the GEP is in bounds.
-  const SCEV *getGEPExpr(Type *PointeeType, const SCEV *BaseExpr,
-                         const SmallVectorImpl<const SCEV *> &IndexExprs,
-                         bool InBounds = false);
+  const SCEV *getGEPExpr(GEPOperator *GEP,
+                         const SmallVectorImpl<const SCEV *> &IndexExprs);
   const SCEV *getSMaxExpr(const SCEV *LHS, const SCEV *RHS);
   const SCEV *getSMaxExpr(SmallVectorImpl<const SCEV *> &Operands);
   const SCEV *getUMaxExpr(const SCEV *LHS, const SCEV *RHS);
@@ -1313,6 +1312,11 @@ public:
   /// prematurely via another branch.
   unsigned getSmallConstantTripCount(Loop *L, BasicBlock *ExitingBlock);
 
+  /// Returns the upper bound of the loop trip count as a normal unsigned
+  /// value.
+  /// Returns 0 if the trip count is unknown or not constant.
+  unsigned getSmallConstantMaxTripCount(Loop *L);
+
   /// Returns the largest constant divisor of the trip count of the
   /// loop if it is a single-exit loop and we can compute a small maximum for
   /// that loop.
@@ -1357,6 +1361,10 @@ public:
   /// Similar to getBackedgeTakenCount, except return the least SCEV value
   /// that is known never to be less than the actual backedge taken count.
   const SCEV *getMaxBackedgeTakenCount(const Loop *L);
+
+  /// Return true if the backedge taken count is either the value returned by
+  /// getMaxBackedgeTakenCount or zero.
+  bool isBackedgeTakenCountMaxOrZero(const Loop *L);
 
   /// Return true if the specified loop has an analyzable loop-invariant
   /// backedge-taken count.
@@ -1581,9 +1589,9 @@ public:
                                     SCEVUnionPredicate &A);
   /// Tries to convert the \p S expression to an AddRec expression,
   /// adding additional predicates to \p Preds as required.
-  const SCEVAddRecExpr *
-  convertSCEVToAddRecWithPredicates(const SCEV *S, const Loop *L,
-                                    SCEVUnionPredicate &Preds);
+  const SCEVAddRecExpr *convertSCEVToAddRecWithPredicates(
+      const SCEV *S, const Loop *L,
+      SmallPtrSetImpl<const SCEVPredicate *> &Preds);
 
 private:
   /// Compute the backedge taken count knowing the interval difference, the

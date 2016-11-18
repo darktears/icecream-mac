@@ -220,6 +220,10 @@
   bool VisitConsumableSetOnReadAttr(ConsumableSetOnReadAttr *A) {
     return true; 
   }
+  bool TraverseConvergentAttr(ConvergentAttr *A);
+  bool VisitConvergentAttr(ConvergentAttr *A) {
+    return true; 
+  }
   bool TraverseDLLExportAttr(DLLExportAttr *A);
   bool VisitDLLExportAttr(DLLExportAttr *A) {
     return true; 
@@ -560,6 +564,10 @@
   bool VisitObjCRuntimeVisibleAttr(ObjCRuntimeVisibleAttr *A) {
     return true; 
   }
+  bool TraverseObjCSubclassingRestrictedAttr(ObjCSubclassingRestrictedAttr *A);
+  bool VisitObjCSubclassingRestrictedAttr(ObjCSubclassingRestrictedAttr *A) {
+    return true; 
+  }
   bool TraverseOpenCLAccessAttr(OpenCLAccessAttr *A);
   bool VisitOpenCLAccessAttr(OpenCLAccessAttr *A) {
     return true; 
@@ -626,6 +634,10 @@
   }
   bool TraversePureAttr(PureAttr *A);
   bool VisitPureAttr(PureAttr *A) {
+    return true; 
+  }
+  bool TraverseRegCallAttr(RegCallAttr *A);
+  bool VisitRegCallAttr(RegCallAttr *A) {
     return true; 
   }
   bool TraverseReleaseCapabilityAttr(ReleaseCapabilityAttr *A);
@@ -1340,6 +1352,15 @@ bool VISITORCLASS<Derived>::TraverseConsumableSetOnReadAttr(ConsumableSetOnReadA
   if (!getDerived().VisitAttr(A))
     return false;
   if (!getDerived().VisitConsumableSetOnReadAttr(A))
+    return false;
+  return true;
+}
+
+template <typename Derived>
+bool VISITORCLASS<Derived>::TraverseConvergentAttr(ConvergentAttr *A) {
+  if (!getDerived().VisitAttr(A))
+    return false;
+  if (!getDerived().VisitConvergentAttr(A))
     return false;
   return true;
 }
@@ -2178,6 +2199,15 @@ bool VISITORCLASS<Derived>::TraverseObjCRuntimeVisibleAttr(ObjCRuntimeVisibleAtt
 }
 
 template <typename Derived>
+bool VISITORCLASS<Derived>::TraverseObjCSubclassingRestrictedAttr(ObjCSubclassingRestrictedAttr *A) {
+  if (!getDerived().VisitAttr(A))
+    return false;
+  if (!getDerived().VisitObjCSubclassingRestrictedAttr(A))
+    return false;
+  return true;
+}
+
+template <typename Derived>
 bool VISITORCLASS<Derived>::TraverseOpenCLAccessAttr(OpenCLAccessAttr *A) {
   if (!getDerived().VisitAttr(A))
     return false;
@@ -2328,6 +2358,15 @@ bool VISITORCLASS<Derived>::TraversePureAttr(PureAttr *A) {
   if (!getDerived().VisitAttr(A))
     return false;
   if (!getDerived().VisitPureAttr(A))
+    return false;
+  return true;
+}
+
+template <typename Derived>
+bool VISITORCLASS<Derived>::TraverseRegCallAttr(RegCallAttr *A) {
+  if (!getDerived().VisitAttr(A))
+    return false;
+  if (!getDerived().VisitRegCallAttr(A))
     return false;
   return true;
 }
@@ -2894,6 +2933,8 @@ bool VISITORCLASS<Derived>::TraverseAttr(Attr *A) {
       return getDerived().TraverseConsumableAutoCastAttr(cast<ConsumableAutoCastAttr>(A));
     case attr::ConsumableSetOnRead:
       return getDerived().TraverseConsumableSetOnReadAttr(cast<ConsumableSetOnReadAttr>(A));
+    case attr::Convergent:
+      return getDerived().TraverseConvergentAttr(cast<ConvergentAttr>(A));
     case attr::DLLExport:
       return getDerived().TraverseDLLExportAttr(cast<DLLExportAttr>(A));
     case attr::DLLImport:
@@ -3064,6 +3105,8 @@ bool VISITORCLASS<Derived>::TraverseAttr(Attr *A) {
       return getDerived().TraverseObjCRuntimeNameAttr(cast<ObjCRuntimeNameAttr>(A));
     case attr::ObjCRuntimeVisible:
       return getDerived().TraverseObjCRuntimeVisibleAttr(cast<ObjCRuntimeVisibleAttr>(A));
+    case attr::ObjCSubclassingRestricted:
+      return getDerived().TraverseObjCSubclassingRestrictedAttr(cast<ObjCSubclassingRestrictedAttr>(A));
     case attr::OpenCLAccess:
       return getDerived().TraverseOpenCLAccessAttr(cast<OpenCLAccessAttr>(A));
     case attr::OpenCLKernel:
@@ -3098,6 +3141,8 @@ bool VISITORCLASS<Derived>::TraverseAttr(Attr *A) {
       return getDerived().TraversePtGuardedVarAttr(cast<PtGuardedVarAttr>(A));
     case attr::Pure:
       return getDerived().TraversePureAttr(cast<PureAttr>(A));
+    case attr::RegCall:
+      return getDerived().TraverseRegCallAttr(cast<RegCallAttr>(A));
     case attr::ReleaseCapability:
       return getDerived().TraverseReleaseCapabilityAttr(cast<ReleaseCapabilityAttr>(A));
     case attr::RenderScriptKernel:

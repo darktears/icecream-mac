@@ -245,6 +245,24 @@ set_target_properties(clangFormat PROPERTIES
 list(APPEND _IMPORT_CHECK_TARGETS clangFormat )
 list(APPEND _IMPORT_CHECK_FILES_FOR_clangFormat "${_IMPORT_PREFIX}/lib/libclangFormat.a" )
 
+# Import target "clang" for configuration "Release"
+set_property(TARGET clang APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
+set_target_properties(clang PROPERTIES
+  IMPORTED_LOCATION_RELEASE "${_IMPORT_PREFIX}/bin/clang-4.0"
+  )
+
+list(APPEND _IMPORT_CHECK_TARGETS clang )
+list(APPEND _IMPORT_CHECK_FILES_FOR_clang "${_IMPORT_PREFIX}/bin/clang-4.0" )
+
+# Import target "clang-format" for configuration "Release"
+set_property(TARGET clang-format APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
+set_target_properties(clang-format PROPERTIES
+  IMPORTED_LOCATION_RELEASE "${_IMPORT_PREFIX}/bin/clang-format"
+  )
+
+list(APPEND _IMPORT_CHECK_TARGETS clang-format )
+list(APPEND _IMPORT_CHECK_FILES_FOR_clang-format "${_IMPORT_PREFIX}/bin/clang-format" )
+
 # Import target "libclang" for configuration "Release"
 set_property(TARGET libclang APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
 set_target_properties(libclang PROPERTIES

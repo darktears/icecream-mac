@@ -285,6 +285,10 @@ Attr *instantiateTemplateAttribute(const Attr *At, ASTContext &C, Sema &S,
       const auto *A = cast<ConsumableSetOnReadAttr>(At);
       return A->clone(C);
     }
+    case attr::Convergent: {
+      const auto *A = cast<ConvergentAttr>(At);
+      return A->clone(C);
+    }
     case attr::DLLExport: {
       const auto *A = cast<DLLExportAttr>(At);
       return A->clone(C);
@@ -671,6 +675,10 @@ Attr *instantiateTemplateAttribute(const Attr *At, ASTContext &C, Sema &S,
       const auto *A = cast<ObjCRuntimeVisibleAttr>(At);
       return A->clone(C);
     }
+    case attr::ObjCSubclassingRestricted: {
+      const auto *A = cast<ObjCSubclassingRestrictedAttr>(At);
+      return A->clone(C);
+    }
     case attr::OpenCLAccess: {
       const auto *A = cast<OpenCLAccessAttr>(At);
       return A->clone(C);
@@ -743,6 +751,10 @@ Attr *instantiateTemplateAttribute(const Attr *At, ASTContext &C, Sema &S,
     }
     case attr::Pure: {
       const auto *A = cast<PureAttr>(At);
+      return A->clone(C);
+    }
+    case attr::RegCall: {
+      const auto *A = cast<RegCallAttr>(At);
       return A->clone(C);
     }
     case attr::ReleaseCapability: {

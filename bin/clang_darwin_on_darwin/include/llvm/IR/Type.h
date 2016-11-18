@@ -81,6 +81,8 @@ private:
 
   TypeID   ID : 8;            // The current base type of this type.
   unsigned SubclassData : 24; // Space for subclasses to store data.
+                              // Note that this should be synchronized with
+                              // MAX_INT_BITS value in IntegerType class.
 
 protected:
   friend class LLVMContextImpl;
@@ -342,12 +344,21 @@ public:
   }
 
   inline uint64_t getArrayNumElements() const;
-  Type *getArrayElementType() const { return getSequentialElementType(); }
+  Type *getArrayElementType() const {
+    assert(getTypeID() == ArrayTyID);
+    return ContainedTys[0];
+  }
 
   inline unsigned getVectorNumElements() const;
-  Type *getVectorElementType() const { return getSequentialElementType(); }
+  Type *getVectorElementType() const {
+    assert(getTypeID() == VectorTyID);
+    return ContainedTys[0];
+  }
 
-  Type *getPointerElementType() const { return getSequentialElementType(); }
+  Type *getPointerElementType() const {
+    assert(getTypeID() == PointerTyID);
+    return ContainedTys[0];
+  }
 
   /// Get the address space of this pointer or pointer vector type.
   inline unsigned getPointerAddressSpace() const;

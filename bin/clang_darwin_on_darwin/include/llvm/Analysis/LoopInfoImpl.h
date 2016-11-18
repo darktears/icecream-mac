@@ -186,8 +186,13 @@ BlockT *LoopBase<BlockT, LoopT>::getLoopLatch() const {
 template<class BlockT, class LoopT>
 void LoopBase<BlockT, LoopT>::
 addBasicBlockToLoop(BlockT *NewBB, LoopInfoBase<BlockT, LoopT> &LIB) {
-  assert((Blocks.empty() || LIB[getHeader()] == this) &&
-         "Incorrect LI specified for this loop!");
+#ifndef NDEBUG
+  if (!Blocks.empty()) {
+    auto SameHeader = LIB[getHeader()];
+    assert(contains(SameHeader) && getHeader() == SameHeader->getHeader()
+           && "Incorrect LI specified for this loop!");
+  }
+#endif
   assert(NewBB && "Cannot add a null basic block to the loop!");
   assert(!LIB[NewBB] && "BasicBlock already in the loop!");
 
@@ -228,9 +233,9 @@ void LoopBase<BlockT, LoopT>::verifyLoop() const {
   // Setup for using a depth-first iterator to visit every block in the loop.
   SmallVector<BlockT*, 8> ExitBBs;
   getExitBlocks(ExitBBs);
-  llvm::SmallPtrSet<BlockT*, 8> VisitSet;
+  df_iterator_default_set<BlockT*> VisitSet;
   VisitSet.insert(ExitBBs.begin(), ExitBBs.end());
-  df_ext_iterator<BlockT*, llvm::SmallPtrSet<BlockT*, 8> >
+  df_ext_iterator<BlockT*, df_iterator_default_set<BlockT*>>
     BI = df_ext_begin(getHeader(), VisitSet),
     BE = df_ext_end(getHeader(), VisitSet);
 

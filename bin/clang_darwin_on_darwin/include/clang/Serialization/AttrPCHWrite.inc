@@ -434,6 +434,13 @@ Record.push_back(SA->getDefaultState());
     Record.push_back(A->getSpellingListIndex());
     break;
   }
+  case attr::Convergent: {
+    const auto *SA = cast<ConvergentAttr>(A);
+    Record.push_back(SA->isInherited());
+    Record.push_back(A->isImplicit());
+    Record.push_back(A->getSpellingListIndex());
+    break;
+  }
   case attr::DLLExport: {
     const auto *SA = cast<DLLExportAttr>(A);
     Record.push_back(SA->isInherited());
@@ -1080,6 +1087,13 @@ Record.push_back(SA->getFamily());
     Record.push_back(A->getSpellingListIndex());
     break;
   }
+  case attr::ObjCSubclassingRestricted: {
+    const auto *SA = cast<ObjCSubclassingRestrictedAttr>(A);
+    Record.push_back(SA->isInherited());
+    Record.push_back(A->isImplicit());
+    Record.push_back(A->getSpellingListIndex());
+    break;
+  }
   case attr::OpenCLAccess: {
     Record.push_back(A->isImplicit());
     Record.push_back(A->getSpellingListIndex());
@@ -1199,6 +1213,13 @@ Record.push_back(SA->getPCS());
   }
   case attr::Pure: {
     const auto *SA = cast<PureAttr>(A);
+    Record.push_back(SA->isInherited());
+    Record.push_back(A->isImplicit());
+    Record.push_back(A->getSpellingListIndex());
+    break;
+  }
+  case attr::RegCall: {
+    const auto *SA = cast<RegCallAttr>(A);
     Record.push_back(SA->isInherited());
     Record.push_back(A->isImplicit());
     Record.push_back(A->getSpellingListIndex());

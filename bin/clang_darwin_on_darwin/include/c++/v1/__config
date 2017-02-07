@@ -257,10 +257,6 @@ typedef __char32_t char32_t;
 #  define _LIBCPP_NORETURN __attribute__ ((noreturn))
 #endif
 
-#if !(__has_feature(cxx_defaulted_functions))
-#define _LIBCPP_HAS_NO_DEFAULTED_FUNCTIONS
-#endif  // !(__has_feature(cxx_defaulted_functions))
-
 #if !(__has_feature(cxx_deleted_functions))
 #define _LIBCPP_HAS_NO_DELETED_FUNCTIONS
 #endif  // !(__has_feature(cxx_deleted_functions))
@@ -413,7 +409,6 @@ namespace std {
 
 #ifndef __GXX_EXPERIMENTAL_CXX0X__
 #define _LIBCPP_HAS_NO_DECLTYPE
-#define _LIBCPP_HAS_NO_DEFAULTED_FUNCTIONS
 #define _LIBCPP_HAS_NO_DELETED_FUNCTIONS
 #define _LIBCPP_HAS_NO_NULLPTR
 #define _LIBCPP_HAS_NO_UNICODE_CHARS
@@ -442,10 +437,6 @@ namespace std {
 #define _LIBCPP_HAS_NO_NULLPTR
 #endif
 
-#if _GNUC_VER < 407
-#define _LIBCPP_HAS_NO_DEFAULTED_FUNCTIONS
-#endif
-
 #endif  // __GXX_EXPERIMENTAL_CXX0X__
 
 #define _LIBCPP_BEGIN_NAMESPACE_STD namespace std { namespace _LIBCPP_NAMESPACE {
@@ -469,7 +460,6 @@ using namespace _LIBCPP_NAMESPACE __attribute__((__strong__));
 #define _LIBCPP_HAS_NO_VARIABLE_TEMPLATES
 #define _LIBCPP_HAS_NO_UNICODE_CHARS
 #define _LIBCPP_HAS_NO_DELETED_FUNCTIONS
-#define _LIBCPP_HAS_NO_DEFAULTED_FUNCTIONS
 #define _LIBCPP_HAS_NO_NOEXCEPT
 #define __alignof__ __alignof
 #define _LIBCPP_NORETURN __declspec(noreturn)
@@ -520,7 +510,7 @@ namespace std {
 
 
 #ifdef _WIN32
-#if defined(_LIBCPP_DISABLE_DLL_IMPORT_EXPORT)
+#if defined(_LIBCPP_DISABLE_VISIBILITY_ANNOTATIONS)
 # define _LIBCPP_DLL_VIS
 # define _LIBCPP_EXTERN_TEMPLATE_TYPE_VIS
 # define _LIBCPP_CLASS_TEMPLATE_INSTANTIATION_VIS
@@ -556,18 +546,30 @@ namespace std {
 #endif // _WIN32
 
 #ifndef _LIBCPP_HIDDEN
+#if !defined(_LIBCPP_DISABLE_VISIBILITY_ANNOTATIONS)
 #define _LIBCPP_HIDDEN __attribute__ ((__visibility__("hidden")))
+#else
+#define _LIBCPP_HIDDEN
+#endif
 #endif
 
 #ifndef _LIBCPP_FUNC_VIS
+#if !defined(_LIBCPP_DISABLE_VISIBILITY_ANNOTATIONS)
 #define _LIBCPP_FUNC_VIS __attribute__ ((__visibility__("default")))
+#else
+#define _LIBCPP_FUNC_VIS
+#endif
 #endif
 
 #ifndef _LIBCPP_TYPE_VIS
-#  if __has_attribute(__type_visibility__)
-#    define _LIBCPP_TYPE_VIS __attribute__ ((__type_visibility__("default")))
+#  if !defined(_LIBCPP_DISABLE_VISIBILITY_ANNOTATIONS)
+#    if __has_attribute(__type_visibility__)
+#      define _LIBCPP_TYPE_VIS __attribute__ ((__type_visibility__("default")))
+#    else
+#      define _LIBCPP_TYPE_VIS __attribute__ ((__visibility__("default")))
+#    endif
 #  else
-#    define _LIBCPP_TYPE_VIS __attribute__ ((__visibility__("default")))
+#    define _LIBCPP_TYPE_VIS
 #  endif
 #endif
 
@@ -584,11 +586,15 @@ namespace std {
 #endif
 
 #ifndef _LIBCPP_EXCEPTION_ABI
+#if !defined(_LIBCPP_DISABLE_VISIBILITY_ANNOTATIONS)
 #define _LIBCPP_EXCEPTION_ABI __attribute__ ((__visibility__("default")))
+#else
+#define _LIBCPP_EXCEPTION_ABI
+#endif
 #endif
 
 #ifndef _LIBCPP_ENUM_VIS
-#  if __has_attribute(__type_visibility__)
+#  if !defined(_LIBCPP_DISABLE_VISIBILITY_ANNOTATIONS) && __has_attribute(__type_visibility__)
 #    define _LIBCPP_ENUM_VIS __attribute__ ((__type_visibility__("default")))
 #  else
 #    define _LIBCPP_ENUM_VIS
@@ -596,7 +602,7 @@ namespace std {
 #endif
 
 #ifndef _LIBCPP_EXTERN_TEMPLATE_TYPE_VIS
-#  if __has_attribute(__type_visibility__)
+#  if !defined(_LIBCPP_DISABLE_VISIBILITY_ANNOTATIONS) && __has_attribute(__type_visibility__)
 #    define _LIBCPP_EXTERN_TEMPLATE_TYPE_VIS __attribute__ ((__type_visibility__("default")))
 #  else
 #    define _LIBCPP_EXTERN_TEMPLATE_TYPE_VIS
@@ -608,15 +614,27 @@ namespace std {
 #endif
 
 #ifndef _LIBCPP_INLINE_VISIBILITY
+#if !defined(_LIBCPP_DISABLE_VISIBILITY_ANNOTATIONS)
 #define _LIBCPP_INLINE_VISIBILITY __attribute__ ((__visibility__("hidden"), __always_inline__))
+#else
+#define _LIBCPP_INLINE_VISIBILITY __attribute__ ((__always_inline__))
+#endif
 #endif
 
 #ifndef _LIBCPP_ALWAYS_INLINE
+#if !defined(_LIBCPP_DISABLE_VISIBILITY_ANNOTATIONS)
 #define _LIBCPP_ALWAYS_INLINE  __attribute__ ((__visibility__("hidden"), __always_inline__))
+#else
+#define _LIBCPP_ALWAYS_INLINE  __attribute__ ((__always_inline__))
+#endif
 #endif
 
 #ifndef _LIBCPP_EXTERN_TEMPLATE_INLINE_VISIBILITY
-# define _LIBCPP_EXTERN_TEMPLATE_INLINE_VISIBILITY __attribute__((__visibility__("default"), __always_inline__))
+# if !defined(_LIBCPP_DISABLE_VISIBILITY_ANNOTATIONS)
+#  define _LIBCPP_EXTERN_TEMPLATE_INLINE_VISIBILITY __attribute__((__visibility__("default"), __always_inline__))
+# else
+#  define _LIBCPP_EXTERN_TEMPLATE_INLINE_VISIBILITY __attribute__((__always_inline__))
+# endif
 #endif
 
 #ifndef _LIBCPP_PREFERRED_OVERLOAD
@@ -672,7 +690,7 @@ template <unsigned> struct __static_assert_check {};
 #define _LIBCPP_CONSTEXPR constexpr
 #endif
 
-#ifdef _LIBCPP_HAS_NO_DEFAULTED_FUNCTIONS
+#ifdef _LIBCPP_CXX03_LANG
 #define _LIBCPP_DEFAULT {}
 #else
 #define _LIBCPP_DEFAULT = default;
@@ -794,6 +812,11 @@ template <unsigned> struct __static_assert_check {};
 #define _LIBCPP_CONSTEXPR_AFTER_CXX14 constexpr
 #else
 #define _LIBCPP_CONSTEXPR_AFTER_CXX14
+#endif
+
+// FIXME: Remove all usages of this macro once compilers catch up.
+#if !defined(__cpp_inline_variables) || (__cpp_inline_variables < 201606L)
+# define _LIBCPP_HAS_NO_INLINE_VARIABLES
 #endif
 
 #ifdef _LIBCPP_HAS_NO_RVALUE_REFERENCES

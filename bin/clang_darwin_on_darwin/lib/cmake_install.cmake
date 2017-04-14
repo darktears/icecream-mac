@@ -50,6 +50,7 @@ if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   include("/Users/alexisme/Development/chromium/src/third_party/llvm-build/Release+Asserts/lib/Fuzzer/cmake_install.cmake")
   include("/Users/alexisme/Development/chromium/src/third_party/llvm-build/Release+Asserts/lib/Passes/cmake_install.cmake")
   include("/Users/alexisme/Development/chromium/src/third_party/llvm-build/Release+Asserts/lib/LibDriver/cmake_install.cmake")
+  include("/Users/alexisme/Development/chromium/src/third_party/llvm-build/Release+Asserts/lib/XRay/cmake_install.cmake")
 
 endif()
 

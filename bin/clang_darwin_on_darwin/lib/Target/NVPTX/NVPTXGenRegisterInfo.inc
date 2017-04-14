@@ -63,47 +63,57 @@ enum {
   FL2 = 43,
   FL3 = 44,
   FL4 = 45,
-  P0 = 46,
-  P1 = 47,
-  P2 = 48,
-  P3 = 49,
-  P4 = 50,
-  R0 = 51,
-  R1 = 52,
-  R2 = 53,
-  R3 = 54,
-  R4 = 55,
-  RL0 = 56,
-  RL1 = 57,
-  RL2 = 58,
-  RL3 = 59,
-  RL4 = 60,
-  RS0 = 61,
-  RS1 = 62,
-  RS2 = 63,
-  RS3 = 64,
-  RS4 = 65,
-  da0 = 66,
-  da1 = 67,
-  da2 = 68,
-  da3 = 69,
-  da4 = 70,
-  fa0 = 71,
-  fa1 = 72,
-  fa2 = 73,
-  fa3 = 74,
-  fa4 = 75,
-  ia0 = 76,
-  ia1 = 77,
-  ia2 = 78,
-  ia3 = 79,
-  ia4 = 80,
-  la0 = 81,
-  la1 = 82,
-  la2 = 83,
-  la3 = 84,
-  la4 = 85,
-  NUM_TARGET_REGS 	// 86
+  H0 = 46,
+  H1 = 47,
+  H2 = 48,
+  H3 = 49,
+  H4 = 50,
+  HH0 = 51,
+  HH1 = 52,
+  HH2 = 53,
+  HH3 = 54,
+  HH4 = 55,
+  P0 = 56,
+  P1 = 57,
+  P2 = 58,
+  P3 = 59,
+  P4 = 60,
+  R0 = 61,
+  R1 = 62,
+  R2 = 63,
+  R3 = 64,
+  R4 = 65,
+  RL0 = 66,
+  RL1 = 67,
+  RL2 = 68,
+  RL3 = 69,
+  RL4 = 70,
+  RS0 = 71,
+  RS1 = 72,
+  RS2 = 73,
+  RS3 = 74,
+  RS4 = 75,
+  da0 = 76,
+  da1 = 77,
+  da2 = 78,
+  da3 = 79,
+  da4 = 80,
+  fa0 = 81,
+  fa1 = 82,
+  fa2 = 83,
+  fa3 = 84,
+  fa4 = 85,
+  ia0 = 86,
+  ia1 = 87,
+  ia2 = 88,
+  ia3 = 89,
+  ia4 = 90,
+  la0 = 91,
+  la1 = 92,
+  la2 = 93,
+  la3 = 94,
+  la4 = 95,
+  NUM_TARGET_REGS 	// 96
 };
 } // end namespace NVPTX
 
@@ -112,16 +122,18 @@ enum {
 namespace NVPTX {
 enum {
   Int1RegsRegClassID = 0,
-  Int16RegsRegClassID = 1,
-  SpecialRegsRegClassID = 2,
-  Float32ArgRegsRegClassID = 3,
-  Float32RegsRegClassID = 4,
-  Int32ArgRegsRegClassID = 5,
-  Int32RegsRegClassID = 6,
-  Float64ArgRegsRegClassID = 7,
-  Float64RegsRegClassID = 8,
-  Int64ArgRegsRegClassID = 9,
-  Int64RegsRegClassID = 10,
+  Float16RegsRegClassID = 1,
+  Int16RegsRegClassID = 2,
+  SpecialRegsRegClassID = 3,
+  Float16x2RegsRegClassID = 4,
+  Float32ArgRegsRegClassID = 5,
+  Float32RegsRegClassID = 6,
+  Int32ArgRegsRegClassID = 7,
+  Int32RegsRegClassID = 8,
+  Float64ArgRegsRegClassID = 9,
+  Float64RegsRegClassID = 10,
+  Int64ArgRegsRegClassID = 11,
+  Int64RegsRegClassID = 12,
 
   };
 } // end namespace NVPTX
@@ -166,175 +178,190 @@ extern const char NVPTXRegStrings[] = {
   /* 18 */ 'E', 'N', 'V', 'R', 'E', 'G', '3', '0', 0,
   /* 27 */ 'F', '0', 0,
   /* 30 */ 'E', 'N', 'V', 'R', 'E', 'G', '0', 0,
-  /* 38 */ 'F', 'L', '0', 0,
-  /* 42 */ 'R', 'L', '0', 0,
-  /* 46 */ 'P', '0', 0,
-  /* 49 */ 'R', '0', 0,
-  /* 52 */ 'R', 'S', '0', 0,
-  /* 56 */ 'd', 'a', '0', 0,
-  /* 60 */ 'f', 'a', '0', 0,
-  /* 64 */ 'i', 'a', '0', 0,
-  /* 68 */ 'l', 'a', '0', 0,
-  /* 72 */ 'E', 'N', 'V', 'R', 'E', 'G', '1', '1', 0,
-  /* 81 */ 'E', 'N', 'V', 'R', 'E', 'G', '2', '1', 0,
-  /* 90 */ 'E', 'N', 'V', 'R', 'E', 'G', '3', '1', 0,
-  /* 99 */ 'F', '1', 0,
-  /* 102 */ 'E', 'N', 'V', 'R', 'E', 'G', '1', 0,
-  /* 110 */ 'F', 'L', '1', 0,
-  /* 114 */ 'R', 'L', '1', 0,
-  /* 118 */ 'P', '1', 0,
-  /* 121 */ 'R', '1', 0,
-  /* 124 */ 'R', 'S', '1', 0,
-  /* 128 */ 'd', 'a', '1', 0,
-  /* 132 */ 'f', 'a', '1', 0,
-  /* 136 */ 'i', 'a', '1', 0,
-  /* 140 */ 'l', 'a', '1', 0,
-  /* 144 */ 'E', 'N', 'V', 'R', 'E', 'G', '1', '2', 0,
-  /* 153 */ 'E', 'N', 'V', 'R', 'E', 'G', '2', '2', 0,
-  /* 162 */ 'F', '2', 0,
-  /* 165 */ 'E', 'N', 'V', 'R', 'E', 'G', '2', 0,
-  /* 173 */ 'F', 'L', '2', 0,
-  /* 177 */ 'R', 'L', '2', 0,
-  /* 181 */ 'P', '2', 0,
-  /* 184 */ 'R', '2', 0,
-  /* 187 */ 'R', 'S', '2', 0,
-  /* 191 */ 'd', 'a', '2', 0,
-  /* 195 */ 'f', 'a', '2', 0,
-  /* 199 */ 'i', 'a', '2', 0,
-  /* 203 */ 'l', 'a', '2', 0,
-  /* 207 */ 'E', 'N', 'V', 'R', 'E', 'G', '1', '3', 0,
-  /* 216 */ 'E', 'N', 'V', 'R', 'E', 'G', '2', '3', 0,
-  /* 225 */ 'F', '3', 0,
-  /* 228 */ 'E', 'N', 'V', 'R', 'E', 'G', '3', 0,
-  /* 236 */ 'F', 'L', '3', 0,
-  /* 240 */ 'R', 'L', '3', 0,
-  /* 244 */ 'P', '3', 0,
-  /* 247 */ 'R', '3', 0,
-  /* 250 */ 'R', 'S', '3', 0,
-  /* 254 */ 'd', 'a', '3', 0,
-  /* 258 */ 'f', 'a', '3', 0,
-  /* 262 */ 'i', 'a', '3', 0,
-  /* 266 */ 'l', 'a', '3', 0,
-  /* 270 */ 'E', 'N', 'V', 'R', 'E', 'G', '1', '4', 0,
-  /* 279 */ 'E', 'N', 'V', 'R', 'E', 'G', '2', '4', 0,
-  /* 288 */ 'F', '4', 0,
-  /* 291 */ 'E', 'N', 'V', 'R', 'E', 'G', '4', 0,
-  /* 299 */ 'F', 'L', '4', 0,
-  /* 303 */ 'R', 'L', '4', 0,
-  /* 307 */ 'P', '4', 0,
-  /* 310 */ 'R', '4', 0,
-  /* 313 */ 'R', 'S', '4', 0,
-  /* 317 */ 'd', 'a', '4', 0,
-  /* 321 */ 'f', 'a', '4', 0,
-  /* 325 */ 'i', 'a', '4', 0,
-  /* 329 */ 'l', 'a', '4', 0,
-  /* 333 */ 'E', 'N', 'V', 'R', 'E', 'G', '1', '5', 0,
-  /* 342 */ 'E', 'N', 'V', 'R', 'E', 'G', '2', '5', 0,
-  /* 351 */ 'E', 'N', 'V', 'R', 'E', 'G', '5', 0,
-  /* 359 */ 'E', 'N', 'V', 'R', 'E', 'G', '1', '6', 0,
-  /* 368 */ 'E', 'N', 'V', 'R', 'E', 'G', '2', '6', 0,
-  /* 377 */ 'E', 'N', 'V', 'R', 'E', 'G', '6', 0,
-  /* 385 */ 'E', 'N', 'V', 'R', 'E', 'G', '1', '7', 0,
-  /* 394 */ 'E', 'N', 'V', 'R', 'E', 'G', '2', '7', 0,
-  /* 403 */ 'E', 'N', 'V', 'R', 'E', 'G', '7', 0,
-  /* 411 */ 'E', 'N', 'V', 'R', 'E', 'G', '1', '8', 0,
-  /* 420 */ 'E', 'N', 'V', 'R', 'E', 'G', '2', '8', 0,
-  /* 429 */ 'E', 'N', 'V', 'R', 'E', 'G', '8', 0,
-  /* 437 */ 'E', 'N', 'V', 'R', 'E', 'G', '1', '9', 0,
-  /* 446 */ 'E', 'N', 'V', 'R', 'E', 'G', '2', '9', 0,
-  /* 455 */ 'E', 'N', 'V', 'R', 'E', 'G', '9', 0,
-  /* 463 */ 'V', 'R', 'F', 'r', 'a', 'm', 'e', 0,
-  /* 471 */ 'V', 'R', 'F', 'r', 'a', 'm', 'e', 'L', 'o', 'c', 'a', 'l', 0,
-  /* 484 */ 'V', 'R', 'D', 'e', 'p', 'o', 't', 0,
+  /* 38 */ 'H', 'H', '0', 0,
+  /* 42 */ 'F', 'L', '0', 0,
+  /* 46 */ 'R', 'L', '0', 0,
+  /* 50 */ 'P', '0', 0,
+  /* 53 */ 'R', '0', 0,
+  /* 56 */ 'R', 'S', '0', 0,
+  /* 60 */ 'd', 'a', '0', 0,
+  /* 64 */ 'f', 'a', '0', 0,
+  /* 68 */ 'i', 'a', '0', 0,
+  /* 72 */ 'l', 'a', '0', 0,
+  /* 76 */ 'E', 'N', 'V', 'R', 'E', 'G', '1', '1', 0,
+  /* 85 */ 'E', 'N', 'V', 'R', 'E', 'G', '2', '1', 0,
+  /* 94 */ 'E', 'N', 'V', 'R', 'E', 'G', '3', '1', 0,
+  /* 103 */ 'F', '1', 0,
+  /* 106 */ 'E', 'N', 'V', 'R', 'E', 'G', '1', 0,
+  /* 114 */ 'H', 'H', '1', 0,
+  /* 118 */ 'F', 'L', '1', 0,
+  /* 122 */ 'R', 'L', '1', 0,
+  /* 126 */ 'P', '1', 0,
+  /* 129 */ 'R', '1', 0,
+  /* 132 */ 'R', 'S', '1', 0,
+  /* 136 */ 'd', 'a', '1', 0,
+  /* 140 */ 'f', 'a', '1', 0,
+  /* 144 */ 'i', 'a', '1', 0,
+  /* 148 */ 'l', 'a', '1', 0,
+  /* 152 */ 'E', 'N', 'V', 'R', 'E', 'G', '1', '2', 0,
+  /* 161 */ 'E', 'N', 'V', 'R', 'E', 'G', '2', '2', 0,
+  /* 170 */ 'F', '2', 0,
+  /* 173 */ 'E', 'N', 'V', 'R', 'E', 'G', '2', 0,
+  /* 181 */ 'H', 'H', '2', 0,
+  /* 185 */ 'F', 'L', '2', 0,
+  /* 189 */ 'R', 'L', '2', 0,
+  /* 193 */ 'P', '2', 0,
+  /* 196 */ 'R', '2', 0,
+  /* 199 */ 'R', 'S', '2', 0,
+  /* 203 */ 'd', 'a', '2', 0,
+  /* 207 */ 'f', 'a', '2', 0,
+  /* 211 */ 'i', 'a', '2', 0,
+  /* 215 */ 'l', 'a', '2', 0,
+  /* 219 */ 'E', 'N', 'V', 'R', 'E', 'G', '1', '3', 0,
+  /* 228 */ 'E', 'N', 'V', 'R', 'E', 'G', '2', '3', 0,
+  /* 237 */ 'F', '3', 0,
+  /* 240 */ 'E', 'N', 'V', 'R', 'E', 'G', '3', 0,
+  /* 248 */ 'H', 'H', '3', 0,
+  /* 252 */ 'F', 'L', '3', 0,
+  /* 256 */ 'R', 'L', '3', 0,
+  /* 260 */ 'P', '3', 0,
+  /* 263 */ 'R', '3', 0,
+  /* 266 */ 'R', 'S', '3', 0,
+  /* 270 */ 'd', 'a', '3', 0,
+  /* 274 */ 'f', 'a', '3', 0,
+  /* 278 */ 'i', 'a', '3', 0,
+  /* 282 */ 'l', 'a', '3', 0,
+  /* 286 */ 'E', 'N', 'V', 'R', 'E', 'G', '1', '4', 0,
+  /* 295 */ 'E', 'N', 'V', 'R', 'E', 'G', '2', '4', 0,
+  /* 304 */ 'F', '4', 0,
+  /* 307 */ 'E', 'N', 'V', 'R', 'E', 'G', '4', 0,
+  /* 315 */ 'H', 'H', '4', 0,
+  /* 319 */ 'F', 'L', '4', 0,
+  /* 323 */ 'R', 'L', '4', 0,
+  /* 327 */ 'P', '4', 0,
+  /* 330 */ 'R', '4', 0,
+  /* 333 */ 'R', 'S', '4', 0,
+  /* 337 */ 'd', 'a', '4', 0,
+  /* 341 */ 'f', 'a', '4', 0,
+  /* 345 */ 'i', 'a', '4', 0,
+  /* 349 */ 'l', 'a', '4', 0,
+  /* 353 */ 'E', 'N', 'V', 'R', 'E', 'G', '1', '5', 0,
+  /* 362 */ 'E', 'N', 'V', 'R', 'E', 'G', '2', '5', 0,
+  /* 371 */ 'E', 'N', 'V', 'R', 'E', 'G', '5', 0,
+  /* 379 */ 'E', 'N', 'V', 'R', 'E', 'G', '1', '6', 0,
+  /* 388 */ 'E', 'N', 'V', 'R', 'E', 'G', '2', '6', 0,
+  /* 397 */ 'E', 'N', 'V', 'R', 'E', 'G', '6', 0,
+  /* 405 */ 'E', 'N', 'V', 'R', 'E', 'G', '1', '7', 0,
+  /* 414 */ 'E', 'N', 'V', 'R', 'E', 'G', '2', '7', 0,
+  /* 423 */ 'E', 'N', 'V', 'R', 'E', 'G', '7', 0,
+  /* 431 */ 'E', 'N', 'V', 'R', 'E', 'G', '1', '8', 0,
+  /* 440 */ 'E', 'N', 'V', 'R', 'E', 'G', '2', '8', 0,
+  /* 449 */ 'E', 'N', 'V', 'R', 'E', 'G', '8', 0,
+  /* 457 */ 'E', 'N', 'V', 'R', 'E', 'G', '1', '9', 0,
+  /* 466 */ 'E', 'N', 'V', 'R', 'E', 'G', '2', '9', 0,
+  /* 475 */ 'E', 'N', 'V', 'R', 'E', 'G', '9', 0,
+  /* 483 */ 'V', 'R', 'F', 'r', 'a', 'm', 'e', 0,
+  /* 491 */ 'V', 'R', 'F', 'r', 'a', 'm', 'e', 'L', 'o', 'c', 'a', 'l', 0,
+  /* 504 */ 'V', 'R', 'D', 'e', 'p', 'o', 't', 0,
 };
 
 extern const MCRegisterDesc NVPTXRegDesc[] = { // Descriptors
   { 8, 0, 0, 0, 0, 0 },
-  { 484, 1, 1, 0, 1, 0 },
-  { 463, 1, 1, 0, 1, 0 },
-  { 471, 1, 1, 0, 1, 0 },
+  { 504, 1, 1, 0, 1, 0 },
+  { 483, 1, 1, 0, 1, 0 },
+  { 491, 1, 1, 0, 1, 0 },
   { 30, 1, 1, 0, 1, 0 },
-  { 102, 1, 1, 0, 1, 0 },
-  { 165, 1, 1, 0, 1, 0 },
-  { 228, 1, 1, 0, 1, 0 },
-  { 291, 1, 1, 0, 1, 0 },
-  { 351, 1, 1, 0, 1, 0 },
-  { 377, 1, 1, 0, 1, 0 },
-  { 403, 1, 1, 0, 1, 0 },
-  { 429, 1, 1, 0, 1, 0 },
-  { 455, 1, 1, 0, 1, 0 },
-  { 0, 1, 1, 0, 1, 0 },
-  { 72, 1, 1, 0, 1, 0 },
-  { 144, 1, 1, 0, 1, 0 },
-  { 207, 1, 1, 0, 1, 0 },
-  { 270, 1, 1, 0, 1, 0 },
-  { 333, 1, 1, 0, 1, 0 },
-  { 359, 1, 1, 0, 1, 0 },
-  { 385, 1, 1, 0, 1, 0 },
-  { 411, 1, 1, 0, 1, 0 },
-  { 437, 1, 1, 0, 1, 0 },
-  { 9, 1, 1, 0, 1, 0 },
-  { 81, 1, 1, 0, 1, 0 },
-  { 153, 1, 1, 0, 1, 0 },
-  { 216, 1, 1, 0, 1, 0 },
-  { 279, 1, 1, 0, 1, 0 },
-  { 342, 1, 1, 0, 1, 0 },
-  { 368, 1, 1, 0, 1, 0 },
-  { 394, 1, 1, 0, 1, 0 },
-  { 420, 1, 1, 0, 1, 0 },
-  { 446, 1, 1, 0, 1, 0 },
-  { 18, 1, 1, 0, 1, 0 },
-  { 90, 1, 1, 0, 1, 0 },
-  { 27, 1, 1, 0, 1, 0 },
-  { 99, 1, 1, 0, 1, 0 },
-  { 162, 1, 1, 0, 1, 0 },
-  { 225, 1, 1, 0, 1, 0 },
-  { 288, 1, 1, 0, 1, 0 },
-  { 38, 1, 1, 0, 1, 0 },
-  { 110, 1, 1, 0, 1, 0 },
+  { 106, 1, 1, 0, 1, 0 },
   { 173, 1, 1, 0, 1, 0 },
-  { 236, 1, 1, 0, 1, 0 },
-  { 299, 1, 1, 0, 1, 0 },
-  { 46, 1, 1, 0, 1, 0 },
-  { 118, 1, 1, 0, 1, 0 },
-  { 181, 1, 1, 0, 1, 0 },
-  { 244, 1, 1, 0, 1, 0 },
-  { 307, 1, 1, 0, 1, 0 },
-  { 49, 1, 1, 0, 1, 0 },
-  { 121, 1, 1, 0, 1, 0 },
-  { 184, 1, 1, 0, 1, 0 },
-  { 247, 1, 1, 0, 1, 0 },
-  { 310, 1, 1, 0, 1, 0 },
-  { 42, 1, 1, 0, 1, 0 },
-  { 114, 1, 1, 0, 1, 0 },
-  { 177, 1, 1, 0, 1, 0 },
   { 240, 1, 1, 0, 1, 0 },
-  { 303, 1, 1, 0, 1, 0 },
-  { 52, 1, 1, 0, 1, 0 },
-  { 124, 1, 1, 0, 1, 0 },
-  { 187, 1, 1, 0, 1, 0 },
-  { 250, 1, 1, 0, 1, 0 },
-  { 313, 1, 1, 0, 1, 0 },
+  { 307, 1, 1, 0, 1, 0 },
+  { 371, 1, 1, 0, 1, 0 },
+  { 397, 1, 1, 0, 1, 0 },
+  { 423, 1, 1, 0, 1, 0 },
+  { 449, 1, 1, 0, 1, 0 },
+  { 475, 1, 1, 0, 1, 0 },
+  { 0, 1, 1, 0, 1, 0 },
+  { 76, 1, 1, 0, 1, 0 },
+  { 152, 1, 1, 0, 1, 0 },
+  { 219, 1, 1, 0, 1, 0 },
+  { 286, 1, 1, 0, 1, 0 },
+  { 353, 1, 1, 0, 1, 0 },
+  { 379, 1, 1, 0, 1, 0 },
+  { 405, 1, 1, 0, 1, 0 },
+  { 431, 1, 1, 0, 1, 0 },
+  { 457, 1, 1, 0, 1, 0 },
+  { 9, 1, 1, 0, 1, 0 },
+  { 85, 1, 1, 0, 1, 0 },
+  { 161, 1, 1, 0, 1, 0 },
+  { 228, 1, 1, 0, 1, 0 },
+  { 295, 1, 1, 0, 1, 0 },
+  { 362, 1, 1, 0, 1, 0 },
+  { 388, 1, 1, 0, 1, 0 },
+  { 414, 1, 1, 0, 1, 0 },
+  { 440, 1, 1, 0, 1, 0 },
+  { 466, 1, 1, 0, 1, 0 },
+  { 18, 1, 1, 0, 1, 0 },
+  { 94, 1, 1, 0, 1, 0 },
+  { 27, 1, 1, 0, 1, 0 },
+  { 103, 1, 1, 0, 1, 0 },
+  { 170, 1, 1, 0, 1, 0 },
+  { 237, 1, 1, 0, 1, 0 },
+  { 304, 1, 1, 0, 1, 0 },
+  { 42, 1, 1, 0, 1, 0 },
+  { 118, 1, 1, 0, 1, 0 },
+  { 185, 1, 1, 0, 1, 0 },
+  { 252, 1, 1, 0, 1, 0 },
+  { 319, 1, 1, 0, 1, 0 },
+  { 39, 1, 1, 0, 1, 0 },
+  { 115, 1, 1, 0, 1, 0 },
+  { 182, 1, 1, 0, 1, 0 },
+  { 249, 1, 1, 0, 1, 0 },
+  { 316, 1, 1, 0, 1, 0 },
+  { 38, 1, 1, 0, 1, 0 },
+  { 114, 1, 1, 0, 1, 0 },
+  { 181, 1, 1, 0, 1, 0 },
+  { 248, 1, 1, 0, 1, 0 },
+  { 315, 1, 1, 0, 1, 0 },
+  { 50, 1, 1, 0, 1, 0 },
+  { 126, 1, 1, 0, 1, 0 },
+  { 193, 1, 1, 0, 1, 0 },
+  { 260, 1, 1, 0, 1, 0 },
+  { 327, 1, 1, 0, 1, 0 },
+  { 53, 1, 1, 0, 1, 0 },
+  { 129, 1, 1, 0, 1, 0 },
+  { 196, 1, 1, 0, 1, 0 },
+  { 263, 1, 1, 0, 1, 0 },
+  { 330, 1, 1, 0, 1, 0 },
+  { 46, 1, 1, 0, 1, 0 },
+  { 122, 1, 1, 0, 1, 0 },
+  { 189, 1, 1, 0, 1, 0 },
+  { 256, 1, 1, 0, 1, 0 },
+  { 323, 1, 1, 0, 1, 0 },
   { 56, 1, 1, 0, 1, 0 },
-  { 128, 1, 1, 0, 1, 0 },
-  { 191, 1, 1, 0, 1, 0 },
-  { 254, 1, 1, 0, 1, 0 },
-  { 317, 1, 1, 0, 1, 0 },
-  { 60, 1, 1, 0, 1, 0 },
   { 132, 1, 1, 0, 1, 0 },
-  { 195, 1, 1, 0, 1, 0 },
-  { 258, 1, 1, 0, 1, 0 },
-  { 321, 1, 1, 0, 1, 0 },
-  { 64, 1, 1, 0, 1, 0 },
-  { 136, 1, 1, 0, 1, 0 },
   { 199, 1, 1, 0, 1, 0 },
-  { 262, 1, 1, 0, 1, 0 },
-  { 325, 1, 1, 0, 1, 0 },
-  { 68, 1, 1, 0, 1, 0 },
-  { 140, 1, 1, 0, 1, 0 },
-  { 203, 1, 1, 0, 1, 0 },
   { 266, 1, 1, 0, 1, 0 },
-  { 329, 1, 1, 0, 1, 0 },
+  { 333, 1, 1, 0, 1, 0 },
+  { 60, 1, 1, 0, 1, 0 },
+  { 136, 1, 1, 0, 1, 0 },
+  { 203, 1, 1, 0, 1, 0 },
+  { 270, 1, 1, 0, 1, 0 },
+  { 337, 1, 1, 0, 1, 0 },
+  { 64, 1, 1, 0, 1, 0 },
+  { 140, 1, 1, 0, 1, 0 },
+  { 207, 1, 1, 0, 1, 0 },
+  { 274, 1, 1, 0, 1, 0 },
+  { 341, 1, 1, 0, 1, 0 },
+  { 68, 1, 1, 0, 1, 0 },
+  { 144, 1, 1, 0, 1, 0 },
+  { 211, 1, 1, 0, 1, 0 },
+  { 278, 1, 1, 0, 1, 0 },
+  { 345, 1, 1, 0, 1, 0 },
+  { 72, 1, 1, 0, 1, 0 },
+  { 148, 1, 1, 0, 1, 0 },
+  { 215, 1, 1, 0, 1, 0 },
+  { 282, 1, 1, 0, 1, 0 },
+  { 349, 1, 1, 0, 1, 0 },
 };
 
 extern const MCPhysReg NVPTXRegUnitRoots[][2] = {
@@ -383,6 +410,16 @@ extern const MCPhysReg NVPTXRegUnitRoots[][2] = {
   { NVPTX::FL2 },
   { NVPTX::FL3 },
   { NVPTX::FL4 },
+  { NVPTX::H0 },
+  { NVPTX::H1 },
+  { NVPTX::H2 },
+  { NVPTX::H3 },
+  { NVPTX::H4 },
+  { NVPTX::HH0 },
+  { NVPTX::HH1 },
+  { NVPTX::HH2 },
+  { NVPTX::HH3 },
+  { NVPTX::HH4 },
   { NVPTX::P0 },
   { NVPTX::P1 },
   { NVPTX::P2 },
@@ -433,6 +470,16 @@ namespace {     // Register classes...
 
   // Int1Regs Bit set.
   const uint8_t Int1RegsBits[] = {
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x1f, 
+  };
+
+  // Float16Regs Register Class...
+  const MCPhysReg Float16Regs[] = {
+    NVPTX::H0, NVPTX::H1, NVPTX::H2, NVPTX::H3, NVPTX::H4, 
+  };
+
+  // Float16Regs Bit set.
+  const uint8_t Float16RegsBits[] = {
     0x00, 0x00, 0x00, 0x00, 0x00, 0xc0, 0x07, 
   };
 
@@ -443,7 +490,7 @@ namespace {     // Register classes...
 
   // Int16Regs Bit set.
   const uint8_t Int16RegsBits[] = {
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xe0, 0x03, 
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x80, 0x0f, 
   };
 
   // SpecialRegs Register Class...
@@ -456,6 +503,16 @@ namespace {     // Register classes...
     0xfe, 0xff, 0xff, 0xff, 0x0f, 
   };
 
+  // Float16x2Regs Register Class...
+  const MCPhysReg Float16x2Regs[] = {
+    NVPTX::HH0, NVPTX::HH1, NVPTX::HH2, NVPTX::HH3, NVPTX::HH4, 
+  };
+
+  // Float16x2Regs Bit set.
+  const uint8_t Float16x2RegsBits[] = {
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xf8, 
+  };
+
   // Float32ArgRegs Register Class...
   const MCPhysReg Float32ArgRegs[] = {
     NVPTX::fa0, NVPTX::fa1, NVPTX::fa2, NVPTX::fa3, NVPTX::fa4, 
@@ -463,7 +520,7 @@ namespace {     // Register classes...
 
   // Float32ArgRegs Bit set.
   const uint8_t Float32ArgRegsBits[] = {
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x80, 0x0f, 
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x3e, 
   };
 
   // Float32Regs Register Class...
@@ -483,7 +540,7 @@ namespace {     // Register classes...
 
   // Int32ArgRegs Bit set.
   const uint8_t Int32ArgRegsBits[] = {
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xf0, 0x01, 
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xc0, 0x07, 
   };
 
   // Int32Regs Register Class...
@@ -493,7 +550,7 @@ namespace {     // Register classes...
 
   // Int32Regs Bit set.
   const uint8_t Int32RegsBits[] = {
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xf8, 
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xe0, 0x03, 
   };
 
   // Float64ArgRegs Register Class...
@@ -503,7 +560,7 @@ namespace {     // Register classes...
 
   // Float64ArgRegs Bit set.
   const uint8_t Float64ArgRegsBits[] = {
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x7c, 
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xf0, 0x01, 
   };
 
   // Float64Regs Register Class...
@@ -523,7 +580,7 @@ namespace {     // Register classes...
 
   // Int64ArgRegs Bit set.
   const uint8_t Int64ArgRegsBits[] = {
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x3e, 
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xf8, 
   };
 
   // Int64Regs Register Class...
@@ -533,7 +590,7 @@ namespace {     // Register classes...
 
   // Int64Regs Bit set.
   const uint8_t Int64RegsBits[] = {
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x1f, 
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x7c, 
   };
 
 } // end anonymous namespace
@@ -542,28 +599,32 @@ extern const char NVPTXRegClassStrings[] = {
   /* 0 */ 'I', 'n', 't', '1', 'R', 'e', 'g', 's', 0,
   /* 9 */ 'F', 'l', 'o', 'a', 't', '3', '2', 'R', 'e', 'g', 's', 0,
   /* 21 */ 'I', 'n', 't', '3', '2', 'R', 'e', 'g', 's', 0,
-  /* 31 */ 'F', 'l', 'o', 'a', 't', '6', '4', 'R', 'e', 'g', 's', 0,
-  /* 43 */ 'I', 'n', 't', '6', '4', 'R', 'e', 'g', 's', 0,
-  /* 53 */ 'I', 'n', 't', '1', '6', 'R', 'e', 'g', 's', 0,
-  /* 63 */ 'F', 'l', 'o', 'a', 't', '3', '2', 'A', 'r', 'g', 'R', 'e', 'g', 's', 0,
-  /* 78 */ 'I', 'n', 't', '3', '2', 'A', 'r', 'g', 'R', 'e', 'g', 's', 0,
-  /* 91 */ 'F', 'l', 'o', 'a', 't', '6', '4', 'A', 'r', 'g', 'R', 'e', 'g', 's', 0,
-  /* 106 */ 'I', 'n', 't', '6', '4', 'A', 'r', 'g', 'R', 'e', 'g', 's', 0,
-  /* 119 */ 'S', 'p', 'e', 'c', 'i', 'a', 'l', 'R', 'e', 'g', 's', 0,
+  /* 31 */ 'F', 'l', 'o', 'a', 't', '1', '6', 'x', '2', 'R', 'e', 'g', 's', 0,
+  /* 45 */ 'F', 'l', 'o', 'a', 't', '6', '4', 'R', 'e', 'g', 's', 0,
+  /* 57 */ 'I', 'n', 't', '6', '4', 'R', 'e', 'g', 's', 0,
+  /* 67 */ 'F', 'l', 'o', 'a', 't', '1', '6', 'R', 'e', 'g', 's', 0,
+  /* 79 */ 'I', 'n', 't', '1', '6', 'R', 'e', 'g', 's', 0,
+  /* 89 */ 'F', 'l', 'o', 'a', 't', '3', '2', 'A', 'r', 'g', 'R', 'e', 'g', 's', 0,
+  /* 104 */ 'I', 'n', 't', '3', '2', 'A', 'r', 'g', 'R', 'e', 'g', 's', 0,
+  /* 117 */ 'F', 'l', 'o', 'a', 't', '6', '4', 'A', 'r', 'g', 'R', 'e', 'g', 's', 0,
+  /* 132 */ 'I', 'n', 't', '6', '4', 'A', 'r', 'g', 'R', 'e', 'g', 's', 0,
+  /* 145 */ 'S', 'p', 'e', 'c', 'i', 'a', 'l', 'R', 'e', 'g', 's', 0,
 };
 
 extern const MCRegisterClass NVPTXMCRegisterClasses[] = {
-  { Int1Regs, Int1RegsBits, 0, 5, sizeof(Int1RegsBits), NVPTX::Int1RegsRegClassID, 0, 1, 1, true },
-  { Int16Regs, Int16RegsBits, 53, 5, sizeof(Int16RegsBits), NVPTX::Int16RegsRegClassID, 2, 2, 1, true },
-  { SpecialRegs, SpecialRegsBits, 119, 35, sizeof(SpecialRegsBits), NVPTX::SpecialRegsRegClassID, 4, 4, 1, true },
-  { Float32ArgRegs, Float32ArgRegsBits, 63, 5, sizeof(Float32ArgRegsBits), NVPTX::Float32ArgRegsRegClassID, 4, 4, 1, true },
-  { Float32Regs, Float32RegsBits, 9, 5, sizeof(Float32RegsBits), NVPTX::Float32RegsRegClassID, 4, 4, 1, true },
-  { Int32ArgRegs, Int32ArgRegsBits, 78, 5, sizeof(Int32ArgRegsBits), NVPTX::Int32ArgRegsRegClassID, 4, 4, 1, true },
-  { Int32Regs, Int32RegsBits, 21, 5, sizeof(Int32RegsBits), NVPTX::Int32RegsRegClassID, 4, 4, 1, true },
-  { Float64ArgRegs, Float64ArgRegsBits, 91, 5, sizeof(Float64ArgRegsBits), NVPTX::Float64ArgRegsRegClassID, 8, 8, 1, true },
-  { Float64Regs, Float64RegsBits, 31, 5, sizeof(Float64RegsBits), NVPTX::Float64RegsRegClassID, 8, 8, 1, true },
-  { Int64ArgRegs, Int64ArgRegsBits, 106, 5, sizeof(Int64ArgRegsBits), NVPTX::Int64ArgRegsRegClassID, 8, 8, 1, true },
-  { Int64Regs, Int64RegsBits, 43, 5, sizeof(Int64RegsBits), NVPTX::Int64RegsRegClassID, 8, 8, 1, true },
+  { Int1Regs, Int1RegsBits, 0, 5, sizeof(Int1RegsBits), NVPTX::Int1RegsRegClassID, 0, 1, true },
+  { Float16Regs, Float16RegsBits, 67, 5, sizeof(Float16RegsBits), NVPTX::Float16RegsRegClassID, 2, 1, true },
+  { Int16Regs, Int16RegsBits, 79, 5, sizeof(Int16RegsBits), NVPTX::Int16RegsRegClassID, 2, 1, true },
+  { SpecialRegs, SpecialRegsBits, 145, 35, sizeof(SpecialRegsBits), NVPTX::SpecialRegsRegClassID, 4, 1, true },
+  { Float16x2Regs, Float16x2RegsBits, 31, 5, sizeof(Float16x2RegsBits), NVPTX::Float16x2RegsRegClassID, 4, 1, true },
+  { Float32ArgRegs, Float32ArgRegsBits, 89, 5, sizeof(Float32ArgRegsBits), NVPTX::Float32ArgRegsRegClassID, 4, 1, true },
+  { Float32Regs, Float32RegsBits, 9, 5, sizeof(Float32RegsBits), NVPTX::Float32RegsRegClassID, 4, 1, true },
+  { Int32ArgRegs, Int32ArgRegsBits, 104, 5, sizeof(Int32ArgRegsBits), NVPTX::Int32ArgRegsRegClassID, 4, 1, true },
+  { Int32Regs, Int32RegsBits, 21, 5, sizeof(Int32RegsBits), NVPTX::Int32RegsRegClassID, 4, 1, true },
+  { Float64ArgRegs, Float64ArgRegsBits, 117, 5, sizeof(Float64ArgRegsBits), NVPTX::Float64ArgRegsRegClassID, 8, 1, true },
+  { Float64Regs, Float64RegsBits, 45, 5, sizeof(Float64RegsBits), NVPTX::Float64RegsRegClassID, 8, 1, true },
+  { Int64ArgRegs, Int64ArgRegsBits, 132, 5, sizeof(Int64ArgRegsBits), NVPTX::Int64ArgRegsRegClassID, 8, 1, true },
+  { Int64Regs, Int64RegsBits, 57, 5, sizeof(Int64RegsBits), NVPTX::Int64RegsRegClassID, 8, 1, true },
 };
 
 extern const uint16_t NVPTXRegEncodingTable[] = {
@@ -653,9 +714,19 @@ extern const uint16_t NVPTXRegEncodingTable[] = {
   0,
   0,
   0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
 };
 static inline void InitNVPTXMCRegisterInfo(MCRegisterInfo *RI, unsigned RA, unsigned DwarfFlavour = 0, unsigned EHFlavour = 0, unsigned PC = 0) {
-  RI->InitMCRegisterInfo(NVPTXRegDesc, 86, RA, PC, NVPTXMCRegisterClasses, 11, NVPTXRegUnitRoots, 85, NVPTXRegDiffLists, NVPTXLaneMaskLists, NVPTXRegStrings, NVPTXRegClassStrings, NVPTXSubRegIdxLists, 1,
+  RI->InitMCRegisterInfo(NVPTXRegDesc, 96, RA, PC, NVPTXMCRegisterClasses, 13, NVPTXRegUnitRoots, 95, NVPTXRegDiffLists, NVPTXLaneMaskLists, NVPTXRegStrings, NVPTXRegClassStrings, NVPTXSubRegIdxLists, 1,
 NVPTXSubRegIdxRanges, NVPTXRegEncodingTable);
 
 }
@@ -700,8 +771,10 @@ struct NVPTXGenRegisterInfo : public TargetRegisterInfo {
 
 namespace NVPTX { // Register classes
   extern const TargetRegisterClass Int1RegsRegClass;
+  extern const TargetRegisterClass Float16RegsRegClass;
   extern const TargetRegisterClass Int16RegsRegClass;
   extern const TargetRegisterClass SpecialRegsRegClass;
+  extern const TargetRegisterClass Float16x2RegsRegClass;
   extern const TargetRegisterClass Float32ArgRegsRegClass;
   extern const TargetRegisterClass Float32RegsRegClass;
   extern const TargetRegisterClass Int32ArgRegsRegClass;
@@ -737,8 +810,10 @@ static const MVT::SimpleValueType VTLists[] = {
   /* 2 */ MVT::i16, MVT::Other,
   /* 4 */ MVT::i32, MVT::Other,
   /* 6 */ MVT::i64, MVT::Other,
-  /* 8 */ MVT::f32, MVT::Other,
-  /* 10 */ MVT::f64, MVT::Other,
+  /* 8 */ MVT::f16, MVT::Other,
+  /* 10 */ MVT::f32, MVT::Other,
+  /* 12 */ MVT::f64, MVT::Other,
+  /* 14 */ MVT::v2f16, MVT::Other,
 };
 
 static const char *const SubRegIndexNameTable[] = { "" };
@@ -756,44 +831,52 @@ static const uint32_t Int1RegsSubClassMask[] = {
   0x00000001, 
 };
 
-static const uint32_t Int16RegsSubClassMask[] = {
+static const uint32_t Float16RegsSubClassMask[] = {
   0x00000002, 
 };
 
-static const uint32_t SpecialRegsSubClassMask[] = {
+static const uint32_t Int16RegsSubClassMask[] = {
   0x00000004, 
 };
 
-static const uint32_t Float32ArgRegsSubClassMask[] = {
+static const uint32_t SpecialRegsSubClassMask[] = {
   0x00000008, 
 };
 
-static const uint32_t Float32RegsSubClassMask[] = {
+static const uint32_t Float16x2RegsSubClassMask[] = {
   0x00000010, 
 };
 
-static const uint32_t Int32ArgRegsSubClassMask[] = {
+static const uint32_t Float32ArgRegsSubClassMask[] = {
   0x00000020, 
 };
 
-static const uint32_t Int32RegsSubClassMask[] = {
+static const uint32_t Float32RegsSubClassMask[] = {
   0x00000040, 
 };
 
-static const uint32_t Float64ArgRegsSubClassMask[] = {
+static const uint32_t Int32ArgRegsSubClassMask[] = {
   0x00000080, 
 };
 
-static const uint32_t Float64RegsSubClassMask[] = {
+static const uint32_t Int32RegsSubClassMask[] = {
   0x00000100, 
 };
 
-static const uint32_t Int64ArgRegsSubClassMask[] = {
+static const uint32_t Float64ArgRegsSubClassMask[] = {
   0x00000200, 
 };
 
-static const uint32_t Int64RegsSubClassMask[] = {
+static const uint32_t Float64RegsSubClassMask[] = {
   0x00000400, 
+};
+
+static const uint32_t Int64ArgRegsSubClassMask[] = {
+  0x00000800, 
+};
+
+static const uint32_t Int64RegsSubClassMask[] = {
+  0x00001000, 
 };
 
 static const uint16_t SuperRegIdxSeqs[] = {
@@ -804,6 +887,8 @@ static const uint16_t SuperRegIdxSeqs[] = {
 namespace NVPTX {   // Register class instances
   extern const TargetRegisterClass Int1RegsRegClass = {
     &NVPTXMCRegisterClasses[Int1RegsRegClassID],
+    0, /* SpillSize */
+    1, /* SpillAlignment */
     VTLists + 0,
     Int1RegsSubClassMask,
     SuperRegIdxSeqs + 0,
@@ -815,8 +900,25 @@ namespace NVPTX {   // Register class instances
     nullptr
   };
 
+  extern const TargetRegisterClass Float16RegsRegClass = {
+    &NVPTXMCRegisterClasses[Float16RegsRegClassID],
+    2, /* SpillSize */
+    2, /* SpillAlignment */
+    VTLists + 8,
+    Float16RegsSubClassMask,
+    SuperRegIdxSeqs + 0,
+    LaneBitmask(0x00000001),
+    0,
+    false, /* HasDisjunctSubRegs */
+    false, /* CoveredBySubRegs */
+    NullRegClasses,
+    nullptr
+  };
+
   extern const TargetRegisterClass Int16RegsRegClass = {
     &NVPTXMCRegisterClasses[Int16RegsRegClassID],
+    2, /* SpillSize */
+    2, /* SpillAlignment */
     VTLists + 2,
     Int16RegsSubClassMask,
     SuperRegIdxSeqs + 0,
@@ -830,6 +932,8 @@ namespace NVPTX {   // Register class instances
 
   extern const TargetRegisterClass SpecialRegsRegClass = {
     &NVPTXMCRegisterClasses[SpecialRegsRegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 4,
     SpecialRegsSubClassMask,
     SuperRegIdxSeqs + 0,
@@ -841,9 +945,26 @@ namespace NVPTX {   // Register class instances
     nullptr
   };
 
+  extern const TargetRegisterClass Float16x2RegsRegClass = {
+    &NVPTXMCRegisterClasses[Float16x2RegsRegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
+    VTLists + 14,
+    Float16x2RegsSubClassMask,
+    SuperRegIdxSeqs + 0,
+    LaneBitmask(0x00000001),
+    0,
+    false, /* HasDisjunctSubRegs */
+    false, /* CoveredBySubRegs */
+    NullRegClasses,
+    nullptr
+  };
+
   extern const TargetRegisterClass Float32ArgRegsRegClass = {
     &NVPTXMCRegisterClasses[Float32ArgRegsRegClassID],
-    VTLists + 8,
+    4, /* SpillSize */
+    4, /* SpillAlignment */
+    VTLists + 10,
     Float32ArgRegsSubClassMask,
     SuperRegIdxSeqs + 0,
     LaneBitmask(0x00000001),
@@ -856,7 +977,9 @@ namespace NVPTX {   // Register class instances
 
   extern const TargetRegisterClass Float32RegsRegClass = {
     &NVPTXMCRegisterClasses[Float32RegsRegClassID],
-    VTLists + 8,
+    4, /* SpillSize */
+    4, /* SpillAlignment */
+    VTLists + 10,
     Float32RegsSubClassMask,
     SuperRegIdxSeqs + 0,
     LaneBitmask(0x00000001),
@@ -869,6 +992,8 @@ namespace NVPTX {   // Register class instances
 
   extern const TargetRegisterClass Int32ArgRegsRegClass = {
     &NVPTXMCRegisterClasses[Int32ArgRegsRegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 4,
     Int32ArgRegsSubClassMask,
     SuperRegIdxSeqs + 0,
@@ -882,6 +1007,8 @@ namespace NVPTX {   // Register class instances
 
   extern const TargetRegisterClass Int32RegsRegClass = {
     &NVPTXMCRegisterClasses[Int32RegsRegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 4,
     Int32RegsSubClassMask,
     SuperRegIdxSeqs + 0,
@@ -895,7 +1022,9 @@ namespace NVPTX {   // Register class instances
 
   extern const TargetRegisterClass Float64ArgRegsRegClass = {
     &NVPTXMCRegisterClasses[Float64ArgRegsRegClassID],
-    VTLists + 10,
+    8, /* SpillSize */
+    8, /* SpillAlignment */
+    VTLists + 12,
     Float64ArgRegsSubClassMask,
     SuperRegIdxSeqs + 0,
     LaneBitmask(0x00000001),
@@ -908,7 +1037,9 @@ namespace NVPTX {   // Register class instances
 
   extern const TargetRegisterClass Float64RegsRegClass = {
     &NVPTXMCRegisterClasses[Float64RegsRegClassID],
-    VTLists + 10,
+    8, /* SpillSize */
+    8, /* SpillAlignment */
+    VTLists + 12,
     Float64RegsSubClassMask,
     SuperRegIdxSeqs + 0,
     LaneBitmask(0x00000001),
@@ -921,6 +1052,8 @@ namespace NVPTX {   // Register class instances
 
   extern const TargetRegisterClass Int64ArgRegsRegClass = {
     &NVPTXMCRegisterClasses[Int64ArgRegsRegClassID],
+    8, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 6,
     Int64ArgRegsSubClassMask,
     SuperRegIdxSeqs + 0,
@@ -934,6 +1067,8 @@ namespace NVPTX {   // Register class instances
 
   extern const TargetRegisterClass Int64RegsRegClass = {
     &NVPTXMCRegisterClasses[Int64RegsRegClassID],
+    8, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 6,
     Int64RegsSubClassMask,
     SuperRegIdxSeqs + 0,
@@ -950,8 +1085,10 @@ namespace NVPTX {   // Register class instances
 namespace {
   const TargetRegisterClass* const RegisterClasses[] = {
     &NVPTX::Int1RegsRegClass,
+    &NVPTX::Float16RegsRegClass,
     &NVPTX::Int16RegsRegClass,
     &NVPTX::SpecialRegsRegClass,
+    &NVPTX::Float16x2RegsRegClass,
     &NVPTX::Float32ArgRegsRegClass,
     &NVPTX::Float32RegsRegClass,
     &NVPTX::Int32ArgRegsRegClass,
@@ -1050,14 +1187,26 @@ static const TargetRegisterInfoDesc NVPTXRegInfoDesc[] = { // Extra Descriptors
   { 0, true },
   { 0, true },
   { 0, true },
+  { 0, true },
+  { 0, true },
+  { 0, true },
+  { 0, true },
+  { 0, true },
+  { 0, true },
+  { 0, true },
+  { 0, true },
+  { 0, true },
+  { 0, true },
 };
 /// Get the weight in units of pressure for this register class.
 const RegClassWeight &NVPTXGenRegisterInfo::
 getRegClassWeight(const TargetRegisterClass *RC) const {
   static const RegClassWeight RCWeightTable[] = {
     {1, 5},  	// Int1Regs
+    {1, 5},  	// Float16Regs
     {1, 5},  	// Int16Regs
     {1, 35},  	// SpecialRegs
+    {1, 5},  	// Float16x2Regs
     {1, 5},  	// Float32ArgRegs
     {1, 5},  	// Float32Regs
     {1, 5},  	// Int32ArgRegs
@@ -1073,7 +1222,7 @@ getRegClassWeight(const TargetRegisterClass *RC) const {
 /// Get the weight in units of pressure for this register unit.
 unsigned NVPTXGenRegisterInfo::
 getRegUnitWeight(unsigned RegUnit) const {
-  assert(RegUnit < 85 && "invalid register unit");
+  assert(RegUnit < 95 && "invalid register unit");
   // All register units have unit weight.
   return 1;
 }
@@ -1081,7 +1230,7 @@ getRegUnitWeight(unsigned RegUnit) const {
 
 // Get the number of dimensions of register pressure.
 unsigned NVPTXGenRegisterInfo::getNumRegPressureSets() const {
-  return 11;
+  return 13;
 }
 
 // Get the name of this register unit pressure set.
@@ -1089,7 +1238,9 @@ const char *NVPTXGenRegisterInfo::
 getRegPressureSetName(unsigned Idx) const {
   static const char *const PressureNameTable[] = {
     "Int1Regs",
+    "Float16Regs",
     "Int16Regs",
+    "Float16x2Regs",
     "Float32ArgRegs",
     "Float32Regs",
     "Int32ArgRegs",
@@ -1109,16 +1260,18 @@ unsigned NVPTXGenRegisterInfo::
 getRegPressureSetLimit(const MachineFunction &MF, unsigned Idx) const {
   static const uint8_t PressureLimitTable[] = {
     5,  	// 0: Int1Regs
-    5,  	// 1: Int16Regs
-    5,  	// 2: Float32ArgRegs
-    5,  	// 3: Float32Regs
-    5,  	// 4: Int32ArgRegs
-    5,  	// 5: Int32Regs
-    5,  	// 6: Float64ArgRegs
-    5,  	// 7: Float64Regs
-    5,  	// 8: Int64ArgRegs
-    5,  	// 9: Int64Regs
-    35,  	// 10: SpecialRegs
+    5,  	// 1: Float16Regs
+    5,  	// 2: Int16Regs
+    5,  	// 3: Float16x2Regs
+    5,  	// 4: Float32ArgRegs
+    5,  	// 5: Float32Regs
+    5,  	// 6: Int32ArgRegs
+    5,  	// 7: Int32Regs
+    5,  	// 8: Float64ArgRegs
+    5,  	// 9: Float64Regs
+    5,  	// 10: Int64ArgRegs
+    5,  	// 11: Int64Regs
+    35,  	// 12: SpecialRegs
   };
   return PressureLimitTable[Idx];
 }
@@ -1136,6 +1289,8 @@ static const int RCSetsTable[] = {
   /* 16 */ 8, -1,
   /* 18 */ 9, -1,
   /* 20 */ 10, -1,
+  /* 22 */ 11, -1,
+  /* 24 */ 12, -1,
 };
 
 /// Get the dimensions of register pressure impacted by this register class.
@@ -1143,7 +1298,7 @@ static const int RCSetsTable[] = {
 const int* NVPTXGenRegisterInfo::
 getRegClassPressureSets(const TargetRegisterClass *RC) const {
   static const uint8_t RCSetStartTable[] = {
-    0,2,20,4,6,8,10,12,14,16,18,};
+    0,2,4,24,6,8,10,12,14,16,18,20,22,};
   return &RCSetsTable[RCSetStartTable[RC->getID()]];
 }
 
@@ -1151,9 +1306,9 @@ getRegClassPressureSets(const TargetRegisterClass *RC) const {
 /// Returns a -1 terminated array of pressure set IDs
 const int* NVPTXGenRegisterInfo::
 getRegUnitPressureSets(unsigned RegUnit) const {
-  assert(RegUnit < 85 && "invalid register unit");
+  assert(RegUnit < 95 && "invalid register unit");
   static const uint8_t RUSetStartTable[] = {
-    20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,6,6,6,6,6,14,14,14,14,14,0,0,0,0,0,10,10,10,10,10,18,18,18,18,18,2,2,2,2,2,12,12,12,12,12,4,4,4,4,4,8,8,8,8,8,16,16,16,16,16,};
+    24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,10,10,10,10,10,18,18,18,18,18,2,2,2,2,2,6,6,6,6,6,0,0,0,0,0,14,14,14,14,14,22,22,22,22,22,4,4,4,4,4,16,16,16,16,16,8,8,8,8,8,12,12,12,12,12,20,20,20,20,20,};
   return &RCSetsTable[RUSetStartTable[RegUnit]];
 }
 
@@ -1168,12 +1323,12 @@ extern const MCRegisterInfo::SubRegCoveredBits NVPTXSubRegIdxRanges[];
 extern const uint16_t NVPTXRegEncodingTable[];
 NVPTXGenRegisterInfo::
 NVPTXGenRegisterInfo(unsigned RA, unsigned DwarfFlavour, unsigned EHFlavour, unsigned PC)
-  : TargetRegisterInfo(NVPTXRegInfoDesc, RegisterClasses, RegisterClasses+11,
+  : TargetRegisterInfo(NVPTXRegInfoDesc, RegisterClasses, RegisterClasses+13,
              SubRegIndexNameTable, SubRegIndexLaneMaskTable, LaneBitmask(0xFFFFFFFF)) {
-  InitMCRegisterInfo(NVPTXRegDesc, 86, RA, PC,
-                     NVPTXMCRegisterClasses, 11,
+  InitMCRegisterInfo(NVPTXRegDesc, 96, RA, PC,
+                     NVPTXMCRegisterClasses, 13,
                      NVPTXRegUnitRoots,
-                     85,
+                     95,
                      NVPTXRegDiffLists,
                      NVPTXLaneMaskLists,
                      NVPTXRegStrings,

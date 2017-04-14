@@ -16,7 +16,6 @@
                        const OperandVector &Operands);
   void convertToMapAndConstraints(unsigned Kind,
                            const OperandVector &Operands) override;
-  bool mnemonicIsValid(StringRef Mnemonic, unsigned VariantID);
   unsigned MatchInstructionImpl(const OperandVector &Operands,
                                 MCInst &Inst,
                                 uint64_t &ErrorInfo, bool matchingInlineAsm,
@@ -45,8 +44,30 @@
   Match_DupAlignedMemoryRequires64,
   Match_DupAlignedMemoryRequires64or128,
   Match_DupAlignedMemoryRequiresNone,
+  Match_ImmRange0_1,
   Match_ImmRange0_15,
+  Match_ImmRange0_16777215,
   Match_ImmRange0_239,
+  Match_ImmRange0_255,
+  Match_ImmRange0_3,
+  Match_ImmRange0_31,
+  Match_ImmRange0_32,
+  Match_ImmRange0_4095,
+  Match_ImmRange0_63,
+  Match_ImmRange0_65535,
+  Match_ImmRange0_7,
+  Match_ImmRange16_16,
+  Match_ImmRange1_15,
+  Match_ImmRange1_16,
+  Match_ImmRange1_31,
+  Match_ImmRange1_32,
+  Match_ImmRange1_64,
+  Match_ImmRange1_7,
+  Match_ImmRange1_8,
+  Match_ImmRange256_65535,
+  Match_ImmRange32_32,
+  Match_ImmRange8_255,
+  Match_ImmRange8_8,
   END_OPERAND_DIAGNOSTIC_TYPES
 #endif // GET_OPERAND_DIAGNOSTIC_TYPES
 
@@ -56,23 +77,23 @@
 
 // Flags for subtarget features that participate in instruction matching.
 enum SubtargetFeatureFlag : uint64_t {
-  Feature_HasV4T = (1ULL << 17),
-  Feature_HasV5T = (1ULL << 18),
-  Feature_HasV5TE = (1ULL << 19),
-  Feature_HasV6 = (1ULL << 20),
-  Feature_HasV6M = (1ULL << 22),
-  Feature_HasV8MBaseline = (1ULL << 27),
-  Feature_HasV8MMainline = (1ULL << 28),
-  Feature_HasV6T2 = (1ULL << 23),
-  Feature_HasV6K = (1ULL << 21),
-  Feature_HasV7 = (1ULL << 24),
-  Feature_HasV8 = (1ULL << 26),
-  Feature_PreV8 = (1ULL << 40),
-  Feature_HasV8_1a = (1ULL << 29),
-  Feature_HasV8_2a = (1ULL << 30),
-  Feature_HasVFP2 = (1ULL << 31),
-  Feature_HasVFP3 = (1ULL << 32),
-  Feature_HasVFP4 = (1ULL << 33),
+  Feature_HasV4T = (1ULL << 16),
+  Feature_HasV5T = (1ULL << 17),
+  Feature_HasV5TE = (1ULL << 18),
+  Feature_HasV6 = (1ULL << 19),
+  Feature_HasV6M = (1ULL << 21),
+  Feature_HasV8MBaseline = (1ULL << 26),
+  Feature_HasV8MMainline = (1ULL << 27),
+  Feature_HasV6T2 = (1ULL << 22),
+  Feature_HasV6K = (1ULL << 20),
+  Feature_HasV7 = (1ULL << 23),
+  Feature_HasV8 = (1ULL << 25),
+  Feature_PreV8 = (1ULL << 39),
+  Feature_HasV8_1a = (1ULL << 28),
+  Feature_HasV8_2a = (1ULL << 29),
+  Feature_HasVFP2 = (1ULL << 30),
+  Feature_HasVFP3 = (1ULL << 31),
+  Feature_HasVFP4 = (1ULL << 32),
   Feature_HasDPVFP = (1ULL << 5),
   Feature_HasFPARMv8 = (1ULL << 10),
   Feature_HasNEON = (1ULL << 13),
@@ -83,21 +104,21 @@ enum SubtargetFeatureFlag : uint64_t {
   Feature_HasFullFP16 = (1ULL << 11),
   Feature_HasDivide = (1ULL << 7),
   Feature_HasDivideInARM = (1ULL << 8),
-  Feature_HasT2ExtractPack = (1ULL << 15),
   Feature_HasDSP = (1ULL << 6),
   Feature_HasDB = (1ULL << 4),
-  Feature_HasV7Clrex = (1ULL << 25),
+  Feature_HasV7Clrex = (1ULL << 24),
   Feature_HasAcquireRelease = (1ULL << 1),
   Feature_HasMP = (1ULL << 12),
-  Feature_HasVirtualization = (1ULL << 34),
-  Feature_HasTrustZone = (1ULL << 16),
+  Feature_HasVirtualization = (1ULL << 33),
+  Feature_HasTrustZone = (1ULL << 15),
   Feature_Has8MSecExt = (1ULL << 0),
-  Feature_IsThumb = (1ULL << 38),
-  Feature_IsThumb2 = (1ULL << 39),
-  Feature_IsMClass = (1ULL << 36),
-  Feature_IsNotMClass = (1ULL << 37),
-  Feature_IsARM = (1ULL << 35),
-  Feature_UseNaClTrap = (1ULL << 41),
+  Feature_IsThumb = (1ULL << 37),
+  Feature_IsThumb2 = (1ULL << 38),
+  Feature_IsMClass = (1ULL << 35),
+  Feature_IsNotMClass = (1ULL << 36),
+  Feature_IsARM = (1ULL << 34),
+  Feature_UseNaClTrap = (1ULL << 40),
+  Feature_UseNegativeImmediates = (1ULL << 41),
   Feature_None = 0
 };
 
@@ -388,15 +409,15 @@ static unsigned MatchRegisterName(StringRef Name) {
     switch (Name[0]) {
     default: break;
     case 'a':	 // 1 string to match.
-      if (memcmp(Name.data()+1, "psr", 3))
+      if (memcmp(Name.data()+1, "psr", 3) != 0)
         break;
       return 1;	 // "apsr"
     case 'c':	 // 1 string to match.
-      if (memcmp(Name.data()+1, "psr", 3))
+      if (memcmp(Name.data()+1, "psr", 3) != 0)
         break;
       return 3;	 // "cpsr"
     case 's':	 // 1 string to match.
-      if (memcmp(Name.data()+1, "psr", 3))
+      if (memcmp(Name.data()+1, "psr", 3) != 0)
         break;
       return 13;	 // "spsr"
     }
@@ -410,7 +431,7 @@ static unsigned MatchRegisterName(StringRef Name) {
       switch (Name[2]) {
       default: break;
       case 'e':	 // 1 string to match.
-        if (memcmp(Name.data()+3, "xc", 2))
+        if (memcmp(Name.data()+3, "xc", 2) != 0)
           break;
         return 4;	 // "fpexc"
       case 's':	 // 2 strings to match.
@@ -429,7 +450,7 @@ static unsigned MatchRegisterName(StringRef Name) {
       }
       break;
     case 'm':	 // 3 strings to match.
-      if (memcmp(Name.data()+1, "vfr", 3))
+      if (memcmp(Name.data()+1, "vfr", 3) != 0)
         break;
       switch (Name[4]) {
       default: break;
@@ -444,28 +465,28 @@ static unsigned MatchRegisterName(StringRef Name) {
     }
     break;
   case 6:	 // 1 string to match.
-    if (memcmp(Name.data()+0, "fpinst", 6))
+    if (memcmp(Name.data()+0, "fpinst", 6) != 0)
       break;
     return 5;	 // "fpinst"
   case 7:	 // 2 strings to match.
     switch (Name[0]) {
     default: break;
     case 'f':	 // 1 string to match.
-      if (memcmp(Name.data()+1, "pinst2", 6))
+      if (memcmp(Name.data()+1, "pinst2", 6) != 0)
         break;
       return 46;	 // "fpinst2"
     case 'i':	 // 1 string to match.
-      if (memcmp(Name.data()+1, "tstate", 6))
+      if (memcmp(Name.data()+1, "tstate", 6) != 0)
         break;
       return 9;	 // "itstate"
     }
     break;
   case 9:	 // 1 string to match.
-    if (memcmp(Name.data()+0, "apsr_nzcv", 9))
+    if (memcmp(Name.data()+0, "apsr_nzcv", 9) != 0)
       break;
     return 2;	 // "apsr_nzcv"
   case 10:	 // 1 string to match.
-    if (memcmp(Name.data()+0, "fpscr_nzcv", 10))
+    if (memcmp(Name.data()+0, "fpscr_nzcv", 10) != 0)
       break;
     return 7;	 // "fpscr_nzcv"
   }
@@ -509,7 +530,6 @@ static const char *getSubtargetFeatureName(uint64_t Val) {
   case Feature_HasFullFP16: return "full half-float";
   case Feature_HasDivide: return "divide in THUMB";
   case Feature_HasDivideInARM: return "divide in ARM";
-  case Feature_HasT2ExtractPack: return "pack/extract";
   case Feature_HasDSP: return "dsp";
   case Feature_HasDB: return "data-barriers";
   case Feature_HasV7Clrex: return "v7 clrex";
@@ -524,6 +544,7 @@ static const char *getSubtargetFeatureName(uint64_t Val) {
   case Feature_IsNotMClass: return "!armv*m";
   case Feature_IsARM: return "arm-mode";
   case Feature_UseNaClTrap: return "NaCl";
+  case Feature_UseNegativeImmediates: return "NegativeImmediates";
   default: return "(unknown)";
   }
 }
@@ -545,7 +566,7 @@ static void applyMnemonicAliases(StringRef &Mnemonic, uint64_t Features, unsigne
     switch (Mnemonic[0]) {
     default: break;
     case 'r':	 // 1 string to match.
-      if (memcmp(Mnemonic.data()+1, "fe", 2))
+      if (memcmp(Mnemonic.data()+1, "fe", 2) != 0)
         break;
       Mnemonic = "rfeia";	 // "rfe"
       return;
@@ -643,12 +664,12 @@ static void applyMnemonicAliases(StringRef &Mnemonic, uint64_t Features, unsigne
       switch (Mnemonic[1]) {
       default: break;
       case 'l':	 // 1 string to match.
-        if (memcmp(Mnemonic.data()+2, "dm", 2))
+        if (memcmp(Mnemonic.data()+2, "dm", 2) != 0)
           break;
         Mnemonic = "vldmia";	 // "vldm"
         return;
       case 's':	 // 1 string to match.
-        if (memcmp(Mnemonic.data()+2, "tm", 2))
+        if (memcmp(Mnemonic.data()+2, "tm", 2) != 0)
           break;
         Mnemonic = "vstmia";	 // "vstm"
         return;
@@ -663,7 +684,7 @@ static void applyMnemonicAliases(StringRef &Mnemonic, uint64_t Features, unsigne
       switch (Mnemonic[1]) {
       default: break;
       case 'a':	 // 2 strings to match.
-        if (memcmp(Mnemonic.data()+2, "dd", 2))
+        if (memcmp(Mnemonic.data()+2, "dd", 2) != 0)
           break;
         switch (Mnemonic[4]) {
         default: break;
@@ -713,7 +734,7 @@ static void applyMnemonicAliases(StringRef &Mnemonic, uint64_t Features, unsigne
         }
         break;
       case 'd':	 // 2 strings to match.
-        if (memcmp(Mnemonic.data()+2, "iv", 2))
+        if (memcmp(Mnemonic.data()+2, "iv", 2) != 0)
           break;
         switch (Mnemonic[4]) {
         default: break;
@@ -746,7 +767,7 @@ static void applyMnemonicAliases(StringRef &Mnemonic, uint64_t Features, unsigne
           }
           break;
         case 'd':	 // 1 string to match.
-          if (memcmp(Mnemonic.data()+3, "rr", 2))
+          if (memcmp(Mnemonic.data()+3, "rr", 2) != 0)
             break;
           if ((Features & Feature_HasVFP2) == Feature_HasVFP2)	 // "fmdrr"
             Mnemonic = "vmov";
@@ -793,7 +814,7 @@ static void applyMnemonicAliases(StringRef &Mnemonic, uint64_t Features, unsigne
         }
         break;
       case 'n':	 // 2 strings to match.
-        if (memcmp(Mnemonic.data()+2, "eg", 2))
+        if (memcmp(Mnemonic.data()+2, "eg", 2) != 0)
           break;
         switch (Mnemonic[4]) {
         default: break;
@@ -810,7 +831,7 @@ static void applyMnemonicAliases(StringRef &Mnemonic, uint64_t Features, unsigne
       }
       break;
     case 'l':	 // 3 strings to match.
-      if (memcmp(Mnemonic.data()+1, "dm", 2))
+      if (memcmp(Mnemonic.data()+1, "dm", 2) != 0)
         break;
       switch (Mnemonic[3]) {
       default: break;
@@ -832,7 +853,7 @@ static void applyMnemonicAliases(StringRef &Mnemonic, uint64_t Features, unsigne
       }
       break;
     case 'r':	 // 4 strings to match.
-      if (memcmp(Mnemonic.data()+1, "fe", 2))
+      if (memcmp(Mnemonic.data()+1, "fe", 2) != 0)
         break;
       switch (Mnemonic[3]) {
       default: break;
@@ -923,19 +944,19 @@ static void applyMnemonicAliases(StringRef &Mnemonic, uint64_t Features, unsigne
         switch (Mnemonic[2]) {
         default: break;
         case 'b':	 // 1 string to match.
-          if (memcmp(Mnemonic.data()+3, "sq", 2))
+          if (memcmp(Mnemonic.data()+3, "sq", 2) != 0)
             break;
           if ((Features & Feature_HasNEON) == Feature_HasNEON)	 // "vabsq"
             Mnemonic = "vabs";
           return;
         case 'd':	 // 1 string to match.
-          if (memcmp(Mnemonic.data()+3, "dq", 2))
+          if (memcmp(Mnemonic.data()+3, "dq", 2) != 0)
             break;
           if ((Features & Feature_HasNEON) == Feature_HasNEON)	 // "vaddq"
             Mnemonic = "vadd";
           return;
         case 'n':	 // 1 string to match.
-          if (memcmp(Mnemonic.data()+3, "dq", 2))
+          if (memcmp(Mnemonic.data()+3, "dq", 2) != 0)
             break;
           if ((Features & Feature_HasNEON) == Feature_HasNEON)	 // "vandq"
             Mnemonic = "vand";
@@ -943,7 +964,7 @@ static void applyMnemonicAliases(StringRef &Mnemonic, uint64_t Features, unsigne
         }
         break;
       case 'b':	 // 1 string to match.
-        if (memcmp(Mnemonic.data()+2, "icq", 3))
+        if (memcmp(Mnemonic.data()+2, "icq", 3) != 0)
           break;
         if ((Features & Feature_HasNEON) == Feature_HasNEON)	 // "vbicq"
           Mnemonic = "vbic";
@@ -952,19 +973,19 @@ static void applyMnemonicAliases(StringRef &Mnemonic, uint64_t Features, unsigne
         switch (Mnemonic[2]) {
         default: break;
         case 'e':	 // 1 string to match.
-          if (memcmp(Mnemonic.data()+3, "qq", 2))
+          if (memcmp(Mnemonic.data()+3, "qq", 2) != 0)
             break;
           if ((Features & Feature_HasNEON) == Feature_HasNEON)	 // "vceqq"
             Mnemonic = "vceq";
           return;
         case 'l':	 // 1 string to match.
-          if (memcmp(Mnemonic.data()+3, "eq", 2))
+          if (memcmp(Mnemonic.data()+3, "eq", 2) != 0)
             break;
           if ((Features & Feature_HasNEON) == Feature_HasNEON)	 // "vcleq"
             Mnemonic = "vcle";
           return;
         case 'v':	 // 1 string to match.
-          if (memcmp(Mnemonic.data()+3, "tq", 2))
+          if (memcmp(Mnemonic.data()+3, "tq", 2) != 0)
             break;
           if ((Features & Feature_HasNEON) == Feature_HasNEON)	 // "vcvtq"
             Mnemonic = "vcvt";
@@ -972,7 +993,7 @@ static void applyMnemonicAliases(StringRef &Mnemonic, uint64_t Features, unsigne
         }
         break;
       case 'e':	 // 1 string to match.
-        if (memcmp(Mnemonic.data()+2, "orq", 3))
+        if (memcmp(Mnemonic.data()+2, "orq", 3) != 0)
           break;
         if ((Features & Feature_HasNEON) == Feature_HasNEON)	 // "veorq"
           Mnemonic = "veor";
@@ -981,31 +1002,31 @@ static void applyMnemonicAliases(StringRef &Mnemonic, uint64_t Features, unsigne
         switch (Mnemonic[2]) {
         default: break;
         case 'a':	 // 1 string to match.
-          if (memcmp(Mnemonic.data()+3, "xq", 2))
+          if (memcmp(Mnemonic.data()+3, "xq", 2) != 0)
             break;
           if ((Features & Feature_HasNEON) == Feature_HasNEON)	 // "vmaxq"
             Mnemonic = "vmax";
           return;
         case 'i':	 // 1 string to match.
-          if (memcmp(Mnemonic.data()+3, "nq", 2))
+          if (memcmp(Mnemonic.data()+3, "nq", 2) != 0)
             break;
           if ((Features & Feature_HasNEON) == Feature_HasNEON)	 // "vminq"
             Mnemonic = "vmin";
           return;
         case 'o':	 // 1 string to match.
-          if (memcmp(Mnemonic.data()+3, "vq", 2))
+          if (memcmp(Mnemonic.data()+3, "vq", 2) != 0)
             break;
           if ((Features & Feature_HasNEON) == Feature_HasNEON)	 // "vmovq"
             Mnemonic = "vmov";
           return;
         case 'u':	 // 1 string to match.
-          if (memcmp(Mnemonic.data()+3, "lq", 2))
+          if (memcmp(Mnemonic.data()+3, "lq", 2) != 0)
             break;
           if ((Features & Feature_HasNEON) == Feature_HasNEON)	 // "vmulq"
             Mnemonic = "vmul";
           return;
         case 'v':	 // 1 string to match.
-          if (memcmp(Mnemonic.data()+3, "nq", 2))
+          if (memcmp(Mnemonic.data()+3, "nq", 2) != 0)
             break;
           if ((Features & Feature_HasNEON) == Feature_HasNEON)	 // "vmvnq"
             Mnemonic = "vmvn";
@@ -1013,7 +1034,7 @@ static void applyMnemonicAliases(StringRef &Mnemonic, uint64_t Features, unsigne
         }
         break;
       case 'o':	 // 1 string to match.
-        if (memcmp(Mnemonic.data()+2, "rrq", 3))
+        if (memcmp(Mnemonic.data()+2, "rrq", 3) != 0)
           break;
         if ((Features & Feature_HasNEON) == Feature_HasNEON)	 // "vorrq"
           Mnemonic = "vorr";
@@ -1039,13 +1060,13 @@ static void applyMnemonicAliases(StringRef &Mnemonic, uint64_t Features, unsigne
           }
           break;
         case 'u':	 // 1 string to match.
-          if (memcmp(Mnemonic.data()+3, "bq", 2))
+          if (memcmp(Mnemonic.data()+3, "bq", 2) != 0)
             break;
           if ((Features & Feature_HasNEON) == Feature_HasNEON)	 // "vsubq"
             Mnemonic = "vsub";
           return;
         case 'w':	 // 1 string to match.
-          if (memcmp(Mnemonic.data()+3, "pq", 2))
+          if (memcmp(Mnemonic.data()+3, "pq", 2) != 0)
             break;
           if ((Features & Feature_HasNEON) == Feature_HasNEON)	 // "vswpq"
             Mnemonic = "vswp";
@@ -1053,7 +1074,7 @@ static void applyMnemonicAliases(StringRef &Mnemonic, uint64_t Features, unsigne
         }
         break;
       case 'z':	 // 1 string to match.
-        if (memcmp(Mnemonic.data()+2, "ipq", 3))
+        if (memcmp(Mnemonic.data()+2, "ipq", 3) != 0)
           break;
         if ((Features & Feature_HasNEON) == Feature_HasNEON)	 // "vzipq"
           Mnemonic = "vzip";
@@ -1071,7 +1092,7 @@ static void applyMnemonicAliases(StringRef &Mnemonic, uint64_t Features, unsigne
       switch (Mnemonic[2]) {
       default: break;
       case 'i':	 // 2 strings to match.
-        if (memcmp(Mnemonic.data()+3, "to", 2))
+        if (memcmp(Mnemonic.data()+3, "to", 2) != 0)
           break;
         switch (Mnemonic[5]) {
         default: break;
@@ -1086,7 +1107,7 @@ static void applyMnemonicAliases(StringRef &Mnemonic, uint64_t Features, unsigne
         }
         break;
       case 'q':	 // 2 strings to match.
-        if (memcmp(Mnemonic.data()+3, "rt", 2))
+        if (memcmp(Mnemonic.data()+3, "rt", 2) != 0)
           break;
         switch (Mnemonic[5]) {
         default: break;
@@ -1140,7 +1161,7 @@ static void applyMnemonicAliases(StringRef &Mnemonic, uint64_t Features, unsigne
       }
       break;
     case 'u':	 // 2 strings to match.
-      if (memcmp(Mnemonic.data()+2, "ito", 3))
+      if (memcmp(Mnemonic.data()+2, "ito", 3) != 0)
         break;
       switch (Mnemonic[5]) {
       default: break;
@@ -1162,7 +1183,7 @@ static void applyMnemonicAliases(StringRef &Mnemonic, uint64_t Features, unsigne
     switch (Mnemonic[1]) {
     default: break;
     case 'l':	 // 10 strings to match.
-      if (memcmp(Mnemonic.data()+2, "dm", 2))
+      if (memcmp(Mnemonic.data()+2, "dm", 2) != 0)
         break;
       switch (Mnemonic[4]) {
       default: break;
@@ -1237,7 +1258,7 @@ static void applyMnemonicAliases(StringRef &Mnemonic, uint64_t Features, unsigne
       }
       break;
     case 's':	 // 10 strings to match.
-      if (memcmp(Mnemonic.data()+2, "tm", 2))
+      if (memcmp(Mnemonic.data()+2, "tm", 2) != 0)
         break;
       switch (Mnemonic[4]) {
       default: break;
@@ -1317,7 +1338,7 @@ static void applyMnemonicAliases(StringRef &Mnemonic, uint64_t Features, unsigne
       switch (Mnemonic[3]) {
       default: break;
       case 's':	 // 2 strings to match.
-        if (memcmp(Mnemonic.data()+4, "iz", 2))
+        if (memcmp(Mnemonic.data()+4, "iz", 2) != 0)
           break;
         switch (Mnemonic[6]) {
         default: break;
@@ -1332,7 +1353,7 @@ static void applyMnemonicAliases(StringRef &Mnemonic, uint64_t Features, unsigne
         }
         break;
       case 'u':	 // 2 strings to match.
-        if (memcmp(Mnemonic.data()+4, "iz", 2))
+        if (memcmp(Mnemonic.data()+4, "iz", 2) != 0)
           break;
         switch (Mnemonic[6]) {
         default: break;
@@ -1354,7 +1375,7 @@ static void applyMnemonicAliases(StringRef &Mnemonic, uint64_t Features, unsigne
     switch (Mnemonic[0]) {
     default: break;
     case 'q':	 // 1 string to match.
-      if (memcmp(Mnemonic.data()+1, "subaddx", 7))
+      if (memcmp(Mnemonic.data()+1, "subaddx", 7) != 0)
         break;
       Mnemonic = "qsax";	 // "qsubaddx"
       return;
@@ -1362,12 +1383,12 @@ static void applyMnemonicAliases(StringRef &Mnemonic, uint64_t Features, unsigne
       switch (Mnemonic[1]) {
       default: break;
       case 'a':	 // 1 string to match.
-        if (memcmp(Mnemonic.data()+2, "ddsubx", 6))
+        if (memcmp(Mnemonic.data()+2, "ddsubx", 6) != 0)
           break;
         Mnemonic = "sasx";	 // "saddsubx"
         return;
       case 's':	 // 1 string to match.
-        if (memcmp(Mnemonic.data()+2, "ubaddx", 6))
+        if (memcmp(Mnemonic.data()+2, "ubaddx", 6) != 0)
           break;
         Mnemonic = "ssax";	 // "ssubaddx"
         return;
@@ -1377,12 +1398,12 @@ static void applyMnemonicAliases(StringRef &Mnemonic, uint64_t Features, unsigne
       switch (Mnemonic[1]) {
       default: break;
       case 'a':	 // 1 string to match.
-        if (memcmp(Mnemonic.data()+2, "ddsubx", 6))
+        if (memcmp(Mnemonic.data()+2, "ddsubx", 6) != 0)
           break;
         Mnemonic = "uasx";	 // "uaddsubx"
         return;
       case 's':	 // 1 string to match.
-        if (memcmp(Mnemonic.data()+2, "ubaddx", 6))
+        if (memcmp(Mnemonic.data()+2, "ubaddx", 6) != 0)
           break;
         Mnemonic = "usax";	 // "usubaddx"
         return;
@@ -1399,12 +1420,12 @@ static void applyMnemonicAliases(StringRef &Mnemonic, uint64_t Features, unsigne
       switch (Mnemonic[2]) {
       default: break;
       case 'a':	 // 1 string to match.
-        if (memcmp(Mnemonic.data()+3, "ddsubx", 6))
+        if (memcmp(Mnemonic.data()+3, "ddsubx", 6) != 0)
           break;
         Mnemonic = "shasx";	 // "shaddsubx"
         return;
       case 's':	 // 1 string to match.
-        if (memcmp(Mnemonic.data()+3, "ubaddx", 6))
+        if (memcmp(Mnemonic.data()+3, "ubaddx", 6) != 0)
           break;
         Mnemonic = "shsax";	 // "shsubaddx"
         return;
@@ -1417,12 +1438,12 @@ static void applyMnemonicAliases(StringRef &Mnemonic, uint64_t Features, unsigne
         switch (Mnemonic[2]) {
         default: break;
         case 'a':	 // 1 string to match.
-          if (memcmp(Mnemonic.data()+3, "ddsubx", 6))
+          if (memcmp(Mnemonic.data()+3, "ddsubx", 6) != 0)
             break;
           Mnemonic = "uhasx";	 // "uhaddsubx"
           return;
         case 's':	 // 1 string to match.
-          if (memcmp(Mnemonic.data()+3, "ubaddx", 6))
+          if (memcmp(Mnemonic.data()+3, "ubaddx", 6) != 0)
             break;
           Mnemonic = "uhsax";	 // "uhsubaddx"
           return;
@@ -1432,12 +1453,12 @@ static void applyMnemonicAliases(StringRef &Mnemonic, uint64_t Features, unsigne
         switch (Mnemonic[2]) {
         default: break;
         case 'a':	 // 1 string to match.
-          if (memcmp(Mnemonic.data()+3, "ddsubx", 6))
+          if (memcmp(Mnemonic.data()+3, "ddsubx", 6) != 0)
             break;
           Mnemonic = "uqasx";	 // "uqaddsubx"
           return;
         case 's':	 // 1 string to match.
-          if (memcmp(Mnemonic.data()+3, "ubaddx", 6))
+          if (memcmp(Mnemonic.data()+3, "ubaddx", 6) != 0)
             break;
           Mnemonic = "uqsax";	 // "uqsubaddx"
           return;
@@ -1446,7 +1467,7 @@ static void applyMnemonicAliases(StringRef &Mnemonic, uint64_t Features, unsigne
       }
       break;
     case 'v':	 // 2 strings to match.
-      if (memcmp(Mnemonic.data()+1, "movq.f", 6))
+      if (memcmp(Mnemonic.data()+1, "movq.f", 6) != 0)
         break;
       switch (Mnemonic[7]) {
       default: break;
@@ -1467,18 +1488,18 @@ static void applyMnemonicAliases(StringRef &Mnemonic, uint64_t Features, unsigne
     }
     break;
   case 11:	 // 2 strings to match.
-    if (memcmp(Mnemonic.data()+0, "vrecpeq.", 8))
+    if (memcmp(Mnemonic.data()+0, "vrecpeq.", 8) != 0)
       break;
     switch (Mnemonic[8]) {
     default: break;
     case 'f':	 // 1 string to match.
-      if (memcmp(Mnemonic.data()+9, "32", 2))
+      if (memcmp(Mnemonic.data()+9, "32", 2) != 0)
         break;
       if ((Features & Feature_HasNEON) == Feature_HasNEON)	 // "vrecpeq.f32"
         Mnemonic = "vrecpe.f32";
       return;
     case 'u':	 // 1 string to match.
-      if (memcmp(Mnemonic.data()+9, "32", 2))
+      if (memcmp(Mnemonic.data()+9, "32", 2) != 0)
         break;
       if ((Features & Feature_HasNEON) == Feature_HasNEON)	 // "vrecpeq.u32"
         Mnemonic = "vrecpe.u32";
@@ -1498,20 +1519,21 @@ enum OperatorConversionKind {
   CVT_95_addCondCodeOperands,
   CVT_95_addRegShiftedRegOperands,
   CVT_95_addModImmOperands,
+  CVT_95_addModImmNotOperands,
   CVT_95_addRegShiftedImmOperands,
   CVT_95_addImmOperands,
+  CVT_95_addT2SOImmNotOperands,
   CVT_95_addImm0_95_508s4Operands,
   CVT_regSP,
   CVT_95_addImm0_95_508s4NegOperands,
   CVT_95_addImm0_95_4095NegOperands,
+  CVT_95_addThumbModImmNeg8_95_255Operands,
   CVT_95_addT2SOImmNegOperands,
   CVT_95_addModImmNegOperands,
   CVT_95_addImm0_95_1020s4Operands,
+  CVT_95_addThumbModImmNeg1_95_7Operands,
   CVT_95_addUnsignedOffset_95_b8s2Operands,
   CVT_95_addAdrLabelOperands,
-  CVT_95_addT2SOImmNotOperands,
-  CVT_95_addModImmNotOperands,
-  CVT_95_addImmThumbSROperands,
   CVT_95_addARMBranchTargetOperands,
   CVT_cvtThumbBranches,
   CVT_95_addBitfieldOperands,
@@ -1616,12 +1638,15 @@ enum InstructionConversionKind {
   Convert__Reg1_2__Reg1_2__RegShiftedReg3_3__CondCode2_1__CCOut1_0,
   Convert__Reg1_2__Reg1_2__Reg1_3__CondCode2_1__CCOut1_0,
   Convert__Reg1_2__Reg1_2__ModImm1_3__CondCode2_1__CCOut1_0,
+  Convert__Reg1_2__Reg1_2__ModImmNot1_3__CondCode2_1__CCOut1_0,
   Convert__Reg1_2__Reg1_2__RegShiftedImm2_3__CondCode2_1__CCOut1_0,
   Convert__Reg1_2__Reg1_3__Reg1_4__CondCode2_1__CCOut1_0,
   Convert__Reg1_2__Reg1_3__RegShiftedImm2_4__CondCode2_1__CCOut1_0,
   Convert__Reg1_2__Reg1_3__T2SOImm1_4__CondCode2_1__CCOut1_0,
+  Convert__Reg1_2__Reg1_3__T2SOImmNot1_4__CondCode2_1__CCOut1_0,
   Convert__Reg1_2__Reg1_3__RegShiftedReg3_4__CondCode2_1__CCOut1_0,
   Convert__Reg1_2__Reg1_3__ModImm1_4__CondCode2_1__CCOut1_0,
+  Convert__Reg1_2__Reg1_3__ModImmNot1_4__CondCode2_1__CCOut1_0,
   Convert__Reg1_3__Reg1_4__Reg1_5__CondCode2_1__CCOut1_0,
   Convert__Reg1_3__Reg1_4__RegShiftedImm2_5__CondCode2_1__CCOut1_0,
   Convert__Reg1_1__Tie0__Reg1_2__CondCode2_0,
@@ -1630,6 +1655,7 @@ enum InstructionConversionKind {
   Convert__Reg1_1__Reg1_1__Imm0_40951_2__CondCode2_0,
   Convert__Reg1_1__Reg1_1__Imm0_4095Neg1_2__CondCode2_0,
   Convert__Reg1_2__CCOut1_0__Tie0__Imm0_2551_3__CondCode2_1,
+  Convert__Reg1_2__CCOut1_0__Tie0__ThumbModImmNeg8_2551_3__CondCode2_1,
   Convert__Reg1_2__Reg1_2__T2SOImm1_3__CondCode2_1__CCOut1_0,
   Convert__Reg1_2__Reg1_2__T2SOImmNeg1_3__CondCode2_1__CCOut1_0,
   Convert__Reg1_2__Reg1_2__ModImmNeg1_3__CondCode2_1__CCOut1_0,
@@ -1643,10 +1669,12 @@ enum InstructionConversionKind {
   Convert__Reg1_3__Reg1_3__T2SOImmNeg1_4__CondCode2_1__CCOut1_0,
   Convert__Reg1_2__CCOut1_0__Reg1_3__Reg1_4__CondCode2_1,
   Convert__Reg1_2__CCOut1_0__Reg1_3__Imm0_71_4__CondCode2_1,
+  Convert__Reg1_2__CCOut1_0__Reg1_3__ThumbModImmNeg1_71_4__CondCode2_1,
   Convert__Reg1_2__Reg1_3__T2SOImmNeg1_4__CondCode2_1__CCOut1_0,
   Convert__Reg1_2__Reg1_3__ModImmNeg1_4__CondCode2_1__CCOut1_0,
   Convert__Reg1_3__Reg1_4__T2SOImm1_5__CondCode2_1__CCOut1_0,
   Convert__Reg1_3__Reg1_4__T2SOImmNeg1_5__CondCode2_1__CCOut1_0,
+  Convert__Reg1_1__Reg1_2__T2SOImmNeg1_3__CondCode2_0,
   Convert__Reg1_1__UnsignedOffset_b8s21_2__CondCode2_0,
   Convert__Reg1_1__Imm1_2__CondCode2_0,
   Convert__Reg1_1__AdrLabel1_2__CondCode2_0,
@@ -1654,12 +1682,9 @@ enum InstructionConversionKind {
   Convert__Reg1_1__Tie0__Reg1_2,
   Convert__Reg1_1__Reg1_2,
   Convert__Reg1_2__Reg1_2__T2SOImmNot1_3__CondCode2_1__CCOut1_0,
-  Convert__Reg1_2__Reg1_2__ModImmNot1_3__CondCode2_1__CCOut1_0,
   Convert__Reg1_3__Reg1_3__Reg1_4__CondCode2_1__CCOut1_0,
   Convert__Reg1_3__Reg1_3__RegShiftedImm2_4__CondCode2_1__CCOut1_0,
   Convert__Reg1_3__Reg1_3__T2SOImm1_4__CondCode2_1__CCOut1_0,
-  Convert__Reg1_2__Reg1_3__T2SOImmNot1_4__CondCode2_1__CCOut1_0,
-  Convert__Reg1_2__Reg1_3__ModImmNot1_4__CondCode2_1__CCOut1_0,
   Convert__Reg1_2__CCOut1_0__Reg1_2__ImmThumbSR1_3__CondCode2_1,
   Convert__Reg1_2__Reg1_2__ImmThumbSR1_3__CondCode2_1__CCOut1_0,
   Convert__Reg1_2__Reg1_2__Imm0_321_3__CondCode2_1__CCOut1_0,
@@ -1775,11 +1800,15 @@ enum InstructionConversionKind {
   Convert__Reg1_1__MemNoOffset1_2__Tie1__PostIdxReg2_3__CondCode2_0,
   Convert__Reg1_1__MemNoOffset1_2__Tie1__PostIdxImm81_3__CondCode2_0,
   Convert__Reg1_2__CCOut1_0__Reg1_2__Imm0_311_3__CondCode2_1,
+  Convert__Reg1_2__Reg1_2__Imm1_311_3__CondCode2_1__CCOut1_0,
   Convert__Reg1_2__Reg1_2__Imm0_311_3__CondCode2_1__CCOut1_0,
-  Convert__Reg1_3__Reg1_3__Imm0_311_4__CondCode2_1__CCOut1_0,
+  Convert__Reg1_3__Reg1_3__Imm1_311_4__CondCode2_1__CCOut1_0,
   Convert__Reg1_2__CCOut1_0__Reg1_3__Imm0_311_4__CondCode2_1,
+  Convert__Reg1_2__Reg1_3__Imm1_311_4__CondCode2_1__CCOut1_0,
+  Convert__Reg1_2__Reg1_3__CondCode2_1__CCOut1_0,
   Convert__Reg1_2__Reg1_3__Imm0_311_4__CondCode2_1__CCOut1_0,
-  Convert__Reg1_3__Reg1_4__Imm0_311_5__CondCode2_1__CCOut1_0,
+  Convert__Reg1_3__Reg1_4__Imm1_311_5__CondCode2_1__CCOut1_0,
+  Convert__Reg1_3__Reg1_4__CondCode2_1__CCOut1_0,
   Convert__CoprocNum1_1__Imm0_71_2__Reg1_3__CoprocReg1_4__CoprocReg1_5__imm_95_0__CondCode2_0,
   Convert__CoprocNum1_1__Imm0_71_2__Reg1_3__CoprocReg1_4__CoprocReg1_5__Imm0_71_6__CondCode2_0,
   Convert__CoprocNum1_0__Imm0_71_1__Reg1_2__CoprocReg1_3__CoprocReg1_4__imm_95_0,
@@ -1792,7 +1821,6 @@ enum InstructionConversionKind {
   Convert__Reg1_1__T2SOImm1_2__CondCode2_0__reg0,
   Convert__Reg1_1__T2SOImmNot1_2__CondCode2_0__reg0,
   Convert__Reg1_1__Imm0_65535Expr1_2__CondCode2_0,
-  Convert__Reg1_2__Reg1_3__CondCode2_1__CCOut1_0,
   Convert__Reg1_2__CCOut1_0__Imm0_2551_3__CondCode2_1,
   Convert__Reg1_2__ModImmNot1_3__CondCode2_1__CCOut1_0,
   Convert__Reg1_2__RegShiftedReg3_3__CondCode2_1__CCOut1_0,
@@ -1801,7 +1829,6 @@ enum InstructionConversionKind {
   Convert__Reg1_2__T2SOImm1_3__CondCode2_0__reg0,
   Convert__Reg1_2__Reg1_3__CondCode2_0__reg0,
   Convert__Reg1_3__T2SOImm1_4__CondCode2_1__CCOut1_0,
-  Convert__Reg1_3__Reg1_4__CondCode2_1__CCOut1_0,
   Convert__Reg1_0__Reg1_1,
   Convert__Reg1_0__regCPSR__Imm0_2551_1__imm_95_14__imm_95_0,
   Convert__Reg1_1__T2SOImm1_2__CondCode2_0__regCPSR,
@@ -1824,6 +1851,7 @@ enum InstructionConversionKind {
   ConvertCustom_cvtThumbMultiply,
   Convert__Reg1_2__CCOut1_0__Reg1_3__CondCode2_1,
   Convert__Reg1_2__T2SOImm1_3__CondCode2_1__CCOut1_0,
+  Convert__Reg1_2__T2SOImmNot1_3__CondCode2_1__CCOut1_0,
   Convert__Reg1_3__RegShiftedImm2_4__CondCode2_1__CCOut1_0,
   Convert__Reg1_2__Reg1_3__imm_95_0__CondCode2_1__CCOut1_0,
   Convert__regR8__regR8__imm_95_14__imm_95_0,
@@ -1842,6 +1870,8 @@ enum InstructionConversionKind {
   Convert__CondCode2_0__RegList1_1,
   Convert__regSP__Tie0__CondCode2_0__RegList1_1,
   Convert__regSP__Tie0__CondCode2_0__RegList1_2,
+  Convert__Reg1_3__Reg1_3__Imm0_311_4__CondCode2_1__CCOut1_0,
+  Convert__Reg1_3__Reg1_4__Imm0_311_5__CondCode2_1__CCOut1_0,
   Convert__Reg1_1__Reg1_2__Imm0_311_3__Imm1_321_4__CondCode2_0,
   Convert__SetEndImm1_0,
   Convert__Imm0_11_0,
@@ -2140,6 +2170,8 @@ static const uint8_t ConversionTable[CVT_NUM_SIGNATURES][17] = {
   { CVT_95_Reg, 3, CVT_95_Reg, 3, CVT_95_Reg, 4, CVT_95_addCondCodeOperands, 2, CVT_95_addCCOutOperands, 1, CVT_Done },
   // Convert__Reg1_2__Reg1_2__ModImm1_3__CondCode2_1__CCOut1_0
   { CVT_95_Reg, 3, CVT_95_Reg, 3, CVT_95_addModImmOperands, 4, CVT_95_addCondCodeOperands, 2, CVT_95_addCCOutOperands, 1, CVT_Done },
+  // Convert__Reg1_2__Reg1_2__ModImmNot1_3__CondCode2_1__CCOut1_0
+  { CVT_95_Reg, 3, CVT_95_Reg, 3, CVT_95_addModImmNotOperands, 4, CVT_95_addCondCodeOperands, 2, CVT_95_addCCOutOperands, 1, CVT_Done },
   // Convert__Reg1_2__Reg1_2__RegShiftedImm2_3__CondCode2_1__CCOut1_0
   { CVT_95_Reg, 3, CVT_95_Reg, 3, CVT_95_addRegShiftedImmOperands, 4, CVT_95_addCondCodeOperands, 2, CVT_95_addCCOutOperands, 1, CVT_Done },
   // Convert__Reg1_2__Reg1_3__Reg1_4__CondCode2_1__CCOut1_0
@@ -2148,10 +2180,14 @@ static const uint8_t ConversionTable[CVT_NUM_SIGNATURES][17] = {
   { CVT_95_Reg, 3, CVT_95_Reg, 4, CVT_95_addRegShiftedImmOperands, 5, CVT_95_addCondCodeOperands, 2, CVT_95_addCCOutOperands, 1, CVT_Done },
   // Convert__Reg1_2__Reg1_3__T2SOImm1_4__CondCode2_1__CCOut1_0
   { CVT_95_Reg, 3, CVT_95_Reg, 4, CVT_95_addImmOperands, 5, CVT_95_addCondCodeOperands, 2, CVT_95_addCCOutOperands, 1, CVT_Done },
+  // Convert__Reg1_2__Reg1_3__T2SOImmNot1_4__CondCode2_1__CCOut1_0
+  { CVT_95_Reg, 3, CVT_95_Reg, 4, CVT_95_addT2SOImmNotOperands, 5, CVT_95_addCondCodeOperands, 2, CVT_95_addCCOutOperands, 1, CVT_Done },
   // Convert__Reg1_2__Reg1_3__RegShiftedReg3_4__CondCode2_1__CCOut1_0
   { CVT_95_Reg, 3, CVT_95_Reg, 4, CVT_95_addRegShiftedRegOperands, 5, CVT_95_addCondCodeOperands, 2, CVT_95_addCCOutOperands, 1, CVT_Done },
   // Convert__Reg1_2__Reg1_3__ModImm1_4__CondCode2_1__CCOut1_0
   { CVT_95_Reg, 3, CVT_95_Reg, 4, CVT_95_addModImmOperands, 5, CVT_95_addCondCodeOperands, 2, CVT_95_addCCOutOperands, 1, CVT_Done },
+  // Convert__Reg1_2__Reg1_3__ModImmNot1_4__CondCode2_1__CCOut1_0
+  { CVT_95_Reg, 3, CVT_95_Reg, 4, CVT_95_addModImmNotOperands, 5, CVT_95_addCondCodeOperands, 2, CVT_95_addCCOutOperands, 1, CVT_Done },
   // Convert__Reg1_3__Reg1_4__Reg1_5__CondCode2_1__CCOut1_0
   { CVT_95_Reg, 4, CVT_95_Reg, 5, CVT_95_Reg, 6, CVT_95_addCondCodeOperands, 2, CVT_95_addCCOutOperands, 1, CVT_Done },
   // Convert__Reg1_3__Reg1_4__RegShiftedImm2_5__CondCode2_1__CCOut1_0
@@ -2168,6 +2204,8 @@ static const uint8_t ConversionTable[CVT_NUM_SIGNATURES][17] = {
   { CVT_95_Reg, 2, CVT_95_Reg, 2, CVT_95_addImm0_95_4095NegOperands, 3, CVT_95_addCondCodeOperands, 1, CVT_Done },
   // Convert__Reg1_2__CCOut1_0__Tie0__Imm0_2551_3__CondCode2_1
   { CVT_95_Reg, 3, CVT_95_addCCOutOperands, 1, CVT_Tied, 0, CVT_95_addImmOperands, 4, CVT_95_addCondCodeOperands, 2, CVT_Done },
+  // Convert__Reg1_2__CCOut1_0__Tie0__ThumbModImmNeg8_2551_3__CondCode2_1
+  { CVT_95_Reg, 3, CVT_95_addCCOutOperands, 1, CVT_Tied, 0, CVT_95_addThumbModImmNeg8_95_255Operands, 4, CVT_95_addCondCodeOperands, 2, CVT_Done },
   // Convert__Reg1_2__Reg1_2__T2SOImm1_3__CondCode2_1__CCOut1_0
   { CVT_95_Reg, 3, CVT_95_Reg, 3, CVT_95_addImmOperands, 4, CVT_95_addCondCodeOperands, 2, CVT_95_addCCOutOperands, 1, CVT_Done },
   // Convert__Reg1_2__Reg1_2__T2SOImmNeg1_3__CondCode2_1__CCOut1_0
@@ -2194,6 +2232,8 @@ static const uint8_t ConversionTable[CVT_NUM_SIGNATURES][17] = {
   { CVT_95_Reg, 3, CVT_95_addCCOutOperands, 1, CVT_95_Reg, 4, CVT_95_Reg, 5, CVT_95_addCondCodeOperands, 2, CVT_Done },
   // Convert__Reg1_2__CCOut1_0__Reg1_3__Imm0_71_4__CondCode2_1
   { CVT_95_Reg, 3, CVT_95_addCCOutOperands, 1, CVT_95_Reg, 4, CVT_95_addImmOperands, 5, CVT_95_addCondCodeOperands, 2, CVT_Done },
+  // Convert__Reg1_2__CCOut1_0__Reg1_3__ThumbModImmNeg1_71_4__CondCode2_1
+  { CVT_95_Reg, 3, CVT_95_addCCOutOperands, 1, CVT_95_Reg, 4, CVT_95_addThumbModImmNeg1_95_7Operands, 5, CVT_95_addCondCodeOperands, 2, CVT_Done },
   // Convert__Reg1_2__Reg1_3__T2SOImmNeg1_4__CondCode2_1__CCOut1_0
   { CVT_95_Reg, 3, CVT_95_Reg, 4, CVT_95_addT2SOImmNegOperands, 5, CVT_95_addCondCodeOperands, 2, CVT_95_addCCOutOperands, 1, CVT_Done },
   // Convert__Reg1_2__Reg1_3__ModImmNeg1_4__CondCode2_1__CCOut1_0
@@ -2202,6 +2242,8 @@ static const uint8_t ConversionTable[CVT_NUM_SIGNATURES][17] = {
   { CVT_95_Reg, 4, CVT_95_Reg, 5, CVT_95_addImmOperands, 6, CVT_95_addCondCodeOperands, 2, CVT_95_addCCOutOperands, 1, CVT_Done },
   // Convert__Reg1_3__Reg1_4__T2SOImmNeg1_5__CondCode2_1__CCOut1_0
   { CVT_95_Reg, 4, CVT_95_Reg, 5, CVT_95_addT2SOImmNegOperands, 6, CVT_95_addCondCodeOperands, 2, CVT_95_addCCOutOperands, 1, CVT_Done },
+  // Convert__Reg1_1__Reg1_2__T2SOImmNeg1_3__CondCode2_0
+  { CVT_95_Reg, 2, CVT_95_Reg, 3, CVT_95_addT2SOImmNegOperands, 4, CVT_95_addCondCodeOperands, 1, CVT_Done },
   // Convert__Reg1_1__UnsignedOffset_b8s21_2__CondCode2_0
   { CVT_95_Reg, 2, CVT_95_addUnsignedOffset_95_b8s2Operands, 3, CVT_95_addCondCodeOperands, 1, CVT_Done },
   // Convert__Reg1_1__Imm1_2__CondCode2_0
@@ -2216,34 +2258,28 @@ static const uint8_t ConversionTable[CVT_NUM_SIGNATURES][17] = {
   { CVT_95_Reg, 2, CVT_95_Reg, 3, CVT_Done },
   // Convert__Reg1_2__Reg1_2__T2SOImmNot1_3__CondCode2_1__CCOut1_0
   { CVT_95_Reg, 3, CVT_95_Reg, 3, CVT_95_addT2SOImmNotOperands, 4, CVT_95_addCondCodeOperands, 2, CVT_95_addCCOutOperands, 1, CVT_Done },
-  // Convert__Reg1_2__Reg1_2__ModImmNot1_3__CondCode2_1__CCOut1_0
-  { CVT_95_Reg, 3, CVT_95_Reg, 3, CVT_95_addModImmNotOperands, 4, CVT_95_addCondCodeOperands, 2, CVT_95_addCCOutOperands, 1, CVT_Done },
   // Convert__Reg1_3__Reg1_3__Reg1_4__CondCode2_1__CCOut1_0
   { CVT_95_Reg, 4, CVT_95_Reg, 4, CVT_95_Reg, 5, CVT_95_addCondCodeOperands, 2, CVT_95_addCCOutOperands, 1, CVT_Done },
   // Convert__Reg1_3__Reg1_3__RegShiftedImm2_4__CondCode2_1__CCOut1_0
   { CVT_95_Reg, 4, CVT_95_Reg, 4, CVT_95_addRegShiftedImmOperands, 5, CVT_95_addCondCodeOperands, 2, CVT_95_addCCOutOperands, 1, CVT_Done },
   // Convert__Reg1_3__Reg1_3__T2SOImm1_4__CondCode2_1__CCOut1_0
   { CVT_95_Reg, 4, CVT_95_Reg, 4, CVT_95_addImmOperands, 5, CVT_95_addCondCodeOperands, 2, CVT_95_addCCOutOperands, 1, CVT_Done },
-  // Convert__Reg1_2__Reg1_3__T2SOImmNot1_4__CondCode2_1__CCOut1_0
-  { CVT_95_Reg, 3, CVT_95_Reg, 4, CVT_95_addT2SOImmNotOperands, 5, CVT_95_addCondCodeOperands, 2, CVT_95_addCCOutOperands, 1, CVT_Done },
-  // Convert__Reg1_2__Reg1_3__ModImmNot1_4__CondCode2_1__CCOut1_0
-  { CVT_95_Reg, 3, CVT_95_Reg, 4, CVT_95_addModImmNotOperands, 5, CVT_95_addCondCodeOperands, 2, CVT_95_addCCOutOperands, 1, CVT_Done },
   // Convert__Reg1_2__CCOut1_0__Reg1_2__ImmThumbSR1_3__CondCode2_1
-  { CVT_95_Reg, 3, CVT_95_addCCOutOperands, 1, CVT_95_Reg, 3, CVT_95_addImmThumbSROperands, 4, CVT_95_addCondCodeOperands, 2, CVT_Done },
+  { CVT_95_Reg, 3, CVT_95_addCCOutOperands, 1, CVT_95_Reg, 3, CVT_95_addImmOperands, 4, CVT_95_addCondCodeOperands, 2, CVT_Done },
   // Convert__Reg1_2__Reg1_2__ImmThumbSR1_3__CondCode2_1__CCOut1_0
-  { CVT_95_Reg, 3, CVT_95_Reg, 3, CVT_95_addImmThumbSROperands, 4, CVT_95_addCondCodeOperands, 2, CVT_95_addCCOutOperands, 1, CVT_Done },
+  { CVT_95_Reg, 3, CVT_95_Reg, 3, CVT_95_addImmOperands, 4, CVT_95_addCondCodeOperands, 2, CVT_95_addCCOutOperands, 1, CVT_Done },
   // Convert__Reg1_2__Reg1_2__Imm0_321_3__CondCode2_1__CCOut1_0
   { CVT_95_Reg, 3, CVT_95_Reg, 3, CVT_95_addImmOperands, 4, CVT_95_addCondCodeOperands, 2, CVT_95_addCCOutOperands, 1, CVT_Done },
   // Convert__Reg1_3__Reg1_3__ImmThumbSR1_4__CondCode2_1__CCOut1_0
-  { CVT_95_Reg, 4, CVT_95_Reg, 4, CVT_95_addImmThumbSROperands, 5, CVT_95_addCondCodeOperands, 2, CVT_95_addCCOutOperands, 1, CVT_Done },
+  { CVT_95_Reg, 4, CVT_95_Reg, 4, CVT_95_addImmOperands, 5, CVT_95_addCondCodeOperands, 2, CVT_95_addCCOutOperands, 1, CVT_Done },
   // Convert__Reg1_2__CCOut1_0__Reg1_3__ImmThumbSR1_4__CondCode2_1
-  { CVT_95_Reg, 3, CVT_95_addCCOutOperands, 1, CVT_95_Reg, 4, CVT_95_addImmThumbSROperands, 5, CVT_95_addCondCodeOperands, 2, CVT_Done },
+  { CVT_95_Reg, 3, CVT_95_addCCOutOperands, 1, CVT_95_Reg, 4, CVT_95_addImmOperands, 5, CVT_95_addCondCodeOperands, 2, CVT_Done },
   // Convert__Reg1_2__Reg1_3__ImmThumbSR1_4__CondCode2_1__CCOut1_0
-  { CVT_95_Reg, 3, CVT_95_Reg, 4, CVT_95_addImmThumbSROperands, 5, CVT_95_addCondCodeOperands, 2, CVT_95_addCCOutOperands, 1, CVT_Done },
+  { CVT_95_Reg, 3, CVT_95_Reg, 4, CVT_95_addImmOperands, 5, CVT_95_addCondCodeOperands, 2, CVT_95_addCCOutOperands, 1, CVT_Done },
   // Convert__Reg1_2__Reg1_3__Imm0_321_4__CondCode2_1__CCOut1_0
   { CVT_95_Reg, 3, CVT_95_Reg, 4, CVT_95_addImmOperands, 5, CVT_95_addCondCodeOperands, 2, CVT_95_addCCOutOperands, 1, CVT_Done },
   // Convert__Reg1_3__Reg1_4__ImmThumbSR1_5__CondCode2_1__CCOut1_0
-  { CVT_95_Reg, 4, CVT_95_Reg, 5, CVT_95_addImmThumbSROperands, 6, CVT_95_addCondCodeOperands, 2, CVT_95_addCCOutOperands, 1, CVT_Done },
+  { CVT_95_Reg, 4, CVT_95_Reg, 5, CVT_95_addImmOperands, 6, CVT_95_addCondCodeOperands, 2, CVT_95_addCCOutOperands, 1, CVT_Done },
   // Convert__ARMBranchTarget1_1__CondCode2_0
   { CVT_95_addARMBranchTargetOperands, 2, CVT_95_addCondCodeOperands, 1, CVT_Done },
   // ConvertCustom_cvtThumbBranches
@@ -2458,16 +2494,24 @@ static const uint8_t ConversionTable[CVT_NUM_SIGNATURES][17] = {
   { CVT_95_Reg, 2, CVT_95_addMemNoOffsetOperands, 3, CVT_Tied, 1, CVT_95_addPostIdxImm8Operands, 4, CVT_95_addCondCodeOperands, 1, CVT_Done },
   // Convert__Reg1_2__CCOut1_0__Reg1_2__Imm0_311_3__CondCode2_1
   { CVT_95_Reg, 3, CVT_95_addCCOutOperands, 1, CVT_95_Reg, 3, CVT_95_addImmOperands, 4, CVT_95_addCondCodeOperands, 2, CVT_Done },
+  // Convert__Reg1_2__Reg1_2__Imm1_311_3__CondCode2_1__CCOut1_0
+  { CVT_95_Reg, 3, CVT_95_Reg, 3, CVT_95_addImmOperands, 4, CVT_95_addCondCodeOperands, 2, CVT_95_addCCOutOperands, 1, CVT_Done },
   // Convert__Reg1_2__Reg1_2__Imm0_311_3__CondCode2_1__CCOut1_0
   { CVT_95_Reg, 3, CVT_95_Reg, 3, CVT_95_addImmOperands, 4, CVT_95_addCondCodeOperands, 2, CVT_95_addCCOutOperands, 1, CVT_Done },
-  // Convert__Reg1_3__Reg1_3__Imm0_311_4__CondCode2_1__CCOut1_0
+  // Convert__Reg1_3__Reg1_3__Imm1_311_4__CondCode2_1__CCOut1_0
   { CVT_95_Reg, 4, CVT_95_Reg, 4, CVT_95_addImmOperands, 5, CVT_95_addCondCodeOperands, 2, CVT_95_addCCOutOperands, 1, CVT_Done },
   // Convert__Reg1_2__CCOut1_0__Reg1_3__Imm0_311_4__CondCode2_1
   { CVT_95_Reg, 3, CVT_95_addCCOutOperands, 1, CVT_95_Reg, 4, CVT_95_addImmOperands, 5, CVT_95_addCondCodeOperands, 2, CVT_Done },
+  // Convert__Reg1_2__Reg1_3__Imm1_311_4__CondCode2_1__CCOut1_0
+  { CVT_95_Reg, 3, CVT_95_Reg, 4, CVT_95_addImmOperands, 5, CVT_95_addCondCodeOperands, 2, CVT_95_addCCOutOperands, 1, CVT_Done },
+  // Convert__Reg1_2__Reg1_3__CondCode2_1__CCOut1_0
+  { CVT_95_Reg, 3, CVT_95_Reg, 4, CVT_95_addCondCodeOperands, 2, CVT_95_addCCOutOperands, 1, CVT_Done },
   // Convert__Reg1_2__Reg1_3__Imm0_311_4__CondCode2_1__CCOut1_0
   { CVT_95_Reg, 3, CVT_95_Reg, 4, CVT_95_addImmOperands, 5, CVT_95_addCondCodeOperands, 2, CVT_95_addCCOutOperands, 1, CVT_Done },
-  // Convert__Reg1_3__Reg1_4__Imm0_311_5__CondCode2_1__CCOut1_0
+  // Convert__Reg1_3__Reg1_4__Imm1_311_5__CondCode2_1__CCOut1_0
   { CVT_95_Reg, 4, CVT_95_Reg, 5, CVT_95_addImmOperands, 6, CVT_95_addCondCodeOperands, 2, CVT_95_addCCOutOperands, 1, CVT_Done },
+  // Convert__Reg1_3__Reg1_4__CondCode2_1__CCOut1_0
+  { CVT_95_Reg, 4, CVT_95_Reg, 5, CVT_95_addCondCodeOperands, 2, CVT_95_addCCOutOperands, 1, CVT_Done },
   // Convert__CoprocNum1_1__Imm0_71_2__Reg1_3__CoprocReg1_4__CoprocReg1_5__imm_95_0__CondCode2_0
   { CVT_95_addCoprocNumOperands, 2, CVT_95_addImmOperands, 3, CVT_95_Reg, 4, CVT_95_addCoprocRegOperands, 5, CVT_95_addCoprocRegOperands, 6, CVT_imm_95_0, 0, CVT_95_addCondCodeOperands, 1, CVT_Done },
   // Convert__CoprocNum1_1__Imm0_71_2__Reg1_3__CoprocReg1_4__CoprocReg1_5__Imm0_71_6__CondCode2_0
@@ -2492,8 +2536,6 @@ static const uint8_t ConversionTable[CVT_NUM_SIGNATURES][17] = {
   { CVT_95_Reg, 2, CVT_95_addT2SOImmNotOperands, 3, CVT_95_addCondCodeOperands, 1, CVT_reg0, 0, CVT_Done },
   // Convert__Reg1_1__Imm0_65535Expr1_2__CondCode2_0
   { CVT_95_Reg, 2, CVT_95_addImmOperands, 3, CVT_95_addCondCodeOperands, 1, CVT_Done },
-  // Convert__Reg1_2__Reg1_3__CondCode2_1__CCOut1_0
-  { CVT_95_Reg, 3, CVT_95_Reg, 4, CVT_95_addCondCodeOperands, 2, CVT_95_addCCOutOperands, 1, CVT_Done },
   // Convert__Reg1_2__CCOut1_0__Imm0_2551_3__CondCode2_1
   { CVT_95_Reg, 3, CVT_95_addCCOutOperands, 1, CVT_95_addImmOperands, 4, CVT_95_addCondCodeOperands, 2, CVT_Done },
   // Convert__Reg1_2__ModImmNot1_3__CondCode2_1__CCOut1_0
@@ -2510,8 +2552,6 @@ static const uint8_t ConversionTable[CVT_NUM_SIGNATURES][17] = {
   { CVT_95_Reg, 3, CVT_95_Reg, 4, CVT_95_addCondCodeOperands, 1, CVT_reg0, 0, CVT_Done },
   // Convert__Reg1_3__T2SOImm1_4__CondCode2_1__CCOut1_0
   { CVT_95_Reg, 4, CVT_95_addImmOperands, 5, CVT_95_addCondCodeOperands, 2, CVT_95_addCCOutOperands, 1, CVT_Done },
-  // Convert__Reg1_3__Reg1_4__CondCode2_1__CCOut1_0
-  { CVT_95_Reg, 4, CVT_95_Reg, 5, CVT_95_addCondCodeOperands, 2, CVT_95_addCCOutOperands, 1, CVT_Done },
   // Convert__Reg1_0__Reg1_1
   { CVT_95_Reg, 1, CVT_95_Reg, 2, CVT_Done },
   // Convert__Reg1_0__regCPSR__Imm0_2551_1__imm_95_14__imm_95_0
@@ -2556,6 +2596,8 @@ static const uint8_t ConversionTable[CVT_NUM_SIGNATURES][17] = {
   { CVT_95_Reg, 3, CVT_95_addCCOutOperands, 1, CVT_95_Reg, 4, CVT_95_addCondCodeOperands, 2, CVT_Done },
   // Convert__Reg1_2__T2SOImm1_3__CondCode2_1__CCOut1_0
   { CVT_95_Reg, 3, CVT_95_addImmOperands, 4, CVT_95_addCondCodeOperands, 2, CVT_95_addCCOutOperands, 1, CVT_Done },
+  // Convert__Reg1_2__T2SOImmNot1_3__CondCode2_1__CCOut1_0
+  { CVT_95_Reg, 3, CVT_95_addT2SOImmNotOperands, 4, CVT_95_addCondCodeOperands, 2, CVT_95_addCCOutOperands, 1, CVT_Done },
   // Convert__Reg1_3__RegShiftedImm2_4__CondCode2_1__CCOut1_0
   { CVT_95_Reg, 4, CVT_95_addRegShiftedImmOperands, 5, CVT_95_addCondCodeOperands, 2, CVT_95_addCCOutOperands, 1, CVT_Done },
   // Convert__Reg1_2__Reg1_3__imm_95_0__CondCode2_1__CCOut1_0
@@ -2592,6 +2634,10 @@ static const uint8_t ConversionTable[CVT_NUM_SIGNATURES][17] = {
   { CVT_regSP, 0, CVT_Tied, 0, CVT_95_addCondCodeOperands, 1, CVT_95_addRegListOperands, 2, CVT_Done },
   // Convert__regSP__Tie0__CondCode2_0__RegList1_2
   { CVT_regSP, 0, CVT_Tied, 0, CVT_95_addCondCodeOperands, 1, CVT_95_addRegListOperands, 3, CVT_Done },
+  // Convert__Reg1_3__Reg1_3__Imm0_311_4__CondCode2_1__CCOut1_0
+  { CVT_95_Reg, 4, CVT_95_Reg, 4, CVT_95_addImmOperands, 5, CVT_95_addCondCodeOperands, 2, CVT_95_addCCOutOperands, 1, CVT_Done },
+  // Convert__Reg1_3__Reg1_4__Imm0_311_5__CondCode2_1__CCOut1_0
+  { CVT_95_Reg, 4, CVT_95_Reg, 5, CVT_95_addImmOperands, 6, CVT_95_addCondCodeOperands, 2, CVT_95_addCCOutOperands, 1, CVT_Done },
   // Convert__Reg1_1__Reg1_2__Imm0_311_3__Imm1_321_4__CondCode2_0
   { CVT_95_Reg, 2, CVT_95_Reg, 3, CVT_95_addImmOperands, 4, CVT_95_addImm1_95_32Operands, 5, CVT_95_addCondCodeOperands, 1, CVT_Done },
   // Convert__SetEndImm1_0
@@ -3190,11 +3236,17 @@ convertToMCInst(unsigned Kind, MCInst &Inst, unsigned Opcode,
     case CVT_95_addModImmOperands:
       static_cast<ARMOperand&>(*Operands[OpIdx]).addModImmOperands(Inst, 1);
       break;
+    case CVT_95_addModImmNotOperands:
+      static_cast<ARMOperand&>(*Operands[OpIdx]).addModImmNotOperands(Inst, 1);
+      break;
     case CVT_95_addRegShiftedImmOperands:
       static_cast<ARMOperand&>(*Operands[OpIdx]).addRegShiftedImmOperands(Inst, 2);
       break;
     case CVT_95_addImmOperands:
       static_cast<ARMOperand&>(*Operands[OpIdx]).addImmOperands(Inst, 1);
+      break;
+    case CVT_95_addT2SOImmNotOperands:
+      static_cast<ARMOperand&>(*Operands[OpIdx]).addT2SOImmNotOperands(Inst, 1);
       break;
     case CVT_95_addImm0_95_508s4Operands:
       static_cast<ARMOperand&>(*Operands[OpIdx]).addImm0_508s4Operands(Inst, 1);
@@ -3208,6 +3260,9 @@ convertToMCInst(unsigned Kind, MCInst &Inst, unsigned Opcode,
     case CVT_95_addImm0_95_4095NegOperands:
       static_cast<ARMOperand&>(*Operands[OpIdx]).addImm0_4095NegOperands(Inst, 1);
       break;
+    case CVT_95_addThumbModImmNeg8_95_255Operands:
+      static_cast<ARMOperand&>(*Operands[OpIdx]).addThumbModImmNeg8_255Operands(Inst, 1);
+      break;
     case CVT_95_addT2SOImmNegOperands:
       static_cast<ARMOperand&>(*Operands[OpIdx]).addT2SOImmNegOperands(Inst, 1);
       break;
@@ -3217,20 +3272,14 @@ convertToMCInst(unsigned Kind, MCInst &Inst, unsigned Opcode,
     case CVT_95_addImm0_95_1020s4Operands:
       static_cast<ARMOperand&>(*Operands[OpIdx]).addImm0_1020s4Operands(Inst, 1);
       break;
+    case CVT_95_addThumbModImmNeg1_95_7Operands:
+      static_cast<ARMOperand&>(*Operands[OpIdx]).addThumbModImmNeg1_7Operands(Inst, 1);
+      break;
     case CVT_95_addUnsignedOffset_95_b8s2Operands:
       static_cast<ARMOperand&>(*Operands[OpIdx]).addUnsignedOffset_b8s2Operands(Inst, 1);
       break;
     case CVT_95_addAdrLabelOperands:
       static_cast<ARMOperand&>(*Operands[OpIdx]).addAdrLabelOperands(Inst, 1);
-      break;
-    case CVT_95_addT2SOImmNotOperands:
-      static_cast<ARMOperand&>(*Operands[OpIdx]).addT2SOImmNotOperands(Inst, 1);
-      break;
-    case CVT_95_addModImmNotOperands:
-      static_cast<ARMOperand&>(*Operands[OpIdx]).addModImmNotOperands(Inst, 1);
-      break;
-    case CVT_95_addImmThumbSROperands:
-      static_cast<ARMOperand&>(*Operands[OpIdx]).addImmThumbSROperands(Inst, 1);
       break;
     case CVT_95_addARMBranchTargetOperands:
       static_cast<ARMOperand&>(*Operands[OpIdx]).addARMBranchTargetOperands(Inst, 1);
@@ -3563,12 +3612,22 @@ convertToMapAndConstraints(unsigned Kind,
       Operands[*(p + 1)]->setConstraint("m");
       NumMCOperands += 1;
       break;
+    case CVT_95_addModImmNotOperands:
+      Operands[*(p + 1)]->setMCOperandNum(NumMCOperands);
+      Operands[*(p + 1)]->setConstraint("m");
+      NumMCOperands += 1;
+      break;
     case CVT_95_addRegShiftedImmOperands:
       Operands[*(p + 1)]->setMCOperandNum(NumMCOperands);
       Operands[*(p + 1)]->setConstraint("m");
       NumMCOperands += 2;
       break;
     case CVT_95_addImmOperands:
+      Operands[*(p + 1)]->setMCOperandNum(NumMCOperands);
+      Operands[*(p + 1)]->setConstraint("m");
+      NumMCOperands += 1;
+      break;
+    case CVT_95_addT2SOImmNotOperands:
       Operands[*(p + 1)]->setMCOperandNum(NumMCOperands);
       Operands[*(p + 1)]->setConstraint("m");
       NumMCOperands += 1;
@@ -3593,6 +3652,11 @@ convertToMapAndConstraints(unsigned Kind,
       Operands[*(p + 1)]->setConstraint("m");
       NumMCOperands += 1;
       break;
+    case CVT_95_addThumbModImmNeg8_95_255Operands:
+      Operands[*(p + 1)]->setMCOperandNum(NumMCOperands);
+      Operands[*(p + 1)]->setConstraint("m");
+      NumMCOperands += 1;
+      break;
     case CVT_95_addT2SOImmNegOperands:
       Operands[*(p + 1)]->setMCOperandNum(NumMCOperands);
       Operands[*(p + 1)]->setConstraint("m");
@@ -3608,27 +3672,17 @@ convertToMapAndConstraints(unsigned Kind,
       Operands[*(p + 1)]->setConstraint("m");
       NumMCOperands += 1;
       break;
+    case CVT_95_addThumbModImmNeg1_95_7Operands:
+      Operands[*(p + 1)]->setMCOperandNum(NumMCOperands);
+      Operands[*(p + 1)]->setConstraint("m");
+      NumMCOperands += 1;
+      break;
     case CVT_95_addUnsignedOffset_95_b8s2Operands:
       Operands[*(p + 1)]->setMCOperandNum(NumMCOperands);
       Operands[*(p + 1)]->setConstraint("m");
       NumMCOperands += 1;
       break;
     case CVT_95_addAdrLabelOperands:
-      Operands[*(p + 1)]->setMCOperandNum(NumMCOperands);
-      Operands[*(p + 1)]->setConstraint("m");
-      NumMCOperands += 1;
-      break;
-    case CVT_95_addT2SOImmNotOperands:
-      Operands[*(p + 1)]->setMCOperandNum(NumMCOperands);
-      Operands[*(p + 1)]->setConstraint("m");
-      NumMCOperands += 1;
-      break;
-    case CVT_95_addModImmNotOperands:
-      Operands[*(p + 1)]->setMCOperandNum(NumMCOperands);
-      Operands[*(p + 1)]->setConstraint("m");
-      NumMCOperands += 1;
-      break;
-    case CVT_95_addImmThumbSROperands:
       Operands[*(p + 1)]->setMCOperandNum(NumMCOperands);
       Operands[*(p + 1)]->setConstraint("m");
       NumMCOperands += 1;
@@ -4297,6 +4351,7 @@ enum MatchClassKind {
   MCK_Imm256_65535Expr, // user defined class 'Imm256_65535ExprAsmOperand'
   MCK_Imm32, // user defined class 'Imm32AsmOperand'
   MCK_Imm8, // user defined class 'Imm8AsmOperand'
+  MCK_Imm8_255, // user defined class 'Imm8_255AsmOperand'
   MCK_Imm, // user defined class 'ImmAsmOperand'
   MCK_InstSyncBarrierOpt, // user defined class 'InstSyncBarrierOptOperand'
   MCK_MSRMask, // user defined class 'MSRMaskOperand'
@@ -4328,6 +4383,8 @@ enum MatchClassKind {
   MCK_ShifterImm, // user defined class 'ShifterImmAsmOperand'
   MCK_ThumbBranchTarget, // user defined class 'ThumbBranchTarget'
   MCK_ThumbMemPC, // user defined class 'ThumbMemPC'
+  MCK_ThumbModImmNeg1_7, // user defined class 'ThumbModImmNeg1_7AsmOperand'
+  MCK_ThumbModImmNeg8_255, // user defined class 'ThumbModImmNeg8_255AsmOperand'
   MCK_ImmThumbSR, // user defined class 'ThumbSRImmAsmOperand'
   MCK_UnsignedOffset_b8s2, // user defined class 'UnsignedOffset_b8s2'
   MCK_VecListDPairAllLanes, // user defined class 'VecListDPairAllLanesAsmOperand'
@@ -5578,49 +5635,49 @@ static unsigned validateOperandClass(MCParsedAsmOperand &GOp, MatchClassKind Kin
     break;
   // 'Imm0_15' class
   case MCK_Imm0_15:
-    if (Operand.isImm0_15())
+    if (Operand.isImmediate<0,15>())
       return MCTargetAsmParser::Match_Success;
     return ARMAsmParser::Match_ImmRange0_15;
   // 'Imm0_1' class
   case MCK_Imm0_1:
-    if (Operand.isImm0_1())
+    if (Operand.isImmediate<0,1>())
       return MCTargetAsmParser::Match_Success;
-    break;
+    return ARMAsmParser::Match_ImmRange0_1;
   // 'Imm0_239' class
   case MCK_Imm0_239:
-    if (Operand.isImm0_239())
+    if (Operand.isImmediate<0,239>())
       return MCTargetAsmParser::Match_Success;
     return ARMAsmParser::Match_ImmRange0_239;
   // 'Imm0_255' class
   case MCK_Imm0_255:
-    if (Operand.isImm0_255())
+    if (Operand.isImmediate<0,255>())
       return MCTargetAsmParser::Match_Success;
-    break;
+    return ARMAsmParser::Match_ImmRange0_255;
   // 'Imm0_31' class
   case MCK_Imm0_31:
-    if (Operand.isImm0_31())
+    if (Operand.isImmediate<0,31>())
       return MCTargetAsmParser::Match_Success;
-    break;
+    return ARMAsmParser::Match_ImmRange0_31;
   // 'Imm0_32' class
   case MCK_Imm0_32:
-    if (Operand.isImm0_32())
+    if (Operand.isImmediate<0,32>())
       return MCTargetAsmParser::Match_Success;
-    break;
+    return ARMAsmParser::Match_ImmRange0_32;
   // 'Imm0_3' class
   case MCK_Imm0_3:
-    if (Operand.isImm0_3())
+    if (Operand.isImmediate<0,3>())
       return MCTargetAsmParser::Match_Success;
-    break;
+    return ARMAsmParser::Match_ImmRange0_3;
   // 'Imm0_63' class
   case MCK_Imm0_63:
-    if (Operand.isImm0_63())
+    if (Operand.isImmediate<0,63>())
       return MCTargetAsmParser::Match_Success;
-    break;
+    return ARMAsmParser::Match_ImmRange0_63;
   // 'Imm0_65535' class
   case MCK_Imm0_65535:
-    if (Operand.isImm0_65535())
+    if (Operand.isImmediate<0,65535>())
       return MCTargetAsmParser::Match_Success;
-    break;
+    return ARMAsmParser::Match_ImmRange0_65535;
   // 'Imm0_65535Expr' class
   case MCK_Imm0_65535Expr:
     if (Operand.isImm0_65535Expr())
@@ -5628,59 +5685,64 @@ static unsigned validateOperandClass(MCParsedAsmOperand &GOp, MatchClassKind Kin
     break;
   // 'Imm0_7' class
   case MCK_Imm0_7:
-    if (Operand.isImm0_7())
+    if (Operand.isImmediate<0,7>())
       return MCTargetAsmParser::Match_Success;
-    break;
+    return ARMAsmParser::Match_ImmRange0_7;
   // 'Imm16' class
   case MCK_Imm16:
-    if (Operand.isImm16())
+    if (Operand.isImmediate<16,16>())
       return MCTargetAsmParser::Match_Success;
-    break;
+    return ARMAsmParser::Match_ImmRange16_16;
   // 'Imm1_15' class
   case MCK_Imm1_15:
-    if (Operand.isImm1_15())
+    if (Operand.isImmediate<1,15>())
       return MCTargetAsmParser::Match_Success;
-    break;
+    return ARMAsmParser::Match_ImmRange1_15;
   // 'Imm1_16' class
   case MCK_Imm1_16:
-    if (Operand.isImm1_16())
+    if (Operand.isImmediate<1,16>())
       return MCTargetAsmParser::Match_Success;
-    break;
+    return ARMAsmParser::Match_ImmRange1_16;
   // 'Imm1_31' class
   case MCK_Imm1_31:
-    if (Operand.isImm1_31())
+    if (Operand.isImmediate<1,31>())
       return MCTargetAsmParser::Match_Success;
-    break;
+    return ARMAsmParser::Match_ImmRange1_31;
   // 'Imm1_32' class
   case MCK_Imm1_32:
-    if (Operand.isImm1_32())
+    if (Operand.isImmediate<1,32>())
       return MCTargetAsmParser::Match_Success;
-    break;
+    return ARMAsmParser::Match_ImmRange1_32;
   // 'Imm1_7' class
   case MCK_Imm1_7:
-    if (Operand.isImm1_7())
+    if (Operand.isImmediate<1,7>())
       return MCTargetAsmParser::Match_Success;
-    break;
+    return ARMAsmParser::Match_ImmRange1_7;
   // 'Imm24bit' class
   case MCK_Imm24bit:
-    if (Operand.isImm24bit())
+    if (Operand.isImmediate<0,16777215>())
       return MCTargetAsmParser::Match_Success;
-    break;
+    return ARMAsmParser::Match_ImmRange0_16777215;
   // 'Imm256_65535Expr' class
   case MCK_Imm256_65535Expr:
-    if (Operand.isImm256_65535Expr())
+    if (Operand.isImmediate<256,65535>())
       return MCTargetAsmParser::Match_Success;
-    break;
+    return ARMAsmParser::Match_ImmRange256_65535;
   // 'Imm32' class
   case MCK_Imm32:
-    if (Operand.isImm32())
+    if (Operand.isImmediate<32,32>())
       return MCTargetAsmParser::Match_Success;
-    break;
+    return ARMAsmParser::Match_ImmRange32_32;
   // 'Imm8' class
   case MCK_Imm8:
-    if (Operand.isImm8())
+    if (Operand.isImmediate<8,8>())
       return MCTargetAsmParser::Match_Success;
-    break;
+    return ARMAsmParser::Match_ImmRange8_8;
+  // 'Imm8_255' class
+  case MCK_Imm8_255:
+    if (Operand.isImmediate<8,255>())
+      return MCTargetAsmParser::Match_Success;
+    return ARMAsmParser::Match_ImmRange8_255;
   // 'Imm' class
   case MCK_Imm:
     if (Operand.isImm())
@@ -5763,9 +5825,9 @@ static unsigned validateOperandClass(MCParsedAsmOperand &GOp, MatchClassKind Kin
     break;
   // 'PKHLSLImm' class
   case MCK_PKHLSLImm:
-    if (Operand.isPKHLSLImm())
+    if (Operand.isImmediate<0,31>())
       return MCTargetAsmParser::Match_Success;
-    break;
+    return ARMAsmParser::Match_ImmRange0_31;
   // 'PostIdxImm8' class
   case MCK_PostIdxImm8:
     if (Operand.isPostIdxImm8())
@@ -5808,9 +5870,9 @@ static unsigned validateOperandClass(MCParsedAsmOperand &GOp, MatchClassKind Kin
     break;
   // 'SetEndImm' class
   case MCK_SetEndImm:
-    if (Operand.isSetEndImm())
+    if (Operand.isImmediate<0,1>())
       return MCTargetAsmParser::Match_Success;
-    break;
+    return ARMAsmParser::Match_ImmRange0_1;
   // 'RegShiftedImm' class
   case MCK_RegShiftedImm:
     if (Operand.isRegShiftedImm())
@@ -5836,11 +5898,21 @@ static unsigned validateOperandClass(MCParsedAsmOperand &GOp, MatchClassKind Kin
     if (Operand.isThumbMemPC())
       return MCTargetAsmParser::Match_Success;
     break;
-  // 'ImmThumbSR' class
-  case MCK_ImmThumbSR:
-    if (Operand.isImmThumbSR())
+  // 'ThumbModImmNeg1_7' class
+  case MCK_ThumbModImmNeg1_7:
+    if (Operand.isThumbModImmNeg1_7())
       return MCTargetAsmParser::Match_Success;
     break;
+  // 'ThumbModImmNeg8_255' class
+  case MCK_ThumbModImmNeg8_255:
+    if (Operand.isThumbModImmNeg8_255())
+      return MCTargetAsmParser::Match_Success;
+    break;
+  // 'ImmThumbSR' class
+  case MCK_ImmThumbSR:
+    if (Operand.isImmediate<1,32>())
+      return MCTargetAsmParser::Match_Success;
+    return ARMAsmParser::Match_ImmRange1_32;
   // 'UnsignedOffset_b8s2' class
   case MCK_UnsignedOffset_b8s2:
     if (Operand.isUnsignedOffset<8, 2>())
@@ -6048,9 +6120,9 @@ static unsigned validateOperandClass(MCParsedAsmOperand &GOp, MatchClassKind Kin
     break;
   // 'Imm0_4095' class
   case MCK_Imm0_4095:
-    if (Operand.isImm0_4095())
+    if (Operand.isImmediate<0,4095>())
       return MCTargetAsmParser::Match_Success;
-    break;
+    return ARMAsmParser::Match_ImmRange0_4095;
   // 'Imm0_4095Neg' class
   case MCK_Imm0_4095Neg:
     if (Operand.isImm0_4095Neg())
@@ -6128,24 +6200,24 @@ static unsigned validateOperandClass(MCParsedAsmOperand &GOp, MatchClassKind Kin
     break;
   // 'ShrImm16' class
   case MCK_ShrImm16:
-    if (Operand.isShrImm16())
+    if (Operand.isImmediate<1,16>())
       return MCTargetAsmParser::Match_Success;
-    break;
+    return ARMAsmParser::Match_ImmRange1_16;
   // 'ShrImm32' class
   case MCK_ShrImm32:
-    if (Operand.isShrImm32())
+    if (Operand.isImmediate<1,32>())
       return MCTargetAsmParser::Match_Success;
-    break;
+    return ARMAsmParser::Match_ImmRange1_32;
   // 'ShrImm64' class
   case MCK_ShrImm64:
-    if (Operand.isShrImm64())
+    if (Operand.isImmediate<1,64>())
       return MCTargetAsmParser::Match_Success;
-    break;
+    return ARMAsmParser::Match_ImmRange1_64;
   // 'ShrImm8' class
   case MCK_ShrImm8:
-    if (Operand.isShrImm8())
+    if (Operand.isImmediate<1,8>())
       return MCTargetAsmParser::Match_Success;
-    break;
+    return ARMAsmParser::Match_ImmRange1_8;
   // 'T2SOImm' class
   case MCK_T2SOImm:
     if (Operand.isT2SOImm())
@@ -6552,8 +6624,6 @@ ComputeAvailableFeatures(const FeatureBitset& FB) const {
     Features |= Feature_HasDivide;
   if ((FB[ARM::FeatureHWDivARM]))
     Features |= Feature_HasDivideInARM;
-  if ((FB[ARM::FeatureT2XtPk]))
-    Features |= Feature_HasT2ExtractPack;
   if ((FB[ARM::FeatureDSP]))
     Features |= Feature_HasDSP;
   if ((FB[ARM::FeatureDB]))
@@ -6582,6 +6652,8 @@ ComputeAvailableFeatures(const FeatureBitset& FB) const {
     Features |= Feature_IsARM;
   if ((FB[ARM::FeatureNaClTrap]))
     Features |= Feature_UseNaClTrap;
+  if ((!FB[ARM::FeatureNoNegativeImmediates]))
+    Features |= Feature_UseNegativeImmediates;
   return Features;
 }
 
@@ -6677,60 +6749,67 @@ static const MatchEntry MatchTable0[] = {
   { 10 /* adc */, ARM::ADCrsr, Convert__Reg1_2__Reg1_2__RegShiftedReg3_3__CondCode2_1__CCOut1_0, Feature_IsARM, { MCK_CCOut, MCK_CondCode, MCK_GPRnopc, MCK_RegShiftedReg }, },
   { 10 /* adc */, ARM::ADCrr, Convert__Reg1_2__Reg1_2__Reg1_3__CondCode2_1__CCOut1_0, Feature_IsARM, { MCK_CCOut, MCK_CondCode, MCK_GPR, MCK_GPR }, },
   { 10 /* adc */, ARM::ADCri, Convert__Reg1_2__Reg1_2__ModImm1_3__CondCode2_1__CCOut1_0, Feature_IsARM, { MCK_CCOut, MCK_CondCode, MCK_GPR, MCK_ModImm }, },
+  { 10 /* adc */, ARM::SBCri, Convert__Reg1_2__Reg1_2__ModImmNot1_3__CondCode2_1__CCOut1_0, Feature_IsARM|Feature_UseNegativeImmediates, { MCK_CCOut, MCK_CondCode, MCK_GPR, MCK_ModImmNot }, },
   { 10 /* adc */, ARM::ADCrsi, Convert__Reg1_2__Reg1_2__RegShiftedImm2_3__CondCode2_1__CCOut1_0, Feature_IsARM, { MCK_CCOut, MCK_CondCode, MCK_GPR, MCK_RegShiftedImm }, },
   { 10 /* adc */, ARM::t2ADCrr, Convert__Reg1_2__Reg1_3__Reg1_4__CondCode2_1__CCOut1_0, Feature_IsThumb2, { MCK_CCOut, MCK_CondCode, MCK_rGPR, MCK_rGPR, MCK_rGPR }, },
   { 10 /* adc */, ARM::t2ADCrs, Convert__Reg1_2__Reg1_3__RegShiftedImm2_4__CondCode2_1__CCOut1_0, Feature_IsThumb2, { MCK_CCOut, MCK_CondCode, MCK_rGPR, MCK_rGPR, MCK_RegShiftedImm }, },
   { 10 /* adc */, ARM::t2ADCri, Convert__Reg1_2__Reg1_3__T2SOImm1_4__CondCode2_1__CCOut1_0, Feature_IsThumb2, { MCK_CCOut, MCK_CondCode, MCK_rGPR, MCK_rGPR, MCK_T2SOImm }, },
+  { 10 /* adc */, ARM::t2SBCri, Convert__Reg1_2__Reg1_3__T2SOImmNot1_4__CondCode2_1__CCOut1_0, Feature_IsThumb2|Feature_UseNegativeImmediates, { MCK_CCOut, MCK_CondCode, MCK_rGPR, MCK_rGPR, MCK_T2SOImmNot }, },
   { 10 /* adc */, ARM::ADCrsr, Convert__Reg1_2__Reg1_3__RegShiftedReg3_4__CondCode2_1__CCOut1_0, Feature_IsARM, { MCK_CCOut, MCK_CondCode, MCK_GPRnopc, MCK_GPRnopc, MCK_RegShiftedReg }, },
   { 10 /* adc */, ARM::ADCrr, Convert__Reg1_2__Reg1_3__Reg1_4__CondCode2_1__CCOut1_0, Feature_IsARM, { MCK_CCOut, MCK_CondCode, MCK_GPR, MCK_GPR, MCK_GPR }, },
   { 10 /* adc */, ARM::ADCri, Convert__Reg1_2__Reg1_3__ModImm1_4__CondCode2_1__CCOut1_0, Feature_IsARM, { MCK_CCOut, MCK_CondCode, MCK_GPR, MCK_GPR, MCK_ModImm }, },
+  { 10 /* adc */, ARM::SBCri, Convert__Reg1_2__Reg1_3__ModImmNot1_4__CondCode2_1__CCOut1_0, Feature_IsARM|Feature_UseNegativeImmediates, { MCK_CCOut, MCK_CondCode, MCK_GPR, MCK_GPR, MCK_ModImmNot }, },
   { 10 /* adc */, ARM::ADCrsi, Convert__Reg1_2__Reg1_3__RegShiftedImm2_4__CondCode2_1__CCOut1_0, Feature_IsARM, { MCK_CCOut, MCK_CondCode, MCK_GPR, MCK_GPR, MCK_RegShiftedImm }, },
   { 10 /* adc */, ARM::t2ADCrr, Convert__Reg1_3__Reg1_4__Reg1_5__CondCode2_1__CCOut1_0, Feature_IsThumb2, { MCK_CCOut, MCK_CondCode, MCK__DOT_w, MCK_rGPR, MCK_rGPR, MCK_rGPR }, },
   { 10 /* adc */, ARM::t2ADCrs, Convert__Reg1_3__Reg1_4__RegShiftedImm2_5__CondCode2_1__CCOut1_0, Feature_IsThumb2, { MCK_CCOut, MCK_CondCode, MCK__DOT_w, MCK_rGPR, MCK_rGPR, MCK_RegShiftedImm }, },
   { 14 /* add */, ARM::tADDspr, Convert__Reg1_1__Tie0__Reg1_2__CondCode2_0, Feature_IsThumb, { MCK_CondCode, MCK_GPRsp, MCK_GPR }, },
   { 14 /* add */, ARM::tADDspi, Convert__Reg1_1__Tie0__Imm0_508s41_2__CondCode2_0, Feature_IsThumb, { MCK_CondCode, MCK_GPRsp, MCK_Imm0_508s4 }, },
-  { 14 /* add */, ARM::tSUBspi, Convert__regSP__Tie0__Imm0_508s4Neg1_2__CondCode2_0, Feature_IsThumb, { MCK_CondCode, MCK_GPRsp, MCK_Imm0_508s4Neg }, },
+  { 14 /* add */, ARM::tSUBspi, Convert__regSP__Tie0__Imm0_508s4Neg1_2__CondCode2_0, Feature_IsThumb|Feature_UseNegativeImmediates, { MCK_CondCode, MCK_GPRsp, MCK_Imm0_508s4Neg }, },
   { 14 /* add */, ARM::t2ADDri12, Convert__Reg1_1__Reg1_1__Imm0_40951_2__CondCode2_0, Feature_IsThumb2, { MCK_CondCode, MCK_GPRnopc, MCK_Imm0_4095 }, },
-  { 14 /* add */, ARM::t2SUBri12, Convert__Reg1_1__Reg1_1__Imm0_4095Neg1_2__CondCode2_0, Feature_IsThumb2, { MCK_CondCode, MCK_GPRnopc, MCK_Imm0_4095Neg }, },
+  { 14 /* add */, ARM::t2SUBri12, Convert__Reg1_1__Reg1_1__Imm0_4095Neg1_2__CondCode2_0, Feature_IsThumb2|Feature_UseNegativeImmediates, { MCK_CondCode, MCK_GPRnopc, MCK_Imm0_4095Neg }, },
   { 14 /* add */, ARM::tADDhirr, Convert__Reg1_1__Tie0__Reg1_2__CondCode2_0, Feature_IsThumb, { MCK_CondCode, MCK_GPR, MCK_GPR }, },
   { 14 /* add */, ARM::tADDi8, Convert__Reg1_2__CCOut1_0__Tie0__Imm0_2551_3__CondCode2_1, Feature_IsThumb, { MCK_CCOut, MCK_CondCode, MCK_tGPR, MCK_Imm0_255 }, },
+  { 14 /* add */, ARM::tSUBi8, Convert__Reg1_2__CCOut1_0__Tie0__ThumbModImmNeg8_2551_3__CondCode2_1, Feature_IsThumb|Feature_UseNegativeImmediates, { MCK_CCOut, MCK_CondCode, MCK_tGPR, MCK_ThumbModImmNeg8_255 }, },
   { 14 /* add */, ARM::t2ADDrr, Convert__Reg1_2__Reg1_2__Reg1_3__CondCode2_1__CCOut1_0, Feature_IsThumb2, { MCK_CCOut, MCK_CondCode, MCK_GPRnopc, MCK_rGPR }, },
   { 14 /* add */, ARM::t2ADDrs, Convert__Reg1_2__Reg1_2__RegShiftedImm2_3__CondCode2_1__CCOut1_0, Feature_IsThumb2, { MCK_CCOut, MCK_CondCode, MCK_GPRnopc, MCK_RegShiftedImm }, },
   { 14 /* add */, ARM::t2ADDri, Convert__Reg1_2__Reg1_2__T2SOImm1_3__CondCode2_1__CCOut1_0, Feature_IsThumb2, { MCK_CCOut, MCK_CondCode, MCK_GPRnopc, MCK_T2SOImm }, },
-  { 14 /* add */, ARM::t2SUBri, Convert__Reg1_2__Reg1_2__T2SOImmNeg1_3__CondCode2_1__CCOut1_0, Feature_IsThumb2, { MCK_CCOut, MCK_CondCode, MCK_GPRnopc, MCK_T2SOImmNeg }, },
-  { 14 /* add */, ARM::t2SUBri, Convert__Reg1_2__Reg1_2__T2SOImmNeg1_3__CondCode2_1__CCOut1_0, Feature_IsThumb2, { MCK_CCOut, MCK_CondCode, MCK_GPRnopc, MCK_T2SOImmNeg }, },
+  { 14 /* add */, ARM::t2SUBri, Convert__Reg1_2__Reg1_2__T2SOImmNeg1_3__CondCode2_1__CCOut1_0, Feature_IsThumb2|Feature_UseNegativeImmediates, { MCK_CCOut, MCK_CondCode, MCK_GPRnopc, MCK_T2SOImmNeg }, },
+  { 14 /* add */, ARM::t2SUBri, Convert__Reg1_2__Reg1_2__T2SOImmNeg1_3__CondCode2_1__CCOut1_0, Feature_IsThumb2|Feature_UseNegativeImmediates, { MCK_CCOut, MCK_CondCode, MCK_GPRnopc, MCK_T2SOImmNeg }, },
   { 14 /* add */, ARM::ADDrr, Convert__Reg1_2__Reg1_2__Reg1_3__CondCode2_1__CCOut1_0, Feature_IsARM, { MCK_CCOut, MCK_CondCode, MCK_GPR, MCK_GPR }, },
   { 14 /* add */, ARM::ADDri, Convert__Reg1_2__Reg1_2__ModImm1_3__CondCode2_1__CCOut1_0, Feature_IsARM, { MCK_CCOut, MCK_CondCode, MCK_GPR, MCK_ModImm }, },
-  { 14 /* add */, ARM::SUBri, Convert__Reg1_2__Reg1_2__ModImmNeg1_3__CondCode2_1__CCOut1_0, Feature_IsARM, { MCK_CCOut, MCK_CondCode, MCK_GPR, MCK_ModImmNeg }, },
+  { 14 /* add */, ARM::SUBri, Convert__Reg1_2__Reg1_2__ModImmNeg1_3__CondCode2_1__CCOut1_0, Feature_IsARM|Feature_UseNegativeImmediates, { MCK_CCOut, MCK_CondCode, MCK_GPR, MCK_ModImmNeg }, },
   { 14 /* add */, ARM::ADDrsi, Convert__Reg1_2__Reg1_2__RegShiftedImm2_3__CondCode2_1__CCOut1_0, Feature_IsARM, { MCK_CCOut, MCK_CondCode, MCK_GPR, MCK_RegShiftedImm }, },
   { 14 /* add */, ARM::ADDrsr, Convert__Reg1_2__Reg1_2__RegShiftedReg3_3__CondCode2_1__CCOut1_0, Feature_IsARM, { MCK_CCOut, MCK_CondCode, MCK_GPR, MCK_RegShiftedReg }, },
   { 14 /* add */, ARM::tADDspi, Convert__regSP__Tie0__Imm0_508s41_3__CondCode2_0, Feature_IsThumb, { MCK_CondCode, MCK_GPRsp, MCK_GPRsp, MCK_Imm0_508s4 }, },
-  { 14 /* add */, ARM::tSUBspi, Convert__regSP__Tie0__Imm0_508s4Neg1_3__CondCode2_0, Feature_IsThumb, { MCK_CondCode, MCK_GPRsp, MCK_GPRsp, MCK_Imm0_508s4Neg }, },
+  { 14 /* add */, ARM::tSUBspi, Convert__regSP__Tie0__Imm0_508s4Neg1_3__CondCode2_0, Feature_IsThumb|Feature_UseNegativeImmediates, { MCK_CondCode, MCK_GPRsp, MCK_GPRsp, MCK_Imm0_508s4Neg }, },
   { 14 /* add */, ARM::tADDrSPi, Convert__Reg1_1__Reg1_2__Imm0_1020s41_3__CondCode2_0, Feature_IsThumb, { MCK_CondCode, MCK_tGPR, MCK_GPRsp, MCK_Imm0_1020s4 }, },
   { 14 /* add */, ARM::t2ADR, Convert__Reg1_1__Imm0_40951_3__CondCode2_0, Feature_IsThumb2, { MCK_CondCode, MCK_rGPR, MCK_PC, MCK_Imm0_4095 }, },
   { 14 /* add */, ARM::t2ADDri12, Convert__Reg1_1__Reg1_2__Imm0_40951_3__CondCode2_0, Feature_IsThumb2, { MCK_CondCode, MCK_GPRnopc, MCK_GPR, MCK_Imm0_4095 }, },
-  { 14 /* add */, ARM::t2SUBri12, Convert__Reg1_1__Reg1_2__Imm0_4095Neg1_3__CondCode2_0, Feature_IsThumb2, { MCK_CondCode, MCK_GPRnopc, MCK_GPR, MCK_Imm0_4095Neg }, },
+  { 14 /* add */, ARM::t2SUBri12, Convert__Reg1_1__Reg1_2__Imm0_4095Neg1_3__CondCode2_0, Feature_IsThumb2|Feature_UseNegativeImmediates, { MCK_CondCode, MCK_GPRnopc, MCK_GPR, MCK_Imm0_4095Neg }, },
   { 14 /* add */, ARM::tADDrSP, Convert__Reg1_1__Reg1_2__Reg1_3__CondCode2_0, Feature_IsThumb, { MCK_CondCode, MCK_GPR, MCK_GPRsp, MCK_GPR }, },
-  { 14 /* add */, ARM::t2SUBri, Convert__Reg1_3__Reg1_3__T2SOImmNeg1_4__CondCode2_1__CCOut1_0, Feature_IsThumb2, { MCK_CCOut, MCK_CondCode, MCK__DOT_w, MCK_GPRnopc, MCK_T2SOImmNeg }, },
+  { 14 /* add */, ARM::t2SUBri, Convert__Reg1_3__Reg1_3__T2SOImmNeg1_4__CondCode2_1__CCOut1_0, Feature_IsThumb2|Feature_UseNegativeImmediates, { MCK_CCOut, MCK_CondCode, MCK__DOT_w, MCK_GPRnopc, MCK_T2SOImmNeg }, },
   { 14 /* add */, ARM::tADDrr, Convert__Reg1_2__CCOut1_0__Reg1_3__Reg1_4__CondCode2_1, Feature_IsThumb, { MCK_CCOut, MCK_CondCode, MCK_tGPR, MCK_tGPR, MCK_tGPR }, },
   { 14 /* add */, ARM::tADDi3, Convert__Reg1_2__CCOut1_0__Reg1_3__Imm0_71_4__CondCode2_1, Feature_IsThumb, { MCK_CCOut, MCK_CondCode, MCK_tGPR, MCK_tGPR, MCK_Imm0_7 }, },
+  { 14 /* add */, ARM::tSUBi3, Convert__Reg1_2__CCOut1_0__Reg1_3__ThumbModImmNeg1_71_4__CondCode2_1, Feature_IsThumb|Feature_UseNegativeImmediates, { MCK_CCOut, MCK_CondCode, MCK_tGPR, MCK_tGPR, MCK_ThumbModImmNeg1_7 }, },
   { 14 /* add */, ARM::t2ADDrr, Convert__Reg1_2__Reg1_3__Reg1_4__CondCode2_1__CCOut1_0, Feature_IsThumb2, { MCK_CCOut, MCK_CondCode, MCK_GPRnopc, MCK_GPRnopc, MCK_rGPR }, },
   { 14 /* add */, ARM::t2ADDrs, Convert__Reg1_2__Reg1_3__RegShiftedImm2_4__CondCode2_1__CCOut1_0, Feature_IsThumb2, { MCK_CCOut, MCK_CondCode, MCK_GPRnopc, MCK_GPRnopc, MCK_RegShiftedImm }, },
   { 14 /* add */, ARM::t2ADDri, Convert__Reg1_2__Reg1_3__T2SOImm1_4__CondCode2_1__CCOut1_0, Feature_IsThumb2, { MCK_CCOut, MCK_CondCode, MCK_GPRnopc, MCK_GPRnopc, MCK_T2SOImm }, },
-  { 14 /* add */, ARM::t2SUBri, Convert__Reg1_2__Reg1_3__T2SOImmNeg1_4__CondCode2_1__CCOut1_0, Feature_IsThumb2, { MCK_CCOut, MCK_CondCode, MCK_GPRnopc, MCK_GPRnopc, MCK_T2SOImmNeg }, },
-  { 14 /* add */, ARM::t2SUBri, Convert__Reg1_2__Reg1_3__T2SOImmNeg1_4__CondCode2_1__CCOut1_0, Feature_IsThumb2, { MCK_CCOut, MCK_CondCode, MCK_GPRnopc, MCK_GPRnopc, MCK_T2SOImmNeg }, },
+  { 14 /* add */, ARM::t2SUBri, Convert__Reg1_2__Reg1_3__T2SOImmNeg1_4__CondCode2_1__CCOut1_0, Feature_IsThumb2|Feature_UseNegativeImmediates, { MCK_CCOut, MCK_CondCode, MCK_GPRnopc, MCK_GPRnopc, MCK_T2SOImmNeg }, },
+  { 14 /* add */, ARM::t2SUBri, Convert__Reg1_2__Reg1_3__T2SOImmNeg1_4__CondCode2_1__CCOut1_0, Feature_IsThumb2|Feature_UseNegativeImmediates, { MCK_CCOut, MCK_CondCode, MCK_GPRnopc, MCK_GPRnopc, MCK_T2SOImmNeg }, },
   { 14 /* add */, ARM::ADDrr, Convert__Reg1_2__Reg1_3__Reg1_4__CondCode2_1__CCOut1_0, Feature_IsARM, { MCK_CCOut, MCK_CondCode, MCK_GPR, MCK_GPR, MCK_GPR }, },
   { 14 /* add */, ARM::ADDri, Convert__Reg1_2__Reg1_3__ModImm1_4__CondCode2_1__CCOut1_0, Feature_IsARM, { MCK_CCOut, MCK_CondCode, MCK_GPR, MCK_GPR, MCK_ModImm }, },
-  { 14 /* add */, ARM::SUBri, Convert__Reg1_2__Reg1_3__ModImmNeg1_4__CondCode2_1__CCOut1_0, Feature_IsARM, { MCK_CCOut, MCK_CondCode, MCK_GPR, MCK_GPR, MCK_ModImmNeg }, },
+  { 14 /* add */, ARM::SUBri, Convert__Reg1_2__Reg1_3__ModImmNeg1_4__CondCode2_1__CCOut1_0, Feature_IsARM|Feature_UseNegativeImmediates, { MCK_CCOut, MCK_CondCode, MCK_GPR, MCK_GPR, MCK_ModImmNeg }, },
   { 14 /* add */, ARM::ADDrsi, Convert__Reg1_2__Reg1_3__RegShiftedImm2_4__CondCode2_1__CCOut1_0, Feature_IsARM, { MCK_CCOut, MCK_CondCode, MCK_GPR, MCK_GPR, MCK_RegShiftedImm }, },
   { 14 /* add */, ARM::ADDrsr, Convert__Reg1_2__Reg1_3__RegShiftedReg3_4__CondCode2_1__CCOut1_0, Feature_IsARM, { MCK_CCOut, MCK_CondCode, MCK_GPR, MCK_GPR, MCK_RegShiftedReg }, },
   { 14 /* add */, ARM::t2ADDrr, Convert__Reg1_3__Reg1_4__Reg1_5__CondCode2_1__CCOut1_0, Feature_IsThumb2, { MCK_CCOut, MCK_CondCode, MCK__DOT_w, MCK_GPRnopc, MCK_GPRnopc, MCK_rGPR }, },
   { 14 /* add */, ARM::t2ADDrs, Convert__Reg1_3__Reg1_4__RegShiftedImm2_5__CondCode2_1__CCOut1_0, Feature_IsThumb2, { MCK_CCOut, MCK_CondCode, MCK__DOT_w, MCK_GPRnopc, MCK_GPRnopc, MCK_RegShiftedImm }, },
   { 14 /* add */, ARM::t2ADDri, Convert__Reg1_3__Reg1_4__T2SOImm1_5__CondCode2_1__CCOut1_0, Feature_IsThumb2, { MCK_CCOut, MCK_CondCode, MCK__DOT_w, MCK_GPRnopc, MCK_GPRnopc, MCK_T2SOImm }, },
-  { 14 /* add */, ARM::t2SUBri, Convert__Reg1_3__Reg1_4__T2SOImmNeg1_5__CondCode2_1__CCOut1_0, Feature_IsThumb2, { MCK_CCOut, MCK_CondCode, MCK__DOT_w, MCK_GPRnopc, MCK_GPRnopc, MCK_T2SOImmNeg }, },
-  { 18 /* addw */, ARM::t2SUBri12, Convert__Reg1_1__Reg1_1__Imm0_4095Neg1_2__CondCode2_0, Feature_IsThumb2, { MCK_CondCode, MCK_GPRnopc, MCK_Imm0_4095Neg }, },
+  { 14 /* add */, ARM::t2SUBri, Convert__Reg1_3__Reg1_4__T2SOImmNeg1_5__CondCode2_1__CCOut1_0, Feature_IsThumb2|Feature_UseNegativeImmediates, { MCK_CCOut, MCK_CondCode, MCK__DOT_w, MCK_GPRnopc, MCK_GPRnopc, MCK_T2SOImmNeg }, },
+  { 14 /* add */, ARM::t2SUBri, Convert__Reg1_3__Reg1_4__T2SOImmNeg1_5__CondCode2_1__CCOut1_0, Feature_IsThumb2|Feature_UseNegativeImmediates, { MCK_CCOut, MCK_CondCode, MCK__DOT_w, MCK_GPRnopc, MCK_GPRnopc, MCK_T2SOImmNeg }, },
+  { 18 /* addw */, ARM::t2SUBri12, Convert__Reg1_1__Reg1_1__Imm0_4095Neg1_2__CondCode2_0, Feature_IsThumb2|Feature_UseNegativeImmediates, { MCK_CondCode, MCK_GPRnopc, MCK_Imm0_4095Neg }, },
   { 18 /* addw */, ARM::t2ADDri12, Convert__Reg1_1__Reg1_2__Imm0_40951_3__CondCode2_0, Feature_IsThumb2, { MCK_CondCode, MCK_GPRnopc, MCK_GPR, MCK_Imm0_4095 }, },
-  { 18 /* addw */, ARM::t2SUBri12, Convert__Reg1_1__Reg1_2__Imm0_4095Neg1_3__CondCode2_0, Feature_IsThumb2, { MCK_CondCode, MCK_GPRnopc, MCK_GPR, MCK_Imm0_4095Neg }, },
+  { 18 /* addw */, ARM::t2SUBri12, Convert__Reg1_1__Reg1_2__Imm0_4095Neg1_3__CondCode2_0, Feature_IsThumb2|Feature_UseNegativeImmediates, { MCK_CondCode, MCK_GPRnopc, MCK_GPR, MCK_Imm0_4095Neg }, },
+  { 18 /* addw */, ARM::t2SUBri12, Convert__Reg1_1__Reg1_2__T2SOImmNeg1_3__CondCode2_0, Feature_IsThumb2|Feature_UseNegativeImmediates, { MCK_CondCode, MCK_GPRnopc, MCK_GPR, MCK_T2SOImmNeg }, },
   { 23 /* adr */, ARM::tADR, Convert__Reg1_1__UnsignedOffset_b8s21_2__CondCode2_0, Feature_IsThumb, { MCK_CondCode, MCK_tGPR, MCK_UnsignedOffset_b8s2 }, },
   { 23 /* adr */, ARM::t2ADR, Convert__Reg1_1__Imm1_2__CondCode2_0, Feature_IsThumb2, { MCK_CondCode, MCK_rGPR, MCK_Imm }, },
   { 23 /* adr */, ARM::ADR, Convert__Reg1_1__AdrLabel1_2__CondCode2_0, Feature_IsARM, { MCK_CondCode, MCK_GPR, MCK_AdrLabel }, },
@@ -6743,10 +6822,10 @@ static const MatchEntry MatchTable0[] = {
   { 50 /* and */, ARM::t2ANDrr, Convert__Reg1_2__Reg1_2__Reg1_3__CondCode2_1__CCOut1_0, Feature_IsThumb2, { MCK_CCOut, MCK_CondCode, MCK_rGPR, MCK_rGPR }, },
   { 50 /* and */, ARM::t2ANDrs, Convert__Reg1_2__Reg1_2__RegShiftedImm2_3__CondCode2_1__CCOut1_0, Feature_IsThumb2, { MCK_CCOut, MCK_CondCode, MCK_rGPR, MCK_RegShiftedImm }, },
   { 50 /* and */, ARM::t2ANDri, Convert__Reg1_2__Reg1_2__T2SOImm1_3__CondCode2_1__CCOut1_0, Feature_IsThumb2, { MCK_CCOut, MCK_CondCode, MCK_rGPR, MCK_T2SOImm }, },
-  { 50 /* and */, ARM::t2BICri, Convert__Reg1_2__Reg1_2__T2SOImmNot1_3__CondCode2_1__CCOut1_0, Feature_IsThumb2, { MCK_CCOut, MCK_CondCode, MCK_rGPR, MCK_T2SOImmNot }, },
+  { 50 /* and */, ARM::t2BICri, Convert__Reg1_2__Reg1_2__T2SOImmNot1_3__CondCode2_1__CCOut1_0, Feature_IsThumb2|Feature_UseNegativeImmediates, { MCK_CCOut, MCK_CondCode, MCK_rGPR, MCK_T2SOImmNot }, },
   { 50 /* and */, ARM::ANDrr, Convert__Reg1_2__Reg1_2__Reg1_3__CondCode2_1__CCOut1_0, Feature_IsARM, { MCK_CCOut, MCK_CondCode, MCK_GPR, MCK_GPR }, },
   { 50 /* and */, ARM::ANDri, Convert__Reg1_2__Reg1_2__ModImm1_3__CondCode2_1__CCOut1_0, Feature_IsARM, { MCK_CCOut, MCK_CondCode, MCK_GPR, MCK_ModImm }, },
-  { 50 /* and */, ARM::BICri, Convert__Reg1_2__Reg1_2__ModImmNot1_3__CondCode2_1__CCOut1_0, Feature_IsARM, { MCK_CCOut, MCK_CondCode, MCK_GPR, MCK_ModImmNot }, },
+  { 50 /* and */, ARM::BICri, Convert__Reg1_2__Reg1_2__ModImmNot1_3__CondCode2_1__CCOut1_0, Feature_IsARM|Feature_UseNegativeImmediates, { MCK_CCOut, MCK_CondCode, MCK_GPR, MCK_ModImmNot }, },
   { 50 /* and */, ARM::ANDrsi, Convert__Reg1_2__Reg1_2__RegShiftedImm2_3__CondCode2_1__CCOut1_0, Feature_IsARM, { MCK_CCOut, MCK_CondCode, MCK_GPR, MCK_RegShiftedImm }, },
   { 50 /* and */, ARM::ANDrsr, Convert__Reg1_2__Reg1_2__RegShiftedReg3_3__CondCode2_1__CCOut1_0, Feature_IsARM, { MCK_CCOut, MCK_CondCode, MCK_GPR, MCK_RegShiftedReg }, },
   { 50 /* and */, ARM::t2ANDrr, Convert__Reg1_3__Reg1_3__Reg1_4__CondCode2_1__CCOut1_0, Feature_IsThumb2, { MCK_CCOut, MCK_CondCode, MCK__DOT_w, MCK_rGPR, MCK_rGPR }, },
@@ -6755,10 +6834,10 @@ static const MatchEntry MatchTable0[] = {
   { 50 /* and */, ARM::t2ANDrr, Convert__Reg1_2__Reg1_3__Reg1_4__CondCode2_1__CCOut1_0, Feature_IsThumb2, { MCK_CCOut, MCK_CondCode, MCK_rGPR, MCK_rGPR, MCK_rGPR }, },
   { 50 /* and */, ARM::t2ANDrs, Convert__Reg1_2__Reg1_3__RegShiftedImm2_4__CondCode2_1__CCOut1_0, Feature_IsThumb2, { MCK_CCOut, MCK_CondCode, MCK_rGPR, MCK_rGPR, MCK_RegShiftedImm }, },
   { 50 /* and */, ARM::t2ANDri, Convert__Reg1_2__Reg1_3__T2SOImm1_4__CondCode2_1__CCOut1_0, Feature_IsThumb2, { MCK_CCOut, MCK_CondCode, MCK_rGPR, MCK_rGPR, MCK_T2SOImm }, },
-  { 50 /* and */, ARM::t2BICri, Convert__Reg1_2__Reg1_3__T2SOImmNot1_4__CondCode2_1__CCOut1_0, Feature_IsThumb2, { MCK_CCOut, MCK_CondCode, MCK_rGPR, MCK_rGPR, MCK_T2SOImmNot }, },
+  { 50 /* and */, ARM::t2BICri, Convert__Reg1_2__Reg1_3__T2SOImmNot1_4__CondCode2_1__CCOut1_0, Feature_IsThumb2|Feature_UseNegativeImmediates, { MCK_CCOut, MCK_CondCode, MCK_rGPR, MCK_rGPR, MCK_T2SOImmNot }, },
   { 50 /* and */, ARM::ANDrr, Convert__Reg1_2__Reg1_3__Reg1_4__CondCode2_1__CCOut1_0, Feature_IsARM, { MCK_CCOut, MCK_CondCode, MCK_GPR, MCK_GPR, MCK_GPR }, },
   { 50 /* and */, ARM::ANDri, Convert__Reg1_2__Reg1_3__ModImm1_4__CondCode2_1__CCOut1_0, Feature_IsARM, { MCK_CCOut, MCK_CondCode, MCK_GPR, MCK_GPR, MCK_ModImm }, },
-  { 50 /* and */, ARM::BICri, Convert__Reg1_2__Reg1_3__ModImmNot1_4__CondCode2_1__CCOut1_0, Feature_IsARM, { MCK_CCOut, MCK_CondCode, MCK_GPR, MCK_GPR, MCK_ModImmNot }, },
+  { 50 /* and */, ARM::BICri, Convert__Reg1_2__Reg1_3__ModImmNot1_4__CondCode2_1__CCOut1_0, Feature_IsARM|Feature_UseNegativeImmediates, { MCK_CCOut, MCK_CondCode, MCK_GPR, MCK_GPR, MCK_ModImmNot }, },
   { 50 /* and */, ARM::ANDrsi, Convert__Reg1_2__Reg1_3__RegShiftedImm2_4__CondCode2_1__CCOut1_0, Feature_IsARM, { MCK_CCOut, MCK_CondCode, MCK_GPR, MCK_GPR, MCK_RegShiftedImm }, },
   { 50 /* and */, ARM::ANDrsr, Convert__Reg1_2__Reg1_3__RegShiftedReg3_4__CondCode2_1__CCOut1_0, Feature_IsARM, { MCK_CCOut, MCK_CondCode, MCK_GPR, MCK_GPR, MCK_RegShiftedReg }, },
   { 50 /* and */, ARM::t2ANDrr, Convert__Reg1_3__Reg1_4__Reg1_5__CondCode2_1__CCOut1_0, Feature_IsThumb2, { MCK_CCOut, MCK_CondCode, MCK__DOT_w, MCK_rGPR, MCK_rGPR, MCK_rGPR }, },
@@ -6792,10 +6871,10 @@ static const MatchEntry MatchTable0[] = {
   { 68 /* bic */, ARM::t2BICrr, Convert__Reg1_2__Reg1_2__Reg1_3__CondCode2_1__CCOut1_0, Feature_IsThumb2, { MCK_CCOut, MCK_CondCode, MCK_rGPR, MCK_rGPR }, },
   { 68 /* bic */, ARM::t2BICrs, Convert__Reg1_2__Reg1_2__RegShiftedImm2_3__CondCode2_1__CCOut1_0, Feature_IsThumb2, { MCK_CCOut, MCK_CondCode, MCK_rGPR, MCK_RegShiftedImm }, },
   { 68 /* bic */, ARM::t2BICri, Convert__Reg1_2__Reg1_2__T2SOImm1_3__CondCode2_1__CCOut1_0, Feature_IsThumb2, { MCK_CCOut, MCK_CondCode, MCK_rGPR, MCK_T2SOImm }, },
-  { 68 /* bic */, ARM::t2ANDri, Convert__Reg1_2__Reg1_2__T2SOImmNot1_3__CondCode2_1__CCOut1_0, Feature_IsThumb2, { MCK_CCOut, MCK_CondCode, MCK_rGPR, MCK_T2SOImmNot }, },
+  { 68 /* bic */, ARM::t2ANDri, Convert__Reg1_2__Reg1_2__T2SOImmNot1_3__CondCode2_1__CCOut1_0, Feature_IsThumb2|Feature_UseNegativeImmediates, { MCK_CCOut, MCK_CondCode, MCK_rGPR, MCK_T2SOImmNot }, },
   { 68 /* bic */, ARM::BICrr, Convert__Reg1_2__Reg1_2__Reg1_3__CondCode2_1__CCOut1_0, Feature_IsARM, { MCK_CCOut, MCK_CondCode, MCK_GPR, MCK_GPR }, },
   { 68 /* bic */, ARM::BICri, Convert__Reg1_2__Reg1_2__ModImm1_3__CondCode2_1__CCOut1_0, Feature_IsARM, { MCK_CCOut, MCK_CondCode, MCK_GPR, MCK_ModImm }, },
-  { 68 /* bic */, ARM::ANDri, Convert__Reg1_2__Reg1_2__ModImmNot1_3__CondCode2_1__CCOut1_0, Feature_IsARM, { MCK_CCOut, MCK_CondCode, MCK_GPR, MCK_ModImmNot }, },
+  { 68 /* bic */, ARM::ANDri, Convert__Reg1_2__Reg1_2__ModImmNot1_3__CondCode2_1__CCOut1_0, Feature_IsARM|Feature_UseNegativeImmediates, { MCK_CCOut, MCK_CondCode, MCK_GPR, MCK_ModImmNot }, },
   { 68 /* bic */, ARM::BICrsi, Convert__Reg1_2__Reg1_2__RegShiftedImm2_3__CondCode2_1__CCOut1_0, Feature_IsARM, { MCK_CCOut, MCK_CondCode, MCK_GPR, MCK_RegShiftedImm }, },
   { 68 /* bic */, ARM::BICrsr, Convert__Reg1_2__Reg1_2__RegShiftedReg3_3__CondCode2_1__CCOut1_0, Feature_IsARM, { MCK_CCOut, MCK_CondCode, MCK_GPR, MCK_RegShiftedReg }, },
   { 68 /* bic */, ARM::t2BICrr, Convert__Reg1_3__Reg1_3__Reg1_4__CondCode2_1__CCOut1_0, Feature_IsThumb2, { MCK_CCOut, MCK_CondCode, MCK__DOT_w, MCK_rGPR, MCK_rGPR }, },
@@ -6804,10 +6883,10 @@ static const MatchEntry MatchTable0[] = {
   { 68 /* bic */, ARM::t2BICrr, Convert__Reg1_2__Reg1_3__Reg1_4__CondCode2_1__CCOut1_0, Feature_IsThumb2, { MCK_CCOut, MCK_CondCode, MCK_rGPR, MCK_rGPR, MCK_rGPR }, },
   { 68 /* bic */, ARM::t2BICrs, Convert__Reg1_2__Reg1_3__RegShiftedImm2_4__CondCode2_1__CCOut1_0, Feature_IsThumb2, { MCK_CCOut, MCK_CondCode, MCK_rGPR, MCK_rGPR, MCK_RegShiftedImm }, },
   { 68 /* bic */, ARM::t2BICri, Convert__Reg1_2__Reg1_3__T2SOImm1_4__CondCode2_1__CCOut1_0, Feature_IsThumb2, { MCK_CCOut, MCK_CondCode, MCK_rGPR, MCK_rGPR, MCK_T2SOImm }, },
-  { 68 /* bic */, ARM::t2ANDri, Convert__Reg1_2__Reg1_3__T2SOImmNot1_4__CondCode2_1__CCOut1_0, Feature_IsThumb2, { MCK_CCOut, MCK_CondCode, MCK_rGPR, MCK_rGPR, MCK_T2SOImmNot }, },
+  { 68 /* bic */, ARM::t2ANDri, Convert__Reg1_2__Reg1_3__T2SOImmNot1_4__CondCode2_1__CCOut1_0, Feature_IsThumb2|Feature_UseNegativeImmediates, { MCK_CCOut, MCK_CondCode, MCK_rGPR, MCK_rGPR, MCK_T2SOImmNot }, },
   { 68 /* bic */, ARM::BICrr, Convert__Reg1_2__Reg1_3__Reg1_4__CondCode2_1__CCOut1_0, Feature_IsARM, { MCK_CCOut, MCK_CondCode, MCK_GPR, MCK_GPR, MCK_GPR }, },
   { 68 /* bic */, ARM::BICri, Convert__Reg1_2__Reg1_3__ModImm1_4__CondCode2_1__CCOut1_0, Feature_IsARM, { MCK_CCOut, MCK_CondCode, MCK_GPR, MCK_GPR, MCK_ModImm }, },
-  { 68 /* bic */, ARM::ANDri, Convert__Reg1_2__Reg1_3__ModImmNot1_4__CondCode2_1__CCOut1_0, Feature_IsARM, { MCK_CCOut, MCK_CondCode, MCK_GPR, MCK_GPR, MCK_ModImmNot }, },
+  { 68 /* bic */, ARM::ANDri, Convert__Reg1_2__Reg1_3__ModImmNot1_4__CondCode2_1__CCOut1_0, Feature_IsARM|Feature_UseNegativeImmediates, { MCK_CCOut, MCK_CondCode, MCK_GPR, MCK_GPR, MCK_ModImmNot }, },
   { 68 /* bic */, ARM::BICrsi, Convert__Reg1_2__Reg1_3__RegShiftedImm2_4__CondCode2_1__CCOut1_0, Feature_IsARM, { MCK_CCOut, MCK_CondCode, MCK_GPR, MCK_GPR, MCK_RegShiftedImm }, },
   { 68 /* bic */, ARM::BICrsr, Convert__Reg1_2__Reg1_3__RegShiftedReg3_4__CondCode2_1__CCOut1_0, Feature_IsARM, { MCK_CCOut, MCK_CondCode, MCK_GPR, MCK_GPR, MCK_RegShiftedReg }, },
   { 68 /* bic */, ARM::t2BICrr, Convert__Reg1_3__Reg1_4__Reg1_5__CondCode2_1__CCOut1_0, Feature_IsThumb2, { MCK_CCOut, MCK_CondCode, MCK__DOT_w, MCK_rGPR, MCK_rGPR, MCK_rGPR }, },
@@ -6835,17 +6914,17 @@ static const MatchEntry MatchTable0[] = {
   { 97 /* bxns */, ARM::tBXNS, Convert__Reg1_1__CondCode2_0, Feature_IsThumb|Feature_Has8MSecExt, { MCK_CondCode, MCK_GPR }, },
   { 102 /* cbnz */, ARM::tCBNZ, Convert__Reg1_0__ThumbBranchTarget1_1, Feature_IsThumb|Feature_HasV8MBaseline, { MCK_tGPR, MCK_ThumbBranchTarget }, },
   { 107 /* cbz */, ARM::tCBZ, Convert__Reg1_0__ThumbBranchTarget1_1, Feature_IsThumb|Feature_HasV8MBaseline, { MCK_tGPR, MCK_ThumbBranchTarget }, },
+  { 111 /* cdp */, ARM::CDP, Convert__CoprocNum1_1__Imm0_151_2__CoprocReg1_3__CoprocReg1_4__CoprocReg1_5__Imm0_71_6__CondCode2_0, Feature_IsARM|Feature_PreV8, { MCK_CondCode, MCK_CoprocNum, MCK_Imm0_15, MCK_CoprocReg, MCK_CoprocReg, MCK_CoprocReg, MCK_Imm0_7 }, },
   { 111 /* cdp */, ARM::t2CDP, Convert__CoprocNum1_1__Imm0_151_2__CoprocReg1_3__CoprocReg1_4__CoprocReg1_5__Imm0_71_6__CondCode2_0, Feature_IsThumb2|Feature_PreV8, { MCK_CondCode, MCK_CoprocNum, MCK_Imm0_15, MCK_CoprocReg, MCK_CoprocReg, MCK_CoprocReg, MCK_Imm0_7 }, },
-  { 111 /* cdp */, ARM::CDP, Convert__CoprocNum1_1__Imm0_151_2__CoprocReg1_3__CoprocReg1_4__CoprocReg1_5__Imm0_71_6__CondCode2_0, Feature_PreV8, { MCK_CondCode, MCK_CoprocNum, MCK_Imm0_15, MCK_CoprocReg, MCK_CoprocReg, MCK_CoprocReg, MCK_Imm0_7 }, },
-  { 115 /* cdp2 */, ARM::CDP2, Convert__CoprocNum1_0__Imm0_151_1__CoprocReg1_2__CoprocReg1_3__CoprocReg1_4__Imm0_71_5, Feature_PreV8, { MCK_CoprocNum, MCK_Imm0_15, MCK_CoprocReg, MCK_CoprocReg, MCK_CoprocReg, MCK_Imm0_7 }, },
+  { 115 /* cdp2 */, ARM::CDP2, Convert__CoprocNum1_0__Imm0_151_1__CoprocReg1_2__CoprocReg1_3__CoprocReg1_4__Imm0_71_5, Feature_IsARM|Feature_PreV8, { MCK_CoprocNum, MCK_Imm0_15, MCK_CoprocReg, MCK_CoprocReg, MCK_CoprocReg, MCK_Imm0_7 }, },
   { 115 /* cdp2 */, ARM::t2CDP2, Convert__CoprocNum1_1__Imm0_151_2__CoprocReg1_3__CoprocReg1_4__CoprocReg1_5__Imm0_71_6__CondCode2_0, Feature_IsThumb2|Feature_PreV8, { MCK_CondCode, MCK_CoprocNum, MCK_Imm0_15, MCK_CoprocReg, MCK_CoprocReg, MCK_CoprocReg, MCK_Imm0_7 }, },
   { 120 /* clrex */, ARM::CLREX, Convert_NoOperands, Feature_IsARM|Feature_HasV6K, {  }, },
   { 120 /* clrex */, ARM::t2CLREX, Convert__CondCode2_0, Feature_IsThumb|Feature_HasV7Clrex, { MCK_CondCode }, },
   { 126 /* clz */, ARM::t2CLZ, Convert__Reg1_1__Reg1_2__CondCode2_0, Feature_IsThumb2, { MCK_CondCode, MCK_rGPR, MCK_rGPR }, },
   { 126 /* clz */, ARM::CLZ, Convert__Reg1_1__Reg1_2__CondCode2_0, Feature_IsARM|Feature_HasV5T, { MCK_CondCode, MCK_GPR, MCK_GPR }, },
   { 130 /* cmn */, ARM::tCMNz, Convert__Reg1_1__Reg1_2__CondCode2_0, Feature_IsThumb, { MCK_CondCode, MCK_tGPR, MCK_tGPR }, },
-  { 130 /* cmn */, ARM::CMPri, Convert__Reg1_1__ModImmNeg1_2__CondCode2_0, Feature_IsARM, { MCK_CondCode, MCK_rGPR, MCK_ModImmNeg }, },
-  { 130 /* cmn */, ARM::t2CMPri, Convert__Reg1_1__T2SOImmNeg1_2__CondCode2_0, Feature_IsThumb2, { MCK_CondCode, MCK_rGPR, MCK_T2SOImmNeg }, },
+  { 130 /* cmn */, ARM::CMPri, Convert__Reg1_1__ModImmNeg1_2__CondCode2_0, Feature_IsARM|Feature_UseNegativeImmediates, { MCK_CondCode, MCK_rGPR, MCK_ModImmNeg }, },
+  { 130 /* cmn */, ARM::t2CMPri, Convert__Reg1_1__T2SOImmNeg1_2__CondCode2_0, Feature_IsThumb2|Feature_UseNegativeImmediates, { MCK_CondCode, MCK_rGPR, MCK_T2SOImmNeg }, },
   { 130 /* cmn */, ARM::t2CMNzrr, Convert__Reg1_1__Reg1_2__CondCode2_0, Feature_IsThumb2, { MCK_CondCode, MCK_GPRnopc, MCK_rGPR }, },
   { 130 /* cmn */, ARM::t2CMNzrs, Convert__Reg1_1__RegShiftedImm2_2__CondCode2_0, Feature_IsThumb2, { MCK_CondCode, MCK_GPRnopc, MCK_RegShiftedImm }, },
   { 130 /* cmn */, ARM::CMNzrsr, Convert__Reg1_1__RegShiftedReg3_2__CondCode2_0, Feature_IsARM, { MCK_CondCode, MCK_GPRnopc, MCK_RegShiftedReg }, },
@@ -6858,8 +6937,8 @@ static const MatchEntry MatchTable0[] = {
   { 130 /* cmn */, ARM::t2CMNri, Convert__Reg1_2__T2SOImm1_3__CondCode2_0, Feature_IsThumb2, { MCK_CondCode, MCK__DOT_w, MCK_GPRnopc, MCK_T2SOImm }, },
   { 134 /* cmp */, ARM::tCMPr, Convert__Reg1_1__Reg1_2__CondCode2_0, Feature_IsThumb, { MCK_CondCode, MCK_tGPR, MCK_tGPR }, },
   { 134 /* cmp */, ARM::tCMPi8, Convert__Reg1_1__Imm0_2551_2__CondCode2_0, Feature_IsThumb, { MCK_CondCode, MCK_tGPR, MCK_Imm0_255 }, },
-  { 134 /* cmp */, ARM::CMNri, Convert__Reg1_1__ModImmNeg1_2__CondCode2_0, Feature_IsARM, { MCK_CondCode, MCK_rGPR, MCK_ModImmNeg }, },
-  { 134 /* cmp */, ARM::t2CMNri, Convert__Reg1_1__T2SOImmNeg1_2__CondCode2_0, Feature_IsThumb2, { MCK_CondCode, MCK_rGPR, MCK_T2SOImmNeg }, },
+  { 134 /* cmp */, ARM::CMNri, Convert__Reg1_1__ModImmNeg1_2__CondCode2_0, Feature_IsARM|Feature_UseNegativeImmediates, { MCK_CondCode, MCK_rGPR, MCK_ModImmNeg }, },
+  { 134 /* cmp */, ARM::t2CMNri, Convert__Reg1_1__T2SOImmNeg1_2__CondCode2_0, Feature_IsThumb2|Feature_UseNegativeImmediates, { MCK_CondCode, MCK_rGPR, MCK_T2SOImmNeg }, },
   { 134 /* cmp */, ARM::t2CMPrs, Convert__Reg1_1__RegShiftedImm2_2__CondCode2_0, Feature_IsThumb2, { MCK_CondCode, MCK_GPRnopc, MCK_RegShiftedImm }, },
   { 134 /* cmp */, ARM::CMPrsr, Convert__Reg1_1__RegShiftedReg3_2__CondCode2_0, Feature_IsARM, { MCK_CondCode, MCK_GPRnopc, MCK_RegShiftedReg }, },
   { 134 /* cmp */, ARM::t2CMPri, Convert__Reg1_1__T2SOImm1_2__CondCode2_0, Feature_IsThumb2, { MCK_CondCode, MCK_GPRnopc, MCK_T2SOImm }, },
@@ -6986,19 +7065,19 @@ static const MatchEntry MatchTable0[] = {
   { 396 /* ldc */, ARM::t2LDC_OPTION, Convert__CoprocNum1_1__CoprocReg1_2__MemNoOffset1_3__CoprocOption1_4__CondCode2_0, Feature_IsThumb2, { MCK_CondCode, MCK_CoprocNum, MCK_CoprocReg, MCK_MemNoOffset, MCK_CoprocOption }, },
   { 396 /* ldc */, ARM::LDC_POST, Convert__CoprocNum1_1__CoprocReg1_2__MemNoOffset1_3__PostIdxImm8s41_4__CondCode2_0, Feature_IsARM, { MCK_CondCode, MCK_CoprocNum, MCK_CoprocReg, MCK_MemNoOffset, MCK_PostIdxImm8s4 }, },
   { 396 /* ldc */, ARM::t2LDC_POST, Convert__CoprocNum1_1__CoprocReg1_2__MemNoOffset1_3__PostIdxImm8s41_4__CondCode2_0, Feature_IsThumb2, { MCK_CondCode, MCK_CoprocNum, MCK_CoprocReg, MCK_MemNoOffset, MCK_PostIdxImm8s4 }, },
-  { 400 /* ldc2 */, ARM::LDC2_OFFSET, Convert__CoprocNum1_0__CoprocReg1_1__AddrMode52_2, Feature_PreV8, { MCK_CoprocNum, MCK_CoprocReg, MCK_AddrMode5 }, },
+  { 400 /* ldc2 */, ARM::LDC2_OFFSET, Convert__CoprocNum1_0__CoprocReg1_1__AddrMode52_2, Feature_IsARM|Feature_PreV8, { MCK_CoprocNum, MCK_CoprocReg, MCK_AddrMode5 }, },
   { 400 /* ldc2 */, ARM::t2LDC2_OFFSET, Convert__CoprocNum1_1__CoprocReg1_2__AddrMode52_3__CondCode2_0, Feature_PreV8|Feature_IsThumb2, { MCK_CondCode, MCK_CoprocNum, MCK_CoprocReg, MCK_AddrMode5 }, },
-  { 400 /* ldc2 */, ARM::LDC2_PRE, Convert__CoprocNum1_0__CoprocReg1_1__AddrMode52_2, Feature_PreV8, { MCK_CoprocNum, MCK_CoprocReg, MCK_AddrMode5, MCK__EXCLAIM_ }, },
-  { 400 /* ldc2 */, ARM::LDC2_OPTION, Convert__CoprocNum1_0__CoprocReg1_1__MemNoOffset1_2__CoprocOption1_3, Feature_PreV8, { MCK_CoprocNum, MCK_CoprocReg, MCK_MemNoOffset, MCK_CoprocOption }, },
-  { 400 /* ldc2 */, ARM::LDC2_POST, Convert__CoprocNum1_0__CoprocReg1_1__MemNoOffset1_2__PostIdxImm8s41_3, Feature_PreV8, { MCK_CoprocNum, MCK_CoprocReg, MCK_MemNoOffset, MCK_PostIdxImm8s4 }, },
+  { 400 /* ldc2 */, ARM::LDC2_PRE, Convert__CoprocNum1_0__CoprocReg1_1__AddrMode52_2, Feature_IsARM|Feature_PreV8, { MCK_CoprocNum, MCK_CoprocReg, MCK_AddrMode5, MCK__EXCLAIM_ }, },
+  { 400 /* ldc2 */, ARM::LDC2_OPTION, Convert__CoprocNum1_0__CoprocReg1_1__MemNoOffset1_2__CoprocOption1_3, Feature_IsARM|Feature_PreV8, { MCK_CoprocNum, MCK_CoprocReg, MCK_MemNoOffset, MCK_CoprocOption }, },
+  { 400 /* ldc2 */, ARM::LDC2_POST, Convert__CoprocNum1_0__CoprocReg1_1__MemNoOffset1_2__PostIdxImm8s41_3, Feature_IsARM|Feature_PreV8, { MCK_CoprocNum, MCK_CoprocReg, MCK_MemNoOffset, MCK_PostIdxImm8s4 }, },
   { 400 /* ldc2 */, ARM::t2LDC2_PRE, Convert__CoprocNum1_1__CoprocReg1_2__AddrMode52_3__CondCode2_0, Feature_PreV8|Feature_IsThumb2, { MCK_CondCode, MCK_CoprocNum, MCK_CoprocReg, MCK_AddrMode5, MCK__EXCLAIM_ }, },
   { 400 /* ldc2 */, ARM::t2LDC2_OPTION, Convert__CoprocNum1_1__CoprocReg1_2__MemNoOffset1_3__CoprocOption1_4__CondCode2_0, Feature_PreV8|Feature_IsThumb2, { MCK_CondCode, MCK_CoprocNum, MCK_CoprocReg, MCK_MemNoOffset, MCK_CoprocOption }, },
   { 400 /* ldc2 */, ARM::t2LDC2_POST, Convert__CoprocNum1_1__CoprocReg1_2__MemNoOffset1_3__PostIdxImm8s41_4__CondCode2_0, Feature_PreV8|Feature_IsThumb2, { MCK_CondCode, MCK_CoprocNum, MCK_CoprocReg, MCK_MemNoOffset, MCK_PostIdxImm8s4 }, },
-  { 405 /* ldc2l */, ARM::LDC2L_OFFSET, Convert__CoprocNum1_0__CoprocReg1_1__AddrMode52_2, Feature_PreV8, { MCK_CoprocNum, MCK_CoprocReg, MCK_AddrMode5 }, },
+  { 405 /* ldc2l */, ARM::LDC2L_OFFSET, Convert__CoprocNum1_0__CoprocReg1_1__AddrMode52_2, Feature_IsARM|Feature_PreV8, { MCK_CoprocNum, MCK_CoprocReg, MCK_AddrMode5 }, },
   { 405 /* ldc2l */, ARM::t2LDC2L_OFFSET, Convert__CoprocNum1_1__CoprocReg1_2__AddrMode52_3__CondCode2_0, Feature_PreV8|Feature_IsThumb2, { MCK_CondCode, MCK_CoprocNum, MCK_CoprocReg, MCK_AddrMode5 }, },
-  { 405 /* ldc2l */, ARM::LDC2L_PRE, Convert__CoprocNum1_0__CoprocReg1_1__AddrMode52_2, Feature_PreV8, { MCK_CoprocNum, MCK_CoprocReg, MCK_AddrMode5, MCK__EXCLAIM_ }, },
-  { 405 /* ldc2l */, ARM::LDC2L_OPTION, Convert__CoprocNum1_0__CoprocReg1_1__MemNoOffset1_2__CoprocOption1_3, Feature_PreV8, { MCK_CoprocNum, MCK_CoprocReg, MCK_MemNoOffset, MCK_CoprocOption }, },
-  { 405 /* ldc2l */, ARM::LDC2L_POST, Convert__CoprocNum1_0__CoprocReg1_1__MemNoOffset1_2__PostIdxImm8s41_3, Feature_PreV8, { MCK_CoprocNum, MCK_CoprocReg, MCK_MemNoOffset, MCK_PostIdxImm8s4 }, },
+  { 405 /* ldc2l */, ARM::LDC2L_PRE, Convert__CoprocNum1_0__CoprocReg1_1__AddrMode52_2, Feature_IsARM|Feature_PreV8, { MCK_CoprocNum, MCK_CoprocReg, MCK_AddrMode5, MCK__EXCLAIM_ }, },
+  { 405 /* ldc2l */, ARM::LDC2L_OPTION, Convert__CoprocNum1_0__CoprocReg1_1__MemNoOffset1_2__CoprocOption1_3, Feature_IsARM|Feature_PreV8, { MCK_CoprocNum, MCK_CoprocReg, MCK_MemNoOffset, MCK_CoprocOption }, },
+  { 405 /* ldc2l */, ARM::LDC2L_POST, Convert__CoprocNum1_0__CoprocReg1_1__MemNoOffset1_2__PostIdxImm8s41_3, Feature_IsARM|Feature_PreV8, { MCK_CoprocNum, MCK_CoprocReg, MCK_MemNoOffset, MCK_PostIdxImm8s4 }, },
   { 405 /* ldc2l */, ARM::t2LDC2L_PRE, Convert__CoprocNum1_1__CoprocReg1_2__AddrMode52_3__CondCode2_0, Feature_PreV8|Feature_IsThumb2, { MCK_CondCode, MCK_CoprocNum, MCK_CoprocReg, MCK_AddrMode5, MCK__EXCLAIM_ }, },
   { 405 /* ldc2l */, ARM::t2LDC2L_OPTION, Convert__CoprocNum1_1__CoprocReg1_2__MemNoOffset1_3__CoprocOption1_4__CondCode2_0, Feature_PreV8|Feature_IsThumb2, { MCK_CondCode, MCK_CoprocNum, MCK_CoprocReg, MCK_MemNoOffset, MCK_CoprocOption }, },
   { 405 /* ldc2l */, ARM::t2LDC2L_POST, Convert__CoprocNum1_1__CoprocReg1_2__MemNoOffset1_3__PostIdxImm8s41_4__CondCode2_0, Feature_PreV8|Feature_IsThumb2, { MCK_CondCode, MCK_CoprocNum, MCK_CoprocReg, MCK_MemNoOffset, MCK_PostIdxImm8s4 }, },
@@ -7160,18 +7239,20 @@ static const MatchEntry MatchTable0[] = {
   { 527 /* lsl */, ARM::tLSLrr, Convert__Reg1_2__CCOut1_0__Tie0__Reg1_3__CondCode2_1, Feature_IsThumb, { MCK_CCOut, MCK_CondCode, MCK_tGPR, MCK_tGPR }, },
   { 527 /* lsl */, ARM::tLSLri, Convert__Reg1_2__CCOut1_0__Reg1_2__Imm0_311_3__CondCode2_1, Feature_IsThumb, { MCK_CCOut, MCK_CondCode, MCK_tGPR, MCK_Imm0_31 }, },
   { 527 /* lsl */, ARM::t2LSLrr, Convert__Reg1_2__Reg1_2__Reg1_3__CondCode2_1__CCOut1_0, Feature_IsThumb2, { MCK_CCOut, MCK_CondCode, MCK_rGPR, MCK_rGPR }, },
-  { 527 /* lsl */, ARM::t2LSLri, Convert__Reg1_2__Reg1_2__Imm0_311_3__CondCode2_1__CCOut1_0, Feature_IsThumb2, { MCK_CCOut, MCK_CondCode, MCK_rGPR, MCK_Imm0_31 }, },
+  { 527 /* lsl */, ARM::t2LSLri, Convert__Reg1_2__Reg1_2__Imm1_311_3__CondCode2_1__CCOut1_0, Feature_IsThumb2, { MCK_CCOut, MCK_CondCode, MCK_rGPR, MCK_Imm1_31 }, },
   { 527 /* lsl */, ARM::LSLr, Convert__Reg1_2__Reg1_2__Reg1_3__CondCode2_1__CCOut1_0, Feature_IsARM, { MCK_CCOut, MCK_CondCode, MCK_GPRnopc, MCK_GPRnopc }, },
   { 527 /* lsl */, ARM::LSLi, Convert__Reg1_2__Reg1_2__Imm0_311_3__CondCode2_1__CCOut1_0, Feature_IsARM, { MCK_CCOut, MCK_CondCode, MCK_GPR, MCK_Imm0_31 }, },
   { 527 /* lsl */, ARM::t2LSLrr, Convert__Reg1_3__Reg1_3__Reg1_4__CondCode2_1__CCOut1_0, Feature_IsThumb2, { MCK_CCOut, MCK_CondCode, MCK__DOT_w, MCK_rGPR, MCK_rGPR }, },
-  { 527 /* lsl */, ARM::t2LSLri, Convert__Reg1_3__Reg1_3__Imm0_311_4__CondCode2_1__CCOut1_0, Feature_IsThumb2, { MCK_CCOut, MCK_CondCode, MCK__DOT_w, MCK_rGPR, MCK_Imm0_31 }, },
+  { 527 /* lsl */, ARM::t2LSLri, Convert__Reg1_3__Reg1_3__Imm1_311_4__CondCode2_1__CCOut1_0, Feature_IsThumb2, { MCK_CCOut, MCK_CondCode, MCK__DOT_w, MCK_rGPR, MCK_Imm1_31 }, },
   { 527 /* lsl */, ARM::tLSLri, Convert__Reg1_2__CCOut1_0__Reg1_3__Imm0_311_4__CondCode2_1, Feature_IsThumb, { MCK_CCOut, MCK_CondCode, MCK_tGPR, MCK_tGPR, MCK_Imm0_31 }, },
   { 527 /* lsl */, ARM::t2LSLrr, Convert__Reg1_2__Reg1_3__Reg1_4__CondCode2_1__CCOut1_0, Feature_IsThumb2, { MCK_CCOut, MCK_CondCode, MCK_rGPR, MCK_rGPR, MCK_rGPR }, },
-  { 527 /* lsl */, ARM::t2LSLri, Convert__Reg1_2__Reg1_3__Imm0_311_4__CondCode2_1__CCOut1_0, Feature_IsThumb2, { MCK_CCOut, MCK_CondCode, MCK_rGPR, MCK_rGPR, MCK_Imm0_31 }, },
+  { 527 /* lsl */, ARM::t2LSLri, Convert__Reg1_2__Reg1_3__Imm1_311_4__CondCode2_1__CCOut1_0, Feature_IsThumb2, { MCK_CCOut, MCK_CondCode, MCK_rGPR, MCK_rGPR, MCK_Imm1_31 }, },
+  { 527 /* lsl */, ARM::t2MOVr, Convert__Reg1_2__Reg1_3__CondCode2_1__CCOut1_0, Feature_IsThumb2, { MCK_CCOut, MCK_CondCode, MCK_GPRnopc, MCK_GPRnopc, MCK__35_0 }, },
   { 527 /* lsl */, ARM::LSLr, Convert__Reg1_2__Reg1_3__Reg1_4__CondCode2_1__CCOut1_0, Feature_IsARM, { MCK_CCOut, MCK_CondCode, MCK_GPRnopc, MCK_GPRnopc, MCK_GPRnopc }, },
   { 527 /* lsl */, ARM::LSLi, Convert__Reg1_2__Reg1_3__Imm0_311_4__CondCode2_1__CCOut1_0, Feature_IsARM, { MCK_CCOut, MCK_CondCode, MCK_GPR, MCK_GPR, MCK_Imm0_31 }, },
   { 527 /* lsl */, ARM::t2LSLrr, Convert__Reg1_3__Reg1_4__Reg1_5__CondCode2_1__CCOut1_0, Feature_IsThumb2, { MCK_CCOut, MCK_CondCode, MCK__DOT_w, MCK_rGPR, MCK_rGPR, MCK_rGPR }, },
-  { 527 /* lsl */, ARM::t2LSLri, Convert__Reg1_3__Reg1_4__Imm0_311_5__CondCode2_1__CCOut1_0, Feature_IsThumb2, { MCK_CCOut, MCK_CondCode, MCK__DOT_w, MCK_rGPR, MCK_rGPR, MCK_Imm0_31 }, },
+  { 527 /* lsl */, ARM::t2LSLri, Convert__Reg1_3__Reg1_4__Imm1_311_5__CondCode2_1__CCOut1_0, Feature_IsThumb2, { MCK_CCOut, MCK_CondCode, MCK__DOT_w, MCK_rGPR, MCK_rGPR, MCK_Imm1_31 }, },
+  { 527 /* lsl */, ARM::t2MOVr, Convert__Reg1_3__Reg1_4__CondCode2_1__CCOut1_0, Feature_IsThumb2, { MCK_CCOut, MCK_CondCode, MCK__DOT_w, MCK_GPRnopc, MCK_GPRnopc, MCK__35_0 }, },
   { 531 /* lsr */, ARM::tLSRrr, Convert__Reg1_2__CCOut1_0__Tie0__Reg1_3__CondCode2_1, Feature_IsThumb, { MCK_CCOut, MCK_CondCode, MCK_tGPR, MCK_tGPR }, },
   { 531 /* lsr */, ARM::tLSRri, Convert__Reg1_2__CCOut1_0__Reg1_2__ImmThumbSR1_3__CondCode2_1, Feature_IsThumb, { MCK_CCOut, MCK_CondCode, MCK_tGPR, MCK_ImmThumbSR }, },
   { 531 /* lsr */, ARM::t2LSRrr, Convert__Reg1_2__Reg1_2__Reg1_3__CondCode2_1__CCOut1_0, Feature_IsThumb2, { MCK_CCOut, MCK_CondCode, MCK_rGPR, MCK_rGPR }, },
@@ -7193,11 +7274,11 @@ static const MatchEntry MatchTable0[] = {
   { 535 /* mcr */, ARM::t2MCR, Convert__CoprocNum1_1__Imm0_71_2__Reg1_3__CoprocReg1_4__CoprocReg1_5__Imm0_71_6__CondCode2_0, Feature_IsThumb2, { MCK_CondCode, MCK_CoprocNum, MCK_Imm0_7, MCK_GPR, MCK_CoprocReg, MCK_CoprocReg, MCK_Imm0_7 }, },
   { 539 /* mcr2 */, ARM::MCR2, Convert__CoprocNum1_0__Imm0_71_1__Reg1_2__CoprocReg1_3__CoprocReg1_4__imm_95_0, Feature_IsARM, { MCK_CoprocNum, MCK_Imm0_7, MCK_GPR, MCK_CoprocReg, MCK_CoprocReg }, },
   { 539 /* mcr2 */, ARM::t2MCR2, Convert__CoprocNum1_1__Imm0_71_2__Reg1_3__CoprocReg1_4__CoprocReg1_5__imm_95_0__CondCode2_0, Feature_IsThumb2, { MCK_CondCode, MCK_CoprocNum, MCK_Imm0_7, MCK_GPR, MCK_CoprocReg, MCK_CoprocReg }, },
-  { 539 /* mcr2 */, ARM::MCR2, Convert__CoprocNum1_0__Imm0_71_1__Reg1_2__CoprocReg1_3__CoprocReg1_4__Imm0_71_5, Feature_PreV8, { MCK_CoprocNum, MCK_Imm0_7, MCK_GPR, MCK_CoprocReg, MCK_CoprocReg, MCK_Imm0_7 }, },
+  { 539 /* mcr2 */, ARM::MCR2, Convert__CoprocNum1_0__Imm0_71_1__Reg1_2__CoprocReg1_3__CoprocReg1_4__Imm0_71_5, Feature_IsARM|Feature_PreV8, { MCK_CoprocNum, MCK_Imm0_7, MCK_GPR, MCK_CoprocReg, MCK_CoprocReg, MCK_Imm0_7 }, },
   { 539 /* mcr2 */, ARM::t2MCR2, Convert__CoprocNum1_1__Imm0_71_2__Reg1_3__CoprocReg1_4__CoprocReg1_5__Imm0_71_6__CondCode2_0, Feature_IsThumb2|Feature_PreV8, { MCK_CondCode, MCK_CoprocNum, MCK_Imm0_7, MCK_GPR, MCK_CoprocReg, MCK_CoprocReg, MCK_Imm0_7 }, },
   { 544 /* mcrr */, ARM::MCRR, Convert__CoprocNum1_1__Imm0_151_2__Reg1_3__Reg1_4__CoprocReg1_5__CondCode2_0, Feature_IsARM, { MCK_CondCode, MCK_CoprocNum, MCK_Imm0_15, MCK_GPRnopc, MCK_GPRnopc, MCK_CoprocReg }, },
   { 544 /* mcrr */, ARM::t2MCRR, Convert__CoprocNum1_1__Imm0_151_2__Reg1_3__Reg1_4__CoprocReg1_5__CondCode2_0, Feature_IsThumb2, { MCK_CondCode, MCK_CoprocNum, MCK_Imm0_15, MCK_GPR, MCK_GPR, MCK_CoprocReg }, },
-  { 549 /* mcrr2 */, ARM::MCRR2, Convert__CoprocNum1_0__Imm0_151_1__Reg1_2__Reg1_3__CoprocReg1_4, Feature_PreV8, { MCK_CoprocNum, MCK_Imm0_15, MCK_GPRnopc, MCK_GPRnopc, MCK_CoprocReg }, },
+  { 549 /* mcrr2 */, ARM::MCRR2, Convert__CoprocNum1_0__Imm0_151_1__Reg1_2__Reg1_3__CoprocReg1_4, Feature_IsARM|Feature_PreV8, { MCK_CoprocNum, MCK_Imm0_15, MCK_GPRnopc, MCK_GPRnopc, MCK_CoprocReg }, },
   { 549 /* mcrr2 */, ARM::t2MCRR2, Convert__CoprocNum1_1__Imm0_151_2__Reg1_3__Reg1_4__CoprocReg1_5__CondCode2_0, Feature_IsThumb2|Feature_PreV8, { MCK_CondCode, MCK_CoprocNum, MCK_Imm0_15, MCK_GPR, MCK_GPR, MCK_CoprocReg }, },
   { 555 /* mla */, ARM::t2MLA, Convert__Reg1_1__Reg1_2__Reg1_3__Reg1_4__CondCode2_0, Feature_IsThumb2, { MCK_CondCode, MCK_rGPR, MCK_rGPR, MCK_rGPR, MCK_rGPR }, },
   { 555 /* mla */, ARM::MLA, Convert__Reg1_2__Reg1_3__Reg1_4__Reg1_5__CondCode2_1__CCOut1_0, Feature_IsARM|Feature_HasV6, { MCK_CCOut, MCK_CondCode, MCK_GPRnopc, MCK_GPRnopc, MCK_GPRnopc, MCK_GPRnopc }, },
@@ -7209,28 +7290,28 @@ static const MatchEntry MatchTable0[] = {
   { 563 /* mov */, ARM::t2MOVsi, Convert__Reg1_1__RegShiftedImm2_2__CondCode2_0, Feature_IsThumb2, { MCK_CondCode, MCK_rGPR, MCK_RegShiftedImm }, },
   { 563 /* mov */, ARM::t2MOVsr, Convert__Reg1_1__RegShiftedReg3_2__CondCode2_0, Feature_IsThumb2, { MCK_CondCode, MCK_rGPR, MCK_RegShiftedReg }, },
   { 563 /* mov */, ARM::t2MOVi, Convert__Reg1_1__T2SOImm1_2__CondCode2_0__reg0, Feature_IsThumb2, { MCK_CondCode, MCK_rGPR, MCK_T2SOImm }, },
-  { 563 /* mov */, ARM::t2MVNi, Convert__Reg1_1__T2SOImmNot1_2__CondCode2_0__reg0, Feature_IsThumb2, { MCK_CondCode, MCK_rGPR, MCK_T2SOImmNot }, },
+  { 563 /* mov */, ARM::t2MVNi, Convert__Reg1_1__T2SOImmNot1_2__CondCode2_0__reg0, Feature_IsThumb2|Feature_UseNegativeImmediates, { MCK_CondCode, MCK_rGPR, MCK_T2SOImmNot }, },
   { 563 /* mov */, ARM::tMOVr, Convert__Reg1_1__Reg1_2__CondCode2_0, Feature_IsThumb, { MCK_CondCode, MCK_GPR, MCK_GPR }, },
   { 563 /* mov */, ARM::MOVi16, Convert__Reg1_1__Imm0_65535Expr1_2__CondCode2_0, Feature_IsARM|Feature_HasV6T2, { MCK_CondCode, MCK_GPR, MCK_Imm0_65535Expr }, },
   { 563 /* mov */, ARM::MOVr_TC, Convert__Reg1_2__Reg1_3__CondCode2_1__CCOut1_0, Feature_IsARM, { MCK_CCOut, MCK_CondCode, MCK_tcGPR, MCK_tcGPR }, },
   { 563 /* mov */, ARM::tMOVi8, Convert__Reg1_2__CCOut1_0__Imm0_2551_3__CondCode2_1, Feature_IsThumb, { MCK_CCOut, MCK_CondCode, MCK_tGPR, MCK_Imm0_255 }, },
-  { 563 /* mov */, ARM::MVNi, Convert__Reg1_2__ModImmNot1_3__CondCode2_1__CCOut1_0, Feature_IsARM, { MCK_CCOut, MCK_CondCode, MCK_rGPR, MCK_ModImmNot }, },
+  { 563 /* mov */, ARM::MVNi, Convert__Reg1_2__ModImmNot1_3__CondCode2_1__CCOut1_0, Feature_IsARM|Feature_UseNegativeImmediates, { MCK_CCOut, MCK_CondCode, MCK_rGPR, MCK_ModImmNot }, },
   { 563 /* mov */, ARM::MOVsr, Convert__Reg1_2__RegShiftedReg3_3__CondCode2_1__CCOut1_0, Feature_IsARM, { MCK_CCOut, MCK_CondCode, MCK_GPRnopc, MCK_RegShiftedReg }, },
   { 563 /* mov */, ARM::MOVr, Convert__Reg1_2__Reg1_3__CondCode2_1__CCOut1_0, Feature_IsARM, { MCK_CCOut, MCK_CondCode, MCK_GPR, MCK_GPR }, },
   { 563 /* mov */, ARM::MOVi, Convert__Reg1_2__ModImm1_3__CondCode2_1__CCOut1_0, Feature_IsARM, { MCK_CCOut, MCK_CondCode, MCK_GPR, MCK_ModImm }, },
   { 563 /* mov */, ARM::MOVsi, Convert__Reg1_2__RegShiftedImm2_3__CondCode2_1__CCOut1_0, Feature_IsARM, { MCK_CCOut, MCK_CondCode, MCK_GPR, MCK_RegShiftedImm }, },
   { 563 /* mov */, ARM::t2MOVi, Convert__Reg1_2__T2SOImm1_3__CondCode2_0__reg0, Feature_IsThumb2, { MCK_CondCode, MCK__DOT_w, MCK_rGPR, MCK_T2SOImm }, },
-  { 563 /* mov */, ARM::t2MOVr, Convert__Reg1_2__Reg1_3__CondCode2_0__reg0, Feature_IsThumb2, { MCK_CondCode, MCK__DOT_w, MCK_GPRnopc, MCK_GPR }, },
+  { 563 /* mov */, ARM::t2MOVr, Convert__Reg1_2__Reg1_3__CondCode2_0__reg0, Feature_IsThumb2, { MCK_CondCode, MCK__DOT_w, MCK_GPRnopc, MCK_GPRnopc }, },
   { 563 /* mov */, ARM::t2MOVi, Convert__Reg1_3__T2SOImm1_4__CondCode2_1__CCOut1_0, Feature_IsThumb2, { MCK_CCOut, MCK_CondCode, MCK__DOT_w, MCK_rGPR, MCK_T2SOImm }, },
-  { 563 /* mov */, ARM::t2MOVr, Convert__Reg1_3__Reg1_4__CondCode2_1__CCOut1_0, Feature_IsThumb2, { MCK_CCOut, MCK_CondCode, MCK__DOT_w, MCK_GPRnopc, MCK_GPR }, },
+  { 563 /* mov */, ARM::t2MOVr, Convert__Reg1_3__Reg1_4__CondCode2_1__CCOut1_0, Feature_IsThumb2, { MCK_CCOut, MCK_CondCode, MCK__DOT_w, MCK_GPRnopc, MCK_GPRnopc }, },
   { 567 /* movs */, ARM::tMOVSr, Convert__Reg1_0__Reg1_1, Feature_IsThumb, { MCK_tGPR, MCK_tGPR }, },
   { 567 /* movs */, ARM::tMOVi8, Convert__Reg1_0__regCPSR__Imm0_2551_1__imm_95_14__imm_95_0, Feature_IsThumb, { MCK_tGPR, MCK_Imm0_255 }, },
   { 567 /* movs */, ARM::t2MOVSsi, Convert__Reg1_1__RegShiftedImm2_2__CondCode2_0, Feature_IsThumb2, { MCK_CondCode, MCK_rGPR, MCK_RegShiftedImm }, },
   { 567 /* movs */, ARM::t2MOVSsr, Convert__Reg1_1__RegShiftedReg3_2__CondCode2_0, Feature_IsThumb2, { MCK_CondCode, MCK_rGPR, MCK_RegShiftedReg }, },
   { 567 /* movs */, ARM::t2MOVi, Convert__Reg1_1__T2SOImm1_2__CondCode2_0__regCPSR, Feature_IsThumb2, { MCK_CondCode, MCK_rGPR, MCK_T2SOImm }, },
-  { 567 /* movs */, ARM::t2MOVr, Convert__Reg1_1__Reg1_2__CondCode2_0__regCPSR, Feature_IsThumb2, { MCK_CondCode, MCK_GPRnopc, MCK_GPR }, },
+  { 567 /* movs */, ARM::t2MOVr, Convert__Reg1_1__Reg1_2__CondCode2_0__regCPSR, Feature_IsThumb2, { MCK_CondCode, MCK_GPRnopc, MCK_GPRnopc }, },
   { 567 /* movs */, ARM::t2MOVi, Convert__Reg1_2__T2SOImm1_3__CondCode2_0__regCPSR, Feature_IsThumb2, { MCK_CondCode, MCK__DOT_w, MCK_rGPR, MCK_T2SOImm }, },
-  { 567 /* movs */, ARM::t2MOVr, Convert__Reg1_2__Reg1_3__CondCode2_0__regCPSR, Feature_IsThumb2, { MCK_CondCode, MCK__DOT_w, MCK_GPRnopc, MCK_GPR }, },
+  { 567 /* movs */, ARM::t2MOVr, Convert__Reg1_2__Reg1_3__CondCode2_0__regCPSR, Feature_IsThumb2, { MCK_CondCode, MCK__DOT_w, MCK_GPRnopc, MCK_GPRnopc }, },
   { 572 /* movt */, ARM::t2MOVTi16, Convert__Reg1_1__Tie0__Imm0_65535Expr1_2__CondCode2_0, Feature_IsThumb|Feature_HasV8MBaseline, { MCK_CondCode, MCK_rGPR, MCK_Imm0_65535Expr }, },
   { 572 /* movt */, ARM::MOVTi16, Convert__Reg1_1__Tie0__Imm0_65535Expr1_2__CondCode2_0, Feature_IsARM|Feature_HasV6T2, { MCK_CondCode, MCK_GPRnopc, MCK_Imm0_65535Expr }, },
   { 577 /* movw */, ARM::t2MOVi16, Convert__Reg1_1__Imm0_65535Expr1_2__CondCode2_0, Feature_IsThumb|Feature_HasV8MBaseline, { MCK_CondCode, MCK_rGPR, MCK_Imm0_65535Expr }, },
@@ -7241,11 +7322,11 @@ static const MatchEntry MatchTable0[] = {
   { 582 /* mrc */, ARM::t2MRC, Convert__Reg1_3__CoprocNum1_1__Imm0_71_2__CoprocReg1_4__CoprocReg1_5__Imm0_71_6__CondCode2_0, Feature_IsThumb2, { MCK_CondCode, MCK_CoprocNum, MCK_Imm0_7, MCK_GPRwithAPSR, MCK_CoprocReg, MCK_CoprocReg, MCK_Imm0_7 }, },
   { 586 /* mrc2 */, ARM::MRC2, Convert__Reg1_2__CoprocNum1_0__Imm0_71_1__CoprocReg1_3__CoprocReg1_4__imm_95_0, Feature_IsARM, { MCK_CoprocNum, MCK_Imm0_7, MCK_GPRwithAPSR, MCK_CoprocReg, MCK_CoprocReg }, },
   { 586 /* mrc2 */, ARM::t2MRC2, Convert__Reg1_3__CoprocNum1_1__Imm0_71_2__CoprocReg1_4__CoprocReg1_5__imm_95_0__CondCode2_0, Feature_IsThumb2, { MCK_CondCode, MCK_CoprocNum, MCK_Imm0_7, MCK_GPRwithAPSR, MCK_CoprocReg, MCK_CoprocReg }, },
-  { 586 /* mrc2 */, ARM::MRC2, Convert__Reg1_2__CoprocNum1_0__Imm0_71_1__CoprocReg1_3__CoprocReg1_4__Imm0_71_5, Feature_PreV8, { MCK_CoprocNum, MCK_Imm0_7, MCK_GPRwithAPSR, MCK_CoprocReg, MCK_CoprocReg, MCK_Imm0_7 }, },
+  { 586 /* mrc2 */, ARM::MRC2, Convert__Reg1_2__CoprocNum1_0__Imm0_71_1__CoprocReg1_3__CoprocReg1_4__Imm0_71_5, Feature_IsARM|Feature_PreV8, { MCK_CoprocNum, MCK_Imm0_7, MCK_GPRwithAPSR, MCK_CoprocReg, MCK_CoprocReg, MCK_Imm0_7 }, },
   { 586 /* mrc2 */, ARM::t2MRC2, Convert__Reg1_3__CoprocNum1_1__Imm0_71_2__CoprocReg1_4__CoprocReg1_5__Imm0_71_6__CondCode2_0, Feature_IsThumb2|Feature_PreV8, { MCK_CondCode, MCK_CoprocNum, MCK_Imm0_7, MCK_GPRwithAPSR, MCK_CoprocReg, MCK_CoprocReg, MCK_Imm0_7 }, },
   { 591 /* mrrc */, ARM::MRRC, Convert__Reg1_3__Reg1_4__CoprocNum1_1__Imm0_151_2__CoprocReg1_5__CondCode2_0, Feature_IsARM, { MCK_CondCode, MCK_CoprocNum, MCK_Imm0_15, MCK_GPRnopc, MCK_GPRnopc, MCK_CoprocReg }, },
   { 591 /* mrrc */, ARM::t2MRRC, Convert__Reg1_3__Reg1_4__CoprocNum1_1__Imm0_151_2__CoprocReg1_5__CondCode2_0, Feature_IsThumb2, { MCK_CondCode, MCK_CoprocNum, MCK_Imm0_15, MCK_GPR, MCK_GPR, MCK_CoprocReg }, },
-  { 596 /* mrrc2 */, ARM::MRRC2, Convert__Reg1_2__Reg1_3__CoprocNum1_0__Imm0_151_1__CoprocReg1_4, Feature_PreV8, { MCK_CoprocNum, MCK_Imm0_15, MCK_GPRnopc, MCK_GPRnopc, MCK_CoprocReg }, },
+  { 596 /* mrrc2 */, ARM::MRRC2, Convert__Reg1_2__Reg1_3__CoprocNum1_0__Imm0_151_1__CoprocReg1_4, Feature_IsARM|Feature_PreV8, { MCK_CoprocNum, MCK_Imm0_15, MCK_GPRnopc, MCK_GPRnopc, MCK_CoprocReg }, },
   { 596 /* mrrc2 */, ARM::t2MRRC2, Convert__Reg1_3__Reg1_4__CoprocNum1_1__Imm0_151_2__CoprocReg1_5__CondCode2_0, Feature_IsThumb2|Feature_PreV8, { MCK_CondCode, MCK_CoprocNum, MCK_Imm0_15, MCK_GPR, MCK_GPR, MCK_CoprocReg }, },
   { 602 /* mrs */, ARM::t2MRSbanked, Convert__Reg1_1__BankedReg1_2__CondCode2_0, Feature_IsThumb|Feature_HasVirtualization, { MCK_CondCode, MCK_rGPR, MCK_BankedReg }, },
   { 602 /* mrs */, ARM::t2MRS_M, Convert__Reg1_1__MSRMask1_2__CondCode2_0, Feature_IsThumb|Feature_IsMClass, { MCK_CondCode, MCK_rGPR, MCK_MSRMask }, },
@@ -7269,12 +7350,12 @@ static const MatchEntry MatchTable0[] = {
   { 610 /* mul */, ARM::tMUL, ConvertCustom_cvtThumbMultiply, Feature_IsThumb, { MCK_CCOut, MCK_CondCode, MCK_tGPR, MCK_tGPR, MCK_tGPR }, },
   { 610 /* mul */, ARM::MUL, Convert__Reg1_2__Reg1_3__Reg1_4__CondCode2_1__CCOut1_0, Feature_IsARM|Feature_HasV6, { MCK_CCOut, MCK_CondCode, MCK_GPRnopc, MCK_GPRnopc, MCK_GPRnopc }, },
   { 610 /* mul */, ARM::MUL, Convert__Reg1_2__Reg1_3__Reg1_4__CondCode2_1__CCOut1_0, Feature_IsARM, { MCK_CCOut, MCK_CondCode, MCK_GPRnopc, MCK_GPRnopc, MCK_GPRnopc }, },
-  { 614 /* mvn */, ARM::t2MOVi, Convert__Reg1_1__T2SOImmNot1_2__CondCode2_0__reg0, Feature_IsThumb2, { MCK_CondCode, MCK_rGPR, MCK_T2SOImmNot }, },
   { 614 /* mvn */, ARM::tMVN, Convert__Reg1_2__CCOut1_0__Reg1_3__CondCode2_1, Feature_IsThumb, { MCK_CCOut, MCK_CondCode, MCK_tGPR, MCK_tGPR }, },
   { 614 /* mvn */, ARM::t2MVNr, Convert__Reg1_2__Reg1_3__CondCode2_1__CCOut1_0, Feature_IsThumb2, { MCK_CCOut, MCK_CondCode, MCK_rGPR, MCK_rGPR }, },
-  { 614 /* mvn */, ARM::MOVi, Convert__Reg1_2__ModImmNot1_3__CondCode2_1__CCOut1_0, Feature_IsARM, { MCK_CCOut, MCK_CondCode, MCK_rGPR, MCK_ModImmNot }, },
+  { 614 /* mvn */, ARM::MOVi, Convert__Reg1_2__ModImmNot1_3__CondCode2_1__CCOut1_0, Feature_IsARM|Feature_UseNegativeImmediates, { MCK_CCOut, MCK_CondCode, MCK_rGPR, MCK_ModImmNot }, },
   { 614 /* mvn */, ARM::t2MVNs, Convert__Reg1_2__RegShiftedImm2_3__CondCode2_1__CCOut1_0, Feature_IsThumb2, { MCK_CCOut, MCK_CondCode, MCK_rGPR, MCK_RegShiftedImm }, },
   { 614 /* mvn */, ARM::t2MVNi, Convert__Reg1_2__T2SOImm1_3__CondCode2_1__CCOut1_0, Feature_IsThumb2, { MCK_CCOut, MCK_CondCode, MCK_rGPR, MCK_T2SOImm }, },
+  { 614 /* mvn */, ARM::t2MOVi, Convert__Reg1_2__T2SOImmNot1_3__CondCode2_1__CCOut1_0, Feature_IsThumb2|Feature_UseNegativeImmediates, { MCK_CCOut, MCK_CondCode, MCK_rGPR, MCK_T2SOImmNot }, },
   { 614 /* mvn */, ARM::MVNr, Convert__Reg1_2__Reg1_3__CondCode2_1__CCOut1_0, Feature_IsARM, { MCK_CCOut, MCK_CondCode, MCK_GPR, MCK_GPR }, },
   { 614 /* mvn */, ARM::MVNi, Convert__Reg1_2__ModImm1_3__CondCode2_1__CCOut1_0, Feature_IsARM, { MCK_CCOut, MCK_CondCode, MCK_GPR, MCK_ModImm }, },
   { 614 /* mvn */, ARM::MVNsi, Convert__Reg1_2__RegShiftedImm2_3__CondCode2_1__CCOut1_0, Feature_IsARM, { MCK_CCOut, MCK_CondCode, MCK_GPR, MCK_RegShiftedImm }, },
@@ -7317,13 +7398,13 @@ static const MatchEntry MatchTable0[] = {
   { 630 /* orr */, ARM::t2ORRrr, Convert__Reg1_3__Reg1_4__Reg1_5__CondCode2_1__CCOut1_0, Feature_IsThumb2, { MCK_CCOut, MCK_CondCode, MCK__DOT_w, MCK_rGPR, MCK_rGPR, MCK_rGPR }, },
   { 630 /* orr */, ARM::t2ORRrs, Convert__Reg1_3__Reg1_4__RegShiftedImm2_5__CondCode2_1__CCOut1_0, Feature_IsThumb2, { MCK_CCOut, MCK_CondCode, MCK__DOT_w, MCK_rGPR, MCK_rGPR, MCK_RegShiftedImm }, },
   { 630 /* orr */, ARM::t2ORRri, Convert__Reg1_3__Reg1_4__T2SOImm1_5__CondCode2_1__CCOut1_0, Feature_IsThumb2, { MCK_CCOut, MCK_CondCode, MCK__DOT_w, MCK_rGPR, MCK_rGPR, MCK_T2SOImm }, },
-  { 634 /* pkhbt */, ARM::t2PKHBT, Convert__Reg1_1__Reg1_2__Reg1_3__imm_95_0__CondCode2_0, Feature_HasT2ExtractPack|Feature_IsThumb2, { MCK_CondCode, MCK_rGPR, MCK_rGPR, MCK_rGPR }, },
+  { 634 /* pkhbt */, ARM::t2PKHBT, Convert__Reg1_1__Reg1_2__Reg1_3__imm_95_0__CondCode2_0, Feature_HasDSP|Feature_IsThumb2, { MCK_CondCode, MCK_rGPR, MCK_rGPR, MCK_rGPR }, },
   { 634 /* pkhbt */, ARM::PKHBT, Convert__Reg1_1__Reg1_2__Reg1_3__imm_95_0__CondCode2_0, Feature_IsARM|Feature_HasV6, { MCK_CondCode, MCK_GPRnopc, MCK_GPRnopc, MCK_GPRnopc }, },
-  { 634 /* pkhbt */, ARM::t2PKHBT, Convert__Reg1_1__Reg1_2__Reg1_3__PKHLSLImm1_4__CondCode2_0, Feature_HasT2ExtractPack|Feature_IsThumb2, { MCK_CondCode, MCK_rGPR, MCK_rGPR, MCK_rGPR, MCK_PKHLSLImm }, },
+  { 634 /* pkhbt */, ARM::t2PKHBT, Convert__Reg1_1__Reg1_2__Reg1_3__PKHLSLImm1_4__CondCode2_0, Feature_HasDSP|Feature_IsThumb2, { MCK_CondCode, MCK_rGPR, MCK_rGPR, MCK_rGPR, MCK_PKHLSLImm }, },
   { 634 /* pkhbt */, ARM::PKHBT, Convert__Reg1_1__Reg1_2__Reg1_3__PKHLSLImm1_4__CondCode2_0, Feature_IsARM|Feature_HasV6, { MCK_CondCode, MCK_GPRnopc, MCK_GPRnopc, MCK_GPRnopc, MCK_PKHLSLImm }, },
-  { 640 /* pkhtb */, ARM::t2PKHBT, Convert__Reg1_1__Reg1_3__Reg1_2__imm_95_0__CondCode2_0, Feature_HasT2ExtractPack|Feature_IsThumb2, { MCK_CondCode, MCK_rGPR, MCK_rGPR, MCK_rGPR }, },
+  { 640 /* pkhtb */, ARM::t2PKHBT, Convert__Reg1_1__Reg1_3__Reg1_2__imm_95_0__CondCode2_0, Feature_HasDSP|Feature_IsThumb2, { MCK_CondCode, MCK_rGPR, MCK_rGPR, MCK_rGPR }, },
   { 640 /* pkhtb */, ARM::PKHBT, Convert__Reg1_1__Reg1_3__Reg1_2__imm_95_0__CondCode2_0, Feature_IsARM|Feature_HasV6, { MCK_CondCode, MCK_GPRnopc, MCK_GPRnopc, MCK_GPRnopc }, },
-  { 640 /* pkhtb */, ARM::t2PKHTB, Convert__Reg1_1__Reg1_2__Reg1_3__PKHASRImm1_4__CondCode2_0, Feature_HasT2ExtractPack|Feature_IsThumb2, { MCK_CondCode, MCK_rGPR, MCK_rGPR, MCK_rGPR, MCK_PKHASRImm }, },
+  { 640 /* pkhtb */, ARM::t2PKHTB, Convert__Reg1_1__Reg1_2__Reg1_3__PKHASRImm1_4__CondCode2_0, Feature_HasDSP|Feature_IsThumb2, { MCK_CondCode, MCK_rGPR, MCK_rGPR, MCK_rGPR, MCK_PKHASRImm }, },
   { 640 /* pkhtb */, ARM::PKHTB, Convert__Reg1_1__Reg1_2__Reg1_3__PKHASRImm1_4__CondCode2_0, Feature_IsARM|Feature_HasV6, { MCK_CondCode, MCK_GPRnopc, MCK_GPRnopc, MCK_GPRnopc, MCK_PKHASRImm }, },
   { 646 /* pld */, ARM::PLDi12, Convert__MemImm12Offset2_0, Feature_IsARM, { MCK_MemImm12Offset }, },
   { 646 /* pld */, ARM::PLDrs, Convert__MemRegOffset3_0, Feature_IsARM, { MCK_MemRegOffset }, },
@@ -7447,13 +7528,16 @@ static const MatchEntry MatchTable0[] = {
   { 805 /* sbc */, ARM::SBCrsr, Convert__Reg1_2__Reg1_2__RegShiftedReg3_3__CondCode2_1__CCOut1_0, Feature_IsARM, { MCK_CCOut, MCK_CondCode, MCK_GPRnopc, MCK_RegShiftedReg }, },
   { 805 /* sbc */, ARM::SBCrr, Convert__Reg1_2__Reg1_2__Reg1_3__CondCode2_1__CCOut1_0, Feature_IsARM, { MCK_CCOut, MCK_CondCode, MCK_GPR, MCK_GPR }, },
   { 805 /* sbc */, ARM::SBCri, Convert__Reg1_2__Reg1_2__ModImm1_3__CondCode2_1__CCOut1_0, Feature_IsARM, { MCK_CCOut, MCK_CondCode, MCK_GPR, MCK_ModImm }, },
+  { 805 /* sbc */, ARM::ADCri, Convert__Reg1_2__Reg1_2__ModImmNot1_3__CondCode2_1__CCOut1_0, Feature_IsARM|Feature_UseNegativeImmediates, { MCK_CCOut, MCK_CondCode, MCK_GPR, MCK_ModImmNot }, },
   { 805 /* sbc */, ARM::SBCrsi, Convert__Reg1_2__Reg1_2__RegShiftedImm2_3__CondCode2_1__CCOut1_0, Feature_IsARM, { MCK_CCOut, MCK_CondCode, MCK_GPR, MCK_RegShiftedImm }, },
   { 805 /* sbc */, ARM::t2SBCrr, Convert__Reg1_2__Reg1_3__Reg1_4__CondCode2_1__CCOut1_0, Feature_IsThumb2, { MCK_CCOut, MCK_CondCode, MCK_rGPR, MCK_rGPR, MCK_rGPR }, },
   { 805 /* sbc */, ARM::t2SBCrs, Convert__Reg1_2__Reg1_3__RegShiftedImm2_4__CondCode2_1__CCOut1_0, Feature_IsThumb2, { MCK_CCOut, MCK_CondCode, MCK_rGPR, MCK_rGPR, MCK_RegShiftedImm }, },
   { 805 /* sbc */, ARM::t2SBCri, Convert__Reg1_2__Reg1_3__T2SOImm1_4__CondCode2_1__CCOut1_0, Feature_IsThumb2, { MCK_CCOut, MCK_CondCode, MCK_rGPR, MCK_rGPR, MCK_T2SOImm }, },
+  { 805 /* sbc */, ARM::t2ADCri, Convert__Reg1_2__Reg1_3__T2SOImmNot1_4__CondCode2_1__CCOut1_0, Feature_IsThumb2|Feature_UseNegativeImmediates, { MCK_CCOut, MCK_CondCode, MCK_rGPR, MCK_rGPR, MCK_T2SOImmNot }, },
   { 805 /* sbc */, ARM::SBCrsr, Convert__Reg1_2__Reg1_3__RegShiftedReg3_4__CondCode2_1__CCOut1_0, Feature_IsARM, { MCK_CCOut, MCK_CondCode, MCK_GPRnopc, MCK_GPRnopc, MCK_RegShiftedReg }, },
   { 805 /* sbc */, ARM::SBCrr, Convert__Reg1_2__Reg1_3__Reg1_4__CondCode2_1__CCOut1_0, Feature_IsARM, { MCK_CCOut, MCK_CondCode, MCK_GPR, MCK_GPR, MCK_GPR }, },
   { 805 /* sbc */, ARM::SBCri, Convert__Reg1_2__Reg1_3__ModImm1_4__CondCode2_1__CCOut1_0, Feature_IsARM, { MCK_CCOut, MCK_CondCode, MCK_GPR, MCK_GPR, MCK_ModImm }, },
+  { 805 /* sbc */, ARM::ADCri, Convert__Reg1_2__Reg1_3__ModImmNot1_4__CondCode2_1__CCOut1_0, Feature_IsARM|Feature_UseNegativeImmediates, { MCK_CCOut, MCK_CondCode, MCK_GPR, MCK_GPR, MCK_ModImmNot }, },
   { 805 /* sbc */, ARM::SBCrsi, Convert__Reg1_2__Reg1_3__RegShiftedImm2_4__CondCode2_1__CCOut1_0, Feature_IsARM, { MCK_CCOut, MCK_CondCode, MCK_GPR, MCK_GPR, MCK_RegShiftedImm }, },
   { 805 /* sbc */, ARM::t2SBCrr, Convert__Reg1_3__Reg1_4__Reg1_5__CondCode2_1__CCOut1_0, Feature_IsThumb2, { MCK_CCOut, MCK_CondCode, MCK__DOT_w, MCK_rGPR, MCK_rGPR, MCK_rGPR }, },
   { 805 /* sbc */, ARM::t2SBCrs, Convert__Reg1_3__Reg1_4__RegShiftedImm2_5__CondCode2_1__CCOut1_0, Feature_IsThumb2, { MCK_CCOut, MCK_CondCode, MCK__DOT_w, MCK_rGPR, MCK_rGPR, MCK_RegShiftedImm }, },
@@ -7509,18 +7593,18 @@ static const MatchEntry MatchTable0[] = {
   { 999 /* smlal */, ARM::t2SMLAL, Convert__Reg1_1__Reg1_2__Reg1_3__Reg1_4__Tie0__Tie1__CondCode2_0, Feature_IsThumb2, { MCK_CondCode, MCK_rGPR, MCK_rGPR, MCK_rGPR, MCK_rGPR }, },
   { 999 /* smlal */, ARM::SMLAL, Convert__Reg1_2__Reg1_3__Reg1_4__Reg1_5__Tie0__Tie1__CondCode2_1__CCOut1_0, Feature_IsARM|Feature_HasV6, { MCK_CCOut, MCK_CondCode, MCK_GPR, MCK_GPR, MCK_GPR, MCK_GPR }, },
   { 999 /* smlal */, ARM::SMLAL, Convert__Reg1_2__Reg1_3__Reg1_4__Reg1_5__Tie0__Tie1__CondCode2_1__CCOut1_0, Feature_IsARM, { MCK_CCOut, MCK_CondCode, MCK_GPR, MCK_GPR, MCK_GPR, MCK_GPR }, },
-  { 1005 /* smlalbb */, ARM::t2SMLALBB, Convert__Reg1_1__Reg1_2__Reg1_3__Reg1_4__CondCode2_0, Feature_IsThumb2|Feature_HasDSP, { MCK_CondCode, MCK_rGPR, MCK_rGPR, MCK_rGPR, MCK_rGPR }, },
-  { 1005 /* smlalbb */, ARM::SMLALBB, Convert__Reg1_1__Reg1_2__Reg1_3__Reg1_4__CondCode2_0, Feature_IsARM|Feature_HasV5TE, { MCK_CondCode, MCK_GPRnopc, MCK_GPRnopc, MCK_GPRnopc, MCK_GPRnopc }, },
-  { 1013 /* smlalbt */, ARM::t2SMLALBT, Convert__Reg1_1__Reg1_2__Reg1_3__Reg1_4__CondCode2_0, Feature_IsThumb2|Feature_HasDSP, { MCK_CondCode, MCK_rGPR, MCK_rGPR, MCK_rGPR, MCK_rGPR }, },
-  { 1013 /* smlalbt */, ARM::SMLALBT, Convert__Reg1_1__Reg1_2__Reg1_3__Reg1_4__CondCode2_0, Feature_IsARM|Feature_HasV5TE, { MCK_CondCode, MCK_GPRnopc, MCK_GPRnopc, MCK_GPRnopc, MCK_GPRnopc }, },
+  { 1005 /* smlalbb */, ARM::t2SMLALBB, Convert__Reg1_1__Reg1_2__Reg1_3__Reg1_4__Tie0__Tie1__CondCode2_0, Feature_IsThumb2|Feature_HasDSP, { MCK_CondCode, MCK_rGPR, MCK_rGPR, MCK_rGPR, MCK_rGPR }, },
+  { 1005 /* smlalbb */, ARM::SMLALBB, Convert__Reg1_1__Reg1_2__Reg1_3__Reg1_4__Tie0__Tie1__CondCode2_0, Feature_IsARM|Feature_HasV5TE, { MCK_CondCode, MCK_GPRnopc, MCK_GPRnopc, MCK_GPRnopc, MCK_GPRnopc }, },
+  { 1013 /* smlalbt */, ARM::t2SMLALBT, Convert__Reg1_1__Reg1_2__Reg1_3__Reg1_4__Tie0__Tie1__CondCode2_0, Feature_IsThumb2|Feature_HasDSP, { MCK_CondCode, MCK_rGPR, MCK_rGPR, MCK_rGPR, MCK_rGPR }, },
+  { 1013 /* smlalbt */, ARM::SMLALBT, Convert__Reg1_1__Reg1_2__Reg1_3__Reg1_4__Tie0__Tie1__CondCode2_0, Feature_IsARM|Feature_HasV5TE, { MCK_CondCode, MCK_GPRnopc, MCK_GPRnopc, MCK_GPRnopc, MCK_GPRnopc }, },
   { 1021 /* smlald */, ARM::t2SMLALD, Convert__Reg1_1__Reg1_2__Reg1_3__Reg1_4__CondCode2_0, Feature_IsThumb2|Feature_HasDSP, { MCK_CondCode, MCK_rGPR, MCK_rGPR, MCK_rGPR, MCK_rGPR }, },
   { 1021 /* smlald */, ARM::SMLALD, Convert__Reg1_1__Reg1_2__Reg1_3__Reg1_4__CondCode2_0, Feature_IsARM|Feature_HasV6, { MCK_CondCode, MCK_GPRnopc, MCK_GPRnopc, MCK_GPRnopc, MCK_GPRnopc }, },
   { 1028 /* smlaldx */, ARM::t2SMLALDX, Convert__Reg1_1__Reg1_2__Reg1_3__Reg1_4__CondCode2_0, Feature_IsThumb2|Feature_HasDSP, { MCK_CondCode, MCK_rGPR, MCK_rGPR, MCK_rGPR, MCK_rGPR }, },
   { 1028 /* smlaldx */, ARM::SMLALDX, Convert__Reg1_1__Reg1_2__Reg1_3__Reg1_4__CondCode2_0, Feature_IsARM|Feature_HasV6, { MCK_CondCode, MCK_GPRnopc, MCK_GPRnopc, MCK_GPRnopc, MCK_GPRnopc }, },
-  { 1036 /* smlaltb */, ARM::t2SMLALTB, Convert__Reg1_1__Reg1_2__Reg1_3__Reg1_4__CondCode2_0, Feature_IsThumb2|Feature_HasDSP, { MCK_CondCode, MCK_rGPR, MCK_rGPR, MCK_rGPR, MCK_rGPR }, },
-  { 1036 /* smlaltb */, ARM::SMLALTB, Convert__Reg1_1__Reg1_2__Reg1_3__Reg1_4__CondCode2_0, Feature_IsARM|Feature_HasV5TE, { MCK_CondCode, MCK_GPRnopc, MCK_GPRnopc, MCK_GPRnopc, MCK_GPRnopc }, },
-  { 1044 /* smlaltt */, ARM::t2SMLALTT, Convert__Reg1_1__Reg1_2__Reg1_3__Reg1_4__CondCode2_0, Feature_IsThumb2|Feature_HasDSP, { MCK_CondCode, MCK_rGPR, MCK_rGPR, MCK_rGPR, MCK_rGPR }, },
-  { 1044 /* smlaltt */, ARM::SMLALTT, Convert__Reg1_1__Reg1_2__Reg1_3__Reg1_4__CondCode2_0, Feature_IsARM|Feature_HasV5TE, { MCK_CondCode, MCK_GPRnopc, MCK_GPRnopc, MCK_GPRnopc, MCK_GPRnopc }, },
+  { 1036 /* smlaltb */, ARM::t2SMLALTB, Convert__Reg1_1__Reg1_2__Reg1_3__Reg1_4__Tie0__Tie1__CondCode2_0, Feature_IsThumb2|Feature_HasDSP, { MCK_CondCode, MCK_rGPR, MCK_rGPR, MCK_rGPR, MCK_rGPR }, },
+  { 1036 /* smlaltb */, ARM::SMLALTB, Convert__Reg1_1__Reg1_2__Reg1_3__Reg1_4__Tie0__Tie1__CondCode2_0, Feature_IsARM|Feature_HasV5TE, { MCK_CondCode, MCK_GPRnopc, MCK_GPRnopc, MCK_GPRnopc, MCK_GPRnopc }, },
+  { 1044 /* smlaltt */, ARM::t2SMLALTT, Convert__Reg1_1__Reg1_2__Reg1_3__Reg1_4__Tie0__Tie1__CondCode2_0, Feature_IsThumb2|Feature_HasDSP, { MCK_CondCode, MCK_rGPR, MCK_rGPR, MCK_rGPR, MCK_rGPR }, },
+  { 1044 /* smlaltt */, ARM::SMLALTT, Convert__Reg1_1__Reg1_2__Reg1_3__Reg1_4__Tie0__Tie1__CondCode2_0, Feature_IsARM|Feature_HasV5TE, { MCK_CondCode, MCK_GPRnopc, MCK_GPRnopc, MCK_GPRnopc, MCK_GPRnopc }, },
   { 1052 /* smlatb */, ARM::t2SMLATB, Convert__Reg1_1__Reg1_2__Reg1_3__Reg1_4__CondCode2_0, Feature_IsThumb2|Feature_HasDSP, { MCK_CondCode, MCK_rGPR, MCK_rGPR, MCK_rGPR, MCK_rGPR }, },
   { 1052 /* smlatb */, ARM::SMLATB, Convert__Reg1_1__Reg1_2__Reg1_3__Reg1_4__CondCode2_0, Feature_IsARM|Feature_HasV5TE, { MCK_CondCode, MCK_GPRnopc, MCK_GPRnopc, MCK_GPRnopc, MCK_GPR }, },
   { 1059 /* smlatt */, ARM::t2SMLATT, Convert__Reg1_1__Reg1_2__Reg1_3__Reg1_4__CondCode2_0, Feature_IsThumb2|Feature_HasDSP, { MCK_CondCode, MCK_rGPR, MCK_rGPR, MCK_rGPR, MCK_rGPR }, },
@@ -7616,19 +7700,19 @@ static const MatchEntry MatchTable0[] = {
   { 1275 /* stc */, ARM::t2STC_OPTION, Convert__CoprocNum1_1__CoprocReg1_2__MemNoOffset1_3__CoprocOption1_4__CondCode2_0, Feature_IsThumb2, { MCK_CondCode, MCK_CoprocNum, MCK_CoprocReg, MCK_MemNoOffset, MCK_CoprocOption }, },
   { 1275 /* stc */, ARM::STC_POST, Convert__CoprocNum1_1__CoprocReg1_2__MemNoOffset1_3__PostIdxImm8s41_4__CondCode2_0, Feature_IsARM, { MCK_CondCode, MCK_CoprocNum, MCK_CoprocReg, MCK_MemNoOffset, MCK_PostIdxImm8s4 }, },
   { 1275 /* stc */, ARM::t2STC_POST, Convert__CoprocNum1_1__CoprocReg1_2__MemNoOffset1_3__PostIdxImm8s41_4__CondCode2_0, Feature_IsThumb2, { MCK_CondCode, MCK_CoprocNum, MCK_CoprocReg, MCK_MemNoOffset, MCK_PostIdxImm8s4 }, },
-  { 1279 /* stc2 */, ARM::STC2_OFFSET, Convert__CoprocNum1_0__CoprocReg1_1__AddrMode52_2, Feature_PreV8, { MCK_CoprocNum, MCK_CoprocReg, MCK_AddrMode5 }, },
+  { 1279 /* stc2 */, ARM::STC2_OFFSET, Convert__CoprocNum1_0__CoprocReg1_1__AddrMode52_2, Feature_IsARM|Feature_PreV8, { MCK_CoprocNum, MCK_CoprocReg, MCK_AddrMode5 }, },
   { 1279 /* stc2 */, ARM::t2STC2_OFFSET, Convert__CoprocNum1_1__CoprocReg1_2__AddrMode52_3__CondCode2_0, Feature_PreV8|Feature_IsThumb2, { MCK_CondCode, MCK_CoprocNum, MCK_CoprocReg, MCK_AddrMode5 }, },
-  { 1279 /* stc2 */, ARM::STC2_PRE, Convert__CoprocNum1_0__CoprocReg1_1__AddrMode52_2, Feature_PreV8, { MCK_CoprocNum, MCK_CoprocReg, MCK_AddrMode5, MCK__EXCLAIM_ }, },
-  { 1279 /* stc2 */, ARM::STC2_OPTION, Convert__CoprocNum1_0__CoprocReg1_1__MemNoOffset1_2__CoprocOption1_3, Feature_PreV8, { MCK_CoprocNum, MCK_CoprocReg, MCK_MemNoOffset, MCK_CoprocOption }, },
-  { 1279 /* stc2 */, ARM::STC2_POST, Convert__CoprocNum1_0__CoprocReg1_1__MemNoOffset1_2__PostIdxImm8s41_3, Feature_PreV8, { MCK_CoprocNum, MCK_CoprocReg, MCK_MemNoOffset, MCK_PostIdxImm8s4 }, },
+  { 1279 /* stc2 */, ARM::STC2_PRE, Convert__CoprocNum1_0__CoprocReg1_1__AddrMode52_2, Feature_IsARM|Feature_PreV8, { MCK_CoprocNum, MCK_CoprocReg, MCK_AddrMode5, MCK__EXCLAIM_ }, },
+  { 1279 /* stc2 */, ARM::STC2_OPTION, Convert__CoprocNum1_0__CoprocReg1_1__MemNoOffset1_2__CoprocOption1_3, Feature_IsARM|Feature_PreV8, { MCK_CoprocNum, MCK_CoprocReg, MCK_MemNoOffset, MCK_CoprocOption }, },
+  { 1279 /* stc2 */, ARM::STC2_POST, Convert__CoprocNum1_0__CoprocReg1_1__MemNoOffset1_2__PostIdxImm8s41_3, Feature_IsARM|Feature_PreV8, { MCK_CoprocNum, MCK_CoprocReg, MCK_MemNoOffset, MCK_PostIdxImm8s4 }, },
   { 1279 /* stc2 */, ARM::t2STC2_PRE, Convert__CoprocNum1_1__CoprocReg1_2__AddrMode52_3__CondCode2_0, Feature_PreV8|Feature_IsThumb2, { MCK_CondCode, MCK_CoprocNum, MCK_CoprocReg, MCK_AddrMode5, MCK__EXCLAIM_ }, },
   { 1279 /* stc2 */, ARM::t2STC2_OPTION, Convert__CoprocNum1_1__CoprocReg1_2__MemNoOffset1_3__CoprocOption1_4__CondCode2_0, Feature_PreV8|Feature_IsThumb2, { MCK_CondCode, MCK_CoprocNum, MCK_CoprocReg, MCK_MemNoOffset, MCK_CoprocOption }, },
   { 1279 /* stc2 */, ARM::t2STC2_POST, Convert__CoprocNum1_1__CoprocReg1_2__MemNoOffset1_3__PostIdxImm8s41_4__CondCode2_0, Feature_PreV8|Feature_IsThumb2, { MCK_CondCode, MCK_CoprocNum, MCK_CoprocReg, MCK_MemNoOffset, MCK_PostIdxImm8s4 }, },
-  { 1284 /* stc2l */, ARM::STC2L_OFFSET, Convert__CoprocNum1_0__CoprocReg1_1__AddrMode52_2, Feature_PreV8, { MCK_CoprocNum, MCK_CoprocReg, MCK_AddrMode5 }, },
+  { 1284 /* stc2l */, ARM::STC2L_OFFSET, Convert__CoprocNum1_0__CoprocReg1_1__AddrMode52_2, Feature_IsARM|Feature_PreV8, { MCK_CoprocNum, MCK_CoprocReg, MCK_AddrMode5 }, },
   { 1284 /* stc2l */, ARM::t2STC2L_OFFSET, Convert__CoprocNum1_1__CoprocReg1_2__AddrMode52_3__CondCode2_0, Feature_PreV8|Feature_IsThumb2, { MCK_CondCode, MCK_CoprocNum, MCK_CoprocReg, MCK_AddrMode5 }, },
-  { 1284 /* stc2l */, ARM::STC2L_PRE, Convert__CoprocNum1_0__CoprocReg1_1__AddrMode52_2, Feature_PreV8, { MCK_CoprocNum, MCK_CoprocReg, MCK_AddrMode5, MCK__EXCLAIM_ }, },
-  { 1284 /* stc2l */, ARM::STC2L_OPTION, Convert__CoprocNum1_0__CoprocReg1_1__MemNoOffset1_2__CoprocOption1_3, Feature_PreV8, { MCK_CoprocNum, MCK_CoprocReg, MCK_MemNoOffset, MCK_CoprocOption }, },
-  { 1284 /* stc2l */, ARM::STC2L_POST, Convert__CoprocNum1_0__CoprocReg1_1__MemNoOffset1_2__PostIdxImm8s41_3, Feature_PreV8, { MCK_CoprocNum, MCK_CoprocReg, MCK_MemNoOffset, MCK_PostIdxImm8s4 }, },
+  { 1284 /* stc2l */, ARM::STC2L_PRE, Convert__CoprocNum1_0__CoprocReg1_1__AddrMode52_2, Feature_IsARM|Feature_PreV8, { MCK_CoprocNum, MCK_CoprocReg, MCK_AddrMode5, MCK__EXCLAIM_ }, },
+  { 1284 /* stc2l */, ARM::STC2L_OPTION, Convert__CoprocNum1_0__CoprocReg1_1__MemNoOffset1_2__CoprocOption1_3, Feature_IsARM|Feature_PreV8, { MCK_CoprocNum, MCK_CoprocReg, MCK_MemNoOffset, MCK_CoprocOption }, },
+  { 1284 /* stc2l */, ARM::STC2L_POST, Convert__CoprocNum1_0__CoprocReg1_1__MemNoOffset1_2__PostIdxImm8s41_3, Feature_IsARM|Feature_PreV8, { MCK_CoprocNum, MCK_CoprocReg, MCK_MemNoOffset, MCK_PostIdxImm8s4 }, },
   { 1284 /* stc2l */, ARM::t2STC2L_PRE, Convert__CoprocNum1_1__CoprocReg1_2__AddrMode52_3__CondCode2_0, Feature_PreV8|Feature_IsThumb2, { MCK_CondCode, MCK_CoprocNum, MCK_CoprocReg, MCK_AddrMode5, MCK__EXCLAIM_ }, },
   { 1284 /* stc2l */, ARM::t2STC2L_OPTION, Convert__CoprocNum1_1__CoprocReg1_2__MemNoOffset1_3__CoprocOption1_4__CondCode2_0, Feature_PreV8|Feature_IsThumb2, { MCK_CondCode, MCK_CoprocNum, MCK_CoprocReg, MCK_MemNoOffset, MCK_CoprocOption }, },
   { 1284 /* stc2l */, ARM::t2STC2L_POST, Convert__CoprocNum1_1__CoprocReg1_2__MemNoOffset1_3__PostIdxImm8s41_4__CondCode2_0, Feature_PreV8|Feature_IsThumb2, { MCK_CondCode, MCK_CoprocNum, MCK_CoprocReg, MCK_MemNoOffset, MCK_PostIdxImm8s4 }, },
@@ -7751,11 +7835,13 @@ static const MatchEntry MatchTable0[] = {
   { 1421 /* sub */, ARM::tSUBspi, Convert__Reg1_1__Tie0__Imm0_508s41_2__CondCode2_0, Feature_IsThumb, { MCK_CondCode, MCK_GPRsp, MCK_Imm0_508s4 }, },
   { 1421 /* sub */, ARM::t2SUBri12, Convert__Reg1_1__Reg1_1__Imm0_40951_2__CondCode2_0, Feature_IsThumb2, { MCK_CondCode, MCK_GPRnopc, MCK_Imm0_4095 }, },
   { 1421 /* sub */, ARM::tSUBi8, Convert__Reg1_2__CCOut1_0__Tie0__Imm0_2551_3__CondCode2_1, Feature_IsThumb, { MCK_CCOut, MCK_CondCode, MCK_tGPR, MCK_Imm0_255 }, },
+  { 1421 /* sub */, ARM::tADDi8, Convert__Reg1_2__CCOut1_0__Tie0__ThumbModImmNeg8_2551_3__CondCode2_1, Feature_IsThumb|Feature_UseNegativeImmediates, { MCK_CCOut, MCK_CondCode, MCK_tGPR, MCK_ThumbModImmNeg8_255 }, },
   { 1421 /* sub */, ARM::t2SUBrr, Convert__Reg1_2__Reg1_2__Reg1_3__CondCode2_1__CCOut1_0, Feature_IsThumb2, { MCK_CCOut, MCK_CondCode, MCK_GPRnopc, MCK_rGPR }, },
   { 1421 /* sub */, ARM::t2SUBrs, Convert__Reg1_2__Reg1_2__RegShiftedImm2_3__CondCode2_1__CCOut1_0, Feature_IsThumb2, { MCK_CCOut, MCK_CondCode, MCK_GPRnopc, MCK_RegShiftedImm }, },
   { 1421 /* sub */, ARM::t2SUBri, Convert__Reg1_2__Reg1_2__T2SOImm1_3__CondCode2_1__CCOut1_0, Feature_IsThumb2, { MCK_CCOut, MCK_CondCode, MCK_GPRnopc, MCK_T2SOImm }, },
   { 1421 /* sub */, ARM::SUBrr, Convert__Reg1_2__Reg1_2__Reg1_3__CondCode2_1__CCOut1_0, Feature_IsARM, { MCK_CCOut, MCK_CondCode, MCK_GPR, MCK_GPR }, },
   { 1421 /* sub */, ARM::SUBri, Convert__Reg1_2__Reg1_2__ModImm1_3__CondCode2_1__CCOut1_0, Feature_IsARM, { MCK_CCOut, MCK_CondCode, MCK_GPR, MCK_ModImm }, },
+  { 1421 /* sub */, ARM::ADDri, Convert__Reg1_2__Reg1_2__ModImmNeg1_3__CondCode2_1__CCOut1_0, Feature_IsARM|Feature_UseNegativeImmediates, { MCK_CCOut, MCK_CondCode, MCK_GPR, MCK_ModImmNeg }, },
   { 1421 /* sub */, ARM::SUBrsi, Convert__Reg1_2__Reg1_2__RegShiftedImm2_3__CondCode2_1__CCOut1_0, Feature_IsARM, { MCK_CCOut, MCK_CondCode, MCK_GPR, MCK_RegShiftedImm }, },
   { 1421 /* sub */, ARM::SUBrsr, Convert__Reg1_2__Reg1_2__RegShiftedReg3_3__CondCode2_1__CCOut1_0, Feature_IsARM, { MCK_CCOut, MCK_CondCode, MCK_GPR, MCK_RegShiftedReg }, },
   { 1421 /* sub */, ARM::tSUBspi, Convert__regSP__Tie0__Imm0_508s41_3__CondCode2_0, Feature_IsThumb, { MCK_CondCode, MCK_GPRsp, MCK_GPRsp, MCK_Imm0_508s4 }, },
@@ -7763,33 +7849,37 @@ static const MatchEntry MatchTable0[] = {
   { 1421 /* sub */, ARM::t2SUBrr, Convert__Reg1_3__Reg1_3__Reg1_4__CondCode2_1__CCOut1_0, Feature_IsThumb2, { MCK_CCOut, MCK_CondCode, MCK__DOT_w, MCK_GPRnopc, MCK_rGPR }, },
   { 1421 /* sub */, ARM::tSUBrr, Convert__Reg1_2__CCOut1_0__Reg1_3__Reg1_4__CondCode2_1, Feature_IsThumb, { MCK_CCOut, MCK_CondCode, MCK_tGPR, MCK_tGPR, MCK_tGPR }, },
   { 1421 /* sub */, ARM::tSUBi3, Convert__Reg1_2__CCOut1_0__Reg1_3__Imm0_71_4__CondCode2_1, Feature_IsThumb, { MCK_CCOut, MCK_CondCode, MCK_tGPR, MCK_tGPR, MCK_Imm0_7 }, },
+  { 1421 /* sub */, ARM::tADDi3, Convert__Reg1_2__CCOut1_0__Reg1_3__ThumbModImmNeg1_71_4__CondCode2_1, Feature_IsThumb|Feature_UseNegativeImmediates, { MCK_CCOut, MCK_CondCode, MCK_tGPR, MCK_tGPR, MCK_ThumbModImmNeg1_7 }, },
   { 1421 /* sub */, ARM::t2SUBrr, Convert__Reg1_2__Reg1_3__Reg1_4__CondCode2_1__CCOut1_0, Feature_IsThumb2, { MCK_CCOut, MCK_CondCode, MCK_GPRnopc, MCK_GPRnopc, MCK_rGPR }, },
   { 1421 /* sub */, ARM::t2SUBrs, Convert__Reg1_2__Reg1_3__RegShiftedImm2_4__CondCode2_1__CCOut1_0, Feature_IsThumb2, { MCK_CCOut, MCK_CondCode, MCK_GPRnopc, MCK_GPRnopc, MCK_RegShiftedImm }, },
   { 1421 /* sub */, ARM::t2SUBri, Convert__Reg1_2__Reg1_3__T2SOImm1_4__CondCode2_1__CCOut1_0, Feature_IsThumb2, { MCK_CCOut, MCK_CondCode, MCK_GPRnopc, MCK_GPRnopc, MCK_T2SOImm }, },
   { 1421 /* sub */, ARM::SUBrr, Convert__Reg1_2__Reg1_3__Reg1_4__CondCode2_1__CCOut1_0, Feature_IsARM, { MCK_CCOut, MCK_CondCode, MCK_GPR, MCK_GPR, MCK_GPR }, },
   { 1421 /* sub */, ARM::SUBri, Convert__Reg1_2__Reg1_3__ModImm1_4__CondCode2_1__CCOut1_0, Feature_IsARM, { MCK_CCOut, MCK_CondCode, MCK_GPR, MCK_GPR, MCK_ModImm }, },
+  { 1421 /* sub */, ARM::ADDri, Convert__Reg1_2__Reg1_3__ModImmNeg1_4__CondCode2_1__CCOut1_0, Feature_IsARM|Feature_UseNegativeImmediates, { MCK_CCOut, MCK_CondCode, MCK_GPR, MCK_GPR, MCK_ModImmNeg }, },
   { 1421 /* sub */, ARM::SUBrsi, Convert__Reg1_2__Reg1_3__RegShiftedImm2_4__CondCode2_1__CCOut1_0, Feature_IsARM, { MCK_CCOut, MCK_CondCode, MCK_GPR, MCK_GPR, MCK_RegShiftedImm }, },
   { 1421 /* sub */, ARM::SUBrsr, Convert__Reg1_2__Reg1_3__RegShiftedReg3_4__CondCode2_1__CCOut1_0, Feature_IsARM, { MCK_CCOut, MCK_CondCode, MCK_GPR, MCK_GPR, MCK_RegShiftedReg }, },
   { 1421 /* sub */, ARM::t2SUBrr, Convert__Reg1_3__Reg1_4__Reg1_5__CondCode2_1__CCOut1_0, Feature_IsThumb2, { MCK_CCOut, MCK_CondCode, MCK__DOT_w, MCK_GPRnopc, MCK_GPRnopc, MCK_rGPR }, },
   { 1421 /* sub */, ARM::t2SUBrs, Convert__Reg1_3__Reg1_4__RegShiftedImm2_5__CondCode2_1__CCOut1_0, Feature_IsThumb2, { MCK_CCOut, MCK_CondCode, MCK__DOT_w, MCK_GPRnopc, MCK_GPRnopc, MCK_RegShiftedImm }, },
   { 1421 /* sub */, ARM::t2SUBri, Convert__Reg1_3__Reg1_4__T2SOImm1_5__CondCode2_1__CCOut1_0, Feature_IsThumb2, { MCK_CCOut, MCK_CondCode, MCK__DOT_w, MCK_GPRnopc, MCK_GPRnopc, MCK_T2SOImm }, },
+  { 1421 /* sub */, ARM::t2ADDri, Convert__Reg1_3__Reg1_4__T2SOImmNeg1_5__CondCode2_1__CCOut1_0, Feature_IsThumb2|Feature_UseNegativeImmediates, { MCK_CCOut, MCK_CondCode, MCK__DOT_w, MCK_GPRnopc, MCK_GPRnopc, MCK_T2SOImmNeg }, },
   { 1425 /* subs */, ARM::t2SUBS_PC_LR, Convert__Imm0_2551_3__CondCode2_0, Feature_IsThumb2|Feature_IsNotMClass, { MCK_CondCode, MCK_PC, MCK_LR, MCK_Imm0_255 }, },
   { 1430 /* subw */, ARM::t2SUBri12, Convert__Reg1_1__Reg1_2__Imm0_40951_3__CondCode2_0, Feature_IsThumb2, { MCK_CondCode, MCK_GPRnopc, MCK_GPR, MCK_Imm0_4095 }, },
+  { 1430 /* subw */, ARM::t2ADDri12, Convert__Reg1_1__Reg1_2__T2SOImmNeg1_3__CondCode2_0, Feature_IsThumb2|Feature_UseNegativeImmediates, { MCK_CondCode, MCK_GPRnopc, MCK_GPR, MCK_T2SOImmNeg }, },
   { 1435 /* svc */, ARM::tSVC, Convert__Imm0_2551_1__CondCode2_0, Feature_IsThumb, { MCK_CondCode, MCK_Imm0_255 }, },
   { 1435 /* svc */, ARM::SVC, Convert__Imm24bit1_1__CondCode2_0, Feature_IsARM, { MCK_CondCode, MCK_Imm24bit }, },
-  { 1439 /* swp */, ARM::SWP, Convert__Reg1_1__Reg1_2__MemNoOffset1_3__CondCode2_0, Feature_PreV8, { MCK_CondCode, MCK_GPRnopc, MCK_GPRnopc, MCK_MemNoOffset }, },
-  { 1443 /* swpb */, ARM::SWPB, Convert__Reg1_1__Reg1_2__MemNoOffset1_3__CondCode2_0, Feature_PreV8, { MCK_CondCode, MCK_GPRnopc, MCK_GPRnopc, MCK_MemNoOffset }, },
-  { 1448 /* sxtab */, ARM::t2SXTAB, Convert__Reg1_1__Reg1_2__Reg1_3__imm_95_0__CondCode2_0, Feature_HasT2ExtractPack|Feature_IsThumb2, { MCK_CondCode, MCK_rGPR, MCK_rGPR, MCK_rGPR }, },
+  { 1439 /* swp */, ARM::SWP, Convert__Reg1_1__Reg1_2__MemNoOffset1_3__CondCode2_0, Feature_IsARM|Feature_PreV8, { MCK_CondCode, MCK_GPRnopc, MCK_GPRnopc, MCK_MemNoOffset }, },
+  { 1443 /* swpb */, ARM::SWPB, Convert__Reg1_1__Reg1_2__MemNoOffset1_3__CondCode2_0, Feature_IsARM|Feature_PreV8, { MCK_CondCode, MCK_GPRnopc, MCK_GPRnopc, MCK_MemNoOffset }, },
+  { 1448 /* sxtab */, ARM::t2SXTAB, Convert__Reg1_1__Reg1_2__Reg1_3__imm_95_0__CondCode2_0, Feature_HasDSP|Feature_IsThumb2, { MCK_CondCode, MCK_rGPR, MCK_rGPR, MCK_rGPR }, },
   { 1448 /* sxtab */, ARM::SXTAB, Convert__Reg1_1__Reg1_2__Reg1_3__imm_95_0__CondCode2_0, Feature_IsARM, { MCK_CondCode, MCK_GPRnopc, MCK_GPR, MCK_GPRnopc }, },
-  { 1448 /* sxtab */, ARM::t2SXTAB, Convert__Reg1_1__Reg1_2__Reg1_3__RotImm1_4__CondCode2_0, Feature_HasT2ExtractPack|Feature_IsThumb2, { MCK_CondCode, MCK_rGPR, MCK_rGPR, MCK_rGPR, MCK_RotImm }, },
+  { 1448 /* sxtab */, ARM::t2SXTAB, Convert__Reg1_1__Reg1_2__Reg1_3__RotImm1_4__CondCode2_0, Feature_HasDSP|Feature_IsThumb2, { MCK_CondCode, MCK_rGPR, MCK_rGPR, MCK_rGPR, MCK_RotImm }, },
   { 1448 /* sxtab */, ARM::SXTAB, Convert__Reg1_1__Reg1_2__Reg1_3__RotImm1_4__CondCode2_0, Feature_IsARM|Feature_HasV6, { MCK_CondCode, MCK_GPRnopc, MCK_GPR, MCK_GPRnopc, MCK_RotImm }, },
-  { 1454 /* sxtab16 */, ARM::t2SXTAB16, Convert__Reg1_1__Reg1_2__Reg1_3__imm_95_0__CondCode2_0, Feature_HasT2ExtractPack|Feature_IsThumb2, { MCK_CondCode, MCK_rGPR, MCK_rGPR, MCK_rGPR }, },
+  { 1454 /* sxtab16 */, ARM::t2SXTAB16, Convert__Reg1_1__Reg1_2__Reg1_3__imm_95_0__CondCode2_0, Feature_HasDSP|Feature_IsThumb2, { MCK_CondCode, MCK_rGPR, MCK_rGPR, MCK_rGPR }, },
   { 1454 /* sxtab16 */, ARM::SXTAB16, Convert__Reg1_1__Reg1_2__Reg1_3__imm_95_0__CondCode2_0, Feature_IsARM, { MCK_CondCode, MCK_GPRnopc, MCK_GPR, MCK_GPRnopc }, },
-  { 1454 /* sxtab16 */, ARM::t2SXTAB16, Convert__Reg1_1__Reg1_2__Reg1_3__RotImm1_4__CondCode2_0, Feature_HasT2ExtractPack|Feature_IsThumb2, { MCK_CondCode, MCK_rGPR, MCK_rGPR, MCK_rGPR, MCK_RotImm }, },
+  { 1454 /* sxtab16 */, ARM::t2SXTAB16, Convert__Reg1_1__Reg1_2__Reg1_3__RotImm1_4__CondCode2_0, Feature_HasDSP|Feature_IsThumb2, { MCK_CondCode, MCK_rGPR, MCK_rGPR, MCK_rGPR, MCK_RotImm }, },
   { 1454 /* sxtab16 */, ARM::SXTAB16, Convert__Reg1_1__Reg1_2__Reg1_3__RotImm1_4__CondCode2_0, Feature_IsARM|Feature_HasV6, { MCK_CondCode, MCK_GPRnopc, MCK_GPR, MCK_GPRnopc, MCK_RotImm }, },
-  { 1462 /* sxtah */, ARM::t2SXTAH, Convert__Reg1_1__Reg1_2__Reg1_3__imm_95_0__CondCode2_0, Feature_HasT2ExtractPack|Feature_IsThumb2, { MCK_CondCode, MCK_rGPR, MCK_rGPR, MCK_rGPR }, },
+  { 1462 /* sxtah */, ARM::t2SXTAH, Convert__Reg1_1__Reg1_2__Reg1_3__imm_95_0__CondCode2_0, Feature_HasDSP|Feature_IsThumb2, { MCK_CondCode, MCK_rGPR, MCK_rGPR, MCK_rGPR }, },
   { 1462 /* sxtah */, ARM::SXTAH, Convert__Reg1_1__Reg1_2__Reg1_3__imm_95_0__CondCode2_0, Feature_IsARM, { MCK_CondCode, MCK_GPRnopc, MCK_GPR, MCK_GPRnopc }, },
-  { 1462 /* sxtah */, ARM::t2SXTAH, Convert__Reg1_1__Reg1_2__Reg1_3__RotImm1_4__CondCode2_0, Feature_HasT2ExtractPack|Feature_IsThumb2, { MCK_CondCode, MCK_rGPR, MCK_rGPR, MCK_rGPR, MCK_RotImm }, },
+  { 1462 /* sxtah */, ARM::t2SXTAH, Convert__Reg1_1__Reg1_2__Reg1_3__RotImm1_4__CondCode2_0, Feature_HasDSP|Feature_IsThumb2, { MCK_CondCode, MCK_rGPR, MCK_rGPR, MCK_rGPR, MCK_RotImm }, },
   { 1462 /* sxtah */, ARM::SXTAH, Convert__Reg1_1__Reg1_2__Reg1_3__RotImm1_4__CondCode2_0, Feature_IsARM|Feature_HasV6, { MCK_CondCode, MCK_GPRnopc, MCK_GPR, MCK_GPRnopc, MCK_RotImm }, },
   { 1468 /* sxtb */, ARM::tSXTB, Convert__Reg1_1__Reg1_2__CondCode2_0, Feature_IsThumb|Feature_HasV6, { MCK_CondCode, MCK_tGPR, MCK_tGPR }, },
   { 1468 /* sxtb */, ARM::t2SXTB, Convert__Reg1_1__Reg1_2__imm_95_0__CondCode2_0, Feature_IsThumb2, { MCK_CondCode, MCK_rGPR, MCK_rGPR }, },
@@ -7798,10 +7888,10 @@ static const MatchEntry MatchTable0[] = {
   { 1468 /* sxtb */, ARM::t2SXTB, Convert__Reg1_1__Reg1_2__RotImm1_3__CondCode2_0, Feature_IsThumb2, { MCK_CondCode, MCK_rGPR, MCK_rGPR, MCK_RotImm }, },
   { 1468 /* sxtb */, ARM::SXTB, Convert__Reg1_1__Reg1_2__RotImm1_3__CondCode2_0, Feature_IsARM|Feature_HasV6, { MCK_CondCode, MCK_GPRnopc, MCK_GPRnopc, MCK_RotImm }, },
   { 1468 /* sxtb */, ARM::t2SXTB, Convert__Reg1_2__Reg1_3__RotImm1_4__CondCode2_0, Feature_IsThumb2, { MCK_CondCode, MCK__DOT_w, MCK_rGPR, MCK_rGPR, MCK_RotImm }, },
-  { 1473 /* sxtb16 */, ARM::t2SXTB16, Convert__Reg1_1__Reg1_2__imm_95_0__CondCode2_0, Feature_HasT2ExtractPack|Feature_IsThumb2, { MCK_CondCode, MCK_rGPR, MCK_rGPR }, },
+  { 1473 /* sxtb16 */, ARM::t2SXTB16, Convert__Reg1_1__Reg1_2__imm_95_0__CondCode2_0, Feature_HasDSP|Feature_IsThumb2, { MCK_CondCode, MCK_rGPR, MCK_rGPR }, },
   { 1473 /* sxtb16 */, ARM::SXTB16, Convert__Reg1_1__Reg1_2__imm_95_0__CondCode2_0, Feature_IsARM, { MCK_CondCode, MCK_GPRnopc, MCK_GPRnopc }, },
-  { 1473 /* sxtb16 */, ARM::t2SXTB16, Convert__Reg1_1__Reg1_2__RotImm1_3__CondCode2_0, Feature_IsThumb2|Feature_HasT2ExtractPack, { MCK_CondCode, MCK_rGPR, MCK_rGPR, MCK_RotImm }, },
-  { 1473 /* sxtb16 */, ARM::t2SXTB16, Convert__Reg1_1__Reg1_2__RotImm1_3__CondCode2_0, Feature_HasT2ExtractPack|Feature_IsThumb2, { MCK_CondCode, MCK_rGPR, MCK_rGPR, MCK_RotImm }, },
+  { 1473 /* sxtb16 */, ARM::t2SXTB16, Convert__Reg1_1__Reg1_2__RotImm1_3__CondCode2_0, Feature_HasDSP|Feature_IsThumb2, { MCK_CondCode, MCK_rGPR, MCK_rGPR, MCK_RotImm }, },
+  { 1473 /* sxtb16 */, ARM::t2SXTB16, Convert__Reg1_1__Reg1_2__RotImm1_3__CondCode2_0, Feature_HasDSP|Feature_IsThumb2, { MCK_CondCode, MCK_rGPR, MCK_rGPR, MCK_RotImm }, },
   { 1473 /* sxtb16 */, ARM::SXTB16, Convert__Reg1_1__Reg1_2__RotImm1_3__CondCode2_0, Feature_IsARM|Feature_HasV6, { MCK_CondCode, MCK_GPRnopc, MCK_GPRnopc, MCK_RotImm }, },
   { 1480 /* sxth */, ARM::tSXTH, Convert__Reg1_1__Reg1_2__CondCode2_0, Feature_IsThumb|Feature_HasV6, { MCK_CondCode, MCK_tGPR, MCK_tGPR }, },
   { 1480 /* sxth */, ARM::t2SXTH, Convert__Reg1_1__Reg1_2__imm_95_0__CondCode2_0, Feature_IsThumb2, { MCK_CondCode, MCK_rGPR, MCK_rGPR }, },
@@ -7901,17 +7991,17 @@ static const MatchEntry MatchTable0[] = {
   { 1686 /* usub16 */, ARM::USUB16, Convert__Reg1_1__Reg1_2__Reg1_3__CondCode2_0, Feature_IsARM, { MCK_CondCode, MCK_GPRnopc, MCK_GPRnopc, MCK_GPRnopc }, },
   { 1693 /* usub8 */, ARM::t2USUB8, Convert__Reg1_1__Reg1_2__Reg1_3__CondCode2_0, Feature_IsThumb2|Feature_HasDSP, { MCK_CondCode, MCK_rGPR, MCK_rGPR, MCK_rGPR }, },
   { 1693 /* usub8 */, ARM::USUB8, Convert__Reg1_1__Reg1_2__Reg1_3__CondCode2_0, Feature_IsARM, { MCK_CondCode, MCK_GPRnopc, MCK_GPRnopc, MCK_GPRnopc }, },
-  { 1699 /* uxtab */, ARM::t2UXTAB, Convert__Reg1_1__Reg1_2__Reg1_3__imm_95_0__CondCode2_0, Feature_HasT2ExtractPack|Feature_IsThumb2, { MCK_CondCode, MCK_rGPR, MCK_rGPR, MCK_rGPR }, },
+  { 1699 /* uxtab */, ARM::t2UXTAB, Convert__Reg1_1__Reg1_2__Reg1_3__imm_95_0__CondCode2_0, Feature_HasDSP|Feature_IsThumb2, { MCK_CondCode, MCK_rGPR, MCK_rGPR, MCK_rGPR }, },
   { 1699 /* uxtab */, ARM::UXTAB, Convert__Reg1_1__Reg1_2__Reg1_3__imm_95_0__CondCode2_0, Feature_IsARM, { MCK_CondCode, MCK_GPRnopc, MCK_GPR, MCK_GPRnopc }, },
-  { 1699 /* uxtab */, ARM::t2UXTAB, Convert__Reg1_1__Reg1_2__Reg1_3__RotImm1_4__CondCode2_0, Feature_HasT2ExtractPack|Feature_IsThumb2, { MCK_CondCode, MCK_rGPR, MCK_rGPR, MCK_rGPR, MCK_RotImm }, },
+  { 1699 /* uxtab */, ARM::t2UXTAB, Convert__Reg1_1__Reg1_2__Reg1_3__RotImm1_4__CondCode2_0, Feature_HasDSP|Feature_IsThumb2, { MCK_CondCode, MCK_rGPR, MCK_rGPR, MCK_rGPR, MCK_RotImm }, },
   { 1699 /* uxtab */, ARM::UXTAB, Convert__Reg1_1__Reg1_2__Reg1_3__RotImm1_4__CondCode2_0, Feature_IsARM|Feature_HasV6, { MCK_CondCode, MCK_GPRnopc, MCK_GPR, MCK_GPRnopc, MCK_RotImm }, },
-  { 1705 /* uxtab16 */, ARM::t2UXTAB16, Convert__Reg1_1__Reg1_2__Reg1_3__imm_95_0__CondCode2_0, Feature_HasT2ExtractPack|Feature_IsThumb2, { MCK_CondCode, MCK_rGPR, MCK_rGPR, MCK_rGPR }, },
+  { 1705 /* uxtab16 */, ARM::t2UXTAB16, Convert__Reg1_1__Reg1_2__Reg1_3__imm_95_0__CondCode2_0, Feature_HasDSP|Feature_IsThumb2, { MCK_CondCode, MCK_rGPR, MCK_rGPR, MCK_rGPR }, },
   { 1705 /* uxtab16 */, ARM::UXTAB16, Convert__Reg1_1__Reg1_2__Reg1_3__imm_95_0__CondCode2_0, Feature_IsARM, { MCK_CondCode, MCK_GPRnopc, MCK_GPR, MCK_GPRnopc }, },
-  { 1705 /* uxtab16 */, ARM::t2UXTAB16, Convert__Reg1_1__Reg1_2__Reg1_3__RotImm1_4__CondCode2_0, Feature_HasT2ExtractPack|Feature_IsThumb2, { MCK_CondCode, MCK_rGPR, MCK_rGPR, MCK_rGPR, MCK_RotImm }, },
+  { 1705 /* uxtab16 */, ARM::t2UXTAB16, Convert__Reg1_1__Reg1_2__Reg1_3__RotImm1_4__CondCode2_0, Feature_HasDSP|Feature_IsThumb2, { MCK_CondCode, MCK_rGPR, MCK_rGPR, MCK_rGPR, MCK_RotImm }, },
   { 1705 /* uxtab16 */, ARM::UXTAB16, Convert__Reg1_1__Reg1_2__Reg1_3__RotImm1_4__CondCode2_0, Feature_IsARM|Feature_HasV6, { MCK_CondCode, MCK_GPRnopc, MCK_GPR, MCK_GPRnopc, MCK_RotImm }, },
-  { 1713 /* uxtah */, ARM::t2UXTAH, Convert__Reg1_1__Reg1_2__Reg1_3__imm_95_0__CondCode2_0, Feature_HasT2ExtractPack|Feature_IsThumb2, { MCK_CondCode, MCK_rGPR, MCK_rGPR, MCK_rGPR }, },
+  { 1713 /* uxtah */, ARM::t2UXTAH, Convert__Reg1_1__Reg1_2__Reg1_3__imm_95_0__CondCode2_0, Feature_HasDSP|Feature_IsThumb2, { MCK_CondCode, MCK_rGPR, MCK_rGPR, MCK_rGPR }, },
   { 1713 /* uxtah */, ARM::UXTAH, Convert__Reg1_1__Reg1_2__Reg1_3__imm_95_0__CondCode2_0, Feature_IsARM, { MCK_CondCode, MCK_GPRnopc, MCK_GPR, MCK_GPRnopc }, },
-  { 1713 /* uxtah */, ARM::t2UXTAH, Convert__Reg1_1__Reg1_2__Reg1_3__RotImm1_4__CondCode2_0, Feature_HasT2ExtractPack|Feature_IsThumb2, { MCK_CondCode, MCK_rGPR, MCK_rGPR, MCK_rGPR, MCK_RotImm }, },
+  { 1713 /* uxtah */, ARM::t2UXTAH, Convert__Reg1_1__Reg1_2__Reg1_3__RotImm1_4__CondCode2_0, Feature_HasDSP|Feature_IsThumb2, { MCK_CondCode, MCK_rGPR, MCK_rGPR, MCK_rGPR, MCK_RotImm }, },
   { 1713 /* uxtah */, ARM::UXTAH, Convert__Reg1_1__Reg1_2__Reg1_3__RotImm1_4__CondCode2_0, Feature_IsARM|Feature_HasV6, { MCK_CondCode, MCK_GPRnopc, MCK_GPR, MCK_GPRnopc, MCK_RotImm }, },
   { 1719 /* uxtb */, ARM::tUXTB, Convert__Reg1_1__Reg1_2__CondCode2_0, Feature_IsThumb|Feature_HasV6, { MCK_CondCode, MCK_tGPR, MCK_tGPR }, },
   { 1719 /* uxtb */, ARM::t2UXTB, Convert__Reg1_1__Reg1_2__imm_95_0__CondCode2_0, Feature_IsThumb2, { MCK_CondCode, MCK_rGPR, MCK_rGPR }, },
@@ -7920,10 +8010,10 @@ static const MatchEntry MatchTable0[] = {
   { 1719 /* uxtb */, ARM::t2UXTB, Convert__Reg1_1__Reg1_2__RotImm1_3__CondCode2_0, Feature_IsThumb2, { MCK_CondCode, MCK_rGPR, MCK_rGPR, MCK_RotImm }, },
   { 1719 /* uxtb */, ARM::UXTB, Convert__Reg1_1__Reg1_2__RotImm1_3__CondCode2_0, Feature_IsARM|Feature_HasV6, { MCK_CondCode, MCK_GPRnopc, MCK_GPRnopc, MCK_RotImm }, },
   { 1719 /* uxtb */, ARM::t2UXTB, Convert__Reg1_2__Reg1_3__RotImm1_4__CondCode2_0, Feature_IsThumb2, { MCK_CondCode, MCK__DOT_w, MCK_rGPR, MCK_rGPR, MCK_RotImm }, },
-  { 1724 /* uxtb16 */, ARM::t2UXTB16, Convert__Reg1_1__Reg1_2__imm_95_0__CondCode2_0, Feature_HasT2ExtractPack|Feature_IsThumb2, { MCK_CondCode, MCK_rGPR, MCK_rGPR }, },
+  { 1724 /* uxtb16 */, ARM::t2UXTB16, Convert__Reg1_1__Reg1_2__imm_95_0__CondCode2_0, Feature_HasDSP|Feature_IsThumb2, { MCK_CondCode, MCK_rGPR, MCK_rGPR }, },
   { 1724 /* uxtb16 */, ARM::UXTB16, Convert__Reg1_1__Reg1_2__imm_95_0__CondCode2_0, Feature_IsARM, { MCK_CondCode, MCK_GPRnopc, MCK_GPRnopc }, },
-  { 1724 /* uxtb16 */, ARM::t2UXTB16, Convert__Reg1_1__Reg1_2__RotImm1_3__CondCode2_0, Feature_HasT2ExtractPack|Feature_IsThumb2, { MCK_CondCode, MCK_rGPR, MCK_rGPR, MCK_RotImm }, },
-  { 1724 /* uxtb16 */, ARM::t2UXTB16, Convert__Reg1_1__Reg1_2__RotImm1_3__CondCode2_0, Feature_HasT2ExtractPack|Feature_IsThumb2, { MCK_CondCode, MCK_rGPR, MCK_rGPR, MCK_RotImm }, },
+  { 1724 /* uxtb16 */, ARM::t2UXTB16, Convert__Reg1_1__Reg1_2__RotImm1_3__CondCode2_0, Feature_HasDSP|Feature_IsThumb2, { MCK_CondCode, MCK_rGPR, MCK_rGPR, MCK_RotImm }, },
+  { 1724 /* uxtb16 */, ARM::t2UXTB16, Convert__Reg1_1__Reg1_2__RotImm1_3__CondCode2_0, Feature_HasDSP|Feature_IsThumb2, { MCK_CondCode, MCK_rGPR, MCK_rGPR, MCK_RotImm }, },
   { 1724 /* uxtb16 */, ARM::UXTB16, Convert__Reg1_1__Reg1_2__RotImm1_3__CondCode2_0, Feature_IsARM|Feature_HasV6, { MCK_CondCode, MCK_GPRnopc, MCK_GPRnopc, MCK_RotImm }, },
   { 1731 /* uxth */, ARM::tUXTH, Convert__Reg1_1__Reg1_2__CondCode2_0, Feature_IsThumb|Feature_HasV6, { MCK_CondCode, MCK_tGPR, MCK_tGPR }, },
   { 1731 /* uxth */, ARM::t2UXTH, Convert__Reg1_1__Reg1_2__imm_95_0__CondCode2_0, Feature_IsThumb2, { MCK_CondCode, MCK_rGPR, MCK_rGPR }, },
@@ -10424,19 +10514,6 @@ static const MatchEntry MatchTable0[] = {
   { 2690 /* yield */, ARM::t2HINT, Convert__imm_95_1__CondCode2_0, Feature_IsThumb2, { MCK_CondCode, MCK__DOT_w }, },
 };
 
-bool ARMAsmParser::
-mnemonicIsValid(StringRef Mnemonic, unsigned VariantID) {
-  // Find the appropriate table for this asm variant.
-  const MatchEntry *Start, *End;
-  switch (VariantID) {
-  default: llvm_unreachable("invalid variant!");
-  case 0: Start = std::begin(MatchTable0); End = std::end(MatchTable0); break;
-  }
-  // Search the table.
-  auto MnemonicRange = std::equal_range(Start, End, Mnemonic, LessOpcode());
-  return MnemonicRange.first != MnemonicRange.second;
-}
-
 unsigned ARMAsmParser::
 MatchInstructionImpl(const OperandVector &Operands,
                      MCInst &Inst, uint64_t &ErrorInfo,
@@ -10631,12 +10708,12 @@ static const OperandMatchEntry OperandMatchTable[729] = {
   { Feature_IsARM|Feature_HasV6T2, 64 /* bfi */, MCK_Bitfield, 8 /* 3 */ },
   { Feature_IsARM, 68 /* bic */, MCK_ModImm, 8 /* 3 */ },
   { Feature_IsARM, 68 /* bic */, MCK_ModImm, 16 /* 4 */ },
+  { Feature_IsARM|Feature_PreV8, 111 /* cdp */, MCK_CoprocNum, 2 /* 1 */ },
+  { Feature_IsARM|Feature_PreV8, 111 /* cdp */, MCK_CoprocReg, 56 /* 3, 4, 5 */ },
   { Feature_IsThumb2|Feature_PreV8, 111 /* cdp */, MCK_CoprocNum, 2 /* 1 */ },
   { Feature_IsThumb2|Feature_PreV8, 111 /* cdp */, MCK_CoprocReg, 56 /* 3, 4, 5 */ },
-  { Feature_PreV8, 111 /* cdp */, MCK_CoprocNum, 2 /* 1 */ },
-  { Feature_PreV8, 111 /* cdp */, MCK_CoprocReg, 56 /* 3, 4, 5 */ },
-  { Feature_PreV8, 115 /* cdp2 */, MCK_CoprocNum, 1 /* 0 */ },
-  { Feature_PreV8, 115 /* cdp2 */, MCK_CoprocReg, 28 /* 2, 3, 4 */ },
+  { Feature_IsARM|Feature_PreV8, 115 /* cdp2 */, MCK_CoprocNum, 1 /* 0 */ },
+  { Feature_IsARM|Feature_PreV8, 115 /* cdp2 */, MCK_CoprocReg, 28 /* 2, 3, 4 */ },
   { Feature_IsThumb2|Feature_PreV8, 115 /* cdp2 */, MCK_CoprocNum, 2 /* 1 */ },
   { Feature_IsThumb2|Feature_PreV8, 115 /* cdp2 */, MCK_CoprocReg, 56 /* 3, 4, 5 */ },
   { Feature_IsARM, 130 /* cmn */, MCK_ModImm, 4 /* 2 */ },
@@ -10677,17 +10754,17 @@ static const OperandMatchEntry OperandMatchTable[729] = {
   { Feature_IsARM, 396 /* ldc */, MCK_CoprocReg, 4 /* 2 */ },
   { Feature_IsThumb2, 396 /* ldc */, MCK_CoprocNum, 2 /* 1 */ },
   { Feature_IsThumb2, 396 /* ldc */, MCK_CoprocReg, 4 /* 2 */ },
-  { Feature_PreV8, 400 /* ldc2 */, MCK_CoprocNum, 1 /* 0 */ },
-  { Feature_PreV8, 400 /* ldc2 */, MCK_CoprocReg, 2 /* 1 */ },
+  { Feature_IsARM|Feature_PreV8, 400 /* ldc2 */, MCK_CoprocNum, 1 /* 0 */ },
+  { Feature_IsARM|Feature_PreV8, 400 /* ldc2 */, MCK_CoprocReg, 2 /* 1 */ },
   { Feature_PreV8|Feature_IsThumb2, 400 /* ldc2 */, MCK_CoprocNum, 2 /* 1 */ },
   { Feature_PreV8|Feature_IsThumb2, 400 /* ldc2 */, MCK_CoprocReg, 4 /* 2 */ },
-  { Feature_PreV8, 400 /* ldc2 */, MCK_CoprocNum, 1 /* 0 */ },
-  { Feature_PreV8, 400 /* ldc2 */, MCK_CoprocReg, 2 /* 1 */ },
-  { Feature_PreV8, 400 /* ldc2 */, MCK_CoprocNum, 1 /* 0 */ },
-  { Feature_PreV8, 400 /* ldc2 */, MCK_CoprocOption, 8 /* 3 */ },
-  { Feature_PreV8, 400 /* ldc2 */, MCK_CoprocReg, 2 /* 1 */ },
-  { Feature_PreV8, 400 /* ldc2 */, MCK_CoprocNum, 1 /* 0 */ },
-  { Feature_PreV8, 400 /* ldc2 */, MCK_CoprocReg, 2 /* 1 */ },
+  { Feature_IsARM|Feature_PreV8, 400 /* ldc2 */, MCK_CoprocNum, 1 /* 0 */ },
+  { Feature_IsARM|Feature_PreV8, 400 /* ldc2 */, MCK_CoprocReg, 2 /* 1 */ },
+  { Feature_IsARM|Feature_PreV8, 400 /* ldc2 */, MCK_CoprocNum, 1 /* 0 */ },
+  { Feature_IsARM|Feature_PreV8, 400 /* ldc2 */, MCK_CoprocOption, 8 /* 3 */ },
+  { Feature_IsARM|Feature_PreV8, 400 /* ldc2 */, MCK_CoprocReg, 2 /* 1 */ },
+  { Feature_IsARM|Feature_PreV8, 400 /* ldc2 */, MCK_CoprocNum, 1 /* 0 */ },
+  { Feature_IsARM|Feature_PreV8, 400 /* ldc2 */, MCK_CoprocReg, 2 /* 1 */ },
   { Feature_PreV8|Feature_IsThumb2, 400 /* ldc2 */, MCK_CoprocNum, 2 /* 1 */ },
   { Feature_PreV8|Feature_IsThumb2, 400 /* ldc2 */, MCK_CoprocReg, 4 /* 2 */ },
   { Feature_PreV8|Feature_IsThumb2, 400 /* ldc2 */, MCK_CoprocNum, 2 /* 1 */ },
@@ -10695,17 +10772,17 @@ static const OperandMatchEntry OperandMatchTable[729] = {
   { Feature_PreV8|Feature_IsThumb2, 400 /* ldc2 */, MCK_CoprocReg, 4 /* 2 */ },
   { Feature_PreV8|Feature_IsThumb2, 400 /* ldc2 */, MCK_CoprocNum, 2 /* 1 */ },
   { Feature_PreV8|Feature_IsThumb2, 400 /* ldc2 */, MCK_CoprocReg, 4 /* 2 */ },
-  { Feature_PreV8, 405 /* ldc2l */, MCK_CoprocNum, 1 /* 0 */ },
-  { Feature_PreV8, 405 /* ldc2l */, MCK_CoprocReg, 2 /* 1 */ },
+  { Feature_IsARM|Feature_PreV8, 405 /* ldc2l */, MCK_CoprocNum, 1 /* 0 */ },
+  { Feature_IsARM|Feature_PreV8, 405 /* ldc2l */, MCK_CoprocReg, 2 /* 1 */ },
   { Feature_PreV8|Feature_IsThumb2, 405 /* ldc2l */, MCK_CoprocNum, 2 /* 1 */ },
   { Feature_PreV8|Feature_IsThumb2, 405 /* ldc2l */, MCK_CoprocReg, 4 /* 2 */ },
-  { Feature_PreV8, 405 /* ldc2l */, MCK_CoprocNum, 1 /* 0 */ },
-  { Feature_PreV8, 405 /* ldc2l */, MCK_CoprocReg, 2 /* 1 */ },
-  { Feature_PreV8, 405 /* ldc2l */, MCK_CoprocNum, 1 /* 0 */ },
-  { Feature_PreV8, 405 /* ldc2l */, MCK_CoprocOption, 8 /* 3 */ },
-  { Feature_PreV8, 405 /* ldc2l */, MCK_CoprocReg, 2 /* 1 */ },
-  { Feature_PreV8, 405 /* ldc2l */, MCK_CoprocNum, 1 /* 0 */ },
-  { Feature_PreV8, 405 /* ldc2l */, MCK_CoprocReg, 2 /* 1 */ },
+  { Feature_IsARM|Feature_PreV8, 405 /* ldc2l */, MCK_CoprocNum, 1 /* 0 */ },
+  { Feature_IsARM|Feature_PreV8, 405 /* ldc2l */, MCK_CoprocReg, 2 /* 1 */ },
+  { Feature_IsARM|Feature_PreV8, 405 /* ldc2l */, MCK_CoprocNum, 1 /* 0 */ },
+  { Feature_IsARM|Feature_PreV8, 405 /* ldc2l */, MCK_CoprocOption, 8 /* 3 */ },
+  { Feature_IsARM|Feature_PreV8, 405 /* ldc2l */, MCK_CoprocReg, 2 /* 1 */ },
+  { Feature_IsARM|Feature_PreV8, 405 /* ldc2l */, MCK_CoprocNum, 1 /* 0 */ },
+  { Feature_IsARM|Feature_PreV8, 405 /* ldc2l */, MCK_CoprocReg, 2 /* 1 */ },
   { Feature_PreV8|Feature_IsThumb2, 405 /* ldc2l */, MCK_CoprocNum, 2 /* 1 */ },
   { Feature_PreV8|Feature_IsThumb2, 405 /* ldc2l */, MCK_CoprocReg, 4 /* 2 */ },
   { Feature_PreV8|Feature_IsThumb2, 405 /* ldc2l */, MCK_CoprocNum, 2 /* 1 */ },
@@ -10754,16 +10831,16 @@ static const OperandMatchEntry OperandMatchTable[729] = {
   { Feature_IsARM, 539 /* mcr2 */, MCK_CoprocReg, 24 /* 3, 4 */ },
   { Feature_IsThumb2, 539 /* mcr2 */, MCK_CoprocNum, 2 /* 1 */ },
   { Feature_IsThumb2, 539 /* mcr2 */, MCK_CoprocReg, 48 /* 4, 5 */ },
-  { Feature_PreV8, 539 /* mcr2 */, MCK_CoprocNum, 1 /* 0 */ },
-  { Feature_PreV8, 539 /* mcr2 */, MCK_CoprocReg, 24 /* 3, 4 */ },
+  { Feature_IsARM|Feature_PreV8, 539 /* mcr2 */, MCK_CoprocNum, 1 /* 0 */ },
+  { Feature_IsARM|Feature_PreV8, 539 /* mcr2 */, MCK_CoprocReg, 24 /* 3, 4 */ },
   { Feature_IsThumb2|Feature_PreV8, 539 /* mcr2 */, MCK_CoprocNum, 2 /* 1 */ },
   { Feature_IsThumb2|Feature_PreV8, 539 /* mcr2 */, MCK_CoprocReg, 48 /* 4, 5 */ },
   { Feature_IsARM, 544 /* mcrr */, MCK_CoprocNum, 2 /* 1 */ },
   { Feature_IsARM, 544 /* mcrr */, MCK_CoprocReg, 32 /* 5 */ },
   { Feature_IsThumb2, 544 /* mcrr */, MCK_CoprocNum, 2 /* 1 */ },
   { Feature_IsThumb2, 544 /* mcrr */, MCK_CoprocReg, 32 /* 5 */ },
-  { Feature_PreV8, 549 /* mcrr2 */, MCK_CoprocNum, 1 /* 0 */ },
-  { Feature_PreV8, 549 /* mcrr2 */, MCK_CoprocReg, 16 /* 4 */ },
+  { Feature_IsARM|Feature_PreV8, 549 /* mcrr2 */, MCK_CoprocNum, 1 /* 0 */ },
+  { Feature_IsARM|Feature_PreV8, 549 /* mcrr2 */, MCK_CoprocReg, 16 /* 4 */ },
   { Feature_IsThumb2|Feature_PreV8, 549 /* mcrr2 */, MCK_CoprocNum, 2 /* 1 */ },
   { Feature_IsThumb2|Feature_PreV8, 549 /* mcrr2 */, MCK_CoprocReg, 32 /* 5 */ },
   { Feature_IsARM, 563 /* mov */, MCK_ModImm, 8 /* 3 */ },
@@ -10779,16 +10856,16 @@ static const OperandMatchEntry OperandMatchTable[729] = {
   { Feature_IsARM, 586 /* mrc2 */, MCK_CoprocReg, 24 /* 3, 4 */ },
   { Feature_IsThumb2, 586 /* mrc2 */, MCK_CoprocNum, 2 /* 1 */ },
   { Feature_IsThumb2, 586 /* mrc2 */, MCK_CoprocReg, 48 /* 4, 5 */ },
-  { Feature_PreV8, 586 /* mrc2 */, MCK_CoprocNum, 1 /* 0 */ },
-  { Feature_PreV8, 586 /* mrc2 */, MCK_CoprocReg, 24 /* 3, 4 */ },
+  { Feature_IsARM|Feature_PreV8, 586 /* mrc2 */, MCK_CoprocNum, 1 /* 0 */ },
+  { Feature_IsARM|Feature_PreV8, 586 /* mrc2 */, MCK_CoprocReg, 24 /* 3, 4 */ },
   { Feature_IsThumb2|Feature_PreV8, 586 /* mrc2 */, MCK_CoprocNum, 2 /* 1 */ },
   { Feature_IsThumb2|Feature_PreV8, 586 /* mrc2 */, MCK_CoprocReg, 48 /* 4, 5 */ },
   { Feature_IsARM, 591 /* mrrc */, MCK_CoprocNum, 2 /* 1 */ },
   { Feature_IsARM, 591 /* mrrc */, MCK_CoprocReg, 32 /* 5 */ },
   { Feature_IsThumb2, 591 /* mrrc */, MCK_CoprocNum, 2 /* 1 */ },
   { Feature_IsThumb2, 591 /* mrrc */, MCK_CoprocReg, 32 /* 5 */ },
-  { Feature_PreV8, 596 /* mrrc2 */, MCK_CoprocNum, 1 /* 0 */ },
-  { Feature_PreV8, 596 /* mrrc2 */, MCK_CoprocReg, 16 /* 4 */ },
+  { Feature_IsARM|Feature_PreV8, 596 /* mrrc2 */, MCK_CoprocNum, 1 /* 0 */ },
+  { Feature_IsARM|Feature_PreV8, 596 /* mrrc2 */, MCK_CoprocReg, 16 /* 4 */ },
   { Feature_IsThumb2|Feature_PreV8, 596 /* mrrc2 */, MCK_CoprocNum, 2 /* 1 */ },
   { Feature_IsThumb2|Feature_PreV8, 596 /* mrrc2 */, MCK_CoprocReg, 32 /* 5 */ },
   { Feature_IsThumb|Feature_HasVirtualization, 602 /* mrs */, MCK_BankedReg, 4 /* 2 */ },
@@ -10804,9 +10881,9 @@ static const OperandMatchEntry OperandMatchTable[729] = {
   { Feature_IsARM, 614 /* mvn */, MCK_ModImm, 8 /* 3 */ },
   { Feature_IsARM, 630 /* orr */, MCK_ModImm, 8 /* 3 */ },
   { Feature_IsARM, 630 /* orr */, MCK_ModImm, 16 /* 4 */ },
-  { Feature_HasT2ExtractPack|Feature_IsThumb2, 634 /* pkhbt */, MCK_PKHLSLImm, 16 /* 4 */ },
+  { Feature_HasDSP|Feature_IsThumb2, 634 /* pkhbt */, MCK_PKHLSLImm, 16 /* 4 */ },
   { Feature_IsARM|Feature_HasV6, 634 /* pkhbt */, MCK_PKHLSLImm, 16 /* 4 */ },
-  { Feature_HasT2ExtractPack|Feature_IsThumb2, 640 /* pkhtb */, MCK_PKHASRImm, 16 /* 4 */ },
+  { Feature_HasDSP|Feature_IsThumb2, 640 /* pkhtb */, MCK_PKHASRImm, 16 /* 4 */ },
   { Feature_IsARM|Feature_HasV6, 640 /* pkhtb */, MCK_PKHASRImm, 16 /* 4 */ },
   { Feature_IsARM, 779 /* rsb */, MCK_ModImm, 8 /* 3 */ },
   { Feature_IsARM, 779 /* rsb */, MCK_ModImm, 16 /* 4 */ },
@@ -10836,17 +10913,17 @@ static const OperandMatchEntry OperandMatchTable[729] = {
   { Feature_IsARM, 1275 /* stc */, MCK_CoprocReg, 4 /* 2 */ },
   { Feature_IsThumb2, 1275 /* stc */, MCK_CoprocNum, 2 /* 1 */ },
   { Feature_IsThumb2, 1275 /* stc */, MCK_CoprocReg, 4 /* 2 */ },
-  { Feature_PreV8, 1279 /* stc2 */, MCK_CoprocNum, 1 /* 0 */ },
-  { Feature_PreV8, 1279 /* stc2 */, MCK_CoprocReg, 2 /* 1 */ },
+  { Feature_IsARM|Feature_PreV8, 1279 /* stc2 */, MCK_CoprocNum, 1 /* 0 */ },
+  { Feature_IsARM|Feature_PreV8, 1279 /* stc2 */, MCK_CoprocReg, 2 /* 1 */ },
   { Feature_PreV8|Feature_IsThumb2, 1279 /* stc2 */, MCK_CoprocNum, 2 /* 1 */ },
   { Feature_PreV8|Feature_IsThumb2, 1279 /* stc2 */, MCK_CoprocReg, 4 /* 2 */ },
-  { Feature_PreV8, 1279 /* stc2 */, MCK_CoprocNum, 1 /* 0 */ },
-  { Feature_PreV8, 1279 /* stc2 */, MCK_CoprocReg, 2 /* 1 */ },
-  { Feature_PreV8, 1279 /* stc2 */, MCK_CoprocNum, 1 /* 0 */ },
-  { Feature_PreV8, 1279 /* stc2 */, MCK_CoprocOption, 8 /* 3 */ },
-  { Feature_PreV8, 1279 /* stc2 */, MCK_CoprocReg, 2 /* 1 */ },
-  { Feature_PreV8, 1279 /* stc2 */, MCK_CoprocNum, 1 /* 0 */ },
-  { Feature_PreV8, 1279 /* stc2 */, MCK_CoprocReg, 2 /* 1 */ },
+  { Feature_IsARM|Feature_PreV8, 1279 /* stc2 */, MCK_CoprocNum, 1 /* 0 */ },
+  { Feature_IsARM|Feature_PreV8, 1279 /* stc2 */, MCK_CoprocReg, 2 /* 1 */ },
+  { Feature_IsARM|Feature_PreV8, 1279 /* stc2 */, MCK_CoprocNum, 1 /* 0 */ },
+  { Feature_IsARM|Feature_PreV8, 1279 /* stc2 */, MCK_CoprocOption, 8 /* 3 */ },
+  { Feature_IsARM|Feature_PreV8, 1279 /* stc2 */, MCK_CoprocReg, 2 /* 1 */ },
+  { Feature_IsARM|Feature_PreV8, 1279 /* stc2 */, MCK_CoprocNum, 1 /* 0 */ },
+  { Feature_IsARM|Feature_PreV8, 1279 /* stc2 */, MCK_CoprocReg, 2 /* 1 */ },
   { Feature_PreV8|Feature_IsThumb2, 1279 /* stc2 */, MCK_CoprocNum, 2 /* 1 */ },
   { Feature_PreV8|Feature_IsThumb2, 1279 /* stc2 */, MCK_CoprocReg, 4 /* 2 */ },
   { Feature_PreV8|Feature_IsThumb2, 1279 /* stc2 */, MCK_CoprocNum, 2 /* 1 */ },
@@ -10854,17 +10931,17 @@ static const OperandMatchEntry OperandMatchTable[729] = {
   { Feature_PreV8|Feature_IsThumb2, 1279 /* stc2 */, MCK_CoprocReg, 4 /* 2 */ },
   { Feature_PreV8|Feature_IsThumb2, 1279 /* stc2 */, MCK_CoprocNum, 2 /* 1 */ },
   { Feature_PreV8|Feature_IsThumb2, 1279 /* stc2 */, MCK_CoprocReg, 4 /* 2 */ },
-  { Feature_PreV8, 1284 /* stc2l */, MCK_CoprocNum, 1 /* 0 */ },
-  { Feature_PreV8, 1284 /* stc2l */, MCK_CoprocReg, 2 /* 1 */ },
+  { Feature_IsARM|Feature_PreV8, 1284 /* stc2l */, MCK_CoprocNum, 1 /* 0 */ },
+  { Feature_IsARM|Feature_PreV8, 1284 /* stc2l */, MCK_CoprocReg, 2 /* 1 */ },
   { Feature_PreV8|Feature_IsThumb2, 1284 /* stc2l */, MCK_CoprocNum, 2 /* 1 */ },
   { Feature_PreV8|Feature_IsThumb2, 1284 /* stc2l */, MCK_CoprocReg, 4 /* 2 */ },
-  { Feature_PreV8, 1284 /* stc2l */, MCK_CoprocNum, 1 /* 0 */ },
-  { Feature_PreV8, 1284 /* stc2l */, MCK_CoprocReg, 2 /* 1 */ },
-  { Feature_PreV8, 1284 /* stc2l */, MCK_CoprocNum, 1 /* 0 */ },
-  { Feature_PreV8, 1284 /* stc2l */, MCK_CoprocOption, 8 /* 3 */ },
-  { Feature_PreV8, 1284 /* stc2l */, MCK_CoprocReg, 2 /* 1 */ },
-  { Feature_PreV8, 1284 /* stc2l */, MCK_CoprocNum, 1 /* 0 */ },
-  { Feature_PreV8, 1284 /* stc2l */, MCK_CoprocReg, 2 /* 1 */ },
+  { Feature_IsARM|Feature_PreV8, 1284 /* stc2l */, MCK_CoprocNum, 1 /* 0 */ },
+  { Feature_IsARM|Feature_PreV8, 1284 /* stc2l */, MCK_CoprocReg, 2 /* 1 */ },
+  { Feature_IsARM|Feature_PreV8, 1284 /* stc2l */, MCK_CoprocNum, 1 /* 0 */ },
+  { Feature_IsARM|Feature_PreV8, 1284 /* stc2l */, MCK_CoprocOption, 8 /* 3 */ },
+  { Feature_IsARM|Feature_PreV8, 1284 /* stc2l */, MCK_CoprocReg, 2 /* 1 */ },
+  { Feature_IsARM|Feature_PreV8, 1284 /* stc2l */, MCK_CoprocNum, 1 /* 0 */ },
+  { Feature_IsARM|Feature_PreV8, 1284 /* stc2l */, MCK_CoprocReg, 2 /* 1 */ },
   { Feature_PreV8|Feature_IsThumb2, 1284 /* stc2l */, MCK_CoprocNum, 2 /* 1 */ },
   { Feature_PreV8|Feature_IsThumb2, 1284 /* stc2l */, MCK_CoprocReg, 4 /* 2 */ },
   { Feature_PreV8|Feature_IsThumb2, 1284 /* stc2l */, MCK_CoprocNum, 2 /* 1 */ },
@@ -10899,17 +10976,17 @@ static const OperandMatchEntry OperandMatchTable[729] = {
   { Feature_IsARM, 1416 /* strt */, MCK_PostIdxRegShifted, 8 /* 3 */ },
   { Feature_IsARM, 1421 /* sub */, MCK_ModImm, 8 /* 3 */ },
   { Feature_IsARM, 1421 /* sub */, MCK_ModImm, 16 /* 4 */ },
-  { Feature_HasT2ExtractPack|Feature_IsThumb2, 1448 /* sxtab */, MCK_RotImm, 16 /* 4 */ },
+  { Feature_HasDSP|Feature_IsThumb2, 1448 /* sxtab */, MCK_RotImm, 16 /* 4 */ },
   { Feature_IsARM|Feature_HasV6, 1448 /* sxtab */, MCK_RotImm, 16 /* 4 */ },
-  { Feature_HasT2ExtractPack|Feature_IsThumb2, 1454 /* sxtab16 */, MCK_RotImm, 16 /* 4 */ },
+  { Feature_HasDSP|Feature_IsThumb2, 1454 /* sxtab16 */, MCK_RotImm, 16 /* 4 */ },
   { Feature_IsARM|Feature_HasV6, 1454 /* sxtab16 */, MCK_RotImm, 16 /* 4 */ },
-  { Feature_HasT2ExtractPack|Feature_IsThumb2, 1462 /* sxtah */, MCK_RotImm, 16 /* 4 */ },
+  { Feature_HasDSP|Feature_IsThumb2, 1462 /* sxtah */, MCK_RotImm, 16 /* 4 */ },
   { Feature_IsARM|Feature_HasV6, 1462 /* sxtah */, MCK_RotImm, 16 /* 4 */ },
   { Feature_IsThumb2, 1468 /* sxtb */, MCK_RotImm, 8 /* 3 */ },
   { Feature_IsARM|Feature_HasV6, 1468 /* sxtb */, MCK_RotImm, 8 /* 3 */ },
   { Feature_IsThumb2, 1468 /* sxtb */, MCK_RotImm, 16 /* 4 */ },
-  { Feature_IsThumb2|Feature_HasT2ExtractPack, 1473 /* sxtb16 */, MCK_RotImm, 8 /* 3 */ },
-  { Feature_HasT2ExtractPack|Feature_IsThumb2, 1473 /* sxtb16 */, MCK_RotImm, 8 /* 3 */ },
+  { Feature_HasDSP|Feature_IsThumb2, 1473 /* sxtb16 */, MCK_RotImm, 8 /* 3 */ },
+  { Feature_HasDSP|Feature_IsThumb2, 1473 /* sxtb16 */, MCK_RotImm, 8 /* 3 */ },
   { Feature_IsARM|Feature_HasV6, 1473 /* sxtb16 */, MCK_RotImm, 8 /* 3 */ },
   { Feature_IsThumb2, 1480 /* sxth */, MCK_RotImm, 8 /* 3 */ },
   { Feature_IsARM|Feature_HasV6, 1480 /* sxth */, MCK_RotImm, 8 /* 3 */ },
@@ -10918,17 +10995,17 @@ static const OperandMatchEntry OperandMatchTable[729] = {
   { Feature_IsARM, 1502 /* tst */, MCK_ModImm, 4 /* 2 */ },
   { Feature_IsThumb2, 1669 /* usat */, MCK_ShifterImm, 16 /* 4 */ },
   { Feature_IsARM|Feature_HasV6, 1669 /* usat */, MCK_ShifterImm, 16 /* 4 */ },
-  { Feature_HasT2ExtractPack|Feature_IsThumb2, 1699 /* uxtab */, MCK_RotImm, 16 /* 4 */ },
+  { Feature_HasDSP|Feature_IsThumb2, 1699 /* uxtab */, MCK_RotImm, 16 /* 4 */ },
   { Feature_IsARM|Feature_HasV6, 1699 /* uxtab */, MCK_RotImm, 16 /* 4 */ },
-  { Feature_HasT2ExtractPack|Feature_IsThumb2, 1705 /* uxtab16 */, MCK_RotImm, 16 /* 4 */ },
+  { Feature_HasDSP|Feature_IsThumb2, 1705 /* uxtab16 */, MCK_RotImm, 16 /* 4 */ },
   { Feature_IsARM|Feature_HasV6, 1705 /* uxtab16 */, MCK_RotImm, 16 /* 4 */ },
-  { Feature_HasT2ExtractPack|Feature_IsThumb2, 1713 /* uxtah */, MCK_RotImm, 16 /* 4 */ },
+  { Feature_HasDSP|Feature_IsThumb2, 1713 /* uxtah */, MCK_RotImm, 16 /* 4 */ },
   { Feature_IsARM|Feature_HasV6, 1713 /* uxtah */, MCK_RotImm, 16 /* 4 */ },
   { Feature_IsThumb2, 1719 /* uxtb */, MCK_RotImm, 8 /* 3 */ },
   { Feature_IsARM|Feature_HasV6, 1719 /* uxtb */, MCK_RotImm, 8 /* 3 */ },
   { Feature_IsThumb2, 1719 /* uxtb */, MCK_RotImm, 16 /* 4 */ },
-  { Feature_HasT2ExtractPack|Feature_IsThumb2, 1724 /* uxtb16 */, MCK_RotImm, 8 /* 3 */ },
-  { Feature_HasT2ExtractPack|Feature_IsThumb2, 1724 /* uxtb16 */, MCK_RotImm, 8 /* 3 */ },
+  { Feature_HasDSP|Feature_IsThumb2, 1724 /* uxtb16 */, MCK_RotImm, 8 /* 3 */ },
+  { Feature_HasDSP|Feature_IsThumb2, 1724 /* uxtb16 */, MCK_RotImm, 8 /* 3 */ },
   { Feature_IsARM|Feature_HasV6, 1724 /* uxtb16 */, MCK_RotImm, 8 /* 3 */ },
   { Feature_IsThumb2, 1731 /* uxth */, MCK_RotImm, 8 /* 3 */ },
   { Feature_IsARM|Feature_HasV6, 1731 /* uxth */, MCK_RotImm, 8 /* 3 */ },

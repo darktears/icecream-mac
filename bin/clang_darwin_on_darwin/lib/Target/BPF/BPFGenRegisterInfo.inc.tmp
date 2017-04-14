@@ -141,7 +141,7 @@ extern const char BPFRegClassStrings[] = {
 };
 
 extern const MCRegisterClass BPFMCRegisterClasses[] = {
-  { GPR, GPRBits, 0, 12, sizeof(GPRBits), BPF::GPRRegClassID, 8, 8, 1, true },
+  { GPR, GPRBits, 0, 12, sizeof(GPRBits), BPF::GPRRegClassID, 8, 1, true },
 };
 
 // BPF Dwarf<->LLVM register mappings.
@@ -347,6 +347,8 @@ static const uint16_t SuperRegIdxSeqs[] = {
 namespace BPF {   // Register class instances
   extern const TargetRegisterClass GPRRegClass = {
     &BPFMCRegisterClasses[GPRRegClassID],
+    8, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 0,
     GPRSubClassMask,
     SuperRegIdxSeqs + 0,

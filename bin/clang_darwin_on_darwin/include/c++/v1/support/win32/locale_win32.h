@@ -11,9 +11,6 @@
 #ifndef _LIBCPP_SUPPORT_WIN32_LOCALE_WIN32_H
 #define _LIBCPP_SUPPORT_WIN32_LOCALE_WIN32_H
 
-// ctype mask table defined in msvcrt.dll
-extern "C" unsigned short  __declspec(dllimport) _ctype[];
-
 #include "support/win32/support.h"
 #include "support/win32/locale_mgmt_win32.h"
 #include <stdio.h>

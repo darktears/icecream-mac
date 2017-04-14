@@ -168,8 +168,8 @@ extern const char XCoreRegClassStrings[] = {
 };
 
 extern const MCRegisterClass XCoreMCRegisterClasses[] = {
-  { RRegs, RRegsBits, 1, 16, sizeof(RRegsBits), XCore::RRegsRegClassID, 4, 4, 1, false },
-  { GRRegs, GRRegsBits, 0, 12, sizeof(GRRegsBits), XCore::GRRegsRegClassID, 4, 4, 1, true },
+  { RRegs, RRegsBits, 1, 16, sizeof(RRegsBits), XCore::RRegsRegClassID, 4, 1, false },
+  { GRRegs, GRRegsBits, 0, 12, sizeof(GRRegsBits), XCore::GRRegsRegClassID, 4, 1, true },
 };
 
 // XCore Dwarf<->LLVM register mappings.
@@ -405,6 +405,8 @@ static const TargetRegisterClass *const GRRegsSuperclasses[] = {
 namespace XCore {   // Register class instances
   extern const TargetRegisterClass RRegsRegClass = {
     &XCoreMCRegisterClasses[RRegsRegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 0,
     RRegsSubClassMask,
     SuperRegIdxSeqs + 0,
@@ -418,6 +420,8 @@ namespace XCore {   // Register class instances
 
   extern const TargetRegisterClass GRRegsRegClass = {
     &XCoreMCRegisterClasses[GRRegsRegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 0,
     GRRegsSubClassMask,
     SuperRegIdxSeqs + 0,

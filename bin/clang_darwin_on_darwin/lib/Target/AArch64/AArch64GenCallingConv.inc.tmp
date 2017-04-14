@@ -340,7 +340,7 @@ static bool CC_AArch64_DarwinPCS(unsigned ValNo, MVT ValVT,
 
   if (ArgFlags.isSwiftError()) {
     if (LocVT == MVT::i64) {
-      if (unsigned Reg = State.AllocateReg(AArch64::X19, AArch64::W19)) {
+      if (unsigned Reg = State.AllocateReg(AArch64::X21, AArch64::W21)) {
         State.addLoc(CCValAssign::getReg(ValNo, ValVT, Reg, LocVT, LocInfo));
         return false;
       }
@@ -775,7 +775,7 @@ static bool RetCC_AArch64_AAPCS(unsigned ValNo, MVT ValVT,
 
   if (ArgFlags.isSwiftError()) {
     if (LocVT == MVT::i64) {
-      if (unsigned Reg = State.AllocateReg(AArch64::X19, AArch64::W19)) {
+      if (unsigned Reg = State.AllocateReg(AArch64::X21, AArch64::W21)) {
         State.addLoc(CCValAssign::getReg(ValNo, ValVT, Reg, LocVT, LocInfo));
         return false;
       }

@@ -92,7 +92,9 @@ void  operator delete[](void* ptr, void*) noexcept;
 #include <cstdlib>
 #endif
 
-#include <__undef___deallocate>
+#if defined(_LIBCPP_ABI_MICROSOFT)
+#include <new.h>
+#endif
 
 #if !defined(_LIBCPP_HAS_NO_PRAGMA_SYSTEM_HEADER)
 #pragma GCC system_header
@@ -103,13 +105,18 @@ void  operator delete[](void* ptr, void*) noexcept;
 # define _LIBCPP_HAS_NO_SIZED_DEALLOCATION
 #endif
 
-#if !(defined(_LIBCPP_BUILDING_NEW) || _LIBCPP_STD_VER > 14 || \
-    (defined(__cpp_aligned_new) && __cpp_aligned_new >= 201606))
+#if !defined(_LIBCPP_HAS_NO_ALIGNED_ALLOCATION) && \
+    (!(defined(_LIBCPP_BUILDING_NEW) || _LIBCPP_STD_VER > 14 || \
+    (defined(__cpp_aligned_new) && __cpp_aligned_new >= 201606)))
 # define _LIBCPP_HAS_NO_ALIGNED_ALLOCATION
 #endif
 
 namespace std  // purposefully not using versioning namespace
 {
+
+#if !defined(_LIBCPP_ABI_MICROSOFT)
+struct _LIBCPP_TYPE_VIS nothrow_t {};
+extern _LIBCPP_FUNC_VIS const nothrow_t nothrow;
 
 class _LIBCPP_EXCEPTION_ABI bad_alloc
     : public exception
@@ -129,9 +136,15 @@ public:
     virtual const char* what() const _NOEXCEPT;
 };
 
+typedef void (*new_handler)();
+_LIBCPP_FUNC_VIS new_handler set_new_handler(new_handler) _NOEXCEPT;
+_LIBCPP_FUNC_VIS new_handler get_new_handler() _NOEXCEPT;
+
+#endif // !_LIBCPP_ABI_MICROSOFT
+
 _LIBCPP_NORETURN _LIBCPP_FUNC_VIS void __throw_bad_alloc();  // not in C++ spec
 
-#if defined(_LIBCPP_BUILDING_NEW) || (_LIBCPP_STD_VER > 11)
+#if defined(_LIBCPP_BUILDING_LIBRARY) || (_LIBCPP_STD_VER > 11)
 
 class _LIBCPP_EXCEPTION_ABI bad_array_length
     : public bad_alloc
@@ -146,7 +159,7 @@ public:
 
 #endif  // defined(_LIBCPP_BUILDING_NEW) || (_LIBCPP_STD_VER > 11)
 
-#ifndef _LIBCPP_HAS_NO_ALIGNED_ALLOCATION
+#if !defined(_LIBCPP_HAS_NO_ALIGNED_ALLOCATION) || _LIBCPP_STD_VER > 14
 #ifndef _LIBCPP_CXX03_LANG
 enum class _LIBCPP_ENUM_VIS align_val_t : size_t { };
 #else
@@ -154,19 +167,15 @@ enum align_val_t { __zero = 0, __max = (size_t)-1 };
 #endif
 #endif
 
-struct _LIBCPP_TYPE_VIS nothrow_t {};
-extern _LIBCPP_FUNC_VIS const nothrow_t nothrow;
-typedef void (*new_handler)();
-_LIBCPP_FUNC_VIS new_handler set_new_handler(new_handler) _NOEXCEPT;
-_LIBCPP_FUNC_VIS new_handler get_new_handler() _NOEXCEPT;
-
 }  // std
 
-#if !__has_feature(cxx_noexcept)
+#if defined(_LIBCPP_CXX03_LANG)
 #define _THROW_BAD_ALLOC throw(std::bad_alloc)
 #else
 #define _THROW_BAD_ALLOC
 #endif
+
+#if !defined(_LIBCPP_ABI_MICROSOFT)
 
 _LIBCPP_OVERRIDABLE_FUNC_VIS void* operator new(std::size_t __sz) _THROW_BAD_ALLOC;
 _LIBCPP_OVERRIDABLE_FUNC_VIS void* operator new(std::size_t __sz, const std::nothrow_t&) _NOEXCEPT _NOALIAS;
@@ -207,6 +216,8 @@ inline _LIBCPP_INLINE_VISIBILITY void* operator new[](std::size_t, void* __p) _N
 inline _LIBCPP_INLINE_VISIBILITY void  operator delete  (void*, void*) _NOEXCEPT {}
 inline _LIBCPP_INLINE_VISIBILITY void  operator delete[](void*, void*) _NOEXCEPT {}
 
+#endif // !_LIBCPP_ABI_MICROSOFT
+
 _LIBCPP_BEGIN_NAMESPACE_STD
 
 inline _LIBCPP_INLINE_VISIBILITY void *__allocate(size_t __size) {
@@ -217,7 +228,7 @@ inline _LIBCPP_INLINE_VISIBILITY void *__allocate(size_t __size) {
 #endif
 }
 
-inline _LIBCPP_INLINE_VISIBILITY void __deallocate(void *__ptr) {
+inline _LIBCPP_INLINE_VISIBILITY void __libcpp_deallocate(void *__ptr) {
 #ifdef _LIBCPP_HAS_NO_BUILTIN_OPERATOR_NEW_DELETE
   ::operator delete(__ptr);
 #else

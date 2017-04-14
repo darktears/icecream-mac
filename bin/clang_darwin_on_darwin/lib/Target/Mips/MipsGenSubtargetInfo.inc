@@ -50,9 +50,10 @@ enum {
   FeaturePTR64Bit = 34,
   FeatureSingleFloat = 35,
   FeatureSoftFloat = 36,
-  FeatureUseTCCInDIV = 37,
-  FeatureVFPU = 38,
-  ImplP5600 = 39
+  FeatureSym32 = 37,
+  FeatureUseTCCInDIV = 38,
+  FeatureVFPU = 39,
+  ImplP5600 = 40
 };
 } // end namespace Mips
 } // end namespace llvm
@@ -104,6 +105,7 @@ extern const llvm::SubtargetFeatureKV MipsFeatureKV[] = {
   { "ptr64", "Pointers are 64-bit wide", { Mips::FeaturePTR64Bit }, { } },
   { "single-float", "Only supports single precision float", { Mips::FeatureSingleFloat }, { } },
   { "soft-float", "Does not support floating point instructions", { Mips::FeatureSoftFloat }, { } },
+  { "sym32", "Symbols are 32 bit on Mips64", { Mips::FeatureSym32 }, { } },
   { "use-tcc-in-div", "Force the assembler to use trapping", { Mips::FeatureUseTCCInDIV }, { } },
   { "vfpu", "Enable vector FPU instructions", { Mips::FeatureVFPU }, { } }
 };
@@ -1991,6 +1993,7 @@ void llvm::MipsSubtarget::ParseSubtargetFeatures(StringRef CPU, StringRef FS) {
   if (Bits[Mips::FeaturePTR64Bit]) IsPTR64bit = true;
   if (Bits[Mips::FeatureSingleFloat]) IsSingleFloat = true;
   if (Bits[Mips::FeatureSoftFloat]) IsSoftFloat = true;
+  if (Bits[Mips::FeatureSym32]) HasSym32 = true;
   if (Bits[Mips::FeatureUseTCCInDIV]) UseTCCInDIV = false;
   if (Bits[Mips::FeatureVFPU]) HasVFPU = true;
   if (Bits[Mips::ImplP5600] && ProcImpl < MipsSubtarget::CPU::P5600) ProcImpl = MipsSubtarget::CPU::P5600;
@@ -2027,7 +2030,7 @@ extern const llvm::MCWriteProcResEntry MipsWriteProcResTable[];
 extern const llvm::MCWriteLatencyEntry MipsWriteLatencyTable[];
 extern const llvm::MCReadAdvanceEntry MipsReadAdvanceTable[];
 MipsGenSubtargetInfo::MipsGenSubtargetInfo(const Triple &TT, StringRef CPU, StringRef FS)
-  : TargetSubtargetInfo(TT, CPU, FS, makeArrayRef(MipsFeatureKV, 40), makeArrayRef(MipsSubTypeKV, 17), 
+  : TargetSubtargetInfo(TT, CPU, FS, makeArrayRef(MipsFeatureKV, 41), makeArrayRef(MipsSubTypeKV, 17), 
                         MipsProcSchedKV, MipsWriteProcResTable, MipsWriteLatencyTable, MipsReadAdvanceTable, 
                         nullptr, nullptr, nullptr) {}
 

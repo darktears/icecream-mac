@@ -49,7 +49,7 @@ static bool RetCC_MSP430(unsigned ValNo, MVT ValVT,
 
   if (LocVT == MVT::i8) {
     static const MCPhysReg RegList1[] = {
-      MSP430::R15B, MSP430::R14B, MSP430::R13B, MSP430::R12B
+      MSP430::R12B, MSP430::R13B, MSP430::R14B, MSP430::R15B
     };
     if (unsigned Reg = State.AllocateReg(RegList1)) {
       State.addLoc(CCValAssign::getReg(ValNo, ValVT, Reg, LocVT, LocInfo));
@@ -59,7 +59,7 @@ static bool RetCC_MSP430(unsigned ValNo, MVT ValVT,
 
   if (LocVT == MVT::i16) {
     static const MCPhysReg RegList2[] = {
-      MSP430::R15, MSP430::R14, MSP430::R13, MSP430::R12
+      MSP430::R12, MSP430::R13, MSP430::R14, MSP430::R15
     };
     if (unsigned Reg = State.AllocateReg(RegList2)) {
       State.addLoc(CCValAssign::getReg(ValNo, ValVT, Reg, LocVT, LocInfo));

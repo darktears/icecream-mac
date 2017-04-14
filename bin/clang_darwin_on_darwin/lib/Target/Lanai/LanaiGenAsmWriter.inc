@@ -69,10 +69,11 @@ void LanaiInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
   /* 456 */ 's', 'h', '.', 'f', 0,
   /* 461 */ 'x', 'o', 'r', '.', 'f', 0,
   /* 467 */ 's', 'h', 0,
-  /* 470 */ 'l', 'd', 9, '-', '4', '[', '%', 'f', 'p', ']', ',', 32, '%', 'p', 'c', 32, '!', 32, 'r', 'e', 't', 'u', 'r', 'n', 0,
-  /* 495 */ 'n', 'o', 'p', 0,
-  /* 499 */ 'x', 'o', 'r', 0,
-  /* 503 */ 's', 0,
+  /* 470 */ '#', 32, 'F', 'E', 'n', 't', 'r', 'y', 32, 'c', 'a', 'l', 'l', 0,
+  /* 484 */ 'l', 'd', 9, '-', '4', '[', '%', 'f', 'p', ']', ',', 32, '%', 'p', 'c', 32, '!', 32, 'r', 'e', 't', 'u', 'r', 'n', 0,
+  /* 509 */ 'n', 'o', 'p', 0,
+  /* 513 */ 'x', 'o', 'r', 0,
+  /* 517 */ 's', 0,
   };
 
   static const uint16_t OpInfo0[] = {
@@ -94,11 +95,12 @@ void LanaiInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     378U,	// LIFETIME_START
     348U,	// LIFETIME_END
     0U,	// STACKMAP
+    471U,	// FENTRY_CALL
     0U,	// PATCHPOINT
     0U,	// LOAD_STACK_GUARD
     0U,	// STATEPOINT
     0U,	// LOCAL_ESCAPE
-    0U,	// FAULTING_LOAD_OP
+    0U,	// FAULTING_OP
     0U,	// PATCHABLE_OP
     250U,	// PATCHABLE_FUNCTION_ENTER
     214U,	// PATCHABLE_RET
@@ -117,20 +119,25 @@ void LanaiInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// G_FRAME_INDEX
     0U,	// G_GLOBAL_VALUE
     0U,	// G_EXTRACT
+    0U,	// G_UNMERGE_VALUES
     0U,	// G_INSERT
     0U,	// G_SEQUENCE
+    0U,	// G_MERGE_VALUES
     0U,	// G_PTRTOINT
     0U,	// G_INTTOPTR
     0U,	// G_BITCAST
     0U,	// G_LOAD
     0U,	// G_STORE
     0U,	// G_BRCOND
+    0U,	// G_BRINDIRECT
     0U,	// G_INTRINSIC
     0U,	// G_INTRINSIC_W_SIDE_EFFECTS
     0U,	// G_ANYEXT
     0U,	// G_TRUNC
     0U,	// G_CONSTANT
     0U,	// G_FCONSTANT
+    0U,	// G_VASTART
+    0U,	// G_VAARG
     0U,	// G_SEXT
     0U,	// G_ZEXT
     0U,	// G_SHL
@@ -145,11 +152,15 @@ void LanaiInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// G_SSUBO
     0U,	// G_UMULO
     0U,	// G_SMULO
+    0U,	// G_UMULH
+    0U,	// G_SMULH
     0U,	// G_FADD
     0U,	// G_FSUB
     0U,	// G_FMUL
     0U,	// G_FDIV
     0U,	// G_FREM
+    0U,	// G_FPOW
+    0U,	// G_FNEG
     0U,	// G_FPEXT
     0U,	// G_FPTRUNC
     0U,	// G_FPTOSI
@@ -157,106 +168,110 @@ void LanaiInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// G_SITOFP
     0U,	// G_UITOFP
     0U,	// G_GEP
+    0U,	// G_PTR_MASK
     0U,	// G_BR
-    591U,	// ADDC_F_I_HI
-    8783U,	// ADDC_F_I_LO
-    1462U,	// ADDC_F_R
-    542U,	// ADDC_I_HI
-    8734U,	// ADDC_I_LO
-    1430U,	// ADDC_R
-    599U,	// ADD_F_I_HI
-    8791U,	// ADD_F_I_LO
-    1469U,	// ADD_F_R
-    554U,	// ADD_I_HI
-    8746U,	// ADD_I_LO
-    1435U,	// ADD_R
-    18098U,	// ADJCALLSTACKDOWN
-    26309U,	// ADJCALLSTACKUP
-    26276U,	// ADJDYNALLOC
-    33374U,	// AND_F_I_HI
-    41566U,	// AND_F_I_LO
-    1475U,	// AND_F_R
-    33332U,	// AND_I_HI
-    41524U,	// AND_I_LO
-    1439U,	// AND_R
-    51600U,	// BRCC
-    51600U,	// BRIND_CC
-    2960U,	// BRIND_CCA
-    59792U,	// BRR
-    18056U,	// BT
+    0U,	// G_INSERT_VECTOR_ELT
+    0U,	// G_EXTRACT_VECTOR_ELT
+    0U,	// G_SHUFFLE_VECTOR
+    1103U,	// ADDC_F_I_HI
+    17487U,	// ADDC_F_I_LO
+    2486U,	// ADDC_F_R
+    1054U,	// ADDC_I_HI
+    17438U,	// ADDC_I_LO
+    2454U,	// ADDC_R
+    1111U,	// ADD_F_I_HI
+    17495U,	// ADD_F_I_LO
+    2493U,	// ADD_F_R
+    1066U,	// ADD_I_HI
+    17450U,	// ADD_I_LO
+    2459U,	// ADD_R
+    36018U,	// ADJCALLSTACKDOWN
+    52421U,	// ADJCALLSTACKUP
+    52388U,	// ADJDYNALLOC
+    1118U,	// AND_F_I_HI
+    17502U,	// AND_F_I_LO
+    2499U,	// AND_F_R
+    1076U,	// AND_I_HI
+    17460U,	// AND_I_LO
+    2463U,	// AND_R
+    37264U,	// BRCC
+    37264U,	// BRIND_CC
+    5520U,	// BRIND_CCA
+    53648U,	// BRR
+    35976U,	// BT
     0U,	// CALL
     0U,	// CALLR
-    18056U,	// JR
-    3120U,	// LDADDR
-    3591U,	// LDBs_RI
-    4103U,	// LDBs_RR
-    3590U,	// LDBz_RI
-    4102U,	// LDBz_RR
-    3699U,	// LDHs_RI
-    4211U,	// LDHs_RR
-    3698U,	// LDHz_RI
-    4210U,	// LDHz_RR
-    4655U,	// LDW_RI
-    4144U,	// LDW_RR
-    4143U,	// LDWz_RR
-    661U,	// LEADZ
+    35976U,	// JR
+    6192U,	// LDADDR
+    7175U,	// LDBs_RI
+    8199U,	// LDBs_RR
+    7174U,	// LDBz_RI
+    8198U,	// LDBz_RR
+    7283U,	// LDHs_RI
+    8307U,	// LDHs_RR
+    7282U,	// LDHz_RI
+    8306U,	// LDHz_RR
+    9263U,	// LDW_RI
+    8240U,	// LDW_RR
+    8239U,	// LDWz_RR
+    1173U,	// LEADZ
     318U,	// LOG0
     324U,	// LOG1
     330U,	// LOG2
     336U,	// LOG3
     342U,	// LOG4
-    5264U,	// MOVHI
-    496U,	// NOP
-    620U,	// OR_F_I_HI
-    8812U,	// OR_F_I_LO
-    1487U,	// OR_F_R
-    644U,	// OR_I_HI
-    8836U,	// OR_I_LO
-    1525U,	// OR_R
-    548U,	// POPC
-    471U,	// RET
-    8761U,	// SA_F_I
-    8705U,	// SA_I
-    51704U,	// SCC
-    5877U,	// SELECT
-    9800U,	// SFSUB_F_RI_HI
-    9800U,	// SFSUB_F_RI_LO
-    9800U,	// SFSUB_F_RR
-    1481U,	// SHL_F_R
-    1492U,	// SHL_R
-    656U,	// SLI
-    8805U,	// SL_F_I
-    8831U,	// SL_I
-    1443U,	// SRA_F_R
-    1417U,	// SRA_R
-    1481U,	// SRL_F_R
-    1492U,	// SRL_R
-    9868U,	// STADDR
-    9741U,	// STB_RI
-    9741U,	// STB_RR
-    9849U,	// STH_RI
-    9849U,	// STH_RR
-    576U,	// SUBB_F_I_HI
-    8768U,	// SUBB_F_I_LO
-    1449U,	// SUBB_F_R
-    531U,	// SUBB_I_HI
-    8723U,	// SUBB_I_LO
-    1421U,	// SUBB_R
-    584U,	// SUB_F_I_HI
-    8776U,	// SUB_F_I_LO
-    1456U,	// SUB_F_R
-    537U,	// SUB_I_HI
-    8729U,	// SUB_I_LO
-    1426U,	// SUB_R
-    9868U,	// SW_RI
-    9868U,	// SW_RR
-    668U,	// TRAILZ
-    619U,	// XOR_F_I_HI
-    8811U,	// XOR_F_I_LO
-    1486U,	// XOR_F_R
-    643U,	// XOR_I_HI
-    8835U,	// XOR_I_LO
-    1524U,	// XOR_R
+    10384U,	// MOVHI
+    510U,	// NOP
+    1132U,	// OR_F_I_HI
+    17516U,	// OR_F_I_LO
+    2511U,	// OR_F_R
+    1156U,	// OR_I_HI
+    17540U,	// OR_I_LO
+    2563U,	// OR_R
+    1060U,	// POPC
+    485U,	// RET
+    17465U,	// SA_F_I
+    17409U,	// SA_I
+    37382U,	// SCC
+    11509U,	// SELECT
+    19528U,	// SFSUB_F_RI_HI
+    19528U,	// SFSUB_F_RI_LO
+    19528U,	// SFSUB_F_RR
+    2505U,	// SHL_F_R
+    2516U,	// SHL_R
+    1168U,	// SLI
+    17509U,	// SL_F_I
+    17535U,	// SL_I
+    2467U,	// SRA_F_R
+    2441U,	// SRA_R
+    2505U,	// SRL_F_R
+    2516U,	// SRL_R
+    19596U,	// STADDR
+    19469U,	// STB_RI
+    19469U,	// STB_RR
+    19577U,	// STH_RI
+    19577U,	// STH_RR
+    1088U,	// SUBB_F_I_HI
+    17472U,	// SUBB_F_I_LO
+    2473U,	// SUBB_F_R
+    1043U,	// SUBB_I_HI
+    17427U,	// SUBB_I_LO
+    2445U,	// SUBB_R
+    1096U,	// SUB_F_I_HI
+    17480U,	// SUB_F_I_LO
+    2480U,	// SUB_F_R
+    1049U,	// SUB_I_HI
+    17433U,	// SUB_I_LO
+    2450U,	// SUB_R
+    19596U,	// SW_RI
+    19596U,	// SW_RR
+    1180U,	// TRAILZ
+    1131U,	// XOR_F_I_HI
+    17515U,	// XOR_F_I_LO
+    2510U,	// XOR_F_R
+    1155U,	// XOR_I_HI
+    17539U,	// XOR_I_LO
+    2562U,	// XOR_R
   };
 
   static const uint8_t OpInfo1[] = {
@@ -278,11 +293,12 @@ void LanaiInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// LIFETIME_START
     0U,	// LIFETIME_END
     0U,	// STACKMAP
+    0U,	// FENTRY_CALL
     0U,	// PATCHPOINT
     0U,	// LOAD_STACK_GUARD
     0U,	// STATEPOINT
     0U,	// LOCAL_ESCAPE
-    0U,	// FAULTING_LOAD_OP
+    0U,	// FAULTING_OP
     0U,	// PATCHABLE_OP
     0U,	// PATCHABLE_FUNCTION_ENTER
     0U,	// PATCHABLE_RET
@@ -301,20 +317,25 @@ void LanaiInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// G_FRAME_INDEX
     0U,	// G_GLOBAL_VALUE
     0U,	// G_EXTRACT
+    0U,	// G_UNMERGE_VALUES
     0U,	// G_INSERT
     0U,	// G_SEQUENCE
+    0U,	// G_MERGE_VALUES
     0U,	// G_PTRTOINT
     0U,	// G_INTTOPTR
     0U,	// G_BITCAST
     0U,	// G_LOAD
     0U,	// G_STORE
     0U,	// G_BRCOND
+    0U,	// G_BRINDIRECT
     0U,	// G_INTRINSIC
     0U,	// G_INTRINSIC_W_SIDE_EFFECTS
     0U,	// G_ANYEXT
     0U,	// G_TRUNC
     0U,	// G_CONSTANT
     0U,	// G_FCONSTANT
+    0U,	// G_VASTART
+    0U,	// G_VAARG
     0U,	// G_SEXT
     0U,	// G_ZEXT
     0U,	// G_SHL
@@ -329,11 +350,15 @@ void LanaiInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// G_SSUBO
     0U,	// G_UMULO
     0U,	// G_SMULO
+    0U,	// G_UMULH
+    0U,	// G_SMULH
     0U,	// G_FADD
     0U,	// G_FSUB
     0U,	// G_FMUL
     0U,	// G_FDIV
     0U,	// G_FREM
+    0U,	// G_FPOW
+    0U,	// G_FNEG
     0U,	// G_FPEXT
     0U,	// G_FPTRUNC
     0U,	// G_FPTOSI
@@ -341,7 +366,11 @@ void LanaiInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// G_SITOFP
     0U,	// G_UITOFP
     0U,	// G_GEP
+    0U,	// G_PTR_MASK
     0U,	// G_BR
+    0U,	// G_INSERT_VECTOR_ELT
+    0U,	// G_EXTRACT_VECTOR_ELT
+    0U,	// G_SHUFFLE_VECTOR
     0U,	// ADDC_F_I_HI
     0U,	// ADDC_F_I_LO
     0U,	// ADDC_F_R
@@ -357,16 +386,16 @@ void LanaiInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// ADJCALLSTACKDOWN
     0U,	// ADJCALLSTACKUP
     0U,	// ADJDYNALLOC
-    0U,	// AND_F_I_HI
-    0U,	// AND_F_I_LO
+    1U,	// AND_F_I_HI
+    1U,	// AND_F_I_LO
     0U,	// AND_F_R
-    0U,	// AND_I_HI
-    0U,	// AND_I_LO
+    1U,	// AND_I_HI
+    1U,	// AND_I_LO
     0U,	// AND_R
-    0U,	// BRCC
-    0U,	// BRIND_CC
+    1U,	// BRCC
+    1U,	// BRIND_CC
     0U,	// BRIND_CCA
-    0U,	// BRR
+    1U,	// BRR
     0U,	// BT
     0U,	// CALL
     0U,	// CALLR
@@ -383,7 +412,7 @@ void LanaiInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// LDW_RI
     0U,	// LDW_RR
     0U,	// LDWz_RR
-    1U,	// LEADZ
+    2U,	// LEADZ
     0U,	// LOG0
     0U,	// LOG1
     0U,	// LOG2
@@ -397,29 +426,29 @@ void LanaiInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// OR_I_HI
     0U,	// OR_I_LO
     0U,	// OR_R
-    1U,	// POPC
+    2U,	// POPC
     0U,	// RET
     0U,	// SA_F_I
     0U,	// SA_I
-    0U,	// SCC
+    1U,	// SCC
     0U,	// SELECT
-    1U,	// SFSUB_F_RI_HI
-    3U,	// SFSUB_F_RI_LO
-    3U,	// SFSUB_F_RR
+    2U,	// SFSUB_F_RI_HI
+    6U,	// SFSUB_F_RI_LO
+    6U,	// SFSUB_F_RR
     0U,	// SHL_F_R
     0U,	// SHL_R
-    1U,	// SLI
+    2U,	// SLI
     0U,	// SL_F_I
     0U,	// SL_I
     0U,	// SRA_F_R
     0U,	// SRA_R
     0U,	// SRL_F_R
     0U,	// SRL_R
-    5U,	// STADDR
-    7U,	// STB_RI
-    9U,	// STB_RR
-    7U,	// STH_RI
-    9U,	// STH_RR
+    10U,	// STADDR
+    14U,	// STB_RI
+    18U,	// STB_RR
+    14U,	// STH_RI
+    18U,	// STH_RR
     0U,	// SUBB_F_I_HI
     0U,	// SUBB_F_I_LO
     0U,	// SUBB_F_R
@@ -432,9 +461,9 @@ void LanaiInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// SUB_I_HI
     0U,	// SUB_I_LO
     0U,	// SUB_R
-    11U,	// SW_RI
-    9U,	// SW_RR
-    1U,	// TRAILZ
+    22U,	// SW_RI
+    18U,	// SW_RR
+    2U,	// TRAILZ
     0U,	// XOR_F_I_HI
     0U,	// XOR_F_I_LO
     0U,	// XOR_F_R
@@ -450,14 +479,14 @@ void LanaiInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
   Bits |= OpInfo0[MI->getOpcode()] << 0;
   Bits |= OpInfo1[MI->getOpcode()] << 16;
   assert(Bits != 0 && "Cannot print this instruction.");
-  O << AsmStrs+(Bits & 511)-1;
+  O << AsmStrs+(Bits & 1023)-1;
 
 
   // Fragment 0 encoded into 4 bits for 12 unique commands.
-  switch ((Bits >> 9) & 15) {
+  switch ((Bits >> 10) & 15) {
   default: llvm_unreachable("Invalid command number.");
   case 0:
-    // DBG_VALUE, BUNDLE, LIFETIME_START, LIFETIME_END, PATCHABLE_FUNCTION_EN...
+    // DBG_VALUE, BUNDLE, LIFETIME_START, LIFETIME_END, FENTRY_CALL, PATCHABL...
     return;
     break;
   case 1:
@@ -543,7 +572,7 @@ void LanaiInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
 
 
   // Fragment 1 encoded into 4 bits for 10 unique commands.
-  switch ((Bits >> 13) & 15) {
+  switch ((Bits >> 14) & 15) {
   default: llvm_unreachable("Invalid command number.");
   case 0:
     // ADDC_F_I_HI, ADDC_I_HI, ADD_F_I_HI, ADD_I_HI, OR_F_I_HI, OR_I_HI, SUBB...
@@ -608,7 +637,7 @@ void LanaiInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
 
 
   // Fragment 2 encoded into 3 bits for 6 unique commands.
-  switch ((Bits >> 17) & 7) {
+  switch ((Bits >> 18) & 7) {
   default: llvm_unreachable("Invalid command number.");
   case 0:
     // SFSUB_F_RI_HI

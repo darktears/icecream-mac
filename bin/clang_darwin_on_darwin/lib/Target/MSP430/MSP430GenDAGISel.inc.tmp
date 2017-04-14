@@ -10,7 +10,7 @@
 // *** instruction selector class.  These functions are really methods.
 
 // The main instruction selector code.
-SDNode *SelectCode(SDNode *N) {
+void SelectCode(SDNode *N) {
   // Some target values are emitted as 2 bytes, TARGET_VAL handles
   // this.
   #define TARGET_VAL(X) X & 255, unsigned(X) >> 8
@@ -3201,7 +3201,6 @@ SDNode *SelectCode(SDNode *N) {
 
   #undef TARGET_VAL
   SelectCodeCommon(N, MatcherTable,sizeof(MatcherTable));
-  return nullptr;
 }
 bool CheckNodePredicate(SDNode *Node,
                         unsigned PredNo) const override {
@@ -3284,7 +3283,7 @@ bool CheckComplexPattern(SDNode *Root, SDNode *Parent,
   default: llvm_unreachable("Invalid pattern # in table?");
   case 0:
     Result.resize(NextRes+2);
-    return SelectAddr(N, Result[NextRes+0].first, Result[NextRes+1].first);
+  return SelectAddr(N, Result[NextRes+0].first, Result[NextRes+1].first);
   }
 }
 

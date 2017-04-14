@@ -16,7 +16,6 @@
                        const OperandVector &Operands);
   void convertToMapAndConstraints(unsigned Kind,
                            const OperandVector &Operands) override;
-  bool mnemonicIsValid(StringRef Mnemonic, unsigned VariantID);
   unsigned MatchInstructionImpl(const OperandVector &Operands,
                                 MCInst &Inst,
                                 uint64_t &ErrorInfo, bool matchingInlineAsm,
@@ -82,19 +81,19 @@ static void applyMnemonicAliases(StringRef &Mnemonic, uint64_t Features, unsigne
         switch (Mnemonic[0]) {
         default: break;
         case 'a':	 // 1 string to match.
-          if (memcmp(Mnemonic.data()+1, "ddc", 3))
+          if (memcmp(Mnemonic.data()+1, "ddc", 3) != 0)
             break;
           if ((Features & Feature_HasV9) == Feature_HasV9)	 // "addc"
             Mnemonic = "addx";
           return;
         case 'l':	 // 1 string to match.
-          if (memcmp(Mnemonic.data()+1, "duw", 3))
+          if (memcmp(Mnemonic.data()+1, "duw", 3) != 0)
             break;
           if ((Features & Feature_HasV9) == Feature_HasV9)	 // "lduw"
             Mnemonic = "ld";
           return;
         case 's':	 // 1 string to match.
-          if (memcmp(Mnemonic.data()+1, "ubc", 3))
+          if (memcmp(Mnemonic.data()+1, "ubc", 3) != 0)
             break;
           if ((Features & Feature_HasV9) == Feature_HasV9)	 // "subc"
             Mnemonic = "subx";
@@ -102,7 +101,7 @@ static void applyMnemonicAliases(StringRef &Mnemonic, uint64_t Features, unsigne
         }
         break;
       case 5:	 // 1 string to match.
-        if (memcmp(Mnemonic.data()+0, "lduwa", 5))
+        if (memcmp(Mnemonic.data()+0, "lduwa", 5) != 0)
           break;
         if ((Features & Feature_HasV9) == Feature_HasV9)	 // "lduwa"
           Mnemonic = "lda";
@@ -111,19 +110,19 @@ static void applyMnemonicAliases(StringRef &Mnemonic, uint64_t Features, unsigne
         switch (Mnemonic[0]) {
         default: break;
         case 'a':	 // 1 string to match.
-          if (memcmp(Mnemonic.data()+1, "ddccc", 5))
+          if (memcmp(Mnemonic.data()+1, "ddccc", 5) != 0)
             break;
           if ((Features & Feature_HasV9) == Feature_HasV9)	 // "addccc"
             Mnemonic = "addxcc";
           return;
         case 'r':	 // 1 string to match.
-          if (memcmp(Mnemonic.data()+1, "eturn", 5))
+          if (memcmp(Mnemonic.data()+1, "eturn", 5) != 0)
             break;
           if ((Features & Feature_HasV9) == Feature_HasV9)	 // "return"
             Mnemonic = "rett";
           return;
         case 's':	 // 1 string to match.
-          if (memcmp(Mnemonic.data()+1, "ubccc", 5))
+          if (memcmp(Mnemonic.data()+1, "ubccc", 5) != 0)
             break;
           if ((Features & Feature_HasV9) == Feature_HasV9)	 // "subccc"
             Mnemonic = "subxcc";
@@ -139,19 +138,19 @@ static void applyMnemonicAliases(StringRef &Mnemonic, uint64_t Features, unsigne
     switch (Mnemonic[0]) {
     default: break;
     case 'a':	 // 1 string to match.
-      if (memcmp(Mnemonic.data()+1, "ddc", 3))
+      if (memcmp(Mnemonic.data()+1, "ddc", 3) != 0)
         break;
       if ((Features & Feature_HasV9) == Feature_HasV9)	 // "addc"
         Mnemonic = "addx";
       return;
     case 'l':	 // 1 string to match.
-      if (memcmp(Mnemonic.data()+1, "duw", 3))
+      if (memcmp(Mnemonic.data()+1, "duw", 3) != 0)
         break;
       if ((Features & Feature_HasV9) == Feature_HasV9)	 // "lduw"
         Mnemonic = "ld";
       return;
     case 's':	 // 1 string to match.
-      if (memcmp(Mnemonic.data()+1, "ubc", 3))
+      if (memcmp(Mnemonic.data()+1, "ubc", 3) != 0)
         break;
       if ((Features & Feature_HasV9) == Feature_HasV9)	 // "subc"
         Mnemonic = "subx";
@@ -159,7 +158,7 @@ static void applyMnemonicAliases(StringRef &Mnemonic, uint64_t Features, unsigne
     }
     break;
   case 5:	 // 1 string to match.
-    if (memcmp(Mnemonic.data()+0, "lduwa", 5))
+    if (memcmp(Mnemonic.data()+0, "lduwa", 5) != 0)
       break;
     if ((Features & Feature_HasV9) == Feature_HasV9)	 // "lduwa"
       Mnemonic = "lda";
@@ -168,19 +167,19 @@ static void applyMnemonicAliases(StringRef &Mnemonic, uint64_t Features, unsigne
     switch (Mnemonic[0]) {
     default: break;
     case 'a':	 // 1 string to match.
-      if (memcmp(Mnemonic.data()+1, "ddccc", 5))
+      if (memcmp(Mnemonic.data()+1, "ddccc", 5) != 0)
         break;
       if ((Features & Feature_HasV9) == Feature_HasV9)	 // "addccc"
         Mnemonic = "addxcc";
       return;
     case 'r':	 // 1 string to match.
-      if (memcmp(Mnemonic.data()+1, "eturn", 5))
+      if (memcmp(Mnemonic.data()+1, "eturn", 5) != 0)
         break;
       if ((Features & Feature_HasV9) == Feature_HasV9)	 // "return"
         Mnemonic = "rett";
       return;
     case 's':	 // 1 string to match.
-      if (memcmp(Mnemonic.data()+1, "ubccc", 5))
+      if (memcmp(Mnemonic.data()+1, "ubccc", 5) != 0)
         break;
       if ((Features & Feature_HasV9) == Feature_HasV9)	 // "subccc"
         Mnemonic = "subxcc";
@@ -1700,37 +1699,37 @@ static MatchClassKind matchTokenString(StringRef Name) {
     switch (Name[1]) {
     default: break;
     case 'c':	 // 1 string to match.
-      if (memcmp(Name.data()+2, "sr", 2))
+      if (memcmp(Name.data()+2, "sr", 2) != 0)
         break;
       return MCK__PCT_csr;	 // "%csr"
     case 'f':	 // 1 string to match.
-      if (memcmp(Name.data()+2, "sr", 2))
+      if (memcmp(Name.data()+2, "sr", 2) != 0)
         break;
       return MCK__PCT_fsr;	 // "%fsr"
     case 'i':	 // 1 string to match.
-      if (memcmp(Name.data()+2, "cc", 2))
+      if (memcmp(Name.data()+2, "cc", 2) != 0)
         break;
       return MCK__PCT_icc;	 // "%icc"
     case 'p':	 // 1 string to match.
-      if (memcmp(Name.data()+2, "sr", 2))
+      if (memcmp(Name.data()+2, "sr", 2) != 0)
         break;
       return MCK__PCT_psr;	 // "%psr"
     case 't':	 // 1 string to match.
-      if (memcmp(Name.data()+2, "br", 2))
+      if (memcmp(Name.data()+2, "br", 2) != 0)
         break;
       return MCK__PCT_tbr;	 // "%tbr"
     case 'w':	 // 1 string to match.
-      if (memcmp(Name.data()+2, "im", 2))
+      if (memcmp(Name.data()+2, "im", 2) != 0)
         break;
       return MCK__PCT_wim;	 // "%wim"
     case 'x':	 // 1 string to match.
-      if (memcmp(Name.data()+2, "cc", 2))
+      if (memcmp(Name.data()+2, "cc", 2) != 0)
         break;
       return MCK__PCT_xcc;	 // "%xcc"
     }
     break;
   case 5:	 // 1 string to match.
-    if (memcmp(Name.data()+0, "%fcc0", 5))
+    if (memcmp(Name.data()+0, "%fcc0", 5) != 0)
       break;
     return MCK__PCT_fcc0;	 // "%fcc0"
   }
@@ -3772,19 +3771,6 @@ static const MatchEntry MatchTable0[] = {
   { 3248 /* xorcc */, Sparc::XORCCrr, Convert__Reg1_2__Reg1_0__Reg1_1, 0, { MCK_IntRegs, MCK_IntRegs, MCK_IntRegs }, },
   { 3248 /* xorcc */, Sparc::XORCCri, Convert__Reg1_2__Reg1_0__Imm1_1, 0, { MCK_IntRegs, MCK_Imm, MCK_IntRegs }, },
 };
-
-bool SparcAsmParser::
-mnemonicIsValid(StringRef Mnemonic, unsigned VariantID) {
-  // Find the appropriate table for this asm variant.
-  const MatchEntry *Start, *End;
-  switch (VariantID) {
-  default: llvm_unreachable("invalid variant!");
-  case 0: Start = std::begin(MatchTable0); End = std::end(MatchTable0); break;
-  }
-  // Search the table.
-  auto MnemonicRange = std::equal_range(Start, End, Mnemonic, LessOpcode());
-  return MnemonicRange.first != MnemonicRange.second;
-}
 
 unsigned SparcAsmParser::
 MatchInstructionImpl(const OperandVector &Operands,

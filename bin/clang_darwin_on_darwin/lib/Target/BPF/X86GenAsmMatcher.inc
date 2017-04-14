@@ -68,7 +68,7 @@ static unsigned MatchRegisterName(StringRef Name) {
     }
     break;
   case 3:	 // 2 strings to match.
-    if (memcmp(Name.data()+0, "r1", 2))
+    if (memcmp(Name.data()+0, "r1", 2) != 0)
       break;
     switch (Name[2]) {
     default: break;
@@ -389,15 +389,15 @@ static MatchClassKind matchTokenString(StringRef Name) {
     switch (Name[0]) {
     default: break;
     case 'l':	 // 1 string to match.
-      if (memcmp(Name.data()+1, "ea", 2))
+      if (memcmp(Name.data()+1, "ea", 2) != 0)
         break;
       return MCK_lea;	 // "lea"
     case 'n':	 // 1 string to match.
-      if (memcmp(Name.data()+1, "op", 2))
+      if (memcmp(Name.data()+1, "op", 2) != 0)
         break;
       return MCK_nop;	 // "nop"
     case 's':	 // 1 string to match.
-      if (memcmp(Name.data()+1, "kb", 2))
+      if (memcmp(Name.data()+1, "kb", 2) != 0)
         break;
       return MCK_skb;	 // "skb"
     case 'u':	 // 3 strings to match.
@@ -423,19 +423,19 @@ static MatchClassKind matchTokenString(StringRef Name) {
     switch (Name[0]) {
     default: break;
     case 'c':	 // 1 string to match.
-      if (memcmp(Name.data()+1, "all", 3))
+      if (memcmp(Name.data()+1, "all", 3) != 0)
         break;
       return MCK_call;	 // "call"
     case 'e':	 // 1 string to match.
-      if (memcmp(Name.data()+1, "xit", 3))
+      if (memcmp(Name.data()+1, "xit", 3) != 0)
         break;
       return MCK_exit;	 // "exit"
     case 'g':	 // 1 string to match.
-      if (memcmp(Name.data()+1, "oto", 3))
+      if (memcmp(Name.data()+1, "oto", 3) != 0)
         break;
       return MCK_goto;	 // "goto"
     case 'l':	 // 1 string to match.
-      if (memcmp(Name.data()+1, "ock", 3))
+      if (memcmp(Name.data()+1, "ock", 3) != 0)
         break;
       return MCK_lock;	 // "lock"
     }
@@ -444,17 +444,17 @@ static MatchClassKind matchTokenString(StringRef Name) {
     switch (Name[0]) {
     default: break;
     case 'P':	 // 1 string to match.
-      if (memcmp(Name.data()+1, "SEUDO", 5))
+      if (memcmp(Name.data()+1, "SEUDO", 5) != 0)
         break;
       return MCK_PSEUDO;	 // "PSEUDO"
     case 'S':	 // 1 string to match.
-      if (memcmp(Name.data()+1, "elect", 5))
+      if (memcmp(Name.data()+1, "elect", 5) != 0)
         break;
       return MCK_Select;	 // "Select"
     }
     break;
   case 7:	 // 3 strings to match.
-    if (memcmp(Name.data()+0, "bswap", 5))
+    if (memcmp(Name.data()+0, "bswap", 5) != 0)
       break;
     switch (Name[5]) {
     default: break;
@@ -473,15 +473,15 @@ static MatchClassKind matchTokenString(StringRef Name) {
     }
     break;
   case 9:	 // 1 string to match.
-    if (memcmp(Name.data()+0, "ld_pseudo", 9))
+    if (memcmp(Name.data()+0, "ld_pseudo", 9) != 0)
       break;
     return MCK_ld_95_pseudo;	 // "ld_pseudo"
   case 14:	 // 1 string to match.
-    if (memcmp(Name.data()+0, "ADJCALLSTACKUP", 14))
+    if (memcmp(Name.data()+0, "ADJCALLSTACKUP", 14) != 0)
       break;
     return MCK_ADJCALLSTACKUP;	 // "ADJCALLSTACKUP"
   case 16:	 // 1 string to match.
-    if (memcmp(Name.data()+0, "ADJCALLSTACKDOWN", 16))
+    if (memcmp(Name.data()+0, "ADJCALLSTACKDOWN", 16) != 0)
       break;
     return MCK_ADJCALLSTACKDOWN;	 // "ADJCALLSTACKDOWN"
   }

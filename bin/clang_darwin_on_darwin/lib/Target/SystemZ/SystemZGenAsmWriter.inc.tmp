@@ -1655,21 +1655,22 @@ void SystemZInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
   /* 11948 */ 'c', 'g', 'r', 'j', 0,
   /* 11953 */ 'c', 'l', 'g', 'r', 'j', 0,
   /* 11959 */ 'c', 'l', 'r', 'j', 0,
-  /* 11964 */ 't', 'a', 'm', 0,
-  /* 11968 */ 'l', 'o', 'c', 'r', 0,
-  /* 11973 */ 'l', 'o', 'c', 'g', 'r', 0,
-  /* 11979 */ 'l', 'o', 'c', 'f', 'h', 'r', 0,
-  /* 11986 */ 'p', 'r', 0,
-  /* 11989 */ 'c', 'l', 'g', 't', 0,
-  /* 11994 */ 'c', 'i', 't', 0,
-  /* 11998 */ 'c', 'l', 'f', 'i', 't', 0,
-  /* 12004 */ 'c', 'g', 'i', 't', 0,
-  /* 12009 */ 'c', 'l', 'g', 'i', 't', 0,
-  /* 12015 */ 'c', 'l', 't', 0,
-  /* 12019 */ 'c', 'r', 't', 0,
-  /* 12023 */ 'c', 'g', 'r', 't', 0,
-  /* 12028 */ 'c', 'l', 'g', 'r', 't', 0,
-  /* 12034 */ 'c', 'l', 'r', 't', 0,
+  /* 11964 */ '#', 32, 'F', 'E', 'n', 't', 'r', 'y', 32, 'c', 'a', 'l', 'l', 0,
+  /* 11978 */ 't', 'a', 'm', 0,
+  /* 11982 */ 'l', 'o', 'c', 'r', 0,
+  /* 11987 */ 'l', 'o', 'c', 'g', 'r', 0,
+  /* 11993 */ 'l', 'o', 'c', 'f', 'h', 'r', 0,
+  /* 12000 */ 'p', 'r', 0,
+  /* 12003 */ 'c', 'l', 'g', 't', 0,
+  /* 12008 */ 'c', 'i', 't', 0,
+  /* 12012 */ 'c', 'l', 'f', 'i', 't', 0,
+  /* 12018 */ 'c', 'g', 'i', 't', 0,
+  /* 12023 */ 'c', 'l', 'g', 'i', 't', 0,
+  /* 12029 */ 'c', 'l', 't', 0,
+  /* 12033 */ 'c', 'r', 't', 0,
+  /* 12037 */ 'c', 'g', 'r', 't', 0,
+  /* 12042 */ 'c', 'l', 'g', 'r', 't', 0,
+  /* 12048 */ 'c', 'l', 'r', 't', 0,
   };
 
   static const uint32_t OpInfo0[] = {
@@ -1691,11 +1692,12 @@ void SystemZInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     11809U,	// LIFETIME_START
     11779U,	// LIFETIME_END
     0U,	// STACKMAP
+    11965U,	// FENTRY_CALL
     0U,	// PATCHPOINT
     0U,	// LOAD_STACK_GUARD
     0U,	// STATEPOINT
     0U,	// LOCAL_ESCAPE
-    0U,	// FAULTING_LOAD_OP
+    0U,	// FAULTING_OP
     0U,	// PATCHABLE_OP
     11693U,	// PATCHABLE_FUNCTION_ENTER
     11662U,	// PATCHABLE_RET
@@ -1714,20 +1716,25 @@ void SystemZInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// G_FRAME_INDEX
     0U,	// G_GLOBAL_VALUE
     0U,	// G_EXTRACT
+    0U,	// G_UNMERGE_VALUES
     0U,	// G_INSERT
     0U,	// G_SEQUENCE
+    0U,	// G_MERGE_VALUES
     0U,	// G_PTRTOINT
     0U,	// G_INTTOPTR
     0U,	// G_BITCAST
     0U,	// G_LOAD
     0U,	// G_STORE
     0U,	// G_BRCOND
+    0U,	// G_BRINDIRECT
     0U,	// G_INTRINSIC
     0U,	// G_INTRINSIC_W_SIDE_EFFECTS
     0U,	// G_ANYEXT
     0U,	// G_TRUNC
     0U,	// G_CONSTANT
     0U,	// G_FCONSTANT
+    0U,	// G_VASTART
+    0U,	// G_VAARG
     0U,	// G_SEXT
     0U,	// G_ZEXT
     0U,	// G_SHL
@@ -1742,11 +1749,15 @@ void SystemZInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// G_SSUBO
     0U,	// G_UMULO
     0U,	// G_SMULO
+    0U,	// G_UMULH
+    0U,	// G_SMULH
     0U,	// G_FADD
     0U,	// G_FSUB
     0U,	// G_FMUL
     0U,	// G_FDIV
     0U,	// G_FREM
+    0U,	// G_FPOW
+    0U,	// G_FNEG
     0U,	// G_FPEXT
     0U,	// G_FPTRUNC
     0U,	// G_FPTOSI
@@ -1754,7 +1765,11 @@ void SystemZInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// G_SITOFP
     0U,	// G_UITOFP
     0U,	// G_GEP
+    0U,	// G_PTR_MASK
     0U,	// G_BR
+    0U,	// G_INSERT_VECTOR_ELT
+    0U,	// G_EXTRACT_VECTOR_ELT
+    0U,	// G_SHUFFLE_VECTOR
     16387U,	// A
     16654U,	// ADB
     16802871U,	// ADBR
@@ -2023,7 +2038,7 @@ void SystemZInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     1895849605U,	// CGIJAsmNL
     1895844533U,	// CGIJAsmNLE
     1895847592U,	// CGIJAsmNLH
-    4304613U,	// CGIT
+    4304627U,	// CGIT
     788556324U,	// CGITAsm
     251678053U,	// CGITAsmE
     251681283U,	// CGITAsmH
@@ -2069,7 +2084,7 @@ void SystemZInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     603998937U,	// CGRJAsmNLE
     604001996U,	// CGRJAsmNLH
     234905442U,	// CGRL
-    136425208U,	// CGRT
+    136425222U,	// CGRT
     604006986U,	// CGRTAsm
     67128704U,	// CGRTAsmE
     67131934U,	// CGRTAsmH
@@ -2124,7 +2139,7 @@ void SystemZInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     1895849598U,	// CIJAsmNL
     1895844525U,	// CIJAsmNLE
     1895847584U,	// CIJAsmNLH
-    4304603U,	// CIT
+    4304617U,	// CIT
     788556312U,	// CITAsm
     251678039U,	// CITAsmE
     251681269U,	// CITAsmH
@@ -2147,7 +2162,7 @@ void SystemZInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     318806945U,	// CLFHSI
     335567641U,	// CLFI
     0U,	// CLFIMux
-    4828895U,	// CLFIT
+    4828909U,	// CLFIT
     889219613U,	// CLFITAsm
     352341341U,	// CLFITAsmE
     352344571U,	// CLFITAsmH
@@ -2201,7 +2216,7 @@ void SystemZInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     1979735693U,	// CLGIJAsmNL
     1979730622U,	// CLGIJAsmNLE
     1979733681U,	// CLGIJAsmNLH
-    4828906U,	// CLGIT
+    4828920U,	// CLGIT
     889219626U,	// CLGITAsm
     352341356U,	// CLGITAsmE
     352344586U,	// CLGITAsmH
@@ -2247,7 +2262,7 @@ void SystemZInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     603998946U,	// CLGRJAsmNLE
     604002005U,	// CLGRJAsmNLH
     234905448U,	// CLGRL
-    136425213U,	// CLGRT
+    136425227U,	// CLGRT
     604006992U,	// CLGRTAsm
     67128711U,	// CLGRTAsmE
     67131941U,	// CLGRTAsmH
@@ -2261,7 +2276,7 @@ void SystemZInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     67133214U,	// CLGRTAsmNL
     67128154U,	// CLGRTAsmNLE
     67131220U,	// CLGRTAsmNLH
-    143062U,	// CLGT
+    143076U,	// CLGT
     385903116U,	// CLGTAsm
     402672976U,	// CLGTAsmE
     402676206U,	// CLGTAsmH
@@ -2345,7 +2360,7 @@ void SystemZInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     603998956U,	// CLRJAsmNLE
     604002015U,	// CLRJAsmNLH
     234905521U,	// CLRL
-    136425219U,	// CLRT
+    136425233U,	// CLRT
     604006999U,	// CLRTAsm
     67128719U,	// CLRTAsmE
     67131949U,	// CLRTAsmH
@@ -2361,7 +2376,7 @@ void SystemZInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     67131230U,	// CLRTAsmNLH
     67136101U,	// CLST
     0U,	// CLSTLoop
-    143088U,	// CLT
+    143102U,	// CLT
     385903153U,	// CLTAsm
     402673012U,	// CLTAsmE
     402676242U,	// CLTAsmH
@@ -2414,7 +2429,7 @@ void SystemZInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     603998929U,	// CRJAsmNLE
     604001988U,	// CRJAsmNLH
     234905405U,	// CRL
-    136425204U,	// CRT
+    136425218U,	// CRT
     604006981U,	// CRTAsm
     67128698U,	// CRTAsmE
     67131928U,	// CRTAsmH
@@ -2749,7 +2764,7 @@ void SystemZInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     436232668U,	// LOCFHAsmO
     436232965U,	// LOCFHAsmP
     436235190U,	// LOCFHAsmZ
-    7581388U,	// LOCFHR
+    7581402U,	// LOCFHR
     553674532U,	// LOCFHRAsm
     16796999U,	// LOCFHRAsmE
     16800188U,	// LOCFHRAsmH
@@ -2815,7 +2830,7 @@ void SystemZInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     50356725U,	// LOCGHIAsmO
     50357022U,	// LOCGHIAsmP
     50359247U,	// LOCGHIAsmZ
-    7581382U,	// LOCGR
+    7581396U,	// LOCGR
     553674428U,	// LOCGRAsm
     16796991U,	// LOCGRAsmE
     16800180U,	// LOCGRAsmH
@@ -2883,7 +2898,7 @@ void SystemZInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     50359239U,	// LOCHIAsmZ
     0U,	// LOCHIMux
     0U,	// LOCMux
-    7581377U,	// LOCR
+    7581391U,	// LOCR
     553674239U,	// LOCRAsm
     16796984U,	// LOCRAsmE
     16800173U,	// LOCRAsmH
@@ -3057,7 +3072,7 @@ void SystemZInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     939549208U,	// PLO
     67136061U,	// POPCNT
     603996189U,	// PPA
-    11987U,	// PR
+    12001U,	// PR
     553668731U,	// RISBG
     553668731U,	// RISBG32
     553673107U,	// RISBGN
@@ -3247,7 +3262,7 @@ void SystemZInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// SelectF64
     0U,	// Serialize
     3189341U,	// TABORT
-    11965U,	// TAM
+    11979U,	// TAM
     318808475U,	// TBEGIN
     318801155U,	// TBEGINC
     0U,	// TBEGIN_nofloat
@@ -3818,11 +3833,12 @@ void SystemZInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// LIFETIME_START
     0U,	// LIFETIME_END
     0U,	// STACKMAP
+    0U,	// FENTRY_CALL
     0U,	// PATCHPOINT
     0U,	// LOAD_STACK_GUARD
     0U,	// STATEPOINT
     0U,	// LOCAL_ESCAPE
-    0U,	// FAULTING_LOAD_OP
+    0U,	// FAULTING_OP
     0U,	// PATCHABLE_OP
     0U,	// PATCHABLE_FUNCTION_ENTER
     0U,	// PATCHABLE_RET
@@ -3841,20 +3857,25 @@ void SystemZInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// G_FRAME_INDEX
     0U,	// G_GLOBAL_VALUE
     0U,	// G_EXTRACT
+    0U,	// G_UNMERGE_VALUES
     0U,	// G_INSERT
     0U,	// G_SEQUENCE
+    0U,	// G_MERGE_VALUES
     0U,	// G_PTRTOINT
     0U,	// G_INTTOPTR
     0U,	// G_BITCAST
     0U,	// G_LOAD
     0U,	// G_STORE
     0U,	// G_BRCOND
+    0U,	// G_BRINDIRECT
     0U,	// G_INTRINSIC
     0U,	// G_INTRINSIC_W_SIDE_EFFECTS
     0U,	// G_ANYEXT
     0U,	// G_TRUNC
     0U,	// G_CONSTANT
     0U,	// G_FCONSTANT
+    0U,	// G_VASTART
+    0U,	// G_VAARG
     0U,	// G_SEXT
     0U,	// G_ZEXT
     0U,	// G_SHL
@@ -3869,11 +3890,15 @@ void SystemZInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// G_SSUBO
     0U,	// G_UMULO
     0U,	// G_SMULO
+    0U,	// G_UMULH
+    0U,	// G_SMULH
     0U,	// G_FADD
     0U,	// G_FSUB
     0U,	// G_FMUL
     0U,	// G_FDIV
     0U,	// G_FREM
+    0U,	// G_FPOW
+    0U,	// G_FNEG
     0U,	// G_FPEXT
     0U,	// G_FPTRUNC
     0U,	// G_FPTOSI
@@ -3881,7 +3906,11 @@ void SystemZInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// G_SITOFP
     0U,	// G_UITOFP
     0U,	// G_GEP
+    0U,	// G_PTR_MASK
     0U,	// G_BR
+    0U,	// G_INSERT_VECTOR_ELT
+    0U,	// G_EXTRACT_VECTOR_ELT
+    0U,	// G_SHUFFLE_VECTOR
     0U,	// A
     0U,	// ADB
     0U,	// ADBR
@@ -5945,11 +5974,12 @@ void SystemZInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// LIFETIME_START
     0U,	// LIFETIME_END
     0U,	// STACKMAP
+    0U,	// FENTRY_CALL
     0U,	// PATCHPOINT
     0U,	// LOAD_STACK_GUARD
     0U,	// STATEPOINT
     0U,	// LOCAL_ESCAPE
-    0U,	// FAULTING_LOAD_OP
+    0U,	// FAULTING_OP
     0U,	// PATCHABLE_OP
     0U,	// PATCHABLE_FUNCTION_ENTER
     0U,	// PATCHABLE_RET
@@ -5968,20 +5998,25 @@ void SystemZInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// G_FRAME_INDEX
     0U,	// G_GLOBAL_VALUE
     0U,	// G_EXTRACT
+    0U,	// G_UNMERGE_VALUES
     0U,	// G_INSERT
     0U,	// G_SEQUENCE
+    0U,	// G_MERGE_VALUES
     0U,	// G_PTRTOINT
     0U,	// G_INTTOPTR
     0U,	// G_BITCAST
     0U,	// G_LOAD
     0U,	// G_STORE
     0U,	// G_BRCOND
+    0U,	// G_BRINDIRECT
     0U,	// G_INTRINSIC
     0U,	// G_INTRINSIC_W_SIDE_EFFECTS
     0U,	// G_ANYEXT
     0U,	// G_TRUNC
     0U,	// G_CONSTANT
     0U,	// G_FCONSTANT
+    0U,	// G_VASTART
+    0U,	// G_VAARG
     0U,	// G_SEXT
     0U,	// G_ZEXT
     0U,	// G_SHL
@@ -5996,11 +6031,15 @@ void SystemZInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// G_SSUBO
     0U,	// G_UMULO
     0U,	// G_SMULO
+    0U,	// G_UMULH
+    0U,	// G_SMULH
     0U,	// G_FADD
     0U,	// G_FSUB
     0U,	// G_FMUL
     0U,	// G_FDIV
     0U,	// G_FREM
+    0U,	// G_FPOW
+    0U,	// G_FNEG
     0U,	// G_FPEXT
     0U,	// G_FPTRUNC
     0U,	// G_FPTOSI
@@ -6008,7 +6047,11 @@ void SystemZInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// G_SITOFP
     0U,	// G_UITOFP
     0U,	// G_GEP
+    0U,	// G_PTR_MASK
     0U,	// G_BR
+    0U,	// G_INSERT_VECTOR_ELT
+    0U,	// G_EXTRACT_VECTOR_ELT
+    0U,	// G_SHUFFLE_VECTOR
     0U,	// A
     0U,	// ADB
     0U,	// ADBR
@@ -8068,7 +8111,7 @@ void SystemZInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
   switch ((Bits >> 14) & 31) {
   default: llvm_unreachable("Invalid command number.");
   case 0:
-    // DBG_VALUE, BUNDLE, LIFETIME_START, LIFETIME_END, PATCHABLE_FUNCTION_EN...
+    // DBG_VALUE, BUNDLE, LIFETIME_START, LIFETIME_END, FENTRY_CALL, PATCHABL...
     return;
     break;
   case 1:

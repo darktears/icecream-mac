@@ -345,15 +345,16 @@ void SparcInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo 
   /* 2937 */ 'c', 'b', 0,
   /* 2940 */ 'f', 'b', 0,
   /* 2943 */ 'f', 'm', 'o', 'v', 'd', 0,
-  /* 2949 */ 's', 'i', 'a', 'm', 0,
-  /* 2954 */ 's', 'h', 'u', 't', 'd', 'o', 'w', 'n', 0,
-  /* 2963 */ 'n', 'o', 'p', 0,
-  /* 2967 */ 'f', 'm', 'o', 'v', 'q', 0,
-  /* 2973 */ 's', 't', 'b', 'a', 'r', 0,
-  /* 2979 */ 'f', 'm', 'o', 'v', 's', 0,
-  /* 2985 */ 't', 0,
-  /* 2987 */ 'm', 'o', 'v', 0,
-  /* 2991 */ 'f', 'l', 'u', 's', 'h', 'w', 0,
+  /* 2949 */ '#', 32, 'F', 'E', 'n', 't', 'r', 'y', 32, 'c', 'a', 'l', 'l', 0,
+  /* 2963 */ 's', 'i', 'a', 'm', 0,
+  /* 2968 */ 's', 'h', 'u', 't', 'd', 'o', 'w', 'n', 0,
+  /* 2977 */ 'n', 'o', 'p', 0,
+  /* 2981 */ 'f', 'm', 'o', 'v', 'q', 0,
+  /* 2987 */ 's', 't', 'b', 'a', 'r', 0,
+  /* 2993 */ 'f', 'm', 'o', 'v', 's', 0,
+  /* 2999 */ 't', 0,
+  /* 3001 */ 'm', 'o', 'v', 0,
+  /* 3005 */ 'f', 'l', 'u', 's', 'h', 'w', 0,
   };
 
   static const uint32_t OpInfo0[] = {
@@ -375,11 +376,12 @@ void SparcInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo 
     2703U,	// LIFETIME_START
     2673U,	// LIFETIME_END
     0U,	// STACKMAP
+    2950U,	// FENTRY_CALL
     0U,	// PATCHPOINT
     0U,	// LOAD_STACK_GUARD
     0U,	// STATEPOINT
     0U,	// LOCAL_ESCAPE
-    0U,	// FAULTING_LOAD_OP
+    0U,	// FAULTING_OP
     0U,	// PATCHABLE_OP
     2548U,	// PATCHABLE_FUNCTION_ENTER
     2517U,	// PATCHABLE_RET
@@ -398,20 +400,25 @@ void SparcInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo 
     0U,	// G_FRAME_INDEX
     0U,	// G_GLOBAL_VALUE
     0U,	// G_EXTRACT
+    0U,	// G_UNMERGE_VALUES
     0U,	// G_INSERT
     0U,	// G_SEQUENCE
+    0U,	// G_MERGE_VALUES
     0U,	// G_PTRTOINT
     0U,	// G_INTTOPTR
     0U,	// G_BITCAST
     0U,	// G_LOAD
     0U,	// G_STORE
     0U,	// G_BRCOND
+    0U,	// G_BRINDIRECT
     0U,	// G_INTRINSIC
     0U,	// G_INTRINSIC_W_SIDE_EFFECTS
     0U,	// G_ANYEXT
     0U,	// G_TRUNC
     0U,	// G_CONSTANT
     0U,	// G_FCONSTANT
+    0U,	// G_VASTART
+    0U,	// G_VAARG
     0U,	// G_SEXT
     0U,	// G_ZEXT
     0U,	// G_SHL
@@ -426,11 +433,15 @@ void SparcInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo 
     0U,	// G_SSUBO
     0U,	// G_UMULO
     0U,	// G_SMULO
+    0U,	// G_UMULH
+    0U,	// G_SMULH
     0U,	// G_FADD
     0U,	// G_FSUB
     0U,	// G_FMUL
     0U,	// G_FDIV
     0U,	// G_FREM
+    0U,	// G_FPOW
+    0U,	// G_FNEG
     0U,	// G_FPEXT
     0U,	// G_FPTRUNC
     0U,	// G_FPTOSI
@@ -438,7 +449,11 @@ void SparcInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo 
     0U,	// G_SITOFP
     0U,	// G_UITOFP
     0U,	// G_GEP
+    0U,	// G_PTR_MASK
     0U,	// G_BR
+    0U,	// G_INSERT_VECTOR_ELT
+    0U,	// G_EXTRACT_VECTOR_ELT
+    0U,	// G_SHUFFLE_VECTOR
     4747U,	// ADDCCri
     4747U,	// ADDCCrr
     6020U,	// ADDCri
@@ -588,7 +603,7 @@ void SparcInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo 
     20980615U,	// FLCMPD
     20981470U,	// FLCMPS
     2616U,	// FLUSH
-    2992U,	// FLUSHW
+    3006U,	// FLUSHW
     82909U,	// FLUSHri
     82909U,	// FLUSHrr
     4426U,	// FMEAN16
@@ -597,9 +612,9 @@ void SparcInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo 
     155605888U,	// FMOVD_ICC
     155868032U,	// FMOVD_XCC
     2102712U,	// FMOVQ
-    1137560U,	// FMOVQ_FCC
-    155605912U,	// FMOVQ_ICC
-    155868056U,	// FMOVQ_XCC
+    1137574U,	// FMOVQ_FCC
+    155605926U,	// FMOVQ_ICC
+    155868070U,	// FMOVQ_XCC
     6113U,	// FMOVRGEZD
     6124U,	// FMOVRGEZQ
     6151U,	// FMOVRGEZS
@@ -619,9 +634,9 @@ void SparcInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo 
     6343U,	// FMOVRZQ
     6364U,	// FMOVRZS
     2103064U,	// FMOVS
-    1137572U,	// FMOVS_FCC
-    155605924U,	// FMOVS_ICC
-    155868068U,	// FMOVS_XCC
+    1137586U,	// FMOVS_FCC
+    155605938U,	// FMOVS_ICC
+    155868082U,	// FMOVS_XCC
     4512U,	// FMUL8SUX16
     4487U,	// FMUL8ULX16
     4464U,	// FMUL8X16
@@ -759,10 +774,10 @@ void SparcInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo 
     2103076U,	// LZCNT
     75199U,	// MEMBARi
     2103214U,	// MOVDTOX
-    1137580U,	// MOVFCCri
-    1137580U,	// MOVFCCrr
-    155605932U,	// MOVICCri
-    155605932U,	// MOVICCrr
+    1137594U,	// MOVFCCri
+    1137594U,	// MOVFCCrr
+    155605946U,	// MOVICCri
+    155605946U,	// MOVICCrr
     6142U,	// MOVRGEZri
     6142U,	// MOVRGEZrr
     6237U,	// MOVRGZri
@@ -778,14 +793,14 @@ void SparcInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo 
     2103140U,	// MOVSTOSW
     2103150U,	// MOVSTOUW
     2103214U,	// MOVWTOS
-    155868076U,	// MOVXCCri
-    155868076U,	// MOVXCCrr
+    155868090U,	// MOVXCCri
+    155868090U,	// MOVXCCrr
     2103214U,	// MOVXTOD
     4807U,	// MULSCCri
     4807U,	// MULSCCrr
     6049U,	// MULXri
     6049U,	// MULXrr
-    2964U,	// NOP
+    2978U,	// NOP
     4794U,	// ORCCri
     4794U,	// ORCCrr
     4785U,	// ORNCCri
@@ -830,8 +845,8 @@ void SparcInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo 
     2103071U,	// SET
     2102249U,	// SETHIXi
     2102249U,	// SETHIi
-    2955U,	// SHUTDOWN
-    2950U,	// SIAM
+    2969U,	// SHUTDOWN
+    2964U,	// SIAM
     6036U,	// SLLXri
     6036U,	// SLLXrr
     5194U,	// SLLri
@@ -851,7 +866,7 @@ void SparcInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo 
     5217U,	// SRLri
     5217U,	// SRLrr
     9409118U,	// STArr
-    2974U,	// STBAR
+    2988U,	// STBAR
     9409077U,	// STBArr
     1348195U,	// STBri
     1348195U,	// STBrr
@@ -907,21 +922,21 @@ void SparcInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo 
     5978U,	// TADDCCTVrr
     4746U,	// TADDCCri
     4746U,	// TADDCCrr
-    36088746U,	// TICCri
-    36088746U,	// TICCrr
+    36088760U,	// TICCri
+    36088760U,	// TICCrr
     285217547U,	// TLS_ADDXrr
     285217547U,	// TLS_ADDrr
     4203588U,	// TLS_CALL
     288389997U,	// TLS_LDXrr
     288389952U,	// TLS_LDrr
-    35826602U,	// TRAPri
-    35826602U,	// TRAPrr
+    35826616U,	// TRAPri
+    35826616U,	// TRAPrr
     5968U,	// TSUBCCTVri
     5968U,	// TSUBCCTVrr
     4729U,	// TSUBCCri
     4729U,	// TSUBCCrr
-    36350890U,	// TXCCri
-    36350890U,	// TXCCrr
+    36350904U,	// TXCCri
+    36350904U,	// TXCCrr
     4823U,	// UDIVCCri
     4823U,	// UDIVCCrr
     6097U,	// UDIVXri
@@ -943,10 +958,10 @@ void SparcInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo 
     20981142U,	// V9FCMPQ
     20981463U,	// V9FCMPS
     48000U,	// V9FMOVD_FCC
-    48024U,	// V9FMOVQ_FCC
-    48036U,	// V9FMOVS_FCC
-    48044U,	// V9MOVFCCri
-    48044U,	// V9MOVFCCrr
+    48038U,	// V9FMOVQ_FCC
+    48050U,	// V9FMOVS_FCC
+    48058U,	// V9MOVFCCri
+    48058U,	// V9MOVFCCrr
     5622U,	// WRASRri
     5622U,	// WRASRrr
     5616U,	// WRPRri
@@ -985,7 +1000,7 @@ void SparcInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo 
   switch ((Bits >> 12) & 15) {
   default: llvm_unreachable("Invalid command number.");
   case 0:
-    // DBG_VALUE, BUNDLE, LIFETIME_START, LIFETIME_END, PATCHABLE_FUNCTION_EN...
+    // DBG_VALUE, BUNDLE, LIFETIME_START, LIFETIME_END, FENTRY_CALL, PATCHABL...
     return;
     break;
   case 1:

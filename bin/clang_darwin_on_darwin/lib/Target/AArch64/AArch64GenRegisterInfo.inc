@@ -2216,60 +2216,60 @@ extern const char AArch64RegClassStrings[] = {
 };
 
 extern const MCRegisterClass AArch64MCRegisterClasses[] = {
-  { FPR8, FPR8Bits, 153, 32, sizeof(FPR8Bits), AArch64::FPR8RegClassID, 1, 1, 1, true },
-  { FPR16, FPR16Bits, 140, 32, sizeof(FPR16Bits), AArch64::FPR16RegClassID, 2, 2, 1, true },
-  { GPR32all, GPR32allBits, 172, 33, sizeof(GPR32allBits), AArch64::GPR32allRegClassID, 4, 4, 1, true },
-  { FPR32, FPR32Bits, 0, 32, sizeof(FPR32Bits), AArch64::FPR32RegClassID, 4, 4, 1, true },
-  { GPR32, GPR32Bits, 6, 32, sizeof(GPR32Bits), AArch64::GPR32RegClassID, 4, 4, 1, true },
-  { GPR32sp, GPR32spBits, 1089, 32, sizeof(GPR32spBits), AArch64::GPR32spRegClassID, 4, 4, 1, true },
-  { GPR32common, GPR32commonBits, 220, 31, sizeof(GPR32commonBits), AArch64::GPR32commonRegClassID, 4, 4, 1, true },
-  { CCR, CCRBits, 168, 1, sizeof(CCRBits), AArch64::CCRRegClassID, 4, 4, -1, false },
-  { GPR32sponly, GPR32sponlyBits, 1135, 1, sizeof(GPR32sponlyBits), AArch64::GPR32sponlyRegClassID, 4, 4, 1, true },
-  { WSeqPairsClass, WSeqPairsClassBits, 1105, 32, sizeof(WSeqPairsClassBits), AArch64::WSeqPairsClassRegClassID, 8, 4, 1, true },
-  { WSeqPairsClass_with_sube32_in_GPR32common, WSeqPairsClass_with_sube32_in_GPR32commonBits, 232, 31, sizeof(WSeqPairsClass_with_sube32_in_GPR32commonBits), AArch64::WSeqPairsClass_with_sube32_in_GPR32commonRegClassID, 8, 4, 1, true },
-  { WSeqPairsClass_with_subo32_in_GPR32common, WSeqPairsClass_with_subo32_in_GPR32commonBits, 320, 31, sizeof(WSeqPairsClass_with_subo32_in_GPR32commonBits), AArch64::WSeqPairsClass_with_subo32_in_GPR32commonRegClassID, 8, 4, 1, true },
-  { WSeqPairsClass_with_sube32_in_GPR32common_and_WSeqPairsClass_with_subo32_in_GPR32common, WSeqPairsClass_with_sube32_in_GPR32common_and_WSeqPairsClass_with_subo32_in_GPR32commonBits, 274, 30, sizeof(WSeqPairsClass_with_sube32_in_GPR32common_and_WSeqPairsClass_with_subo32_in_GPR32commonBits), AArch64::WSeqPairsClass_with_sube32_in_GPR32common_and_WSeqPairsClass_with_subo32_in_GPR32commonRegClassID, 8, 4, 1, true },
-  { GPR64all, GPR64allBits, 181, 33, sizeof(GPR64allBits), AArch64::GPR64allRegClassID, 8, 8, 1, true },
-  { FPR64, FPR64Bits, 12, 32, sizeof(FPR64Bits), AArch64::FPR64RegClassID, 8, 8, 1, true },
-  { GPR64, GPR64Bits, 50, 32, sizeof(GPR64Bits), AArch64::GPR64RegClassID, 8, 8, 1, true },
-  { GPR64sp, GPR64spBits, 1097, 32, sizeof(GPR64spBits), AArch64::GPR64spRegClassID, 8, 8, 1, true },
-  { GPR64common, GPR64commonBits, 438, 31, sizeof(GPR64commonBits), AArch64::GPR64commonRegClassID, 8, 8, 1, true },
-  { tcGPR64, tcGPR64Bits, 48, 19, sizeof(tcGPR64Bits), AArch64::tcGPR64RegClassID, 8, 8, 1, true },
-  { GPR64sponly, GPR64sponlyBits, 1147, 1, sizeof(GPR64sponlyBits), AArch64::GPR64sponlyRegClassID, 8, 8, 1, true },
-  { DD, DDBits, 160, 32, sizeof(DDBits), AArch64::DDRegClassID, 16, 8, 1, true },
-  { XSeqPairsClass, XSeqPairsClassBits, 1120, 32, sizeof(XSeqPairsClassBits), AArch64::XSeqPairsClassRegClassID, 16, 8, 1, true },
-  { XSeqPairsClass_with_sub_32_in_GPR32common, XSeqPairsClass_with_sub_32_in_GPR32commonBits, 190, 31, sizeof(XSeqPairsClass_with_sub_32_in_GPR32commonBits), AArch64::XSeqPairsClass_with_sub_32_in_GPR32commonRegClassID, 16, 8, 1, true },
-  { XSeqPairsClass_with_subo64_in_GPR64common, XSeqPairsClass_with_subo64_in_GPR64commonBits, 408, 31, sizeof(XSeqPairsClass_with_subo64_in_GPR64commonBits), AArch64::XSeqPairsClass_with_subo64_in_GPR64commonRegClassID, 16, 8, 1, true },
-  { XSeqPairsClass_with_sub_32_in_GPR32common_and_XSeqPairsClass_with_subo64_in_GPR64common, XSeqPairsClass_with_sub_32_in_GPR32common_and_XSeqPairsClass_with_subo64_in_GPR64commonBits, 362, 30, sizeof(XSeqPairsClass_with_sub_32_in_GPR32common_and_XSeqPairsClass_with_subo64_in_GPR64commonBits), AArch64::XSeqPairsClass_with_sub_32_in_GPR32common_and_XSeqPairsClass_with_subo64_in_GPR64commonRegClassID, 16, 8, 1, true },
-  { XSeqPairsClass_with_sube64_in_tcGPR64, XSeqPairsClass_with_sube64_in_tcGPR64Bits, 18, 19, sizeof(XSeqPairsClass_with_sube64_in_tcGPR64Bits), AArch64::XSeqPairsClass_with_sube64_in_tcGPR64RegClassID, 16, 8, 1, true },
-  { XSeqPairsClass_with_subo64_in_tcGPR64, XSeqPairsClass_with_subo64_in_tcGPR64Bits, 102, 19, sizeof(XSeqPairsClass_with_subo64_in_tcGPR64Bits), AArch64::XSeqPairsClass_with_subo64_in_tcGPR64RegClassID, 16, 8, 1, true },
-  { XSeqPairsClass_with_sub_32_in_GPR32common_and_XSeqPairsClass_with_subo64_in_tcGPR64, XSeqPairsClass_with_sub_32_in_GPR32common_and_XSeqPairsClass_with_subo64_in_tcGPR64Bits, 56, 18, sizeof(XSeqPairsClass_with_sub_32_in_GPR32common_and_XSeqPairsClass_with_subo64_in_tcGPR64Bits), AArch64::XSeqPairsClass_with_sub_32_in_GPR32common_and_XSeqPairsClass_with_subo64_in_tcGPR64RegClassID, 16, 8, 1, true },
-  { FPR128, FPR128Bits, 146, 32, sizeof(FPR128Bits), AArch64::FPR128RegClassID, 16, 16, 1, true },
-  { FPR128_lo, FPR128_loBits, 469, 16, sizeof(FPR128_loBits), AArch64::FPR128_loRegClassID, 16, 16, 1, true },
-  { DDD, DDDBits, 159, 32, sizeof(DDDBits), AArch64::DDDRegClassID, 24, 8, 1, true },
-  { DDDD, DDDDBits, 158, 32, sizeof(DDDDBits), AArch64::DDDDRegClassID, 32, 8, 1, true },
-  { QQ, QQBits, 165, 32, sizeof(QQBits), AArch64::QQRegClassID, 32, 16, 1, true },
-  { QQ_with_qsub0_in_FPR128_lo, QQ_with_qsub0_in_FPR128_loBits, 452, 16, sizeof(QQ_with_qsub0_in_FPR128_loBits), AArch64::QQ_with_qsub0_in_FPR128_loRegClassID, 32, 16, 1, true },
-  { QQ_with_qsub1_in_FPR128_lo, QQ_with_qsub1_in_FPR128_loBits, 514, 16, sizeof(QQ_with_qsub1_in_FPR128_loBits), AArch64::QQ_with_qsub1_in_FPR128_loRegClassID, 32, 16, 1, true },
-  { QQ_with_qsub0_in_FPR128_lo_and_QQ_with_qsub1_in_FPR128_lo, QQ_with_qsub0_in_FPR128_lo_and_QQ_with_qsub1_in_FPR128_loBits, 601, 15, sizeof(QQ_with_qsub0_in_FPR128_lo_and_QQ_with_qsub1_in_FPR128_loBits), AArch64::QQ_with_qsub0_in_FPR128_lo_and_QQ_with_qsub1_in_FPR128_loRegClassID, 32, 16, 1, true },
-  { QQQ, QQQBits, 164, 32, sizeof(QQQBits), AArch64::QQQRegClassID, 48, 16, 1, true },
-  { QQQ_with_qsub0_in_FPR128_lo, QQQ_with_qsub0_in_FPR128_loBits, 451, 16, sizeof(QQQ_with_qsub0_in_FPR128_loBits), AArch64::QQQ_with_qsub0_in_FPR128_loRegClassID, 48, 16, 1, true },
-  { QQQ_with_qsub1_in_FPR128_lo, QQQ_with_qsub1_in_FPR128_loBits, 513, 16, sizeof(QQQ_with_qsub1_in_FPR128_loBits), AArch64::QQQ_with_qsub1_in_FPR128_loRegClassID, 48, 16, 1, true },
-  { QQQ_with_qsub2_in_FPR128_lo, QQQ_with_qsub2_in_FPR128_loBits, 693, 16, sizeof(QQQ_with_qsub2_in_FPR128_loBits), AArch64::QQQ_with_qsub2_in_FPR128_loRegClassID, 48, 16, 1, true },
-  { QQQ_with_qsub0_in_FPR128_lo_and_QQQ_with_qsub1_in_FPR128_lo, QQQ_with_qsub0_in_FPR128_lo_and_QQQ_with_qsub1_in_FPR128_loBits, 541, 15, sizeof(QQQ_with_qsub0_in_FPR128_lo_and_QQQ_with_qsub1_in_FPR128_loBits), AArch64::QQQ_with_qsub0_in_FPR128_lo_and_QQQ_with_qsub1_in_FPR128_loRegClassID, 48, 16, 1, true },
-  { QQQ_with_qsub1_in_FPR128_lo_and_QQQ_with_qsub2_in_FPR128_lo, QQQ_with_qsub1_in_FPR128_lo_and_QQQ_with_qsub2_in_FPR128_loBits, 843, 15, sizeof(QQQ_with_qsub1_in_FPR128_lo_and_QQQ_with_qsub2_in_FPR128_loBits), AArch64::QQQ_with_qsub1_in_FPR128_lo_and_QQQ_with_qsub2_in_FPR128_loRegClassID, 48, 16, 1, true },
-  { QQQ_with_qsub0_in_FPR128_lo_and_QQQ_with_qsub2_in_FPR128_lo, QQQ_with_qsub0_in_FPR128_lo_and_QQQ_with_qsub2_in_FPR128_loBits, 783, 14, sizeof(QQQ_with_qsub0_in_FPR128_lo_and_QQQ_with_qsub2_in_FPR128_loBits), AArch64::QQQ_with_qsub0_in_FPR128_lo_and_QQQ_with_qsub2_in_FPR128_loRegClassID, 48, 16, 1, true },
-  { QQQQ, QQQQBits, 163, 32, sizeof(QQQQBits), AArch64::QQQQRegClassID, 64, 16, 1, true },
-  { QQQQ_with_qsub0_in_FPR128_lo, QQQQ_with_qsub0_in_FPR128_loBits, 450, 16, sizeof(QQQQ_with_qsub0_in_FPR128_loBits), AArch64::QQQQ_with_qsub0_in_FPR128_loRegClassID, 64, 16, 1, true },
-  { QQQQ_with_qsub1_in_FPR128_lo, QQQQ_with_qsub1_in_FPR128_loBits, 512, 16, sizeof(QQQQ_with_qsub1_in_FPR128_loBits), AArch64::QQQQ_with_qsub1_in_FPR128_loRegClassID, 64, 16, 1, true },
-  { QQQQ_with_qsub2_in_FPR128_lo, QQQQ_with_qsub2_in_FPR128_loBits, 692, 16, sizeof(QQQQ_with_qsub2_in_FPR128_loBits), AArch64::QQQQ_with_qsub2_in_FPR128_loRegClassID, 64, 16, 1, true },
-  { QQQQ_with_qsub3_in_FPR128_lo, QQQQ_with_qsub3_in_FPR128_loBits, 936, 16, sizeof(QQQQ_with_qsub3_in_FPR128_loBits), AArch64::QQQQ_with_qsub3_in_FPR128_loRegClassID, 64, 16, 1, true },
-  { QQQQ_with_qsub0_in_FPR128_lo_and_QQQQ_with_qsub1_in_FPR128_lo, QQQQ_with_qsub0_in_FPR128_lo_and_QQQQ_with_qsub1_in_FPR128_loBits, 479, 15, sizeof(QQQQ_with_qsub0_in_FPR128_lo_and_QQQQ_with_qsub1_in_FPR128_loBits), AArch64::QQQQ_with_qsub0_in_FPR128_lo_and_QQQQ_with_qsub1_in_FPR128_loRegClassID, 64, 16, 1, true },
-  { QQQQ_with_qsub1_in_FPR128_lo_and_QQQQ_with_qsub2_in_FPR128_lo, QQQQ_with_qsub1_in_FPR128_lo_and_QQQQ_with_qsub2_in_FPR128_loBits, 721, 15, sizeof(QQQQ_with_qsub1_in_FPR128_lo_and_QQQQ_with_qsub2_in_FPR128_loBits), AArch64::QQQQ_with_qsub1_in_FPR128_lo_and_QQQQ_with_qsub2_in_FPR128_loRegClassID, 64, 16, 1, true },
-  { QQQQ_with_qsub2_in_FPR128_lo_and_QQQQ_with_qsub3_in_FPR128_lo, QQQQ_with_qsub2_in_FPR128_lo_and_QQQQ_with_qsub3_in_FPR128_loBits, 1027, 15, sizeof(QQQQ_with_qsub2_in_FPR128_lo_and_QQQQ_with_qsub3_in_FPR128_loBits), AArch64::QQQQ_with_qsub2_in_FPR128_lo_and_QQQQ_with_qsub3_in_FPR128_loRegClassID, 64, 16, 1, true },
-  { QQQQ_with_qsub0_in_FPR128_lo_and_QQQQ_with_qsub2_in_FPR128_lo, QQQQ_with_qsub0_in_FPR128_lo_and_QQQQ_with_qsub2_in_FPR128_loBits, 659, 14, sizeof(QQQQ_with_qsub0_in_FPR128_lo_and_QQQQ_with_qsub2_in_FPR128_loBits), AArch64::QQQQ_with_qsub0_in_FPR128_lo_and_QQQQ_with_qsub2_in_FPR128_loRegClassID, 64, 16, 1, true },
-  { QQQQ_with_qsub1_in_FPR128_lo_and_QQQQ_with_qsub3_in_FPR128_lo, QQQQ_with_qsub1_in_FPR128_lo_and_QQQQ_with_qsub3_in_FPR128_loBits, 965, 14, sizeof(QQQQ_with_qsub1_in_FPR128_lo_and_QQQQ_with_qsub3_in_FPR128_loBits), AArch64::QQQQ_with_qsub1_in_FPR128_lo_and_QQQQ_with_qsub3_in_FPR128_loRegClassID, 64, 16, 1, true },
-  { QQQQ_with_qsub0_in_FPR128_lo_and_QQQQ_with_qsub3_in_FPR128_lo, QQQQ_with_qsub0_in_FPR128_lo_and_QQQQ_with_qsub3_in_FPR128_loBits, 903, 13, sizeof(QQQQ_with_qsub0_in_FPR128_lo_and_QQQQ_with_qsub3_in_FPR128_loBits), AArch64::QQQQ_with_qsub0_in_FPR128_lo_and_QQQQ_with_qsub3_in_FPR128_loRegClassID, 64, 16, 1, true },
+  { FPR8, FPR8Bits, 153, 32, sizeof(FPR8Bits), AArch64::FPR8RegClassID, 1, 1, true },
+  { FPR16, FPR16Bits, 140, 32, sizeof(FPR16Bits), AArch64::FPR16RegClassID, 2, 1, true },
+  { GPR32all, GPR32allBits, 172, 33, sizeof(GPR32allBits), AArch64::GPR32allRegClassID, 4, 1, true },
+  { FPR32, FPR32Bits, 0, 32, sizeof(FPR32Bits), AArch64::FPR32RegClassID, 4, 1, true },
+  { GPR32, GPR32Bits, 6, 32, sizeof(GPR32Bits), AArch64::GPR32RegClassID, 4, 1, true },
+  { GPR32sp, GPR32spBits, 1089, 32, sizeof(GPR32spBits), AArch64::GPR32spRegClassID, 4, 1, true },
+  { GPR32common, GPR32commonBits, 220, 31, sizeof(GPR32commonBits), AArch64::GPR32commonRegClassID, 4, 1, true },
+  { CCR, CCRBits, 168, 1, sizeof(CCRBits), AArch64::CCRRegClassID, 4, -1, false },
+  { GPR32sponly, GPR32sponlyBits, 1135, 1, sizeof(GPR32sponlyBits), AArch64::GPR32sponlyRegClassID, 4, 1, true },
+  { WSeqPairsClass, WSeqPairsClassBits, 1105, 32, sizeof(WSeqPairsClassBits), AArch64::WSeqPairsClassRegClassID, 8, 1, true },
+  { WSeqPairsClass_with_sube32_in_GPR32common, WSeqPairsClass_with_sube32_in_GPR32commonBits, 232, 31, sizeof(WSeqPairsClass_with_sube32_in_GPR32commonBits), AArch64::WSeqPairsClass_with_sube32_in_GPR32commonRegClassID, 8, 1, true },
+  { WSeqPairsClass_with_subo32_in_GPR32common, WSeqPairsClass_with_subo32_in_GPR32commonBits, 320, 31, sizeof(WSeqPairsClass_with_subo32_in_GPR32commonBits), AArch64::WSeqPairsClass_with_subo32_in_GPR32commonRegClassID, 8, 1, true },
+  { WSeqPairsClass_with_sube32_in_GPR32common_and_WSeqPairsClass_with_subo32_in_GPR32common, WSeqPairsClass_with_sube32_in_GPR32common_and_WSeqPairsClass_with_subo32_in_GPR32commonBits, 274, 30, sizeof(WSeqPairsClass_with_sube32_in_GPR32common_and_WSeqPairsClass_with_subo32_in_GPR32commonBits), AArch64::WSeqPairsClass_with_sube32_in_GPR32common_and_WSeqPairsClass_with_subo32_in_GPR32commonRegClassID, 8, 1, true },
+  { GPR64all, GPR64allBits, 181, 33, sizeof(GPR64allBits), AArch64::GPR64allRegClassID, 8, 1, true },
+  { FPR64, FPR64Bits, 12, 32, sizeof(FPR64Bits), AArch64::FPR64RegClassID, 8, 1, true },
+  { GPR64, GPR64Bits, 50, 32, sizeof(GPR64Bits), AArch64::GPR64RegClassID, 8, 1, true },
+  { GPR64sp, GPR64spBits, 1097, 32, sizeof(GPR64spBits), AArch64::GPR64spRegClassID, 8, 1, true },
+  { GPR64common, GPR64commonBits, 438, 31, sizeof(GPR64commonBits), AArch64::GPR64commonRegClassID, 8, 1, true },
+  { tcGPR64, tcGPR64Bits, 48, 19, sizeof(tcGPR64Bits), AArch64::tcGPR64RegClassID, 8, 1, true },
+  { GPR64sponly, GPR64sponlyBits, 1147, 1, sizeof(GPR64sponlyBits), AArch64::GPR64sponlyRegClassID, 8, 1, true },
+  { DD, DDBits, 160, 32, sizeof(DDBits), AArch64::DDRegClassID, 16, 1, true },
+  { XSeqPairsClass, XSeqPairsClassBits, 1120, 32, sizeof(XSeqPairsClassBits), AArch64::XSeqPairsClassRegClassID, 16, 1, true },
+  { XSeqPairsClass_with_sub_32_in_GPR32common, XSeqPairsClass_with_sub_32_in_GPR32commonBits, 190, 31, sizeof(XSeqPairsClass_with_sub_32_in_GPR32commonBits), AArch64::XSeqPairsClass_with_sub_32_in_GPR32commonRegClassID, 16, 1, true },
+  { XSeqPairsClass_with_subo64_in_GPR64common, XSeqPairsClass_with_subo64_in_GPR64commonBits, 408, 31, sizeof(XSeqPairsClass_with_subo64_in_GPR64commonBits), AArch64::XSeqPairsClass_with_subo64_in_GPR64commonRegClassID, 16, 1, true },
+  { XSeqPairsClass_with_sub_32_in_GPR32common_and_XSeqPairsClass_with_subo64_in_GPR64common, XSeqPairsClass_with_sub_32_in_GPR32common_and_XSeqPairsClass_with_subo64_in_GPR64commonBits, 362, 30, sizeof(XSeqPairsClass_with_sub_32_in_GPR32common_and_XSeqPairsClass_with_subo64_in_GPR64commonBits), AArch64::XSeqPairsClass_with_sub_32_in_GPR32common_and_XSeqPairsClass_with_subo64_in_GPR64commonRegClassID, 16, 1, true },
+  { XSeqPairsClass_with_sube64_in_tcGPR64, XSeqPairsClass_with_sube64_in_tcGPR64Bits, 18, 19, sizeof(XSeqPairsClass_with_sube64_in_tcGPR64Bits), AArch64::XSeqPairsClass_with_sube64_in_tcGPR64RegClassID, 16, 1, true },
+  { XSeqPairsClass_with_subo64_in_tcGPR64, XSeqPairsClass_with_subo64_in_tcGPR64Bits, 102, 19, sizeof(XSeqPairsClass_with_subo64_in_tcGPR64Bits), AArch64::XSeqPairsClass_with_subo64_in_tcGPR64RegClassID, 16, 1, true },
+  { XSeqPairsClass_with_sub_32_in_GPR32common_and_XSeqPairsClass_with_subo64_in_tcGPR64, XSeqPairsClass_with_sub_32_in_GPR32common_and_XSeqPairsClass_with_subo64_in_tcGPR64Bits, 56, 18, sizeof(XSeqPairsClass_with_sub_32_in_GPR32common_and_XSeqPairsClass_with_subo64_in_tcGPR64Bits), AArch64::XSeqPairsClass_with_sub_32_in_GPR32common_and_XSeqPairsClass_with_subo64_in_tcGPR64RegClassID, 16, 1, true },
+  { FPR128, FPR128Bits, 146, 32, sizeof(FPR128Bits), AArch64::FPR128RegClassID, 16, 1, true },
+  { FPR128_lo, FPR128_loBits, 469, 16, sizeof(FPR128_loBits), AArch64::FPR128_loRegClassID, 16, 1, true },
+  { DDD, DDDBits, 159, 32, sizeof(DDDBits), AArch64::DDDRegClassID, 24, 1, true },
+  { DDDD, DDDDBits, 158, 32, sizeof(DDDDBits), AArch64::DDDDRegClassID, 32, 1, true },
+  { QQ, QQBits, 165, 32, sizeof(QQBits), AArch64::QQRegClassID, 32, 1, true },
+  { QQ_with_qsub0_in_FPR128_lo, QQ_with_qsub0_in_FPR128_loBits, 452, 16, sizeof(QQ_with_qsub0_in_FPR128_loBits), AArch64::QQ_with_qsub0_in_FPR128_loRegClassID, 32, 1, true },
+  { QQ_with_qsub1_in_FPR128_lo, QQ_with_qsub1_in_FPR128_loBits, 514, 16, sizeof(QQ_with_qsub1_in_FPR128_loBits), AArch64::QQ_with_qsub1_in_FPR128_loRegClassID, 32, 1, true },
+  { QQ_with_qsub0_in_FPR128_lo_and_QQ_with_qsub1_in_FPR128_lo, QQ_with_qsub0_in_FPR128_lo_and_QQ_with_qsub1_in_FPR128_loBits, 601, 15, sizeof(QQ_with_qsub0_in_FPR128_lo_and_QQ_with_qsub1_in_FPR128_loBits), AArch64::QQ_with_qsub0_in_FPR128_lo_and_QQ_with_qsub1_in_FPR128_loRegClassID, 32, 1, true },
+  { QQQ, QQQBits, 164, 32, sizeof(QQQBits), AArch64::QQQRegClassID, 48, 1, true },
+  { QQQ_with_qsub0_in_FPR128_lo, QQQ_with_qsub0_in_FPR128_loBits, 451, 16, sizeof(QQQ_with_qsub0_in_FPR128_loBits), AArch64::QQQ_with_qsub0_in_FPR128_loRegClassID, 48, 1, true },
+  { QQQ_with_qsub1_in_FPR128_lo, QQQ_with_qsub1_in_FPR128_loBits, 513, 16, sizeof(QQQ_with_qsub1_in_FPR128_loBits), AArch64::QQQ_with_qsub1_in_FPR128_loRegClassID, 48, 1, true },
+  { QQQ_with_qsub2_in_FPR128_lo, QQQ_with_qsub2_in_FPR128_loBits, 693, 16, sizeof(QQQ_with_qsub2_in_FPR128_loBits), AArch64::QQQ_with_qsub2_in_FPR128_loRegClassID, 48, 1, true },
+  { QQQ_with_qsub0_in_FPR128_lo_and_QQQ_with_qsub1_in_FPR128_lo, QQQ_with_qsub0_in_FPR128_lo_and_QQQ_with_qsub1_in_FPR128_loBits, 541, 15, sizeof(QQQ_with_qsub0_in_FPR128_lo_and_QQQ_with_qsub1_in_FPR128_loBits), AArch64::QQQ_with_qsub0_in_FPR128_lo_and_QQQ_with_qsub1_in_FPR128_loRegClassID, 48, 1, true },
+  { QQQ_with_qsub1_in_FPR128_lo_and_QQQ_with_qsub2_in_FPR128_lo, QQQ_with_qsub1_in_FPR128_lo_and_QQQ_with_qsub2_in_FPR128_loBits, 843, 15, sizeof(QQQ_with_qsub1_in_FPR128_lo_and_QQQ_with_qsub2_in_FPR128_loBits), AArch64::QQQ_with_qsub1_in_FPR128_lo_and_QQQ_with_qsub2_in_FPR128_loRegClassID, 48, 1, true },
+  { QQQ_with_qsub0_in_FPR128_lo_and_QQQ_with_qsub2_in_FPR128_lo, QQQ_with_qsub0_in_FPR128_lo_and_QQQ_with_qsub2_in_FPR128_loBits, 783, 14, sizeof(QQQ_with_qsub0_in_FPR128_lo_and_QQQ_with_qsub2_in_FPR128_loBits), AArch64::QQQ_with_qsub0_in_FPR128_lo_and_QQQ_with_qsub2_in_FPR128_loRegClassID, 48, 1, true },
+  { QQQQ, QQQQBits, 163, 32, sizeof(QQQQBits), AArch64::QQQQRegClassID, 64, 1, true },
+  { QQQQ_with_qsub0_in_FPR128_lo, QQQQ_with_qsub0_in_FPR128_loBits, 450, 16, sizeof(QQQQ_with_qsub0_in_FPR128_loBits), AArch64::QQQQ_with_qsub0_in_FPR128_loRegClassID, 64, 1, true },
+  { QQQQ_with_qsub1_in_FPR128_lo, QQQQ_with_qsub1_in_FPR128_loBits, 512, 16, sizeof(QQQQ_with_qsub1_in_FPR128_loBits), AArch64::QQQQ_with_qsub1_in_FPR128_loRegClassID, 64, 1, true },
+  { QQQQ_with_qsub2_in_FPR128_lo, QQQQ_with_qsub2_in_FPR128_loBits, 692, 16, sizeof(QQQQ_with_qsub2_in_FPR128_loBits), AArch64::QQQQ_with_qsub2_in_FPR128_loRegClassID, 64, 1, true },
+  { QQQQ_with_qsub3_in_FPR128_lo, QQQQ_with_qsub3_in_FPR128_loBits, 936, 16, sizeof(QQQQ_with_qsub3_in_FPR128_loBits), AArch64::QQQQ_with_qsub3_in_FPR128_loRegClassID, 64, 1, true },
+  { QQQQ_with_qsub0_in_FPR128_lo_and_QQQQ_with_qsub1_in_FPR128_lo, QQQQ_with_qsub0_in_FPR128_lo_and_QQQQ_with_qsub1_in_FPR128_loBits, 479, 15, sizeof(QQQQ_with_qsub0_in_FPR128_lo_and_QQQQ_with_qsub1_in_FPR128_loBits), AArch64::QQQQ_with_qsub0_in_FPR128_lo_and_QQQQ_with_qsub1_in_FPR128_loRegClassID, 64, 1, true },
+  { QQQQ_with_qsub1_in_FPR128_lo_and_QQQQ_with_qsub2_in_FPR128_lo, QQQQ_with_qsub1_in_FPR128_lo_and_QQQQ_with_qsub2_in_FPR128_loBits, 721, 15, sizeof(QQQQ_with_qsub1_in_FPR128_lo_and_QQQQ_with_qsub2_in_FPR128_loBits), AArch64::QQQQ_with_qsub1_in_FPR128_lo_and_QQQQ_with_qsub2_in_FPR128_loRegClassID, 64, 1, true },
+  { QQQQ_with_qsub2_in_FPR128_lo_and_QQQQ_with_qsub3_in_FPR128_lo, QQQQ_with_qsub2_in_FPR128_lo_and_QQQQ_with_qsub3_in_FPR128_loBits, 1027, 15, sizeof(QQQQ_with_qsub2_in_FPR128_lo_and_QQQQ_with_qsub3_in_FPR128_loBits), AArch64::QQQQ_with_qsub2_in_FPR128_lo_and_QQQQ_with_qsub3_in_FPR128_loRegClassID, 64, 1, true },
+  { QQQQ_with_qsub0_in_FPR128_lo_and_QQQQ_with_qsub2_in_FPR128_lo, QQQQ_with_qsub0_in_FPR128_lo_and_QQQQ_with_qsub2_in_FPR128_loBits, 659, 14, sizeof(QQQQ_with_qsub0_in_FPR128_lo_and_QQQQ_with_qsub2_in_FPR128_loBits), AArch64::QQQQ_with_qsub0_in_FPR128_lo_and_QQQQ_with_qsub2_in_FPR128_loRegClassID, 64, 1, true },
+  { QQQQ_with_qsub1_in_FPR128_lo_and_QQQQ_with_qsub3_in_FPR128_lo, QQQQ_with_qsub1_in_FPR128_lo_and_QQQQ_with_qsub3_in_FPR128_loBits, 965, 14, sizeof(QQQQ_with_qsub1_in_FPR128_lo_and_QQQQ_with_qsub3_in_FPR128_loBits), AArch64::QQQQ_with_qsub1_in_FPR128_lo_and_QQQQ_with_qsub3_in_FPR128_loRegClassID, 64, 1, true },
+  { QQQQ_with_qsub0_in_FPR128_lo_and_QQQQ_with_qsub3_in_FPR128_lo, QQQQ_with_qsub0_in_FPR128_lo_and_QQQQ_with_qsub3_in_FPR128_loBits, 903, 13, sizeof(QQQQ_with_qsub0_in_FPR128_lo_and_QQQQ_with_qsub3_in_FPR128_loBits), AArch64::QQQQ_with_qsub0_in_FPR128_lo_and_QQQQ_with_qsub3_in_FPR128_loRegClassID, 64, 1, true },
 };
 
 // AArch64 Dwarf<->LLVM register mappings.
@@ -4261,6 +4261,8 @@ static ArrayRef<MCPhysReg> GPR64commonGetRawAllocationOrder(const MachineFunctio
 namespace AArch64 {   // Register class instances
   extern const TargetRegisterClass FPR8RegClass = {
     &AArch64MCRegisterClasses[FPR8RegClassID],
+    1, /* SpillSize */
+    1, /* SpillAlignment */
     VTLists + 34,
     FPR8SubClassMask,
     SuperRegIdxSeqs + 10,
@@ -4274,6 +4276,8 @@ namespace AArch64 {   // Register class instances
 
   extern const TargetRegisterClass FPR16RegClass = {
     &AArch64MCRegisterClasses[FPR16RegClassID],
+    2, /* SpillSize */
+    2, /* SpillAlignment */
     VTLists + 5,
     FPR16SubClassMask,
     SuperRegIdxSeqs + 27,
@@ -4287,6 +4291,8 @@ namespace AArch64 {   // Register class instances
 
   extern const TargetRegisterClass GPR32allRegClass = {
     &AArch64MCRegisterClasses[GPR32allRegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 1,
     GPR32allSubClassMask,
     SuperRegIdxSeqs + 43,
@@ -4300,6 +4306,8 @@ namespace AArch64 {   // Register class instances
 
   extern const TargetRegisterClass FPR32RegClass = {
     &AArch64MCRegisterClasses[FPR32RegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 0,
     FPR32SubClassMask,
     SuperRegIdxSeqs + 35,
@@ -4313,6 +4321,8 @@ namespace AArch64 {   // Register class instances
 
   extern const TargetRegisterClass GPR32RegClass = {
     &AArch64MCRegisterClasses[GPR32RegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 1,
     GPR32SubClassMask,
     SuperRegIdxSeqs + 43,
@@ -4326,6 +4336,8 @@ namespace AArch64 {   // Register class instances
 
   extern const TargetRegisterClass GPR32spRegClass = {
     &AArch64MCRegisterClasses[GPR32spRegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 1,
     GPR32spSubClassMask,
     SuperRegIdxSeqs + 43,
@@ -4339,6 +4351,8 @@ namespace AArch64 {   // Register class instances
 
   extern const TargetRegisterClass GPR32commonRegClass = {
     &AArch64MCRegisterClasses[GPR32commonRegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 1,
     GPR32commonSubClassMask,
     SuperRegIdxSeqs + 43,
@@ -4352,6 +4366,8 @@ namespace AArch64 {   // Register class instances
 
   extern const TargetRegisterClass CCRRegClass = {
     &AArch64MCRegisterClasses[CCRRegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 1,
     CCRSubClassMask,
     SuperRegIdxSeqs + 4,
@@ -4365,6 +4381,8 @@ namespace AArch64 {   // Register class instances
 
   extern const TargetRegisterClass GPR32sponlyRegClass = {
     &AArch64MCRegisterClasses[GPR32sponlyRegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 1,
     GPR32sponlySubClassMask,
     SuperRegIdxSeqs + 5,
@@ -4378,6 +4396,8 @@ namespace AArch64 {   // Register class instances
 
   extern const TargetRegisterClass WSeqPairsClassRegClass = {
     &AArch64MCRegisterClasses[WSeqPairsClassRegClassID],
+    8, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 34,
     WSeqPairsClassSubClassMask,
     SuperRegIdxSeqs + 69,
@@ -4391,6 +4411,8 @@ namespace AArch64 {   // Register class instances
 
   extern const TargetRegisterClass WSeqPairsClass_with_sube32_in_GPR32commonRegClass = {
     &AArch64MCRegisterClasses[WSeqPairsClass_with_sube32_in_GPR32commonRegClassID],
+    8, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 34,
     WSeqPairsClass_with_sube32_in_GPR32commonSubClassMask,
     SuperRegIdxSeqs + 69,
@@ -4404,6 +4426,8 @@ namespace AArch64 {   // Register class instances
 
   extern const TargetRegisterClass WSeqPairsClass_with_subo32_in_GPR32commonRegClass = {
     &AArch64MCRegisterClasses[WSeqPairsClass_with_subo32_in_GPR32commonRegClassID],
+    8, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 34,
     WSeqPairsClass_with_subo32_in_GPR32commonSubClassMask,
     SuperRegIdxSeqs + 69,
@@ -4417,6 +4441,8 @@ namespace AArch64 {   // Register class instances
 
   extern const TargetRegisterClass WSeqPairsClass_with_sube32_in_GPR32common_and_WSeqPairsClass_with_subo32_in_GPR32commonRegClass = {
     &AArch64MCRegisterClasses[WSeqPairsClass_with_sube32_in_GPR32common_and_WSeqPairsClass_with_subo32_in_GPR32commonRegClassID],
+    8, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 34,
     WSeqPairsClass_with_sube32_in_GPR32common_and_WSeqPairsClass_with_subo32_in_GPR32commonSubClassMask,
     SuperRegIdxSeqs + 69,
@@ -4430,6 +4456,8 @@ namespace AArch64 {   // Register class instances
 
   extern const TargetRegisterClass GPR64allRegClass = {
     &AArch64MCRegisterClasses[GPR64allRegClassID],
+    8, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 3,
     GPR64allSubClassMask,
     SuperRegIdxSeqs + 7,
@@ -4443,6 +4471,8 @@ namespace AArch64 {   // Register class instances
 
   extern const TargetRegisterClass FPR64RegClass = {
     &AArch64MCRegisterClasses[FPR64RegClassID],
+    8, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 7,
     FPR64SubClassMask,
     SuperRegIdxSeqs + 18,
@@ -4456,6 +4486,8 @@ namespace AArch64 {   // Register class instances
 
   extern const TargetRegisterClass GPR64RegClass = {
     &AArch64MCRegisterClasses[GPR64RegClassID],
+    8, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 3,
     GPR64SubClassMask,
     SuperRegIdxSeqs + 7,
@@ -4469,6 +4501,8 @@ namespace AArch64 {   // Register class instances
 
   extern const TargetRegisterClass GPR64spRegClass = {
     &AArch64MCRegisterClasses[GPR64spRegClassID],
+    8, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 3,
     GPR64spSubClassMask,
     SuperRegIdxSeqs + 7,
@@ -4482,6 +4516,8 @@ namespace AArch64 {   // Register class instances
 
   extern const TargetRegisterClass GPR64commonRegClass = {
     &AArch64MCRegisterClasses[GPR64commonRegClassID],
+    8, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 3,
     GPR64commonSubClassMask,
     SuperRegIdxSeqs + 7,
@@ -4495,6 +4531,8 @@ namespace AArch64 {   // Register class instances
 
   extern const TargetRegisterClass tcGPR64RegClass = {
     &AArch64MCRegisterClasses[tcGPR64RegClassID],
+    8, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 3,
     tcGPR64SubClassMask,
     SuperRegIdxSeqs + 7,
@@ -4508,6 +4546,8 @@ namespace AArch64 {   // Register class instances
 
   extern const TargetRegisterClass GPR64sponlyRegClass = {
     &AArch64MCRegisterClasses[GPR64sponlyRegClassID],
+    8, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 3,
     GPR64sponlySubClassMask,
     SuperRegIdxSeqs + 4,
@@ -4521,6 +4561,8 @@ namespace AArch64 {   // Register class instances
 
   extern const TargetRegisterClass DDRegClass = {
     &AArch64MCRegisterClasses[DDRegClassID],
+    16, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 34,
     DDSubClassMask,
     SuperRegIdxSeqs + 62,
@@ -4534,6 +4576,8 @@ namespace AArch64 {   // Register class instances
 
   extern const TargetRegisterClass XSeqPairsClassRegClass = {
     &AArch64MCRegisterClasses[XSeqPairsClassRegClassID],
+    16, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 34,
     XSeqPairsClassSubClassMask,
     SuperRegIdxSeqs + 4,
@@ -4547,6 +4591,8 @@ namespace AArch64 {   // Register class instances
 
   extern const TargetRegisterClass XSeqPairsClass_with_sub_32_in_GPR32commonRegClass = {
     &AArch64MCRegisterClasses[XSeqPairsClass_with_sub_32_in_GPR32commonRegClassID],
+    16, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 34,
     XSeqPairsClass_with_sub_32_in_GPR32commonSubClassMask,
     SuperRegIdxSeqs + 4,
@@ -4560,6 +4606,8 @@ namespace AArch64 {   // Register class instances
 
   extern const TargetRegisterClass XSeqPairsClass_with_subo64_in_GPR64commonRegClass = {
     &AArch64MCRegisterClasses[XSeqPairsClass_with_subo64_in_GPR64commonRegClassID],
+    16, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 34,
     XSeqPairsClass_with_subo64_in_GPR64commonSubClassMask,
     SuperRegIdxSeqs + 4,
@@ -4573,6 +4621,8 @@ namespace AArch64 {   // Register class instances
 
   extern const TargetRegisterClass XSeqPairsClass_with_sub_32_in_GPR32common_and_XSeqPairsClass_with_subo64_in_GPR64commonRegClass = {
     &AArch64MCRegisterClasses[XSeqPairsClass_with_sub_32_in_GPR32common_and_XSeqPairsClass_with_subo64_in_GPR64commonRegClassID],
+    16, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 34,
     XSeqPairsClass_with_sub_32_in_GPR32common_and_XSeqPairsClass_with_subo64_in_GPR64commonSubClassMask,
     SuperRegIdxSeqs + 4,
@@ -4586,6 +4636,8 @@ namespace AArch64 {   // Register class instances
 
   extern const TargetRegisterClass XSeqPairsClass_with_sube64_in_tcGPR64RegClass = {
     &AArch64MCRegisterClasses[XSeqPairsClass_with_sube64_in_tcGPR64RegClassID],
+    16, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 34,
     XSeqPairsClass_with_sube64_in_tcGPR64SubClassMask,
     SuperRegIdxSeqs + 4,
@@ -4599,6 +4651,8 @@ namespace AArch64 {   // Register class instances
 
   extern const TargetRegisterClass XSeqPairsClass_with_subo64_in_tcGPR64RegClass = {
     &AArch64MCRegisterClasses[XSeqPairsClass_with_subo64_in_tcGPR64RegClassID],
+    16, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 34,
     XSeqPairsClass_with_subo64_in_tcGPR64SubClassMask,
     SuperRegIdxSeqs + 4,
@@ -4612,6 +4666,8 @@ namespace AArch64 {   // Register class instances
 
   extern const TargetRegisterClass XSeqPairsClass_with_sub_32_in_GPR32common_and_XSeqPairsClass_with_subo64_in_tcGPR64RegClass = {
     &AArch64MCRegisterClasses[XSeqPairsClass_with_sub_32_in_GPR32common_and_XSeqPairsClass_with_subo64_in_tcGPR64RegClassID],
+    16, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 34,
     XSeqPairsClass_with_sub_32_in_GPR32common_and_XSeqPairsClass_with_subo64_in_tcGPR64SubClassMask,
     SuperRegIdxSeqs + 4,
@@ -4625,6 +4681,8 @@ namespace AArch64 {   // Register class instances
 
   extern const TargetRegisterClass FPR128RegClass = {
     &AArch64MCRegisterClasses[FPR128RegClassID],
+    16, /* SpillSize */
+    16, /* SpillAlignment */
     VTLists + 17,
     FPR128SubClassMask,
     SuperRegIdxSeqs + 0,
@@ -4638,6 +4696,8 @@ namespace AArch64 {   // Register class instances
 
   extern const TargetRegisterClass FPR128_loRegClass = {
     &AArch64MCRegisterClasses[FPR128_loRegClassID],
+    16, /* SpillSize */
+    16, /* SpillAlignment */
     VTLists + 26,
     FPR128_loSubClassMask,
     SuperRegIdxSeqs + 0,
@@ -4651,6 +4711,8 @@ namespace AArch64 {   // Register class instances
 
   extern const TargetRegisterClass DDDRegClass = {
     &AArch64MCRegisterClasses[DDDRegClassID],
+    24, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 34,
     DDDSubClassMask,
     SuperRegIdxSeqs + 57,
@@ -4664,6 +4726,8 @@ namespace AArch64 {   // Register class instances
 
   extern const TargetRegisterClass DDDDRegClass = {
     &AArch64MCRegisterClasses[DDDDRegClassID],
+    32, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 34,
     DDDDSubClassMask,
     SuperRegIdxSeqs + 48,
@@ -4677,6 +4741,8 @@ namespace AArch64 {   // Register class instances
 
   extern const TargetRegisterClass QQRegClass = {
     &AArch64MCRegisterClasses[QQRegClassID],
+    32, /* SpillSize */
+    16, /* SpillAlignment */
     VTLists + 34,
     QQSubClassMask,
     SuperRegIdxSeqs + 53,
@@ -4690,6 +4756,8 @@ namespace AArch64 {   // Register class instances
 
   extern const TargetRegisterClass QQ_with_qsub0_in_FPR128_loRegClass = {
     &AArch64MCRegisterClasses[QQ_with_qsub0_in_FPR128_loRegClassID],
+    32, /* SpillSize */
+    16, /* SpillAlignment */
     VTLists + 34,
     QQ_with_qsub0_in_FPR128_loSubClassMask,
     SuperRegIdxSeqs + 53,
@@ -4703,6 +4771,8 @@ namespace AArch64 {   // Register class instances
 
   extern const TargetRegisterClass QQ_with_qsub1_in_FPR128_loRegClass = {
     &AArch64MCRegisterClasses[QQ_with_qsub1_in_FPR128_loRegClassID],
+    32, /* SpillSize */
+    16, /* SpillAlignment */
     VTLists + 34,
     QQ_with_qsub1_in_FPR128_loSubClassMask,
     SuperRegIdxSeqs + 53,
@@ -4716,6 +4786,8 @@ namespace AArch64 {   // Register class instances
 
   extern const TargetRegisterClass QQ_with_qsub0_in_FPR128_lo_and_QQ_with_qsub1_in_FPR128_loRegClass = {
     &AArch64MCRegisterClasses[QQ_with_qsub0_in_FPR128_lo_and_QQ_with_qsub1_in_FPR128_loRegClassID],
+    32, /* SpillSize */
+    16, /* SpillAlignment */
     VTLists + 34,
     QQ_with_qsub0_in_FPR128_lo_and_QQ_with_qsub1_in_FPR128_loSubClassMask,
     SuperRegIdxSeqs + 53,
@@ -4729,6 +4801,8 @@ namespace AArch64 {   // Register class instances
 
   extern const TargetRegisterClass QQQRegClass = {
     &AArch64MCRegisterClasses[QQQRegClassID],
+    48, /* SpillSize */
+    16, /* SpillAlignment */
     VTLists + 34,
     QQQSubClassMask,
     SuperRegIdxSeqs + 50,
@@ -4742,6 +4816,8 @@ namespace AArch64 {   // Register class instances
 
   extern const TargetRegisterClass QQQ_with_qsub0_in_FPR128_loRegClass = {
     &AArch64MCRegisterClasses[QQQ_with_qsub0_in_FPR128_loRegClassID],
+    48, /* SpillSize */
+    16, /* SpillAlignment */
     VTLists + 34,
     QQQ_with_qsub0_in_FPR128_loSubClassMask,
     SuperRegIdxSeqs + 50,
@@ -4755,6 +4831,8 @@ namespace AArch64 {   // Register class instances
 
   extern const TargetRegisterClass QQQ_with_qsub1_in_FPR128_loRegClass = {
     &AArch64MCRegisterClasses[QQQ_with_qsub1_in_FPR128_loRegClassID],
+    48, /* SpillSize */
+    16, /* SpillAlignment */
     VTLists + 34,
     QQQ_with_qsub1_in_FPR128_loSubClassMask,
     SuperRegIdxSeqs + 50,
@@ -4768,6 +4846,8 @@ namespace AArch64 {   // Register class instances
 
   extern const TargetRegisterClass QQQ_with_qsub2_in_FPR128_loRegClass = {
     &AArch64MCRegisterClasses[QQQ_with_qsub2_in_FPR128_loRegClassID],
+    48, /* SpillSize */
+    16, /* SpillAlignment */
     VTLists + 34,
     QQQ_with_qsub2_in_FPR128_loSubClassMask,
     SuperRegIdxSeqs + 50,
@@ -4781,6 +4861,8 @@ namespace AArch64 {   // Register class instances
 
   extern const TargetRegisterClass QQQ_with_qsub0_in_FPR128_lo_and_QQQ_with_qsub1_in_FPR128_loRegClass = {
     &AArch64MCRegisterClasses[QQQ_with_qsub0_in_FPR128_lo_and_QQQ_with_qsub1_in_FPR128_loRegClassID],
+    48, /* SpillSize */
+    16, /* SpillAlignment */
     VTLists + 34,
     QQQ_with_qsub0_in_FPR128_lo_and_QQQ_with_qsub1_in_FPR128_loSubClassMask,
     SuperRegIdxSeqs + 50,
@@ -4794,6 +4876,8 @@ namespace AArch64 {   // Register class instances
 
   extern const TargetRegisterClass QQQ_with_qsub1_in_FPR128_lo_and_QQQ_with_qsub2_in_FPR128_loRegClass = {
     &AArch64MCRegisterClasses[QQQ_with_qsub1_in_FPR128_lo_and_QQQ_with_qsub2_in_FPR128_loRegClassID],
+    48, /* SpillSize */
+    16, /* SpillAlignment */
     VTLists + 34,
     QQQ_with_qsub1_in_FPR128_lo_and_QQQ_with_qsub2_in_FPR128_loSubClassMask,
     SuperRegIdxSeqs + 50,
@@ -4807,6 +4891,8 @@ namespace AArch64 {   // Register class instances
 
   extern const TargetRegisterClass QQQ_with_qsub0_in_FPR128_lo_and_QQQ_with_qsub2_in_FPR128_loRegClass = {
     &AArch64MCRegisterClasses[QQQ_with_qsub0_in_FPR128_lo_and_QQQ_with_qsub2_in_FPR128_loRegClassID],
+    48, /* SpillSize */
+    16, /* SpillAlignment */
     VTLists + 34,
     QQQ_with_qsub0_in_FPR128_lo_and_QQQ_with_qsub2_in_FPR128_loSubClassMask,
     SuperRegIdxSeqs + 50,
@@ -4820,6 +4906,8 @@ namespace AArch64 {   // Register class instances
 
   extern const TargetRegisterClass QQQQRegClass = {
     &AArch64MCRegisterClasses[QQQQRegClassID],
+    64, /* SpillSize */
+    16, /* SpillAlignment */
     VTLists + 34,
     QQQQSubClassMask,
     SuperRegIdxSeqs + 4,
@@ -4833,6 +4921,8 @@ namespace AArch64 {   // Register class instances
 
   extern const TargetRegisterClass QQQQ_with_qsub0_in_FPR128_loRegClass = {
     &AArch64MCRegisterClasses[QQQQ_with_qsub0_in_FPR128_loRegClassID],
+    64, /* SpillSize */
+    16, /* SpillAlignment */
     VTLists + 34,
     QQQQ_with_qsub0_in_FPR128_loSubClassMask,
     SuperRegIdxSeqs + 4,
@@ -4846,6 +4936,8 @@ namespace AArch64 {   // Register class instances
 
   extern const TargetRegisterClass QQQQ_with_qsub1_in_FPR128_loRegClass = {
     &AArch64MCRegisterClasses[QQQQ_with_qsub1_in_FPR128_loRegClassID],
+    64, /* SpillSize */
+    16, /* SpillAlignment */
     VTLists + 34,
     QQQQ_with_qsub1_in_FPR128_loSubClassMask,
     SuperRegIdxSeqs + 4,
@@ -4859,6 +4951,8 @@ namespace AArch64 {   // Register class instances
 
   extern const TargetRegisterClass QQQQ_with_qsub2_in_FPR128_loRegClass = {
     &AArch64MCRegisterClasses[QQQQ_with_qsub2_in_FPR128_loRegClassID],
+    64, /* SpillSize */
+    16, /* SpillAlignment */
     VTLists + 34,
     QQQQ_with_qsub2_in_FPR128_loSubClassMask,
     SuperRegIdxSeqs + 4,
@@ -4872,6 +4966,8 @@ namespace AArch64 {   // Register class instances
 
   extern const TargetRegisterClass QQQQ_with_qsub3_in_FPR128_loRegClass = {
     &AArch64MCRegisterClasses[QQQQ_with_qsub3_in_FPR128_loRegClassID],
+    64, /* SpillSize */
+    16, /* SpillAlignment */
     VTLists + 34,
     QQQQ_with_qsub3_in_FPR128_loSubClassMask,
     SuperRegIdxSeqs + 4,
@@ -4885,6 +4981,8 @@ namespace AArch64 {   // Register class instances
 
   extern const TargetRegisterClass QQQQ_with_qsub0_in_FPR128_lo_and_QQQQ_with_qsub1_in_FPR128_loRegClass = {
     &AArch64MCRegisterClasses[QQQQ_with_qsub0_in_FPR128_lo_and_QQQQ_with_qsub1_in_FPR128_loRegClassID],
+    64, /* SpillSize */
+    16, /* SpillAlignment */
     VTLists + 34,
     QQQQ_with_qsub0_in_FPR128_lo_and_QQQQ_with_qsub1_in_FPR128_loSubClassMask,
     SuperRegIdxSeqs + 4,
@@ -4898,6 +4996,8 @@ namespace AArch64 {   // Register class instances
 
   extern const TargetRegisterClass QQQQ_with_qsub1_in_FPR128_lo_and_QQQQ_with_qsub2_in_FPR128_loRegClass = {
     &AArch64MCRegisterClasses[QQQQ_with_qsub1_in_FPR128_lo_and_QQQQ_with_qsub2_in_FPR128_loRegClassID],
+    64, /* SpillSize */
+    16, /* SpillAlignment */
     VTLists + 34,
     QQQQ_with_qsub1_in_FPR128_lo_and_QQQQ_with_qsub2_in_FPR128_loSubClassMask,
     SuperRegIdxSeqs + 4,
@@ -4911,6 +5011,8 @@ namespace AArch64 {   // Register class instances
 
   extern const TargetRegisterClass QQQQ_with_qsub2_in_FPR128_lo_and_QQQQ_with_qsub3_in_FPR128_loRegClass = {
     &AArch64MCRegisterClasses[QQQQ_with_qsub2_in_FPR128_lo_and_QQQQ_with_qsub3_in_FPR128_loRegClassID],
+    64, /* SpillSize */
+    16, /* SpillAlignment */
     VTLists + 34,
     QQQQ_with_qsub2_in_FPR128_lo_and_QQQQ_with_qsub3_in_FPR128_loSubClassMask,
     SuperRegIdxSeqs + 4,
@@ -4924,6 +5026,8 @@ namespace AArch64 {   // Register class instances
 
   extern const TargetRegisterClass QQQQ_with_qsub0_in_FPR128_lo_and_QQQQ_with_qsub2_in_FPR128_loRegClass = {
     &AArch64MCRegisterClasses[QQQQ_with_qsub0_in_FPR128_lo_and_QQQQ_with_qsub2_in_FPR128_loRegClassID],
+    64, /* SpillSize */
+    16, /* SpillAlignment */
     VTLists + 34,
     QQQQ_with_qsub0_in_FPR128_lo_and_QQQQ_with_qsub2_in_FPR128_loSubClassMask,
     SuperRegIdxSeqs + 4,
@@ -4937,6 +5041,8 @@ namespace AArch64 {   // Register class instances
 
   extern const TargetRegisterClass QQQQ_with_qsub1_in_FPR128_lo_and_QQQQ_with_qsub3_in_FPR128_loRegClass = {
     &AArch64MCRegisterClasses[QQQQ_with_qsub1_in_FPR128_lo_and_QQQQ_with_qsub3_in_FPR128_loRegClassID],
+    64, /* SpillSize */
+    16, /* SpillAlignment */
     VTLists + 34,
     QQQQ_with_qsub1_in_FPR128_lo_and_QQQQ_with_qsub3_in_FPR128_loSubClassMask,
     SuperRegIdxSeqs + 4,
@@ -4950,6 +5056,8 @@ namespace AArch64 {   // Register class instances
 
   extern const TargetRegisterClass QQQQ_with_qsub0_in_FPR128_lo_and_QQQQ_with_qsub3_in_FPR128_loRegClass = {
     &AArch64MCRegisterClasses[QQQQ_with_qsub0_in_FPR128_lo_and_QQQQ_with_qsub3_in_FPR128_loRegClassID],
+    64, /* SpillSize */
+    16, /* SpillAlignment */
     VTLists + 34,
     QQQQ_with_qsub0_in_FPR128_lo_and_QQQQ_with_qsub3_in_FPR128_loSubClassMask,
     SuperRegIdxSeqs + 4,
@@ -5624,7 +5732,7 @@ unsigned AArch64GenRegisterInfo::composeSubRegIndicesImpl(unsigned IdxA, unsigne
 LaneBitmask AArch64GenRegisterInfo::composeSubRegIndexLaneMaskImpl(unsigned IdxA, LaneBitmask LaneMask) const {
   --IdxA; assert(IdxA < 58 && "Subregister index out of bounds");
   LaneBitmask Result;
-  for (const MaskRolOp *Ops = CompositeSequences[IdxA]; !Ops->Mask.none(); ++Ops) {
+  for (const MaskRolOp *Ops = CompositeSequences[IdxA]; Ops->Mask.any(); ++Ops) {
     LaneBitmask::Type M = LaneMask.getAsInteger() & Ops->Mask.getAsInteger();
     if (unsigned S = Ops->RotateLeft)
       Result |= LaneBitmask((M << S) | (M >> (LaneBitmask::BitWidth - S)));
@@ -5638,7 +5746,7 @@ LaneBitmask AArch64GenRegisterInfo::reverseComposeSubRegIndexLaneMaskImpl(unsign
   LaneMask &= getSubRegIndexLaneMask(IdxA);
   --IdxA; assert(IdxA < 58 && "Subregister index out of bounds");
   LaneBitmask Result;
-  for (const MaskRolOp *Ops = CompositeSequences[IdxA]; !Ops->Mask.none(); ++Ops) {
+  for (const MaskRolOp *Ops = CompositeSequences[IdxA]; Ops->Mask.any(); ++Ops) {
     LaneBitmask::Type M = LaneMask.getAsInteger();
     if (unsigned S = Ops->RotateLeft)
       Result |= LaneBitmask((M >> S) | (M << (LaneBitmask::BitWidth - S)));
@@ -9099,8 +9207,8 @@ AArch64GenRegisterInfo(unsigned RA, unsigned DwarfFlavour, unsigned EHFlavour, u
 
 static const MCPhysReg CSR_AArch64_AAPCS_SaveList[] = { AArch64::LR, AArch64::FP, AArch64::X19, AArch64::X20, AArch64::X21, AArch64::X22, AArch64::X23, AArch64::X24, AArch64::X25, AArch64::X26, AArch64::X27, AArch64::X28, AArch64::D8, AArch64::D9, AArch64::D10, AArch64::D11, AArch64::D12, AArch64::D13, AArch64::D14, AArch64::D15, 0 };
 static const uint32_t CSR_AArch64_AAPCS_RegMask[] = { 0x00ff0006, 0x00ff0000, 0x00ff0000, 0x00000000, 0x00ff0000, 0xf8000000, 0xfc00007f, 0x0007f00f, 0x0001f000, 0x0003f000, 0x00000000, 0x00000000, 0x00000000, 0xfe000000, 0xf800009f, 0x0000000f, };
-static const MCPhysReg CSR_AArch64_AAPCS_SwiftError_SaveList[] = { AArch64::LR, AArch64::FP, AArch64::X20, AArch64::X21, AArch64::X22, AArch64::X23, AArch64::X24, AArch64::X25, AArch64::X26, AArch64::X27, AArch64::X28, AArch64::D8, AArch64::D9, AArch64::D10, AArch64::D11, AArch64::D12, AArch64::D13, AArch64::D14, AArch64::D15, 0 };
-static const uint32_t CSR_AArch64_AAPCS_SwiftError_RegMask[] = { 0x00ff0006, 0x00ff0000, 0x00ff0000, 0x00000000, 0x00ff0000, 0xf0000000, 0xf800007f, 0x0007f00f, 0x0001f000, 0x0003f000, 0x00000000, 0x00000000, 0x00000000, 0xfc000000, 0xf000009f, 0x0000000f, };
+static const MCPhysReg CSR_AArch64_AAPCS_SwiftError_SaveList[] = { AArch64::LR, AArch64::FP, AArch64::X19, AArch64::X20, AArch64::X22, AArch64::X23, AArch64::X24, AArch64::X25, AArch64::X26, AArch64::X27, AArch64::X28, AArch64::D8, AArch64::D9, AArch64::D10, AArch64::D11, AArch64::D12, AArch64::D13, AArch64::D14, AArch64::D15, 0 };
+static const uint32_t CSR_AArch64_AAPCS_SwiftError_RegMask[] = { 0x00ff0006, 0x00ff0000, 0x00ff0000, 0x00000000, 0x00ff0000, 0xd8000000, 0xec00007f, 0x0007f00f, 0x0001f000, 0x0003f000, 0x00000000, 0x00000000, 0x00000000, 0xf2000000, 0xc800009f, 0x0000000f, };
 static const MCPhysReg CSR_AArch64_AAPCS_ThisReturn_SaveList[] = { AArch64::LR, AArch64::FP, AArch64::X19, AArch64::X20, AArch64::X21, AArch64::X22, AArch64::X23, AArch64::X24, AArch64::X25, AArch64::X26, AArch64::X27, AArch64::X28, AArch64::D8, AArch64::D9, AArch64::D10, AArch64::D11, AArch64::D12, AArch64::D13, AArch64::D14, AArch64::D15, AArch64::X0, 0 };
 static const uint32_t CSR_AArch64_AAPCS_ThisReturn_RegMask[] = { 0x00ff0006, 0x00ff0000, 0x00ff0000, 0x00000000, 0x00ff0000, 0xf8000100, 0xfc0000ff, 0x0007f00f, 0x0001f000, 0x0003f000, 0x00000000, 0x00000000, 0x00000000, 0xfe000000, 0xf800009f, 0x0000000f, };
 static const MCPhysReg CSR_AArch64_AllRegs_SaveList[] = { AArch64::W0, AArch64::W1, AArch64::W2, AArch64::W3, AArch64::W4, AArch64::W5, AArch64::W6, AArch64::W7, AArch64::W8, AArch64::W9, AArch64::W10, AArch64::W11, AArch64::W12, AArch64::W13, AArch64::W14, AArch64::W15, AArch64::W16, AArch64::W17, AArch64::W18, AArch64::W19, AArch64::W20, AArch64::W21, AArch64::W22, AArch64::W23, AArch64::W24, AArch64::W25, AArch64::W26, AArch64::W27, AArch64::W28, AArch64::W29, AArch64::W30, AArch64::WSP, AArch64::X0, AArch64::X1, AArch64::X2, AArch64::X3, AArch64::X4, AArch64::X5, AArch64::X6, AArch64::X7, AArch64::X8, AArch64::X9, AArch64::X10, AArch64::X11, AArch64::X12, AArch64::X13, AArch64::X14, AArch64::X15, AArch64::X16, AArch64::X17, AArch64::X18, AArch64::X19, AArch64::X20, AArch64::X21, AArch64::X22, AArch64::X23, AArch64::X24, AArch64::X25, AArch64::X26, AArch64::X27, AArch64::X28, AArch64::FP, AArch64::LR, AArch64::SP, AArch64::B0, AArch64::B1, AArch64::B2, AArch64::B3, AArch64::B4, AArch64::B5, AArch64::B6, AArch64::B7, AArch64::B8, AArch64::B9, AArch64::B10, AArch64::B11, AArch64::B12, AArch64::B13, AArch64::B14, AArch64::B15, AArch64::B16, AArch64::B17, AArch64::B18, AArch64::B19, AArch64::B20, AArch64::B21, AArch64::B22, AArch64::B23, AArch64::B24, AArch64::B25, AArch64::B26, AArch64::B27, AArch64::B28, AArch64::B29, AArch64::B30, AArch64::B31, AArch64::H0, AArch64::H1, AArch64::H2, AArch64::H3, AArch64::H4, AArch64::H5, AArch64::H6, AArch64::H7, AArch64::H8, AArch64::H9, AArch64::H10, AArch64::H11, AArch64::H12, AArch64::H13, AArch64::H14, AArch64::H15, AArch64::H16, AArch64::H17, AArch64::H18, AArch64::H19, AArch64::H20, AArch64::H21, AArch64::H22, AArch64::H23, AArch64::H24, AArch64::H25, AArch64::H26, AArch64::H27, AArch64::H28, AArch64::H29, AArch64::H30, AArch64::H31, AArch64::S0, AArch64::S1, AArch64::S2, AArch64::S3, AArch64::S4, AArch64::S5, AArch64::S6, AArch64::S7, AArch64::S8, AArch64::S9, AArch64::S10, AArch64::S11, AArch64::S12, AArch64::S13, AArch64::S14, AArch64::S15, AArch64::S16, AArch64::S17, AArch64::S18, AArch64::S19, AArch64::S20, AArch64::S21, AArch64::S22, AArch64::S23, AArch64::S24, AArch64::S25, AArch64::S26, AArch64::S27, AArch64::S28, AArch64::S29, AArch64::S30, AArch64::S31, AArch64::D0, AArch64::D1, AArch64::D2, AArch64::D3, AArch64::D4, AArch64::D5, AArch64::D6, AArch64::D7, AArch64::D8, AArch64::D9, AArch64::D10, AArch64::D11, AArch64::D12, AArch64::D13, AArch64::D14, AArch64::D15, AArch64::D16, AArch64::D17, AArch64::D18, AArch64::D19, AArch64::D20, AArch64::D21, AArch64::D22, AArch64::D23, AArch64::D24, AArch64::D25, AArch64::D26, AArch64::D27, AArch64::D28, AArch64::D29, AArch64::D30, AArch64::D31, AArch64::Q0, AArch64::Q1, AArch64::Q2, AArch64::Q3, AArch64::Q4, AArch64::Q5, AArch64::Q6, AArch64::Q7, AArch64::Q8, AArch64::Q9, AArch64::Q10, AArch64::Q11, AArch64::Q12, AArch64::Q13, AArch64::Q14, AArch64::Q15, AArch64::Q16, AArch64::Q17, AArch64::Q18, AArch64::Q19, AArch64::Q20, AArch64::Q21, AArch64::Q22, AArch64::Q23, AArch64::Q24, AArch64::Q25, AArch64::Q26, AArch64::Q27, AArch64::Q28, AArch64::Q29, AArch64::Q30, AArch64::Q31, 0 };

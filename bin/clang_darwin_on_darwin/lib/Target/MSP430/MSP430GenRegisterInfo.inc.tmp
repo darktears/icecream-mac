@@ -239,8 +239,8 @@ extern const char MSP430RegClassStrings[] = {
 };
 
 extern const MCRegisterClass MSP430MCRegisterClasses[] = {
-  { GR8, GR8Bits, 5, 16, sizeof(GR8Bits), MSP430::GR8RegClassID, 1, 1, 1, true },
-  { GR16, GR16Bits, 0, 16, sizeof(GR16Bits), MSP430::GR16RegClassID, 2, 2, 1, true },
+  { GR8, GR8Bits, 5, 16, sizeof(GR8Bits), MSP430::GR8RegClassID, 1, 1, true },
+  { GR16, GR16Bits, 0, 16, sizeof(GR16Bits), MSP430::GR16RegClassID, 2, 1, true },
 };
 
 extern const uint16_t MSP430RegEncodingTable[] = {
@@ -385,6 +385,8 @@ static const uint16_t SuperRegIdxSeqs[] = {
 namespace MSP430 {   // Register class instances
   extern const TargetRegisterClass GR8RegClass = {
     &MSP430MCRegisterClasses[GR8RegClassID],
+    1, /* SpillSize */
+    1, /* SpillAlignment */
     VTLists + 0,
     GR8SubClassMask,
     SuperRegIdxSeqs + 0,
@@ -398,6 +400,8 @@ namespace MSP430 {   // Register class instances
 
   extern const TargetRegisterClass GR16RegClass = {
     &MSP430MCRegisterClasses[GR16RegClassID],
+    2, /* SpillSize */
+    2, /* SpillAlignment */
     VTLists + 2,
     GR16SubClassMask,
     SuperRegIdxSeqs + 1,
@@ -477,7 +481,7 @@ unsigned MSP430GenRegisterInfo::composeSubRegIndicesImpl(unsigned IdxA, unsigned
 LaneBitmask MSP430GenRegisterInfo::composeSubRegIndexLaneMaskImpl(unsigned IdxA, LaneBitmask LaneMask) const {
   --IdxA; assert(IdxA < 1 && "Subregister index out of bounds");
   LaneBitmask Result;
-  for (const MaskRolOp *Ops = CompositeSequences[IdxA]; !Ops->Mask.none(); ++Ops) {
+  for (const MaskRolOp *Ops = CompositeSequences[IdxA]; Ops->Mask.any(); ++Ops) {
     LaneBitmask::Type M = LaneMask.getAsInteger() & Ops->Mask.getAsInteger();
     if (unsigned S = Ops->RotateLeft)
       Result |= LaneBitmask((M << S) | (M >> (LaneBitmask::BitWidth - S)));
@@ -491,7 +495,7 @@ LaneBitmask MSP430GenRegisterInfo::reverseComposeSubRegIndexLaneMaskImpl(unsigne
   LaneMask &= getSubRegIndexLaneMask(IdxA);
   --IdxA; assert(IdxA < 1 && "Subregister index out of bounds");
   LaneBitmask Result;
-  for (const MaskRolOp *Ops = CompositeSequences[IdxA]; !Ops->Mask.none(); ++Ops) {
+  for (const MaskRolOp *Ops = CompositeSequences[IdxA]; Ops->Mask.any(); ++Ops) {
     LaneBitmask::Type M = LaneMask.getAsInteger();
     if (unsigned S = Ops->RotateLeft)
       Result |= LaneBitmask((M >> S) | (M << (LaneBitmask::BitWidth - S)));

@@ -41,6 +41,9 @@ static bool Predicate_imm0_4095(int64_t Imm) {
   return Imm >= 0 && Imm < 4096;
 
 }
+static bool Predicate_imm1_31(int64_t Imm) {
+ return Imm > 0 && Imm < 32; 
+}
 static bool Predicate_imm0_31(int64_t Imm) {
 
   return Imm >= 0 && Imm < 32;
@@ -58,6 +61,11 @@ static bool Predicate_shr_imm32(int64_t Imm) {
 static bool Predicate_VectorIndex32(int64_t Imm) {
 
   return ((uint64_t)Imm) < 2;
+
+}
+static bool Predicate_t2_so_imm_neg(int64_t Imm) {
+
+  return Imm && ARM_AM::getT2SOImmVal(-(uint32_t)Imm) != -1;
 
 }
 
@@ -118,34 +126,6 @@ unsigned fastEmit_ARMISD_CALL_PRED_MVT_i32_r(MVT RetVT, unsigned Op0, bool Op0Is
 unsigned fastEmit_ARMISD_CALL_PRED_r(MVT VT, MVT RetVT, unsigned Op0, bool Op0IsKill) {
   switch (VT.SimpleTy) {
   case MVT::i32: return fastEmit_ARMISD_CALL_PRED_MVT_i32_r(RetVT, Op0, Op0IsKill);
-  default: return 0;
-  }
-}
-
-// FastEmit functions for ARMISD::CMPFPw0.
-
-unsigned fastEmit_ARMISD_CMPFPw0_MVT_f32_r(MVT RetVT, unsigned Op0, bool Op0IsKill) {
-  if (RetVT.SimpleTy != MVT::isVoid)
-    return 0;
-  if ((Subtarget->hasVFP2())) {
-    return fastEmitInst_r(ARM::VCMPEZS, &ARM::SPRRegClass, Op0, Op0IsKill);
-  }
-  return 0;
-}
-
-unsigned fastEmit_ARMISD_CMPFPw0_MVT_f64_r(MVT RetVT, unsigned Op0, bool Op0IsKill) {
-  if (RetVT.SimpleTy != MVT::isVoid)
-    return 0;
-  if ((!Subtarget->isFPOnlySP()) && (Subtarget->hasVFP2())) {
-    return fastEmitInst_r(ARM::VCMPEZD, &ARM::DPRRegClass, Op0, Op0IsKill);
-  }
-  return 0;
-}
-
-unsigned fastEmit_ARMISD_CMPFPw0_r(MVT VT, MVT RetVT, unsigned Op0, bool Op0IsKill) {
-  switch (VT.SimpleTy) {
-  case MVT::f32: return fastEmit_ARMISD_CMPFPw0_MVT_f32_r(RetVT, Op0, Op0IsKill);
-  case MVT::f64: return fastEmit_ARMISD_CMPFPw0_MVT_f64_r(RetVT, Op0, Op0IsKill);
   default: return 0;
   }
 }
@@ -2420,7 +2400,6 @@ unsigned fastEmit_r(MVT VT, MVT RetVT, unsigned Opcode, unsigned Op0, bool Op0Is
   case ARMISD::CALL: return fastEmit_ARMISD_CALL_r(VT, RetVT, Op0, Op0IsKill);
   case ARMISD::CALL_NOLINK: return fastEmit_ARMISD_CALL_NOLINK_r(VT, RetVT, Op0, Op0IsKill);
   case ARMISD::CALL_PRED: return fastEmit_ARMISD_CALL_PRED_r(VT, RetVT, Op0, Op0IsKill);
-  case ARMISD::CMPFPw0: return fastEmit_ARMISD_CMPFPw0_r(VT, RetVT, Op0, Op0IsKill);
   case ARMISD::RRX: return fastEmit_ARMISD_RRX_r(VT, RetVT, Op0, Op0IsKill);
   case ARMISD::SRA_FLAG: return fastEmit_ARMISD_SRA_FLAG_r(VT, RetVT, Op0, Op0IsKill);
   case ARMISD::SRL_FLAG: return fastEmit_ARMISD_SRL_FLAG_r(VT, RetVT, Op0, Op0IsKill);
@@ -2484,34 +2463,6 @@ unsigned fastEmit_ARMISD_CMP_MVT_i32_rr(MVT RetVT, unsigned Op0, bool Op0IsKill,
 unsigned fastEmit_ARMISD_CMP_rr(MVT VT, MVT RetVT, unsigned Op0, bool Op0IsKill, unsigned Op1, bool Op1IsKill) {
   switch (VT.SimpleTy) {
   case MVT::i32: return fastEmit_ARMISD_CMP_MVT_i32_rr(RetVT, Op0, Op0IsKill, Op1, Op1IsKill);
-  default: return 0;
-  }
-}
-
-// FastEmit functions for ARMISD::CMPFP.
-
-unsigned fastEmit_ARMISD_CMPFP_MVT_f32_rr(MVT RetVT, unsigned Op0, bool Op0IsKill, unsigned Op1, bool Op1IsKill) {
-  if (RetVT.SimpleTy != MVT::isVoid)
-    return 0;
-  if ((Subtarget->hasVFP2())) {
-    return fastEmitInst_rr(ARM::VCMPES, &ARM::SPRRegClass, Op0, Op0IsKill, Op1, Op1IsKill);
-  }
-  return 0;
-}
-
-unsigned fastEmit_ARMISD_CMPFP_MVT_f64_rr(MVT RetVT, unsigned Op0, bool Op0IsKill, unsigned Op1, bool Op1IsKill) {
-  if (RetVT.SimpleTy != MVT::isVoid)
-    return 0;
-  if ((!Subtarget->isFPOnlySP()) && (Subtarget->hasVFP2())) {
-    return fastEmitInst_rr(ARM::VCMPED, &ARM::DPRRegClass, Op0, Op0IsKill, Op1, Op1IsKill);
-  }
-  return 0;
-}
-
-unsigned fastEmit_ARMISD_CMPFP_rr(MVT VT, MVT RetVT, unsigned Op0, bool Op0IsKill, unsigned Op1, bool Op1IsKill) {
-  switch (VT.SimpleTy) {
-  case MVT::f32: return fastEmit_ARMISD_CMPFP_MVT_f32_rr(RetVT, Op0, Op0IsKill, Op1, Op1IsKill);
-  case MVT::f64: return fastEmit_ARMISD_CMPFP_MVT_f64_rr(RetVT, Op0, Op0IsKill, Op1, Op1IsKill);
   default: return 0;
   }
 }
@@ -2590,6 +2541,48 @@ unsigned fastEmit_ARMISD_EH_SJLJ_SETJMP_MVT_i32_rr(MVT RetVT, unsigned Op0, bool
 unsigned fastEmit_ARMISD_EH_SJLJ_SETJMP_rr(MVT VT, MVT RetVT, unsigned Op0, bool Op0IsKill, unsigned Op1, bool Op1IsKill) {
   switch (VT.SimpleTy) {
   case MVT::i32: return fastEmit_ARMISD_EH_SJLJ_SETJMP_MVT_i32_rr(RetVT, Op0, Op0IsKill, Op1, Op1IsKill);
+  default: return 0;
+  }
+}
+
+// FastEmit functions for ARMISD::SMULWB.
+
+unsigned fastEmit_ARMISD_SMULWB_MVT_i32_rr(MVT RetVT, unsigned Op0, bool Op0IsKill, unsigned Op1, bool Op1IsKill) {
+  if (RetVT.SimpleTy != MVT::i32)
+    return 0;
+  if ((Subtarget->hasDSP()) && (Subtarget->isThumb2())) {
+    return fastEmitInst_rr(ARM::t2SMULWB, &ARM::rGPRRegClass, Op0, Op0IsKill, Op1, Op1IsKill);
+  }
+  if ((Subtarget->hasV5TEOps()) && (!Subtarget->isThumb())) {
+    return fastEmitInst_rr(ARM::SMULWB, &ARM::GPRRegClass, Op0, Op0IsKill, Op1, Op1IsKill);
+  }
+  return 0;
+}
+
+unsigned fastEmit_ARMISD_SMULWB_rr(MVT VT, MVT RetVT, unsigned Op0, bool Op0IsKill, unsigned Op1, bool Op1IsKill) {
+  switch (VT.SimpleTy) {
+  case MVT::i32: return fastEmit_ARMISD_SMULWB_MVT_i32_rr(RetVT, Op0, Op0IsKill, Op1, Op1IsKill);
+  default: return 0;
+  }
+}
+
+// FastEmit functions for ARMISD::SMULWT.
+
+unsigned fastEmit_ARMISD_SMULWT_MVT_i32_rr(MVT RetVT, unsigned Op0, bool Op0IsKill, unsigned Op1, bool Op1IsKill) {
+  if (RetVT.SimpleTy != MVT::i32)
+    return 0;
+  if ((Subtarget->hasDSP()) && (Subtarget->isThumb2())) {
+    return fastEmitInst_rr(ARM::t2SMULWT, &ARM::rGPRRegClass, Op0, Op0IsKill, Op1, Op1IsKill);
+  }
+  if ((Subtarget->hasV5TEOps()) && (!Subtarget->isThumb())) {
+    return fastEmitInst_rr(ARM::SMULWT, &ARM::GPRRegClass, Op0, Op0IsKill, Op1, Op1IsKill);
+  }
+  return 0;
+}
+
+unsigned fastEmit_ARMISD_SMULWT_rr(MVT VT, MVT RetVT, unsigned Op0, bool Op0IsKill, unsigned Op1, bool Op1IsKill) {
+  switch (VT.SimpleTy) {
+  case MVT::i32: return fastEmit_ARMISD_SMULWT_MVT_i32_rr(RetVT, Op0, Op0IsKill, Op1, Op1IsKill);
   default: return 0;
   }
 }
@@ -3316,42 +3309,6 @@ unsigned fastEmit_ISD_ADD_rr(MVT VT, MVT RetVT, unsigned Op0, bool Op0IsKill, un
   case MVT::v4i32: return fastEmit_ISD_ADD_MVT_v4i32_rr(RetVT, Op0, Op0IsKill, Op1, Op1IsKill);
   case MVT::v1i64: return fastEmit_ISD_ADD_MVT_v1i64_rr(RetVT, Op0, Op0IsKill, Op1, Op1IsKill);
   case MVT::v2i64: return fastEmit_ISD_ADD_MVT_v2i64_rr(RetVT, Op0, Op0IsKill, Op1, Op1IsKill);
-  default: return 0;
-  }
-}
-
-// FastEmit functions for ISD::ADDC.
-
-unsigned fastEmit_ISD_ADDC_MVT_i32_rr(MVT RetVT, unsigned Op0, bool Op0IsKill, unsigned Op1, bool Op1IsKill) {
-  if (RetVT.SimpleTy != MVT::i32)
-    return 0;
-  if ((Subtarget->isThumb()) && (Subtarget->isThumb1Only())) {
-    return fastEmitInst_rr(ARM::tADDrr, &ARM::tGPRRegClass, Op0, Op0IsKill, Op1, Op1IsKill);
-  }
-  return 0;
-}
-
-unsigned fastEmit_ISD_ADDC_rr(MVT VT, MVT RetVT, unsigned Op0, bool Op0IsKill, unsigned Op1, bool Op1IsKill) {
-  switch (VT.SimpleTy) {
-  case MVT::i32: return fastEmit_ISD_ADDC_MVT_i32_rr(RetVT, Op0, Op0IsKill, Op1, Op1IsKill);
-  default: return 0;
-  }
-}
-
-// FastEmit functions for ISD::ADDE.
-
-unsigned fastEmit_ISD_ADDE_MVT_i32_rr(MVT RetVT, unsigned Op0, bool Op0IsKill, unsigned Op1, bool Op1IsKill) {
-  if (RetVT.SimpleTy != MVT::i32)
-    return 0;
-  if ((Subtarget->isThumb()) && (Subtarget->isThumb1Only())) {
-    return fastEmitInst_rr(ARM::tADC, &ARM::tGPRRegClass, Op0, Op0IsKill, Op1, Op1IsKill);
-  }
-  return 0;
-}
-
-unsigned fastEmit_ISD_ADDE_rr(MVT VT, MVT RetVT, unsigned Op0, bool Op0IsKill, unsigned Op1, bool Op1IsKill) {
-  switch (VT.SimpleTy) {
-  case MVT::i32: return fastEmit_ISD_ADDE_MVT_i32_rr(RetVT, Op0, Op0IsKill, Op1, Op1IsKill);
   default: return 0;
   }
 }
@@ -4361,42 +4318,6 @@ unsigned fastEmit_ISD_SUB_rr(MVT VT, MVT RetVT, unsigned Op0, bool Op0IsKill, un
   }
 }
 
-// FastEmit functions for ISD::SUBC.
-
-unsigned fastEmit_ISD_SUBC_MVT_i32_rr(MVT RetVT, unsigned Op0, bool Op0IsKill, unsigned Op1, bool Op1IsKill) {
-  if (RetVT.SimpleTy != MVT::i32)
-    return 0;
-  if ((Subtarget->isThumb()) && (Subtarget->isThumb1Only())) {
-    return fastEmitInst_rr(ARM::tSUBrr, &ARM::tGPRRegClass, Op0, Op0IsKill, Op1, Op1IsKill);
-  }
-  return 0;
-}
-
-unsigned fastEmit_ISD_SUBC_rr(MVT VT, MVT RetVT, unsigned Op0, bool Op0IsKill, unsigned Op1, bool Op1IsKill) {
-  switch (VT.SimpleTy) {
-  case MVT::i32: return fastEmit_ISD_SUBC_MVT_i32_rr(RetVT, Op0, Op0IsKill, Op1, Op1IsKill);
-  default: return 0;
-  }
-}
-
-// FastEmit functions for ISD::SUBE.
-
-unsigned fastEmit_ISD_SUBE_MVT_i32_rr(MVT RetVT, unsigned Op0, bool Op0IsKill, unsigned Op1, bool Op1IsKill) {
-  if (RetVT.SimpleTy != MVT::i32)
-    return 0;
-  if ((Subtarget->isThumb()) && (Subtarget->isThumb1Only())) {
-    return fastEmitInst_rr(ARM::tSBC, &ARM::tGPRRegClass, Op0, Op0IsKill, Op1, Op1IsKill);
-  }
-  return 0;
-}
-
-unsigned fastEmit_ISD_SUBE_rr(MVT VT, MVT RetVT, unsigned Op0, bool Op0IsKill, unsigned Op1, bool Op1IsKill) {
-  switch (VT.SimpleTy) {
-  case MVT::i32: return fastEmit_ISD_SUBE_MVT_i32_rr(RetVT, Op0, Op0IsKill, Op1, Op1IsKill);
-  default: return 0;
-  }
-}
-
 // FastEmit functions for ISD::UDIV.
 
 unsigned fastEmit_ISD_UDIV_MVT_i32_rr(MVT RetVT, unsigned Op0, bool Op0IsKill, unsigned Op1, bool Op1IsKill) {
@@ -4603,10 +4524,11 @@ unsigned fastEmit_ISD_XOR_rr(MVT VT, MVT RetVT, unsigned Op0, bool Op0IsKill, un
 unsigned fastEmit_rr(MVT VT, MVT RetVT, unsigned Opcode, unsigned Op0, bool Op0IsKill, unsigned Op1, bool Op1IsKill) override {
   switch (Opcode) {
   case ARMISD::CMP: return fastEmit_ARMISD_CMP_rr(VT, RetVT, Op0, Op0IsKill, Op1, Op1IsKill);
-  case ARMISD::CMPFP: return fastEmit_ARMISD_CMPFP_rr(VT, RetVT, Op0, Op0IsKill, Op1, Op1IsKill);
   case ARMISD::CMPZ: return fastEmit_ARMISD_CMPZ_rr(VT, RetVT, Op0, Op0IsKill, Op1, Op1IsKill);
   case ARMISD::EH_SJLJ_LONGJMP: return fastEmit_ARMISD_EH_SJLJ_LONGJMP_rr(VT, RetVT, Op0, Op0IsKill, Op1, Op1IsKill);
   case ARMISD::EH_SJLJ_SETJMP: return fastEmit_ARMISD_EH_SJLJ_SETJMP_rr(VT, RetVT, Op0, Op0IsKill, Op1, Op1IsKill);
+  case ARMISD::SMULWB: return fastEmit_ARMISD_SMULWB_rr(VT, RetVT, Op0, Op0IsKill, Op1, Op1IsKill);
+  case ARMISD::SMULWT: return fastEmit_ARMISD_SMULWT_rr(VT, RetVT, Op0, Op0IsKill, Op1, Op1IsKill);
   case ARMISD::VCEQ: return fastEmit_ARMISD_VCEQ_rr(VT, RetVT, Op0, Op0IsKill, Op1, Op1IsKill);
   case ARMISD::VCGE: return fastEmit_ARMISD_VCGE_rr(VT, RetVT, Op0, Op0IsKill, Op1, Op1IsKill);
   case ARMISD::VCGEU: return fastEmit_ARMISD_VCGEU_rr(VT, RetVT, Op0, Op0IsKill, Op1, Op1IsKill);
@@ -4617,8 +4539,6 @@ unsigned fastEmit_rr(MVT VT, MVT RetVT, unsigned Opcode, unsigned Op0, bool Op0I
   case ARMISD::VMULLu: return fastEmit_ARMISD_VMULLu_rr(VT, RetVT, Op0, Op0IsKill, Op1, Op1IsKill);
   case ARMISD::VTST: return fastEmit_ARMISD_VTST_rr(VT, RetVT, Op0, Op0IsKill, Op1, Op1IsKill);
   case ISD::ADD: return fastEmit_ISD_ADD_rr(VT, RetVT, Op0, Op0IsKill, Op1, Op1IsKill);
-  case ISD::ADDC: return fastEmit_ISD_ADDC_rr(VT, RetVT, Op0, Op0IsKill, Op1, Op1IsKill);
-  case ISD::ADDE: return fastEmit_ISD_ADDE_rr(VT, RetVT, Op0, Op0IsKill, Op1, Op1IsKill);
   case ISD::AND: return fastEmit_ISD_AND_rr(VT, RetVT, Op0, Op0IsKill, Op1, Op1IsKill);
   case ISD::FADD: return fastEmit_ISD_FADD_rr(VT, RetVT, Op0, Op0IsKill, Op1, Op1IsKill);
   case ISD::FDIV: return fastEmit_ISD_FDIV_rr(VT, RetVT, Op0, Op0IsKill, Op1, Op1IsKill);
@@ -4639,8 +4559,6 @@ unsigned fastEmit_rr(MVT VT, MVT RetVT, unsigned Opcode, unsigned Op0, bool Op0I
   case ISD::SRA: return fastEmit_ISD_SRA_rr(VT, RetVT, Op0, Op0IsKill, Op1, Op1IsKill);
   case ISD::SRL: return fastEmit_ISD_SRL_rr(VT, RetVT, Op0, Op0IsKill, Op1, Op1IsKill);
   case ISD::SUB: return fastEmit_ISD_SUB_rr(VT, RetVT, Op0, Op0IsKill, Op1, Op1IsKill);
-  case ISD::SUBC: return fastEmit_ISD_SUBC_rr(VT, RetVT, Op0, Op0IsKill, Op1, Op1IsKill);
-  case ISD::SUBE: return fastEmit_ISD_SUBE_rr(VT, RetVT, Op0, Op0IsKill, Op1, Op1IsKill);
   case ISD::UDIV: return fastEmit_ISD_UDIV_rr(VT, RetVT, Op0, Op0IsKill, Op1, Op1IsKill);
   case ISD::UMAX: return fastEmit_ISD_UMAX_rr(VT, RetVT, Op0, Op0IsKill, Op1, Op1IsKill);
   case ISD::UMIN: return fastEmit_ISD_UMIN_rr(VT, RetVT, Op0, Op0IsKill, Op1, Op1IsKill);
@@ -5548,6 +5466,10 @@ unsigned fastEmit_ri(MVT VT, MVT RetVT, unsigned Opcode, unsigned Op0, bool Op0I
     if (unsigned Reg = fastEmit_ri_Predicate_imm0_4095(VT, RetVT, Opcode, Op0, Op0IsKill, imm1))
       return Reg;
 
+  if (VT == MVT::i32 && Predicate_imm1_31(imm1))
+    if (unsigned Reg = fastEmit_ri_Predicate_imm1_31(VT, RetVT, Opcode, Op0, Op0IsKill, imm1))
+      return Reg;
+
   if (VT == MVT::i32 && Predicate_imm0_31(imm1))
     if (unsigned Reg = fastEmit_ri_Predicate_imm0_31(VT, RetVT, Opcode, Op0, Op0IsKill, imm1))
       return Reg;
@@ -5765,30 +5687,11 @@ unsigned fastEmit_ISD_ADD_ri_Predicate_imm0_7(MVT VT, MVT RetVT, unsigned Op0, b
   }
 }
 
-// FastEmit functions for ISD::ADDC.
-
-unsigned fastEmit_ISD_ADDC_MVT_i32_ri_Predicate_imm0_7(MVT RetVT, unsigned Op0, bool Op0IsKill, uint64_t imm1) {
-  if (RetVT.SimpleTy != MVT::i32)
-    return 0;
-  if ((Subtarget->isThumb()) && (Subtarget->isThumb1Only())) {
-    return fastEmitInst_ri(ARM::tADDi3, &ARM::tGPRRegClass, Op0, Op0IsKill, imm1);
-  }
-  return 0;
-}
-
-unsigned fastEmit_ISD_ADDC_ri_Predicate_imm0_7(MVT VT, MVT RetVT, unsigned Op0, bool Op0IsKill, uint64_t imm1) {
-  switch (VT.SimpleTy) {
-  case MVT::i32: return fastEmit_ISD_ADDC_MVT_i32_ri_Predicate_imm0_7(RetVT, Op0, Op0IsKill, imm1);
-  default: return 0;
-  }
-}
-
 // Top-level FastEmit function.
 
 unsigned fastEmit_ri_Predicate_imm0_7(MVT VT, MVT RetVT, unsigned Opcode, unsigned Op0, bool Op0IsKill, uint64_t imm1) {
   switch (Opcode) {
   case ISD::ADD: return fastEmit_ISD_ADD_ri_Predicate_imm0_7(VT, RetVT, Op0, Op0IsKill, imm1);
-  case ISD::ADDC: return fastEmit_ISD_ADDC_ri_Predicate_imm0_7(VT, RetVT, Op0, Op0IsKill, imm1);
   default: return 0;
   }
 }
@@ -5811,30 +5714,11 @@ unsigned fastEmit_ISD_ADD_ri_Predicate_imm8_255(MVT VT, MVT RetVT, unsigned Op0,
   }
 }
 
-// FastEmit functions for ISD::ADDC.
-
-unsigned fastEmit_ISD_ADDC_MVT_i32_ri_Predicate_imm8_255(MVT RetVT, unsigned Op0, bool Op0IsKill, uint64_t imm1) {
-  if (RetVT.SimpleTy != MVT::i32)
-    return 0;
-  if ((Subtarget->isThumb()) && (Subtarget->isThumb1Only())) {
-    return fastEmitInst_ri(ARM::tADDi8, &ARM::tGPRRegClass, Op0, Op0IsKill, imm1);
-  }
-  return 0;
-}
-
-unsigned fastEmit_ISD_ADDC_ri_Predicate_imm8_255(MVT VT, MVT RetVT, unsigned Op0, bool Op0IsKill, uint64_t imm1) {
-  switch (VT.SimpleTy) {
-  case MVT::i32: return fastEmit_ISD_ADDC_MVT_i32_ri_Predicate_imm8_255(RetVT, Op0, Op0IsKill, imm1);
-  default: return 0;
-  }
-}
-
 // Top-level FastEmit function.
 
 unsigned fastEmit_ri_Predicate_imm8_255(MVT VT, MVT RetVT, unsigned Opcode, unsigned Op0, bool Op0IsKill, uint64_t imm1) {
   switch (Opcode) {
   case ISD::ADD: return fastEmit_ISD_ADD_ri_Predicate_imm8_255(VT, RetVT, Op0, Op0IsKill, imm1);
-  case ISD::ADDC: return fastEmit_ISD_ADDC_ri_Predicate_imm8_255(VT, RetVT, Op0, Op0IsKill, imm1);
   default: return 0;
   }
 }
@@ -6072,6 +5956,33 @@ unsigned fastEmit_ri_Predicate_imm0_4095(MVT VT, MVT RetVT, unsigned Opcode, uns
   }
 }
 
+// FastEmit functions for ISD::SHL.
+
+unsigned fastEmit_ISD_SHL_MVT_i32_ri_Predicate_imm1_31(MVT RetVT, unsigned Op0, bool Op0IsKill, uint64_t imm1) {
+  if (RetVT.SimpleTy != MVT::i32)
+    return 0;
+  if ((Subtarget->isThumb2())) {
+    return fastEmitInst_ri(ARM::t2LSLri, &ARM::rGPRRegClass, Op0, Op0IsKill, imm1);
+  }
+  return 0;
+}
+
+unsigned fastEmit_ISD_SHL_ri_Predicate_imm1_31(MVT VT, MVT RetVT, unsigned Op0, bool Op0IsKill, uint64_t imm1) {
+  switch (VT.SimpleTy) {
+  case MVT::i32: return fastEmit_ISD_SHL_MVT_i32_ri_Predicate_imm1_31(RetVT, Op0, Op0IsKill, imm1);
+  default: return 0;
+  }
+}
+
+// Top-level FastEmit function.
+
+unsigned fastEmit_ri_Predicate_imm1_31(MVT VT, MVT RetVT, unsigned Opcode, unsigned Op0, bool Op0IsKill, uint64_t imm1) {
+  switch (Opcode) {
+  case ISD::SHL: return fastEmit_ISD_SHL_ri_Predicate_imm1_31(VT, RetVT, Op0, Op0IsKill, imm1);
+  default: return 0;
+  }
+}
+
 // FastEmit functions for ISD::ROTR.
 
 unsigned fastEmit_ISD_ROTR_MVT_i32_ri_Predicate_imm0_31(MVT RetVT, unsigned Op0, bool Op0IsKill, uint64_t imm1) {
@@ -6090,30 +6001,11 @@ unsigned fastEmit_ISD_ROTR_ri_Predicate_imm0_31(MVT VT, MVT RetVT, unsigned Op0,
   }
 }
 
-// FastEmit functions for ISD::SHL.
-
-unsigned fastEmit_ISD_SHL_MVT_i32_ri_Predicate_imm0_31(MVT RetVT, unsigned Op0, bool Op0IsKill, uint64_t imm1) {
-  if (RetVT.SimpleTy != MVT::i32)
-    return 0;
-  if ((Subtarget->isThumb2())) {
-    return fastEmitInst_ri(ARM::t2LSLri, &ARM::rGPRRegClass, Op0, Op0IsKill, imm1);
-  }
-  return 0;
-}
-
-unsigned fastEmit_ISD_SHL_ri_Predicate_imm0_31(MVT VT, MVT RetVT, unsigned Op0, bool Op0IsKill, uint64_t imm1) {
-  switch (VT.SimpleTy) {
-  case MVT::i32: return fastEmit_ISD_SHL_MVT_i32_ri_Predicate_imm0_31(RetVT, Op0, Op0IsKill, imm1);
-  default: return 0;
-  }
-}
-
 // Top-level FastEmit function.
 
 unsigned fastEmit_ri_Predicate_imm0_31(MVT VT, MVT RetVT, unsigned Opcode, unsigned Op0, bool Op0IsKill, uint64_t imm1) {
   switch (Opcode) {
   case ISD::ROTR: return fastEmit_ISD_ROTR_ri_Predicate_imm0_31(VT, RetVT, Op0, Op0IsKill, imm1);
-  case ISD::SHL: return fastEmit_ISD_SHL_ri_Predicate_imm0_31(VT, RetVT, Op0, Op0IsKill, imm1);
   default: return 0;
   }
 }

@@ -100,6 +100,30 @@ static bool Predicate_vecshiftR32(int64_t Imm) {
 }
 
 
+// FastEmit functions for AArch64ISD::THREAD_POINTER.
+
+unsigned fastEmit_AArch64ISD_THREAD_POINTER_MVT_i64_(MVT RetVT) {
+  if (RetVT.SimpleTy != MVT::i64)
+    return 0;
+  return fastEmitInst_(AArch64::MOVbaseTLS, &AArch64::GPR64RegClass);
+}
+
+unsigned fastEmit_AArch64ISD_THREAD_POINTER_(MVT VT, MVT RetVT) {
+  switch (VT.SimpleTy) {
+  case MVT::i64: return fastEmit_AArch64ISD_THREAD_POINTER_MVT_i64_(RetVT);
+  default: return 0;
+  }
+}
+
+// Top-level FastEmit function.
+
+unsigned fastEmit_(MVT VT, MVT RetVT, unsigned Opcode) override {
+  switch (Opcode) {
+  case AArch64ISD::THREAD_POINTER: return fastEmit_AArch64ISD_THREAD_POINTER_(VT, RetVT);
+  default: return 0;
+  }
+}
+
 // FastEmit functions for AArch64ISD::CALL.
 
 unsigned fastEmit_AArch64ISD_CALL_MVT_i64_r(MVT RetVT, unsigned Op0, bool Op0IsKill) {
@@ -2259,6 +2283,28 @@ unsigned fastEmit_ISD_BITCAST_r(MVT VT, MVT RetVT, unsigned Op0, bool Op0IsKill)
   }
 }
 
+// FastEmit functions for ISD::BITREVERSE.
+
+unsigned fastEmit_ISD_BITREVERSE_MVT_i32_r(MVT RetVT, unsigned Op0, bool Op0IsKill) {
+  if (RetVT.SimpleTy != MVT::i32)
+    return 0;
+  return fastEmitInst_r(AArch64::RBITWr, &AArch64::GPR32RegClass, Op0, Op0IsKill);
+}
+
+unsigned fastEmit_ISD_BITREVERSE_MVT_i64_r(MVT RetVT, unsigned Op0, bool Op0IsKill) {
+  if (RetVT.SimpleTy != MVT::i64)
+    return 0;
+  return fastEmitInst_r(AArch64::RBITXr, &AArch64::GPR64RegClass, Op0, Op0IsKill);
+}
+
+unsigned fastEmit_ISD_BITREVERSE_r(MVT VT, MVT RetVT, unsigned Op0, bool Op0IsKill) {
+  switch (VT.SimpleTy) {
+  case MVT::i32: return fastEmit_ISD_BITREVERSE_MVT_i32_r(RetVT, Op0, Op0IsKill);
+  case MVT::i64: return fastEmit_ISD_BITREVERSE_MVT_i64_r(RetVT, Op0, Op0IsKill);
+  default: return 0;
+  }
+}
+
 // FastEmit functions for ISD::BRIND.
 
 unsigned fastEmit_ISD_BRIND_MVT_i64_r(MVT RetVT, unsigned Op0, bool Op0IsKill) {
@@ -3873,6 +3919,7 @@ unsigned fastEmit_r(MVT VT, MVT RetVT, unsigned Opcode, unsigned Op0, bool Op0Is
   case AArch64ISD::SITOF: return fastEmit_AArch64ISD_SITOF_r(VT, RetVT, Op0, Op0IsKill);
   case AArch64ISD::UITOF: return fastEmit_AArch64ISD_UITOF_r(VT, RetVT, Op0, Op0IsKill);
   case ISD::BITCAST: return fastEmit_ISD_BITCAST_r(VT, RetVT, Op0, Op0IsKill);
+  case ISD::BITREVERSE: return fastEmit_ISD_BITREVERSE_r(VT, RetVT, Op0, Op0IsKill);
   case ISD::BRIND: return fastEmit_ISD_BRIND_r(VT, RetVT, Op0, Op0IsKill);
   case ISD::BSWAP: return fastEmit_ISD_BSWAP_r(VT, RetVT, Op0, Op0IsKill);
   case ISD::CTLZ: return fastEmit_ISD_CTLZ_r(VT, RetVT, Op0, Op0IsKill);

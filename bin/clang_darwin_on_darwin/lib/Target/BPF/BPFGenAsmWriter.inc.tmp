@@ -37,7 +37,8 @@ void BPFInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
   /* 310 */ 'r', '0', 32, '=', 32, '*', '(', 'u', '3', '2', 32, '*', ')', 's', 'k', 'b', '[', 0,
   /* 328 */ 'r', '0', 32, '=', 32, '*', '(', 'u', '1', '6', 32, '*', ')', 's', 'k', 'b', '[', 0,
   /* 346 */ 'r', '0', 32, '=', 32, '*', '(', 'u', '8', 32, '*', ')', 's', 'k', 'b', '[', 0,
-  /* 363 */ 'e', 'x', 'i', 't', 0,
+  /* 363 */ '#', 32, 'F', 'E', 'n', 't', 'r', 'y', 32, 'c', 'a', 'l', 'l', 0,
+  /* 377 */ 'e', 'x', 'i', 't', 0,
   };
 
   static const uint16_t OpInfo0[] = {
@@ -59,11 +60,12 @@ void BPFInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     296U,	// LIFETIME_START
     266U,	// LIFETIME_END
     0U,	// STACKMAP
+    364U,	// FENTRY_CALL
     0U,	// PATCHPOINT
     0U,	// LOAD_STACK_GUARD
     0U,	// STATEPOINT
     0U,	// LOCAL_ESCAPE
-    0U,	// FAULTING_LOAD_OP
+    0U,	// FAULTING_OP
     0U,	// PATCHABLE_OP
     198U,	// PATCHABLE_FUNCTION_ENTER
     167U,	// PATCHABLE_RET
@@ -82,20 +84,25 @@ void BPFInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// G_FRAME_INDEX
     0U,	// G_GLOBAL_VALUE
     0U,	// G_EXTRACT
+    0U,	// G_UNMERGE_VALUES
     0U,	// G_INSERT
     0U,	// G_SEQUENCE
+    0U,	// G_MERGE_VALUES
     0U,	// G_PTRTOINT
     0U,	// G_INTTOPTR
     0U,	// G_BITCAST
     0U,	// G_LOAD
     0U,	// G_STORE
     0U,	// G_BRCOND
+    0U,	// G_BRINDIRECT
     0U,	// G_INTRINSIC
     0U,	// G_INTRINSIC_W_SIDE_EFFECTS
     0U,	// G_ANYEXT
     0U,	// G_TRUNC
     0U,	// G_CONSTANT
     0U,	// G_FCONSTANT
+    0U,	// G_VASTART
+    0U,	// G_VAARG
     0U,	// G_SEXT
     0U,	// G_ZEXT
     0U,	// G_SHL
@@ -110,11 +117,15 @@ void BPFInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// G_SSUBO
     0U,	// G_UMULO
     0U,	// G_SMULO
+    0U,	// G_UMULH
+    0U,	// G_SMULH
     0U,	// G_FADD
     0U,	// G_FSUB
     0U,	// G_FMUL
     0U,	// G_FDIV
     0U,	// G_FREM
+    0U,	// G_FPOW
+    0U,	// G_FNEG
     0U,	// G_FPEXT
     0U,	// G_FPTRUNC
     0U,	// G_FPTOSI
@@ -122,7 +133,11 @@ void BPFInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// G_SITOFP
     0U,	// G_UITOFP
     0U,	// G_GEP
+    0U,	// G_PTR_MASK
     0U,	// G_BR
+    0U,	// G_INSERT_VECTOR_ELT
+    0U,	// G_EXTRACT_VECTOR_ELT
+    0U,	// G_SHUFFLE_VECTOR
     521U,	// ADD_ri
     521U,	// ADD_rr
     2609U,	// ADJCALLSTACKDOWN
@@ -168,7 +183,7 @@ void BPFInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     2604U,	// NOP
     37385U,	// OR_ri
     37385U,	// OR_rr
-    364U,	// RET
+    378U,	// RET
     39433U,	// SLL_ri
     39433U,	// SLL_rr
     41481U,	// SRA_ri
@@ -207,11 +222,12 @@ void BPFInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// LIFETIME_START
     0U,	// LIFETIME_END
     0U,	// STACKMAP
+    0U,	// FENTRY_CALL
     0U,	// PATCHPOINT
     0U,	// LOAD_STACK_GUARD
     0U,	// STATEPOINT
     0U,	// LOCAL_ESCAPE
-    0U,	// FAULTING_LOAD_OP
+    0U,	// FAULTING_OP
     0U,	// PATCHABLE_OP
     0U,	// PATCHABLE_FUNCTION_ENTER
     0U,	// PATCHABLE_RET
@@ -230,20 +246,25 @@ void BPFInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// G_FRAME_INDEX
     0U,	// G_GLOBAL_VALUE
     0U,	// G_EXTRACT
+    0U,	// G_UNMERGE_VALUES
     0U,	// G_INSERT
     0U,	// G_SEQUENCE
+    0U,	// G_MERGE_VALUES
     0U,	// G_PTRTOINT
     0U,	// G_INTTOPTR
     0U,	// G_BITCAST
     0U,	// G_LOAD
     0U,	// G_STORE
     0U,	// G_BRCOND
+    0U,	// G_BRINDIRECT
     0U,	// G_INTRINSIC
     0U,	// G_INTRINSIC_W_SIDE_EFFECTS
     0U,	// G_ANYEXT
     0U,	// G_TRUNC
     0U,	// G_CONSTANT
     0U,	// G_FCONSTANT
+    0U,	// G_VASTART
+    0U,	// G_VAARG
     0U,	// G_SEXT
     0U,	// G_ZEXT
     0U,	// G_SHL
@@ -258,11 +279,15 @@ void BPFInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// G_SSUBO
     0U,	// G_UMULO
     0U,	// G_SMULO
+    0U,	// G_UMULH
+    0U,	// G_SMULH
     0U,	// G_FADD
     0U,	// G_FSUB
     0U,	// G_FMUL
     0U,	// G_FDIV
     0U,	// G_FREM
+    0U,	// G_FPOW
+    0U,	// G_FNEG
     0U,	// G_FPEXT
     0U,	// G_FPTRUNC
     0U,	// G_FPTOSI
@@ -270,7 +295,11 @@ void BPFInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// G_SITOFP
     0U,	// G_UITOFP
     0U,	// G_GEP
+    0U,	// G_PTR_MASK
     0U,	// G_BR
+    0U,	// G_INSERT_VECTOR_ELT
+    0U,	// G_EXTRACT_VECTOR_ELT
+    0U,	// G_SHUFFLE_VECTOR
     0U,	// ADD_ri
     0U,	// ADD_rr
     0U,	// ADJCALLSTACKDOWN
@@ -350,7 +379,7 @@ void BPFInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
   switch ((Bits >> 9) & 3) {
   default: llvm_unreachable("Invalid command number.");
   case 0:
-    // DBG_VALUE, BUNDLE, LIFETIME_START, LIFETIME_END, PATCHABLE_FUNCTION_EN...
+    // DBG_VALUE, BUNDLE, LIFETIME_START, LIFETIME_END, FENTRY_CALL, PATCHABL...
     return;
     break;
   case 1:

@@ -2195,108 +2195,108 @@ extern const char X86RegClassStrings[] = {
 };
 
 extern const MCRegisterClass X86MCRegisterClasses[] = {
-  { GR8, GR8Bits, 211, 20, sizeof(GR8Bits), X86::GR8RegClassID, 1, 1, 1, true },
-  { GR8_NOREX, GR8_NOREXBits, 1221, 8, sizeof(GR8_NOREXBits), X86::GR8_NOREXRegClassID, 1, 1, 1, true },
-  { GR8_ABCD_H, GR8_ABCD_HBits, 495, 4, sizeof(GR8_ABCD_HBits), X86::GR8_ABCD_HRegClassID, 1, 1, 1, true },
-  { GR8_ABCD_L, GR8_ABCD_LBits, 542, 4, sizeof(GR8_ABCD_LBits), X86::GR8_ABCD_LRegClassID, 1, 1, 1, true },
-  { GR16, GR16Bits, 162, 16, sizeof(GR16Bits), X86::GR16RegClassID, 2, 2, 1, true },
-  { GR16_NOREX, GR16_NOREXBits, 1159, 8, sizeof(GR16_NOREXBits), X86::GR16_NOREXRegClassID, 2, 2, 1, true },
-  { VK1, VK1Bits, 6, 8, sizeof(VK1Bits), X86::VK1RegClassID, 2, 2, 1, true },
-  { VK16, VK16Bits, 157, 8, sizeof(VK16Bits), X86::VK16RegClassID, 2, 2, 1, true },
-  { VK2, VK2Bits, 37, 8, sizeof(VK2Bits), X86::VK2RegClassID, 2, 2, 1, true },
-  { VK4, VK4Bits, 153, 8, sizeof(VK4Bits), X86::VK4RegClassID, 2, 2, 1, true },
-  { VK8, VK8Bits, 207, 8, sizeof(VK8Bits), X86::VK8RegClassID, 2, 2, 1, true },
-  { VK16WM, VK16WMBits, 585, 7, sizeof(VK16WMBits), X86::VK16WMRegClassID, 2, 2, 1, true },
-  { VK1WM, VK1WMBits, 553, 7, sizeof(VK1WMBits), X86::VK1WMRegClassID, 2, 2, 1, true },
-  { VK2WM, VK2WMBits, 566, 7, sizeof(VK2WMBits), X86::VK2WMRegClassID, 2, 2, 1, true },
-  { VK4WM, VK4WMBits, 579, 7, sizeof(VK4WMBits), X86::VK4WMRegClassID, 2, 2, 1, true },
-  { VK8WM, VK8WMBits, 592, 7, sizeof(VK8WMBits), X86::VK8WMRegClassID, 2, 2, 1, true },
-  { SEGMENT_REG, SEGMENT_REGBits, 447, 6, sizeof(SEGMENT_REGBits), X86::SEGMENT_REGRegClassID, 2, 2, 1, true },
-  { GR16_ABCD, GR16_ABCDBits, 415, 4, sizeof(GR16_ABCDBits), X86::GR16_ABCDRegClassID, 2, 2, 1, true },
-  { FPCCR, FPCCRBits, 797, 1, sizeof(FPCCRBits), X86::FPCCRRegClassID, 2, 2, -1, false },
-  { FR32X, FR32XBits, 839, 32, sizeof(FR32XBits), X86::FR32XRegClassID, 4, 4, 1, true },
-  { LOW32_ADDR_ACCESS_RBP, LOW32_ADDR_ACCESS_RBPBits, 607, 18, sizeof(LOW32_ADDR_ACCESS_RBPBits), X86::LOW32_ADDR_ACCESS_RBPRegClassID, 4, 4, 1, true },
-  { LOW32_ADDR_ACCESS, LOW32_ADDR_ACCESSBits, 817, 17, sizeof(LOW32_ADDR_ACCESSBits), X86::LOW32_ADDR_ACCESSRegClassID, 4, 4, 1, true },
-  { LOW32_ADDR_ACCESS_RBP_with_sub_8bit, LOW32_ADDR_ACCESS_RBP_with_sub_8bitBits, 1371, 17, sizeof(LOW32_ADDR_ACCESS_RBP_with_sub_8bitBits), X86::LOW32_ADDR_ACCESS_RBP_with_sub_8bitRegClassID, 4, 4, 1, true },
-  { FR32, FR32Bits, 27, 16, sizeof(FR32Bits), X86::FR32RegClassID, 4, 4, 1, true },
-  { GR32, GR32Bits, 32, 16, sizeof(GR32Bits), X86::GR32RegClassID, 4, 4, 1, true },
-  { GR32_NOAX, GR32_NOAXBits, 900, 15, sizeof(GR32_NOAXBits), X86::GR32_NOAXRegClassID, 4, 4, 1, true },
-  { GR32_NOSP, GR32_NOSPBits, 708, 15, sizeof(GR32_NOSPBits), X86::GR32_NOSPRegClassID, 4, 4, 1, true },
-  { GR32_NOAX_and_GR32_NOSP, GR32_NOAX_and_GR32_NOSPBits, 694, 14, sizeof(GR32_NOAX_and_GR32_NOSPBits), X86::GR32_NOAX_and_GR32_NOSPRegClassID, 4, 4, 1, true },
-  { LOW32_ADDR_ACCESS_RBP_with_sub_16bit_in_GR16_NOREX, LOW32_ADDR_ACCESS_RBP_with_sub_16bit_in_GR16_NOREXBits, 1170, 9, sizeof(LOW32_ADDR_ACCESS_RBP_with_sub_16bit_in_GR16_NOREXBits), X86::LOW32_ADDR_ACCESS_RBP_with_sub_16bit_in_GR16_NOREXRegClassID, 4, 4, 1, true },
-  { DEBUG_REG, DEBUG_REGBits, 425, 8, sizeof(DEBUG_REGBits), X86::DEBUG_REGRegClassID, 4, 4, 1, true },
-  { GR32_NOREX, GR32_NOREXBits, 1114, 8, sizeof(GR32_NOREXBits), X86::GR32_NOREXRegClassID, 4, 4, 1, true },
-  { VK32, VK32Bits, 16, 8, sizeof(VK32Bits), X86::VK32RegClassID, 4, 4, 1, true },
-  { GR32_NOAX_and_GR32_NOREX, GR32_NOAX_and_GR32_NOREXBits, 1100, 7, sizeof(GR32_NOAX_and_GR32_NOREXBits), X86::GR32_NOAX_and_GR32_NOREXRegClassID, 4, 4, 1, true },
-  { GR32_NOREX_NOSP, GR32_NOREX_NOSPBits, 765, 7, sizeof(GR32_NOREX_NOSPBits), X86::GR32_NOREX_NOSPRegClassID, 4, 4, 1, true },
-  { RFP32, RFP32Bits, 21, 7, sizeof(RFP32Bits), X86::RFP32RegClassID, 4, 4, 1, true },
-  { VK32WM, VK32WMBits, 559, 7, sizeof(VK32WMBits), X86::VK32WMRegClassID, 4, 4, 1, true },
-  { GR32_NOAX_and_GR32_NOREX_NOSP, GR32_NOAX_and_GR32_NOREX_NOSPBits, 751, 6, sizeof(GR32_NOAX_and_GR32_NOREX_NOSPBits), X86::GR32_NOAX_and_GR32_NOREX_NOSPRegClassID, 4, 4, 1, true },
-  { GR32_ABCD, GR32_ABCDBits, 395, 4, sizeof(GR32_ABCDBits), X86::GR32_ABCDRegClassID, 4, 4, 1, true },
-  { GR32_ABCD_and_GR32_NOAX, GR32_ABCD_and_GR32_NOAXBits, 933, 3, sizeof(GR32_ABCD_and_GR32_NOAXBits), X86::GR32_ABCD_and_GR32_NOAXRegClassID, 4, 4, 1, true },
-  { GR32_TC, GR32_TCBits, 252, 3, sizeof(GR32_TCBits), X86::GR32_TCRegClassID, 4, 4, 1, true },
-  { GR32_AD, GR32_ADBits, 387, 2, sizeof(GR32_ADBits), X86::GR32_ADRegClassID, 4, 4, 1, true },
-  { GR32_NOAX_and_GR32_TC, GR32_NOAX_and_GR32_TCBits, 238, 2, sizeof(GR32_NOAX_and_GR32_TCBits), X86::GR32_NOAX_and_GR32_TCRegClassID, 4, 4, 1, true },
-  { LOW32_ADDR_ACCESS_RBP_with_sub_32bit, LOW32_ADDR_ACCESS_RBP_with_sub_32bitBits, 1231, 2, sizeof(LOW32_ADDR_ACCESS_RBP_with_sub_32bitBits), X86::LOW32_ADDR_ACCESS_RBP_with_sub_32bitRegClassID, 4, 4, 1, true },
-  { CCR, CCRBits, 799, 1, sizeof(CCRBits), X86::CCRRegClassID, 4, 4, -1, false },
-  { GR32_AD_and_GR32_NOAX, GR32_AD_and_GR32_NOAXBits, 888, 1, sizeof(GR32_AD_and_GR32_NOAXBits), X86::GR32_AD_and_GR32_NOAXRegClassID, 4, 4, 1, true },
-  { LOW32_ADDR_ACCESS_RBP_with_sub_8bit_with_sub_32bit, LOW32_ADDR_ACCESS_RBP_with_sub_8bit_with_sub_32bitBits, 1301, 1, sizeof(LOW32_ADDR_ACCESS_RBP_with_sub_8bit_with_sub_32bitBits), X86::LOW32_ADDR_ACCESS_RBP_with_sub_8bit_with_sub_32bitRegClassID, 4, 4, 1, true },
-  { LOW32_ADDR_ACCESS_with_sub_32bit, LOW32_ADDR_ACCESS_with_sub_32bitBits, 1268, 1, sizeof(LOW32_ADDR_ACCESS_with_sub_32bitBits), X86::LOW32_ADDR_ACCESS_with_sub_32bitRegClassID, 4, 4, 1, true },
-  { RFP64, RFP64Bits, 46, 7, sizeof(RFP64Bits), X86::RFP64RegClassID, 8, 4, 1, true },
-  { FR64X, FR64XBits, 845, 32, sizeof(FR64XBits), X86::FR64XRegClassID, 8, 8, 1, true },
-  { GR64, GR64Bits, 57, 17, sizeof(GR64Bits), X86::GR64RegClassID, 8, 8, 1, true },
-  { CONTROL_REG, CONTROL_REGBits, 435, 16, sizeof(CONTROL_REGBits), X86::CONTROL_REGRegClassID, 8, 8, 1, true },
-  { FR64, FR64Bits, 52, 16, sizeof(FR64Bits), X86::FR64RegClassID, 8, 8, 1, true },
-  { GR64_with_sub_8bit, GR64_with_sub_8bitBits, 1352, 16, sizeof(GR64_with_sub_8bitBits), X86::GR64_with_sub_8bitRegClassID, 8, 8, 1, true },
-  { GR64_NOSP, GR64_NOSPBits, 718, 15, sizeof(GR64_NOSPBits), X86::GR64_NOSPRegClassID, 8, 8, 1, true },
-  { GR64_with_sub_32bit_in_GR32_NOAX, GR64_with_sub_32bit_in_GR32_NOAXBits, 972, 15, sizeof(GR64_with_sub_32bit_in_GR32_NOAXBits), X86::GR64_with_sub_32bit_in_GR32_NOAXRegClassID, 8, 8, 1, true },
-  { GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_NOSP, GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_NOSPBits, 671, 14, sizeof(GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_NOSPBits), X86::GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_NOSPRegClassID, 8, 8, 1, true },
-  { GR64_NOREX, GR64_NOREXBits, 1125, 9, sizeof(GR64_NOREXBits), X86::GR64_NOREXRegClassID, 8, 8, 1, true },
-  { GR64_TC, GR64_TCBits, 305, 9, sizeof(GR64_TCBits), X86::GR64_TCRegClassID, 8, 8, 1, true },
-  { GR64_NOSP_and_GR64_TC, GR64_NOSP_and_GR64_TCBits, 291, 8, sizeof(GR64_NOSP_and_GR64_TCBits), X86::GR64_NOSP_and_GR64_TCRegClassID, 8, 8, 1, true },
-  { GR64_TCW64, GR64_TCW64Bits, 79, 8, sizeof(GR64_TCW64Bits), X86::GR64_TCW64RegClassID, 8, 8, 1, true },
-  { GR64_with_sub_16bit_in_GR16_NOREX, GR64_with_sub_16bit_in_GR16_NOREXBits, 1136, 8, sizeof(GR64_with_sub_16bit_in_GR16_NOREXBits), X86::GR64_with_sub_16bit_in_GR16_NOREXRegClassID, 8, 8, 1, true },
-  { VK64, VK64Bits, 41, 8, sizeof(VK64Bits), X86::VK64RegClassID, 8, 8, 1, true },
-  { VR64, VR64Bits, 62, 8, sizeof(VR64Bits), X86::VR64RegClassID, 8, 8, 1, true },
-  { GR64_NOREX_NOSP, GR64_NOREX_NOSPBits, 781, 7, sizeof(GR64_NOREX_NOSPBits), X86::GR64_NOREX_NOSPRegClassID, 8, 8, 1, true },
-  { GR64_NOSP_and_GR64_TCW64, GR64_NOSP_and_GR64_TCW64Bits, 102, 7, sizeof(GR64_NOSP_and_GR64_TCW64Bits), X86::GR64_NOSP_and_GR64_TCW64RegClassID, 8, 8, 1, true },
-  { GR64_TC_and_GR64_TCW64, GR64_TC_and_GR64_TCW64Bits, 67, 7, sizeof(GR64_TC_and_GR64_TCW64Bits), X86::GR64_TC_and_GR64_TCW64RegClassID, 8, 8, 1, true },
-  { GR64_TC_and_GR64_with_sub_32bit_in_GR32_NOAX, GR64_TC_and_GR64_with_sub_32bit_in_GR32_NOAXBits, 1020, 7, sizeof(GR64_TC_and_GR64_with_sub_32bit_in_GR32_NOAXBits), X86::GR64_TC_and_GR64_with_sub_32bit_in_GR32_NOAXRegClassID, 8, 8, 1, true },
-  { GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_NOREX, GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_NOREXBits, 1077, 7, sizeof(GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_NOREXBits), X86::GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_NOREXRegClassID, 8, 8, 1, true },
-  { VK64WM, VK64WMBits, 572, 7, sizeof(VK64WMBits), X86::VK64WMRegClassID, 8, 8, 1, true },
-  { GR64_NOREX_and_GR64_TC, GR64_NOREX_and_GR64_TCBits, 341, 6, sizeof(GR64_NOREX_and_GR64_TCBits), X86::GR64_NOREX_and_GR64_TCRegClassID, 8, 8, 1, true },
-  { GR64_TCW64_and_GR64_with_sub_32bit_in_GR32_NOAX, GR64_TCW64_and_GR64_with_sub_32bit_in_GR32_NOAXBits, 957, 6, sizeof(GR64_TCW64_and_GR64_with_sub_32bit_in_GR32_NOAXBits), X86::GR64_TCW64_and_GR64_with_sub_32bit_in_GR32_NOAXRegClassID, 8, 8, 1, true },
-  { GR64_TC_and_GR64_NOSP_and_GR64_TCW64, GR64_TC_and_GR64_NOSP_and_GR64_TCW64Bits, 90, 6, sizeof(GR64_TC_and_GR64_NOSP_and_GR64_TCW64Bits), X86::GR64_TC_and_GR64_NOSP_and_GR64_TCW64RegClassID, 8, 8, 1, true },
-  { GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_NOREX_NOSP, GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_NOREX_NOSPBits, 728, 6, sizeof(GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_NOREX_NOSPBits), X86::GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_NOREX_NOSPRegClassID, 8, 8, 1, true },
-  { GR64_NOREX_NOSP_and_GR64_TC, GR64_NOREX_NOSP_and_GR64_TCBits, 313, 5, sizeof(GR64_NOREX_NOSP_and_GR64_TCBits), X86::GR64_NOREX_NOSP_and_GR64_TCRegClassID, 8, 8, 1, true },
-  { GR64_TCW64_and_GR64_TC_and_GR64_with_sub_32bit_in_GR32_NOAX, GR64_TCW64_and_GR64_TC_and_GR64_with_sub_32bit_in_GR32_NOAXBits, 1005, 5, sizeof(GR64_TCW64_and_GR64_TC_and_GR64_with_sub_32bit_in_GR32_NOAXBits), X86::GR64_TCW64_and_GR64_TC_and_GR64_with_sub_32bit_in_GR32_NOAXRegClassID, 8, 8, 1, true },
-  { GR64_ABCD, GR64_ABCDBits, 405, 4, sizeof(GR64_ABCDBits), X86::GR64_ABCDRegClassID, 8, 8, 1, true },
-  { GR64_NOREX_and_GR64_TCW64, GR64_NOREX_and_GR64_TCW64Bits, 127, 4, sizeof(GR64_NOREX_and_GR64_TCW64Bits), X86::GR64_NOREX_and_GR64_TCW64RegClassID, 8, 8, 1, true },
-  { GR64_TC_and_GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_NOREX, GR64_TC_and_GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_NOREXBits, 1065, 4, sizeof(GR64_TC_and_GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_NOREXBits), X86::GR64_TC_and_GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_NOREXRegClassID, 8, 8, 1, true },
-  { GR64_with_sub_32bit_in_GR32_ABCD_and_GR32_NOAX, GR64_with_sub_32bit_in_GR32_ABCD_and_GR32_NOAXBits, 910, 3, sizeof(GR64_with_sub_32bit_in_GR32_ABCD_and_GR32_NOAXBits), X86::GR64_with_sub_32bit_in_GR32_ABCD_and_GR32_NOAXRegClassID, 8, 8, 1, true },
-  { GR64_with_sub_32bit_in_GR32_TC, GR64_with_sub_32bit_in_GR32_TCBits, 260, 3, sizeof(GR64_with_sub_32bit_in_GR32_TCBits), X86::GR64_with_sub_32bit_in_GR32_TCRegClassID, 8, 8, 1, true },
-  { GR64_and_LOW32_ADDR_ACCESS_RBP, GR64_and_LOW32_ADDR_ACCESS_RBPBits, 598, 2, sizeof(GR64_and_LOW32_ADDR_ACCESS_RBPBits), X86::GR64_and_LOW32_ADDR_ACCESS_RBPRegClassID, 8, 8, 1, true },
-  { GR64_with_sub_32bit_in_GR32_AD, GR64_with_sub_32bit_in_GR32_ADBits, 364, 2, sizeof(GR64_with_sub_32bit_in_GR32_ADBits), X86::GR64_with_sub_32bit_in_GR32_ADRegClassID, 8, 8, 1, true },
-  { GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_TC, GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_TCBits, 215, 2, sizeof(GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_TCBits), X86::GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_TCRegClassID, 8, 8, 1, true },
-  { GR64_NOREX_NOSP_and_LOW32_ADDR_ACCESS_RBP, GR64_NOREX_NOSP_and_LOW32_ADDR_ACCESS_RBPBits, 629, 1, sizeof(GR64_NOREX_NOSP_and_LOW32_ADDR_ACCESS_RBPBits), X86::GR64_NOREX_NOSP_and_LOW32_ADDR_ACCESS_RBPRegClassID, 8, 8, 1, true },
-  { GR64_and_LOW32_ADDR_ACCESS, GR64_and_LOW32_ADDR_ACCESSBits, 808, 1, sizeof(GR64_and_LOW32_ADDR_ACCESSBits), X86::GR64_and_LOW32_ADDR_ACCESSRegClassID, 8, 8, 1, true },
-  { GR64_with_sub_32bit_in_GR32_AD_and_GR32_NOAX, GR64_with_sub_32bit_in_GR32_AD_and_GR32_NOAXBits, 865, 1, sizeof(GR64_with_sub_32bit_in_GR32_AD_and_GR32_NOAXBits), X86::GR64_with_sub_32bit_in_GR32_AD_and_GR32_NOAXRegClassID, 8, 8, 1, true },
-  { RST, RSTBits, 835, 8, sizeof(RSTBits), X86::RSTRegClassID, 10, 4, 1, false },
-  { RFP80, RFP80Bits, 0, 7, sizeof(RFP80Bits), X86::RFP80RegClassID, 10, 4, 1, true },
-  { VR128X, VR128XBits, 858, 32, sizeof(VR128XBits), X86::VR128XRegClassID, 16, 16, 1, true },
-  { FR128, FR128Bits, 195, 16, sizeof(FR128Bits), X86::FR128RegClassID, 16, 16, 1, true },
-  { VR128, VR128Bits, 201, 16, sizeof(VR128Bits), X86::VR128RegClassID, 16, 16, 1, true },
-  { VR128H, VR128HBits, 488, 8, sizeof(VR128HBits), X86::VR128HRegClassID, 16, 16, 1, true },
-  { VR128L, VR128LBits, 535, 8, sizeof(VR128LBits), X86::VR128LRegClassID, 16, 16, 1, true },
-  { BNDR, BNDRBits, 803, 4, sizeof(BNDRBits), X86::BNDRRegClassID, 16, 16, 1, true },
-  { VR256X, VR256XBits, 851, 32, sizeof(VR256XBits), X86::VR256XRegClassID, 32, 32, 1, true },
-  { VR256, VR256Bits, 167, 16, sizeof(VR256Bits), X86::VR256RegClassID, 32, 32, 1, true },
-  { VR256H, VR256HBits, 459, 8, sizeof(VR256HBits), X86::VR256HRegClassID, 32, 32, 1, true },
-  { VR256L, VR256LBits, 506, 8, sizeof(VR256LBits), X86::VR256LRegClassID, 32, 32, 1, true },
-  { VR512, VR512Bits, 10, 32, sizeof(VR512Bits), X86::VR512RegClassID, 64, 64, 1, true },
-  { VR512_with_sub_xmm_in_FR128, VR512_with_sub_xmm_in_FR128Bits, 173, 16, sizeof(VR512_with_sub_xmm_in_FR128Bits), X86::VR512_with_sub_xmm_in_FR128RegClassID, 64, 64, 1, true },
-  { VR512_with_sub_xmm_in_VR128H, VR512_with_sub_xmm_in_VR128HBits, 466, 8, sizeof(VR512_with_sub_xmm_in_VR128HBits), X86::VR512_with_sub_xmm_in_VR128HRegClassID, 64, 64, 1, true },
-  { VR512_with_sub_xmm_in_VR128L, VR512_with_sub_xmm_in_VR128LBits, 513, 8, sizeof(VR512_with_sub_xmm_in_VR128LBits), X86::VR512_with_sub_xmm_in_VR128LRegClassID, 64, 64, 1, true },
+  { GR8, GR8Bits, 211, 20, sizeof(GR8Bits), X86::GR8RegClassID, 1, 1, true },
+  { GR8_NOREX, GR8_NOREXBits, 1221, 8, sizeof(GR8_NOREXBits), X86::GR8_NOREXRegClassID, 1, 1, true },
+  { GR8_ABCD_H, GR8_ABCD_HBits, 495, 4, sizeof(GR8_ABCD_HBits), X86::GR8_ABCD_HRegClassID, 1, 1, true },
+  { GR8_ABCD_L, GR8_ABCD_LBits, 542, 4, sizeof(GR8_ABCD_LBits), X86::GR8_ABCD_LRegClassID, 1, 1, true },
+  { GR16, GR16Bits, 162, 16, sizeof(GR16Bits), X86::GR16RegClassID, 2, 1, true },
+  { GR16_NOREX, GR16_NOREXBits, 1159, 8, sizeof(GR16_NOREXBits), X86::GR16_NOREXRegClassID, 2, 1, true },
+  { VK1, VK1Bits, 6, 8, sizeof(VK1Bits), X86::VK1RegClassID, 2, 1, true },
+  { VK16, VK16Bits, 157, 8, sizeof(VK16Bits), X86::VK16RegClassID, 2, 1, true },
+  { VK2, VK2Bits, 37, 8, sizeof(VK2Bits), X86::VK2RegClassID, 2, 1, true },
+  { VK4, VK4Bits, 153, 8, sizeof(VK4Bits), X86::VK4RegClassID, 2, 1, true },
+  { VK8, VK8Bits, 207, 8, sizeof(VK8Bits), X86::VK8RegClassID, 2, 1, true },
+  { VK16WM, VK16WMBits, 585, 7, sizeof(VK16WMBits), X86::VK16WMRegClassID, 2, 1, true },
+  { VK1WM, VK1WMBits, 553, 7, sizeof(VK1WMBits), X86::VK1WMRegClassID, 2, 1, true },
+  { VK2WM, VK2WMBits, 566, 7, sizeof(VK2WMBits), X86::VK2WMRegClassID, 2, 1, true },
+  { VK4WM, VK4WMBits, 579, 7, sizeof(VK4WMBits), X86::VK4WMRegClassID, 2, 1, true },
+  { VK8WM, VK8WMBits, 592, 7, sizeof(VK8WMBits), X86::VK8WMRegClassID, 2, 1, true },
+  { SEGMENT_REG, SEGMENT_REGBits, 447, 6, sizeof(SEGMENT_REGBits), X86::SEGMENT_REGRegClassID, 2, 1, true },
+  { GR16_ABCD, GR16_ABCDBits, 415, 4, sizeof(GR16_ABCDBits), X86::GR16_ABCDRegClassID, 2, 1, true },
+  { FPCCR, FPCCRBits, 797, 1, sizeof(FPCCRBits), X86::FPCCRRegClassID, 2, -1, false },
+  { FR32X, FR32XBits, 839, 32, sizeof(FR32XBits), X86::FR32XRegClassID, 4, 1, true },
+  { LOW32_ADDR_ACCESS_RBP, LOW32_ADDR_ACCESS_RBPBits, 607, 18, sizeof(LOW32_ADDR_ACCESS_RBPBits), X86::LOW32_ADDR_ACCESS_RBPRegClassID, 4, 1, true },
+  { LOW32_ADDR_ACCESS, LOW32_ADDR_ACCESSBits, 817, 17, sizeof(LOW32_ADDR_ACCESSBits), X86::LOW32_ADDR_ACCESSRegClassID, 4, 1, true },
+  { LOW32_ADDR_ACCESS_RBP_with_sub_8bit, LOW32_ADDR_ACCESS_RBP_with_sub_8bitBits, 1371, 17, sizeof(LOW32_ADDR_ACCESS_RBP_with_sub_8bitBits), X86::LOW32_ADDR_ACCESS_RBP_with_sub_8bitRegClassID, 4, 1, true },
+  { FR32, FR32Bits, 27, 16, sizeof(FR32Bits), X86::FR32RegClassID, 4, 1, true },
+  { GR32, GR32Bits, 32, 16, sizeof(GR32Bits), X86::GR32RegClassID, 4, 1, true },
+  { GR32_NOAX, GR32_NOAXBits, 900, 15, sizeof(GR32_NOAXBits), X86::GR32_NOAXRegClassID, 4, 1, true },
+  { GR32_NOSP, GR32_NOSPBits, 708, 15, sizeof(GR32_NOSPBits), X86::GR32_NOSPRegClassID, 4, 1, true },
+  { GR32_NOAX_and_GR32_NOSP, GR32_NOAX_and_GR32_NOSPBits, 694, 14, sizeof(GR32_NOAX_and_GR32_NOSPBits), X86::GR32_NOAX_and_GR32_NOSPRegClassID, 4, 1, true },
+  { LOW32_ADDR_ACCESS_RBP_with_sub_16bit_in_GR16_NOREX, LOW32_ADDR_ACCESS_RBP_with_sub_16bit_in_GR16_NOREXBits, 1170, 9, sizeof(LOW32_ADDR_ACCESS_RBP_with_sub_16bit_in_GR16_NOREXBits), X86::LOW32_ADDR_ACCESS_RBP_with_sub_16bit_in_GR16_NOREXRegClassID, 4, 1, true },
+  { DEBUG_REG, DEBUG_REGBits, 425, 8, sizeof(DEBUG_REGBits), X86::DEBUG_REGRegClassID, 4, 1, true },
+  { GR32_NOREX, GR32_NOREXBits, 1114, 8, sizeof(GR32_NOREXBits), X86::GR32_NOREXRegClassID, 4, 1, true },
+  { VK32, VK32Bits, 16, 8, sizeof(VK32Bits), X86::VK32RegClassID, 4, 1, true },
+  { GR32_NOAX_and_GR32_NOREX, GR32_NOAX_and_GR32_NOREXBits, 1100, 7, sizeof(GR32_NOAX_and_GR32_NOREXBits), X86::GR32_NOAX_and_GR32_NOREXRegClassID, 4, 1, true },
+  { GR32_NOREX_NOSP, GR32_NOREX_NOSPBits, 765, 7, sizeof(GR32_NOREX_NOSPBits), X86::GR32_NOREX_NOSPRegClassID, 4, 1, true },
+  { RFP32, RFP32Bits, 21, 7, sizeof(RFP32Bits), X86::RFP32RegClassID, 4, 1, true },
+  { VK32WM, VK32WMBits, 559, 7, sizeof(VK32WMBits), X86::VK32WMRegClassID, 4, 1, true },
+  { GR32_NOAX_and_GR32_NOREX_NOSP, GR32_NOAX_and_GR32_NOREX_NOSPBits, 751, 6, sizeof(GR32_NOAX_and_GR32_NOREX_NOSPBits), X86::GR32_NOAX_and_GR32_NOREX_NOSPRegClassID, 4, 1, true },
+  { GR32_ABCD, GR32_ABCDBits, 395, 4, sizeof(GR32_ABCDBits), X86::GR32_ABCDRegClassID, 4, 1, true },
+  { GR32_ABCD_and_GR32_NOAX, GR32_ABCD_and_GR32_NOAXBits, 933, 3, sizeof(GR32_ABCD_and_GR32_NOAXBits), X86::GR32_ABCD_and_GR32_NOAXRegClassID, 4, 1, true },
+  { GR32_TC, GR32_TCBits, 252, 3, sizeof(GR32_TCBits), X86::GR32_TCRegClassID, 4, 1, true },
+  { GR32_AD, GR32_ADBits, 387, 2, sizeof(GR32_ADBits), X86::GR32_ADRegClassID, 4, 1, true },
+  { GR32_NOAX_and_GR32_TC, GR32_NOAX_and_GR32_TCBits, 238, 2, sizeof(GR32_NOAX_and_GR32_TCBits), X86::GR32_NOAX_and_GR32_TCRegClassID, 4, 1, true },
+  { LOW32_ADDR_ACCESS_RBP_with_sub_32bit, LOW32_ADDR_ACCESS_RBP_with_sub_32bitBits, 1231, 2, sizeof(LOW32_ADDR_ACCESS_RBP_with_sub_32bitBits), X86::LOW32_ADDR_ACCESS_RBP_with_sub_32bitRegClassID, 4, 1, true },
+  { CCR, CCRBits, 799, 1, sizeof(CCRBits), X86::CCRRegClassID, 4, -1, false },
+  { GR32_AD_and_GR32_NOAX, GR32_AD_and_GR32_NOAXBits, 888, 1, sizeof(GR32_AD_and_GR32_NOAXBits), X86::GR32_AD_and_GR32_NOAXRegClassID, 4, 1, true },
+  { LOW32_ADDR_ACCESS_RBP_with_sub_8bit_with_sub_32bit, LOW32_ADDR_ACCESS_RBP_with_sub_8bit_with_sub_32bitBits, 1301, 1, sizeof(LOW32_ADDR_ACCESS_RBP_with_sub_8bit_with_sub_32bitBits), X86::LOW32_ADDR_ACCESS_RBP_with_sub_8bit_with_sub_32bitRegClassID, 4, 1, true },
+  { LOW32_ADDR_ACCESS_with_sub_32bit, LOW32_ADDR_ACCESS_with_sub_32bitBits, 1268, 1, sizeof(LOW32_ADDR_ACCESS_with_sub_32bitBits), X86::LOW32_ADDR_ACCESS_with_sub_32bitRegClassID, 4, 1, true },
+  { RFP64, RFP64Bits, 46, 7, sizeof(RFP64Bits), X86::RFP64RegClassID, 8, 1, true },
+  { FR64X, FR64XBits, 845, 32, sizeof(FR64XBits), X86::FR64XRegClassID, 8, 1, true },
+  { GR64, GR64Bits, 57, 17, sizeof(GR64Bits), X86::GR64RegClassID, 8, 1, true },
+  { CONTROL_REG, CONTROL_REGBits, 435, 16, sizeof(CONTROL_REGBits), X86::CONTROL_REGRegClassID, 8, 1, true },
+  { FR64, FR64Bits, 52, 16, sizeof(FR64Bits), X86::FR64RegClassID, 8, 1, true },
+  { GR64_with_sub_8bit, GR64_with_sub_8bitBits, 1352, 16, sizeof(GR64_with_sub_8bitBits), X86::GR64_with_sub_8bitRegClassID, 8, 1, true },
+  { GR64_NOSP, GR64_NOSPBits, 718, 15, sizeof(GR64_NOSPBits), X86::GR64_NOSPRegClassID, 8, 1, true },
+  { GR64_with_sub_32bit_in_GR32_NOAX, GR64_with_sub_32bit_in_GR32_NOAXBits, 972, 15, sizeof(GR64_with_sub_32bit_in_GR32_NOAXBits), X86::GR64_with_sub_32bit_in_GR32_NOAXRegClassID, 8, 1, true },
+  { GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_NOSP, GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_NOSPBits, 671, 14, sizeof(GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_NOSPBits), X86::GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_NOSPRegClassID, 8, 1, true },
+  { GR64_NOREX, GR64_NOREXBits, 1125, 9, sizeof(GR64_NOREXBits), X86::GR64_NOREXRegClassID, 8, 1, true },
+  { GR64_TC, GR64_TCBits, 305, 9, sizeof(GR64_TCBits), X86::GR64_TCRegClassID, 8, 1, true },
+  { GR64_NOSP_and_GR64_TC, GR64_NOSP_and_GR64_TCBits, 291, 8, sizeof(GR64_NOSP_and_GR64_TCBits), X86::GR64_NOSP_and_GR64_TCRegClassID, 8, 1, true },
+  { GR64_TCW64, GR64_TCW64Bits, 79, 8, sizeof(GR64_TCW64Bits), X86::GR64_TCW64RegClassID, 8, 1, true },
+  { GR64_with_sub_16bit_in_GR16_NOREX, GR64_with_sub_16bit_in_GR16_NOREXBits, 1136, 8, sizeof(GR64_with_sub_16bit_in_GR16_NOREXBits), X86::GR64_with_sub_16bit_in_GR16_NOREXRegClassID, 8, 1, true },
+  { VK64, VK64Bits, 41, 8, sizeof(VK64Bits), X86::VK64RegClassID, 8, 1, true },
+  { VR64, VR64Bits, 62, 8, sizeof(VR64Bits), X86::VR64RegClassID, 8, 1, true },
+  { GR64_NOREX_NOSP, GR64_NOREX_NOSPBits, 781, 7, sizeof(GR64_NOREX_NOSPBits), X86::GR64_NOREX_NOSPRegClassID, 8, 1, true },
+  { GR64_NOSP_and_GR64_TCW64, GR64_NOSP_and_GR64_TCW64Bits, 102, 7, sizeof(GR64_NOSP_and_GR64_TCW64Bits), X86::GR64_NOSP_and_GR64_TCW64RegClassID, 8, 1, true },
+  { GR64_TC_and_GR64_TCW64, GR64_TC_and_GR64_TCW64Bits, 67, 7, sizeof(GR64_TC_and_GR64_TCW64Bits), X86::GR64_TC_and_GR64_TCW64RegClassID, 8, 1, true },
+  { GR64_TC_and_GR64_with_sub_32bit_in_GR32_NOAX, GR64_TC_and_GR64_with_sub_32bit_in_GR32_NOAXBits, 1020, 7, sizeof(GR64_TC_and_GR64_with_sub_32bit_in_GR32_NOAXBits), X86::GR64_TC_and_GR64_with_sub_32bit_in_GR32_NOAXRegClassID, 8, 1, true },
+  { GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_NOREX, GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_NOREXBits, 1077, 7, sizeof(GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_NOREXBits), X86::GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_NOREXRegClassID, 8, 1, true },
+  { VK64WM, VK64WMBits, 572, 7, sizeof(VK64WMBits), X86::VK64WMRegClassID, 8, 1, true },
+  { GR64_NOREX_and_GR64_TC, GR64_NOREX_and_GR64_TCBits, 341, 6, sizeof(GR64_NOREX_and_GR64_TCBits), X86::GR64_NOREX_and_GR64_TCRegClassID, 8, 1, true },
+  { GR64_TCW64_and_GR64_with_sub_32bit_in_GR32_NOAX, GR64_TCW64_and_GR64_with_sub_32bit_in_GR32_NOAXBits, 957, 6, sizeof(GR64_TCW64_and_GR64_with_sub_32bit_in_GR32_NOAXBits), X86::GR64_TCW64_and_GR64_with_sub_32bit_in_GR32_NOAXRegClassID, 8, 1, true },
+  { GR64_TC_and_GR64_NOSP_and_GR64_TCW64, GR64_TC_and_GR64_NOSP_and_GR64_TCW64Bits, 90, 6, sizeof(GR64_TC_and_GR64_NOSP_and_GR64_TCW64Bits), X86::GR64_TC_and_GR64_NOSP_and_GR64_TCW64RegClassID, 8, 1, true },
+  { GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_NOREX_NOSP, GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_NOREX_NOSPBits, 728, 6, sizeof(GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_NOREX_NOSPBits), X86::GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_NOREX_NOSPRegClassID, 8, 1, true },
+  { GR64_NOREX_NOSP_and_GR64_TC, GR64_NOREX_NOSP_and_GR64_TCBits, 313, 5, sizeof(GR64_NOREX_NOSP_and_GR64_TCBits), X86::GR64_NOREX_NOSP_and_GR64_TCRegClassID, 8, 1, true },
+  { GR64_TCW64_and_GR64_TC_and_GR64_with_sub_32bit_in_GR32_NOAX, GR64_TCW64_and_GR64_TC_and_GR64_with_sub_32bit_in_GR32_NOAXBits, 1005, 5, sizeof(GR64_TCW64_and_GR64_TC_and_GR64_with_sub_32bit_in_GR32_NOAXBits), X86::GR64_TCW64_and_GR64_TC_and_GR64_with_sub_32bit_in_GR32_NOAXRegClassID, 8, 1, true },
+  { GR64_ABCD, GR64_ABCDBits, 405, 4, sizeof(GR64_ABCDBits), X86::GR64_ABCDRegClassID, 8, 1, true },
+  { GR64_NOREX_and_GR64_TCW64, GR64_NOREX_and_GR64_TCW64Bits, 127, 4, sizeof(GR64_NOREX_and_GR64_TCW64Bits), X86::GR64_NOREX_and_GR64_TCW64RegClassID, 8, 1, true },
+  { GR64_TC_and_GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_NOREX, GR64_TC_and_GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_NOREXBits, 1065, 4, sizeof(GR64_TC_and_GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_NOREXBits), X86::GR64_TC_and_GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_NOREXRegClassID, 8, 1, true },
+  { GR64_with_sub_32bit_in_GR32_ABCD_and_GR32_NOAX, GR64_with_sub_32bit_in_GR32_ABCD_and_GR32_NOAXBits, 910, 3, sizeof(GR64_with_sub_32bit_in_GR32_ABCD_and_GR32_NOAXBits), X86::GR64_with_sub_32bit_in_GR32_ABCD_and_GR32_NOAXRegClassID, 8, 1, true },
+  { GR64_with_sub_32bit_in_GR32_TC, GR64_with_sub_32bit_in_GR32_TCBits, 260, 3, sizeof(GR64_with_sub_32bit_in_GR32_TCBits), X86::GR64_with_sub_32bit_in_GR32_TCRegClassID, 8, 1, true },
+  { GR64_and_LOW32_ADDR_ACCESS_RBP, GR64_and_LOW32_ADDR_ACCESS_RBPBits, 598, 2, sizeof(GR64_and_LOW32_ADDR_ACCESS_RBPBits), X86::GR64_and_LOW32_ADDR_ACCESS_RBPRegClassID, 8, 1, true },
+  { GR64_with_sub_32bit_in_GR32_AD, GR64_with_sub_32bit_in_GR32_ADBits, 364, 2, sizeof(GR64_with_sub_32bit_in_GR32_ADBits), X86::GR64_with_sub_32bit_in_GR32_ADRegClassID, 8, 1, true },
+  { GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_TC, GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_TCBits, 215, 2, sizeof(GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_TCBits), X86::GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_TCRegClassID, 8, 1, true },
+  { GR64_NOREX_NOSP_and_LOW32_ADDR_ACCESS_RBP, GR64_NOREX_NOSP_and_LOW32_ADDR_ACCESS_RBPBits, 629, 1, sizeof(GR64_NOREX_NOSP_and_LOW32_ADDR_ACCESS_RBPBits), X86::GR64_NOREX_NOSP_and_LOW32_ADDR_ACCESS_RBPRegClassID, 8, 1, true },
+  { GR64_and_LOW32_ADDR_ACCESS, GR64_and_LOW32_ADDR_ACCESSBits, 808, 1, sizeof(GR64_and_LOW32_ADDR_ACCESSBits), X86::GR64_and_LOW32_ADDR_ACCESSRegClassID, 8, 1, true },
+  { GR64_with_sub_32bit_in_GR32_AD_and_GR32_NOAX, GR64_with_sub_32bit_in_GR32_AD_and_GR32_NOAXBits, 865, 1, sizeof(GR64_with_sub_32bit_in_GR32_AD_and_GR32_NOAXBits), X86::GR64_with_sub_32bit_in_GR32_AD_and_GR32_NOAXRegClassID, 8, 1, true },
+  { RST, RSTBits, 835, 8, sizeof(RSTBits), X86::RSTRegClassID, 10, 1, false },
+  { RFP80, RFP80Bits, 0, 7, sizeof(RFP80Bits), X86::RFP80RegClassID, 10, 1, true },
+  { VR128X, VR128XBits, 858, 32, sizeof(VR128XBits), X86::VR128XRegClassID, 16, 1, true },
+  { FR128, FR128Bits, 195, 16, sizeof(FR128Bits), X86::FR128RegClassID, 16, 1, true },
+  { VR128, VR128Bits, 201, 16, sizeof(VR128Bits), X86::VR128RegClassID, 16, 1, true },
+  { VR128H, VR128HBits, 488, 8, sizeof(VR128HBits), X86::VR128HRegClassID, 16, 1, true },
+  { VR128L, VR128LBits, 535, 8, sizeof(VR128LBits), X86::VR128LRegClassID, 16, 1, true },
+  { BNDR, BNDRBits, 803, 4, sizeof(BNDRBits), X86::BNDRRegClassID, 16, 1, true },
+  { VR256X, VR256XBits, 851, 32, sizeof(VR256XBits), X86::VR256XRegClassID, 32, 1, true },
+  { VR256, VR256Bits, 167, 16, sizeof(VR256Bits), X86::VR256RegClassID, 32, 1, true },
+  { VR256H, VR256HBits, 459, 8, sizeof(VR256HBits), X86::VR256HRegClassID, 32, 1, true },
+  { VR256L, VR256LBits, 506, 8, sizeof(VR256LBits), X86::VR256LRegClassID, 32, 1, true },
+  { VR512, VR512Bits, 10, 32, sizeof(VR512Bits), X86::VR512RegClassID, 64, 1, true },
+  { VR512_with_sub_xmm_in_FR128, VR512_with_sub_xmm_in_FR128Bits, 173, 16, sizeof(VR512_with_sub_xmm_in_FR128Bits), X86::VR512_with_sub_xmm_in_FR128RegClassID, 64, 1, true },
+  { VR512_with_sub_xmm_in_VR128H, VR512_with_sub_xmm_in_VR128HBits, 466, 8, sizeof(VR512_with_sub_xmm_in_VR128HBits), X86::VR512_with_sub_xmm_in_VR128HRegClassID, 64, 1, true },
+  { VR512_with_sub_xmm_in_VR128L, VR512_with_sub_xmm_in_VR128LBits, 513, 8, sizeof(VR512_with_sub_xmm_in_VR128LBits), X86::VR512_with_sub_xmm_in_VR128LRegClassID, 64, 1, true },
 };
 
 // X86 Dwarf<->LLVM register mappings.
@@ -2350,22 +2350,22 @@ extern const MCRegisterInfo::DwarfLLVMRegPair X86DwarfFlavour0Dwarf2L[] = {
   { 46U, X86::MM5 },
   { 47U, X86::MM6 },
   { 48U, X86::MM7 },
-  { 60U, X86::XMM16 },
-  { 61U, X86::XMM17 },
-  { 62U, X86::XMM18 },
-  { 63U, X86::XMM19 },
-  { 64U, X86::XMM20 },
-  { 65U, X86::XMM21 },
-  { 66U, X86::XMM22 },
-  { 67U, X86::XMM23 },
-  { 68U, X86::XMM24 },
-  { 69U, X86::XMM25 },
-  { 70U, X86::XMM26 },
-  { 71U, X86::XMM27 },
-  { 72U, X86::XMM28 },
-  { 73U, X86::XMM29 },
-  { 74U, X86::XMM30 },
-  { 75U, X86::XMM31 },
+  { 67U, X86::XMM16 },
+  { 68U, X86::XMM17 },
+  { 69U, X86::XMM18 },
+  { 70U, X86::XMM19 },
+  { 71U, X86::XMM20 },
+  { 72U, X86::XMM21 },
+  { 73U, X86::XMM22 },
+  { 74U, X86::XMM23 },
+  { 75U, X86::XMM24 },
+  { 76U, X86::XMM25 },
+  { 77U, X86::XMM26 },
+  { 78U, X86::XMM27 },
+  { 79U, X86::XMM28 },
+  { 80U, X86::XMM29 },
+  { 81U, X86::XMM30 },
+  { 82U, X86::XMM31 },
   { 118U, X86::K0 },
   { 119U, X86::K1 },
   { 120U, X86::K2 },
@@ -2517,22 +2517,22 @@ extern const MCRegisterInfo::DwarfLLVMRegPair X86EHFlavour0Dwarf2L[] = {
   { 46U, X86::MM5 },
   { 47U, X86::MM6 },
   { 48U, X86::MM7 },
-  { 60U, X86::XMM16 },
-  { 61U, X86::XMM17 },
-  { 62U, X86::XMM18 },
-  { 63U, X86::XMM19 },
-  { 64U, X86::XMM20 },
-  { 65U, X86::XMM21 },
-  { 66U, X86::XMM22 },
-  { 67U, X86::XMM23 },
-  { 68U, X86::XMM24 },
-  { 69U, X86::XMM25 },
-  { 70U, X86::XMM26 },
-  { 71U, X86::XMM27 },
-  { 72U, X86::XMM28 },
-  { 73U, X86::XMM29 },
-  { 74U, X86::XMM30 },
-  { 75U, X86::XMM31 },
+  { 67U, X86::XMM16 },
+  { 68U, X86::XMM17 },
+  { 69U, X86::XMM18 },
+  { 70U, X86::XMM19 },
+  { 71U, X86::XMM20 },
+  { 72U, X86::XMM21 },
+  { 73U, X86::XMM22 },
+  { 74U, X86::XMM23 },
+  { 75U, X86::XMM24 },
+  { 76U, X86::XMM25 },
+  { 77U, X86::XMM26 },
+  { 78U, X86::XMM27 },
+  { 79U, X86::XMM28 },
+  { 80U, X86::XMM29 },
+  { 81U, X86::XMM30 },
+  { 82U, X86::XMM31 },
   { 118U, X86::K0 },
   { 119U, X86::K1 },
   { 120U, X86::K2 },
@@ -2701,22 +2701,22 @@ extern const MCRegisterInfo::DwarfLLVMRegPair X86DwarfFlavour0L2Dwarf[] = {
   { X86::XMM13, 30U },
   { X86::XMM14, 31U },
   { X86::XMM15, 32U },
-  { X86::XMM16, 60U },
-  { X86::XMM17, 61U },
-  { X86::XMM18, 62U },
-  { X86::XMM19, 63U },
-  { X86::XMM20, 64U },
-  { X86::XMM21, 65U },
-  { X86::XMM22, 66U },
-  { X86::XMM23, 67U },
-  { X86::XMM24, 68U },
-  { X86::XMM25, 69U },
-  { X86::XMM26, 70U },
-  { X86::XMM27, 71U },
-  { X86::XMM28, 72U },
-  { X86::XMM29, 73U },
-  { X86::XMM30, 74U },
-  { X86::XMM31, 75U },
+  { X86::XMM16, 67U },
+  { X86::XMM17, 68U },
+  { X86::XMM18, 69U },
+  { X86::XMM19, 70U },
+  { X86::XMM20, 71U },
+  { X86::XMM21, 72U },
+  { X86::XMM22, 73U },
+  { X86::XMM23, 74U },
+  { X86::XMM24, 75U },
+  { X86::XMM25, 76U },
+  { X86::XMM26, 77U },
+  { X86::XMM27, 78U },
+  { X86::XMM28, 79U },
+  { X86::XMM29, 80U },
+  { X86::XMM30, 81U },
+  { X86::XMM31, 82U },
   { X86::YMM0, 17U },
   { X86::YMM1, 18U },
   { X86::YMM2, 19U },
@@ -2733,22 +2733,22 @@ extern const MCRegisterInfo::DwarfLLVMRegPair X86DwarfFlavour0L2Dwarf[] = {
   { X86::YMM13, 30U },
   { X86::YMM14, 31U },
   { X86::YMM15, 32U },
-  { X86::YMM16, 60U },
-  { X86::YMM17, 61U },
-  { X86::YMM18, 62U },
-  { X86::YMM19, 63U },
-  { X86::YMM20, 64U },
-  { X86::YMM21, 65U },
-  { X86::YMM22, 66U },
-  { X86::YMM23, 67U },
-  { X86::YMM24, 68U },
-  { X86::YMM25, 69U },
-  { X86::YMM26, 70U },
-  { X86::YMM27, 71U },
-  { X86::YMM28, 72U },
-  { X86::YMM29, 73U },
-  { X86::YMM30, 74U },
-  { X86::YMM31, 75U },
+  { X86::YMM16, 67U },
+  { X86::YMM17, 68U },
+  { X86::YMM18, 69U },
+  { X86::YMM19, 70U },
+  { X86::YMM20, 71U },
+  { X86::YMM21, 72U },
+  { X86::YMM22, 73U },
+  { X86::YMM23, 74U },
+  { X86::YMM24, 75U },
+  { X86::YMM25, 76U },
+  { X86::YMM26, 77U },
+  { X86::YMM27, 78U },
+  { X86::YMM28, 79U },
+  { X86::YMM29, 80U },
+  { X86::YMM30, 81U },
+  { X86::YMM31, 82U },
   { X86::ZMM0, 17U },
   { X86::ZMM1, 18U },
   { X86::ZMM2, 19U },
@@ -2765,22 +2765,22 @@ extern const MCRegisterInfo::DwarfLLVMRegPair X86DwarfFlavour0L2Dwarf[] = {
   { X86::ZMM13, 30U },
   { X86::ZMM14, 31U },
   { X86::ZMM15, 32U },
-  { X86::ZMM16, 60U },
-  { X86::ZMM17, 61U },
-  { X86::ZMM18, 62U },
-  { X86::ZMM19, 63U },
-  { X86::ZMM20, 64U },
-  { X86::ZMM21, 65U },
-  { X86::ZMM22, 66U },
-  { X86::ZMM23, 67U },
-  { X86::ZMM24, 68U },
-  { X86::ZMM25, 69U },
-  { X86::ZMM26, 70U },
-  { X86::ZMM27, 71U },
-  { X86::ZMM28, 72U },
-  { X86::ZMM29, 73U },
-  { X86::ZMM30, 74U },
-  { X86::ZMM31, 75U },
+  { X86::ZMM16, 67U },
+  { X86::ZMM17, 68U },
+  { X86::ZMM18, 69U },
+  { X86::ZMM19, 70U },
+  { X86::ZMM20, 71U },
+  { X86::ZMM21, 72U },
+  { X86::ZMM22, 73U },
+  { X86::ZMM23, 74U },
+  { X86::ZMM24, 75U },
+  { X86::ZMM25, 76U },
+  { X86::ZMM26, 77U },
+  { X86::ZMM27, 78U },
+  { X86::ZMM28, 79U },
+  { X86::ZMM29, 80U },
+  { X86::ZMM30, 81U },
+  { X86::ZMM31, 82U },
 };
 extern const unsigned X86DwarfFlavour0L2DwarfSize = array_lengthof(X86DwarfFlavour0L2Dwarf);
 
@@ -3151,22 +3151,22 @@ extern const MCRegisterInfo::DwarfLLVMRegPair X86EHFlavour0L2Dwarf[] = {
   { X86::XMM13, 30U },
   { X86::XMM14, 31U },
   { X86::XMM15, 32U },
-  { X86::XMM16, 60U },
-  { X86::XMM17, 61U },
-  { X86::XMM18, 62U },
-  { X86::XMM19, 63U },
-  { X86::XMM20, 64U },
-  { X86::XMM21, 65U },
-  { X86::XMM22, 66U },
-  { X86::XMM23, 67U },
-  { X86::XMM24, 68U },
-  { X86::XMM25, 69U },
-  { X86::XMM26, 70U },
-  { X86::XMM27, 71U },
-  { X86::XMM28, 72U },
-  { X86::XMM29, 73U },
-  { X86::XMM30, 74U },
-  { X86::XMM31, 75U },
+  { X86::XMM16, 67U },
+  { X86::XMM17, 68U },
+  { X86::XMM18, 69U },
+  { X86::XMM19, 70U },
+  { X86::XMM20, 71U },
+  { X86::XMM21, 72U },
+  { X86::XMM22, 73U },
+  { X86::XMM23, 74U },
+  { X86::XMM24, 75U },
+  { X86::XMM25, 76U },
+  { X86::XMM26, 77U },
+  { X86::XMM27, 78U },
+  { X86::XMM28, 79U },
+  { X86::XMM29, 80U },
+  { X86::XMM30, 81U },
+  { X86::XMM31, 82U },
   { X86::YMM0, 17U },
   { X86::YMM1, 18U },
   { X86::YMM2, 19U },
@@ -3183,22 +3183,22 @@ extern const MCRegisterInfo::DwarfLLVMRegPair X86EHFlavour0L2Dwarf[] = {
   { X86::YMM13, 30U },
   { X86::YMM14, 31U },
   { X86::YMM15, 32U },
-  { X86::YMM16, 60U },
-  { X86::YMM17, 61U },
-  { X86::YMM18, 62U },
-  { X86::YMM19, 63U },
-  { X86::YMM20, 64U },
-  { X86::YMM21, 65U },
-  { X86::YMM22, 66U },
-  { X86::YMM23, 67U },
-  { X86::YMM24, 68U },
-  { X86::YMM25, 69U },
-  { X86::YMM26, 70U },
-  { X86::YMM27, 71U },
-  { X86::YMM28, 72U },
-  { X86::YMM29, 73U },
-  { X86::YMM30, 74U },
-  { X86::YMM31, 75U },
+  { X86::YMM16, 67U },
+  { X86::YMM17, 68U },
+  { X86::YMM18, 69U },
+  { X86::YMM19, 70U },
+  { X86::YMM20, 71U },
+  { X86::YMM21, 72U },
+  { X86::YMM22, 73U },
+  { X86::YMM23, 74U },
+  { X86::YMM24, 75U },
+  { X86::YMM25, 76U },
+  { X86::YMM26, 77U },
+  { X86::YMM27, 78U },
+  { X86::YMM28, 79U },
+  { X86::YMM29, 80U },
+  { X86::YMM30, 81U },
+  { X86::YMM31, 82U },
   { X86::ZMM0, 17U },
   { X86::ZMM1, 18U },
   { X86::ZMM2, 19U },
@@ -3215,22 +3215,22 @@ extern const MCRegisterInfo::DwarfLLVMRegPair X86EHFlavour0L2Dwarf[] = {
   { X86::ZMM13, 30U },
   { X86::ZMM14, 31U },
   { X86::ZMM15, 32U },
-  { X86::ZMM16, 60U },
-  { X86::ZMM17, 61U },
-  { X86::ZMM18, 62U },
-  { X86::ZMM19, 63U },
-  { X86::ZMM20, 64U },
-  { X86::ZMM21, 65U },
-  { X86::ZMM22, 66U },
-  { X86::ZMM23, 67U },
-  { X86::ZMM24, 68U },
-  { X86::ZMM25, 69U },
-  { X86::ZMM26, 70U },
-  { X86::ZMM27, 71U },
-  { X86::ZMM28, 72U },
-  { X86::ZMM29, 73U },
-  { X86::ZMM30, 74U },
-  { X86::ZMM31, 75U },
+  { X86::ZMM16, 67U },
+  { X86::ZMM17, 68U },
+  { X86::ZMM18, 69U },
+  { X86::ZMM19, 70U },
+  { X86::ZMM20, 71U },
+  { X86::ZMM21, 72U },
+  { X86::ZMM22, 73U },
+  { X86::ZMM23, 74U },
+  { X86::ZMM24, 75U },
+  { X86::ZMM25, 76U },
+  { X86::ZMM26, 77U },
+  { X86::ZMM27, 78U },
+  { X86::ZMM28, 79U },
+  { X86::ZMM29, 80U },
+  { X86::ZMM30, 81U },
+  { X86::ZMM31, 82U },
 };
 extern const unsigned X86EHFlavour0L2DwarfSize = array_lengthof(X86EHFlavour0L2Dwarf);
 
@@ -5417,6 +5417,8 @@ static ArrayRef<MCPhysReg> GR8_NOREXGetRawAllocationOrder(const MachineFunction 
 namespace X86 {   // Register class instances
   extern const TargetRegisterClass GR8RegClass = {
     &X86MCRegisterClasses[GR8RegClassID],
+    1, /* SpillSize */
+    1, /* SpillAlignment */
     VTLists + 2,
     GR8SubClassMask,
     SuperRegIdxSeqs + 2,
@@ -5430,6 +5432,8 @@ namespace X86 {   // Register class instances
 
   extern const TargetRegisterClass GR8_NOREXRegClass = {
     &X86MCRegisterClasses[GR8_NOREXRegClassID],
+    1, /* SpillSize */
+    1, /* SpillAlignment */
     VTLists + 2,
     GR8_NOREXSubClassMask,
     SuperRegIdxSeqs + 2,
@@ -5443,6 +5447,8 @@ namespace X86 {   // Register class instances
 
   extern const TargetRegisterClass GR8_ABCD_HRegClass = {
     &X86MCRegisterClasses[GR8_ABCD_HRegClassID],
+    1, /* SpillSize */
+    1, /* SpillAlignment */
     VTLists + 2,
     GR8_ABCD_HSubClassMask,
     SuperRegIdxSeqs + 3,
@@ -5456,6 +5462,8 @@ namespace X86 {   // Register class instances
 
   extern const TargetRegisterClass GR8_ABCD_LRegClass = {
     &X86MCRegisterClasses[GR8_ABCD_LRegClassID],
+    1, /* SpillSize */
+    1, /* SpillAlignment */
     VTLists + 2,
     GR8_ABCD_LSubClassMask,
     SuperRegIdxSeqs + 0,
@@ -5469,6 +5477,8 @@ namespace X86 {   // Register class instances
 
   extern const TargetRegisterClass GR16RegClass = {
     &X86MCRegisterClasses[GR16RegClassID],
+    2, /* SpillSize */
+    2, /* SpillAlignment */
     VTLists + 4,
     GR16SubClassMask,
     SuperRegIdxSeqs + 5,
@@ -5482,6 +5492,8 @@ namespace X86 {   // Register class instances
 
   extern const TargetRegisterClass GR16_NOREXRegClass = {
     &X86MCRegisterClasses[GR16_NOREXRegClassID],
+    2, /* SpillSize */
+    2, /* SpillAlignment */
     VTLists + 4,
     GR16_NOREXSubClassMask,
     SuperRegIdxSeqs + 5,
@@ -5495,6 +5507,8 @@ namespace X86 {   // Register class instances
 
   extern const TargetRegisterClass VK1RegClass = {
     &X86MCRegisterClasses[VK1RegClassID],
+    2, /* SpillSize */
+    2, /* SpillAlignment */
     VTLists + 0,
     VK1SubClassMask,
     SuperRegIdxSeqs + 1,
@@ -5508,6 +5522,8 @@ namespace X86 {   // Register class instances
 
   extern const TargetRegisterClass VK16RegClass = {
     &X86MCRegisterClasses[VK16RegClassID],
+    2, /* SpillSize */
+    2, /* SpillAlignment */
     VTLists + 27,
     VK16SubClassMask,
     SuperRegIdxSeqs + 1,
@@ -5521,6 +5537,8 @@ namespace X86 {   // Register class instances
 
   extern const TargetRegisterClass VK2RegClass = {
     &X86MCRegisterClasses[VK2RegClassID],
+    2, /* SpillSize */
+    2, /* SpillAlignment */
     VTLists + 21,
     VK2SubClassMask,
     SuperRegIdxSeqs + 1,
@@ -5534,6 +5552,8 @@ namespace X86 {   // Register class instances
 
   extern const TargetRegisterClass VK4RegClass = {
     &X86MCRegisterClasses[VK4RegClassID],
+    2, /* SpillSize */
+    2, /* SpillAlignment */
     VTLists + 23,
     VK4SubClassMask,
     SuperRegIdxSeqs + 1,
@@ -5547,6 +5567,8 @@ namespace X86 {   // Register class instances
 
   extern const TargetRegisterClass VK8RegClass = {
     &X86MCRegisterClasses[VK8RegClassID],
+    2, /* SpillSize */
+    2, /* SpillAlignment */
     VTLists + 25,
     VK8SubClassMask,
     SuperRegIdxSeqs + 1,
@@ -5560,6 +5582,8 @@ namespace X86 {   // Register class instances
 
   extern const TargetRegisterClass VK16WMRegClass = {
     &X86MCRegisterClasses[VK16WMRegClassID],
+    2, /* SpillSize */
+    2, /* SpillAlignment */
     VTLists + 27,
     VK16WMSubClassMask,
     SuperRegIdxSeqs + 1,
@@ -5573,6 +5597,8 @@ namespace X86 {   // Register class instances
 
   extern const TargetRegisterClass VK1WMRegClass = {
     &X86MCRegisterClasses[VK1WMRegClassID],
+    2, /* SpillSize */
+    2, /* SpillAlignment */
     VTLists + 0,
     VK1WMSubClassMask,
     SuperRegIdxSeqs + 1,
@@ -5586,6 +5612,8 @@ namespace X86 {   // Register class instances
 
   extern const TargetRegisterClass VK2WMRegClass = {
     &X86MCRegisterClasses[VK2WMRegClassID],
+    2, /* SpillSize */
+    2, /* SpillAlignment */
     VTLists + 21,
     VK2WMSubClassMask,
     SuperRegIdxSeqs + 1,
@@ -5599,6 +5627,8 @@ namespace X86 {   // Register class instances
 
   extern const TargetRegisterClass VK4WMRegClass = {
     &X86MCRegisterClasses[VK4WMRegClassID],
+    2, /* SpillSize */
+    2, /* SpillAlignment */
     VTLists + 23,
     VK4WMSubClassMask,
     SuperRegIdxSeqs + 1,
@@ -5612,6 +5642,8 @@ namespace X86 {   // Register class instances
 
   extern const TargetRegisterClass VK8WMRegClass = {
     &X86MCRegisterClasses[VK8WMRegClassID],
+    2, /* SpillSize */
+    2, /* SpillAlignment */
     VTLists + 25,
     VK8WMSubClassMask,
     SuperRegIdxSeqs + 1,
@@ -5625,6 +5657,8 @@ namespace X86 {   // Register class instances
 
   extern const TargetRegisterClass SEGMENT_REGRegClass = {
     &X86MCRegisterClasses[SEGMENT_REGRegClassID],
+    2, /* SpillSize */
+    2, /* SpillAlignment */
     VTLists + 4,
     SEGMENT_REGSubClassMask,
     SuperRegIdxSeqs + 1,
@@ -5638,6 +5672,8 @@ namespace X86 {   // Register class instances
 
   extern const TargetRegisterClass GR16_ABCDRegClass = {
     &X86MCRegisterClasses[GR16_ABCDRegClassID],
+    2, /* SpillSize */
+    2, /* SpillAlignment */
     VTLists + 4,
     GR16_ABCDSubClassMask,
     SuperRegIdxSeqs + 5,
@@ -5651,6 +5687,8 @@ namespace X86 {   // Register class instances
 
   extern const TargetRegisterClass FPCCRRegClass = {
     &X86MCRegisterClasses[FPCCRRegClassID],
+    2, /* SpillSize */
+    2, /* SpillAlignment */
     VTLists + 4,
     FPCCRSubClassMask,
     SuperRegIdxSeqs + 1,
@@ -5664,6 +5702,8 @@ namespace X86 {   // Register class instances
 
   extern const TargetRegisterClass FR32XRegClass = {
     &X86MCRegisterClasses[FR32XRegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 12,
     FR32XSubClassMask,
     SuperRegIdxSeqs + 9,
@@ -5677,6 +5717,8 @@ namespace X86 {   // Register class instances
 
   extern const TargetRegisterClass LOW32_ADDR_ACCESS_RBPRegClass = {
     &X86MCRegisterClasses[LOW32_ADDR_ACCESS_RBPRegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 6,
     LOW32_ADDR_ACCESS_RBPSubClassMask,
     SuperRegIdxSeqs + 7,
@@ -5690,6 +5732,8 @@ namespace X86 {   // Register class instances
 
   extern const TargetRegisterClass LOW32_ADDR_ACCESSRegClass = {
     &X86MCRegisterClasses[LOW32_ADDR_ACCESSRegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 6,
     LOW32_ADDR_ACCESSSubClassMask,
     SuperRegIdxSeqs + 7,
@@ -5703,6 +5747,8 @@ namespace X86 {   // Register class instances
 
   extern const TargetRegisterClass LOW32_ADDR_ACCESS_RBP_with_sub_8bitRegClass = {
     &X86MCRegisterClasses[LOW32_ADDR_ACCESS_RBP_with_sub_8bitRegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 6,
     LOW32_ADDR_ACCESS_RBP_with_sub_8bitSubClassMask,
     SuperRegIdxSeqs + 7,
@@ -5716,6 +5762,8 @@ namespace X86 {   // Register class instances
 
   extern const TargetRegisterClass FR32RegClass = {
     &X86MCRegisterClasses[FR32RegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 12,
     FR32SubClassMask,
     SuperRegIdxSeqs + 9,
@@ -5729,6 +5777,8 @@ namespace X86 {   // Register class instances
 
   extern const TargetRegisterClass GR32RegClass = {
     &X86MCRegisterClasses[GR32RegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 6,
     GR32SubClassMask,
     SuperRegIdxSeqs + 7,
@@ -5742,6 +5792,8 @@ namespace X86 {   // Register class instances
 
   extern const TargetRegisterClass GR32_NOAXRegClass = {
     &X86MCRegisterClasses[GR32_NOAXRegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 6,
     GR32_NOAXSubClassMask,
     SuperRegIdxSeqs + 7,
@@ -5755,6 +5807,8 @@ namespace X86 {   // Register class instances
 
   extern const TargetRegisterClass GR32_NOSPRegClass = {
     &X86MCRegisterClasses[GR32_NOSPRegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 6,
     GR32_NOSPSubClassMask,
     SuperRegIdxSeqs + 7,
@@ -5768,6 +5822,8 @@ namespace X86 {   // Register class instances
 
   extern const TargetRegisterClass GR32_NOAX_and_GR32_NOSPRegClass = {
     &X86MCRegisterClasses[GR32_NOAX_and_GR32_NOSPRegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 6,
     GR32_NOAX_and_GR32_NOSPSubClassMask,
     SuperRegIdxSeqs + 7,
@@ -5781,6 +5837,8 @@ namespace X86 {   // Register class instances
 
   extern const TargetRegisterClass LOW32_ADDR_ACCESS_RBP_with_sub_16bit_in_GR16_NOREXRegClass = {
     &X86MCRegisterClasses[LOW32_ADDR_ACCESS_RBP_with_sub_16bit_in_GR16_NOREXRegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 6,
     LOW32_ADDR_ACCESS_RBP_with_sub_16bit_in_GR16_NOREXSubClassMask,
     SuperRegIdxSeqs + 7,
@@ -5794,6 +5852,8 @@ namespace X86 {   // Register class instances
 
   extern const TargetRegisterClass DEBUG_REGRegClass = {
     &X86MCRegisterClasses[DEBUG_REGRegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 6,
     DEBUG_REGSubClassMask,
     SuperRegIdxSeqs + 1,
@@ -5807,6 +5867,8 @@ namespace X86 {   // Register class instances
 
   extern const TargetRegisterClass GR32_NOREXRegClass = {
     &X86MCRegisterClasses[GR32_NOREXRegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 6,
     GR32_NOREXSubClassMask,
     SuperRegIdxSeqs + 7,
@@ -5820,6 +5882,8 @@ namespace X86 {   // Register class instances
 
   extern const TargetRegisterClass VK32RegClass = {
     &X86MCRegisterClasses[VK32RegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 29,
     VK32SubClassMask,
     SuperRegIdxSeqs + 1,
@@ -5833,6 +5897,8 @@ namespace X86 {   // Register class instances
 
   extern const TargetRegisterClass GR32_NOAX_and_GR32_NOREXRegClass = {
     &X86MCRegisterClasses[GR32_NOAX_and_GR32_NOREXRegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 6,
     GR32_NOAX_and_GR32_NOREXSubClassMask,
     SuperRegIdxSeqs + 7,
@@ -5846,6 +5912,8 @@ namespace X86 {   // Register class instances
 
   extern const TargetRegisterClass GR32_NOREX_NOSPRegClass = {
     &X86MCRegisterClasses[GR32_NOREX_NOSPRegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 6,
     GR32_NOREX_NOSPSubClassMask,
     SuperRegIdxSeqs + 7,
@@ -5859,6 +5927,8 @@ namespace X86 {   // Register class instances
 
   extern const TargetRegisterClass RFP32RegClass = {
     &X86MCRegisterClasses[RFP32RegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 12,
     RFP32SubClassMask,
     SuperRegIdxSeqs + 1,
@@ -5872,6 +5942,8 @@ namespace X86 {   // Register class instances
 
   extern const TargetRegisterClass VK32WMRegClass = {
     &X86MCRegisterClasses[VK32WMRegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 29,
     VK32WMSubClassMask,
     SuperRegIdxSeqs + 1,
@@ -5885,6 +5957,8 @@ namespace X86 {   // Register class instances
 
   extern const TargetRegisterClass GR32_NOAX_and_GR32_NOREX_NOSPRegClass = {
     &X86MCRegisterClasses[GR32_NOAX_and_GR32_NOREX_NOSPRegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 6,
     GR32_NOAX_and_GR32_NOREX_NOSPSubClassMask,
     SuperRegIdxSeqs + 7,
@@ -5898,6 +5972,8 @@ namespace X86 {   // Register class instances
 
   extern const TargetRegisterClass GR32_ABCDRegClass = {
     &X86MCRegisterClasses[GR32_ABCDRegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 6,
     GR32_ABCDSubClassMask,
     SuperRegIdxSeqs + 7,
@@ -5911,6 +5987,8 @@ namespace X86 {   // Register class instances
 
   extern const TargetRegisterClass GR32_ABCD_and_GR32_NOAXRegClass = {
     &X86MCRegisterClasses[GR32_ABCD_and_GR32_NOAXRegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 6,
     GR32_ABCD_and_GR32_NOAXSubClassMask,
     SuperRegIdxSeqs + 7,
@@ -5924,6 +6002,8 @@ namespace X86 {   // Register class instances
 
   extern const TargetRegisterClass GR32_TCRegClass = {
     &X86MCRegisterClasses[GR32_TCRegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 6,
     GR32_TCSubClassMask,
     SuperRegIdxSeqs + 7,
@@ -5937,6 +6017,8 @@ namespace X86 {   // Register class instances
 
   extern const TargetRegisterClass GR32_ADRegClass = {
     &X86MCRegisterClasses[GR32_ADRegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 6,
     GR32_ADSubClassMask,
     SuperRegIdxSeqs + 7,
@@ -5950,6 +6032,8 @@ namespace X86 {   // Register class instances
 
   extern const TargetRegisterClass GR32_NOAX_and_GR32_TCRegClass = {
     &X86MCRegisterClasses[GR32_NOAX_and_GR32_TCRegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 6,
     GR32_NOAX_and_GR32_TCSubClassMask,
     SuperRegIdxSeqs + 7,
@@ -5963,6 +6047,8 @@ namespace X86 {   // Register class instances
 
   extern const TargetRegisterClass LOW32_ADDR_ACCESS_RBP_with_sub_32bitRegClass = {
     &X86MCRegisterClasses[LOW32_ADDR_ACCESS_RBP_with_sub_32bitRegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 6,
     LOW32_ADDR_ACCESS_RBP_with_sub_32bitSubClassMask,
     SuperRegIdxSeqs + 1,
@@ -5976,6 +6062,8 @@ namespace X86 {   // Register class instances
 
   extern const TargetRegisterClass CCRRegClass = {
     &X86MCRegisterClasses[CCRRegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 6,
     CCRSubClassMask,
     SuperRegIdxSeqs + 1,
@@ -5989,6 +6077,8 @@ namespace X86 {   // Register class instances
 
   extern const TargetRegisterClass GR32_AD_and_GR32_NOAXRegClass = {
     &X86MCRegisterClasses[GR32_AD_and_GR32_NOAXRegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 6,
     GR32_AD_and_GR32_NOAXSubClassMask,
     SuperRegIdxSeqs + 7,
@@ -6002,6 +6092,8 @@ namespace X86 {   // Register class instances
 
   extern const TargetRegisterClass LOW32_ADDR_ACCESS_RBP_with_sub_8bit_with_sub_32bitRegClass = {
     &X86MCRegisterClasses[LOW32_ADDR_ACCESS_RBP_with_sub_8bit_with_sub_32bitRegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 6,
     LOW32_ADDR_ACCESS_RBP_with_sub_8bit_with_sub_32bitSubClassMask,
     SuperRegIdxSeqs + 1,
@@ -6015,6 +6107,8 @@ namespace X86 {   // Register class instances
 
   extern const TargetRegisterClass LOW32_ADDR_ACCESS_with_sub_32bitRegClass = {
     &X86MCRegisterClasses[LOW32_ADDR_ACCESS_with_sub_32bitRegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 6,
     LOW32_ADDR_ACCESS_with_sub_32bitSubClassMask,
     SuperRegIdxSeqs + 1,
@@ -6028,6 +6122,8 @@ namespace X86 {   // Register class instances
 
   extern const TargetRegisterClass RFP64RegClass = {
     &X86MCRegisterClasses[RFP64RegClassID],
+    8, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 14,
     RFP64SubClassMask,
     SuperRegIdxSeqs + 1,
@@ -6041,6 +6137,8 @@ namespace X86 {   // Register class instances
 
   extern const TargetRegisterClass FR64XRegClass = {
     &X86MCRegisterClasses[FR64XRegClassID],
+    8, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 14,
     FR64XSubClassMask,
     SuperRegIdxSeqs + 9,
@@ -6054,6 +6152,8 @@ namespace X86 {   // Register class instances
 
   extern const TargetRegisterClass GR64RegClass = {
     &X86MCRegisterClasses[GR64RegClassID],
+    8, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 8,
     GR64SubClassMask,
     SuperRegIdxSeqs + 1,
@@ -6067,6 +6167,8 @@ namespace X86 {   // Register class instances
 
   extern const TargetRegisterClass CONTROL_REGRegClass = {
     &X86MCRegisterClasses[CONTROL_REGRegClassID],
+    8, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 8,
     CONTROL_REGSubClassMask,
     SuperRegIdxSeqs + 1,
@@ -6080,6 +6182,8 @@ namespace X86 {   // Register class instances
 
   extern const TargetRegisterClass FR64RegClass = {
     &X86MCRegisterClasses[FR64RegClassID],
+    8, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 14,
     FR64SubClassMask,
     SuperRegIdxSeqs + 9,
@@ -6093,6 +6197,8 @@ namespace X86 {   // Register class instances
 
   extern const TargetRegisterClass GR64_with_sub_8bitRegClass = {
     &X86MCRegisterClasses[GR64_with_sub_8bitRegClassID],
+    8, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 8,
     GR64_with_sub_8bitSubClassMask,
     SuperRegIdxSeqs + 1,
@@ -6106,6 +6212,8 @@ namespace X86 {   // Register class instances
 
   extern const TargetRegisterClass GR64_NOSPRegClass = {
     &X86MCRegisterClasses[GR64_NOSPRegClassID],
+    8, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 8,
     GR64_NOSPSubClassMask,
     SuperRegIdxSeqs + 1,
@@ -6119,6 +6227,8 @@ namespace X86 {   // Register class instances
 
   extern const TargetRegisterClass GR64_with_sub_32bit_in_GR32_NOAXRegClass = {
     &X86MCRegisterClasses[GR64_with_sub_32bit_in_GR32_NOAXRegClassID],
+    8, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 8,
     GR64_with_sub_32bit_in_GR32_NOAXSubClassMask,
     SuperRegIdxSeqs + 1,
@@ -6132,6 +6242,8 @@ namespace X86 {   // Register class instances
 
   extern const TargetRegisterClass GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_NOSPRegClass = {
     &X86MCRegisterClasses[GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_NOSPRegClassID],
+    8, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 8,
     GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_NOSPSubClassMask,
     SuperRegIdxSeqs + 1,
@@ -6145,6 +6257,8 @@ namespace X86 {   // Register class instances
 
   extern const TargetRegisterClass GR64_NOREXRegClass = {
     &X86MCRegisterClasses[GR64_NOREXRegClassID],
+    8, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 8,
     GR64_NOREXSubClassMask,
     SuperRegIdxSeqs + 1,
@@ -6158,6 +6272,8 @@ namespace X86 {   // Register class instances
 
   extern const TargetRegisterClass GR64_TCRegClass = {
     &X86MCRegisterClasses[GR64_TCRegClassID],
+    8, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 8,
     GR64_TCSubClassMask,
     SuperRegIdxSeqs + 1,
@@ -6171,6 +6287,8 @@ namespace X86 {   // Register class instances
 
   extern const TargetRegisterClass GR64_NOSP_and_GR64_TCRegClass = {
     &X86MCRegisterClasses[GR64_NOSP_and_GR64_TCRegClassID],
+    8, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 8,
     GR64_NOSP_and_GR64_TCSubClassMask,
     SuperRegIdxSeqs + 1,
@@ -6184,6 +6302,8 @@ namespace X86 {   // Register class instances
 
   extern const TargetRegisterClass GR64_TCW64RegClass = {
     &X86MCRegisterClasses[GR64_TCW64RegClassID],
+    8, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 8,
     GR64_TCW64SubClassMask,
     SuperRegIdxSeqs + 1,
@@ -6197,6 +6317,8 @@ namespace X86 {   // Register class instances
 
   extern const TargetRegisterClass GR64_with_sub_16bit_in_GR16_NOREXRegClass = {
     &X86MCRegisterClasses[GR64_with_sub_16bit_in_GR16_NOREXRegClassID],
+    8, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 8,
     GR64_with_sub_16bit_in_GR16_NOREXSubClassMask,
     SuperRegIdxSeqs + 1,
@@ -6210,6 +6332,8 @@ namespace X86 {   // Register class instances
 
   extern const TargetRegisterClass VK64RegClass = {
     &X86MCRegisterClasses[VK64RegClassID],
+    8, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 31,
     VK64SubClassMask,
     SuperRegIdxSeqs + 1,
@@ -6223,6 +6347,8 @@ namespace X86 {   // Register class instances
 
   extern const TargetRegisterClass VR64RegClass = {
     &X86MCRegisterClasses[VR64RegClassID],
+    8, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 54,
     VR64SubClassMask,
     SuperRegIdxSeqs + 1,
@@ -6236,6 +6362,8 @@ namespace X86 {   // Register class instances
 
   extern const TargetRegisterClass GR64_NOREX_NOSPRegClass = {
     &X86MCRegisterClasses[GR64_NOREX_NOSPRegClassID],
+    8, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 8,
     GR64_NOREX_NOSPSubClassMask,
     SuperRegIdxSeqs + 1,
@@ -6249,6 +6377,8 @@ namespace X86 {   // Register class instances
 
   extern const TargetRegisterClass GR64_NOSP_and_GR64_TCW64RegClass = {
     &X86MCRegisterClasses[GR64_NOSP_and_GR64_TCW64RegClassID],
+    8, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 8,
     GR64_NOSP_and_GR64_TCW64SubClassMask,
     SuperRegIdxSeqs + 1,
@@ -6262,6 +6392,8 @@ namespace X86 {   // Register class instances
 
   extern const TargetRegisterClass GR64_TC_and_GR64_TCW64RegClass = {
     &X86MCRegisterClasses[GR64_TC_and_GR64_TCW64RegClassID],
+    8, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 8,
     GR64_TC_and_GR64_TCW64SubClassMask,
     SuperRegIdxSeqs + 1,
@@ -6275,6 +6407,8 @@ namespace X86 {   // Register class instances
 
   extern const TargetRegisterClass GR64_TC_and_GR64_with_sub_32bit_in_GR32_NOAXRegClass = {
     &X86MCRegisterClasses[GR64_TC_and_GR64_with_sub_32bit_in_GR32_NOAXRegClassID],
+    8, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 8,
     GR64_TC_and_GR64_with_sub_32bit_in_GR32_NOAXSubClassMask,
     SuperRegIdxSeqs + 1,
@@ -6288,6 +6422,8 @@ namespace X86 {   // Register class instances
 
   extern const TargetRegisterClass GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_NOREXRegClass = {
     &X86MCRegisterClasses[GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_NOREXRegClassID],
+    8, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 8,
     GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_NOREXSubClassMask,
     SuperRegIdxSeqs + 1,
@@ -6301,6 +6437,8 @@ namespace X86 {   // Register class instances
 
   extern const TargetRegisterClass VK64WMRegClass = {
     &X86MCRegisterClasses[VK64WMRegClassID],
+    8, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 31,
     VK64WMSubClassMask,
     SuperRegIdxSeqs + 1,
@@ -6314,6 +6452,8 @@ namespace X86 {   // Register class instances
 
   extern const TargetRegisterClass GR64_NOREX_and_GR64_TCRegClass = {
     &X86MCRegisterClasses[GR64_NOREX_and_GR64_TCRegClassID],
+    8, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 8,
     GR64_NOREX_and_GR64_TCSubClassMask,
     SuperRegIdxSeqs + 1,
@@ -6327,6 +6467,8 @@ namespace X86 {   // Register class instances
 
   extern const TargetRegisterClass GR64_TCW64_and_GR64_with_sub_32bit_in_GR32_NOAXRegClass = {
     &X86MCRegisterClasses[GR64_TCW64_and_GR64_with_sub_32bit_in_GR32_NOAXRegClassID],
+    8, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 8,
     GR64_TCW64_and_GR64_with_sub_32bit_in_GR32_NOAXSubClassMask,
     SuperRegIdxSeqs + 1,
@@ -6340,6 +6482,8 @@ namespace X86 {   // Register class instances
 
   extern const TargetRegisterClass GR64_TC_and_GR64_NOSP_and_GR64_TCW64RegClass = {
     &X86MCRegisterClasses[GR64_TC_and_GR64_NOSP_and_GR64_TCW64RegClassID],
+    8, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 8,
     GR64_TC_and_GR64_NOSP_and_GR64_TCW64SubClassMask,
     SuperRegIdxSeqs + 1,
@@ -6353,6 +6497,8 @@ namespace X86 {   // Register class instances
 
   extern const TargetRegisterClass GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_NOREX_NOSPRegClass = {
     &X86MCRegisterClasses[GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_NOREX_NOSPRegClassID],
+    8, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 8,
     GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_NOREX_NOSPSubClassMask,
     SuperRegIdxSeqs + 1,
@@ -6366,6 +6512,8 @@ namespace X86 {   // Register class instances
 
   extern const TargetRegisterClass GR64_NOREX_NOSP_and_GR64_TCRegClass = {
     &X86MCRegisterClasses[GR64_NOREX_NOSP_and_GR64_TCRegClassID],
+    8, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 8,
     GR64_NOREX_NOSP_and_GR64_TCSubClassMask,
     SuperRegIdxSeqs + 1,
@@ -6379,6 +6527,8 @@ namespace X86 {   // Register class instances
 
   extern const TargetRegisterClass GR64_TCW64_and_GR64_TC_and_GR64_with_sub_32bit_in_GR32_NOAXRegClass = {
     &X86MCRegisterClasses[GR64_TCW64_and_GR64_TC_and_GR64_with_sub_32bit_in_GR32_NOAXRegClassID],
+    8, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 8,
     GR64_TCW64_and_GR64_TC_and_GR64_with_sub_32bit_in_GR32_NOAXSubClassMask,
     SuperRegIdxSeqs + 1,
@@ -6392,6 +6542,8 @@ namespace X86 {   // Register class instances
 
   extern const TargetRegisterClass GR64_ABCDRegClass = {
     &X86MCRegisterClasses[GR64_ABCDRegClassID],
+    8, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 8,
     GR64_ABCDSubClassMask,
     SuperRegIdxSeqs + 1,
@@ -6405,6 +6557,8 @@ namespace X86 {   // Register class instances
 
   extern const TargetRegisterClass GR64_NOREX_and_GR64_TCW64RegClass = {
     &X86MCRegisterClasses[GR64_NOREX_and_GR64_TCW64RegClassID],
+    8, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 8,
     GR64_NOREX_and_GR64_TCW64SubClassMask,
     SuperRegIdxSeqs + 1,
@@ -6418,6 +6572,8 @@ namespace X86 {   // Register class instances
 
   extern const TargetRegisterClass GR64_TC_and_GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_NOREXRegClass = {
     &X86MCRegisterClasses[GR64_TC_and_GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_NOREXRegClassID],
+    8, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 8,
     GR64_TC_and_GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_NOREXSubClassMask,
     SuperRegIdxSeqs + 1,
@@ -6431,6 +6587,8 @@ namespace X86 {   // Register class instances
 
   extern const TargetRegisterClass GR64_with_sub_32bit_in_GR32_ABCD_and_GR32_NOAXRegClass = {
     &X86MCRegisterClasses[GR64_with_sub_32bit_in_GR32_ABCD_and_GR32_NOAXRegClassID],
+    8, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 8,
     GR64_with_sub_32bit_in_GR32_ABCD_and_GR32_NOAXSubClassMask,
     SuperRegIdxSeqs + 1,
@@ -6444,6 +6602,8 @@ namespace X86 {   // Register class instances
 
   extern const TargetRegisterClass GR64_with_sub_32bit_in_GR32_TCRegClass = {
     &X86MCRegisterClasses[GR64_with_sub_32bit_in_GR32_TCRegClassID],
+    8, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 8,
     GR64_with_sub_32bit_in_GR32_TCSubClassMask,
     SuperRegIdxSeqs + 1,
@@ -6457,6 +6617,8 @@ namespace X86 {   // Register class instances
 
   extern const TargetRegisterClass GR64_and_LOW32_ADDR_ACCESS_RBPRegClass = {
     &X86MCRegisterClasses[GR64_and_LOW32_ADDR_ACCESS_RBPRegClassID],
+    8, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 8,
     GR64_and_LOW32_ADDR_ACCESS_RBPSubClassMask,
     SuperRegIdxSeqs + 1,
@@ -6470,6 +6632,8 @@ namespace X86 {   // Register class instances
 
   extern const TargetRegisterClass GR64_with_sub_32bit_in_GR32_ADRegClass = {
     &X86MCRegisterClasses[GR64_with_sub_32bit_in_GR32_ADRegClassID],
+    8, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 8,
     GR64_with_sub_32bit_in_GR32_ADSubClassMask,
     SuperRegIdxSeqs + 1,
@@ -6483,6 +6647,8 @@ namespace X86 {   // Register class instances
 
   extern const TargetRegisterClass GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_TCRegClass = {
     &X86MCRegisterClasses[GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_TCRegClassID],
+    8, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 8,
     GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_TCSubClassMask,
     SuperRegIdxSeqs + 1,
@@ -6496,6 +6662,8 @@ namespace X86 {   // Register class instances
 
   extern const TargetRegisterClass GR64_NOREX_NOSP_and_LOW32_ADDR_ACCESS_RBPRegClass = {
     &X86MCRegisterClasses[GR64_NOREX_NOSP_and_LOW32_ADDR_ACCESS_RBPRegClassID],
+    8, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 8,
     GR64_NOREX_NOSP_and_LOW32_ADDR_ACCESS_RBPSubClassMask,
     SuperRegIdxSeqs + 1,
@@ -6509,6 +6677,8 @@ namespace X86 {   // Register class instances
 
   extern const TargetRegisterClass GR64_and_LOW32_ADDR_ACCESSRegClass = {
     &X86MCRegisterClasses[GR64_and_LOW32_ADDR_ACCESSRegClassID],
+    8, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 8,
     GR64_and_LOW32_ADDR_ACCESSSubClassMask,
     SuperRegIdxSeqs + 1,
@@ -6522,6 +6692,8 @@ namespace X86 {   // Register class instances
 
   extern const TargetRegisterClass GR64_with_sub_32bit_in_GR32_AD_and_GR32_NOAXRegClass = {
     &X86MCRegisterClasses[GR64_with_sub_32bit_in_GR32_AD_and_GR32_NOAXRegClassID],
+    8, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 8,
     GR64_with_sub_32bit_in_GR32_AD_and_GR32_NOAXSubClassMask,
     SuperRegIdxSeqs + 1,
@@ -6535,6 +6707,8 @@ namespace X86 {   // Register class instances
 
   extern const TargetRegisterClass RSTRegClass = {
     &X86MCRegisterClasses[RSTRegClassID],
+    10, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 10,
     RSTSubClassMask,
     SuperRegIdxSeqs + 1,
@@ -6548,6 +6722,8 @@ namespace X86 {   // Register class instances
 
   extern const TargetRegisterClass RFP80RegClass = {
     &X86MCRegisterClasses[RFP80RegClassID],
+    10, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 16,
     RFP80SubClassMask,
     SuperRegIdxSeqs + 1,
@@ -6561,6 +6737,8 @@ namespace X86 {   // Register class instances
 
   extern const TargetRegisterClass VR128XRegClass = {
     &X86MCRegisterClasses[VR128XRegClassID],
+    16, /* SpillSize */
+    16, /* SpillAlignment */
     VTLists + 33,
     VR128XSubClassMask,
     SuperRegIdxSeqs + 9,
@@ -6574,6 +6752,8 @@ namespace X86 {   // Register class instances
 
   extern const TargetRegisterClass FR128RegClass = {
     &X86MCRegisterClasses[FR128RegClassID],
+    16, /* SpillSize */
+    16, /* SpillAlignment */
     VTLists + 18,
     FR128SubClassMask,
     SuperRegIdxSeqs + 9,
@@ -6587,6 +6767,8 @@ namespace X86 {   // Register class instances
 
   extern const TargetRegisterClass VR128RegClass = {
     &X86MCRegisterClasses[VR128RegClassID],
+    16, /* SpillSize */
+    16, /* SpillAlignment */
     VTLists + 33,
     VR128SubClassMask,
     SuperRegIdxSeqs + 9,
@@ -6600,6 +6782,8 @@ namespace X86 {   // Register class instances
 
   extern const TargetRegisterClass VR128HRegClass = {
     &X86MCRegisterClasses[VR128HRegClassID],
+    16, /* SpillSize */
+    16, /* SpillAlignment */
     VTLists + 33,
     VR128HSubClassMask,
     SuperRegIdxSeqs + 9,
@@ -6613,6 +6797,8 @@ namespace X86 {   // Register class instances
 
   extern const TargetRegisterClass VR128LRegClass = {
     &X86MCRegisterClasses[VR128LRegClassID],
+    16, /* SpillSize */
+    16, /* SpillAlignment */
     VTLists + 33,
     VR128LSubClassMask,
     SuperRegIdxSeqs + 9,
@@ -6626,6 +6812,8 @@ namespace X86 {   // Register class instances
 
   extern const TargetRegisterClass BNDRRegClass = {
     &X86MCRegisterClasses[BNDRRegClassID],
+    16, /* SpillSize */
+    16, /* SpillAlignment */
     VTLists + 38,
     BNDRSubClassMask,
     SuperRegIdxSeqs + 1,
@@ -6639,6 +6827,8 @@ namespace X86 {   // Register class instances
 
   extern const TargetRegisterClass VR256XRegClass = {
     &X86MCRegisterClasses[VR256XRegClassID],
+    32, /* SpillSize */
+    32, /* SpillAlignment */
     VTLists + 40,
     VR256XSubClassMask,
     SuperRegIdxSeqs + 11,
@@ -6652,6 +6842,8 @@ namespace X86 {   // Register class instances
 
   extern const TargetRegisterClass VR256RegClass = {
     &X86MCRegisterClasses[VR256RegClassID],
+    32, /* SpillSize */
+    32, /* SpillAlignment */
     VTLists + 40,
     VR256SubClassMask,
     SuperRegIdxSeqs + 11,
@@ -6665,6 +6857,8 @@ namespace X86 {   // Register class instances
 
   extern const TargetRegisterClass VR256HRegClass = {
     &X86MCRegisterClasses[VR256HRegClassID],
+    32, /* SpillSize */
+    32, /* SpillAlignment */
     VTLists + 40,
     VR256HSubClassMask,
     SuperRegIdxSeqs + 11,
@@ -6678,6 +6872,8 @@ namespace X86 {   // Register class instances
 
   extern const TargetRegisterClass VR256LRegClass = {
     &X86MCRegisterClasses[VR256LRegClassID],
+    32, /* SpillSize */
+    32, /* SpillAlignment */
     VTLists + 40,
     VR256LSubClassMask,
     SuperRegIdxSeqs + 11,
@@ -6691,6 +6887,8 @@ namespace X86 {   // Register class instances
 
   extern const TargetRegisterClass VR512RegClass = {
     &X86MCRegisterClasses[VR512RegClassID],
+    64, /* SpillSize */
+    64, /* SpillAlignment */
     VTLists + 47,
     VR512SubClassMask,
     SuperRegIdxSeqs + 1,
@@ -6704,6 +6902,8 @@ namespace X86 {   // Register class instances
 
   extern const TargetRegisterClass VR512_with_sub_xmm_in_FR128RegClass = {
     &X86MCRegisterClasses[VR512_with_sub_xmm_in_FR128RegClassID],
+    64, /* SpillSize */
+    64, /* SpillAlignment */
     VTLists + 47,
     VR512_with_sub_xmm_in_FR128SubClassMask,
     SuperRegIdxSeqs + 1,
@@ -6717,6 +6917,8 @@ namespace X86 {   // Register class instances
 
   extern const TargetRegisterClass VR512_with_sub_xmm_in_VR128HRegClass = {
     &X86MCRegisterClasses[VR512_with_sub_xmm_in_VR128HRegClassID],
+    64, /* SpillSize */
+    64, /* SpillAlignment */
     VTLists + 47,
     VR512_with_sub_xmm_in_VR128HSubClassMask,
     SuperRegIdxSeqs + 1,
@@ -6730,6 +6932,8 @@ namespace X86 {   // Register class instances
 
   extern const TargetRegisterClass VR512_with_sub_xmm_in_VR128LRegClass = {
     &X86MCRegisterClasses[VR512_with_sub_xmm_in_VR128LRegClassID],
+    64, /* SpillSize */
+    64, /* SpillAlignment */
     VTLists + 47,
     VR512_with_sub_xmm_in_VR128LSubClassMask,
     SuperRegIdxSeqs + 1,
@@ -7129,7 +7333,7 @@ unsigned X86GenRegisterInfo::composeSubRegIndicesImpl(unsigned IdxA, unsigned Id
 LaneBitmask X86GenRegisterInfo::composeSubRegIndexLaneMaskImpl(unsigned IdxA, LaneBitmask LaneMask) const {
   --IdxA; assert(IdxA < 6 && "Subregister index out of bounds");
   LaneBitmask Result;
-  for (const MaskRolOp *Ops = CompositeSequences[IdxA]; !Ops->Mask.none(); ++Ops) {
+  for (const MaskRolOp *Ops = CompositeSequences[IdxA]; Ops->Mask.any(); ++Ops) {
     LaneBitmask::Type M = LaneMask.getAsInteger() & Ops->Mask.getAsInteger();
     if (unsigned S = Ops->RotateLeft)
       Result |= LaneBitmask((M << S) | (M >> (LaneBitmask::BitWidth - S)));
@@ -7143,7 +7347,7 @@ LaneBitmask X86GenRegisterInfo::reverseComposeSubRegIndexLaneMaskImpl(unsigned I
   LaneMask &= getSubRegIndexLaneMask(IdxA);
   --IdxA; assert(IdxA < 6 && "Subregister index out of bounds");
   LaneBitmask Result;
-  for (const MaskRolOp *Ops = CompositeSequences[IdxA]; !Ops->Mask.none(); ++Ops) {
+  for (const MaskRolOp *Ops = CompositeSequences[IdxA]; Ops->Mask.any(); ++Ops) {
     LaneBitmask::Type M = LaneMask.getAsInteger();
     if (unsigned S = Ops->RotateLeft)
       Result |= LaneBitmask((M >> S) | (M << (LaneBitmask::BitWidth - S)));
@@ -8372,6 +8576,8 @@ static const MCPhysReg CSR_64_AllRegs_AVX_SaveList[] = { X86::RBX, X86::RCX, X86
 static const uint32_t CSR_64_AllRegs_AVX_RegMask[] = { 0x21fdf7fe, 0x000069f8, 0x00000000, 0xc03fc000, 0xc0003fff, 0x00003fff, 0xc0000000, 0x003fffff, };
 static const MCPhysReg CSR_64_AllRegs_AVX512_SaveList[] = { X86::RBX, X86::RCX, X86::RDX, X86::RSI, X86::RDI, X86::R8, X86::R9, X86::R10, X86::R11, X86::R12, X86::R13, X86::R14, X86::R15, X86::RBP, X86::RAX, X86::ZMM0, X86::ZMM1, X86::ZMM2, X86::ZMM3, X86::ZMM4, X86::ZMM5, X86::ZMM6, X86::ZMM7, X86::ZMM8, X86::ZMM9, X86::ZMM10, X86::ZMM11, X86::ZMM12, X86::ZMM13, X86::ZMM14, X86::ZMM15, X86::ZMM16, X86::ZMM17, X86::ZMM18, X86::ZMM19, X86::ZMM20, X86::ZMM21, X86::ZMM22, X86::ZMM23, X86::ZMM24, X86::ZMM25, X86::ZMM26, X86::ZMM27, X86::ZMM28, X86::ZMM29, X86::ZMM30, X86::ZMM31, X86::K0, X86::K1, X86::K2, X86::K3, X86::K4, X86::K5, X86::K6, X86::K7, 0 };
 static const uint32_t CSR_64_AllRegs_AVX512_RegMask[] = { 0x21fdf7fe, 0x000069f8, 0xc0000000, 0xc03fc03f, 0xffffffff, 0xffffffff, 0xffffffff, 0x003fffff, };
+static const MCPhysReg CSR_64_AllRegs_NoSSE_SaveList[] = { X86::RAX, X86::RBX, X86::RCX, X86::RDX, X86::RSI, X86::RDI, X86::R8, X86::R9, X86::R10, X86::R11, X86::R12, X86::R13, X86::R14, X86::R15, X86::RBP, 0 };
+static const uint32_t CSR_64_AllRegs_NoSSE_RegMask[] = { 0x21fdf7fe, 0x000069f8, 0x00000000, 0x003fc000, 0x00000000, 0x00000000, 0xc0000000, 0x003fffff, };
 static const MCPhysReg CSR_64_CXX_TLS_Darwin_PE_SaveList[] = { X86::RBP, 0 };
 static const uint32_t CSR_64_CXX_TLS_Darwin_PE_RegMask[] = { 0x001000c0, 0x00000010, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, };
 static const MCPhysReg CSR_64_CXX_TLS_Darwin_ViaCopy_SaveList[] = { X86::RBX, X86::R12, X86::R13, X86::R14, X86::R15, X86::RCX, X86::RDX, X86::RSI, X86::R8, X86::R9, X86::R10, X86::R11, 0 };
@@ -8431,6 +8637,7 @@ ArrayRef<const uint32_t *> X86GenRegisterInfo::getRegMasks() const {
     CSR_64_AllRegs_RegMask,
     CSR_64_AllRegs_AVX_RegMask,
     CSR_64_AllRegs_AVX512_RegMask,
+    CSR_64_AllRegs_NoSSE_RegMask,
     CSR_64_CXX_TLS_Darwin_PE_RegMask,
     CSR_64_CXX_TLS_Darwin_ViaCopy_RegMask,
     CSR_64_HHVM_RegMask,
@@ -8471,6 +8678,7 @@ ArrayRef<const char *> X86GenRegisterInfo::getRegMaskNames() const {
     "CSR_64_AllRegs",
     "CSR_64_AllRegs_AVX",
     "CSR_64_AllRegs_AVX512",
+    "CSR_64_AllRegs_NoSSE",
     "CSR_64_CXX_TLS_Darwin_PE",
     "CSR_64_CXX_TLS_Darwin_ViaCopy",
     "CSR_64_HHVM",

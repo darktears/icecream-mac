@@ -456,60 +456,66 @@ enum {
   FGRH32RegClassID = 10,
   GPR32RegClassID = 11,
   HWRegsRegClassID = 12,
-  OddSP_with_sub_hiRegClassID = 13,
-  FGR32_and_OddSPRegClassID = 14,
-  FGRH32_and_OddSPRegClassID = 15,
-  OddSP_with_sub_hi_with_sub_hi_in_FGRH32RegClassID = 16,
-  CPU16RegsPlusSPRegClassID = 17,
-  CPU16RegsRegClassID = 18,
-  FCCRegClassID = 19,
-  GPRMM16RegClassID = 20,
-  GPRMM16MovePRegClassID = 21,
-  GPRMM16ZeroRegClassID = 22,
-  MSACtrlRegClassID = 23,
-  OddSP_with_sub_hi_with_sub_hi_in_FGR32RegClassID = 24,
-  CPU16Regs_and_GPRMM16ZeroRegClassID = 25,
-  CPU16Regs_and_GPRMM16MovePRegClassID = 26,
-  GPRMM16MoveP_and_GPRMM16ZeroRegClassID = 27,
-  HI32DSPRegClassID = 28,
-  LO32DSPRegClassID = 29,
-  GPRMM16MoveP_and_CPU16Regs_and_GPRMM16ZeroRegClassID = 30,
-  CPURARegRegClassID = 31,
-  CPUSPRegRegClassID = 32,
-  DSPCCRegClassID = 33,
-  GP32RegClassID = 34,
-  HI32RegClassID = 35,
-  LO32RegClassID = 36,
-  SP32RegClassID = 37,
-  FGR64RegClassID = 38,
-  GPR64RegClassID = 39,
-  AFGR64RegClassID = 40,
-  FGR64_and_OddSPRegClassID = 41,
-  GPR64_with_sub_32_in_CPU16RegsPlusSPRegClassID = 42,
-  AFGR64_and_OddSPRegClassID = 43,
-  GPR64_with_sub_32_in_GPRMM16MovePRegClassID = 44,
-  GPR64_with_sub_32_in_GPRMM16ZeroRegClassID = 45,
-  GPRMM16_64RegClassID = 46,
-  GPR64_with_sub_32_in_CPU16Regs_and_GPRMM16ZeroRegClassID = 47,
-  ACC64DSPRegClassID = 48,
-  GPR64_with_sub_32_in_CPU16Regs_and_GPRMM16MovePRegClassID = 49,
-  GPR64_with_sub_32_in_GPRMM16MoveP_and_GPRMM16ZeroRegClassID = 50,
-  GPRMM16_64_with_sub_32_in_GPRMM16MoveP_and_GPRMM16ZeroRegClassID = 51,
-  OCTEON_MPLRegClassID = 52,
-  OCTEON_PRegClassID = 53,
-  ACC64RegClassID = 54,
-  GP64RegClassID = 55,
-  GPR64_with_sub_32_in_CPURARegRegClassID = 56,
-  HI64RegClassID = 57,
-  LO64RegClassID = 58,
-  SP64RegClassID = 59,
-  MSA128BRegClassID = 60,
-  MSA128DRegClassID = 61,
-  MSA128HRegClassID = 62,
-  MSA128WRegClassID = 63,
-  MSA128B_with_sub_64_in_OddSPRegClassID = 64,
-  MSA128WEvensRegClassID = 65,
-  ACC128RegClassID = 66,
+  GPR32NONZERORegClassID = 13,
+  OddSP_with_sub_hiRegClassID = 14,
+  FGR32_and_OddSPRegClassID = 15,
+  FGRH32_and_OddSPRegClassID = 16,
+  OddSP_with_sub_hi_with_sub_hi_in_FGRH32RegClassID = 17,
+  CPU16RegsPlusSPRegClassID = 18,
+  CPU16RegsRegClassID = 19,
+  FCCRegClassID = 20,
+  GPRMM16RegClassID = 21,
+  GPRMM16MovePRegClassID = 22,
+  GPRMM16ZeroRegClassID = 23,
+  MSACtrlRegClassID = 24,
+  OddSP_with_sub_hi_with_sub_hi_in_FGR32RegClassID = 25,
+  CPU16Regs_and_GPRMM16ZeroRegClassID = 26,
+  GPR32NONZERO_and_GPRMM16MovePRegClassID = 27,
+  CPU16Regs_and_GPRMM16MovePRegClassID = 28,
+  GPRMM16MoveP_and_GPRMM16ZeroRegClassID = 29,
+  HI32DSPRegClassID = 30,
+  LO32DSPRegClassID = 31,
+  GPRMM16MoveP_and_CPU16Regs_and_GPRMM16ZeroRegClassID = 32,
+  CPURARegRegClassID = 33,
+  CPUSPRegRegClassID = 34,
+  DSPCCRegClassID = 35,
+  GP32RegClassID = 36,
+  GPR32ZERORegClassID = 37,
+  HI32RegClassID = 38,
+  LO32RegClassID = 39,
+  SP32RegClassID = 40,
+  FGR64RegClassID = 41,
+  GPR64RegClassID = 42,
+  GPR64_with_sub_32_in_GPR32NONZERORegClassID = 43,
+  AFGR64RegClassID = 44,
+  FGR64_and_OddSPRegClassID = 45,
+  GPR64_with_sub_32_in_CPU16RegsPlusSPRegClassID = 46,
+  AFGR64_and_OddSPRegClassID = 47,
+  GPR64_with_sub_32_in_GPRMM16MovePRegClassID = 48,
+  GPR64_with_sub_32_in_GPRMM16ZeroRegClassID = 49,
+  GPRMM16_64RegClassID = 50,
+  GPR64_with_sub_32_in_CPU16Regs_and_GPRMM16ZeroRegClassID = 51,
+  GPR64_with_sub_32_in_GPR32NONZERO_and_GPRMM16MovePRegClassID = 52,
+  ACC64DSPRegClassID = 53,
+  GPR64_with_sub_32_in_CPU16Regs_and_GPRMM16MovePRegClassID = 54,
+  GPR64_with_sub_32_in_GPRMM16MoveP_and_GPRMM16ZeroRegClassID = 55,
+  GPRMM16_64_with_sub_32_in_GPRMM16MoveP_and_GPRMM16ZeroRegClassID = 56,
+  OCTEON_MPLRegClassID = 57,
+  OCTEON_PRegClassID = 58,
+  ACC64RegClassID = 59,
+  GP64RegClassID = 60,
+  GPR64_with_sub_32_in_CPURARegRegClassID = 61,
+  GPR64_with_sub_32_in_GPR32ZERORegClassID = 62,
+  HI64RegClassID = 63,
+  LO64RegClassID = 64,
+  SP64RegClassID = 65,
+  MSA128BRegClassID = 66,
+  MSA128DRegClassID = 67,
+  MSA128HRegClassID = 68,
+  MSA128WRegClassID = 69,
+  MSA128B_with_sub_64_in_OddSPRegClassID = 70,
+  MSA128WEvensRegClassID = 71,
+  ACC128RegClassID = 72,
 
   };
 } // end namespace Mips
@@ -1943,6 +1949,16 @@ namespace {     // Register classes...
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xfe, 0xff, 0xff, 0xff, 0x01, 
   };
 
+  // GPR32NONZERO Register Class...
+  const MCPhysReg GPR32NONZERO[] = {
+    Mips::AT, Mips::V0, Mips::V1, Mips::A0, Mips::A1, Mips::A2, Mips::A3, Mips::T0, Mips::T1, Mips::T2, Mips::T3, Mips::T4, Mips::T5, Mips::T6, Mips::T7, Mips::S0, Mips::S1, Mips::S2, Mips::S3, Mips::S4, Mips::S5, Mips::S6, Mips::S7, Mips::T8, Mips::T9, Mips::K0, Mips::K1, Mips::GP, Mips::SP, Mips::FP, Mips::RA, 
+  };
+
+  // GPR32NONZERO Bit set.
+  const uint8_t GPR32NONZEROBits[] = {
+    0x02, 0x03, 0xd8, 0x03, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x06, 0xc0, 0xbf, 0xff, 0x07, 
+  };
+
   // OddSP_with_sub_hi Register Class...
   const MCPhysReg OddSP_with_sub_hi[] = {
     Mips::D1, Mips::D3, Mips::D5, Mips::D7, Mips::D9, Mips::D11, Mips::D13, Mips::D15, Mips::D1_64, Mips::D3_64, Mips::D5_64, Mips::D7_64, Mips::D9_64, Mips::D11_64, Mips::D13_64, Mips::D15_64, Mips::D17_64, Mips::D19_64, Mips::D21_64, Mips::D23_64, Mips::D25_64, Mips::D27_64, Mips::D29_64, Mips::D31_64, 
@@ -2073,6 +2089,16 @@ namespace {     // Register classes...
     0x00, 0x00, 0xc0, 0x03, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x80, 0x00, 0x00, 0x06, 
   };
 
+  // GPR32NONZERO_and_GPRMM16MoveP Register Class...
+  const MCPhysReg GPR32NONZERO_and_GPRMM16MoveP[] = {
+    Mips::S1, Mips::V0, Mips::V1, Mips::S0, Mips::S2, Mips::S3, Mips::S4, 
+  };
+
+  // GPR32NONZERO_and_GPRMM16MoveP Bit set.
+  const uint8_t GPR32NONZERO_and_GPRMM16MovePBits[] = {
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xc0, 0x07, 0x00, 0x06, 
+  };
+
   // CPU16Regs_and_GPRMM16MoveP Register Class...
   const MCPhysReg CPU16Regs_and_GPRMM16MoveP[] = {
     Mips::S1, Mips::V0, Mips::V1, Mips::S0, 
@@ -2163,6 +2189,16 @@ namespace {     // Register classes...
     0x00, 0x02, 
   };
 
+  // GPR32ZERO Register Class...
+  const MCPhysReg GPR32ZERO[] = {
+    Mips::ZERO, 
+  };
+
+  // GPR32ZERO Bit set.
+  const uint8_t GPR32ZEROBits[] = {
+    0x00, 0x00, 0x20, 
+  };
+
   // HI32 Register Class...
   const MCPhysReg HI32[] = {
     Mips::HI0, 
@@ -2211,6 +2247,16 @@ namespace {     // Register classes...
   // GPR64 Bit set.
   const uint8_t GPR64Bits[] = {
     0x00, 0x00, 0x00, 0x40, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x08, 0x00, 0x00, 0x00, 0x10, 0x00, 0x00, 0x00, 0x00, 0x00, 0x20, 0x40, 0x00, 0x00, 0x00, 0x00, 0x00, 0xf8, 0x00, 0x00, 0x00, 0x00, 0xd8, 0xff, 0xff, 0x03, 
+  };
+
+  // GPR64_with_sub_32_in_GPR32NONZERO Register Class...
+  const MCPhysReg GPR64_with_sub_32_in_GPR32NONZERO[] = {
+    Mips::AT_64, Mips::V0_64, Mips::V1_64, Mips::A0_64, Mips::A1_64, Mips::A2_64, Mips::A3_64, Mips::T0_64, Mips::T1_64, Mips::T2_64, Mips::T3_64, Mips::T4_64, Mips::T5_64, Mips::T6_64, Mips::T7_64, Mips::S0_64, Mips::S1_64, Mips::S2_64, Mips::S3_64, Mips::S4_64, Mips::S5_64, Mips::S6_64, Mips::S7_64, Mips::T8_64, Mips::T9_64, Mips::K0_64, Mips::K1_64, Mips::GP_64, Mips::SP_64, Mips::FP_64, Mips::RA_64, 
+  };
+
+  // GPR64_with_sub_32_in_GPR32NONZERO Bit set.
+  const uint8_t GPR64_with_sub_32_in_GPR32NONZEROBits[] = {
+    0x00, 0x00, 0x00, 0x40, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x08, 0x00, 0x00, 0x00, 0x10, 0x00, 0x00, 0x00, 0x00, 0x00, 0x20, 0x40, 0x00, 0x00, 0x00, 0x00, 0x00, 0xf0, 0x00, 0x00, 0x00, 0x00, 0xd8, 0xff, 0xff, 0x03, 
   };
 
   // AFGR64 Register Class...
@@ -2293,6 +2339,16 @@ namespace {     // Register classes...
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xf0, 0x00, 0x00, 0x00, 0x00, 0x80, 0x00, 0x00, 0x03, 
   };
 
+  // GPR64_with_sub_32_in_GPR32NONZERO_and_GPRMM16MoveP Register Class...
+  const MCPhysReg GPR64_with_sub_32_in_GPR32NONZERO_and_GPRMM16MoveP[] = {
+    Mips::V0_64, Mips::V1_64, Mips::S0_64, Mips::S1_64, Mips::S2_64, Mips::S3_64, Mips::S4_64, 
+  };
+
+  // GPR64_with_sub_32_in_GPR32NONZERO_and_GPRMM16MoveP Bit set.
+  const uint8_t GPR64_with_sub_32_in_GPR32NONZERO_and_GPRMM16MovePBits[] = {
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xc0, 0x07, 0x00, 0x03, 
+  };
+
   // ACC64DSP Register Class...
   const MCPhysReg ACC64DSP[] = {
     Mips::AC0, Mips::AC1, Mips::AC2, Mips::AC3, 
@@ -2305,7 +2361,7 @@ namespace {     // Register classes...
 
   // GPR64_with_sub_32_in_CPU16Regs_and_GPRMM16MoveP Register Class...
   const MCPhysReg GPR64_with_sub_32_in_CPU16Regs_and_GPRMM16MoveP[] = {
-    Mips::S0_64, Mips::S1_64, Mips::V0_64, Mips::V1_64, 
+    Mips::V0_64, Mips::V1_64, Mips::S0_64, Mips::S1_64, 
   };
 
   // GPR64_with_sub_32_in_CPU16Regs_and_GPRMM16MoveP Bit set.
@@ -2381,6 +2437,16 @@ namespace {     // Register classes...
   // GPR64_with_sub_32_in_CPURAReg Bit set.
   const uint8_t GPR64_with_sub_32_in_CPURARegBits[] = {
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x20, 
+  };
+
+  // GPR64_with_sub_32_in_GPR32ZERO Register Class...
+  const MCPhysReg GPR64_with_sub_32_in_GPR32ZERO[] = {
+    Mips::ZERO_64, 
+  };
+
+  // GPR64_with_sub_32_in_GPR32ZERO Bit set.
+  const uint8_t GPR64_with_sub_32_in_GPR32ZEROBits[] = {
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x08, 
   };
 
   // HI64 Register Class...
@@ -2514,103 +2580,112 @@ extern const char MipsRegClassStrings[] = {
   /* 219 */ 'M', 'S', 'A', '1', '2', '8', 'D', 0,
   /* 227 */ 'M', 'S', 'A', '1', '2', '8', 'H', 0,
   /* 235 */ 'O', 'C', 'T', 'E', 'O', 'N', '_', 'M', 'P', 'L', 0,
-  /* 246 */ 'H', 'I', '3', '2', 'D', 'S', 'P', 0,
-  /* 254 */ 'L', 'O', '3', '2', 'D', 'S', 'P', 0,
-  /* 262 */ 'A', 'C', 'C', '6', '4', 'D', 'S', 'P', 0,
-  /* 271 */ 'F', 'G', 'R', 'H', '3', '2', '_', 'a', 'n', 'd', '_', 'O', 'd', 'd', 'S', 'P', 0,
-  /* 288 */ 'F', 'G', 'R', '3', '2', '_', 'a', 'n', 'd', '_', 'O', 'd', 'd', 'S', 'P', 0,
-  /* 304 */ 'A', 'F', 'G', 'R', '6', '4', '_', 'a', 'n', 'd', '_', 'O', 'd', 'd', 'S', 'P', 0,
-  /* 321 */ 'M', 'S', 'A', '1', '2', '8', 'F', '1', '6', '_', 'w', 'i', 't', 'h', '_', 's', 'u', 'b', '_', '6', '4', '_', 'i', 'n', '_', 'O', 'd', 'd', 'S', 'P', 0,
-  /* 352 */ 'M', 'S', 'A', '1', '2', '8', 'B', '_', 'w', 'i', 't', 'h', '_', 's', 'u', 'b', '_', '6', '4', '_', 'i', 'n', '_', 'O', 'd', 'd', 'S', 'P', 0,
-  /* 381 */ 'G', 'P', 'R', '6', '4', '_', 'w', 'i', 't', 'h', '_', 's', 'u', 'b', '_', '3', '2', '_', 'i', 'n', '_', 'C', 'P', 'U', '1', '6', 'R', 'e', 'g', 's', 'P', 'l', 'u', 's', 'S', 'P', 0,
-  /* 418 */ 'O', 'C', 'T', 'E', 'O', 'N', '_', 'P', 0,
-  /* 427 */ 'G', 'P', 'R', '6', '4', '_', 'w', 'i', 't', 'h', '_', 's', 'u', 'b', '_', '3', '2', '_', 'i', 'n', '_', 'C', 'P', 'U', '1', '6', 'R', 'e', 'g', 's', '_', 'a', 'n', 'd', '_', 'G', 'P', 'R', 'M', 'M', '1', '6', 'M', 'o', 'v', 'e', 'P', 0,
-  /* 475 */ 'G', 'P', 'R', '6', '4', '_', 'w', 'i', 't', 'h', '_', 's', 'u', 'b', '_', '3', '2', '_', 'i', 'n', '_', 'G', 'P', 'R', 'M', 'M', '1', '6', 'M', 'o', 'v', 'e', 'P', 0,
-  /* 509 */ 'C', 'C', 'R', 0,
-  /* 513 */ 'D', 'S', 'P', 'R', 0,
-  /* 518 */ 'M', 'S', 'A', '1', '2', '8', 'W', 0,
-  /* 526 */ 'G', 'P', 'R', '6', '4', '_', 'w', 'i', 't', 'h', '_', 's', 'u', 'b', '_', '3', '2', '_', 'i', 'n', '_', 'C', 'P', 'U', 'R', 'A', 'R', 'e', 'g', 0,
-  /* 556 */ 'C', 'P', 'U', 'S', 'P', 'R', 'e', 'g', 0,
-  /* 565 */ 'O', 'd', 'd', 'S', 'P', '_', 'w', 'i', 't', 'h', '_', 's', 'u', 'b', '_', 'h', 'i', 0,
-  /* 583 */ 'M', 'S', 'A', 'C', 't', 'r', 'l', 0,
-  /* 591 */ 'G', 'P', 'R', '6', '4', '_', 'w', 'i', 't', 'h', '_', 's', 'u', 'b', '_', '3', '2', '_', 'i', 'n', '_', 'G', 'P', 'R', 'M', 'M', '1', '6', 'M', 'o', 'v', 'e', 'P', '_', 'a', 'n', 'd', '_', 'G', 'P', 'R', 'M', 'M', '1', '6', 'Z', 'e', 'r', 'o', 0,
-  /* 641 */ 'G', 'P', 'R', 'M', 'M', '1', '6', '_', '6', '4', '_', 'w', 'i', 't', 'h', '_', 's', 'u', 'b', '_', '3', '2', '_', 'i', 'n', '_', 'G', 'P', 'R', 'M', 'M', '1', '6', 'M', 'o', 'v', 'e', 'P', '_', 'a', 'n', 'd', '_', 'G', 'P', 'R', 'M', 'M', '1', '6', 'Z', 'e', 'r', 'o', 0,
-  /* 696 */ 'G', 'P', 'R', 'M', 'M', '1', '6', 'M', 'o', 'v', 'e', 'P', '_', 'a', 'n', 'd', '_', 'C', 'P', 'U', '1', '6', 'R', 'e', 'g', 's', '_', 'a', 'n', 'd', '_', 'G', 'P', 'R', 'M', 'M', '1', '6', 'Z', 'e', 'r', 'o', 0,
-  /* 739 */ 'G', 'P', 'R', '6', '4', '_', 'w', 'i', 't', 'h', '_', 's', 'u', 'b', '_', '3', '2', '_', 'i', 'n', '_', 'C', 'P', 'U', '1', '6', 'R', 'e', 'g', 's', '_', 'a', 'n', 'd', '_', 'G', 'P', 'R', 'M', 'M', '1', '6', 'Z', 'e', 'r', 'o', 0,
-  /* 786 */ 'G', 'P', 'R', '6', '4', '_', 'w', 'i', 't', 'h', '_', 's', 'u', 'b', '_', '3', '2', '_', 'i', 'n', '_', 'G', 'P', 'R', 'M', 'M', '1', '6', 'Z', 'e', 'r', 'o', 0,
-  /* 819 */ 'C', 'P', 'U', '1', '6', 'R', 'e', 'g', 's', 0,
-  /* 829 */ 'H', 'W', 'R', 'e', 'g', 's', 0,
-  /* 836 */ 'M', 'S', 'A', '1', '2', '8', 'W', 'E', 'v', 'e', 'n', 's', 0,
+  /* 246 */ 'G', 'P', 'R', '6', '4', '_', 'w', 'i', 't', 'h', '_', 's', 'u', 'b', '_', '3', '2', '_', 'i', 'n', '_', 'G', 'P', 'R', '3', '2', 'Z', 'E', 'R', 'O', 0,
+  /* 277 */ 'G', 'P', 'R', '6', '4', '_', 'w', 'i', 't', 'h', '_', 's', 'u', 'b', '_', '3', '2', '_', 'i', 'n', '_', 'G', 'P', 'R', '3', '2', 'N', 'O', 'N', 'Z', 'E', 'R', 'O', 0,
+  /* 311 */ 'H', 'I', '3', '2', 'D', 'S', 'P', 0,
+  /* 319 */ 'L', 'O', '3', '2', 'D', 'S', 'P', 0,
+  /* 327 */ 'A', 'C', 'C', '6', '4', 'D', 'S', 'P', 0,
+  /* 336 */ 'F', 'G', 'R', 'H', '3', '2', '_', 'a', 'n', 'd', '_', 'O', 'd', 'd', 'S', 'P', 0,
+  /* 353 */ 'F', 'G', 'R', '3', '2', '_', 'a', 'n', 'd', '_', 'O', 'd', 'd', 'S', 'P', 0,
+  /* 369 */ 'A', 'F', 'G', 'R', '6', '4', '_', 'a', 'n', 'd', '_', 'O', 'd', 'd', 'S', 'P', 0,
+  /* 386 */ 'M', 'S', 'A', '1', '2', '8', 'F', '1', '6', '_', 'w', 'i', 't', 'h', '_', 's', 'u', 'b', '_', '6', '4', '_', 'i', 'n', '_', 'O', 'd', 'd', 'S', 'P', 0,
+  /* 417 */ 'M', 'S', 'A', '1', '2', '8', 'B', '_', 'w', 'i', 't', 'h', '_', 's', 'u', 'b', '_', '6', '4', '_', 'i', 'n', '_', 'O', 'd', 'd', 'S', 'P', 0,
+  /* 446 */ 'G', 'P', 'R', '6', '4', '_', 'w', 'i', 't', 'h', '_', 's', 'u', 'b', '_', '3', '2', '_', 'i', 'n', '_', 'C', 'P', 'U', '1', '6', 'R', 'e', 'g', 's', 'P', 'l', 'u', 's', 'S', 'P', 0,
+  /* 483 */ 'O', 'C', 'T', 'E', 'O', 'N', '_', 'P', 0,
+  /* 492 */ 'G', 'P', 'R', '6', '4', '_', 'w', 'i', 't', 'h', '_', 's', 'u', 'b', '_', '3', '2', '_', 'i', 'n', '_', 'G', 'P', 'R', '3', '2', 'N', 'O', 'N', 'Z', 'E', 'R', 'O', '_', 'a', 'n', 'd', '_', 'G', 'P', 'R', 'M', 'M', '1', '6', 'M', 'o', 'v', 'e', 'P', 0,
+  /* 543 */ 'G', 'P', 'R', '6', '4', '_', 'w', 'i', 't', 'h', '_', 's', 'u', 'b', '_', '3', '2', '_', 'i', 'n', '_', 'C', 'P', 'U', '1', '6', 'R', 'e', 'g', 's', '_', 'a', 'n', 'd', '_', 'G', 'P', 'R', 'M', 'M', '1', '6', 'M', 'o', 'v', 'e', 'P', 0,
+  /* 591 */ 'G', 'P', 'R', '6', '4', '_', 'w', 'i', 't', 'h', '_', 's', 'u', 'b', '_', '3', '2', '_', 'i', 'n', '_', 'G', 'P', 'R', 'M', 'M', '1', '6', 'M', 'o', 'v', 'e', 'P', 0,
+  /* 625 */ 'C', 'C', 'R', 0,
+  /* 629 */ 'D', 'S', 'P', 'R', 0,
+  /* 634 */ 'M', 'S', 'A', '1', '2', '8', 'W', 0,
+  /* 642 */ 'G', 'P', 'R', '6', '4', '_', 'w', 'i', 't', 'h', '_', 's', 'u', 'b', '_', '3', '2', '_', 'i', 'n', '_', 'C', 'P', 'U', 'R', 'A', 'R', 'e', 'g', 0,
+  /* 672 */ 'C', 'P', 'U', 'S', 'P', 'R', 'e', 'g', 0,
+  /* 681 */ 'O', 'd', 'd', 'S', 'P', '_', 'w', 'i', 't', 'h', '_', 's', 'u', 'b', '_', 'h', 'i', 0,
+  /* 699 */ 'M', 'S', 'A', 'C', 't', 'r', 'l', 0,
+  /* 707 */ 'G', 'P', 'R', '6', '4', '_', 'w', 'i', 't', 'h', '_', 's', 'u', 'b', '_', '3', '2', '_', 'i', 'n', '_', 'G', 'P', 'R', 'M', 'M', '1', '6', 'M', 'o', 'v', 'e', 'P', '_', 'a', 'n', 'd', '_', 'G', 'P', 'R', 'M', 'M', '1', '6', 'Z', 'e', 'r', 'o', 0,
+  /* 757 */ 'G', 'P', 'R', 'M', 'M', '1', '6', '_', '6', '4', '_', 'w', 'i', 't', 'h', '_', 's', 'u', 'b', '_', '3', '2', '_', 'i', 'n', '_', 'G', 'P', 'R', 'M', 'M', '1', '6', 'M', 'o', 'v', 'e', 'P', '_', 'a', 'n', 'd', '_', 'G', 'P', 'R', 'M', 'M', '1', '6', 'Z', 'e', 'r', 'o', 0,
+  /* 812 */ 'G', 'P', 'R', 'M', 'M', '1', '6', 'M', 'o', 'v', 'e', 'P', '_', 'a', 'n', 'd', '_', 'C', 'P', 'U', '1', '6', 'R', 'e', 'g', 's', '_', 'a', 'n', 'd', '_', 'G', 'P', 'R', 'M', 'M', '1', '6', 'Z', 'e', 'r', 'o', 0,
+  /* 855 */ 'G', 'P', 'R', '6', '4', '_', 'w', 'i', 't', 'h', '_', 's', 'u', 'b', '_', '3', '2', '_', 'i', 'n', '_', 'C', 'P', 'U', '1', '6', 'R', 'e', 'g', 's', '_', 'a', 'n', 'd', '_', 'G', 'P', 'R', 'M', 'M', '1', '6', 'Z', 'e', 'r', 'o', 0,
+  /* 902 */ 'G', 'P', 'R', '6', '4', '_', 'w', 'i', 't', 'h', '_', 's', 'u', 'b', '_', '3', '2', '_', 'i', 'n', '_', 'G', 'P', 'R', 'M', 'M', '1', '6', 'Z', 'e', 'r', 'o', 0,
+  /* 935 */ 'C', 'P', 'U', '1', '6', 'R', 'e', 'g', 's', 0,
+  /* 945 */ 'H', 'W', 'R', 'e', 'g', 's', 0,
+  /* 952 */ 'M', 'S', 'A', '1', '2', '8', 'W', 'E', 'v', 'e', 'n', 's', 0,
 };
 
 extern const MCRegisterClass MipsMCRegisterClasses[] = {
-  { MSA128F16, MSA128F16Bits, 170, 32, sizeof(MSA128F16Bits), Mips::MSA128F16RegClassID, 2, 16, 1, true },
-  { MSA128F16_with_sub_64_in_OddSP, MSA128F16_with_sub_64_in_OddSPBits, 321, 16, sizeof(MSA128F16_with_sub_64_in_OddSPBits), Mips::MSA128F16_with_sub_64_in_OddSPRegClassID, 2, 16, 1, true },
-  { OddSP, OddSPBits, 282, 56, sizeof(OddSPBits), Mips::OddSPRegClassID, 4, 4, 1, false },
-  { CCR, CCRBits, 509, 32, sizeof(CCRBits), Mips::CCRRegClassID, 4, 4, 1, false },
-  { COP0, COP0Bits, 0, 32, sizeof(COP0Bits), Mips::COP0RegClassID, 4, 4, 1, false },
-  { COP2, COP2Bits, 110, 32, sizeof(COP2Bits), Mips::COP2RegClassID, 4, 4, 1, false },
-  { COP3, COP3Bits, 115, 32, sizeof(COP3Bits), Mips::COP3RegClassID, 4, 4, 1, false },
-  { DSPR, DSPRBits, 513, 32, sizeof(DSPRBits), Mips::DSPRRegClassID, 4, 4, 1, true },
-  { FGR32, FGR32Bits, 98, 32, sizeof(FGR32Bits), Mips::FGR32RegClassID, 4, 4, 1, true },
-  { FGRCC, FGRCCBits, 213, 32, sizeof(FGRCCBits), Mips::FGRCCRegClassID, 4, 4, 1, true },
-  { FGRH32, FGRH32Bits, 38, 32, sizeof(FGRH32Bits), Mips::FGRH32RegClassID, 4, 4, 1, false },
-  { GPR32, GPR32Bits, 104, 32, sizeof(GPR32Bits), Mips::GPR32RegClassID, 4, 4, 1, true },
-  { HWRegs, HWRegsBits, 829, 32, sizeof(HWRegsBits), Mips::HWRegsRegClassID, 4, 4, 1, false },
-  { OddSP_with_sub_hi, OddSP_with_sub_hiBits, 565, 24, sizeof(OddSP_with_sub_hiBits), Mips::OddSP_with_sub_hiRegClassID, 4, 4, 1, false },
-  { FGR32_and_OddSP, FGR32_and_OddSPBits, 288, 16, sizeof(FGR32_and_OddSPBits), Mips::FGR32_and_OddSPRegClassID, 4, 4, 1, true },
-  { FGRH32_and_OddSP, FGRH32_and_OddSPBits, 271, 16, sizeof(FGRH32_and_OddSPBits), Mips::FGRH32_and_OddSPRegClassID, 4, 4, 1, false },
-  { OddSP_with_sub_hi_with_sub_hi_in_FGRH32, OddSP_with_sub_hi_with_sub_hi_in_FGRH32Bits, 5, 16, sizeof(OddSP_with_sub_hi_with_sub_hi_in_FGRH32Bits), Mips::OddSP_with_sub_hi_with_sub_hi_in_FGRH32RegClassID, 4, 4, 1, false },
-  { CPU16RegsPlusSP, CPU16RegsPlusSPBits, 402, 9, sizeof(CPU16RegsPlusSPBits), Mips::CPU16RegsPlusSPRegClassID, 4, 4, 1, true },
-  { CPU16Regs, CPU16RegsBits, 819, 8, sizeof(CPU16RegsBits), Mips::CPU16RegsRegClassID, 4, 4, 1, true },
-  { FCC, FCCBits, 203, 8, sizeof(FCCBits), Mips::FCCRegClassID, 4, 4, 1, false },
-  { GPRMM16, GPRMM16Bits, 180, 8, sizeof(GPRMM16Bits), Mips::GPRMM16RegClassID, 4, 4, 1, true },
-  { GPRMM16MoveP, GPRMM16MovePBits, 462, 8, sizeof(GPRMM16MovePBits), Mips::GPRMM16MovePRegClassID, 4, 4, 1, true },
-  { GPRMM16Zero, GPRMM16ZeroBits, 629, 8, sizeof(GPRMM16ZeroBits), Mips::GPRMM16ZeroRegClassID, 4, 4, 1, true },
-  { MSACtrl, MSACtrlBits, 583, 8, sizeof(MSACtrlBits), Mips::MSACtrlRegClassID, 4, 4, 1, true },
-  { OddSP_with_sub_hi_with_sub_hi_in_FGR32, OddSP_with_sub_hi_with_sub_hi_in_FGR32Bits, 65, 8, sizeof(OddSP_with_sub_hi_with_sub_hi_in_FGR32Bits), Mips::OddSP_with_sub_hi_with_sub_hi_in_FGR32RegClassID, 4, 4, 1, false },
-  { CPU16Regs_and_GPRMM16Zero, CPU16Regs_and_GPRMM16ZeroBits, 713, 7, sizeof(CPU16Regs_and_GPRMM16ZeroBits), Mips::CPU16Regs_and_GPRMM16ZeroRegClassID, 4, 4, 1, true },
-  { CPU16Regs_and_GPRMM16MoveP, CPU16Regs_and_GPRMM16MovePBits, 448, 4, sizeof(CPU16Regs_and_GPRMM16MovePBits), Mips::CPU16Regs_and_GPRMM16MovePRegClassID, 4, 4, 1, true },
-  { GPRMM16MoveP_and_GPRMM16Zero, GPRMM16MoveP_and_GPRMM16ZeroBits, 612, 4, sizeof(GPRMM16MoveP_and_GPRMM16ZeroBits), Mips::GPRMM16MoveP_and_GPRMM16ZeroRegClassID, 4, 4, 1, true },
-  { HI32DSP, HI32DSPBits, 246, 4, sizeof(HI32DSPBits), Mips::HI32DSPRegClassID, 4, 4, 1, true },
-  { LO32DSP, LO32DSPBits, 254, 4, sizeof(LO32DSPBits), Mips::LO32DSPRegClassID, 4, 4, 1, true },
-  { GPRMM16MoveP_and_CPU16Regs_and_GPRMM16Zero, GPRMM16MoveP_and_CPU16Regs_and_GPRMM16ZeroBits, 696, 3, sizeof(GPRMM16MoveP_and_CPU16Regs_and_GPRMM16ZeroBits), Mips::GPRMM16MoveP_and_CPU16Regs_and_GPRMM16ZeroRegClassID, 4, 4, 1, true },
-  { CPURAReg, CPURARegBits, 547, 1, sizeof(CPURARegBits), Mips::CPURARegRegClassID, 4, 4, 1, false },
-  { CPUSPReg, CPUSPRegBits, 556, 1, sizeof(CPUSPRegBits), Mips::CPUSPRegRegClassID, 4, 4, 1, false },
-  { DSPCC, DSPCCBits, 207, 1, sizeof(DSPCCBits), Mips::DSPCCRegClassID, 4, 4, 1, true },
-  { GP32, GP32Bits, 55, 1, sizeof(GP32Bits), Mips::GP32RegClassID, 4, 4, 1, false },
-  { HI32, HI32Bits, 45, 1, sizeof(HI32Bits), Mips::HI32RegClassID, 4, 4, 1, true },
-  { LO32, LO32Bits, 50, 1, sizeof(LO32Bits), Mips::LO32RegClassID, 4, 4, 1, true },
-  { SP32, SP32Bits, 60, 1, sizeof(SP32Bits), Mips::SP32RegClassID, 4, 4, 1, false },
-  { FGR64, FGR64Bits, 147, 32, sizeof(FGR64Bits), Mips::FGR64RegClassID, 8, 8, 1, true },
-  { GPR64, GPR64Bits, 153, 32, sizeof(GPR64Bits), Mips::GPR64RegClassID, 8, 8, 1, true },
-  { AFGR64, AFGR64Bits, 146, 16, sizeof(AFGR64Bits), Mips::AFGR64RegClassID, 8, 8, 1, true },
-  { FGR64_and_OddSP, FGR64_and_OddSPBits, 305, 16, sizeof(FGR64_and_OddSPBits), Mips::FGR64_and_OddSPRegClassID, 8, 8, 1, true },
-  { GPR64_with_sub_32_in_CPU16RegsPlusSP, GPR64_with_sub_32_in_CPU16RegsPlusSPBits, 381, 9, sizeof(GPR64_with_sub_32_in_CPU16RegsPlusSPBits), Mips::GPR64_with_sub_32_in_CPU16RegsPlusSPRegClassID, 8, 8, 1, true },
-  { AFGR64_and_OddSP, AFGR64_and_OddSPBits, 304, 8, sizeof(AFGR64_and_OddSPBits), Mips::AFGR64_and_OddSPRegClassID, 8, 8, 1, true },
-  { GPR64_with_sub_32_in_GPRMM16MoveP, GPR64_with_sub_32_in_GPRMM16MovePBits, 475, 8, sizeof(GPR64_with_sub_32_in_GPRMM16MovePBits), Mips::GPR64_with_sub_32_in_GPRMM16MovePRegClassID, 8, 8, 1, true },
-  { GPR64_with_sub_32_in_GPRMM16Zero, GPR64_with_sub_32_in_GPRMM16ZeroBits, 786, 8, sizeof(GPR64_with_sub_32_in_GPRMM16ZeroBits), Mips::GPR64_with_sub_32_in_GPRMM16ZeroRegClassID, 8, 8, 1, true },
-  { GPRMM16_64, GPRMM16_64Bits, 159, 8, sizeof(GPRMM16_64Bits), Mips::GPRMM16_64RegClassID, 8, 8, 1, true },
-  { GPR64_with_sub_32_in_CPU16Regs_and_GPRMM16Zero, GPR64_with_sub_32_in_CPU16Regs_and_GPRMM16ZeroBits, 739, 7, sizeof(GPR64_with_sub_32_in_CPU16Regs_and_GPRMM16ZeroBits), Mips::GPR64_with_sub_32_in_CPU16Regs_and_GPRMM16ZeroRegClassID, 8, 8, 1, true },
-  { ACC64DSP, ACC64DSPBits, 262, 4, sizeof(ACC64DSPBits), Mips::ACC64DSPRegClassID, 8, 8, 1, true },
-  { GPR64_with_sub_32_in_CPU16Regs_and_GPRMM16MoveP, GPR64_with_sub_32_in_CPU16Regs_and_GPRMM16MovePBits, 427, 4, sizeof(GPR64_with_sub_32_in_CPU16Regs_and_GPRMM16MovePBits), Mips::GPR64_with_sub_32_in_CPU16Regs_and_GPRMM16MovePRegClassID, 8, 8, 1, true },
-  { GPR64_with_sub_32_in_GPRMM16MoveP_and_GPRMM16Zero, GPR64_with_sub_32_in_GPRMM16MoveP_and_GPRMM16ZeroBits, 591, 4, sizeof(GPR64_with_sub_32_in_GPRMM16MoveP_and_GPRMM16ZeroBits), Mips::GPR64_with_sub_32_in_GPRMM16MoveP_and_GPRMM16ZeroRegClassID, 8, 8, 1, true },
-  { GPRMM16_64_with_sub_32_in_GPRMM16MoveP_and_GPRMM16Zero, GPRMM16_64_with_sub_32_in_GPRMM16MoveP_and_GPRMM16ZeroBits, 641, 3, sizeof(GPRMM16_64_with_sub_32_in_GPRMM16MoveP_and_GPRMM16ZeroBits), Mips::GPRMM16_64_with_sub_32_in_GPRMM16MoveP_and_GPRMM16ZeroRegClassID, 8, 8, 1, true },
-  { OCTEON_MPL, OCTEON_MPLBits, 235, 3, sizeof(OCTEON_MPLBits), Mips::OCTEON_MPLRegClassID, 8, 8, 1, false },
-  { OCTEON_P, OCTEON_PBits, 418, 3, sizeof(OCTEON_PBits), Mips::OCTEON_PRegClassID, 8, 8, 1, false },
-  { ACC64, ACC64Bits, 120, 1, sizeof(ACC64Bits), Mips::ACC64RegClassID, 8, 8, 1, true },
-  { GP64, GP64Bits, 136, 1, sizeof(GP64Bits), Mips::GP64RegClassID, 8, 8, 1, false },
-  { GPR64_with_sub_32_in_CPURAReg, GPR64_with_sub_32_in_CPURARegBits, 526, 1, sizeof(GPR64_with_sub_32_in_CPURARegBits), Mips::GPR64_with_sub_32_in_CPURARegRegClassID, 8, 8, 1, true },
-  { HI64, HI64Bits, 126, 1, sizeof(HI64Bits), Mips::HI64RegClassID, 8, 8, 1, true },
-  { LO64, LO64Bits, 131, 1, sizeof(LO64Bits), Mips::LO64RegClassID, 8, 8, 1, true },
-  { SP64, SP64Bits, 141, 1, sizeof(SP64Bits), Mips::SP64RegClassID, 8, 8, 1, false },
-  { MSA128B, MSA128BBits, 195, 32, sizeof(MSA128BBits), Mips::MSA128BRegClassID, 16, 16, 1, true },
-  { MSA128D, MSA128DBits, 219, 32, sizeof(MSA128DBits), Mips::MSA128DRegClassID, 16, 16, 1, true },
-  { MSA128H, MSA128HBits, 227, 32, sizeof(MSA128HBits), Mips::MSA128HRegClassID, 16, 16, 1, true },
-  { MSA128W, MSA128WBits, 518, 32, sizeof(MSA128WBits), Mips::MSA128WRegClassID, 16, 16, 1, true },
-  { MSA128B_with_sub_64_in_OddSP, MSA128B_with_sub_64_in_OddSPBits, 352, 16, sizeof(MSA128B_with_sub_64_in_OddSPBits), Mips::MSA128B_with_sub_64_in_OddSPRegClassID, 16, 16, 1, true },
-  { MSA128WEvens, MSA128WEvensBits, 836, 16, sizeof(MSA128WEvensBits), Mips::MSA128WEvensRegClassID, 16, 16, 1, true },
-  { ACC128, ACC128Bits, 188, 1, sizeof(ACC128Bits), Mips::ACC128RegClassID, 16, 16, 1, true },
+  { MSA128F16, MSA128F16Bits, 170, 32, sizeof(MSA128F16Bits), Mips::MSA128F16RegClassID, 2, 1, true },
+  { MSA128F16_with_sub_64_in_OddSP, MSA128F16_with_sub_64_in_OddSPBits, 386, 16, sizeof(MSA128F16_with_sub_64_in_OddSPBits), Mips::MSA128F16_with_sub_64_in_OddSPRegClassID, 2, 1, true },
+  { OddSP, OddSPBits, 347, 56, sizeof(OddSPBits), Mips::OddSPRegClassID, 4, 1, false },
+  { CCR, CCRBits, 625, 32, sizeof(CCRBits), Mips::CCRRegClassID, 4, 1, false },
+  { COP0, COP0Bits, 0, 32, sizeof(COP0Bits), Mips::COP0RegClassID, 4, 1, false },
+  { COP2, COP2Bits, 110, 32, sizeof(COP2Bits), Mips::COP2RegClassID, 4, 1, false },
+  { COP3, COP3Bits, 115, 32, sizeof(COP3Bits), Mips::COP3RegClassID, 4, 1, false },
+  { DSPR, DSPRBits, 629, 32, sizeof(DSPRBits), Mips::DSPRRegClassID, 4, 1, true },
+  { FGR32, FGR32Bits, 98, 32, sizeof(FGR32Bits), Mips::FGR32RegClassID, 4, 1, true },
+  { FGRCC, FGRCCBits, 213, 32, sizeof(FGRCCBits), Mips::FGRCCRegClassID, 4, 1, true },
+  { FGRH32, FGRH32Bits, 38, 32, sizeof(FGRH32Bits), Mips::FGRH32RegClassID, 4, 1, false },
+  { GPR32, GPR32Bits, 104, 32, sizeof(GPR32Bits), Mips::GPR32RegClassID, 4, 1, true },
+  { HWRegs, HWRegsBits, 945, 32, sizeof(HWRegsBits), Mips::HWRegsRegClassID, 4, 1, false },
+  { GPR32NONZERO, GPR32NONZEROBits, 298, 31, sizeof(GPR32NONZEROBits), Mips::GPR32NONZERORegClassID, 4, 1, true },
+  { OddSP_with_sub_hi, OddSP_with_sub_hiBits, 681, 24, sizeof(OddSP_with_sub_hiBits), Mips::OddSP_with_sub_hiRegClassID, 4, 1, false },
+  { FGR32_and_OddSP, FGR32_and_OddSPBits, 353, 16, sizeof(FGR32_and_OddSPBits), Mips::FGR32_and_OddSPRegClassID, 4, 1, true },
+  { FGRH32_and_OddSP, FGRH32_and_OddSPBits, 336, 16, sizeof(FGRH32_and_OddSPBits), Mips::FGRH32_and_OddSPRegClassID, 4, 1, false },
+  { OddSP_with_sub_hi_with_sub_hi_in_FGRH32, OddSP_with_sub_hi_with_sub_hi_in_FGRH32Bits, 5, 16, sizeof(OddSP_with_sub_hi_with_sub_hi_in_FGRH32Bits), Mips::OddSP_with_sub_hi_with_sub_hi_in_FGRH32RegClassID, 4, 1, false },
+  { CPU16RegsPlusSP, CPU16RegsPlusSPBits, 467, 9, sizeof(CPU16RegsPlusSPBits), Mips::CPU16RegsPlusSPRegClassID, 4, 1, true },
+  { CPU16Regs, CPU16RegsBits, 935, 8, sizeof(CPU16RegsBits), Mips::CPU16RegsRegClassID, 4, 1, true },
+  { FCC, FCCBits, 203, 8, sizeof(FCCBits), Mips::FCCRegClassID, 4, 1, false },
+  { GPRMM16, GPRMM16Bits, 180, 8, sizeof(GPRMM16Bits), Mips::GPRMM16RegClassID, 4, 1, true },
+  { GPRMM16MoveP, GPRMM16MovePBits, 530, 8, sizeof(GPRMM16MovePBits), Mips::GPRMM16MovePRegClassID, 4, 1, true },
+  { GPRMM16Zero, GPRMM16ZeroBits, 745, 8, sizeof(GPRMM16ZeroBits), Mips::GPRMM16ZeroRegClassID, 4, 1, true },
+  { MSACtrl, MSACtrlBits, 699, 8, sizeof(MSACtrlBits), Mips::MSACtrlRegClassID, 4, 1, true },
+  { OddSP_with_sub_hi_with_sub_hi_in_FGR32, OddSP_with_sub_hi_with_sub_hi_in_FGR32Bits, 65, 8, sizeof(OddSP_with_sub_hi_with_sub_hi_in_FGR32Bits), Mips::OddSP_with_sub_hi_with_sub_hi_in_FGR32RegClassID, 4, 1, false },
+  { CPU16Regs_and_GPRMM16Zero, CPU16Regs_and_GPRMM16ZeroBits, 829, 7, sizeof(CPU16Regs_and_GPRMM16ZeroBits), Mips::CPU16Regs_and_GPRMM16ZeroRegClassID, 4, 1, true },
+  { GPR32NONZERO_and_GPRMM16MoveP, GPR32NONZERO_and_GPRMM16MovePBits, 513, 7, sizeof(GPR32NONZERO_and_GPRMM16MovePBits), Mips::GPR32NONZERO_and_GPRMM16MovePRegClassID, 4, 1, true },
+  { CPU16Regs_and_GPRMM16MoveP, CPU16Regs_and_GPRMM16MovePBits, 564, 4, sizeof(CPU16Regs_and_GPRMM16MovePBits), Mips::CPU16Regs_and_GPRMM16MovePRegClassID, 4, 1, true },
+  { GPRMM16MoveP_and_GPRMM16Zero, GPRMM16MoveP_and_GPRMM16ZeroBits, 728, 4, sizeof(GPRMM16MoveP_and_GPRMM16ZeroBits), Mips::GPRMM16MoveP_and_GPRMM16ZeroRegClassID, 4, 1, true },
+  { HI32DSP, HI32DSPBits, 311, 4, sizeof(HI32DSPBits), Mips::HI32DSPRegClassID, 4, 1, true },
+  { LO32DSP, LO32DSPBits, 319, 4, sizeof(LO32DSPBits), Mips::LO32DSPRegClassID, 4, 1, true },
+  { GPRMM16MoveP_and_CPU16Regs_and_GPRMM16Zero, GPRMM16MoveP_and_CPU16Regs_and_GPRMM16ZeroBits, 812, 3, sizeof(GPRMM16MoveP_and_CPU16Regs_and_GPRMM16ZeroBits), Mips::GPRMM16MoveP_and_CPU16Regs_and_GPRMM16ZeroRegClassID, 4, 1, true },
+  { CPURAReg, CPURARegBits, 663, 1, sizeof(CPURARegBits), Mips::CPURARegRegClassID, 4, 1, false },
+  { CPUSPReg, CPUSPRegBits, 672, 1, sizeof(CPUSPRegBits), Mips::CPUSPRegRegClassID, 4, 1, false },
+  { DSPCC, DSPCCBits, 207, 1, sizeof(DSPCCBits), Mips::DSPCCRegClassID, 4, 1, true },
+  { GP32, GP32Bits, 55, 1, sizeof(GP32Bits), Mips::GP32RegClassID, 4, 1, false },
+  { GPR32ZERO, GPR32ZEROBits, 267, 1, sizeof(GPR32ZEROBits), Mips::GPR32ZERORegClassID, 4, 1, true },
+  { HI32, HI32Bits, 45, 1, sizeof(HI32Bits), Mips::HI32RegClassID, 4, 1, true },
+  { LO32, LO32Bits, 50, 1, sizeof(LO32Bits), Mips::LO32RegClassID, 4, 1, true },
+  { SP32, SP32Bits, 60, 1, sizeof(SP32Bits), Mips::SP32RegClassID, 4, 1, false },
+  { FGR64, FGR64Bits, 147, 32, sizeof(FGR64Bits), Mips::FGR64RegClassID, 8, 1, true },
+  { GPR64, GPR64Bits, 153, 32, sizeof(GPR64Bits), Mips::GPR64RegClassID, 8, 1, true },
+  { GPR64_with_sub_32_in_GPR32NONZERO, GPR64_with_sub_32_in_GPR32NONZEROBits, 277, 31, sizeof(GPR64_with_sub_32_in_GPR32NONZEROBits), Mips::GPR64_with_sub_32_in_GPR32NONZERORegClassID, 8, 1, true },
+  { AFGR64, AFGR64Bits, 146, 16, sizeof(AFGR64Bits), Mips::AFGR64RegClassID, 8, 1, true },
+  { FGR64_and_OddSP, FGR64_and_OddSPBits, 370, 16, sizeof(FGR64_and_OddSPBits), Mips::FGR64_and_OddSPRegClassID, 8, 1, true },
+  { GPR64_with_sub_32_in_CPU16RegsPlusSP, GPR64_with_sub_32_in_CPU16RegsPlusSPBits, 446, 9, sizeof(GPR64_with_sub_32_in_CPU16RegsPlusSPBits), Mips::GPR64_with_sub_32_in_CPU16RegsPlusSPRegClassID, 8, 1, true },
+  { AFGR64_and_OddSP, AFGR64_and_OddSPBits, 369, 8, sizeof(AFGR64_and_OddSPBits), Mips::AFGR64_and_OddSPRegClassID, 8, 1, true },
+  { GPR64_with_sub_32_in_GPRMM16MoveP, GPR64_with_sub_32_in_GPRMM16MovePBits, 591, 8, sizeof(GPR64_with_sub_32_in_GPRMM16MovePBits), Mips::GPR64_with_sub_32_in_GPRMM16MovePRegClassID, 8, 1, true },
+  { GPR64_with_sub_32_in_GPRMM16Zero, GPR64_with_sub_32_in_GPRMM16ZeroBits, 902, 8, sizeof(GPR64_with_sub_32_in_GPRMM16ZeroBits), Mips::GPR64_with_sub_32_in_GPRMM16ZeroRegClassID, 8, 1, true },
+  { GPRMM16_64, GPRMM16_64Bits, 159, 8, sizeof(GPRMM16_64Bits), Mips::GPRMM16_64RegClassID, 8, 1, true },
+  { GPR64_with_sub_32_in_CPU16Regs_and_GPRMM16Zero, GPR64_with_sub_32_in_CPU16Regs_and_GPRMM16ZeroBits, 855, 7, sizeof(GPR64_with_sub_32_in_CPU16Regs_and_GPRMM16ZeroBits), Mips::GPR64_with_sub_32_in_CPU16Regs_and_GPRMM16ZeroRegClassID, 8, 1, true },
+  { GPR64_with_sub_32_in_GPR32NONZERO_and_GPRMM16MoveP, GPR64_with_sub_32_in_GPR32NONZERO_and_GPRMM16MovePBits, 492, 7, sizeof(GPR64_with_sub_32_in_GPR32NONZERO_and_GPRMM16MovePBits), Mips::GPR64_with_sub_32_in_GPR32NONZERO_and_GPRMM16MovePRegClassID, 8, 1, true },
+  { ACC64DSP, ACC64DSPBits, 327, 4, sizeof(ACC64DSPBits), Mips::ACC64DSPRegClassID, 8, 1, true },
+  { GPR64_with_sub_32_in_CPU16Regs_and_GPRMM16MoveP, GPR64_with_sub_32_in_CPU16Regs_and_GPRMM16MovePBits, 543, 4, sizeof(GPR64_with_sub_32_in_CPU16Regs_and_GPRMM16MovePBits), Mips::GPR64_with_sub_32_in_CPU16Regs_and_GPRMM16MovePRegClassID, 8, 1, true },
+  { GPR64_with_sub_32_in_GPRMM16MoveP_and_GPRMM16Zero, GPR64_with_sub_32_in_GPRMM16MoveP_and_GPRMM16ZeroBits, 707, 4, sizeof(GPR64_with_sub_32_in_GPRMM16MoveP_and_GPRMM16ZeroBits), Mips::GPR64_with_sub_32_in_GPRMM16MoveP_and_GPRMM16ZeroRegClassID, 8, 1, true },
+  { GPRMM16_64_with_sub_32_in_GPRMM16MoveP_and_GPRMM16Zero, GPRMM16_64_with_sub_32_in_GPRMM16MoveP_and_GPRMM16ZeroBits, 757, 3, sizeof(GPRMM16_64_with_sub_32_in_GPRMM16MoveP_and_GPRMM16ZeroBits), Mips::GPRMM16_64_with_sub_32_in_GPRMM16MoveP_and_GPRMM16ZeroRegClassID, 8, 1, true },
+  { OCTEON_MPL, OCTEON_MPLBits, 235, 3, sizeof(OCTEON_MPLBits), Mips::OCTEON_MPLRegClassID, 8, 1, false },
+  { OCTEON_P, OCTEON_PBits, 483, 3, sizeof(OCTEON_PBits), Mips::OCTEON_PRegClassID, 8, 1, false },
+  { ACC64, ACC64Bits, 120, 1, sizeof(ACC64Bits), Mips::ACC64RegClassID, 8, 1, true },
+  { GP64, GP64Bits, 136, 1, sizeof(GP64Bits), Mips::GP64RegClassID, 8, 1, false },
+  { GPR64_with_sub_32_in_CPURAReg, GPR64_with_sub_32_in_CPURARegBits, 642, 1, sizeof(GPR64_with_sub_32_in_CPURARegBits), Mips::GPR64_with_sub_32_in_CPURARegRegClassID, 8, 1, true },
+  { GPR64_with_sub_32_in_GPR32ZERO, GPR64_with_sub_32_in_GPR32ZEROBits, 246, 1, sizeof(GPR64_with_sub_32_in_GPR32ZEROBits), Mips::GPR64_with_sub_32_in_GPR32ZERORegClassID, 8, 1, true },
+  { HI64, HI64Bits, 126, 1, sizeof(HI64Bits), Mips::HI64RegClassID, 8, 1, true },
+  { LO64, LO64Bits, 131, 1, sizeof(LO64Bits), Mips::LO64RegClassID, 8, 1, true },
+  { SP64, SP64Bits, 141, 1, sizeof(SP64Bits), Mips::SP64RegClassID, 8, 1, false },
+  { MSA128B, MSA128BBits, 195, 32, sizeof(MSA128BBits), Mips::MSA128BRegClassID, 16, 1, true },
+  { MSA128D, MSA128DBits, 219, 32, sizeof(MSA128DBits), Mips::MSA128DRegClassID, 16, 1, true },
+  { MSA128H, MSA128HBits, 227, 32, sizeof(MSA128HBits), Mips::MSA128HRegClassID, 16, 1, true },
+  { MSA128W, MSA128WBits, 634, 32, sizeof(MSA128WBits), Mips::MSA128WRegClassID, 16, 1, true },
+  { MSA128B_with_sub_64_in_OddSP, MSA128B_with_sub_64_in_OddSPBits, 417, 16, sizeof(MSA128B_with_sub_64_in_OddSPBits), Mips::MSA128B_with_sub_64_in_OddSPRegClassID, 16, 1, true },
+  { MSA128WEvens, MSA128WEvensBits, 952, 16, sizeof(MSA128WEvensBits), Mips::MSA128WEvensRegClassID, 16, 1, true },
+  { ACC128, ACC128Bits, 188, 1, sizeof(ACC128Bits), Mips::ACC128RegClassID, 16, 1, true },
 };
 
 // Mips Dwarf<->LLVM register mappings.
@@ -3595,7 +3670,7 @@ extern const uint16_t MipsRegEncodingTable[] = {
   3,
 };
 static inline void InitMipsMCRegisterInfo(MCRegisterInfo *RI, unsigned RA, unsigned DwarfFlavour = 0, unsigned EHFlavour = 0, unsigned PC = 0) {
-  RI->InitMCRegisterInfo(MipsRegDesc, 418, RA, PC, MipsMCRegisterClasses, 67, MipsRegUnitRoots, 297, MipsRegDiffLists, MipsLaneMaskLists, MipsRegStrings, MipsRegClassStrings, MipsSubRegIdxLists, 12,
+  RI->InitMCRegisterInfo(MipsRegDesc, 418, RA, PC, MipsMCRegisterClasses, 73, MipsRegUnitRoots, 297, MipsRegDiffLists, MipsLaneMaskLists, MipsRegStrings, MipsRegClassStrings, MipsSubRegIdxLists, 12,
 MipsSubRegIdxRanges, MipsRegEncodingTable);
 
   switch (DwarfFlavour) {
@@ -3684,6 +3759,7 @@ namespace Mips { // Register classes
   extern const TargetRegisterClass FGRH32RegClass;
   extern const TargetRegisterClass GPR32RegClass;
   extern const TargetRegisterClass HWRegsRegClass;
+  extern const TargetRegisterClass GPR32NONZERORegClass;
   extern const TargetRegisterClass OddSP_with_sub_hiRegClass;
   extern const TargetRegisterClass FGR32_and_OddSPRegClass;
   extern const TargetRegisterClass FGRH32_and_OddSPRegClass;
@@ -3697,6 +3773,7 @@ namespace Mips { // Register classes
   extern const TargetRegisterClass MSACtrlRegClass;
   extern const TargetRegisterClass OddSP_with_sub_hi_with_sub_hi_in_FGR32RegClass;
   extern const TargetRegisterClass CPU16Regs_and_GPRMM16ZeroRegClass;
+  extern const TargetRegisterClass GPR32NONZERO_and_GPRMM16MovePRegClass;
   extern const TargetRegisterClass CPU16Regs_and_GPRMM16MovePRegClass;
   extern const TargetRegisterClass GPRMM16MoveP_and_GPRMM16ZeroRegClass;
   extern const TargetRegisterClass HI32DSPRegClass;
@@ -3706,11 +3783,13 @@ namespace Mips { // Register classes
   extern const TargetRegisterClass CPUSPRegRegClass;
   extern const TargetRegisterClass DSPCCRegClass;
   extern const TargetRegisterClass GP32RegClass;
+  extern const TargetRegisterClass GPR32ZERORegClass;
   extern const TargetRegisterClass HI32RegClass;
   extern const TargetRegisterClass LO32RegClass;
   extern const TargetRegisterClass SP32RegClass;
   extern const TargetRegisterClass FGR64RegClass;
   extern const TargetRegisterClass GPR64RegClass;
+  extern const TargetRegisterClass GPR64_with_sub_32_in_GPR32NONZERORegClass;
   extern const TargetRegisterClass AFGR64RegClass;
   extern const TargetRegisterClass FGR64_and_OddSPRegClass;
   extern const TargetRegisterClass GPR64_with_sub_32_in_CPU16RegsPlusSPRegClass;
@@ -3719,6 +3798,7 @@ namespace Mips { // Register classes
   extern const TargetRegisterClass GPR64_with_sub_32_in_GPRMM16ZeroRegClass;
   extern const TargetRegisterClass GPRMM16_64RegClass;
   extern const TargetRegisterClass GPR64_with_sub_32_in_CPU16Regs_and_GPRMM16ZeroRegClass;
+  extern const TargetRegisterClass GPR64_with_sub_32_in_GPR32NONZERO_and_GPRMM16MovePRegClass;
   extern const TargetRegisterClass ACC64DSPRegClass;
   extern const TargetRegisterClass GPR64_with_sub_32_in_CPU16Regs_and_GPRMM16MovePRegClass;
   extern const TargetRegisterClass GPR64_with_sub_32_in_GPRMM16MoveP_and_GPRMM16ZeroRegClass;
@@ -3728,6 +3808,7 @@ namespace Mips { // Register classes
   extern const TargetRegisterClass ACC64RegClass;
   extern const TargetRegisterClass GP64RegClass;
   extern const TargetRegisterClass GPR64_with_sub_32_in_CPURARegRegClass;
+  extern const TargetRegisterClass GPR64_with_sub_32_in_GPR32ZERORegClass;
   extern const TargetRegisterClass HI64RegClass;
   extern const TargetRegisterClass LO64RegClass;
   extern const TargetRegisterClass SP64RegClass;
@@ -3797,18 +3878,18 @@ static const LaneBitmask SubRegIndexLaneMaskTable[] = {
 static const TargetRegisterClass *const NullRegClasses[] = { nullptr };
 
 static const uint32_t MSA128F16SubClassMask[] = {
-  0x00000003, 0xf0000000, 0x00000003, 
+  0x00000003, 0x00000000, 0x000000fc, 
 };
 
 static const uint32_t MSA128F16_with_sub_64_in_OddSPSubClassMask[] = {
-  0x00000002, 0x00000000, 0x00000001, 
+  0x00000002, 0x00000000, 0x00000040, 
 };
 
 static const uint32_t OddSPSubClassMask[] = {
-  0x0101e004, 0x00000a00, 0x00000000, 
-  0x00000002, 0x00000000, 0x00000001, // sub_64
-  0x01012002, 0x00000b00, 0x00000001, // sub_hi
-  0x00010002, 0x00000200, 0x00000001, // sub_lo
+  0x0203c004, 0x0000a000, 0x00000000, 
+  0x00000002, 0x00000000, 0x00000040, // sub_64
+  0x02024002, 0x0000b000, 0x00000040, // sub_hi
+  0x00020002, 0x00002000, 0x00000040, // sub_lo
 };
 
 static const uint32_t CCRSubClassMask[] = {
@@ -3828,284 +3909,311 @@ static const uint32_t COP3SubClassMask[] = {
 };
 
 static const uint32_t DSPRSubClassMask[] = {
-  0xce760880, 0x00000025, 0x00000000, 
-  0x00000000, 0x098ef480, 0x00000000, // sub_32
+  0x3cec2880, 0x00000137, 0x00000000, 
+  0x00000000, 0x71df4c00, 0x00000002, // sub_32
 };
 
 static const uint32_t FGR32SubClassMask[] = {
-  0x00004300, 0x00000000, 0x00000000, 
-  0x01000000, 0x00000900, 0x00000000, // sub_hi
-  0x01012003, 0xf0000b40, 0x00000003, // sub_lo
+  0x00008300, 0x00000000, 0x00000000, 
+  0x02000000, 0x00009000, 0x00000000, // sub_hi
+  0x02024003, 0x0000b200, 0x000000fc, // sub_lo
 };
 
 static const uint32_t FGRCCSubClassMask[] = {
-  0x00004300, 0x00000000, 0x00000000, 
-  0x01000000, 0x00000900, 0x00000000, // sub_hi
-  0x01012003, 0xf0000b40, 0x00000003, // sub_lo
+  0x00008300, 0x00000000, 0x00000000, 
+  0x02000000, 0x00009000, 0x00000000, // sub_hi
+  0x02024003, 0x0000b200, 0x000000fc, // sub_lo
 };
 
 static const uint32_t FGRH32SubClassMask[] = {
-  0x00008400, 0x00000000, 0x00000000, 
-  0x00010003, 0xf0000240, 0x00000003, // sub_hi
+  0x00010400, 0x00000000, 0x00000000, 
+  0x00020003, 0x00002200, 0x000000fc, // sub_hi
 };
 
 static const uint32_t GPR32SubClassMask[] = {
-  0xce760800, 0x00000025, 0x00000000, 
-  0x00000000, 0x098ef480, 0x00000000, // sub_32
+  0x3cec2800, 0x00000137, 0x00000000, 
+  0x00000000, 0x71df4c00, 0x00000002, // sub_32
 };
 
 static const uint32_t HWRegsSubClassMask[] = {
   0x00001000, 0x00000000, 0x00000000, 
 };
 
+static const uint32_t GPR32NONZEROSubClassMask[] = {
+  0x1c2c2000, 0x00000117, 0x00000000, 
+  0x00000000, 0x315c4800, 0x00000002, // sub_32
+};
+
 static const uint32_t OddSP_with_sub_hiSubClassMask[] = {
-  0x01012000, 0x00000a00, 0x00000000, 
-  0x00000002, 0x00000000, 0x00000001, // sub_64
+  0x02024000, 0x0000a000, 0x00000000, 
+  0x00000002, 0x00000000, 0x00000040, // sub_64
 };
 
 static const uint32_t FGR32_and_OddSPSubClassMask[] = {
-  0x00004000, 0x00000000, 0x00000000, 
-  0x01000000, 0x00000900, 0x00000000, // sub_hi
-  0x00010002, 0x00000200, 0x00000001, // sub_lo
+  0x00008000, 0x00000000, 0x00000000, 
+  0x02000000, 0x00009000, 0x00000000, // sub_hi
+  0x00020002, 0x00002000, 0x00000040, // sub_lo
 };
 
 static const uint32_t FGRH32_and_OddSPSubClassMask[] = {
-  0x00008000, 0x00000000, 0x00000000, 
-  0x00010002, 0x00000200, 0x00000001, // sub_hi
+  0x00010000, 0x00000000, 0x00000000, 
+  0x00020002, 0x00002000, 0x00000040, // sub_hi
 };
 
 static const uint32_t OddSP_with_sub_hi_with_sub_hi_in_FGRH32SubClassMask[] = {
-  0x00010000, 0x00000200, 0x00000000, 
-  0x00000002, 0x00000000, 0x00000001, // sub_64
+  0x00020000, 0x00002000, 0x00000000, 
+  0x00000002, 0x00000000, 0x00000040, // sub_64
 };
 
 static const uint32_t CPU16RegsPlusSPSubClassMask[] = {
-  0x46160000, 0x00000021, 0x00000000, 
-  0x00000000, 0x080ac400, 0x00000000, // sub_32
+  0x142c0000, 0x00000105, 0x00000000, 
+  0x00000000, 0x014c4000, 0x00000002, // sub_32
 };
 
 static const uint32_t CPU16RegsSubClassMask[] = {
-  0x46140000, 0x00000000, 0x00000000, 
-  0x00000000, 0x000ac000, 0x00000000, // sub_32
+  0x14280000, 0x00000001, 0x00000000, 
+  0x00000000, 0x014c0000, 0x00000000, // sub_32
 };
 
 static const uint32_t FCCSubClassMask[] = {
-  0x00080000, 0x00000000, 0x00000000, 
+  0x00100000, 0x00000000, 0x00000000, 
 };
 
 static const uint32_t GPRMM16SubClassMask[] = {
-  0x46100000, 0x00000000, 0x00000000, 
-  0x00000000, 0x000ac000, 0x00000000, // sub_32
+  0x14200000, 0x00000001, 0x00000000, 
+  0x00000000, 0x014c0000, 0x00000000, // sub_32
 };
 
 static const uint32_t GPRMM16MovePSubClassMask[] = {
-  0x4c200000, 0x00000000, 0x00000000, 
-  0x00000000, 0x000e1000, 0x00000000, // sub_32
+  0x38400000, 0x00000021, 0x00000000, 
+  0x00000000, 0x41d10000, 0x00000000, // sub_32
 };
 
 static const uint32_t GPRMM16ZeroSubClassMask[] = {
-  0x4a400000, 0x00000000, 0x00000000, 
-  0x00000000, 0x000ca000, 0x00000000, // sub_32
+  0x24800000, 0x00000021, 0x00000000, 
+  0x00000000, 0x418a0000, 0x00000000, // sub_32
 };
 
 static const uint32_t MSACtrlSubClassMask[] = {
-  0x00800000, 0x00000000, 0x00000000, 
+  0x01000000, 0x00000000, 0x00000000, 
 };
 
 static const uint32_t OddSP_with_sub_hi_with_sub_hi_in_FGR32SubClassMask[] = {
-  0x01000000, 0x00000800, 0x00000000, 
+  0x02000000, 0x00008000, 0x00000000, 
 };
 
 static const uint32_t CPU16Regs_and_GPRMM16ZeroSubClassMask[] = {
-  0x42000000, 0x00000000, 0x00000000, 
-  0x00000000, 0x00088000, 0x00000000, // sub_32
+  0x04000000, 0x00000001, 0x00000000, 
+  0x00000000, 0x01080000, 0x00000000, // sub_32
+};
+
+static const uint32_t GPR32NONZERO_and_GPRMM16MovePSubClassMask[] = {
+  0x18000000, 0x00000001, 0x00000000, 
+  0x00000000, 0x01500000, 0x00000000, // sub_32
 };
 
 static const uint32_t CPU16Regs_and_GPRMM16MovePSubClassMask[] = {
-  0x44000000, 0x00000000, 0x00000000, 
-  0x00000000, 0x000a0000, 0x00000000, // sub_32
+  0x10000000, 0x00000001, 0x00000000, 
+  0x00000000, 0x01400000, 0x00000000, // sub_32
 };
 
 static const uint32_t GPRMM16MoveP_and_GPRMM16ZeroSubClassMask[] = {
-  0x48000000, 0x00000000, 0x00000000, 
-  0x00000000, 0x000c0000, 0x00000000, // sub_32
+  0x20000000, 0x00000021, 0x00000000, 
+  0x00000000, 0x41800000, 0x00000000, // sub_32
 };
 
 static const uint32_t HI32DSPSubClassMask[] = {
-  0x10000000, 0x00000008, 0x00000000, 
-  0x00000000, 0x02000000, 0x00000000, // sub_32
-  0x00000000, 0x00410000, 0x00000000, // sub_hi
-  0x00000000, 0x00000000, 0x00000004, // sub_hi_then_sub_32
+  0x40000000, 0x00000040, 0x00000000, 
+  0x00000000, 0x80000000, 0x00000000, // sub_32
+  0x00000000, 0x08200000, 0x00000000, // sub_hi
+  0x00000000, 0x00000000, 0x00000100, // sub_hi_then_sub_32
 };
 
 static const uint32_t LO32DSPSubClassMask[] = {
-  0x20000000, 0x00000010, 0x00000000, 
-  0x00000000, 0x04000000, 0x00000004, // sub_32
-  0x00000000, 0x00410000, 0x00000000, // sub_lo
+  0x80000000, 0x00000080, 0x00000000, 
+  0x00000000, 0x00000000, 0x00000101, // sub_32
+  0x00000000, 0x08200000, 0x00000000, // sub_lo
 };
 
 static const uint32_t GPRMM16MoveP_and_CPU16Regs_and_GPRMM16ZeroSubClassMask[] = {
-  0x40000000, 0x00000000, 0x00000000, 
-  0x00000000, 0x00080000, 0x00000000, // sub_32
-};
-
-static const uint32_t CPURARegSubClassMask[] = {
-  0x80000000, 0x00000000, 0x00000000, 
+  0x00000000, 0x00000001, 0x00000000, 
   0x00000000, 0x01000000, 0x00000000, // sub_32
 };
 
+static const uint32_t CPURARegSubClassMask[] = {
+  0x00000000, 0x00000002, 0x00000000, 
+  0x00000000, 0x20000000, 0x00000000, // sub_32
+};
+
 static const uint32_t CPUSPRegSubClassMask[] = {
-  0x00000000, 0x00000021, 0x00000000, 
-  0x00000000, 0x08000000, 0x00000000, // sub_32
+  0x00000000, 0x00000104, 0x00000000, 
+  0x00000000, 0x00000000, 0x00000002, // sub_32
 };
 
 static const uint32_t DSPCCSubClassMask[] = {
-  0x00000000, 0x00000002, 0x00000000, 
+  0x00000000, 0x00000008, 0x00000000, 
 };
 
 static const uint32_t GP32SubClassMask[] = {
-  0x00000000, 0x00000004, 0x00000000, 
-  0x00000000, 0x00800000, 0x00000000, // sub_32
+  0x00000000, 0x00000010, 0x00000000, 
+  0x00000000, 0x10000000, 0x00000000, // sub_32
+};
+
+static const uint32_t GPR32ZEROSubClassMask[] = {
+  0x00000000, 0x00000020, 0x00000000, 
+  0x00000000, 0x40000000, 0x00000000, // sub_32
 };
 
 static const uint32_t HI32SubClassMask[] = {
-  0x00000000, 0x00000008, 0x00000000, 
-  0x00000000, 0x02000000, 0x00000000, // sub_32
-  0x00000000, 0x00400000, 0x00000000, // sub_hi
-  0x00000000, 0x00000000, 0x00000004, // sub_hi_then_sub_32
+  0x00000000, 0x00000040, 0x00000000, 
+  0x00000000, 0x80000000, 0x00000000, // sub_32
+  0x00000000, 0x08000000, 0x00000000, // sub_hi
+  0x00000000, 0x00000000, 0x00000100, // sub_hi_then_sub_32
 };
 
 static const uint32_t LO32SubClassMask[] = {
-  0x00000000, 0x00000010, 0x00000000, 
-  0x00000000, 0x04000000, 0x00000004, // sub_32
-  0x00000000, 0x00400000, 0x00000000, // sub_lo
+  0x00000000, 0x00000080, 0x00000000, 
+  0x00000000, 0x00000000, 0x00000101, // sub_32
+  0x00000000, 0x08000000, 0x00000000, // sub_lo
 };
 
 static const uint32_t SP32SubClassMask[] = {
-  0x00000000, 0x00000020, 0x00000000, 
-  0x00000000, 0x08000000, 0x00000000, // sub_32
+  0x00000000, 0x00000100, 0x00000000, 
+  0x00000000, 0x00000000, 0x00000002, // sub_32
 };
 
 static const uint32_t FGR64SubClassMask[] = {
-  0x00000000, 0x00000240, 0x00000000, 
-  0x00000003, 0xf0000000, 0x00000003, // sub_64
+  0x00000000, 0x00002200, 0x00000000, 
+  0x00000003, 0x00000000, 0x000000fc, // sub_64
 };
 
 static const uint32_t GPR64SubClassMask[] = {
-  0x00000000, 0x098ef480, 0x00000000, 
+  0x00000000, 0x71df4c00, 0x00000002, 
+};
+
+static const uint32_t GPR64_with_sub_32_in_GPR32NONZEROSubClassMask[] = {
+  0x00000000, 0x315c4800, 0x00000002, 
 };
 
 static const uint32_t AFGR64SubClassMask[] = {
-  0x00000000, 0x00000900, 0x00000000, 
+  0x00000000, 0x00009000, 0x00000000, 
 };
 
 static const uint32_t FGR64_and_OddSPSubClassMask[] = {
-  0x00000000, 0x00000200, 0x00000000, 
-  0x00000002, 0x00000000, 0x00000001, // sub_64
+  0x00000000, 0x00002000, 0x00000000, 
+  0x00000002, 0x00000000, 0x00000040, // sub_64
 };
 
 static const uint32_t GPR64_with_sub_32_in_CPU16RegsPlusSPSubClassMask[] = {
-  0x00000000, 0x080ac400, 0x00000000, 
+  0x00000000, 0x014c4000, 0x00000002, 
 };
 
 static const uint32_t AFGR64_and_OddSPSubClassMask[] = {
-  0x00000000, 0x00000800, 0x00000000, 
+  0x00000000, 0x00008000, 0x00000000, 
 };
 
 static const uint32_t GPR64_with_sub_32_in_GPRMM16MovePSubClassMask[] = {
-  0x00000000, 0x000e1000, 0x00000000, 
+  0x00000000, 0x41d10000, 0x00000000, 
 };
 
 static const uint32_t GPR64_with_sub_32_in_GPRMM16ZeroSubClassMask[] = {
-  0x00000000, 0x000ca000, 0x00000000, 
+  0x00000000, 0x418a0000, 0x00000000, 
 };
 
 static const uint32_t GPRMM16_64SubClassMask[] = {
-  0x00000000, 0x000ac000, 0x00000000, 
+  0x00000000, 0x014c0000, 0x00000000, 
 };
 
 static const uint32_t GPR64_with_sub_32_in_CPU16Regs_and_GPRMM16ZeroSubClassMask[] = {
-  0x00000000, 0x00088000, 0x00000000, 
+  0x00000000, 0x01080000, 0x00000000, 
+};
+
+static const uint32_t GPR64_with_sub_32_in_GPR32NONZERO_and_GPRMM16MovePSubClassMask[] = {
+  0x00000000, 0x01500000, 0x00000000, 
 };
 
 static const uint32_t ACC64DSPSubClassMask[] = {
-  0x00000000, 0x00410000, 0x00000000, 
-  0x00000000, 0x00000000, 0x00000004, // sub_32_sub_hi_then_sub_32
+  0x00000000, 0x08200000, 0x00000000, 
+  0x00000000, 0x00000000, 0x00000100, // sub_32_sub_hi_then_sub_32
 };
 
 static const uint32_t GPR64_with_sub_32_in_CPU16Regs_and_GPRMM16MovePSubClassMask[] = {
-  0x00000000, 0x000a0000, 0x00000000, 
+  0x00000000, 0x01400000, 0x00000000, 
 };
 
 static const uint32_t GPR64_with_sub_32_in_GPRMM16MoveP_and_GPRMM16ZeroSubClassMask[] = {
-  0x00000000, 0x000c0000, 0x00000000, 
+  0x00000000, 0x41800000, 0x00000000, 
 };
 
 static const uint32_t GPRMM16_64_with_sub_32_in_GPRMM16MoveP_and_GPRMM16ZeroSubClassMask[] = {
-  0x00000000, 0x00080000, 0x00000000, 
-};
-
-static const uint32_t OCTEON_MPLSubClassMask[] = {
-  0x00000000, 0x00100000, 0x00000000, 
-};
-
-static const uint32_t OCTEON_PSubClassMask[] = {
-  0x00000000, 0x00200000, 0x00000000, 
-};
-
-static const uint32_t ACC64SubClassMask[] = {
-  0x00000000, 0x00400000, 0x00000000, 
-  0x00000000, 0x00000000, 0x00000004, // sub_32_sub_hi_then_sub_32
-};
-
-static const uint32_t GP64SubClassMask[] = {
-  0x00000000, 0x00800000, 0x00000000, 
-};
-
-static const uint32_t GPR64_with_sub_32_in_CPURARegSubClassMask[] = {
   0x00000000, 0x01000000, 0x00000000, 
 };
 
-static const uint32_t HI64SubClassMask[] = {
+static const uint32_t OCTEON_MPLSubClassMask[] = {
   0x00000000, 0x02000000, 0x00000000, 
-  0x00000000, 0x00000000, 0x00000004, // sub_hi
+};
+
+static const uint32_t OCTEON_PSubClassMask[] = {
+  0x00000000, 0x04000000, 0x00000000, 
+};
+
+static const uint32_t ACC64SubClassMask[] = {
+  0x00000000, 0x08000000, 0x00000000, 
+  0x00000000, 0x00000000, 0x00000100, // sub_32_sub_hi_then_sub_32
+};
+
+static const uint32_t GP64SubClassMask[] = {
+  0x00000000, 0x10000000, 0x00000000, 
+};
+
+static const uint32_t GPR64_with_sub_32_in_CPURARegSubClassMask[] = {
+  0x00000000, 0x20000000, 0x00000000, 
+};
+
+static const uint32_t GPR64_with_sub_32_in_GPR32ZEROSubClassMask[] = {
+  0x00000000, 0x40000000, 0x00000000, 
+};
+
+static const uint32_t HI64SubClassMask[] = {
+  0x00000000, 0x80000000, 0x00000000, 
+  0x00000000, 0x00000000, 0x00000100, // sub_hi
 };
 
 static const uint32_t LO64SubClassMask[] = {
-  0x00000000, 0x04000000, 0x00000000, 
-  0x00000000, 0x00000000, 0x00000004, // sub_lo
+  0x00000000, 0x00000000, 0x00000001, 
+  0x00000000, 0x00000000, 0x00000100, // sub_lo
 };
 
 static const uint32_t SP64SubClassMask[] = {
-  0x00000000, 0x08000000, 0x00000000, 
-};
-
-static const uint32_t MSA128BSubClassMask[] = {
-  0x00000000, 0xf0000000, 0x00000003, 
-};
-
-static const uint32_t MSA128DSubClassMask[] = {
-  0x00000000, 0xf0000000, 0x00000003, 
-};
-
-static const uint32_t MSA128HSubClassMask[] = {
-  0x00000000, 0xf0000000, 0x00000003, 
-};
-
-static const uint32_t MSA128WSubClassMask[] = {
-  0x00000000, 0xf0000000, 0x00000003, 
-};
-
-static const uint32_t MSA128B_with_sub_64_in_OddSPSubClassMask[] = {
-  0x00000000, 0x00000000, 0x00000001, 
-};
-
-static const uint32_t MSA128WEvensSubClassMask[] = {
   0x00000000, 0x00000000, 0x00000002, 
 };
 
+static const uint32_t MSA128BSubClassMask[] = {
+  0x00000000, 0x00000000, 0x000000fc, 
+};
+
+static const uint32_t MSA128DSubClassMask[] = {
+  0x00000000, 0x00000000, 0x000000fc, 
+};
+
+static const uint32_t MSA128HSubClassMask[] = {
+  0x00000000, 0x00000000, 0x000000fc, 
+};
+
+static const uint32_t MSA128WSubClassMask[] = {
+  0x00000000, 0x00000000, 0x000000fc, 
+};
+
+static const uint32_t MSA128B_with_sub_64_in_OddSPSubClassMask[] = {
+  0x00000000, 0x00000000, 0x00000040, 
+};
+
+static const uint32_t MSA128WEvensSubClassMask[] = {
+  0x00000000, 0x00000000, 0x00000080, 
+};
+
 static const uint32_t ACC128SubClassMask[] = {
-  0x00000000, 0x00000000, 0x00000004, 
+  0x00000000, 0x00000000, 0x00000100, 
 };
 
 static const uint16_t SuperRegIdxSeqs[] = {
@@ -4138,6 +4246,12 @@ static const TargetRegisterClass *const GPR32Superclasses[] = {
   nullptr
 };
 
+static const TargetRegisterClass *const GPR32NONZEROSuperclasses[] = {
+  &Mips::DSPRRegClass,
+  &Mips::GPR32RegClass,
+  nullptr
+};
+
 static const TargetRegisterClass *const OddSP_with_sub_hiSuperclasses[] = {
   &Mips::OddSPRegClass,
   nullptr
@@ -4165,12 +4279,14 @@ static const TargetRegisterClass *const OddSP_with_sub_hi_with_sub_hi_in_FGRH32S
 static const TargetRegisterClass *const CPU16RegsPlusSPSuperclasses[] = {
   &Mips::DSPRRegClass,
   &Mips::GPR32RegClass,
+  &Mips::GPR32NONZERORegClass,
   nullptr
 };
 
 static const TargetRegisterClass *const CPU16RegsSuperclasses[] = {
   &Mips::DSPRRegClass,
   &Mips::GPR32RegClass,
+  &Mips::GPR32NONZERORegClass,
   &Mips::CPU16RegsPlusSPRegClass,
   nullptr
 };
@@ -4178,6 +4294,7 @@ static const TargetRegisterClass *const CPU16RegsSuperclasses[] = {
 static const TargetRegisterClass *const GPRMM16Superclasses[] = {
   &Mips::DSPRRegClass,
   &Mips::GPR32RegClass,
+  &Mips::GPR32NONZERORegClass,
   &Mips::CPU16RegsPlusSPRegClass,
   &Mips::CPU16RegsRegClass,
   nullptr
@@ -4204,6 +4321,7 @@ static const TargetRegisterClass *const OddSP_with_sub_hi_with_sub_hi_in_FGR32Su
 static const TargetRegisterClass *const CPU16Regs_and_GPRMM16ZeroSuperclasses[] = {
   &Mips::DSPRRegClass,
   &Mips::GPR32RegClass,
+  &Mips::GPR32NONZERORegClass,
   &Mips::CPU16RegsPlusSPRegClass,
   &Mips::CPU16RegsRegClass,
   &Mips::GPRMM16RegClass,
@@ -4211,13 +4329,23 @@ static const TargetRegisterClass *const CPU16Regs_and_GPRMM16ZeroSuperclasses[] 
   nullptr
 };
 
+static const TargetRegisterClass *const GPR32NONZERO_and_GPRMM16MovePSuperclasses[] = {
+  &Mips::DSPRRegClass,
+  &Mips::GPR32RegClass,
+  &Mips::GPR32NONZERORegClass,
+  &Mips::GPRMM16MovePRegClass,
+  nullptr
+};
+
 static const TargetRegisterClass *const CPU16Regs_and_GPRMM16MovePSuperclasses[] = {
   &Mips::DSPRRegClass,
   &Mips::GPR32RegClass,
+  &Mips::GPR32NONZERORegClass,
   &Mips::CPU16RegsPlusSPRegClass,
   &Mips::CPU16RegsRegClass,
   &Mips::GPRMM16RegClass,
   &Mips::GPRMM16MovePRegClass,
+  &Mips::GPR32NONZERO_and_GPRMM16MovePRegClass,
   nullptr
 };
 
@@ -4232,12 +4360,14 @@ static const TargetRegisterClass *const GPRMM16MoveP_and_GPRMM16ZeroSuperclasses
 static const TargetRegisterClass *const GPRMM16MoveP_and_CPU16Regs_and_GPRMM16ZeroSuperclasses[] = {
   &Mips::DSPRRegClass,
   &Mips::GPR32RegClass,
+  &Mips::GPR32NONZERORegClass,
   &Mips::CPU16RegsPlusSPRegClass,
   &Mips::CPU16RegsRegClass,
   &Mips::GPRMM16RegClass,
   &Mips::GPRMM16MovePRegClass,
   &Mips::GPRMM16ZeroRegClass,
   &Mips::CPU16Regs_and_GPRMM16ZeroRegClass,
+  &Mips::GPR32NONZERO_and_GPRMM16MovePRegClass,
   &Mips::CPU16Regs_and_GPRMM16MovePRegClass,
   &Mips::GPRMM16MoveP_and_GPRMM16ZeroRegClass,
   nullptr
@@ -4246,12 +4376,14 @@ static const TargetRegisterClass *const GPRMM16MoveP_and_CPU16Regs_and_GPRMM16Ze
 static const TargetRegisterClass *const CPURARegSuperclasses[] = {
   &Mips::DSPRRegClass,
   &Mips::GPR32RegClass,
+  &Mips::GPR32NONZERORegClass,
   nullptr
 };
 
 static const TargetRegisterClass *const CPUSPRegSuperclasses[] = {
   &Mips::DSPRRegClass,
   &Mips::GPR32RegClass,
+  &Mips::GPR32NONZERORegClass,
   &Mips::CPU16RegsPlusSPRegClass,
   nullptr
 };
@@ -4259,6 +4391,16 @@ static const TargetRegisterClass *const CPUSPRegSuperclasses[] = {
 static const TargetRegisterClass *const GP32Superclasses[] = {
   &Mips::DSPRRegClass,
   &Mips::GPR32RegClass,
+  &Mips::GPR32NONZERORegClass,
+  nullptr
+};
+
+static const TargetRegisterClass *const GPR32ZEROSuperclasses[] = {
+  &Mips::DSPRRegClass,
+  &Mips::GPR32RegClass,
+  &Mips::GPRMM16MovePRegClass,
+  &Mips::GPRMM16ZeroRegClass,
+  &Mips::GPRMM16MoveP_and_GPRMM16ZeroRegClass,
   nullptr
 };
 
@@ -4275,8 +4417,14 @@ static const TargetRegisterClass *const LO32Superclasses[] = {
 static const TargetRegisterClass *const SP32Superclasses[] = {
   &Mips::DSPRRegClass,
   &Mips::GPR32RegClass,
+  &Mips::GPR32NONZERORegClass,
   &Mips::CPU16RegsPlusSPRegClass,
   &Mips::CPUSPRegRegClass,
+  nullptr
+};
+
+static const TargetRegisterClass *const GPR64_with_sub_32_in_GPR32NONZEROSuperclasses[] = {
+  &Mips::GPR64RegClass,
   nullptr
 };
 
@@ -4290,6 +4438,7 @@ static const TargetRegisterClass *const FGR64_and_OddSPSuperclasses[] = {
 
 static const TargetRegisterClass *const GPR64_with_sub_32_in_CPU16RegsPlusSPSuperclasses[] = {
   &Mips::GPR64RegClass,
+  &Mips::GPR64_with_sub_32_in_GPR32NONZERORegClass,
   nullptr
 };
 
@@ -4313,23 +4462,34 @@ static const TargetRegisterClass *const GPR64_with_sub_32_in_GPRMM16ZeroSupercla
 
 static const TargetRegisterClass *const GPRMM16_64Superclasses[] = {
   &Mips::GPR64RegClass,
+  &Mips::GPR64_with_sub_32_in_GPR32NONZERORegClass,
   &Mips::GPR64_with_sub_32_in_CPU16RegsPlusSPRegClass,
   nullptr
 };
 
 static const TargetRegisterClass *const GPR64_with_sub_32_in_CPU16Regs_and_GPRMM16ZeroSuperclasses[] = {
   &Mips::GPR64RegClass,
+  &Mips::GPR64_with_sub_32_in_GPR32NONZERORegClass,
   &Mips::GPR64_with_sub_32_in_CPU16RegsPlusSPRegClass,
   &Mips::GPR64_with_sub_32_in_GPRMM16ZeroRegClass,
   &Mips::GPRMM16_64RegClass,
   nullptr
 };
 
+static const TargetRegisterClass *const GPR64_with_sub_32_in_GPR32NONZERO_and_GPRMM16MovePSuperclasses[] = {
+  &Mips::GPR64RegClass,
+  &Mips::GPR64_with_sub_32_in_GPR32NONZERORegClass,
+  &Mips::GPR64_with_sub_32_in_GPRMM16MovePRegClass,
+  nullptr
+};
+
 static const TargetRegisterClass *const GPR64_with_sub_32_in_CPU16Regs_and_GPRMM16MovePSuperclasses[] = {
   &Mips::GPR64RegClass,
+  &Mips::GPR64_with_sub_32_in_GPR32NONZERORegClass,
   &Mips::GPR64_with_sub_32_in_CPU16RegsPlusSPRegClass,
   &Mips::GPR64_with_sub_32_in_GPRMM16MovePRegClass,
   &Mips::GPRMM16_64RegClass,
+  &Mips::GPR64_with_sub_32_in_GPR32NONZERO_and_GPRMM16MovePRegClass,
   nullptr
 };
 
@@ -4342,11 +4502,13 @@ static const TargetRegisterClass *const GPR64_with_sub_32_in_GPRMM16MoveP_and_GP
 
 static const TargetRegisterClass *const GPRMM16_64_with_sub_32_in_GPRMM16MoveP_and_GPRMM16ZeroSuperclasses[] = {
   &Mips::GPR64RegClass,
+  &Mips::GPR64_with_sub_32_in_GPR32NONZERORegClass,
   &Mips::GPR64_with_sub_32_in_CPU16RegsPlusSPRegClass,
   &Mips::GPR64_with_sub_32_in_GPRMM16MovePRegClass,
   &Mips::GPR64_with_sub_32_in_GPRMM16ZeroRegClass,
   &Mips::GPRMM16_64RegClass,
   &Mips::GPR64_with_sub_32_in_CPU16Regs_and_GPRMM16ZeroRegClass,
+  &Mips::GPR64_with_sub_32_in_GPR32NONZERO_and_GPRMM16MovePRegClass,
   &Mips::GPR64_with_sub_32_in_CPU16Regs_and_GPRMM16MovePRegClass,
   &Mips::GPR64_with_sub_32_in_GPRMM16MoveP_and_GPRMM16ZeroRegClass,
   nullptr
@@ -4359,16 +4521,27 @@ static const TargetRegisterClass *const ACC64Superclasses[] = {
 
 static const TargetRegisterClass *const GP64Superclasses[] = {
   &Mips::GPR64RegClass,
+  &Mips::GPR64_with_sub_32_in_GPR32NONZERORegClass,
   nullptr
 };
 
 static const TargetRegisterClass *const GPR64_with_sub_32_in_CPURARegSuperclasses[] = {
   &Mips::GPR64RegClass,
+  &Mips::GPR64_with_sub_32_in_GPR32NONZERORegClass,
+  nullptr
+};
+
+static const TargetRegisterClass *const GPR64_with_sub_32_in_GPR32ZEROSuperclasses[] = {
+  &Mips::GPR64RegClass,
+  &Mips::GPR64_with_sub_32_in_GPRMM16MovePRegClass,
+  &Mips::GPR64_with_sub_32_in_GPRMM16ZeroRegClass,
+  &Mips::GPR64_with_sub_32_in_GPRMM16MoveP_and_GPRMM16ZeroRegClass,
   nullptr
 };
 
 static const TargetRegisterClass *const SP64Superclasses[] = {
   &Mips::GPR64RegClass,
+  &Mips::GPR64_with_sub_32_in_GPR32NONZERORegClass,
   &Mips::GPR64_with_sub_32_in_CPU16RegsPlusSPRegClass,
   nullptr
 };
@@ -4428,6 +4601,8 @@ static const TargetRegisterClass *const MSA128WEvensSuperclasses[] = {
 namespace Mips {   // Register class instances
   extern const TargetRegisterClass MSA128F16RegClass = {
     &MipsMCRegisterClasses[MSA128F16RegClassID],
+    2, /* SpillSize */
+    16, /* SpillAlignment */
     VTLists + 4,
     MSA128F16SubClassMask,
     SuperRegIdxSeqs + 1,
@@ -4441,6 +4616,8 @@ namespace Mips {   // Register class instances
 
   extern const TargetRegisterClass MSA128F16_with_sub_64_in_OddSPRegClass = {
     &MipsMCRegisterClasses[MSA128F16_with_sub_64_in_OddSPRegClassID],
+    2, /* SpillSize */
+    16, /* SpillAlignment */
     VTLists + 4,
     MSA128F16_with_sub_64_in_OddSPSubClassMask,
     SuperRegIdxSeqs + 1,
@@ -4454,6 +4631,8 @@ namespace Mips {   // Register class instances
 
   extern const TargetRegisterClass OddSPRegClass = {
     &MipsMCRegisterClasses[OddSPRegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 6,
     OddSPSubClassMask,
     SuperRegIdxSeqs + 9,
@@ -4467,6 +4646,8 @@ namespace Mips {   // Register class instances
 
   extern const TargetRegisterClass CCRRegClass = {
     &MipsMCRegisterClasses[CCRRegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 0,
     CCRSubClassMask,
     SuperRegIdxSeqs + 1,
@@ -4480,6 +4661,8 @@ namespace Mips {   // Register class instances
 
   extern const TargetRegisterClass COP0RegClass = {
     &MipsMCRegisterClasses[COP0RegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 0,
     COP0SubClassMask,
     SuperRegIdxSeqs + 1,
@@ -4493,6 +4676,8 @@ namespace Mips {   // Register class instances
 
   extern const TargetRegisterClass COP2RegClass = {
     &MipsMCRegisterClasses[COP2RegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 0,
     COP2SubClassMask,
     SuperRegIdxSeqs + 1,
@@ -4506,6 +4691,8 @@ namespace Mips {   // Register class instances
 
   extern const TargetRegisterClass COP3RegClass = {
     &MipsMCRegisterClasses[COP3RegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 0,
     COP3SubClassMask,
     SuperRegIdxSeqs + 1,
@@ -4519,6 +4706,8 @@ namespace Mips {   // Register class instances
 
   extern const TargetRegisterClass DSPRRegClass = {
     &MipsMCRegisterClasses[DSPRRegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 12,
     DSPRSubClassMask,
     SuperRegIdxSeqs + 0,
@@ -4532,6 +4721,8 @@ namespace Mips {   // Register class instances
 
   extern const TargetRegisterClass FGR32RegClass = {
     &MipsMCRegisterClasses[FGR32RegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 6,
     FGR32SubClassMask,
     SuperRegIdxSeqs + 10,
@@ -4545,6 +4736,8 @@ namespace Mips {   // Register class instances
 
   extern const TargetRegisterClass FGRCCRegClass = {
     &MipsMCRegisterClasses[FGRCCRegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 0,
     FGRCCSubClassMask,
     SuperRegIdxSeqs + 10,
@@ -4558,6 +4751,8 @@ namespace Mips {   // Register class instances
 
   extern const TargetRegisterClass FGRH32RegClass = {
     &MipsMCRegisterClasses[FGRH32RegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 6,
     FGRH32SubClassMask,
     SuperRegIdxSeqs + 4,
@@ -4571,6 +4766,8 @@ namespace Mips {   // Register class instances
 
   extern const TargetRegisterClass GPR32RegClass = {
     &MipsMCRegisterClasses[GPR32RegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 0,
     GPR32SubClassMask,
     SuperRegIdxSeqs + 0,
@@ -4584,6 +4781,8 @@ namespace Mips {   // Register class instances
 
   extern const TargetRegisterClass HWRegsRegClass = {
     &MipsMCRegisterClasses[HWRegsRegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 0,
     HWRegsSubClassMask,
     SuperRegIdxSeqs + 1,
@@ -4595,8 +4794,25 @@ namespace Mips {   // Register class instances
     nullptr
   };
 
+  extern const TargetRegisterClass GPR32NONZERORegClass = {
+    &MipsMCRegisterClasses[GPR32NONZERORegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
+    VTLists + 0,
+    GPR32NONZEROSubClassMask,
+    SuperRegIdxSeqs + 0,
+    LaneBitmask(0x00000001),
+    0,
+    false, /* HasDisjunctSubRegs */
+    false, /* CoveredBySubRegs */
+    GPR32NONZEROSuperclasses,
+    nullptr
+  };
+
   extern const TargetRegisterClass OddSP_with_sub_hiRegClass = {
     &MipsMCRegisterClasses[OddSP_with_sub_hiRegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 6,
     OddSP_with_sub_hiSubClassMask,
     SuperRegIdxSeqs + 2,
@@ -4610,6 +4826,8 @@ namespace Mips {   // Register class instances
 
   extern const TargetRegisterClass FGR32_and_OddSPRegClass = {
     &MipsMCRegisterClasses[FGR32_and_OddSPRegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 0,
     FGR32_and_OddSPSubClassMask,
     SuperRegIdxSeqs + 10,
@@ -4623,6 +4841,8 @@ namespace Mips {   // Register class instances
 
   extern const TargetRegisterClass FGRH32_and_OddSPRegClass = {
     &MipsMCRegisterClasses[FGRH32_and_OddSPRegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 6,
     FGRH32_and_OddSPSubClassMask,
     SuperRegIdxSeqs + 4,
@@ -4636,6 +4856,8 @@ namespace Mips {   // Register class instances
 
   extern const TargetRegisterClass OddSP_with_sub_hi_with_sub_hi_in_FGRH32RegClass = {
     &MipsMCRegisterClasses[OddSP_with_sub_hi_with_sub_hi_in_FGRH32RegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 6,
     OddSP_with_sub_hi_with_sub_hi_in_FGRH32SubClassMask,
     SuperRegIdxSeqs + 2,
@@ -4649,6 +4871,8 @@ namespace Mips {   // Register class instances
 
   extern const TargetRegisterClass CPU16RegsPlusSPRegClass = {
     &MipsMCRegisterClasses[CPU16RegsPlusSPRegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 0,
     CPU16RegsPlusSPSubClassMask,
     SuperRegIdxSeqs + 0,
@@ -4662,6 +4886,8 @@ namespace Mips {   // Register class instances
 
   extern const TargetRegisterClass CPU16RegsRegClass = {
     &MipsMCRegisterClasses[CPU16RegsRegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 0,
     CPU16RegsSubClassMask,
     SuperRegIdxSeqs + 0,
@@ -4675,6 +4901,8 @@ namespace Mips {   // Register class instances
 
   extern const TargetRegisterClass FCCRegClass = {
     &MipsMCRegisterClasses[FCCRegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 0,
     FCCSubClassMask,
     SuperRegIdxSeqs + 1,
@@ -4688,6 +4916,8 @@ namespace Mips {   // Register class instances
 
   extern const TargetRegisterClass GPRMM16RegClass = {
     &MipsMCRegisterClasses[GPRMM16RegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 0,
     GPRMM16SubClassMask,
     SuperRegIdxSeqs + 0,
@@ -4701,6 +4931,8 @@ namespace Mips {   // Register class instances
 
   extern const TargetRegisterClass GPRMM16MovePRegClass = {
     &MipsMCRegisterClasses[GPRMM16MovePRegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 0,
     GPRMM16MovePSubClassMask,
     SuperRegIdxSeqs + 0,
@@ -4714,6 +4946,8 @@ namespace Mips {   // Register class instances
 
   extern const TargetRegisterClass GPRMM16ZeroRegClass = {
     &MipsMCRegisterClasses[GPRMM16ZeroRegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 0,
     GPRMM16ZeroSubClassMask,
     SuperRegIdxSeqs + 0,
@@ -4727,6 +4961,8 @@ namespace Mips {   // Register class instances
 
   extern const TargetRegisterClass MSACtrlRegClass = {
     &MipsMCRegisterClasses[MSACtrlRegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 0,
     MSACtrlSubClassMask,
     SuperRegIdxSeqs + 1,
@@ -4740,6 +4976,8 @@ namespace Mips {   // Register class instances
 
   extern const TargetRegisterClass OddSP_with_sub_hi_with_sub_hi_in_FGR32RegClass = {
     &MipsMCRegisterClasses[OddSP_with_sub_hi_with_sub_hi_in_FGR32RegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 6,
     OddSP_with_sub_hi_with_sub_hi_in_FGR32SubClassMask,
     SuperRegIdxSeqs + 1,
@@ -4753,6 +4991,8 @@ namespace Mips {   // Register class instances
 
   extern const TargetRegisterClass CPU16Regs_and_GPRMM16ZeroRegClass = {
     &MipsMCRegisterClasses[CPU16Regs_and_GPRMM16ZeroRegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 0,
     CPU16Regs_and_GPRMM16ZeroSubClassMask,
     SuperRegIdxSeqs + 0,
@@ -4764,8 +5004,25 @@ namespace Mips {   // Register class instances
     nullptr
   };
 
+  extern const TargetRegisterClass GPR32NONZERO_and_GPRMM16MovePRegClass = {
+    &MipsMCRegisterClasses[GPR32NONZERO_and_GPRMM16MovePRegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
+    VTLists + 0,
+    GPR32NONZERO_and_GPRMM16MovePSubClassMask,
+    SuperRegIdxSeqs + 0,
+    LaneBitmask(0x00000001),
+    0,
+    false, /* HasDisjunctSubRegs */
+    false, /* CoveredBySubRegs */
+    GPR32NONZERO_and_GPRMM16MovePSuperclasses,
+    nullptr
+  };
+
   extern const TargetRegisterClass CPU16Regs_and_GPRMM16MovePRegClass = {
     &MipsMCRegisterClasses[CPU16Regs_and_GPRMM16MovePRegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 0,
     CPU16Regs_and_GPRMM16MovePSubClassMask,
     SuperRegIdxSeqs + 0,
@@ -4779,6 +5036,8 @@ namespace Mips {   // Register class instances
 
   extern const TargetRegisterClass GPRMM16MoveP_and_GPRMM16ZeroRegClass = {
     &MipsMCRegisterClasses[GPRMM16MoveP_and_GPRMM16ZeroRegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 0,
     GPRMM16MoveP_and_GPRMM16ZeroSubClassMask,
     SuperRegIdxSeqs + 0,
@@ -4792,6 +5051,8 @@ namespace Mips {   // Register class instances
 
   extern const TargetRegisterClass HI32DSPRegClass = {
     &MipsMCRegisterClasses[HI32DSPRegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 0,
     HI32DSPSubClassMask,
     SuperRegIdxSeqs + 13,
@@ -4805,6 +5066,8 @@ namespace Mips {   // Register class instances
 
   extern const TargetRegisterClass LO32DSPRegClass = {
     &MipsMCRegisterClasses[LO32DSPRegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 0,
     LO32DSPSubClassMask,
     SuperRegIdxSeqs + 6,
@@ -4818,6 +5081,8 @@ namespace Mips {   // Register class instances
 
   extern const TargetRegisterClass GPRMM16MoveP_and_CPU16Regs_and_GPRMM16ZeroRegClass = {
     &MipsMCRegisterClasses[GPRMM16MoveP_and_CPU16Regs_and_GPRMM16ZeroRegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 0,
     GPRMM16MoveP_and_CPU16Regs_and_GPRMM16ZeroSubClassMask,
     SuperRegIdxSeqs + 0,
@@ -4831,6 +5096,8 @@ namespace Mips {   // Register class instances
 
   extern const TargetRegisterClass CPURARegRegClass = {
     &MipsMCRegisterClasses[CPURARegRegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 0,
     CPURARegSubClassMask,
     SuperRegIdxSeqs + 0,
@@ -4844,6 +5111,8 @@ namespace Mips {   // Register class instances
 
   extern const TargetRegisterClass CPUSPRegRegClass = {
     &MipsMCRegisterClasses[CPUSPRegRegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 0,
     CPUSPRegSubClassMask,
     SuperRegIdxSeqs + 0,
@@ -4857,6 +5126,8 @@ namespace Mips {   // Register class instances
 
   extern const TargetRegisterClass DSPCCRegClass = {
     &MipsMCRegisterClasses[DSPCCRegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 12,
     DSPCCSubClassMask,
     SuperRegIdxSeqs + 1,
@@ -4870,6 +5141,8 @@ namespace Mips {   // Register class instances
 
   extern const TargetRegisterClass GP32RegClass = {
     &MipsMCRegisterClasses[GP32RegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 0,
     GP32SubClassMask,
     SuperRegIdxSeqs + 0,
@@ -4881,8 +5154,25 @@ namespace Mips {   // Register class instances
     nullptr
   };
 
+  extern const TargetRegisterClass GPR32ZERORegClass = {
+    &MipsMCRegisterClasses[GPR32ZERORegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
+    VTLists + 0,
+    GPR32ZEROSubClassMask,
+    SuperRegIdxSeqs + 0,
+    LaneBitmask(0x00000001),
+    0,
+    false, /* HasDisjunctSubRegs */
+    false, /* CoveredBySubRegs */
+    GPR32ZEROSuperclasses,
+    nullptr
+  };
+
   extern const TargetRegisterClass HI32RegClass = {
     &MipsMCRegisterClasses[HI32RegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 0,
     HI32SubClassMask,
     SuperRegIdxSeqs + 13,
@@ -4896,6 +5186,8 @@ namespace Mips {   // Register class instances
 
   extern const TargetRegisterClass LO32RegClass = {
     &MipsMCRegisterClasses[LO32RegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 0,
     LO32SubClassMask,
     SuperRegIdxSeqs + 6,
@@ -4909,6 +5201,8 @@ namespace Mips {   // Register class instances
 
   extern const TargetRegisterClass SP32RegClass = {
     &MipsMCRegisterClasses[SP32RegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 0,
     SP32SubClassMask,
     SuperRegIdxSeqs + 0,
@@ -4922,6 +5216,8 @@ namespace Mips {   // Register class instances
 
   extern const TargetRegisterClass FGR64RegClass = {
     &MipsMCRegisterClasses[FGR64RegClassID],
+    8, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 8,
     FGR64SubClassMask,
     SuperRegIdxSeqs + 2,
@@ -4935,6 +5231,8 @@ namespace Mips {   // Register class instances
 
   extern const TargetRegisterClass GPR64RegClass = {
     &MipsMCRegisterClasses[GPR64RegClassID],
+    8, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 2,
     GPR64SubClassMask,
     SuperRegIdxSeqs + 1,
@@ -4946,8 +5244,25 @@ namespace Mips {   // Register class instances
     nullptr
   };
 
+  extern const TargetRegisterClass GPR64_with_sub_32_in_GPR32NONZERORegClass = {
+    &MipsMCRegisterClasses[GPR64_with_sub_32_in_GPR32NONZERORegClassID],
+    8, /* SpillSize */
+    8, /* SpillAlignment */
+    VTLists + 2,
+    GPR64_with_sub_32_in_GPR32NONZEROSubClassMask,
+    SuperRegIdxSeqs + 1,
+    LaneBitmask(0x00000001),
+    0,
+    false, /* HasDisjunctSubRegs */
+    false, /* CoveredBySubRegs */
+    GPR64_with_sub_32_in_GPR32NONZEROSuperclasses,
+    nullptr
+  };
+
   extern const TargetRegisterClass AFGR64RegClass = {
     &MipsMCRegisterClasses[AFGR64RegClassID],
+    8, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 8,
     AFGR64SubClassMask,
     SuperRegIdxSeqs + 1,
@@ -4961,6 +5276,8 @@ namespace Mips {   // Register class instances
 
   extern const TargetRegisterClass FGR64_and_OddSPRegClass = {
     &MipsMCRegisterClasses[FGR64_and_OddSPRegClassID],
+    8, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 8,
     FGR64_and_OddSPSubClassMask,
     SuperRegIdxSeqs + 2,
@@ -4974,6 +5291,8 @@ namespace Mips {   // Register class instances
 
   extern const TargetRegisterClass GPR64_with_sub_32_in_CPU16RegsPlusSPRegClass = {
     &MipsMCRegisterClasses[GPR64_with_sub_32_in_CPU16RegsPlusSPRegClassID],
+    8, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 2,
     GPR64_with_sub_32_in_CPU16RegsPlusSPSubClassMask,
     SuperRegIdxSeqs + 1,
@@ -4987,6 +5306,8 @@ namespace Mips {   // Register class instances
 
   extern const TargetRegisterClass AFGR64_and_OddSPRegClass = {
     &MipsMCRegisterClasses[AFGR64_and_OddSPRegClassID],
+    8, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 8,
     AFGR64_and_OddSPSubClassMask,
     SuperRegIdxSeqs + 1,
@@ -5000,6 +5321,8 @@ namespace Mips {   // Register class instances
 
   extern const TargetRegisterClass GPR64_with_sub_32_in_GPRMM16MovePRegClass = {
     &MipsMCRegisterClasses[GPR64_with_sub_32_in_GPRMM16MovePRegClassID],
+    8, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 2,
     GPR64_with_sub_32_in_GPRMM16MovePSubClassMask,
     SuperRegIdxSeqs + 1,
@@ -5013,6 +5336,8 @@ namespace Mips {   // Register class instances
 
   extern const TargetRegisterClass GPR64_with_sub_32_in_GPRMM16ZeroRegClass = {
     &MipsMCRegisterClasses[GPR64_with_sub_32_in_GPRMM16ZeroRegClassID],
+    8, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 2,
     GPR64_with_sub_32_in_GPRMM16ZeroSubClassMask,
     SuperRegIdxSeqs + 1,
@@ -5026,6 +5351,8 @@ namespace Mips {   // Register class instances
 
   extern const TargetRegisterClass GPRMM16_64RegClass = {
     &MipsMCRegisterClasses[GPRMM16_64RegClassID],
+    8, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 2,
     GPRMM16_64SubClassMask,
     SuperRegIdxSeqs + 1,
@@ -5039,6 +5366,8 @@ namespace Mips {   // Register class instances
 
   extern const TargetRegisterClass GPR64_with_sub_32_in_CPU16Regs_and_GPRMM16ZeroRegClass = {
     &MipsMCRegisterClasses[GPR64_with_sub_32_in_CPU16Regs_and_GPRMM16ZeroRegClassID],
+    8, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 2,
     GPR64_with_sub_32_in_CPU16Regs_and_GPRMM16ZeroSubClassMask,
     SuperRegIdxSeqs + 1,
@@ -5050,8 +5379,25 @@ namespace Mips {   // Register class instances
     nullptr
   };
 
+  extern const TargetRegisterClass GPR64_with_sub_32_in_GPR32NONZERO_and_GPRMM16MovePRegClass = {
+    &MipsMCRegisterClasses[GPR64_with_sub_32_in_GPR32NONZERO_and_GPRMM16MovePRegClassID],
+    8, /* SpillSize */
+    8, /* SpillAlignment */
+    VTLists + 2,
+    GPR64_with_sub_32_in_GPR32NONZERO_and_GPRMM16MovePSubClassMask,
+    SuperRegIdxSeqs + 1,
+    LaneBitmask(0x00000001),
+    0,
+    false, /* HasDisjunctSubRegs */
+    false, /* CoveredBySubRegs */
+    GPR64_with_sub_32_in_GPR32NONZERO_and_GPRMM16MovePSuperclasses,
+    nullptr
+  };
+
   extern const TargetRegisterClass ACC64DSPRegClass = {
     &MipsMCRegisterClasses[ACC64DSPRegClassID],
+    8, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 24,
     ACC64DSPSubClassMask,
     SuperRegIdxSeqs + 17,
@@ -5065,6 +5411,8 @@ namespace Mips {   // Register class instances
 
   extern const TargetRegisterClass GPR64_with_sub_32_in_CPU16Regs_and_GPRMM16MovePRegClass = {
     &MipsMCRegisterClasses[GPR64_with_sub_32_in_CPU16Regs_and_GPRMM16MovePRegClassID],
+    8, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 2,
     GPR64_with_sub_32_in_CPU16Regs_and_GPRMM16MovePSubClassMask,
     SuperRegIdxSeqs + 1,
@@ -5078,6 +5426,8 @@ namespace Mips {   // Register class instances
 
   extern const TargetRegisterClass GPR64_with_sub_32_in_GPRMM16MoveP_and_GPRMM16ZeroRegClass = {
     &MipsMCRegisterClasses[GPR64_with_sub_32_in_GPRMM16MoveP_and_GPRMM16ZeroRegClassID],
+    8, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 2,
     GPR64_with_sub_32_in_GPRMM16MoveP_and_GPRMM16ZeroSubClassMask,
     SuperRegIdxSeqs + 1,
@@ -5091,6 +5441,8 @@ namespace Mips {   // Register class instances
 
   extern const TargetRegisterClass GPRMM16_64_with_sub_32_in_GPRMM16MoveP_and_GPRMM16ZeroRegClass = {
     &MipsMCRegisterClasses[GPRMM16_64_with_sub_32_in_GPRMM16MoveP_and_GPRMM16ZeroRegClassID],
+    8, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 2,
     GPRMM16_64_with_sub_32_in_GPRMM16MoveP_and_GPRMM16ZeroSubClassMask,
     SuperRegIdxSeqs + 1,
@@ -5104,6 +5456,8 @@ namespace Mips {   // Register class instances
 
   extern const TargetRegisterClass OCTEON_MPLRegClass = {
     &MipsMCRegisterClasses[OCTEON_MPLRegClassID],
+    8, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 2,
     OCTEON_MPLSubClassMask,
     SuperRegIdxSeqs + 1,
@@ -5117,6 +5471,8 @@ namespace Mips {   // Register class instances
 
   extern const TargetRegisterClass OCTEON_PRegClass = {
     &MipsMCRegisterClasses[OCTEON_PRegClassID],
+    8, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 2,
     OCTEON_PSubClassMask,
     SuperRegIdxSeqs + 1,
@@ -5130,6 +5486,8 @@ namespace Mips {   // Register class instances
 
   extern const TargetRegisterClass ACC64RegClass = {
     &MipsMCRegisterClasses[ACC64RegClassID],
+    8, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 24,
     ACC64SubClassMask,
     SuperRegIdxSeqs + 17,
@@ -5143,6 +5501,8 @@ namespace Mips {   // Register class instances
 
   extern const TargetRegisterClass GP64RegClass = {
     &MipsMCRegisterClasses[GP64RegClassID],
+    8, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 2,
     GP64SubClassMask,
     SuperRegIdxSeqs + 1,
@@ -5156,6 +5516,8 @@ namespace Mips {   // Register class instances
 
   extern const TargetRegisterClass GPR64_with_sub_32_in_CPURARegRegClass = {
     &MipsMCRegisterClasses[GPR64_with_sub_32_in_CPURARegRegClassID],
+    8, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 2,
     GPR64_with_sub_32_in_CPURARegSubClassMask,
     SuperRegIdxSeqs + 1,
@@ -5167,8 +5529,25 @@ namespace Mips {   // Register class instances
     nullptr
   };
 
+  extern const TargetRegisterClass GPR64_with_sub_32_in_GPR32ZERORegClass = {
+    &MipsMCRegisterClasses[GPR64_with_sub_32_in_GPR32ZERORegClassID],
+    8, /* SpillSize */
+    8, /* SpillAlignment */
+    VTLists + 2,
+    GPR64_with_sub_32_in_GPR32ZEROSubClassMask,
+    SuperRegIdxSeqs + 1,
+    LaneBitmask(0x00000001),
+    0,
+    false, /* HasDisjunctSubRegs */
+    false, /* CoveredBySubRegs */
+    GPR64_with_sub_32_in_GPR32ZEROSuperclasses,
+    nullptr
+  };
+
   extern const TargetRegisterClass HI64RegClass = {
     &MipsMCRegisterClasses[HI64RegClassID],
+    8, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 2,
     HI64SubClassMask,
     SuperRegIdxSeqs + 4,
@@ -5182,6 +5561,8 @@ namespace Mips {   // Register class instances
 
   extern const TargetRegisterClass LO64RegClass = {
     &MipsMCRegisterClasses[LO64RegClassID],
+    8, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 2,
     LO64SubClassMask,
     SuperRegIdxSeqs + 7,
@@ -5195,6 +5576,8 @@ namespace Mips {   // Register class instances
 
   extern const TargetRegisterClass SP64RegClass = {
     &MipsMCRegisterClasses[SP64RegClassID],
+    8, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 2,
     SP64SubClassMask,
     SuperRegIdxSeqs + 1,
@@ -5208,6 +5591,8 @@ namespace Mips {   // Register class instances
 
   extern const TargetRegisterClass MSA128BRegClass = {
     &MipsMCRegisterClasses[MSA128BRegClassID],
+    16, /* SpillSize */
+    16, /* SpillAlignment */
     VTLists + 10,
     MSA128BSubClassMask,
     SuperRegIdxSeqs + 1,
@@ -5221,6 +5606,8 @@ namespace Mips {   // Register class instances
 
   extern const TargetRegisterClass MSA128DRegClass = {
     &MipsMCRegisterClasses[MSA128DRegClassID],
+    16, /* SpillSize */
+    16, /* SpillAlignment */
     VTLists + 21,
     MSA128DSubClassMask,
     SuperRegIdxSeqs + 1,
@@ -5234,6 +5621,8 @@ namespace Mips {   // Register class instances
 
   extern const TargetRegisterClass MSA128HRegClass = {
     &MipsMCRegisterClasses[MSA128HRegClassID],
+    16, /* SpillSize */
+    16, /* SpillAlignment */
     VTLists + 15,
     MSA128HSubClassMask,
     SuperRegIdxSeqs + 1,
@@ -5247,6 +5636,8 @@ namespace Mips {   // Register class instances
 
   extern const TargetRegisterClass MSA128WRegClass = {
     &MipsMCRegisterClasses[MSA128WRegClassID],
+    16, /* SpillSize */
+    16, /* SpillAlignment */
     VTLists + 18,
     MSA128WSubClassMask,
     SuperRegIdxSeqs + 1,
@@ -5260,6 +5651,8 @@ namespace Mips {   // Register class instances
 
   extern const TargetRegisterClass MSA128B_with_sub_64_in_OddSPRegClass = {
     &MipsMCRegisterClasses[MSA128B_with_sub_64_in_OddSPRegClassID],
+    16, /* SpillSize */
+    16, /* SpillAlignment */
     VTLists + 18,
     MSA128B_with_sub_64_in_OddSPSubClassMask,
     SuperRegIdxSeqs + 1,
@@ -5273,6 +5666,8 @@ namespace Mips {   // Register class instances
 
   extern const TargetRegisterClass MSA128WEvensRegClass = {
     &MipsMCRegisterClasses[MSA128WEvensRegClassID],
+    16, /* SpillSize */
+    16, /* SpillAlignment */
     VTLists + 18,
     MSA128WEvensSubClassMask,
     SuperRegIdxSeqs + 1,
@@ -5286,6 +5681,8 @@ namespace Mips {   // Register class instances
 
   extern const TargetRegisterClass ACC128RegClass = {
     &MipsMCRegisterClasses[ACC128RegClassID],
+    16, /* SpillSize */
+    16, /* SpillAlignment */
     VTLists + 24,
     ACC128SubClassMask,
     SuperRegIdxSeqs + 1,
@@ -5314,6 +5711,7 @@ namespace {
     &Mips::FGRH32RegClass,
     &Mips::GPR32RegClass,
     &Mips::HWRegsRegClass,
+    &Mips::GPR32NONZERORegClass,
     &Mips::OddSP_with_sub_hiRegClass,
     &Mips::FGR32_and_OddSPRegClass,
     &Mips::FGRH32_and_OddSPRegClass,
@@ -5327,6 +5725,7 @@ namespace {
     &Mips::MSACtrlRegClass,
     &Mips::OddSP_with_sub_hi_with_sub_hi_in_FGR32RegClass,
     &Mips::CPU16Regs_and_GPRMM16ZeroRegClass,
+    &Mips::GPR32NONZERO_and_GPRMM16MovePRegClass,
     &Mips::CPU16Regs_and_GPRMM16MovePRegClass,
     &Mips::GPRMM16MoveP_and_GPRMM16ZeroRegClass,
     &Mips::HI32DSPRegClass,
@@ -5336,11 +5735,13 @@ namespace {
     &Mips::CPUSPRegRegClass,
     &Mips::DSPCCRegClass,
     &Mips::GP32RegClass,
+    &Mips::GPR32ZERORegClass,
     &Mips::HI32RegClass,
     &Mips::LO32RegClass,
     &Mips::SP32RegClass,
     &Mips::FGR64RegClass,
     &Mips::GPR64RegClass,
+    &Mips::GPR64_with_sub_32_in_GPR32NONZERORegClass,
     &Mips::AFGR64RegClass,
     &Mips::FGR64_and_OddSPRegClass,
     &Mips::GPR64_with_sub_32_in_CPU16RegsPlusSPRegClass,
@@ -5349,6 +5750,7 @@ namespace {
     &Mips::GPR64_with_sub_32_in_GPRMM16ZeroRegClass,
     &Mips::GPRMM16_64RegClass,
     &Mips::GPR64_with_sub_32_in_CPU16Regs_and_GPRMM16ZeroRegClass,
+    &Mips::GPR64_with_sub_32_in_GPR32NONZERO_and_GPRMM16MovePRegClass,
     &Mips::ACC64DSPRegClass,
     &Mips::GPR64_with_sub_32_in_CPU16Regs_and_GPRMM16MovePRegClass,
     &Mips::GPR64_with_sub_32_in_GPRMM16MoveP_and_GPRMM16ZeroRegClass,
@@ -5358,6 +5760,7 @@ namespace {
     &Mips::ACC64RegClass,
     &Mips::GP64RegClass,
     &Mips::GPR64_with_sub_32_in_CPURARegRegClass,
+    &Mips::GPR64_with_sub_32_in_GPR32ZERORegClass,
     &Mips::HI64RegClass,
     &Mips::LO64RegClass,
     &Mips::SP64RegClass,
@@ -5835,7 +6238,7 @@ unsigned MipsGenRegisterInfo::composeSubRegIndicesImpl(unsigned IdxA, unsigned I
 LaneBitmask MipsGenRegisterInfo::composeSubRegIndexLaneMaskImpl(unsigned IdxA, LaneBitmask LaneMask) const {
   --IdxA; assert(IdxA < 11 && "Subregister index out of bounds");
   LaneBitmask Result;
-  for (const MaskRolOp *Ops = CompositeSequences[IdxA]; !Ops->Mask.none(); ++Ops) {
+  for (const MaskRolOp *Ops = CompositeSequences[IdxA]; Ops->Mask.any(); ++Ops) {
     LaneBitmask::Type M = LaneMask.getAsInteger() & Ops->Mask.getAsInteger();
     if (unsigned S = Ops->RotateLeft)
       Result |= LaneBitmask((M << S) | (M >> (LaneBitmask::BitWidth - S)));
@@ -5849,7 +6252,7 @@ LaneBitmask MipsGenRegisterInfo::reverseComposeSubRegIndexLaneMaskImpl(unsigned 
   LaneMask &= getSubRegIndexLaneMask(IdxA);
   --IdxA; assert(IdxA < 11 && "Subregister index out of bounds");
   LaneBitmask Result;
-  for (const MaskRolOp *Ops = CompositeSequences[IdxA]; !Ops->Mask.none(); ++Ops) {
+  for (const MaskRolOp *Ops = CompositeSequences[IdxA]; Ops->Mask.any(); ++Ops) {
     LaneBitmask::Type M = LaneMask.getAsInteger();
     if (unsigned S = Ops->RotateLeft)
       Result |= LaneBitmask((M >> S) | (M << (LaneBitmask::BitWidth - S)));
@@ -5860,7 +6263,7 @@ LaneBitmask MipsGenRegisterInfo::reverseComposeSubRegIndexLaneMaskImpl(unsigned 
 }
 
 const TargetRegisterClass *MipsGenRegisterInfo::getSubClassWithSubReg(const TargetRegisterClass *RC, unsigned Idx) const {
-  static const uint8_t Table[67][11] = {
+  static const uint8_t Table[73][11] = {
     {	// MSA128F16
       0,	// sub_32
       1,	// sub_64 -> MSA128F16
@@ -5895,8 +6298,8 @@ const TargetRegisterClass *MipsGenRegisterInfo::getSubClassWithSubReg(const Targ
       0,	// sub_dsp21
       0,	// sub_dsp22
       0,	// sub_dsp23
-      14,	// sub_hi -> OddSP_with_sub_hi
-      14,	// sub_lo -> OddSP_with_sub_hi
+      15,	// sub_hi -> OddSP_with_sub_hi
+      15,	// sub_lo -> OddSP_with_sub_hi
       0,	// sub_hi_then_sub_32
       0,	// sub_32_sub_hi_then_sub_32
     },
@@ -6030,6 +6433,19 @@ const TargetRegisterClass *MipsGenRegisterInfo::getSubClassWithSubReg(const Targ
       0,	// sub_hi_then_sub_32
       0,	// sub_32_sub_hi_then_sub_32
     },
+    {	// GPR32NONZERO
+      0,	// sub_32
+      0,	// sub_64
+      0,	// sub_dsp16_19
+      0,	// sub_dsp20
+      0,	// sub_dsp21
+      0,	// sub_dsp22
+      0,	// sub_dsp23
+      0,	// sub_hi
+      0,	// sub_lo
+      0,	// sub_hi_then_sub_32
+      0,	// sub_32_sub_hi_then_sub_32
+    },
     {	// OddSP_with_sub_hi
       0,	// sub_32
       0,	// sub_64
@@ -6038,8 +6454,8 @@ const TargetRegisterClass *MipsGenRegisterInfo::getSubClassWithSubReg(const Targ
       0,	// sub_dsp21
       0,	// sub_dsp22
       0,	// sub_dsp23
-      14,	// sub_hi -> OddSP_with_sub_hi
-      14,	// sub_lo -> OddSP_with_sub_hi
+      15,	// sub_hi -> OddSP_with_sub_hi
+      15,	// sub_lo -> OddSP_with_sub_hi
       0,	// sub_hi_then_sub_32
       0,	// sub_32_sub_hi_then_sub_32
     },
@@ -6077,8 +6493,8 @@ const TargetRegisterClass *MipsGenRegisterInfo::getSubClassWithSubReg(const Targ
       0,	// sub_dsp21
       0,	// sub_dsp22
       0,	// sub_dsp23
-      17,	// sub_hi -> OddSP_with_sub_hi_with_sub_hi_in_FGRH32
-      17,	// sub_lo -> OddSP_with_sub_hi_with_sub_hi_in_FGRH32
+      18,	// sub_hi -> OddSP_with_sub_hi_with_sub_hi_in_FGRH32
+      18,	// sub_lo -> OddSP_with_sub_hi_with_sub_hi_in_FGRH32
       0,	// sub_hi_then_sub_32
       0,	// sub_32_sub_hi_then_sub_32
     },
@@ -6181,12 +6597,25 @@ const TargetRegisterClass *MipsGenRegisterInfo::getSubClassWithSubReg(const Targ
       0,	// sub_dsp21
       0,	// sub_dsp22
       0,	// sub_dsp23
-      25,	// sub_hi -> OddSP_with_sub_hi_with_sub_hi_in_FGR32
-      25,	// sub_lo -> OddSP_with_sub_hi_with_sub_hi_in_FGR32
+      26,	// sub_hi -> OddSP_with_sub_hi_with_sub_hi_in_FGR32
+      26,	// sub_lo -> OddSP_with_sub_hi_with_sub_hi_in_FGR32
       0,	// sub_hi_then_sub_32
       0,	// sub_32_sub_hi_then_sub_32
     },
     {	// CPU16Regs_and_GPRMM16Zero
+      0,	// sub_32
+      0,	// sub_64
+      0,	// sub_dsp16_19
+      0,	// sub_dsp20
+      0,	// sub_dsp21
+      0,	// sub_dsp22
+      0,	// sub_dsp23
+      0,	// sub_hi
+      0,	// sub_lo
+      0,	// sub_hi_then_sub_32
+      0,	// sub_32_sub_hi_then_sub_32
+    },
+    {	// GPR32NONZERO_and_GPRMM16MoveP
       0,	// sub_32
       0,	// sub_64
       0,	// sub_dsp16_19
@@ -6316,6 +6745,19 @@ const TargetRegisterClass *MipsGenRegisterInfo::getSubClassWithSubReg(const Targ
       0,	// sub_hi_then_sub_32
       0,	// sub_32_sub_hi_then_sub_32
     },
+    {	// GPR32ZERO
+      0,	// sub_32
+      0,	// sub_64
+      0,	// sub_dsp16_19
+      0,	// sub_dsp20
+      0,	// sub_dsp21
+      0,	// sub_dsp22
+      0,	// sub_dsp23
+      0,	// sub_hi
+      0,	// sub_lo
+      0,	// sub_hi_then_sub_32
+      0,	// sub_32_sub_hi_then_sub_32
+    },
     {	// HI32
       0,	// sub_32
       0,	// sub_64
@@ -6363,13 +6805,26 @@ const TargetRegisterClass *MipsGenRegisterInfo::getSubClassWithSubReg(const Targ
       0,	// sub_dsp21
       0,	// sub_dsp22
       0,	// sub_dsp23
-      39,	// sub_hi -> FGR64
-      39,	// sub_lo -> FGR64
+      42,	// sub_hi -> FGR64
+      42,	// sub_lo -> FGR64
       0,	// sub_hi_then_sub_32
       0,	// sub_32_sub_hi_then_sub_32
     },
     {	// GPR64
-      40,	// sub_32 -> GPR64
+      43,	// sub_32 -> GPR64
+      0,	// sub_64
+      0,	// sub_dsp16_19
+      0,	// sub_dsp20
+      0,	// sub_dsp21
+      0,	// sub_dsp22
+      0,	// sub_dsp23
+      0,	// sub_hi
+      0,	// sub_lo
+      0,	// sub_hi_then_sub_32
+      0,	// sub_32_sub_hi_then_sub_32
+    },
+    {	// GPR64_with_sub_32_in_GPR32NONZERO
+      44,	// sub_32 -> GPR64_with_sub_32_in_GPR32NONZERO
       0,	// sub_64
       0,	// sub_dsp16_19
       0,	// sub_dsp20
@@ -6389,8 +6844,8 @@ const TargetRegisterClass *MipsGenRegisterInfo::getSubClassWithSubReg(const Targ
       0,	// sub_dsp21
       0,	// sub_dsp22
       0,	// sub_dsp23
-      41,	// sub_hi -> AFGR64
-      41,	// sub_lo -> AFGR64
+      45,	// sub_hi -> AFGR64
+      45,	// sub_lo -> AFGR64
       0,	// sub_hi_then_sub_32
       0,	// sub_32_sub_hi_then_sub_32
     },
@@ -6402,13 +6857,13 @@ const TargetRegisterClass *MipsGenRegisterInfo::getSubClassWithSubReg(const Targ
       0,	// sub_dsp21
       0,	// sub_dsp22
       0,	// sub_dsp23
-      42,	// sub_hi -> FGR64_and_OddSP
-      42,	// sub_lo -> FGR64_and_OddSP
+      46,	// sub_hi -> FGR64_and_OddSP
+      46,	// sub_lo -> FGR64_and_OddSP
       0,	// sub_hi_then_sub_32
       0,	// sub_32_sub_hi_then_sub_32
     },
     {	// GPR64_with_sub_32_in_CPU16RegsPlusSP
-      43,	// sub_32 -> GPR64_with_sub_32_in_CPU16RegsPlusSP
+      47,	// sub_32 -> GPR64_with_sub_32_in_CPU16RegsPlusSP
       0,	// sub_64
       0,	// sub_dsp16_19
       0,	// sub_dsp20
@@ -6428,13 +6883,13 @@ const TargetRegisterClass *MipsGenRegisterInfo::getSubClassWithSubReg(const Targ
       0,	// sub_dsp21
       0,	// sub_dsp22
       0,	// sub_dsp23
-      44,	// sub_hi -> AFGR64_and_OddSP
-      44,	// sub_lo -> AFGR64_and_OddSP
+      48,	// sub_hi -> AFGR64_and_OddSP
+      48,	// sub_lo -> AFGR64_and_OddSP
       0,	// sub_hi_then_sub_32
       0,	// sub_32_sub_hi_then_sub_32
     },
     {	// GPR64_with_sub_32_in_GPRMM16MoveP
-      45,	// sub_32 -> GPR64_with_sub_32_in_GPRMM16MoveP
+      49,	// sub_32 -> GPR64_with_sub_32_in_GPRMM16MoveP
       0,	// sub_64
       0,	// sub_dsp16_19
       0,	// sub_dsp20
@@ -6447,7 +6902,7 @@ const TargetRegisterClass *MipsGenRegisterInfo::getSubClassWithSubReg(const Targ
       0,	// sub_32_sub_hi_then_sub_32
     },
     {	// GPR64_with_sub_32_in_GPRMM16Zero
-      46,	// sub_32 -> GPR64_with_sub_32_in_GPRMM16Zero
+      50,	// sub_32 -> GPR64_with_sub_32_in_GPRMM16Zero
       0,	// sub_64
       0,	// sub_dsp16_19
       0,	// sub_dsp20
@@ -6460,7 +6915,7 @@ const TargetRegisterClass *MipsGenRegisterInfo::getSubClassWithSubReg(const Targ
       0,	// sub_32_sub_hi_then_sub_32
     },
     {	// GPRMM16_64
-      47,	// sub_32 -> GPRMM16_64
+      51,	// sub_32 -> GPRMM16_64
       0,	// sub_64
       0,	// sub_dsp16_19
       0,	// sub_dsp20
@@ -6473,7 +6928,20 @@ const TargetRegisterClass *MipsGenRegisterInfo::getSubClassWithSubReg(const Targ
       0,	// sub_32_sub_hi_then_sub_32
     },
     {	// GPR64_with_sub_32_in_CPU16Regs_and_GPRMM16Zero
-      48,	// sub_32 -> GPR64_with_sub_32_in_CPU16Regs_and_GPRMM16Zero
+      52,	// sub_32 -> GPR64_with_sub_32_in_CPU16Regs_and_GPRMM16Zero
+      0,	// sub_64
+      0,	// sub_dsp16_19
+      0,	// sub_dsp20
+      0,	// sub_dsp21
+      0,	// sub_dsp22
+      0,	// sub_dsp23
+      0,	// sub_hi
+      0,	// sub_lo
+      0,	// sub_hi_then_sub_32
+      0,	// sub_32_sub_hi_then_sub_32
+    },
+    {	// GPR64_with_sub_32_in_GPR32NONZERO_and_GPRMM16MoveP
+      53,	// sub_32 -> GPR64_with_sub_32_in_GPR32NONZERO_and_GPRMM16MoveP
       0,	// sub_64
       0,	// sub_dsp16_19
       0,	// sub_dsp20
@@ -6493,13 +6961,13 @@ const TargetRegisterClass *MipsGenRegisterInfo::getSubClassWithSubReg(const Targ
       0,	// sub_dsp21
       0,	// sub_dsp22
       0,	// sub_dsp23
-      49,	// sub_hi -> ACC64DSP
-      49,	// sub_lo -> ACC64DSP
+      54,	// sub_hi -> ACC64DSP
+      54,	// sub_lo -> ACC64DSP
       0,	// sub_hi_then_sub_32
       0,	// sub_32_sub_hi_then_sub_32
     },
     {	// GPR64_with_sub_32_in_CPU16Regs_and_GPRMM16MoveP
-      50,	// sub_32 -> GPR64_with_sub_32_in_CPU16Regs_and_GPRMM16MoveP
+      55,	// sub_32 -> GPR64_with_sub_32_in_CPU16Regs_and_GPRMM16MoveP
       0,	// sub_64
       0,	// sub_dsp16_19
       0,	// sub_dsp20
@@ -6512,7 +6980,7 @@ const TargetRegisterClass *MipsGenRegisterInfo::getSubClassWithSubReg(const Targ
       0,	// sub_32_sub_hi_then_sub_32
     },
     {	// GPR64_with_sub_32_in_GPRMM16MoveP_and_GPRMM16Zero
-      51,	// sub_32 -> GPR64_with_sub_32_in_GPRMM16MoveP_and_GPRMM16Zero
+      56,	// sub_32 -> GPR64_with_sub_32_in_GPRMM16MoveP_and_GPRMM16Zero
       0,	// sub_64
       0,	// sub_dsp16_19
       0,	// sub_dsp20
@@ -6525,7 +6993,7 @@ const TargetRegisterClass *MipsGenRegisterInfo::getSubClassWithSubReg(const Targ
       0,	// sub_32_sub_hi_then_sub_32
     },
     {	// GPRMM16_64_with_sub_32_in_GPRMM16MoveP_and_GPRMM16Zero
-      52,	// sub_32 -> GPRMM16_64_with_sub_32_in_GPRMM16MoveP_and_GPRMM16Zero
+      57,	// sub_32 -> GPRMM16_64_with_sub_32_in_GPRMM16MoveP_and_GPRMM16Zero
       0,	// sub_64
       0,	// sub_dsp16_19
       0,	// sub_dsp20
@@ -6571,13 +7039,13 @@ const TargetRegisterClass *MipsGenRegisterInfo::getSubClassWithSubReg(const Targ
       0,	// sub_dsp21
       0,	// sub_dsp22
       0,	// sub_dsp23
-      55,	// sub_hi -> ACC64
-      55,	// sub_lo -> ACC64
+      60,	// sub_hi -> ACC64
+      60,	// sub_lo -> ACC64
       0,	// sub_hi_then_sub_32
       0,	// sub_32_sub_hi_then_sub_32
     },
     {	// GP64
-      56,	// sub_32 -> GP64
+      61,	// sub_32 -> GP64
       0,	// sub_64
       0,	// sub_dsp16_19
       0,	// sub_dsp20
@@ -6590,7 +7058,20 @@ const TargetRegisterClass *MipsGenRegisterInfo::getSubClassWithSubReg(const Targ
       0,	// sub_32_sub_hi_then_sub_32
     },
     {	// GPR64_with_sub_32_in_CPURAReg
-      57,	// sub_32 -> GPR64_with_sub_32_in_CPURAReg
+      62,	// sub_32 -> GPR64_with_sub_32_in_CPURAReg
+      0,	// sub_64
+      0,	// sub_dsp16_19
+      0,	// sub_dsp20
+      0,	// sub_dsp21
+      0,	// sub_dsp22
+      0,	// sub_dsp23
+      0,	// sub_hi
+      0,	// sub_lo
+      0,	// sub_hi_then_sub_32
+      0,	// sub_32_sub_hi_then_sub_32
+    },
+    {	// GPR64_with_sub_32_in_GPR32ZERO
+      63,	// sub_32 -> GPR64_with_sub_32_in_GPR32ZERO
       0,	// sub_64
       0,	// sub_dsp16_19
       0,	// sub_dsp20
@@ -6603,7 +7084,7 @@ const TargetRegisterClass *MipsGenRegisterInfo::getSubClassWithSubReg(const Targ
       0,	// sub_32_sub_hi_then_sub_32
     },
     {	// HI64
-      58,	// sub_32 -> HI64
+      64,	// sub_32 -> HI64
       0,	// sub_64
       0,	// sub_dsp16_19
       0,	// sub_dsp20
@@ -6616,7 +7097,7 @@ const TargetRegisterClass *MipsGenRegisterInfo::getSubClassWithSubReg(const Targ
       0,	// sub_32_sub_hi_then_sub_32
     },
     {	// LO64
-      59,	// sub_32 -> LO64
+      65,	// sub_32 -> LO64
       0,	// sub_64
       0,	// sub_dsp16_19
       0,	// sub_dsp20
@@ -6629,7 +7110,7 @@ const TargetRegisterClass *MipsGenRegisterInfo::getSubClassWithSubReg(const Targ
       0,	// sub_32_sub_hi_then_sub_32
     },
     {	// SP64
-      60,	// sub_32 -> SP64
+      66,	// sub_32 -> SP64
       0,	// sub_64
       0,	// sub_dsp16_19
       0,	// sub_dsp20
@@ -6643,94 +7124,94 @@ const TargetRegisterClass *MipsGenRegisterInfo::getSubClassWithSubReg(const Targ
     },
     {	// MSA128B
       0,	// sub_32
-      61,	// sub_64 -> MSA128B
+      67,	// sub_64 -> MSA128B
       0,	// sub_dsp16_19
       0,	// sub_dsp20
       0,	// sub_dsp21
       0,	// sub_dsp22
       0,	// sub_dsp23
-      61,	// sub_hi -> MSA128B
-      61,	// sub_lo -> MSA128B
+      67,	// sub_hi -> MSA128B
+      67,	// sub_lo -> MSA128B
       0,	// sub_hi_then_sub_32
       0,	// sub_32_sub_hi_then_sub_32
     },
     {	// MSA128D
       0,	// sub_32
-      62,	// sub_64 -> MSA128D
+      68,	// sub_64 -> MSA128D
       0,	// sub_dsp16_19
       0,	// sub_dsp20
       0,	// sub_dsp21
       0,	// sub_dsp22
       0,	// sub_dsp23
-      62,	// sub_hi -> MSA128D
-      62,	// sub_lo -> MSA128D
+      68,	// sub_hi -> MSA128D
+      68,	// sub_lo -> MSA128D
       0,	// sub_hi_then_sub_32
       0,	// sub_32_sub_hi_then_sub_32
     },
     {	// MSA128H
       0,	// sub_32
-      63,	// sub_64 -> MSA128H
+      69,	// sub_64 -> MSA128H
       0,	// sub_dsp16_19
       0,	// sub_dsp20
       0,	// sub_dsp21
       0,	// sub_dsp22
       0,	// sub_dsp23
-      63,	// sub_hi -> MSA128H
-      63,	// sub_lo -> MSA128H
+      69,	// sub_hi -> MSA128H
+      69,	// sub_lo -> MSA128H
       0,	// sub_hi_then_sub_32
       0,	// sub_32_sub_hi_then_sub_32
     },
     {	// MSA128W
       0,	// sub_32
-      64,	// sub_64 -> MSA128W
+      70,	// sub_64 -> MSA128W
       0,	// sub_dsp16_19
       0,	// sub_dsp20
       0,	// sub_dsp21
       0,	// sub_dsp22
       0,	// sub_dsp23
-      64,	// sub_hi -> MSA128W
-      64,	// sub_lo -> MSA128W
+      70,	// sub_hi -> MSA128W
+      70,	// sub_lo -> MSA128W
       0,	// sub_hi_then_sub_32
       0,	// sub_32_sub_hi_then_sub_32
     },
     {	// MSA128B_with_sub_64_in_OddSP
       0,	// sub_32
-      65,	// sub_64 -> MSA128B_with_sub_64_in_OddSP
+      71,	// sub_64 -> MSA128B_with_sub_64_in_OddSP
       0,	// sub_dsp16_19
       0,	// sub_dsp20
       0,	// sub_dsp21
       0,	// sub_dsp22
       0,	// sub_dsp23
-      65,	// sub_hi -> MSA128B_with_sub_64_in_OddSP
-      65,	// sub_lo -> MSA128B_with_sub_64_in_OddSP
+      71,	// sub_hi -> MSA128B_with_sub_64_in_OddSP
+      71,	// sub_lo -> MSA128B_with_sub_64_in_OddSP
       0,	// sub_hi_then_sub_32
       0,	// sub_32_sub_hi_then_sub_32
     },
     {	// MSA128WEvens
       0,	// sub_32
-      66,	// sub_64 -> MSA128WEvens
+      72,	// sub_64 -> MSA128WEvens
       0,	// sub_dsp16_19
       0,	// sub_dsp20
       0,	// sub_dsp21
       0,	// sub_dsp22
       0,	// sub_dsp23
-      66,	// sub_hi -> MSA128WEvens
-      66,	// sub_lo -> MSA128WEvens
+      72,	// sub_hi -> MSA128WEvens
+      72,	// sub_lo -> MSA128WEvens
       0,	// sub_hi_then_sub_32
       0,	// sub_32_sub_hi_then_sub_32
     },
     {	// ACC128
-      67,	// sub_32 -> ACC128
+      73,	// sub_32 -> ACC128
       0,	// sub_64
       0,	// sub_dsp16_19
       0,	// sub_dsp20
       0,	// sub_dsp21
       0,	// sub_dsp22
       0,	// sub_dsp23
-      67,	// sub_hi -> ACC128
-      67,	// sub_lo -> ACC128
-      67,	// sub_hi_then_sub_32 -> ACC128
-      67,	// sub_32_sub_hi_then_sub_32 -> ACC128
+      73,	// sub_hi -> ACC128
+      73,	// sub_lo -> ACC128
+      73,	// sub_hi_then_sub_32 -> ACC128
+      73,	// sub_32_sub_hi_then_sub_32 -> ACC128
     },
   };
   assert(RC && "Missing regclass");
@@ -6758,6 +7239,7 @@ getRegClassWeight(const TargetRegisterClass *RC) const {
     {1, 32},  	// FGRH32
     {1, 32},  	// GPR32
     {0, 0},  	// HWRegs
+    {1, 31},  	// GPR32NONZERO
     {2, 40},  	// OddSP_with_sub_hi
     {1, 16},  	// FGR32_and_OddSP
     {1, 16},  	// FGRH32_and_OddSP
@@ -6771,6 +7253,7 @@ getRegClassWeight(const TargetRegisterClass *RC) const {
     {1, 8},  	// MSACtrl
     {2, 16},  	// OddSP_with_sub_hi_with_sub_hi_in_FGR32
     {1, 7},  	// CPU16Regs_and_GPRMM16Zero
+    {1, 7},  	// GPR32NONZERO_and_GPRMM16MoveP
     {1, 4},  	// CPU16Regs_and_GPRMM16MoveP
     {1, 4},  	// GPRMM16MoveP_and_GPRMM16Zero
     {1, 4},  	// HI32DSP
@@ -6780,11 +7263,13 @@ getRegClassWeight(const TargetRegisterClass *RC) const {
     {1, 1},  	// CPUSPReg
     {1, 1},  	// DSPCC
     {1, 1},  	// GP32
+    {1, 1},  	// GPR32ZERO
     {1, 1},  	// HI32
     {1, 1},  	// LO32
     {1, 1},  	// SP32
     {2, 64},  	// FGR64
     {1, 32},  	// GPR64
+    {1, 31},  	// GPR64_with_sub_32_in_GPR32NONZERO
     {2, 32},  	// AFGR64
     {2, 32},  	// FGR64_and_OddSP
     {1, 9},  	// GPR64_with_sub_32_in_CPU16RegsPlusSP
@@ -6793,6 +7278,7 @@ getRegClassWeight(const TargetRegisterClass *RC) const {
     {1, 8},  	// GPR64_with_sub_32_in_GPRMM16Zero
     {1, 8},  	// GPRMM16_64
     {1, 7},  	// GPR64_with_sub_32_in_CPU16Regs_and_GPRMM16Zero
+    {1, 7},  	// GPR64_with_sub_32_in_GPR32NONZERO_and_GPRMM16MoveP
     {2, 8},  	// ACC64DSP
     {1, 4},  	// GPR64_with_sub_32_in_CPU16Regs_and_GPRMM16MoveP
     {1, 4},  	// GPR64_with_sub_32_in_GPRMM16MoveP_and_GPRMM16Zero
@@ -6802,6 +7288,7 @@ getRegClassWeight(const TargetRegisterClass *RC) const {
     {2, 2},  	// ACC64
     {1, 1},  	// GP64
     {1, 1},  	// GPR64_with_sub_32_in_CPURAReg
+    {1, 1},  	// GPR64_with_sub_32_in_GPR32ZERO
     {1, 1},  	// HI64
     {1, 1},  	// LO64
     {1, 1},  	// SP64
@@ -6827,7 +7314,7 @@ getRegUnitWeight(unsigned RegUnit) const {
 
 // Get the number of dimensions of register pressure.
 unsigned MipsGenRegisterInfo::getNumRegPressureSets() const {
-  return 23;
+  return 24;
 }
 
 // Get the name of this register unit pressure set.
@@ -6835,6 +7322,7 @@ const char *MipsGenRegisterInfo::
 getRegPressureSetName(unsigned Idx) const {
   static const char *const PressureNameTable[] = {
     "DSPCC",
+    "GPR32ZERO",
     "GPR64_with_sub_32_in_CPURAReg",
     "HI32",
     "CPU16Regs_and_GPRMM16MoveP",
@@ -6867,28 +7355,29 @@ unsigned MipsGenRegisterInfo::
 getRegPressureSetLimit(const MachineFunction &MF, unsigned Idx) const {
   static const uint8_t PressureLimitTable[] = {
     1,  	// 0: DSPCC
-    1,  	// 1: GPR64_with_sub_32_in_CPURAReg
-    2,  	// 2: HI32
-    5,  	// 3: CPU16Regs_and_GPRMM16MoveP
-    5,  	// 4: HI32DSP
-    5,  	// 5: LO32DSP
-    8,  	// 6: GPRMM16MoveP
-    8,  	// 7: MSACtrl
-    8,  	// 8: ACC64DSP
-    10,  	// 9: CPU16Regs
-    13,  	// 10: CPU16Regs+GPRMM16MoveP
-    16,  	// 11: FGR32_and_OddSP
-    16,  	// 12: AFGR64_and_OddSP
-    24,  	// 13: FGR32_and_OddSP+AFGR64_and_OddSP
-    32,  	// 14: MSA128F16_with_sub_64_in_OddSP
-    32,  	// 15: DSPR
-    32,  	// 16: FGR32
-    32,  	// 17: MSA128WEvens
-    40,  	// 18: MSA128F16_with_sub_64_in_OddSP+AFGR64_and_OddSP
-    40,  	// 19: AFGR64_and_OddSP+MSA128WEvens
-    48,  	// 20: MSA128F16_with_sub_64_in_OddSP+FGR32
-    48,  	// 21: FGR32+MSA128WEvens
-    64,  	// 22: MSA128F16
+    1,  	// 1: GPR32ZERO
+    1,  	// 2: GPR64_with_sub_32_in_CPURAReg
+    2,  	// 3: HI32
+    5,  	// 4: CPU16Regs_and_GPRMM16MoveP
+    5,  	// 5: HI32DSP
+    5,  	// 6: LO32DSP
+    8,  	// 7: GPRMM16MoveP
+    8,  	// 8: MSACtrl
+    8,  	// 9: ACC64DSP
+    10,  	// 10: CPU16Regs
+    13,  	// 11: CPU16Regs+GPRMM16MoveP
+    16,  	// 12: FGR32_and_OddSP
+    16,  	// 13: AFGR64_and_OddSP
+    24,  	// 14: FGR32_and_OddSP+AFGR64_and_OddSP
+    32,  	// 15: MSA128F16_with_sub_64_in_OddSP
+    32,  	// 16: DSPR
+    32,  	// 17: FGR32
+    32,  	// 18: MSA128WEvens
+    40,  	// 19: MSA128F16_with_sub_64_in_OddSP+AFGR64_and_OddSP
+    40,  	// 20: AFGR64_and_OddSP+MSA128WEvens
+    48,  	// 21: MSA128F16_with_sub_64_in_OddSP+FGR32
+    48,  	// 22: FGR32+MSA128WEvens
+    64,  	// 23: MSA128F16
   };
   return PressureLimitTable[Idx];
 }
@@ -6896,20 +7385,20 @@ getRegPressureSetLimit(const MachineFunction &MF, unsigned Idx) const {
 /// Table of pressure sets per register class or unit.
 static const int RCSetsTable[] = {
   /* 0 */ 0, -1,
-  /* 2 */ 7, -1,
-  /* 4 */ 4, 8, -1,
-  /* 7 */ 2, 4, 5, 8, -1,
-  /* 12 */ 1, 15, -1,
-  /* 15 */ 6, 10, 15, -1,
-  /* 19 */ 3, 6, 9, 10, 15, -1,
-  /* 25 */ 14, 18, 20, 22, -1,
-  /* 30 */ 17, 19, 21, 22, -1,
-  /* 35 */ 16, 20, 21, 22, -1,
-  /* 40 */ 11, 13, 14, 16, 18, 20, 21, 22, -1,
-  /* 49 */ 16, 17, 19, 20, 21, 22, -1,
-  /* 56 */ 12, 13, 16, 18, 19, 20, 21, 22, -1,
-  /* 65 */ 11, 12, 13, 14, 16, 18, 19, 20, 21, 22, -1,
-  /* 76 */ 12, 13, 16, 17, 18, 19, 20, 21, 22, -1,
+  /* 2 */ 8, -1,
+  /* 4 */ 5, 9, -1,
+  /* 7 */ 3, 5, 6, 9, -1,
+  /* 12 */ 2, 16, -1,
+  /* 15 */ 7, 11, 16, -1,
+  /* 19 */ 1, 4, 7, 10, 11, 16, -1,
+  /* 26 */ 15, 19, 21, 23, -1,
+  /* 31 */ 18, 20, 22, 23, -1,
+  /* 36 */ 17, 21, 22, 23, -1,
+  /* 41 */ 12, 14, 15, 17, 19, 21, 22, 23, -1,
+  /* 50 */ 17, 18, 20, 21, 22, 23, -1,
+  /* 57 */ 13, 14, 17, 19, 20, 21, 22, 23, -1,
+  /* 66 */ 12, 13, 14, 15, 17, 19, 20, 21, 22, 23, -1,
+  /* 77 */ 13, 14, 17, 18, 19, 20, 21, 22, 23, -1,
 };
 
 /// Get the dimensions of register pressure impacted by this register class.
@@ -6917,7 +7406,7 @@ static const int RCSetsTable[] = {
 const int* MipsGenRegisterInfo::
 getRegClassPressureSets(const TargetRegisterClass *RC) const {
   static const uint8_t RCSetStartTable[] = {
-    28,25,1,1,1,1,1,13,35,35,1,13,1,1,40,1,1,21,21,1,21,15,21,2,1,21,19,19,4,9,19,1,1,0,1,7,7,1,28,13,35,25,21,56,15,21,21,21,5,19,19,19,1,1,7,1,12,7,7,1,28,28,28,28,25,30,7,};
+    29,26,1,1,1,1,1,13,36,36,1,13,1,13,1,41,1,1,22,22,1,22,15,22,2,1,22,15,20,20,4,9,20,1,1,0,1,19,7,7,1,29,13,13,36,26,22,57,15,22,22,22,15,5,20,20,20,1,1,7,1,12,19,7,7,1,29,29,29,29,26,31,7,};
   return &RCSetsTable[RCSetStartTable[RC->getID()]];
 }
 
@@ -6927,7 +7416,7 @@ const int* MipsGenRegisterInfo::
 getRegUnitPressureSets(unsigned RegUnit) const {
   assert(RegUnit < 297 && "invalid register unit");
   static const uint8_t RUSetStartTable[] = {
-    13,0,1,1,1,1,1,1,1,1,1,13,13,2,2,2,2,2,2,2,2,1,12,21,19,21,21,21,21,7,7,9,4,9,4,9,4,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,49,40,76,65,49,40,76,65,49,40,76,65,49,40,76,65,49,40,76,65,49,40,76,65,49,40,76,65,49,40,76,65,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,30,25,30,25,30,25,30,25,30,25,30,25,30,25,30,25,30,25,30,25,30,25,30,25,30,25,30,25,30,25,30,25,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,13,13,1,1,1,1,1,1,19,19,15,15,15,13,13,13,13,13,13,13,13,13,13,13,13,13,19,19,};
+    13,0,1,1,1,1,1,1,1,1,1,13,13,2,2,2,2,2,2,2,2,1,12,22,19,22,22,22,22,7,7,9,4,9,4,9,4,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,50,41,77,66,50,41,77,66,50,41,77,66,50,41,77,66,50,41,77,66,50,41,77,66,50,41,77,66,50,41,77,66,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,31,26,31,26,31,26,31,26,31,26,31,26,31,26,31,26,31,26,31,26,31,26,31,26,31,26,31,26,31,26,31,26,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,13,13,1,1,1,1,1,1,20,20,15,15,15,13,13,13,13,13,13,13,13,13,13,13,13,13,20,20,};
   return &RCSetsTable[RUSetStartTable[RegUnit]];
 }
 
@@ -6955,10 +7444,10 @@ extern const unsigned MipsEHFlavour0L2DwarfSize;
 
 MipsGenRegisterInfo::
 MipsGenRegisterInfo(unsigned RA, unsigned DwarfFlavour, unsigned EHFlavour, unsigned PC)
-  : TargetRegisterInfo(MipsRegInfoDesc, RegisterClasses, RegisterClasses+67,
+  : TargetRegisterInfo(MipsRegInfoDesc, RegisterClasses, RegisterClasses+73,
              SubRegIndexNameTable, SubRegIndexLaneMaskTable, LaneBitmask(0xFFFFFF80)) {
   InitMCRegisterInfo(MipsRegDesc, 418, RA, PC,
-                     MipsMCRegisterClasses, 67,
+                     MipsMCRegisterClasses, 73,
                      MipsRegUnitRoots,
                      297,
                      MipsRegDiffLists,

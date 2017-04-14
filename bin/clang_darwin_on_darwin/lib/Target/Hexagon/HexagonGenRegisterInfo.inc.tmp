@@ -19,138 +19,147 @@ namespace Hexagon {
 enum {
   NoRegister,
   CS = 1,
-  GP = 2,
-  PC = 3,
-  UGP = 4,
-  UPC = 5,
-  UPCH = 6,
-  UPCL = 7,
-  USR = 8,
-  USR_OVF = 9,
-  C5 = 10,
-  C6 = 11,
-  C7 = 12,
-  C8 = 13,
-  CS0 = 14,
-  CS1 = 15,
-  D0 = 16,
-  D1 = 17,
-  D2 = 18,
-  D3 = 19,
-  D4 = 20,
-  D5 = 21,
-  D6 = 22,
-  D7 = 23,
-  D8 = 24,
-  D9 = 25,
-  D10 = 26,
-  D11 = 27,
-  D12 = 28,
-  D13 = 29,
-  D14 = 30,
-  D15 = 31,
-  LC0 = 32,
-  LC1 = 33,
-  M0 = 34,
-  M1 = 35,
-  P0 = 36,
-  P1 = 37,
-  P2 = 38,
-  P3 = 39,
-  Q0 = 40,
-  Q1 = 41,
-  Q2 = 42,
-  Q3 = 43,
-  R0 = 44,
-  R1 = 45,
-  R2 = 46,
-  R3 = 47,
-  R4 = 48,
-  R5 = 49,
-  R6 = 50,
-  R7 = 51,
-  R8 = 52,
-  R9 = 53,
-  R10 = 54,
-  R11 = 55,
-  R12 = 56,
-  R13 = 57,
-  R14 = 58,
-  R15 = 59,
-  R16 = 60,
-  R17 = 61,
-  R18 = 62,
-  R19 = 63,
-  R20 = 64,
-  R21 = 65,
-  R22 = 66,
-  R23 = 67,
-  R24 = 68,
-  R25 = 69,
-  R26 = 70,
-  R27 = 71,
-  R28 = 72,
-  R29 = 73,
-  R30 = 74,
-  R31 = 75,
-  SA0 = 76,
-  SA1 = 77,
-  V0 = 78,
-  V1 = 79,
-  V2 = 80,
-  V3 = 81,
-  V4 = 82,
-  V5 = 83,
-  V6 = 84,
-  V7 = 85,
-  V8 = 86,
-  V9 = 87,
-  V10 = 88,
-  V11 = 89,
-  V12 = 90,
-  V13 = 91,
-  V14 = 92,
-  V15 = 93,
-  V16 = 94,
-  V17 = 95,
-  V18 = 96,
-  V19 = 97,
-  V20 = 98,
-  V21 = 99,
-  V22 = 100,
-  V23 = 101,
-  V24 = 102,
-  V25 = 103,
-  V26 = 104,
-  V27 = 105,
-  V28 = 106,
-  V29 = 107,
-  V30 = 108,
-  V31 = 109,
-  W0 = 110,
-  W1 = 111,
-  W2 = 112,
-  W3 = 113,
-  W4 = 114,
-  W5 = 115,
-  W6 = 116,
-  W7 = 117,
-  W8 = 118,
-  W9 = 119,
-  W10 = 120,
-  W11 = 121,
-  W12 = 122,
-  W13 = 123,
-  W14 = 124,
-  W15 = 125,
-  C1_0 = 126,
-  C3_2 = 127,
-  C5_4 = 128,
-  C7_6 = 129,
-  C9_8 = 130,
-  C11_10 = 131,
-  P3_0 = 132,
-  NUM_TARGET_REGS 	// 133
+  FRAMEKEY = 2,
+  FRAMELIMIT = 3,
+  GP = 4,
+  PC = 5,
+  PKTCOUNT = 6,
+  PKTCOUNTHI = 7,
+  PKTCOUNTLO = 8,
+  UGP = 9,
+  UPCYCLE = 10,
+  UPCYCLEHI = 11,
+  UPCYCLELO = 12,
+  USR = 13,
+  USR_OVF = 14,
+  UTIMER = 15,
+  UTIMERHI = 16,
+  UTIMERLO = 17,
+  C5 = 18,
+  C6 = 19,
+  C7 = 20,
+  C8 = 21,
+  CS0 = 22,
+  CS1 = 23,
+  D0 = 24,
+  D1 = 25,
+  D2 = 26,
+  D3 = 27,
+  D4 = 28,
+  D5 = 29,
+  D6 = 30,
+  D7 = 31,
+  D8 = 32,
+  D9 = 33,
+  D10 = 34,
+  D11 = 35,
+  D12 = 36,
+  D13 = 37,
+  D14 = 38,
+  D15 = 39,
+  LC0 = 40,
+  LC1 = 41,
+  M0 = 42,
+  M1 = 43,
+  P0 = 44,
+  P1 = 45,
+  P2 = 46,
+  P3 = 47,
+  Q0 = 48,
+  Q1 = 49,
+  Q2 = 50,
+  Q3 = 51,
+  R0 = 52,
+  R1 = 53,
+  R2 = 54,
+  R3 = 55,
+  R4 = 56,
+  R5 = 57,
+  R6 = 58,
+  R7 = 59,
+  R8 = 60,
+  R9 = 61,
+  R10 = 62,
+  R11 = 63,
+  R12 = 64,
+  R13 = 65,
+  R14 = 66,
+  R15 = 67,
+  R16 = 68,
+  R17 = 69,
+  R18 = 70,
+  R19 = 71,
+  R20 = 72,
+  R21 = 73,
+  R22 = 74,
+  R23 = 75,
+  R24 = 76,
+  R25 = 77,
+  R26 = 78,
+  R27 = 79,
+  R28 = 80,
+  R29 = 81,
+  R30 = 82,
+  R31 = 83,
+  SA0 = 84,
+  SA1 = 85,
+  V0 = 86,
+  V1 = 87,
+  V2 = 88,
+  V3 = 89,
+  V4 = 90,
+  V5 = 91,
+  V6 = 92,
+  V7 = 93,
+  V8 = 94,
+  V9 = 95,
+  V10 = 96,
+  V11 = 97,
+  V12 = 98,
+  V13 = 99,
+  V14 = 100,
+  V15 = 101,
+  V16 = 102,
+  V17 = 103,
+  V18 = 104,
+  V19 = 105,
+  V20 = 106,
+  V21 = 107,
+  V22 = 108,
+  V23 = 109,
+  V24 = 110,
+  V25 = 111,
+  V26 = 112,
+  V27 = 113,
+  V28 = 114,
+  V29 = 115,
+  V30 = 116,
+  V31 = 117,
+  W0 = 118,
+  W1 = 119,
+  W2 = 120,
+  W3 = 121,
+  W4 = 122,
+  W5 = 123,
+  W6 = 124,
+  W7 = 125,
+  W8 = 126,
+  W9 = 127,
+  W10 = 128,
+  W11 = 129,
+  W12 = 130,
+  W13 = 131,
+  W14 = 132,
+  W15 = 133,
+  C1_0 = 134,
+  C3_2 = 135,
+  C5_4 = 136,
+  C7_6 = 137,
+  C9_8 = 138,
+  C11_10 = 139,
+  C17_16 = 140,
+  P3_0 = 141,
+  NUM_TARGET_REGS 	// 142
 };
 } // end namespace Hexagon
 
@@ -161,19 +170,25 @@ enum {
   UsrBitsRegClassID = 0,
   IntRegsRegClassID = 1,
   CtrRegsRegClassID = 2,
-  IntRegsLow8RegClassID = 3,
-  PredRegsRegClassID = 4,
-  ModRegsRegClassID = 5,
-  CtrRegs_with_subreg_overflowRegClassID = 6,
-  DoubleRegsRegClassID = 7,
-  CtrRegs64RegClassID = 8,
-  DoubleRegs_with_isub_hi_in_IntRegsLow8RegClassID = 9,
-  VectorRegsRegClassID = 10,
-  VecPredRegsRegClassID = 11,
-  VectorRegs128BRegClassID = 12,
-  VecDblRegsRegClassID = 13,
-  VecPredRegs128BRegClassID = 14,
-  VecDblRegs128BRegClassID = 15,
+  GeneralSubRegsRegClassID = 3,
+  V62RegsRegClassID = 4,
+  IntRegsLow8RegClassID = 5,
+  CtrRegs_and_V62RegsRegClassID = 6,
+  PredRegsRegClassID = 7,
+  V62Regs_with_isub_hiRegClassID = 8,
+  ModRegsRegClassID = 9,
+  CtrRegs_with_subreg_overflowRegClassID = 10,
+  DoubleRegsRegClassID = 11,
+  CtrRegs64RegClassID = 12,
+  GeneralDoubleLow8RegsRegClassID = 13,
+  DoubleRegs_with_isub_hi_in_IntRegsLow8RegClassID = 14,
+  CtrRegs64_and_V62RegsRegClassID = 15,
+  VectorRegsRegClassID = 16,
+  VecPredRegsRegClassID = 17,
+  VectorRegs128BRegClassID = 18,
+  VecDblRegsRegClassID = 19,
+  VecPredRegs128BRegClassID = 20,
+  VecDblRegs128BRegClassID = 21,
 
   };
 } // end namespace Hexagon
@@ -214,102 +229,112 @@ namespace llvm {
 extern const MCPhysReg HexagonRegDiffLists[] = {
   /* 0 */ 0, 0,
   /* 2 */ 0, 1, 0,
-  /* 5 */ 9, 37, 1, 1, 1, 0,
-  /* 11 */ 46, 1, 1, 1, 0,
-  /* 16 */ 5, 1, 0,
-  /* 19 */ 7, 1, 0,
-  /* 22 */ 10, 1, 0,
-  /* 25 */ 13, 1, 0,
-  /* 28 */ 28, 1, 0,
-  /* 31 */ 29, 1, 0,
-  /* 34 */ 30, 1, 0,
-  /* 37 */ 31, 1, 0,
-  /* 40 */ 32, 1, 0,
-  /* 43 */ 33, 1, 0,
-  /* 46 */ 34, 1, 0,
-  /* 49 */ 35, 1, 0,
-  /* 52 */ 36, 1, 0,
-  /* 55 */ 37, 1, 0,
-  /* 58 */ 38, 1, 0,
-  /* 61 */ 39, 1, 0,
-  /* 64 */ 40, 1, 0,
-  /* 67 */ 41, 1, 0,
-  /* 70 */ 42, 1, 0,
-  /* 73 */ 43, 1, 0,
-  /* 76 */ 65372, 1, 0,
-  /* 79 */ 65418, 1, 0,
-  /* 82 */ 65504, 1, 0,
-  /* 85 */ 65505, 1, 0,
-  /* 88 */ 65506, 1, 0,
-  /* 91 */ 65507, 1, 0,
-  /* 94 */ 65508, 1, 0,
-  /* 97 */ 65509, 1, 0,
-  /* 100 */ 65510, 1, 0,
-  /* 103 */ 65511, 1, 0,
-  /* 106 */ 65512, 1, 0,
-  /* 109 */ 65513, 1, 0,
-  /* 112 */ 65514, 1, 0,
-  /* 115 */ 65515, 1, 0,
-  /* 118 */ 65516, 1, 0,
-  /* 121 */ 65517, 1, 0,
-  /* 124 */ 65518, 1, 0,
-  /* 127 */ 65519, 1, 0,
-  /* 130 */ 2, 2, 0,
-  /* 133 */ 3, 5, 0,
-  /* 136 */ 6, 0,
-  /* 138 */ 8, 0,
-  /* 140 */ 65454, 10, 0,
-  /* 143 */ 12, 0,
-  /* 145 */ 16, 0,
-  /* 147 */ 17, 0,
-  /* 149 */ 18, 0,
-  /* 151 */ 19, 0,
-  /* 153 */ 20, 0,
-  /* 155 */ 21, 0,
-  /* 157 */ 22, 0,
-  /* 159 */ 23, 0,
-  /* 161 */ 24, 0,
-  /* 163 */ 25, 0,
-  /* 165 */ 26, 0,
-  /* 167 */ 27, 0,
-  /* 169 */ 28, 0,
-  /* 171 */ 29, 0,
-  /* 173 */ 30, 0,
-  /* 175 */ 31, 0,
-  /* 177 */ 32, 0,
-  /* 179 */ 50, 0,
-  /* 181 */ 94, 0,
-  /* 183 */ 117, 0,
-  /* 185 */ 118, 0,
-  /* 187 */ 127, 0,
-  /* 189 */ 129, 0,
-  /* 191 */ 4, 65414, 0,
-  /* 194 */ 65486, 65492, 0,
-  /* 197 */ 65493, 0,
-  /* 199 */ 65494, 0,
-  /* 201 */ 65495, 0,
-  /* 203 */ 65496, 0,
-  /* 205 */ 65497, 0,
-  /* 207 */ 65498, 0,
-  /* 209 */ 65499, 0,
-  /* 211 */ 65500, 0,
-  /* 213 */ 65501, 0,
-  /* 215 */ 65502, 0,
-  /* 217 */ 65503, 0,
-  /* 219 */ 65504, 0,
-  /* 221 */ 65505, 0,
-  /* 223 */ 65506, 0,
-  /* 225 */ 65507, 0,
-  /* 227 */ 65508, 0,
-  /* 229 */ 65512, 0,
-  /* 231 */ 65514, 0,
-  /* 233 */ 65522, 0,
-  /* 235 */ 65523, 0,
-  /* 237 */ 65525, 0,
-  /* 239 */ 65419, 65526, 0,
-  /* 242 */ 65532, 0,
-  /* 244 */ 65409, 65534, 0,
-  /* 247 */ 2, 65535, 0,
+  /* 5 */ 15, 37, 1, 1, 1, 0,
+  /* 11 */ 52, 1, 1, 1, 0,
+  /* 16 */ 2, 1, 0,
+  /* 19 */ 6, 1, 0,
+  /* 22 */ 9, 1, 0,
+  /* 25 */ 11, 1, 0,
+  /* 28 */ 13, 1, 0,
+  /* 31 */ 16, 1, 0,
+  /* 34 */ 21, 1, 0,
+  /* 37 */ 28, 1, 0,
+  /* 40 */ 29, 1, 0,
+  /* 43 */ 30, 1, 0,
+  /* 46 */ 31, 1, 0,
+  /* 49 */ 32, 1, 0,
+  /* 52 */ 33, 1, 0,
+  /* 55 */ 34, 1, 0,
+  /* 58 */ 35, 1, 0,
+  /* 61 */ 36, 1, 0,
+  /* 64 */ 37, 1, 0,
+  /* 67 */ 38, 1, 0,
+  /* 70 */ 39, 1, 0,
+  /* 73 */ 40, 1, 0,
+  /* 76 */ 41, 1, 0,
+  /* 79 */ 42, 1, 0,
+  /* 82 */ 43, 1, 0,
+  /* 85 */ 65362, 1, 0,
+  /* 88 */ 65418, 1, 0,
+  /* 91 */ 65504, 1, 0,
+  /* 94 */ 65505, 1, 0,
+  /* 97 */ 65506, 1, 0,
+  /* 100 */ 65507, 1, 0,
+  /* 103 */ 65508, 1, 0,
+  /* 106 */ 65509, 1, 0,
+  /* 109 */ 65510, 1, 0,
+  /* 112 */ 65511, 1, 0,
+  /* 115 */ 65512, 1, 0,
+  /* 118 */ 65513, 1, 0,
+  /* 121 */ 65514, 1, 0,
+  /* 124 */ 65515, 1, 0,
+  /* 127 */ 65516, 1, 0,
+  /* 130 */ 65517, 1, 0,
+  /* 133 */ 65518, 1, 0,
+  /* 136 */ 65519, 1, 0,
+  /* 139 */ 4, 4, 0,
+  /* 142 */ 5, 7, 0,
+  /* 145 */ 8, 0,
+  /* 147 */ 9, 0,
+  /* 149 */ 65452, 10, 0,
+  /* 152 */ 11, 0,
+  /* 154 */ 12, 0,
+  /* 156 */ 14, 0,
+  /* 158 */ 16, 0,
+  /* 160 */ 17, 0,
+  /* 162 */ 18, 0,
+  /* 164 */ 19, 0,
+  /* 166 */ 20, 0,
+  /* 168 */ 21, 0,
+  /* 170 */ 22, 0,
+  /* 172 */ 23, 0,
+  /* 174 */ 24, 0,
+  /* 176 */ 25, 0,
+  /* 178 */ 26, 0,
+  /* 180 */ 27, 0,
+  /* 182 */ 28, 0,
+  /* 184 */ 29, 0,
+  /* 186 */ 30, 0,
+  /* 188 */ 31, 0,
+  /* 190 */ 32, 0,
+  /* 192 */ 50, 0,
+  /* 194 */ 94, 0,
+  /* 196 */ 117, 0,
+  /* 198 */ 118, 0,
+  /* 200 */ 130, 0,
+  /* 202 */ 133, 0,
+  /* 204 */ 135, 0,
+  /* 206 */ 137, 0,
+  /* 208 */ 138, 0,
+  /* 210 */ 5, 65413, 0,
+  /* 213 */ 65486, 65492, 0,
+  /* 216 */ 65493, 0,
+  /* 218 */ 65494, 0,
+  /* 220 */ 65495, 0,
+  /* 222 */ 65496, 0,
+  /* 224 */ 65497, 0,
+  /* 226 */ 65498, 0,
+  /* 228 */ 65499, 0,
+  /* 230 */ 65500, 0,
+  /* 232 */ 65501, 0,
+  /* 234 */ 65502, 0,
+  /* 236 */ 65503, 0,
+  /* 238 */ 65504, 0,
+  /* 240 */ 65505, 0,
+  /* 242 */ 65506, 0,
+  /* 244 */ 65507, 0,
+  /* 246 */ 65508, 0,
+  /* 248 */ 65510, 0,
+  /* 250 */ 65512, 0,
+  /* 252 */ 65514, 0,
+  /* 254 */ 65515, 0,
+  /* 256 */ 65419, 65520, 0,
+  /* 259 */ 65526, 0,
+  /* 261 */ 65406, 65531, 0,
+  /* 264 */ 65533, 0,
+  /* 266 */ 65534, 0,
+  /* 268 */ 2, 65535, 0,
+  /* 271 */ 65399, 65535, 0,
 };
 
 extern const LaneBitmask HexagonLaneMaskLists[] = {
@@ -425,196 +450,221 @@ extern const char HexagonRegStrings[] = {
   /* 313 */ 'W', '5', 0,
   /* 316 */ 'R', '1', '6', 0,
   /* 320 */ 'V', '1', '6', 0,
-  /* 324 */ 'R', '2', '6', 0,
-  /* 328 */ 'V', '2', '6', 0,
-  /* 332 */ 'C', '6', 0,
-  /* 335 */ 'D', '6', 0,
-  /* 338 */ 'R', '6', 0,
-  /* 341 */ 'V', '6', 0,
-  /* 344 */ 'W', '6', 0,
-  /* 347 */ 'C', '7', '_', '6', 0,
-  /* 352 */ 'R', '1', '7', 0,
-  /* 356 */ 'V', '1', '7', 0,
-  /* 360 */ 'R', '2', '7', 0,
-  /* 364 */ 'V', '2', '7', 0,
-  /* 368 */ 'C', '7', 0,
-  /* 371 */ 'D', '7', 0,
-  /* 374 */ 'R', '7', 0,
-  /* 377 */ 'V', '7', 0,
-  /* 380 */ 'W', '7', 0,
-  /* 383 */ 'R', '1', '8', 0,
-  /* 387 */ 'V', '1', '8', 0,
-  /* 391 */ 'R', '2', '8', 0,
-  /* 395 */ 'V', '2', '8', 0,
-  /* 399 */ 'C', '8', 0,
-  /* 402 */ 'D', '8', 0,
-  /* 405 */ 'R', '8', 0,
-  /* 408 */ 'V', '8', 0,
-  /* 411 */ 'W', '8', 0,
-  /* 414 */ 'C', '9', '_', '8', 0,
-  /* 419 */ 'R', '1', '9', 0,
-  /* 423 */ 'V', '1', '9', 0,
-  /* 427 */ 'R', '2', '9', 0,
-  /* 431 */ 'V', '2', '9', 0,
-  /* 435 */ 'D', '9', 0,
-  /* 438 */ 'R', '9', 0,
-  /* 441 */ 'V', '9', 0,
-  /* 444 */ 'W', '9', 0,
-  /* 447 */ 'U', 'P', 'C', 0,
-  /* 451 */ 'U', 'S', 'R', '_', 'O', 'V', 'F', 0,
-  /* 459 */ 'U', 'P', 'C', 'H', 0,
-  /* 464 */ 'U', 'P', 'C', 'L', 0,
-  /* 469 */ 'U', 'G', 'P', 0,
-  /* 473 */ 'U', 'S', 'R', 0,
-  /* 477 */ 'C', 'S', 0,
+  /* 324 */ 'C', '1', '7', '_', '1', '6', 0,
+  /* 331 */ 'R', '2', '6', 0,
+  /* 335 */ 'V', '2', '6', 0,
+  /* 339 */ 'C', '6', 0,
+  /* 342 */ 'D', '6', 0,
+  /* 345 */ 'R', '6', 0,
+  /* 348 */ 'V', '6', 0,
+  /* 351 */ 'W', '6', 0,
+  /* 354 */ 'C', '7', '_', '6', 0,
+  /* 359 */ 'R', '1', '7', 0,
+  /* 363 */ 'V', '1', '7', 0,
+  /* 367 */ 'R', '2', '7', 0,
+  /* 371 */ 'V', '2', '7', 0,
+  /* 375 */ 'C', '7', 0,
+  /* 378 */ 'D', '7', 0,
+  /* 381 */ 'R', '7', 0,
+  /* 384 */ 'V', '7', 0,
+  /* 387 */ 'W', '7', 0,
+  /* 390 */ 'R', '1', '8', 0,
+  /* 394 */ 'V', '1', '8', 0,
+  /* 398 */ 'R', '2', '8', 0,
+  /* 402 */ 'V', '2', '8', 0,
+  /* 406 */ 'C', '8', 0,
+  /* 409 */ 'D', '8', 0,
+  /* 412 */ 'R', '8', 0,
+  /* 415 */ 'V', '8', 0,
+  /* 418 */ 'W', '8', 0,
+  /* 421 */ 'C', '9', '_', '8', 0,
+  /* 426 */ 'R', '1', '9', 0,
+  /* 430 */ 'V', '1', '9', 0,
+  /* 434 */ 'R', '2', '9', 0,
+  /* 438 */ 'V', '2', '9', 0,
+  /* 442 */ 'D', '9', 0,
+  /* 445 */ 'R', '9', 0,
+  /* 448 */ 'V', '9', 0,
+  /* 451 */ 'W', '9', 0,
+  /* 454 */ 'P', 'C', 0,
+  /* 457 */ 'U', 'P', 'C', 'Y', 'C', 'L', 'E', 0,
+  /* 465 */ 'U', 'S', 'R', '_', 'O', 'V', 'F', 0,
+  /* 473 */ 'U', 'P', 'C', 'Y', 'C', 'L', 'E', 'H', 'I', 0,
+  /* 483 */ 'U', 'T', 'I', 'M', 'E', 'R', 'H', 'I', 0,
+  /* 492 */ 'P', 'K', 'T', 'C', 'O', 'U', 'N', 'T', 'H', 'I', 0,
+  /* 503 */ 'U', 'P', 'C', 'Y', 'C', 'L', 'E', 'L', 'O', 0,
+  /* 513 */ 'U', 'T', 'I', 'M', 'E', 'R', 'L', 'O', 0,
+  /* 522 */ 'P', 'K', 'T', 'C', 'O', 'U', 'N', 'T', 'L', 'O', 0,
+  /* 533 */ 'U', 'G', 'P', 0,
+  /* 537 */ 'U', 'T', 'I', 'M', 'E', 'R', 0,
+  /* 544 */ 'U', 'S', 'R', 0,
+  /* 548 */ 'C', 'S', 0,
+  /* 551 */ 'F', 'R', 'A', 'M', 'E', 'L', 'I', 'M', 'I', 'T', 0,
+  /* 562 */ 'P', 'K', 'T', 'C', 'O', 'U', 'N', 'T', 0,
+  /* 571 */ 'F', 'R', 'A', 'M', 'E', 'K', 'E', 'Y', 0,
 };
 
 extern const MCRegisterDesc HexagonRegDesc[] = { // Descriptors
   { 3, 0, 0, 0, 0, 0 },
-  { 477, 25, 1, 0, 32, 8 },
-  { 470, 1, 189, 2, 1, 3 },
-  { 448, 1, 187, 2, 1, 3 },
-  { 469, 1, 187, 2, 1, 3 },
-  { 447, 247, 1, 0, 256, 8 },
-  { 459, 1, 248, 2, 2176, 3 },
-  { 464, 1, 245, 2, 2144, 3 },
-  { 473, 3, 1, 3, 304, 5 },
-  { 451, 1, 248, 2, 3794, 3 },
-  { 301, 1, 185, 2, 3969, 3 },
-  { 332, 1, 185, 2, 3969, 3 },
-  { 368, 1, 183, 2, 3969, 3 },
-  { 399, 1, 183, 2, 2208, 3 },
-  { 62, 1, 235, 2, 3729, 3 },
-  { 137, 1, 233, 2, 3729, 3 },
-  { 47, 28, 1, 0, 1890, 8 },
-  { 122, 31, 1, 0, 1890, 8 },
-  { 171, 34, 1, 0, 1890, 8 },
-  { 218, 37, 1, 0, 1890, 8 },
-  { 260, 40, 1, 0, 1890, 8 },
-  { 304, 43, 1, 0, 1890, 8 },
-  { 335, 46, 1, 0, 1890, 8 },
-  { 371, 49, 1, 0, 1890, 8 },
-  { 402, 52, 1, 0, 1890, 8 },
-  { 435, 55, 1, 0, 1890, 8 },
-  { 0, 58, 1, 0, 1890, 8 },
-  { 82, 61, 1, 0, 1890, 8 },
-  { 147, 64, 1, 0, 1890, 8 },
-  { 194, 67, 1, 0, 1890, 8 },
-  { 236, 70, 1, 0, 1890, 8 },
-  { 277, 73, 1, 0, 1890, 8 },
-  { 43, 1, 181, 2, 2289, 3 },
-  { 118, 1, 181, 2, 2289, 3 },
-  { 50, 1, 1, 2, 3665, 3 },
-  { 125, 1, 1, 2, 3665, 3 },
-  { 53, 1, 1, 2, 2257, 3 },
-  { 128, 1, 1, 2, 2257, 3 },
-  { 174, 1, 1, 2, 2257, 3 },
-  { 221, 1, 1, 2, 2257, 3 },
-  { 56, 1, 1, 2, 2257, 3 },
-  { 131, 1, 1, 2, 2257, 3 },
-  { 177, 1, 1, 2, 2257, 3 },
-  { 224, 1, 1, 2, 2257, 3 },
-  { 59, 1, 227, 2, 3505, 3 },
-  { 134, 1, 225, 2, 3505, 3 },
-  { 180, 1, 225, 2, 3505, 3 },
-  { 227, 1, 223, 2, 3505, 3 },
-  { 263, 1, 223, 2, 3505, 3 },
-  { 307, 1, 221, 2, 3505, 3 },
-  { 338, 1, 221, 2, 3505, 3 },
-  { 374, 1, 219, 2, 3505, 3 },
-  { 405, 1, 219, 2, 3505, 3 },
-  { 438, 1, 217, 2, 3505, 3 },
-  { 4, 1, 217, 2, 3505, 3 },
-  { 86, 1, 215, 2, 3505, 3 },
-  { 151, 1, 215, 2, 3505, 3 },
-  { 198, 1, 213, 2, 3505, 3 },
-  { 240, 1, 213, 2, 3505, 3 },
-  { 281, 1, 211, 2, 3505, 3 },
-  { 316, 1, 211, 2, 3505, 3 },
-  { 352, 1, 209, 2, 3505, 3 },
-  { 383, 1, 209, 2, 3505, 3 },
-  { 419, 1, 207, 2, 3505, 3 },
-  { 23, 1, 207, 2, 3505, 3 },
-  { 98, 1, 205, 2, 3505, 3 },
-  { 163, 1, 205, 2, 3505, 3 },
-  { 210, 1, 203, 2, 3505, 3 },
-  { 252, 1, 203, 2, 3505, 3 },
-  { 293, 1, 201, 2, 3505, 3 },
-  { 324, 1, 201, 2, 3505, 3 },
-  { 360, 1, 199, 2, 3505, 3 },
-  { 391, 1, 199, 2, 3505, 3 },
-  { 427, 1, 197, 2, 3505, 3 },
-  { 31, 1, 197, 2, 3505, 3 },
-  { 106, 1, 195, 2, 3505, 3 },
-  { 39, 1, 179, 2, 3697, 3 },
-  { 114, 1, 179, 2, 3697, 3 },
-  { 66, 1, 177, 2, 3697, 3 },
-  { 141, 1, 175, 2, 3697, 3 },
-  { 183, 1, 175, 2, 3697, 3 },
-  { 230, 1, 173, 2, 3697, 3 },
-  { 266, 1, 173, 2, 3697, 3 },
-  { 310, 1, 171, 2, 3697, 3 },
-  { 341, 1, 171, 2, 3697, 3 },
-  { 377, 1, 169, 2, 3697, 3 },
-  { 408, 1, 169, 2, 3697, 3 },
-  { 441, 1, 167, 2, 3697, 3 },
-  { 8, 1, 167, 2, 3697, 3 },
-  { 90, 1, 165, 2, 3697, 3 },
-  { 155, 1, 165, 2, 3697, 3 },
-  { 202, 1, 163, 2, 3697, 3 },
-  { 244, 1, 163, 2, 3697, 3 },
-  { 285, 1, 161, 2, 3697, 3 },
-  { 320, 1, 161, 2, 3697, 3 },
-  { 356, 1, 159, 2, 3697, 3 },
-  { 387, 1, 159, 2, 3697, 3 },
-  { 423, 1, 157, 2, 3697, 3 },
-  { 27, 1, 157, 2, 3697, 3 },
-  { 102, 1, 155, 2, 3697, 3 },
-  { 167, 1, 155, 2, 3697, 3 },
-  { 214, 1, 153, 2, 3697, 3 },
-  { 256, 1, 153, 2, 3697, 3 },
-  { 297, 1, 151, 2, 3697, 3 },
-  { 328, 1, 151, 2, 3697, 3 },
-  { 364, 1, 149, 2, 3697, 3 },
-  { 395, 1, 149, 2, 3697, 3 },
-  { 431, 1, 147, 2, 3697, 3 },
-  { 35, 1, 147, 2, 3697, 3 },
-  { 110, 1, 145, 2, 3697, 3 },
-  { 69, 82, 1, 5, 1218, 20 },
-  { 144, 85, 1, 5, 1218, 20 },
-  { 186, 88, 1, 5, 1218, 20 },
-  { 233, 91, 1, 5, 1218, 20 },
-  { 269, 94, 1, 5, 1218, 20 },
-  { 313, 97, 1, 5, 1218, 20 },
-  { 344, 100, 1, 5, 1218, 20 },
-  { 380, 103, 1, 5, 1218, 20 },
-  { 411, 106, 1, 5, 1218, 20 },
-  { 444, 109, 1, 5, 1218, 20 },
-  { 12, 112, 1, 5, 1218, 20 },
-  { 94, 115, 1, 5, 1218, 20 },
-  { 159, 118, 1, 5, 1218, 20 },
-  { 206, 121, 1, 5, 1218, 20 },
-  { 248, 124, 1, 5, 1218, 20 },
-  { 289, 127, 1, 5, 1218, 20 },
-  { 72, 194, 1, 0, 2241, 11 },
-  { 189, 194, 1, 0, 2241, 11 },
-  { 272, 191, 1, 0, 80, 14 },
-  { 347, 79, 1, 0, 352, 8 },
-  { 414, 239, 1, 0, 2128, 11 },
-  { 16, 244, 1, 0, 2080, 11 },
-  { 77, 1, 242, 2, 176, 0 },
+  { 548, 34, 1, 0, 32, 8 },
+  { 571, 1, 208, 2, 1, 3 },
+  { 551, 1, 206, 2, 1, 3 },
+  { 534, 1, 204, 2, 1, 3 },
+  { 454, 1, 202, 2, 1, 3 },
+  { 562, 268, 1, 0, 304, 8 },
+  { 492, 1, 269, 2, 2288, 3 },
+  { 522, 1, 266, 2, 4146, 3 },
+  { 533, 1, 200, 2, 4146, 3 },
+  { 457, 268, 1, 0, 352, 8 },
+  { 473, 1, 269, 2, 2400, 3 },
+  { 503, 1, 266, 2, 2352, 3 },
+  { 544, 3, 1, 3, 400, 5 },
+  { 465, 1, 269, 2, 2432, 3 },
+  { 537, 268, 1, 0, 448, 8 },
+  { 483, 1, 269, 2, 2496, 3 },
+  { 513, 1, 266, 2, 4066, 3 },
+  { 301, 1, 198, 2, 4225, 3 },
+  { 339, 1, 198, 2, 4225, 3 },
+  { 375, 1, 196, 2, 4225, 3 },
+  { 406, 1, 196, 2, 2464, 3 },
+  { 62, 1, 254, 2, 4033, 3 },
+  { 137, 1, 252, 2, 4033, 3 },
+  { 47, 37, 1, 0, 1554, 8 },
+  { 122, 40, 1, 0, 1554, 8 },
+  { 171, 43, 1, 0, 1554, 8 },
+  { 218, 46, 1, 0, 1554, 8 },
+  { 260, 49, 1, 0, 1554, 8 },
+  { 304, 52, 1, 0, 1554, 8 },
+  { 342, 55, 1, 0, 1554, 8 },
+  { 378, 58, 1, 0, 1554, 8 },
+  { 409, 61, 1, 0, 1554, 8 },
+  { 442, 64, 1, 0, 1554, 8 },
+  { 0, 67, 1, 0, 1554, 8 },
+  { 82, 70, 1, 0, 1554, 8 },
+  { 147, 73, 1, 0, 1554, 8 },
+  { 194, 76, 1, 0, 1554, 8 },
+  { 236, 79, 1, 0, 1554, 8 },
+  { 277, 82, 1, 0, 1554, 8 },
+  { 43, 1, 194, 2, 2401, 3 },
+  { 118, 1, 194, 2, 2401, 3 },
+  { 50, 1, 1, 2, 3969, 3 },
+  { 125, 1, 1, 2, 3969, 3 },
+  { 53, 1, 1, 2, 2321, 3 },
+  { 128, 1, 1, 2, 2321, 3 },
+  { 174, 1, 1, 2, 2321, 3 },
+  { 221, 1, 1, 2, 2321, 3 },
+  { 56, 1, 1, 2, 2321, 3 },
+  { 131, 1, 1, 2, 2321, 3 },
+  { 177, 1, 1, 2, 2321, 3 },
+  { 224, 1, 1, 2, 2321, 3 },
+  { 59, 1, 246, 2, 3745, 3 },
+  { 134, 1, 244, 2, 3745, 3 },
+  { 180, 1, 244, 2, 3745, 3 },
+  { 227, 1, 242, 2, 3745, 3 },
+  { 263, 1, 242, 2, 3745, 3 },
+  { 307, 1, 240, 2, 3745, 3 },
+  { 345, 1, 240, 2, 3745, 3 },
+  { 381, 1, 238, 2, 3745, 3 },
+  { 412, 1, 238, 2, 3745, 3 },
+  { 445, 1, 236, 2, 3745, 3 },
+  { 4, 1, 236, 2, 3745, 3 },
+  { 86, 1, 234, 2, 3745, 3 },
+  { 151, 1, 234, 2, 3745, 3 },
+  { 198, 1, 232, 2, 3745, 3 },
+  { 240, 1, 232, 2, 3745, 3 },
+  { 281, 1, 230, 2, 3745, 3 },
+  { 316, 1, 230, 2, 3745, 3 },
+  { 359, 1, 228, 2, 3745, 3 },
+  { 390, 1, 228, 2, 3745, 3 },
+  { 426, 1, 226, 2, 3745, 3 },
+  { 23, 1, 226, 2, 3745, 3 },
+  { 98, 1, 224, 2, 3745, 3 },
+  { 163, 1, 224, 2, 3745, 3 },
+  { 210, 1, 222, 2, 3745, 3 },
+  { 252, 1, 222, 2, 3745, 3 },
+  { 293, 1, 220, 2, 3745, 3 },
+  { 331, 1, 220, 2, 3745, 3 },
+  { 367, 1, 218, 2, 3745, 3 },
+  { 398, 1, 218, 2, 3745, 3 },
+  { 434, 1, 216, 2, 3745, 3 },
+  { 31, 1, 216, 2, 3745, 3 },
+  { 106, 1, 214, 2, 3745, 3 },
+  { 39, 1, 192, 2, 4001, 3 },
+  { 114, 1, 192, 2, 4001, 3 },
+  { 66, 1, 190, 2, 4001, 3 },
+  { 141, 1, 188, 2, 4001, 3 },
+  { 183, 1, 188, 2, 4001, 3 },
+  { 230, 1, 186, 2, 4001, 3 },
+  { 266, 1, 186, 2, 4001, 3 },
+  { 310, 1, 184, 2, 4001, 3 },
+  { 348, 1, 184, 2, 4001, 3 },
+  { 384, 1, 182, 2, 4001, 3 },
+  { 415, 1, 182, 2, 4001, 3 },
+  { 448, 1, 180, 2, 4001, 3 },
+  { 8, 1, 180, 2, 4001, 3 },
+  { 90, 1, 178, 2, 4001, 3 },
+  { 155, 1, 178, 2, 4001, 3 },
+  { 202, 1, 176, 2, 4001, 3 },
+  { 244, 1, 176, 2, 4001, 3 },
+  { 285, 1, 174, 2, 4001, 3 },
+  { 320, 1, 174, 2, 4001, 3 },
+  { 363, 1, 172, 2, 4001, 3 },
+  { 394, 1, 172, 2, 4001, 3 },
+  { 430, 1, 170, 2, 4001, 3 },
+  { 27, 1, 170, 2, 4001, 3 },
+  { 102, 1, 168, 2, 4001, 3 },
+  { 167, 1, 168, 2, 4001, 3 },
+  { 214, 1, 166, 2, 4001, 3 },
+  { 256, 1, 166, 2, 4001, 3 },
+  { 297, 1, 164, 2, 4001, 3 },
+  { 335, 1, 164, 2, 4001, 3 },
+  { 371, 1, 162, 2, 4001, 3 },
+  { 402, 1, 162, 2, 4001, 3 },
+  { 438, 1, 160, 2, 4001, 3 },
+  { 35, 1, 160, 2, 4001, 3 },
+  { 110, 1, 158, 2, 4001, 3 },
+  { 69, 91, 1, 5, 1362, 20 },
+  { 144, 94, 1, 5, 1362, 20 },
+  { 186, 97, 1, 5, 1362, 20 },
+  { 233, 100, 1, 5, 1362, 20 },
+  { 269, 103, 1, 5, 1362, 20 },
+  { 313, 106, 1, 5, 1362, 20 },
+  { 351, 109, 1, 5, 1362, 20 },
+  { 387, 112, 1, 5, 1362, 20 },
+  { 418, 115, 1, 5, 1362, 20 },
+  { 451, 118, 1, 5, 1362, 20 },
+  { 12, 121, 1, 5, 1362, 20 },
+  { 94, 124, 1, 5, 1362, 20 },
+  { 159, 127, 1, 5, 1362, 20 },
+  { 206, 130, 1, 5, 1362, 20 },
+  { 248, 133, 1, 5, 1362, 20 },
+  { 289, 136, 1, 5, 1362, 20 },
+  { 72, 213, 1, 0, 2385, 11 },
+  { 189, 213, 1, 0, 2385, 11 },
+  { 272, 210, 1, 0, 80, 14 },
+  { 354, 88, 1, 0, 496, 8 },
+  { 421, 256, 1, 0, 2272, 11 },
+  { 16, 261, 1, 0, 2224, 11 },
+  { 324, 271, 1, 0, 256, 11 },
+  { 77, 1, 262, 2, 176, 0 },
 };
 
 extern const MCPhysReg HexagonRegUnitRoots[][2] = {
   { Hexagon::CS0 },
   { Hexagon::CS1 },
+  { Hexagon::FRAMEKEY },
+  { Hexagon::FRAMELIMIT },
   { Hexagon::GP },
   { Hexagon::PC },
+  { Hexagon::PKTCOUNTLO },
+  { Hexagon::PKTCOUNTHI },
   { Hexagon::UGP },
-  { Hexagon::UPCL },
-  { Hexagon::UPCH },
+  { Hexagon::UPCYCLELO },
+  { Hexagon::UPCYCLEHI },
   { Hexagon::USR_OVF },
   { Hexagon::USR, Hexagon::C8 },
+  { Hexagon::UTIMERLO },
+  { Hexagon::UTIMERHI },
   { Hexagon::C5 },
   { Hexagon::C6, Hexagon::M0 },
   { Hexagon::C7, Hexagon::M1 },
@@ -704,7 +754,7 @@ namespace {     // Register classes...
 
   // UsrBits Bit set.
   const uint8_t UsrBitsBits[] = {
-    0x00, 0x02, 
+    0x00, 0x40, 
   };
 
   // IntRegs Register Class...
@@ -714,17 +764,37 @@ namespace {     // Register classes...
 
   // IntRegs Bit set.
   const uint8_t IntRegsBits[] = {
-    0x00, 0x00, 0x00, 0x00, 0x00, 0xf0, 0xff, 0xff, 0xff, 0x0f, 
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xf0, 0xff, 0xff, 0xff, 0x0f, 
   };
 
   // CtrRegs Register Class...
   const MCPhysReg CtrRegs[] = {
-    Hexagon::LC0, Hexagon::SA0, Hexagon::LC1, Hexagon::SA1, Hexagon::P3_0, Hexagon::C5, Hexagon::M0, Hexagon::M1, Hexagon::C6, Hexagon::C7, Hexagon::C8, Hexagon::CS0, Hexagon::CS1, Hexagon::UPCL, Hexagon::UPCH, Hexagon::USR, Hexagon::UGP, Hexagon::GP, Hexagon::PC, 
+    Hexagon::LC0, Hexagon::SA0, Hexagon::LC1, Hexagon::SA1, Hexagon::P3_0, Hexagon::C5, Hexagon::C6, Hexagon::C7, Hexagon::C8, Hexagon::PC, Hexagon::UGP, Hexagon::GP, Hexagon::CS0, Hexagon::CS1, Hexagon::UPCYCLELO, Hexagon::UPCYCLEHI, Hexagon::FRAMELIMIT, Hexagon::FRAMEKEY, Hexagon::PKTCOUNTLO, Hexagon::PKTCOUNTHI, Hexagon::UTIMERLO, Hexagon::UTIMERHI, Hexagon::M0, Hexagon::M1, Hexagon::USR, 
   };
 
   // CtrRegs Bit set.
   const uint8_t CtrRegsBits[] = {
-    0xdc, 0xfd, 0x00, 0x00, 0x0f, 0x00, 0x00, 0x00, 0x00, 0x30, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x10, 
+    0xbc, 0x3b, 0xff, 0x00, 0x00, 0x0f, 0x00, 0x00, 0x00, 0x00, 0x30, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x20, 
+  };
+
+  // GeneralSubRegs Register Class...
+  const MCPhysReg GeneralSubRegs[] = {
+    Hexagon::R23, Hexagon::R22, Hexagon::R21, Hexagon::R20, Hexagon::R19, Hexagon::R18, Hexagon::R17, Hexagon::R16, Hexagon::R7, Hexagon::R6, Hexagon::R5, Hexagon::R4, Hexagon::R3, Hexagon::R2, Hexagon::R1, Hexagon::R0, 
+  };
+
+  // GeneralSubRegs Bit set.
+  const uint8_t GeneralSubRegsBits[] = {
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xf0, 0x0f, 0xf0, 0x0f, 
+  };
+
+  // V62Regs Register Class...
+  const MCPhysReg V62Regs[] = {
+    Hexagon::FRAMELIMIT, Hexagon::FRAMEKEY, Hexagon::C17_16, Hexagon::PKTCOUNTLO, Hexagon::PKTCOUNTHI, Hexagon::PKTCOUNT, Hexagon::UTIMERLO, Hexagon::UTIMERHI, Hexagon::UTIMER, 
+  };
+
+  // V62Regs Bit set.
+  const uint8_t V62RegsBits[] = {
+    0xcc, 0x81, 0x03, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x10, 
   };
 
   // IntRegsLow8 Register Class...
@@ -734,7 +804,17 @@ namespace {     // Register classes...
 
   // IntRegsLow8 Bit set.
   const uint8_t IntRegsLow8Bits[] = {
-    0x00, 0x00, 0x00, 0x00, 0x00, 0xf0, 0x0f, 
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xf0, 0x0f, 
+  };
+
+  // CtrRegs_and_V62Regs Register Class...
+  const MCPhysReg CtrRegs_and_V62Regs[] = {
+    Hexagon::FRAMELIMIT, Hexagon::FRAMEKEY, Hexagon::PKTCOUNTLO, Hexagon::PKTCOUNTHI, Hexagon::UTIMERLO, Hexagon::UTIMERHI, 
+  };
+
+  // CtrRegs_and_V62Regs Bit set.
+  const uint8_t CtrRegs_and_V62RegsBits[] = {
+    0x8c, 0x01, 0x03, 
   };
 
   // PredRegs Register Class...
@@ -744,7 +824,17 @@ namespace {     // Register classes...
 
   // PredRegs Bit set.
   const uint8_t PredRegsBits[] = {
-    0x00, 0x00, 0x00, 0x00, 0xf0, 
+    0x00, 0x00, 0x00, 0x00, 0x00, 0xf0, 
+  };
+
+  // V62Regs_with_isub_hi Register Class...
+  const MCPhysReg V62Regs_with_isub_hi[] = {
+    Hexagon::C17_16, Hexagon::PKTCOUNT, Hexagon::UTIMER, 
+  };
+
+  // V62Regs_with_isub_hi Bit set.
+  const uint8_t V62Regs_with_isub_hiBits[] = {
+    0x40, 0x80, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x10, 
   };
 
   // ModRegs Register Class...
@@ -754,7 +844,7 @@ namespace {     // Register classes...
 
   // ModRegs Bit set.
   const uint8_t ModRegsBits[] = {
-    0x00, 0x00, 0x00, 0x00, 0x0c, 
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x0c, 
   };
 
   // CtrRegs_with_subreg_overflow Register Class...
@@ -764,7 +854,7 @@ namespace {     // Register classes...
 
   // CtrRegs_with_subreg_overflow Bit set.
   const uint8_t CtrRegs_with_subreg_overflowBits[] = {
-    0x00, 0x01, 
+    0x00, 0x20, 
   };
 
   // DoubleRegs Register Class...
@@ -774,27 +864,47 @@ namespace {     // Register classes...
 
   // DoubleRegs Bit set.
   const uint8_t DoubleRegsBits[] = {
-    0x00, 0x00, 0xff, 0xff, 
+    0x00, 0x00, 0x00, 0xff, 0xff, 
   };
 
   // CtrRegs64 Register Class...
   const MCPhysReg CtrRegs64[] = {
-    Hexagon::C1_0, Hexagon::C3_2, Hexagon::C7_6, Hexagon::C9_8, Hexagon::C11_10, Hexagon::CS, Hexagon::UPC, 
+    Hexagon::C1_0, Hexagon::C3_2, Hexagon::C5_4, Hexagon::C7_6, Hexagon::C9_8, Hexagon::C11_10, Hexagon::CS, Hexagon::UPCYCLE, Hexagon::C17_16, Hexagon::PKTCOUNT, Hexagon::UTIMER, 
   };
 
   // CtrRegs64 Bit set.
   const uint8_t CtrRegs64Bits[] = {
-    0x22, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xc0, 0x0e, 
+    0x42, 0x84, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xc0, 0x1f, 
+  };
+
+  // GeneralDoubleLow8Regs Register Class...
+  const MCPhysReg GeneralDoubleLow8Regs[] = {
+    Hexagon::D11, Hexagon::D10, Hexagon::D9, Hexagon::D8, Hexagon::D3, Hexagon::D2, Hexagon::D1, Hexagon::D0, 
+  };
+
+  // GeneralDoubleLow8Regs Bit set.
+  const uint8_t GeneralDoubleLow8RegsBits[] = {
+    0x00, 0x00, 0x00, 0x0f, 0x0f, 
   };
 
   // DoubleRegs_with_isub_hi_in_IntRegsLow8 Register Class...
   const MCPhysReg DoubleRegs_with_isub_hi_in_IntRegsLow8[] = {
-    Hexagon::D0, Hexagon::D1, Hexagon::D2, Hexagon::D3, 
+    Hexagon::D3, Hexagon::D2, Hexagon::D1, Hexagon::D0, 
   };
 
   // DoubleRegs_with_isub_hi_in_IntRegsLow8 Bit set.
   const uint8_t DoubleRegs_with_isub_hi_in_IntRegsLow8Bits[] = {
-    0x00, 0x00, 0x0f, 
+    0x00, 0x00, 0x00, 0x0f, 
+  };
+
+  // CtrRegs64_and_V62Regs Register Class...
+  const MCPhysReg CtrRegs64_and_V62Regs[] = {
+    Hexagon::C17_16, Hexagon::PKTCOUNT, Hexagon::UTIMER, 
+  };
+
+  // CtrRegs64_and_V62Regs Bit set.
+  const uint8_t CtrRegs64_and_V62RegsBits[] = {
+    0x40, 0x80, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x10, 
   };
 
   // VectorRegs Register Class...
@@ -804,7 +914,7 @@ namespace {     // Register classes...
 
   // VectorRegs Bit set.
   const uint8_t VectorRegsBits[] = {
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xc0, 0xff, 0xff, 0xff, 0x3f, 
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xc0, 0xff, 0xff, 0xff, 0x3f, 
   };
 
   // VecPredRegs Register Class...
@@ -814,7 +924,7 @@ namespace {     // Register classes...
 
   // VecPredRegs Bit set.
   const uint8_t VecPredRegsBits[] = {
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x0f, 
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x0f, 
   };
 
   // VectorRegs128B Register Class...
@@ -824,7 +934,7 @@ namespace {     // Register classes...
 
   // VectorRegs128B Bit set.
   const uint8_t VectorRegs128BBits[] = {
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xc0, 0xff, 0xff, 0xff, 0x3f, 
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xc0, 0xff, 0xff, 0xff, 0x3f, 
   };
 
   // VecDblRegs Register Class...
@@ -834,7 +944,7 @@ namespace {     // Register classes...
 
   // VecDblRegs Bit set.
   const uint8_t VecDblRegsBits[] = {
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xc0, 0xff, 0x3f, 
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xc0, 0xff, 0x3f, 
   };
 
   // VecPredRegs128B Register Class...
@@ -844,7 +954,7 @@ namespace {     // Register classes...
 
   // VecPredRegs128B Bit set.
   const uint8_t VecPredRegs128BBits[] = {
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x0f, 
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x0f, 
   };
 
   // VecDblRegs128B Register Class...
@@ -854,7 +964,7 @@ namespace {     // Register classes...
 
   // VecDblRegs128B Bit set.
   const uint8_t VecDblRegs128BBits[] = {
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xc0, 0xff, 0x3f, 
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xc0, 0xff, 0x3f, 
   };
 
 } // end anonymous namespace
@@ -865,34 +975,45 @@ extern const char HexagonRegClassStrings[] = {
   /* 49 */ 'V', 'e', 'c', 'P', 'r', 'e', 'd', 'R', 'e', 'g', 's', '1', '2', '8', 'B', 0,
   /* 65 */ 'V', 'e', 'c', 'D', 'b', 'l', 'R', 'e', 'g', 's', '1', '2', '8', 'B', 0,
   /* 80 */ 'V', 'e', 'c', 't', 'o', 'r', 'R', 'e', 'g', 's', '1', '2', '8', 'B', 0,
-  /* 95 */ 'V', 'e', 'c', 'P', 'r', 'e', 'd', 'R', 'e', 'g', 's', 0,
-  /* 107 */ 'M', 'o', 'd', 'R', 'e', 'g', 's', 0,
-  /* 115 */ 'D', 'o', 'u', 'b', 'l', 'e', 'R', 'e', 'g', 's', 0,
-  /* 126 */ 'V', 'e', 'c', 'D', 'b', 'l', 'R', 'e', 'g', 's', 0,
-  /* 137 */ 'V', 'e', 'c', 't', 'o', 'r', 'R', 'e', 'g', 's', 0,
-  /* 148 */ 'C', 't', 'r', 'R', 'e', 'g', 's', 0,
-  /* 156 */ 'I', 'n', 't', 'R', 'e', 'g', 's', 0,
-  /* 164 */ 'U', 's', 'r', 'B', 'i', 't', 's', 0,
-  /* 172 */ 'C', 't', 'r', 'R', 'e', 'g', 's', '_', 'w', 'i', 't', 'h', '_', 's', 'u', 'b', 'r', 'e', 'g', '_', 'o', 'v', 'e', 'r', 'f', 'l', 'o', 'w', 0,
+  /* 95 */ 'V', '6', '2', 'R', 'e', 'g', 's', '_', 'w', 'i', 't', 'h', '_', 'i', 's', 'u', 'b', '_', 'h', 'i', 0,
+  /* 116 */ 'C', 't', 'r', 'R', 'e', 'g', 's', '6', '4', '_', 'a', 'n', 'd', '_', 'V', '6', '2', 'R', 'e', 'g', 's', 0,
+  /* 138 */ 'C', 't', 'r', 'R', 'e', 'g', 's', '_', 'a', 'n', 'd', '_', 'V', '6', '2', 'R', 'e', 'g', 's', 0,
+  /* 158 */ 'G', 'e', 'n', 'e', 'r', 'a', 'l', 'D', 'o', 'u', 'b', 'l', 'e', 'L', 'o', 'w', '8', 'R', 'e', 'g', 's', 0,
+  /* 180 */ 'G', 'e', 'n', 'e', 'r', 'a', 'l', 'S', 'u', 'b', 'R', 'e', 'g', 's', 0,
+  /* 195 */ 'V', 'e', 'c', 'P', 'r', 'e', 'd', 'R', 'e', 'g', 's', 0,
+  /* 207 */ 'M', 'o', 'd', 'R', 'e', 'g', 's', 0,
+  /* 215 */ 'D', 'o', 'u', 'b', 'l', 'e', 'R', 'e', 'g', 's', 0,
+  /* 226 */ 'V', 'e', 'c', 'D', 'b', 'l', 'R', 'e', 'g', 's', 0,
+  /* 237 */ 'V', 'e', 'c', 't', 'o', 'r', 'R', 'e', 'g', 's', 0,
+  /* 248 */ 'C', 't', 'r', 'R', 'e', 'g', 's', 0,
+  /* 256 */ 'I', 'n', 't', 'R', 'e', 'g', 's', 0,
+  /* 264 */ 'U', 's', 'r', 'B', 'i', 't', 's', 0,
+  /* 272 */ 'C', 't', 'r', 'R', 'e', 'g', 's', '_', 'w', 'i', 't', 'h', '_', 's', 'u', 'b', 'r', 'e', 'g', '_', 'o', 'v', 'e', 'r', 'f', 'l', 'o', 'w', 0,
 };
 
 extern const MCRegisterClass HexagonMCRegisterClasses[] = {
-  { UsrBits, UsrBitsBits, 164, 1, sizeof(UsrBitsBits), Hexagon::UsrBitsRegClassID, 0, 0, 1, false },
-  { IntRegs, IntRegsBits, 156, 32, sizeof(IntRegsBits), Hexagon::IntRegsRegClassID, 4, 4, 1, true },
-  { CtrRegs, CtrRegsBits, 148, 19, sizeof(CtrRegsBits), Hexagon::CtrRegsRegClassID, 4, 4, 1, false },
-  { IntRegsLow8, IntRegsLow8Bits, 37, 8, sizeof(IntRegsLow8Bits), Hexagon::IntRegsLow8RegClassID, 4, 4, 1, true },
-  { PredRegs, PredRegsBits, 98, 4, sizeof(PredRegsBits), Hexagon::PredRegsRegClassID, 4, 4, 1, true },
-  { ModRegs, ModRegsBits, 107, 2, sizeof(ModRegsBits), Hexagon::ModRegsRegClassID, 4, 4, 1, true },
-  { CtrRegs_with_subreg_overflow, CtrRegs_with_subreg_overflowBits, 172, 1, sizeof(CtrRegs_with_subreg_overflowBits), Hexagon::CtrRegs_with_subreg_overflowRegClassID, 4, 4, 1, false },
-  { DoubleRegs, DoubleRegsBits, 115, 16, sizeof(DoubleRegsBits), Hexagon::DoubleRegsRegClassID, 8, 8, 1, true },
-  { CtrRegs64, CtrRegs64Bits, 0, 7, sizeof(CtrRegs64Bits), Hexagon::CtrRegs64RegClassID, 8, 8, 1, false },
-  { DoubleRegs_with_isub_hi_in_IntRegsLow8, DoubleRegs_with_isub_hi_in_IntRegsLow8Bits, 10, 4, sizeof(DoubleRegs_with_isub_hi_in_IntRegsLow8Bits), Hexagon::DoubleRegs_with_isub_hi_in_IntRegsLow8RegClassID, 8, 8, 1, true },
-  { VectorRegs, VectorRegsBits, 137, 32, sizeof(VectorRegsBits), Hexagon::VectorRegsRegClassID, 64, 64, 1, true },
-  { VecPredRegs, VecPredRegsBits, 95, 4, sizeof(VecPredRegsBits), Hexagon::VecPredRegsRegClassID, 64, 64, 1, true },
-  { VectorRegs128B, VectorRegs128BBits, 80, 32, sizeof(VectorRegs128BBits), Hexagon::VectorRegs128BRegClassID, 128, 128, 1, true },
-  { VecDblRegs, VecDblRegsBits, 126, 16, sizeof(VecDblRegsBits), Hexagon::VecDblRegsRegClassID, 128, 128, 1, true },
-  { VecPredRegs128B, VecPredRegs128BBits, 49, 4, sizeof(VecPredRegs128BBits), Hexagon::VecPredRegs128BRegClassID, 128, 128, 1, true },
-  { VecDblRegs128B, VecDblRegs128BBits, 65, 16, sizeof(VecDblRegs128BBits), Hexagon::VecDblRegs128BRegClassID, 256, 256, 1, true },
+  { UsrBits, UsrBitsBits, 264, 1, sizeof(UsrBitsBits), Hexagon::UsrBitsRegClassID, 0, 1, false },
+  { IntRegs, IntRegsBits, 256, 32, sizeof(IntRegsBits), Hexagon::IntRegsRegClassID, 4, 1, true },
+  { CtrRegs, CtrRegsBits, 248, 25, sizeof(CtrRegsBits), Hexagon::CtrRegsRegClassID, 4, 1, false },
+  { GeneralSubRegs, GeneralSubRegsBits, 180, 16, sizeof(GeneralSubRegsBits), Hexagon::GeneralSubRegsRegClassID, 4, 1, true },
+  { V62Regs, V62RegsBits, 130, 9, sizeof(V62RegsBits), Hexagon::V62RegsRegClassID, 4, 1, false },
+  { IntRegsLow8, IntRegsLow8Bits, 37, 8, sizeof(IntRegsLow8Bits), Hexagon::IntRegsLow8RegClassID, 4, 1, true },
+  { CtrRegs_and_V62Regs, CtrRegs_and_V62RegsBits, 138, 6, sizeof(CtrRegs_and_V62RegsBits), Hexagon::CtrRegs_and_V62RegsRegClassID, 4, 1, false },
+  { PredRegs, PredRegsBits, 198, 4, sizeof(PredRegsBits), Hexagon::PredRegsRegClassID, 4, 1, true },
+  { V62Regs_with_isub_hi, V62Regs_with_isub_hiBits, 95, 3, sizeof(V62Regs_with_isub_hiBits), Hexagon::V62Regs_with_isub_hiRegClassID, 4, 1, false },
+  { ModRegs, ModRegsBits, 207, 2, sizeof(ModRegsBits), Hexagon::ModRegsRegClassID, 4, 1, true },
+  { CtrRegs_with_subreg_overflow, CtrRegs_with_subreg_overflowBits, 272, 1, sizeof(CtrRegs_with_subreg_overflowBits), Hexagon::CtrRegs_with_subreg_overflowRegClassID, 4, 1, false },
+  { DoubleRegs, DoubleRegsBits, 215, 16, sizeof(DoubleRegsBits), Hexagon::DoubleRegsRegClassID, 8, 1, true },
+  { CtrRegs64, CtrRegs64Bits, 0, 11, sizeof(CtrRegs64Bits), Hexagon::CtrRegs64RegClassID, 8, 1, false },
+  { GeneralDoubleLow8Regs, GeneralDoubleLow8RegsBits, 158, 8, sizeof(GeneralDoubleLow8RegsBits), Hexagon::GeneralDoubleLow8RegsRegClassID, 8, 1, true },
+  { DoubleRegs_with_isub_hi_in_IntRegsLow8, DoubleRegs_with_isub_hi_in_IntRegsLow8Bits, 10, 4, sizeof(DoubleRegs_with_isub_hi_in_IntRegsLow8Bits), Hexagon::DoubleRegs_with_isub_hi_in_IntRegsLow8RegClassID, 8, 1, true },
+  { CtrRegs64_and_V62Regs, CtrRegs64_and_V62RegsBits, 116, 3, sizeof(CtrRegs64_and_V62RegsBits), Hexagon::CtrRegs64_and_V62RegsRegClassID, 8, 1, false },
+  { VectorRegs, VectorRegsBits, 237, 32, sizeof(VectorRegsBits), Hexagon::VectorRegsRegClassID, 64, 1, true },
+  { VecPredRegs, VecPredRegsBits, 195, 4, sizeof(VecPredRegsBits), Hexagon::VecPredRegsRegClassID, 64, 1, true },
+  { VectorRegs128B, VectorRegs128BBits, 80, 32, sizeof(VectorRegs128BBits), Hexagon::VectorRegs128BRegClassID, 128, 1, true },
+  { VecDblRegs, VecDblRegsBits, 226, 16, sizeof(VecDblRegsBits), Hexagon::VecDblRegsRegClassID, 128, 1, true },
+  { VecPredRegs128B, VecPredRegs128BBits, 49, 4, sizeof(VecPredRegs128BBits), Hexagon::VecPredRegs128BRegClassID, 128, 1, true },
+  { VecDblRegs128B, VecDblRegs128BBits, 65, 16, sizeof(VecDblRegs128BBits), Hexagon::VecDblRegs128BRegClassID, 256, 1, true },
 };
 
 // Hexagon Dwarf<->LLVM register mappings.
@@ -963,8 +1084,14 @@ extern const MCRegisterInfo::DwarfLLVMRegPair HexagonDwarfFlavour0Dwarf2L[] = {
   { 78U, Hexagon::GP },
   { 79U, Hexagon::CS0 },
   { 80U, Hexagon::CS1 },
-  { 81U, Hexagon::UPCL },
-  { 82U, Hexagon::UPCH },
+  { 81U, Hexagon::UPCYCLELO },
+  { 82U, Hexagon::UPCYCLEHI },
+  { 83U, Hexagon::C17_16 },
+  { 84U, Hexagon::FRAMEKEY },
+  { 85U, Hexagon::PKTCOUNTLO },
+  { 86U, Hexagon::PKTCOUNTHI },
+  { 97U, Hexagon::UTIMERLO },
+  { 98U, Hexagon::UTIMERHI },
   { 99U, Hexagon::W0 },
   { 100U, Hexagon::V1 },
   { 101U, Hexagon::W1 },
@@ -1071,8 +1198,14 @@ extern const MCRegisterInfo::DwarfLLVMRegPair HexagonEHFlavour0Dwarf2L[] = {
   { 78U, Hexagon::GP },
   { 79U, Hexagon::CS0 },
   { 80U, Hexagon::CS1 },
-  { 81U, Hexagon::UPCL },
-  { 82U, Hexagon::UPCH },
+  { 81U, Hexagon::UPCYCLELO },
+  { 82U, Hexagon::UPCYCLEHI },
+  { 83U, Hexagon::C17_16 },
+  { 84U, Hexagon::FRAMEKEY },
+  { 85U, Hexagon::PKTCOUNTLO },
+  { 86U, Hexagon::PKTCOUNTHI },
+  { 97U, Hexagon::UTIMERLO },
+  { 98U, Hexagon::UTIMERHI },
   { 99U, Hexagon::W0 },
   { 100U, Hexagon::V1 },
   { 101U, Hexagon::W1 },
@@ -1114,13 +1247,21 @@ extern const unsigned HexagonEHFlavour0Dwarf2LSize = array_lengthof(HexagonEHFla
 
 extern const MCRegisterInfo::DwarfLLVMRegPair HexagonDwarfFlavour0L2Dwarf[] = {
   { Hexagon::CS, 78U },
+  { Hexagon::FRAMEKEY, 84U },
+  { Hexagon::FRAMELIMIT, 83U },
   { Hexagon::GP, 78U },
   { Hexagon::PC, 76U },
+  { Hexagon::PKTCOUNT, 85U },
+  { Hexagon::PKTCOUNTHI, 86U },
+  { Hexagon::PKTCOUNTLO, 85U },
   { Hexagon::UGP, 77U },
-  { Hexagon::UPC, 80U },
-  { Hexagon::UPCH, 82U },
-  { Hexagon::UPCL, 81U },
+  { Hexagon::UPCYCLE, 80U },
+  { Hexagon::UPCYCLEHI, 82U },
+  { Hexagon::UPCYCLELO, 81U },
   { Hexagon::USR, 75U },
+  { Hexagon::UTIMER, 97U },
+  { Hexagon::UTIMERHI, 98U },
+  { Hexagon::UTIMERLO, 97U },
   { Hexagon::C5, 72U },
   { Hexagon::C6, 73U },
   { Hexagon::C7, 74U },
@@ -1243,19 +1384,28 @@ extern const MCRegisterInfo::DwarfLLVMRegPair HexagonDwarfFlavour0L2Dwarf[] = {
   { Hexagon::C7_6, 72U },
   { Hexagon::C9_8, 74U },
   { Hexagon::C11_10, 76U },
+  { Hexagon::C17_16, 83U },
   { Hexagon::P3_0, 71U },
 };
 extern const unsigned HexagonDwarfFlavour0L2DwarfSize = array_lengthof(HexagonDwarfFlavour0L2Dwarf);
 
 extern const MCRegisterInfo::DwarfLLVMRegPair HexagonEHFlavour0L2Dwarf[] = {
   { Hexagon::CS, 78U },
+  { Hexagon::FRAMEKEY, 84U },
+  { Hexagon::FRAMELIMIT, 83U },
   { Hexagon::GP, 78U },
   { Hexagon::PC, 76U },
+  { Hexagon::PKTCOUNT, 85U },
+  { Hexagon::PKTCOUNTHI, 86U },
+  { Hexagon::PKTCOUNTLO, 85U },
   { Hexagon::UGP, 77U },
-  { Hexagon::UPC, 80U },
-  { Hexagon::UPCH, 82U },
-  { Hexagon::UPCL, 81U },
+  { Hexagon::UPCYCLE, 80U },
+  { Hexagon::UPCYCLEHI, 82U },
+  { Hexagon::UPCYCLELO, 81U },
   { Hexagon::USR, 75U },
+  { Hexagon::UTIMER, 97U },
+  { Hexagon::UTIMERHI, 98U },
+  { Hexagon::UTIMERLO, 97U },
   { Hexagon::C5, 72U },
   { Hexagon::C6, 73U },
   { Hexagon::C7, 74U },
@@ -1378,6 +1528,7 @@ extern const MCRegisterInfo::DwarfLLVMRegPair HexagonEHFlavour0L2Dwarf[] = {
   { Hexagon::C7_6, 72U },
   { Hexagon::C9_8, 74U },
   { Hexagon::C11_10, 76U },
+  { Hexagon::C17_16, 83U },
   { Hexagon::P3_0, 71U },
 };
 extern const unsigned HexagonEHFlavour0L2DwarfSize = array_lengthof(HexagonEHFlavour0L2Dwarf);
@@ -1385,14 +1536,22 @@ extern const unsigned HexagonEHFlavour0L2DwarfSize = array_lengthof(HexagonEHFla
 extern const uint16_t HexagonRegEncodingTable[] = {
   0,
   12,
+  17,
+  16,
   11,
   9,
+  18,
+  19,
+  18,
   10,
   14,
   15,
   14,
   8,
   0,
+  30,
+  31,
+  30,
   5,
   6,
   7,
@@ -1515,10 +1674,11 @@ extern const uint16_t HexagonRegEncodingTable[] = {
   6,
   8,
   10,
+  16,
   4,
 };
 static inline void InitHexagonMCRegisterInfo(MCRegisterInfo *RI, unsigned RA, unsigned DwarfFlavour = 0, unsigned EHFlavour = 0, unsigned PC = 0) {
-  RI->InitMCRegisterInfo(HexagonRegDesc, 133, RA, PC, HexagonMCRegisterClasses, 16, HexagonRegUnitRoots, 88, HexagonRegDiffLists, HexagonLaneMaskLists, HexagonRegStrings, HexagonRegClassStrings, HexagonSubRegIdxLists, 6,
+  RI->InitMCRegisterInfo(HexagonRegDesc, 142, RA, PC, HexagonMCRegisterClasses, 22, HexagonRegUnitRoots, 94, HexagonRegDiffLists, HexagonLaneMaskLists, HexagonRegStrings, HexagonRegClassStrings, HexagonSubRegIdxLists, 6,
 HexagonSubRegIdxRanges, HexagonRegEncodingTable);
 
   switch (DwarfFlavour) {
@@ -1597,13 +1757,19 @@ namespace Hexagon { // Register classes
   extern const TargetRegisterClass UsrBitsRegClass;
   extern const TargetRegisterClass IntRegsRegClass;
   extern const TargetRegisterClass CtrRegsRegClass;
+  extern const TargetRegisterClass GeneralSubRegsRegClass;
+  extern const TargetRegisterClass V62RegsRegClass;
   extern const TargetRegisterClass IntRegsLow8RegClass;
+  extern const TargetRegisterClass CtrRegs_and_V62RegsRegClass;
   extern const TargetRegisterClass PredRegsRegClass;
+  extern const TargetRegisterClass V62Regs_with_isub_hiRegClass;
   extern const TargetRegisterClass ModRegsRegClass;
   extern const TargetRegisterClass CtrRegs_with_subreg_overflowRegClass;
   extern const TargetRegisterClass DoubleRegsRegClass;
   extern const TargetRegisterClass CtrRegs64RegClass;
+  extern const TargetRegisterClass GeneralDoubleLow8RegsRegClass;
   extern const TargetRegisterClass DoubleRegs_with_isub_hi_in_IntRegsLow8RegClass;
+  extern const TargetRegisterClass CtrRegs64_and_V62RegsRegClass;
   extern const TargetRegisterClass VectorRegsRegClass;
   extern const TargetRegisterClass VecPredRegsRegClass;
   extern const TargetRegisterClass VectorRegs128BRegClass;
@@ -1663,77 +1829,107 @@ static const TargetRegisterClass *const NullRegClasses[] = { nullptr };
 
 static const uint32_t UsrBitsSubClassMask[] = {
   0x00000001, 
-  0x00000040, // subreg_overflow
+  0x00000400, // subreg_overflow
 };
 
 static const uint32_t IntRegsSubClassMask[] = {
-  0x0000000a, 
-  0x00000280, // isub_hi
-  0x00000280, // isub_lo
+  0x0000002a, 
+  0x00006800, // isub_hi
+  0x00006800, // isub_lo
 };
 
 static const uint32_t CtrRegsSubClassMask[] = {
-  0x00000064, 
-  0x00000100, // isub_hi
-  0x00000100, // isub_lo
+  0x00000644, 
+  0x00009100, // isub_hi
+  0x00009100, // isub_lo
+};
+
+static const uint32_t GeneralSubRegsSubClassMask[] = {
+  0x00000028, 
+  0x00006000, // isub_hi
+  0x00006000, // isub_lo
+};
+
+static const uint32_t V62RegsSubClassMask[] = {
+  0x00008150, 
+  0x00008100, // isub_hi
+  0x00008100, // isub_lo
 };
 
 static const uint32_t IntRegsLow8SubClassMask[] = {
-  0x00000008, 
-  0x00000200, // isub_hi
-  0x00000200, // isub_lo
+  0x00000020, 
+  0x00004000, // isub_hi
+  0x00004000, // isub_lo
+};
+
+static const uint32_t CtrRegs_and_V62RegsSubClassMask[] = {
+  0x00000040, 
+  0x00008100, // isub_hi
+  0x00008100, // isub_lo
 };
 
 static const uint32_t PredRegsSubClassMask[] = {
-  0x00000010, 
+  0x00000080, 
+};
+
+static const uint32_t V62Regs_with_isub_hiSubClassMask[] = {
+  0x00008100, 
 };
 
 static const uint32_t ModRegsSubClassMask[] = {
-  0x00000020, 
-};
-
-static const uint32_t CtrRegs_with_subreg_overflowSubClassMask[] = {
-  0x00000040, 
-};
-
-static const uint32_t DoubleRegsSubClassMask[] = {
-  0x00000280, 
-};
-
-static const uint32_t CtrRegs64SubClassMask[] = {
-  0x00000100, 
-};
-
-static const uint32_t DoubleRegs_with_isub_hi_in_IntRegsLow8SubClassMask[] = {
   0x00000200, 
 };
 
-static const uint32_t VectorRegsSubClassMask[] = {
-  0x00001400, 
-  0x0000a000, // vsub_hi
-  0x0000a000, // vsub_lo
+static const uint32_t CtrRegs_with_subreg_overflowSubClassMask[] = {
+  0x00000400, 
 };
 
-static const uint32_t VecPredRegsSubClassMask[] = {
-  0x00004800, 
+static const uint32_t DoubleRegsSubClassMask[] = {
+  0x00006800, 
 };
 
-static const uint32_t VectorRegs128BSubClassMask[] = {
-  0x00001000, 
-  0x0000a000, // vsub_hi
-  0x0000a000, // vsub_lo
+static const uint32_t CtrRegs64SubClassMask[] = {
+  0x00009000, 
 };
 
-static const uint32_t VecDblRegsSubClassMask[] = {
-  0x0000a000, 
+static const uint32_t GeneralDoubleLow8RegsSubClassMask[] = {
+  0x00006000, 
 };
 
-static const uint32_t VecPredRegs128BSubClassMask[] = {
+static const uint32_t DoubleRegs_with_isub_hi_in_IntRegsLow8SubClassMask[] = {
   0x00004000, 
 };
 
-static const uint32_t VecDblRegs128BSubClassMask[] = {
+static const uint32_t CtrRegs64_and_V62RegsSubClassMask[] = {
   0x00008000, 
+};
+
+static const uint32_t VectorRegsSubClassMask[] = {
+  0x00050000, 
+  0x00280000, // vsub_hi
+  0x00280000, // vsub_lo
+};
+
+static const uint32_t VecPredRegsSubClassMask[] = {
+  0x00120000, 
+};
+
+static const uint32_t VectorRegs128BSubClassMask[] = {
+  0x00040000, 
+  0x00280000, // vsub_hi
+  0x00280000, // vsub_lo
+};
+
+static const uint32_t VecDblRegsSubClassMask[] = {
+  0x00280000, 
+};
+
+static const uint32_t VecPredRegs128BSubClassMask[] = {
+  0x00100000, 
+};
+
+static const uint32_t VecDblRegs128BSubClassMask[] = {
+  0x00200000, 
 };
 
 static const uint16_t SuperRegIdxSeqs[] = {
@@ -1742,8 +1938,25 @@ static const uint16_t SuperRegIdxSeqs[] = {
   /* 5 */ 4, 5, 0,
 };
 
+static const TargetRegisterClass *const GeneralSubRegsSuperclasses[] = {
+  &Hexagon::IntRegsRegClass,
+  nullptr
+};
+
 static const TargetRegisterClass *const IntRegsLow8Superclasses[] = {
   &Hexagon::IntRegsRegClass,
+  &Hexagon::GeneralSubRegsRegClass,
+  nullptr
+};
+
+static const TargetRegisterClass *const CtrRegs_and_V62RegsSuperclasses[] = {
+  &Hexagon::CtrRegsRegClass,
+  &Hexagon::V62RegsRegClass,
+  nullptr
+};
+
+static const TargetRegisterClass *const V62Regs_with_isub_hiSuperclasses[] = {
+  &Hexagon::V62RegsRegClass,
   nullptr
 };
 
@@ -1757,8 +1970,21 @@ static const TargetRegisterClass *const CtrRegs_with_subreg_overflowSuperclasses
   nullptr
 };
 
+static const TargetRegisterClass *const GeneralDoubleLow8RegsSuperclasses[] = {
+  &Hexagon::DoubleRegsRegClass,
+  nullptr
+};
+
 static const TargetRegisterClass *const DoubleRegs_with_isub_hi_in_IntRegsLow8Superclasses[] = {
   &Hexagon::DoubleRegsRegClass,
+  &Hexagon::GeneralDoubleLow8RegsRegClass,
+  nullptr
+};
+
+static const TargetRegisterClass *const CtrRegs64_and_V62RegsSuperclasses[] = {
+  &Hexagon::V62RegsRegClass,
+  &Hexagon::V62Regs_with_isub_hiRegClass,
+  &Hexagon::CtrRegs64RegClass,
   nullptr
 };
 
@@ -1781,6 +2007,8 @@ static const TargetRegisterClass *const VecDblRegs128BSuperclasses[] = {
 namespace Hexagon {   // Register class instances
   extern const TargetRegisterClass UsrBitsRegClass = {
     &HexagonMCRegisterClasses[UsrBitsRegClassID],
+    0, /* SpillSize */
+    0, /* SpillAlignment */
     VTLists + 0,
     UsrBitsSubClassMask,
     SuperRegIdxSeqs + 3,
@@ -1794,6 +2022,8 @@ namespace Hexagon {   // Register class instances
 
   extern const TargetRegisterClass IntRegsRegClass = {
     &HexagonMCRegisterClasses[IntRegsRegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 16,
     IntRegsSubClassMask,
     SuperRegIdxSeqs + 0,
@@ -1807,6 +2037,8 @@ namespace Hexagon {   // Register class instances
 
   extern const TargetRegisterClass CtrRegsRegClass = {
     &HexagonMCRegisterClasses[CtrRegsRegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 8,
     CtrRegsSubClassMask,
     SuperRegIdxSeqs + 0,
@@ -1818,8 +2050,40 @@ namespace Hexagon {   // Register class instances
     nullptr
   };
 
+  extern const TargetRegisterClass GeneralSubRegsRegClass = {
+    &HexagonMCRegisterClasses[GeneralSubRegsRegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
+    VTLists + 8,
+    GeneralSubRegsSubClassMask,
+    SuperRegIdxSeqs + 0,
+    LaneBitmask(0x00000001),
+    0,
+    false, /* HasDisjunctSubRegs */
+    false, /* CoveredBySubRegs */
+    GeneralSubRegsSuperclasses,
+    nullptr
+  };
+
+  extern const TargetRegisterClass V62RegsRegClass = {
+    &HexagonMCRegisterClasses[V62RegsRegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
+    VTLists + 8,
+    V62RegsSubClassMask,
+    SuperRegIdxSeqs + 0,
+    LaneBitmask(0x00000003),
+    0,
+    true, /* HasDisjunctSubRegs */
+    false, /* CoveredBySubRegs */
+    NullRegClasses,
+    nullptr
+  };
+
   extern const TargetRegisterClass IntRegsLow8RegClass = {
     &HexagonMCRegisterClasses[IntRegsLow8RegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 8,
     IntRegsLow8SubClassMask,
     SuperRegIdxSeqs + 0,
@@ -1831,8 +2095,25 @@ namespace Hexagon {   // Register class instances
     nullptr
   };
 
+  extern const TargetRegisterClass CtrRegs_and_V62RegsRegClass = {
+    &HexagonMCRegisterClasses[CtrRegs_and_V62RegsRegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
+    VTLists + 8,
+    CtrRegs_and_V62RegsSubClassMask,
+    SuperRegIdxSeqs + 0,
+    LaneBitmask(0x00000001),
+    0,
+    false, /* HasDisjunctSubRegs */
+    false, /* CoveredBySubRegs */
+    CtrRegs_and_V62RegsSuperclasses,
+    nullptr
+  };
+
   extern const TargetRegisterClass PredRegsRegClass = {
     &HexagonMCRegisterClasses[PredRegsRegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 2,
     PredRegsSubClassMask,
     SuperRegIdxSeqs + 2,
@@ -1844,8 +2125,25 @@ namespace Hexagon {   // Register class instances
     nullptr
   };
 
+  extern const TargetRegisterClass V62Regs_with_isub_hiRegClass = {
+    &HexagonMCRegisterClasses[V62Regs_with_isub_hiRegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
+    VTLists + 8,
+    V62Regs_with_isub_hiSubClassMask,
+    SuperRegIdxSeqs + 2,
+    LaneBitmask(0x00000003),
+    0,
+    true, /* HasDisjunctSubRegs */
+    true, /* CoveredBySubRegs */
+    V62Regs_with_isub_hiSuperclasses,
+    nullptr
+  };
+
   extern const TargetRegisterClass ModRegsRegClass = {
     &HexagonMCRegisterClasses[ModRegsRegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 8,
     ModRegsSubClassMask,
     SuperRegIdxSeqs + 2,
@@ -1859,6 +2157,8 @@ namespace Hexagon {   // Register class instances
 
   extern const TargetRegisterClass CtrRegs_with_subreg_overflowRegClass = {
     &HexagonMCRegisterClasses[CtrRegs_with_subreg_overflowRegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 8,
     CtrRegs_with_subreg_overflowSubClassMask,
     SuperRegIdxSeqs + 2,
@@ -1872,6 +2172,8 @@ namespace Hexagon {   // Register class instances
 
   extern const TargetRegisterClass DoubleRegsRegClass = {
     &HexagonMCRegisterClasses[DoubleRegsRegClassID],
+    8, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 21,
     DoubleRegsSubClassMask,
     SuperRegIdxSeqs + 2,
@@ -1885,6 +2187,8 @@ namespace Hexagon {   // Register class instances
 
   extern const TargetRegisterClass CtrRegs64RegClass = {
     &HexagonMCRegisterClasses[CtrRegs64RegClassID],
+    8, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 10,
     CtrRegs64SubClassMask,
     SuperRegIdxSeqs + 2,
@@ -1896,9 +2200,26 @@ namespace Hexagon {   // Register class instances
     nullptr
   };
 
+  extern const TargetRegisterClass GeneralDoubleLow8RegsRegClass = {
+    &HexagonMCRegisterClasses[GeneralDoubleLow8RegsRegClassID],
+    8, /* SpillSize */
+    8, /* SpillAlignment */
+    VTLists + 10,
+    GeneralDoubleLow8RegsSubClassMask,
+    SuperRegIdxSeqs + 2,
+    LaneBitmask(0x00000003),
+    0,
+    true, /* HasDisjunctSubRegs */
+    true, /* CoveredBySubRegs */
+    GeneralDoubleLow8RegsSuperclasses,
+    nullptr
+  };
+
   extern const TargetRegisterClass DoubleRegs_with_isub_hi_in_IntRegsLow8RegClass = {
     &HexagonMCRegisterClasses[DoubleRegs_with_isub_hi_in_IntRegsLow8RegClassID],
-    VTLists + 21,
+    8, /* SpillSize */
+    8, /* SpillAlignment */
+    VTLists + 10,
     DoubleRegs_with_isub_hi_in_IntRegsLow8SubClassMask,
     SuperRegIdxSeqs + 2,
     LaneBitmask(0x00000003),
@@ -1909,8 +2230,25 @@ namespace Hexagon {   // Register class instances
     nullptr
   };
 
+  extern const TargetRegisterClass CtrRegs64_and_V62RegsRegClass = {
+    &HexagonMCRegisterClasses[CtrRegs64_and_V62RegsRegClassID],
+    8, /* SpillSize */
+    8, /* SpillAlignment */
+    VTLists + 10,
+    CtrRegs64_and_V62RegsSubClassMask,
+    SuperRegIdxSeqs + 2,
+    LaneBitmask(0x00000003),
+    0,
+    true, /* HasDisjunctSubRegs */
+    true, /* CoveredBySubRegs */
+    CtrRegs64_and_V62RegsSuperclasses,
+    nullptr
+  };
+
   extern const TargetRegisterClass VectorRegsRegClass = {
     &HexagonMCRegisterClasses[VectorRegsRegClassID],
+    64, /* SpillSize */
+    64, /* SpillAlignment */
     VTLists + 27,
     VectorRegsSubClassMask,
     SuperRegIdxSeqs + 5,
@@ -1924,6 +2262,8 @@ namespace Hexagon {   // Register class instances
 
   extern const TargetRegisterClass VecPredRegsRegClass = {
     &HexagonMCRegisterClasses[VecPredRegsRegClassID],
+    64, /* SpillSize */
+    64, /* SpillAlignment */
     VTLists + 12,
     VecPredRegsSubClassMask,
     SuperRegIdxSeqs + 2,
@@ -1937,6 +2277,8 @@ namespace Hexagon {   // Register class instances
 
   extern const TargetRegisterClass VectorRegs128BRegClass = {
     &HexagonMCRegisterClasses[VectorRegs128BRegClassID],
+    128, /* SpillSize */
+    128, /* SpillAlignment */
     VTLists + 32,
     VectorRegs128BSubClassMask,
     SuperRegIdxSeqs + 5,
@@ -1950,6 +2292,8 @@ namespace Hexagon {   // Register class instances
 
   extern const TargetRegisterClass VecDblRegsRegClass = {
     &HexagonMCRegisterClasses[VecDblRegsRegClassID],
+    128, /* SpillSize */
+    128, /* SpillAlignment */
     VTLists + 32,
     VecDblRegsSubClassMask,
     SuperRegIdxSeqs + 2,
@@ -1963,6 +2307,8 @@ namespace Hexagon {   // Register class instances
 
   extern const TargetRegisterClass VecPredRegs128BRegClass = {
     &HexagonMCRegisterClasses[VecPredRegs128BRegClassID],
+    128, /* SpillSize */
+    128, /* SpillAlignment */
     VTLists + 14,
     VecPredRegs128BSubClassMask,
     SuperRegIdxSeqs + 2,
@@ -1976,6 +2322,8 @@ namespace Hexagon {   // Register class instances
 
   extern const TargetRegisterClass VecDblRegs128BRegClass = {
     &HexagonMCRegisterClasses[VecDblRegs128BRegClassID],
+    256, /* SpillSize */
+    256, /* SpillAlignment */
     VTLists + 37,
     VecDblRegs128BSubClassMask,
     SuperRegIdxSeqs + 2,
@@ -1994,13 +2342,19 @@ namespace {
     &Hexagon::UsrBitsRegClass,
     &Hexagon::IntRegsRegClass,
     &Hexagon::CtrRegsRegClass,
+    &Hexagon::GeneralSubRegsRegClass,
+    &Hexagon::V62RegsRegClass,
     &Hexagon::IntRegsLow8RegClass,
+    &Hexagon::CtrRegs_and_V62RegsRegClass,
     &Hexagon::PredRegsRegClass,
+    &Hexagon::V62Regs_with_isub_hiRegClass,
     &Hexagon::ModRegsRegClass,
     &Hexagon::CtrRegs_with_subreg_overflowRegClass,
     &Hexagon::DoubleRegsRegClass,
     &Hexagon::CtrRegs64RegClass,
+    &Hexagon::GeneralDoubleLow8RegsRegClass,
     &Hexagon::DoubleRegs_with_isub_hi_in_IntRegsLow8RegClass,
+    &Hexagon::CtrRegs64_and_V62RegsRegClass,
     &Hexagon::VectorRegsRegClass,
     &Hexagon::VecPredRegsRegClass,
     &Hexagon::VectorRegs128BRegClass,
@@ -2027,6 +2381,14 @@ static const TargetRegisterInfoDesc HexagonRegInfoDesc[] = { // Extra Descriptor
   { 0, false },
   { 0, false },
   { 0, false },
+  { 0, false },
+  { 0, false },
+  { 0, false },
+  { 0, false },
+  { 0, false },
+  { 0, false },
+  { 0, false },
+  { 0, false },
   { 0, true },
   { 0, true },
   { 0, true },
@@ -2137,6 +2499,7 @@ static const TargetRegisterInfoDesc HexagonRegInfoDesc[] = { // Extra Descriptor
   { 0, true },
   { 0, true },
   { 0, true },
+  { 0, false },
   { 0, false },
   { 0, false },
   { 0, false },
@@ -2177,7 +2540,7 @@ unsigned HexagonGenRegisterInfo::composeSubRegIndicesImpl(unsigned IdxA, unsigne
 LaneBitmask HexagonGenRegisterInfo::composeSubRegIndexLaneMaskImpl(unsigned IdxA, LaneBitmask LaneMask) const {
   --IdxA; assert(IdxA < 5 && "Subregister index out of bounds");
   LaneBitmask Result;
-  for (const MaskRolOp *Ops = CompositeSequences[IdxA]; !Ops->Mask.none(); ++Ops) {
+  for (const MaskRolOp *Ops = CompositeSequences[IdxA]; Ops->Mask.any(); ++Ops) {
     LaneBitmask::Type M = LaneMask.getAsInteger() & Ops->Mask.getAsInteger();
     if (unsigned S = Ops->RotateLeft)
       Result |= LaneBitmask((M << S) | (M >> (LaneBitmask::BitWidth - S)));
@@ -2191,7 +2554,7 @@ LaneBitmask HexagonGenRegisterInfo::reverseComposeSubRegIndexLaneMaskImpl(unsign
   LaneMask &= getSubRegIndexLaneMask(IdxA);
   --IdxA; assert(IdxA < 5 && "Subregister index out of bounds");
   LaneBitmask Result;
-  for (const MaskRolOp *Ops = CompositeSequences[IdxA]; !Ops->Mask.none(); ++Ops) {
+  for (const MaskRolOp *Ops = CompositeSequences[IdxA]; Ops->Mask.any(); ++Ops) {
     LaneBitmask::Type M = LaneMask.getAsInteger();
     if (unsigned S = Ops->RotateLeft)
       Result |= LaneBitmask((M >> S) | (M << (LaneBitmask::BitWidth - S)));
@@ -2202,7 +2565,7 @@ LaneBitmask HexagonGenRegisterInfo::reverseComposeSubRegIndexLaneMaskImpl(unsign
 }
 
 const TargetRegisterClass *HexagonGenRegisterInfo::getSubClassWithSubReg(const TargetRegisterClass *RC, unsigned Idx) const {
-  static const uint8_t Table[16][5] = {
+  static const uint8_t Table[22][5] = {
     {	// UsrBits
       0,	// isub_hi
       0,	// isub_lo
@@ -2220,7 +2583,21 @@ const TargetRegisterClass *HexagonGenRegisterInfo::getSubClassWithSubReg(const T
     {	// CtrRegs
       0,	// isub_hi
       0,	// isub_lo
-      7,	// subreg_overflow -> CtrRegs_with_subreg_overflow
+      11,	// subreg_overflow -> CtrRegs_with_subreg_overflow
+      0,	// vsub_hi
+      0,	// vsub_lo
+    },
+    {	// GeneralSubRegs
+      0,	// isub_hi
+      0,	// isub_lo
+      0,	// subreg_overflow
+      0,	// vsub_hi
+      0,	// vsub_lo
+    },
+    {	// V62Regs
+      9,	// isub_hi -> V62Regs_with_isub_hi
+      9,	// isub_lo -> V62Regs_with_isub_hi
+      0,	// subreg_overflow
       0,	// vsub_hi
       0,	// vsub_lo
     },
@@ -2231,9 +2608,23 @@ const TargetRegisterClass *HexagonGenRegisterInfo::getSubClassWithSubReg(const T
       0,	// vsub_hi
       0,	// vsub_lo
     },
+    {	// CtrRegs_and_V62Regs
+      0,	// isub_hi
+      0,	// isub_lo
+      0,	// subreg_overflow
+      0,	// vsub_hi
+      0,	// vsub_lo
+    },
     {	// PredRegs
       0,	// isub_hi
       0,	// isub_lo
+      0,	// subreg_overflow
+      0,	// vsub_hi
+      0,	// vsub_lo
+    },
+    {	// V62Regs_with_isub_hi
+      9,	// isub_hi -> V62Regs_with_isub_hi
+      9,	// isub_lo -> V62Regs_with_isub_hi
       0,	// subreg_overflow
       0,	// vsub_hi
       0,	// vsub_lo
@@ -2248,27 +2639,41 @@ const TargetRegisterClass *HexagonGenRegisterInfo::getSubClassWithSubReg(const T
     {	// CtrRegs_with_subreg_overflow
       0,	// isub_hi
       0,	// isub_lo
-      7,	// subreg_overflow -> CtrRegs_with_subreg_overflow
+      11,	// subreg_overflow -> CtrRegs_with_subreg_overflow
       0,	// vsub_hi
       0,	// vsub_lo
     },
     {	// DoubleRegs
-      8,	// isub_hi -> DoubleRegs
-      8,	// isub_lo -> DoubleRegs
+      12,	// isub_hi -> DoubleRegs
+      12,	// isub_lo -> DoubleRegs
       0,	// subreg_overflow
       0,	// vsub_hi
       0,	// vsub_lo
     },
     {	// CtrRegs64
-      9,	// isub_hi -> CtrRegs64
-      9,	// isub_lo -> CtrRegs64
+      13,	// isub_hi -> CtrRegs64
+      13,	// isub_lo -> CtrRegs64
+      0,	// subreg_overflow
+      0,	// vsub_hi
+      0,	// vsub_lo
+    },
+    {	// GeneralDoubleLow8Regs
+      14,	// isub_hi -> GeneralDoubleLow8Regs
+      14,	// isub_lo -> GeneralDoubleLow8Regs
       0,	// subreg_overflow
       0,	// vsub_hi
       0,	// vsub_lo
     },
     {	// DoubleRegs_with_isub_hi_in_IntRegsLow8
-      10,	// isub_hi -> DoubleRegs_with_isub_hi_in_IntRegsLow8
-      10,	// isub_lo -> DoubleRegs_with_isub_hi_in_IntRegsLow8
+      15,	// isub_hi -> DoubleRegs_with_isub_hi_in_IntRegsLow8
+      15,	// isub_lo -> DoubleRegs_with_isub_hi_in_IntRegsLow8
+      0,	// subreg_overflow
+      0,	// vsub_hi
+      0,	// vsub_lo
+    },
+    {	// CtrRegs64_and_V62Regs
+      16,	// isub_hi -> CtrRegs64_and_V62Regs
+      16,	// isub_lo -> CtrRegs64_and_V62Regs
       0,	// subreg_overflow
       0,	// vsub_hi
       0,	// vsub_lo
@@ -2298,8 +2703,8 @@ const TargetRegisterClass *HexagonGenRegisterInfo::getSubClassWithSubReg(const T
       0,	// isub_hi
       0,	// isub_lo
       0,	// subreg_overflow
-      14,	// vsub_hi -> VecDblRegs
-      14,	// vsub_lo -> VecDblRegs
+      20,	// vsub_hi -> VecDblRegs
+      20,	// vsub_lo -> VecDblRegs
     },
     {	// VecPredRegs128B
       0,	// isub_hi
@@ -2312,8 +2717,8 @@ const TargetRegisterClass *HexagonGenRegisterInfo::getSubClassWithSubReg(const T
       0,	// isub_hi
       0,	// isub_lo
       0,	// subreg_overflow
-      16,	// vsub_hi -> VecDblRegs128B
-      16,	// vsub_lo -> VecDblRegs128B
+      22,	// vsub_hi -> VecDblRegs128B
+      22,	// vsub_lo -> VecDblRegs128B
     },
   };
   assert(RC && "Missing regclass");
@@ -2331,13 +2736,19 @@ getRegClassWeight(const TargetRegisterClass *RC) const {
     {0, 0},  	// UsrBits
     {1, 32},  	// IntRegs
     {0, 6},  	// CtrRegs
+    {1, 16},  	// GeneralSubRegs
+    {0, 0},  	// V62Regs
     {1, 8},  	// IntRegsLow8
+    {0, 0},  	// CtrRegs_and_V62Regs
     {1, 4},  	// PredRegs
+    {0, 0},  	// V62Regs_with_isub_hi
     {1, 2},  	// ModRegs
     {0, 0},  	// CtrRegs_with_subreg_overflow
     {2, 32},  	// DoubleRegs
-    {0, 2},  	// CtrRegs64
+    {0, 6},  	// CtrRegs64
+    {2, 16},  	// GeneralDoubleLow8Regs
     {2, 8},  	// DoubleRegs_with_isub_hi_in_IntRegsLow8
+    {0, 0},  	// CtrRegs64_and_V62Regs
     {1, 32},  	// VectorRegs
     {1, 4},  	// VecPredRegs
     {1, 32},  	// VectorRegs128B
@@ -2351,7 +2762,7 @@ getRegClassWeight(const TargetRegisterClass *RC) const {
 /// Get the weight in units of pressure for this register unit.
 unsigned HexagonGenRegisterInfo::
 getRegUnitWeight(unsigned RegUnit) const {
-  assert(RegUnit < 88 && "invalid register unit");
+  assert(RegUnit < 94 && "invalid register unit");
   // All register units have unit weight.
   return 1;
 }
@@ -2359,7 +2770,7 @@ getRegUnitWeight(unsigned RegUnit) const {
 
 // Get the number of dimensions of register pressure.
 unsigned HexagonGenRegisterInfo::getNumRegPressureSets() const {
-  return 6;
+  return 7;
 }
 
 // Get the name of this register unit pressure set.
@@ -2370,6 +2781,7 @@ getRegPressureSetName(unsigned Idx) const {
     "PredRegs",
     "VecPredRegs",
     "IntRegsLow8",
+    "GeneralSubRegs",
     "IntRegs",
     "VectorRegs",
   };
@@ -2385,8 +2797,9 @@ getRegPressureSetLimit(const MachineFunction &MF, unsigned Idx) const {
     4,  	// 1: PredRegs
     4,  	// 2: VecPredRegs
     8,  	// 3: IntRegsLow8
-    32,  	// 4: IntRegs
-    32,  	// 5: VectorRegs
+    16,  	// 4: GeneralSubRegs
+    32,  	// 5: IntRegs
+    32,  	// 6: VectorRegs
   };
   return PressureLimitTable[Idx];
 }
@@ -2396,8 +2809,8 @@ static const int RCSetsTable[] = {
   /* 0 */ 0, -1,
   /* 2 */ 1, -1,
   /* 4 */ 2, -1,
-  /* 6 */ 3, 4, -1,
-  /* 9 */ 5, -1,
+  /* 6 */ 3, 4, 5, -1,
+  /* 10 */ 6, -1,
 };
 
 /// Get the dimensions of register pressure impacted by this register class.
@@ -2405,7 +2818,7 @@ static const int RCSetsTable[] = {
 const int* HexagonGenRegisterInfo::
 getRegClassPressureSets(const TargetRegisterClass *RC) const {
   static const uint8_t RCSetStartTable[] = {
-    1,7,1,6,2,0,1,7,1,6,9,4,9,9,4,9,};
+    1,8,1,7,1,6,1,2,1,0,1,8,1,7,6,1,10,4,10,10,4,10,};
   return &RCSetsTable[RCSetStartTable[RC->getID()]];
 }
 
@@ -2413,9 +2826,9 @@ getRegClassPressureSets(const TargetRegisterClass *RC) const {
 /// Returns a -1 terminated array of pressure set IDs
 const int* HexagonGenRegisterInfo::
 getRegUnitPressureSets(unsigned RegUnit) const {
-  assert(RegUnit < 88 && "invalid register unit");
+  assert(RegUnit < 94 && "invalid register unit");
   static const uint8_t RUSetStartTable[] = {
-    1,1,1,1,1,1,1,1,1,1,0,0,6,6,6,6,6,6,6,6,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,1,1,2,2,2,2,4,4,4,4,1,1,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,};
+    1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,6,6,6,6,6,6,6,6,8,8,8,8,8,8,8,8,7,7,7,7,7,7,7,7,8,8,8,8,8,8,8,8,1,1,2,2,2,2,4,4,4,4,1,1,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,};
   return &RCSetsTable[RUSetStartTable[RegUnit]];
 }
 
@@ -2443,12 +2856,12 @@ extern const unsigned HexagonEHFlavour0L2DwarfSize;
 
 HexagonGenRegisterInfo::
 HexagonGenRegisterInfo(unsigned RA, unsigned DwarfFlavour, unsigned EHFlavour, unsigned PC)
-  : TargetRegisterInfo(HexagonRegInfoDesc, RegisterClasses, RegisterClasses+16,
+  : TargetRegisterInfo(HexagonRegInfoDesc, RegisterClasses, RegisterClasses+22,
              SubRegIndexNameTable, SubRegIndexLaneMaskTable, LaneBitmask(0xFFFFFFFB)) {
-  InitMCRegisterInfo(HexagonRegDesc, 133, RA, PC,
-                     HexagonMCRegisterClasses, 16,
+  InitMCRegisterInfo(HexagonRegDesc, 142, RA, PC,
+                     HexagonMCRegisterClasses, 22,
                      HexagonRegUnitRoots,
-                     88,
+                     94,
                      HexagonRegDiffLists,
                      HexagonLaneMaskLists,
                      HexagonRegStrings,
@@ -2488,14 +2901,22 @@ HexagonGenRegisterInfo(unsigned RA, unsigned DwarfFlavour, unsigned EHFlavour, u
   }
 }
 
+static const MCPhysReg HexagonCSR_SaveList[] = { Hexagon::R16, Hexagon::R17, Hexagon::R18, Hexagon::R19, Hexagon::R20, Hexagon::R21, Hexagon::R22, Hexagon::R23, Hexagon::R24, Hexagon::R25, Hexagon::R26, Hexagon::R27, 0 };
+static const uint32_t HexagonCSR_RegMask[] = { 0x00000000, 0x0000003f, 0x0000fff0, 0x00000000, 0x00000000, };
 
 
 ArrayRef<const uint32_t *> HexagonGenRegisterInfo::getRegMasks() const {
-  return None;
+  static const uint32_t *const Masks[] = {
+    HexagonCSR_RegMask,
+  };
+  return makeArrayRef(Masks);
 }
 
 ArrayRef<const char *> HexagonGenRegisterInfo::getRegMaskNames() const {
-  return None;
+  static const char *const Names[] = {
+    "HexagonCSR",
+  };
+  return makeArrayRef(Names);
 }
 
 const HexagonFrameLowering *

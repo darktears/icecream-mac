@@ -14,72 +14,83 @@ namespace llvm {
 namespace AMDGPU {
 enum {
   Feature16BitInsts = 0,
-  FeatureCFALUBug = 1,
-  FeatureCIInsts = 2,
-  FeatureCaymanISA = 3,
-  FeatureDebuggerEmitPrologue = 4,
-  FeatureDebuggerInsertNops = 5,
-  FeatureDebuggerReserveRegs = 6,
-  FeatureDisable = 7,
-  FeatureDumpCode = 8,
-  FeatureDumpCodeLower = 9,
-  FeatureEnableLoadStoreOpt = 10,
-  FeatureEnableSIScheduler = 11,
-  FeatureEnableUnsafeDSOffsetFolding = 12,
-  FeatureEvergreen = 13,
-  FeatureFP16Denormals = 14,
-  FeatureFP32Denormals = 15,
-  FeatureFP64 = 16,
-  FeatureFP64Denormals = 17,
-  FeatureFPExceptions = 18,
-  FeatureFastFMAF32 = 19,
-  FeatureFetchLimit8 = 20,
-  FeatureFetchLimit16 = 21,
-  FeatureFlatAddressSpace = 22,
-  FeatureFlatForGlobal = 23,
-  FeatureGCN = 24,
-  FeatureGCN1Encoding = 25,
-  FeatureGCN3Encoding = 26,
-  FeatureISAVersion7_0_0 = 27,
-  FeatureISAVersion7_0_1 = 28,
-  FeatureISAVersion7_0_2 = 29,
-  FeatureISAVersion8_0_0 = 30,
-  FeatureISAVersion8_0_1 = 31,
-  FeatureISAVersion8_0_2 = 32,
-  FeatureISAVersion8_0_3 = 33,
-  FeatureISAVersion8_0_4 = 34,
-  FeatureISAVersion8_1_0 = 35,
-  FeatureInv2PiInlineImm = 36,
-  FeatureLDSBankCount16 = 37,
-  FeatureLDSBankCount32 = 38,
-  FeatureLocalMemorySize0 = 39,
-  FeatureLocalMemorySize32768 = 40,
-  FeatureLocalMemorySize65536 = 41,
-  FeatureMaxPrivateElementSize4 = 42,
-  FeatureMaxPrivateElementSize8 = 43,
-  FeatureMaxPrivateElementSize16 = 44,
-  FeatureMovrel = 45,
-  FeatureNorthernIslands = 46,
-  FeaturePromoteAlloca = 47,
-  FeatureR600 = 48,
-  FeatureR600ALUInst = 49,
-  FeatureR700 = 50,
-  FeatureSGPRInitBug = 51,
-  FeatureSMemRealTime = 52,
-  FeatureScalarStores = 53,
-  FeatureSeaIslands = 54,
-  FeatureSouthernIslands = 55,
-  FeatureUnalignedBufferAccess = 56,
-  FeatureUnalignedScratchAccess = 57,
-  FeatureVGPRIndexMode = 58,
-  FeatureVGPRSpilling = 59,
-  FeatureVertexCache = 60,
-  FeatureVolcanicIslands = 61,
-  FeatureWavefrontSize16 = 62,
-  FeatureWavefrontSize32 = 63,
-  FeatureWavefrontSize64 = 64,
-  FeatureXNACK = 65,
-  HalfRate64Ops = 66
+  FeatureApertureRegs = 1,
+  FeatureCFALUBug = 2,
+  FeatureCIInsts = 3,
+  FeatureCaymanISA = 4,
+  FeatureDPP = 5,
+  FeatureDX10Clamp = 6,
+  FeatureDebuggerEmitPrologue = 7,
+  FeatureDebuggerInsertNops = 8,
+  FeatureDebuggerReserveRegs = 9,
+  FeatureDisable = 10,
+  FeatureDumpCode = 11,
+  FeatureDumpCodeLower = 12,
+  FeatureEnableLoadStoreOpt = 13,
+  FeatureEnableSIScheduler = 14,
+  FeatureEnableUnsafeDSOffsetFolding = 15,
+  FeatureEvergreen = 16,
+  FeatureFP16Denormals = 17,
+  FeatureFP32Denormals = 18,
+  FeatureFP64 = 19,
+  FeatureFP64Denormals = 20,
+  FeatureFP64FP16Denormals = 21,
+  FeatureFPExceptions = 22,
+  FeatureFastFMAF32 = 23,
+  FeatureFetchLimit8 = 24,
+  FeatureFetchLimit16 = 25,
+  FeatureFlatAddressSpace = 26,
+  FeatureFlatForGlobal = 27,
+  FeatureGCN = 28,
+  FeatureGCN1Encoding = 29,
+  FeatureGCN3Encoding = 30,
+  FeatureGFX9 = 31,
+  FeatureGFX9Insts = 32,
+  FeatureISAVersion7_0_0 = 33,
+  FeatureISAVersion7_0_1 = 34,
+  FeatureISAVersion7_0_2 = 35,
+  FeatureISAVersion8_0_0 = 36,
+  FeatureISAVersion8_0_1 = 37,
+  FeatureISAVersion8_0_2 = 38,
+  FeatureISAVersion8_0_3 = 39,
+  FeatureISAVersion8_0_4 = 40,
+  FeatureISAVersion8_1_0 = 41,
+  FeatureISAVersion9_0_0 = 42,
+  FeatureISAVersion9_0_1 = 43,
+  FeatureInv2PiInlineImm = 44,
+  FeatureLDSBankCount16 = 45,
+  FeatureLDSBankCount32 = 46,
+  FeatureLocalMemorySize0 = 47,
+  FeatureLocalMemorySize32768 = 48,
+  FeatureLocalMemorySize65536 = 49,
+  FeatureMaxPrivateElementSize4 = 50,
+  FeatureMaxPrivateElementSize8 = 51,
+  FeatureMaxPrivateElementSize16 = 52,
+  FeatureMovrel = 53,
+  FeatureNorthernIslands = 54,
+  FeaturePromoteAlloca = 55,
+  FeatureR600 = 56,
+  FeatureR600ALUInst = 57,
+  FeatureR700 = 58,
+  FeatureSDWA = 59,
+  FeatureSGPRInitBug = 60,
+  FeatureSMemRealTime = 61,
+  FeatureScalarStores = 62,
+  FeatureSeaIslands = 63,
+  FeatureSouthernIslands = 64,
+  FeatureTrapHandler = 65,
+  FeatureUnalignedBufferAccess = 66,
+  FeatureUnalignedScratchAccess = 67,
+  FeatureVGPRIndexMode = 68,
+  FeatureVGPRSpilling = 69,
+  FeatureVOP3P = 70,
+  FeatureVertexCache = 71,
+  FeatureVolcanicIslands = 72,
+  FeatureWavefrontSize16 = 73,
+  FeatureWavefrontSize32 = 74,
+  FeatureWavefrontSize64 = 75,
+  FeatureXNACK = 76,
+  HalfRate64Ops = 77
 };
 } // end namespace AMDGPU
 } // end namespace llvm
@@ -96,6 +107,7 @@ extern const llvm::SubtargetFeatureKV AMDGPUFeatureKV[] = {
   { "16-bit-insts", "Has i16/f16 instructions", { AMDGPU::Feature16BitInsts }, { } },
   { "DumpCode", "Dump MachineInstrs in the CodeEmitter", { AMDGPU::FeatureDumpCode }, { } },
   { "EVERGREEN", "EVERGREEN GPU generation", { AMDGPU::FeatureEvergreen }, { AMDGPU::FeatureFetchLimit16, AMDGPU::FeatureLocalMemorySize32768 } },
+  { "GFX9", "GFX9 GPU generation", { AMDGPU::FeatureGFX9 }, { AMDGPU::FeatureFP64, AMDGPU::FeatureLocalMemorySize65536, AMDGPU::FeatureWavefrontSize64, AMDGPU::FeatureFlatAddressSpace, AMDGPU::FeatureGCN, AMDGPU::FeatureGCN3Encoding, AMDGPU::FeatureCIInsts, AMDGPU::Feature16BitInsts, AMDGPU::FeatureSMemRealTime, AMDGPU::FeatureScalarStores, AMDGPU::FeatureInv2PiInlineImm, AMDGPU::FeatureApertureRegs, AMDGPU::FeatureGFX9Insts, AMDGPU::FeatureVOP3P, AMDGPU::FeatureVGPRIndexMode } },
   { "HasVertexCache", "Specify use of dedicated vertex cache", { AMDGPU::FeatureVertexCache }, { } },
   { "NORTHERN_ISLANDS", "NORTHERN_ISLANDS GPU generation", { AMDGPU::FeatureNorthernIslands }, { AMDGPU::FeatureFetchLimit16, AMDGPU::FeatureWavefrontSize64, AMDGPU::FeatureLocalMemorySize32768 } },
   { "R600", "R600 GPU generation", { AMDGPU::FeatureR600 }, { AMDGPU::FeatureR600ALUInst, AMDGPU::FeatureFetchLimit8, AMDGPU::FeatureLocalMemorySize0 } },
@@ -103,27 +115,32 @@ extern const llvm::SubtargetFeatureKV AMDGPUFeatureKV[] = {
   { "R700", "R700 GPU generation", { AMDGPU::FeatureR700 }, { AMDGPU::FeatureFetchLimit16, AMDGPU::FeatureLocalMemorySize0 } },
   { "SEA_ISLANDS", "SEA_ISLANDS GPU generation", { AMDGPU::FeatureSeaIslands }, { AMDGPU::FeatureFP64, AMDGPU::FeatureLocalMemorySize65536, AMDGPU::FeatureWavefrontSize64, AMDGPU::FeatureGCN, AMDGPU::FeatureFlatAddressSpace, AMDGPU::FeatureGCN1Encoding, AMDGPU::FeatureCIInsts, AMDGPU::FeatureMovrel } },
   { "SOUTHERN_ISLANDS", "SOUTHERN_ISLANDS GPU generation", { AMDGPU::FeatureSouthernIslands }, { AMDGPU::FeatureFP64, AMDGPU::FeatureLocalMemorySize32768, AMDGPU::FeatureWavefrontSize64, AMDGPU::FeatureGCN, AMDGPU::FeatureGCN1Encoding, AMDGPU::FeatureLDSBankCount32, AMDGPU::FeatureMovrel } },
-  { "VOLCANIC_ISLANDS", "VOLCANIC_ISLANDS GPU generation", { AMDGPU::FeatureVolcanicIslands }, { AMDGPU::FeatureFP64, AMDGPU::FeatureLocalMemorySize65536, AMDGPU::FeatureWavefrontSize64, AMDGPU::FeatureFlatAddressSpace, AMDGPU::FeatureGCN, AMDGPU::FeatureGCN3Encoding, AMDGPU::FeatureCIInsts, AMDGPU::Feature16BitInsts, AMDGPU::FeatureSMemRealTime, AMDGPU::FeatureVGPRIndexMode, AMDGPU::FeatureMovrel, AMDGPU::FeatureScalarStores, AMDGPU::FeatureInv2PiInlineImm } },
+  { "VOLCANIC_ISLANDS", "VOLCANIC_ISLANDS GPU generation", { AMDGPU::FeatureVolcanicIslands }, { AMDGPU::FeatureFP64, AMDGPU::FeatureLocalMemorySize65536, AMDGPU::FeatureWavefrontSize64, AMDGPU::FeatureFlatAddressSpace, AMDGPU::FeatureGCN, AMDGPU::FeatureGCN3Encoding, AMDGPU::FeatureCIInsts, AMDGPU::Feature16BitInsts, AMDGPU::FeatureSMemRealTime, AMDGPU::FeatureVGPRIndexMode, AMDGPU::FeatureMovrel, AMDGPU::FeatureScalarStores, AMDGPU::FeatureInv2PiInlineImm, AMDGPU::FeatureSDWA, AMDGPU::FeatureDPP } },
   { "amdgpu-debugger-emit-prologue", "Emit debugger prologue", { AMDGPU::FeatureDebuggerEmitPrologue }, { } },
   { "amdgpu-debugger-insert-nops", "Insert one nop instruction for each high level source statement", { AMDGPU::FeatureDebuggerInsertNops }, { } },
   { "amdgpu-debugger-reserve-regs", "Reserve registers for debugger usage", { AMDGPU::FeatureDebuggerReserveRegs }, { } },
+  { "aperture-regs", "Has Memory Aperture Base and Size Registers", { AMDGPU::FeatureApertureRegs }, { } },
   { "caymanISA", "Use Cayman ISA", { AMDGPU::FeatureCaymanISA }, { } },
   { "cfalubug", "GPU has CF_ALU bug", { AMDGPU::FeatureCFALUBug }, { } },
   { "ci-insts", "Additional intstructions for CI+", { AMDGPU::FeatureCIInsts }, { } },
+  { "dpp", "Support DPP (Data Parallel Primitives) extension", { AMDGPU::FeatureDPP }, { } },
   { "dumpcode", "Dump MachineInstrs in the CodeEmitter", { AMDGPU::FeatureDumpCodeLower }, { } },
+  { "dx10-clamp", "clamp modifier clamps NaNs to 0.0", { AMDGPU::FeatureDX10Clamp }, { } },
   { "fast-fmaf", "Assuming f32 fma is at least as fast as mul + add", { AMDGPU::FeatureFastFMAF32 }, { } },
   { "fetch16", "Limit the maximum number of fetches in a clause to 16", { AMDGPU::FeatureFetchLimit16 }, { } },
   { "fetch8", "Limit the maximum number of fetches in a clause to 8", { AMDGPU::FeatureFetchLimit8 }, { } },
   { "flat-address-space", "Support flat address space", { AMDGPU::FeatureFlatAddressSpace }, { } },
   { "flat-for-global", "Force to generate flat instruction for global", { AMDGPU::FeatureFlatForGlobal }, { } },
   { "fp-exceptions", "Enable floating point exceptions", { AMDGPU::FeatureFPExceptions }, { } },
-  { "fp16-denormals", "Enable half precision denormal handling", { AMDGPU::FeatureFP16Denormals }, { } },
+  { "fp16-denormals", "Enable half precision denormal handling", { AMDGPU::FeatureFP16Denormals }, { AMDGPU::FeatureFP64FP16Denormals } },
   { "fp32-denormals", "Enable single precision denormal handling", { AMDGPU::FeatureFP32Denormals }, { } },
   { "fp64", "Enable double precision operations", { AMDGPU::FeatureFP64 }, { } },
-  { "fp64-denormals", "Enable double precision denormal handling", { AMDGPU::FeatureFP64Denormals }, { AMDGPU::FeatureFP64 } },
+  { "fp64-denormals", "Enable double and half precision denormal handling", { AMDGPU::FeatureFP64Denormals }, { AMDGPU::FeatureFP64, AMDGPU::FeatureFP64FP16Denormals } },
+  { "fp64-fp16-denormals", "Enable double and half precision denormal handling", { AMDGPU::FeatureFP64FP16Denormals }, { AMDGPU::FeatureFP64 } },
   { "gcn", "GCN or newer GPU", { AMDGPU::FeatureGCN }, { } },
   { "gcn1-encoding", "Encoding format for SI and CI", { AMDGPU::FeatureGCN1Encoding }, { } },
   { "gcn3-encoding", "Encoding format for VI", { AMDGPU::FeatureGCN3Encoding }, { } },
+  { "gfx9-insts", "Additional intstructions for GFX9+", { AMDGPU::FeatureGFX9Insts }, { } },
   { "half-rate-64-ops", "Most fp64 instructions are half rate instead of quarter", { AMDGPU::HalfRate64Ops }, { } },
   { "inv-2pi-inline-imm", "Has 1 / (2 * pi) as inline immediate", { AMDGPU::FeatureInv2PiInlineImm }, { } },
   { "isaver7.0.0", "Instruction set version number", { AMDGPU::FeatureISAVersion7_0_0 }, { AMDGPU::FeatureSeaIslands, AMDGPU::FeatureLDSBankCount32 } },
@@ -135,6 +152,8 @@ extern const llvm::SubtargetFeatureKV AMDGPUFeatureKV[] = {
   { "isaver8.0.3", "Instruction set version number", { AMDGPU::FeatureISAVersion8_0_3 }, { AMDGPU::FeatureVolcanicIslands, AMDGPU::FeatureLDSBankCount32 } },
   { "isaver8.0.4", "Instruction set version number", { AMDGPU::FeatureISAVersion8_0_4 }, { AMDGPU::FeatureVolcanicIslands, AMDGPU::FeatureLDSBankCount32 } },
   { "isaver8.1.0", "Instruction set version number", { AMDGPU::FeatureISAVersion8_1_0 }, { AMDGPU::FeatureVolcanicIslands, AMDGPU::FeatureLDSBankCount16, AMDGPU::FeatureXNACK } },
+  { "isaver9.0.0", "Instruction set version number", { AMDGPU::FeatureISAVersion9_0_0 }, { } },
+  { "isaver9.0.1", "Instruction set version number", { AMDGPU::FeatureISAVersion9_0_1 }, { } },
   { "ldsbankcount16", "The number of LDS banks per compute unit.", { AMDGPU::FeatureLDSBankCount16 }, { } },
   { "ldsbankcount32", "The number of LDS banks per compute unit.", { AMDGPU::FeatureLDSBankCount32 }, { } },
   { "load-store-opt", "Enable SI load/store optimizer pass", { AMDGPU::FeatureEnableLoadStoreOpt }, { } },
@@ -148,13 +167,16 @@ extern const llvm::SubtargetFeatureKV AMDGPUFeatureKV[] = {
   { "promote-alloca", "Enable promote alloca pass", { AMDGPU::FeaturePromoteAlloca }, { } },
   { "s-memrealtime", "Has s_memrealtime instruction", { AMDGPU::FeatureSMemRealTime }, { } },
   { "scalar-stores", "Has store scalar memory instructions", { AMDGPU::FeatureScalarStores }, { } },
+  { "sdwa", "Support SDWA (Sub-DWORD Addressing) extension", { AMDGPU::FeatureSDWA }, { } },
   { "sgpr-init-bug", "VI SGPR initilization bug requiring a fixed SGPR allocation size", { AMDGPU::FeatureSGPRInitBug }, { } },
   { "si-scheduler", "Enable SI Machine Scheduler", { AMDGPU::FeatureEnableSIScheduler }, { } },
+  { "trap-handler", "Trap handler support", { AMDGPU::FeatureTrapHandler }, { } },
   { "unaligned-buffer-access", "Support unaligned global loads and stores", { AMDGPU::FeatureUnalignedBufferAccess }, { } },
   { "unaligned-scratch-access", "Support unaligned scratch loads and stores", { AMDGPU::FeatureUnalignedScratchAccess }, { } },
   { "unsafe-ds-offset-folding", "Force using DS instruction immediate offsets on SI", { AMDGPU::FeatureEnableUnsafeDSOffsetFolding }, { } },
   { "vgpr-index-mode", "Has VGPR mode register indexing", { AMDGPU::FeatureVGPRIndexMode }, { } },
   { "vgpr-spilling", "Enable spilling of VGPRs to scratch memory", { AMDGPU::FeatureVGPRSpilling }, { } },
+  { "vop3p", "Has VOP3P packed instructions", { AMDGPU::FeatureVOP3P }, { } },
   { "wavefrontsize16", "The number of threads per wavefront", { AMDGPU::FeatureWavefrontSize16 }, { } },
   { "wavefrontsize32", "The number of threads per wavefront", { AMDGPU::FeatureWavefrontSize32 }, { } },
   { "wavefrontsize64", "The number of threads per wavefront", { AMDGPU::FeatureWavefrontSize64 }, { } },
@@ -181,6 +203,8 @@ extern const llvm::SubtargetFeatureKV AMDGPUSubTypeKV[] = {
   { "gfx803", "Select the gfx803 processor", { AMDGPU::FeatureISAVersion8_0_3 }, { } },
   { "gfx804", "Select the gfx804 processor", { AMDGPU::FeatureISAVersion8_0_4 }, { } },
   { "gfx810", "Select the gfx810 processor", { AMDGPU::FeatureISAVersion8_1_0 }, { } },
+  { "gfx900", "Select the gfx900 processor", { AMDGPU::FeatureGFX9, AMDGPU::FeatureISAVersion9_0_0, AMDGPU::FeatureLDSBankCount32 }, { } },
+  { "gfx901", "Select the gfx901 processor", { AMDGPU::FeatureGFX9, AMDGPU::FeatureXNACK, AMDGPU::FeatureISAVersion9_0_1, AMDGPU::FeatureLDSBankCount32 }, { } },
   { "hainan", "Select the hainan processor", { AMDGPU::FeatureSouthernIslands }, { } },
   { "hawaii", "Select the hawaii processor", { AMDGPU::FeatureISAVersion7_0_1 }, { } },
   { "iceland", "Select the iceland processor", { AMDGPU::FeatureISAVersion8_0_0 }, { } },
@@ -279,7 +303,8 @@ static const llvm::InstrItinerary R600_VLIW5_Itin[] = {
   { 1, 2, 3, 0, 0 }, // 19 NullALU_WriteDouble
   { 1, 2, 3, 0, 0 }, // 20 NullALU_WriteFloatFMA_WriteSALU
   { 1, 2, 3, 0, 0 }, // 21 NullALU_WriteDouble_WriteSALU
-  { 0, 0, 0, 0, 0 }, // 22 COPY
+  { 1, 2, 3, 0, 0 }, // 22 NullALU_Write64Bit_Write64Bit
+  { 0, 0, 0, 0, 0 }, // 23 COPY
   { 0, ~0U, ~0U, ~0U, ~0U } // end marker
 };
 
@@ -306,7 +331,8 @@ static const llvm::InstrItinerary R600_VLIW4_Itin[] = {
   { 1, 7, 8, 0, 0 }, // 19 NullALU_WriteDouble
   { 1, 7, 8, 0, 0 }, // 20 NullALU_WriteFloatFMA_WriteSALU
   { 1, 7, 8, 0, 0 }, // 21 NullALU_WriteDouble_WriteSALU
-  { 0, 0, 0, 0, 0 }, // 22 COPY
+  { 1, 7, 8, 0, 0 }, // 22 NullALU_Write64Bit_Write64Bit
+  { 0, 0, 0, 0, 0 }, // 23 COPY
   { 0, ~0U, ~0U, ~0U, ~0U } // end marker
 };
 
@@ -323,7 +349,8 @@ extern const llvm::MCWriteProcResEntry AMDGPUWriteProcResTable[] = {
   { 4,  1}, // #5
   { 1,  1}, // #6
   { 4,  1}, // #7
-  { 5,  1} // #8
+  { 5,  1}, // #8
+  { 5,  2} // #9
 }; // AMDGPUWriteProcResTable
 
 // {Cycles, WriteResourceID}
@@ -340,9 +367,11 @@ extern const llvm::MCWriteLatencyEntry AMDGPUWriteLatencyTable[] = {
   { 2,  0}, // #9 WriteDoubleAdd_Write64Bit
   { 4,  0}, // #10 WriteDouble
   { 1,  0}, // #11 WriteSALU
-  {16,  0}, // #12 WriteFloatFMA_WriteDouble
-  {16,  0}, // #13 WriteFloatFMA_WriteDouble
-  { 1,  0} // #14 WriteSALU
+  { 2,  0}, // #12 Write64Bit
+  { 2,  0}, // #13 Write64Bit
+  {16,  0}, // #14 WriteFloatFMA_WriteDouble
+  {16,  0}, // #15 WriteFloatFMA_WriteDouble
+  { 1,  0} // #16 WriteSALU
 }; // AMDGPUWriteLatencyTable
 
 // {UseIdx, WriteResourceID, Cycles}
@@ -374,10 +403,11 @@ static const llvm::MCSchedClassDesc SIFullSpeedModelSchedClasses[] = {
   {DBGFIELD("NullALU_WriteDouble") 1, false, false,  2, 1,  4, 1,  0, 0}, // #19
   {DBGFIELD("NullALU_WriteFloatFMA_WriteSALU") 2, false, false,  7, 2,  7, 2,  0, 0}, // #20
   {DBGFIELD("NullALU_WriteDouble_WriteSALU") 2, false, false,  7, 2, 10, 2,  0, 0}, // #21
-  {DBGFIELD("COPY")               65534, false, false,  0, 0,  0, 0,  0, 0}, // #22
-  {DBGFIELD("Write32Bit")         1, false, false,  2, 1,  2, 1,  0, 0}, // #23
-  {DBGFIELD("Write64Bit")         1, false, false,  2, 1,  9, 1,  0, 0}, // #24
-  {DBGFIELD("WriteSALU")          1, false, false,  5, 1,  2, 1,  0, 0} // #25
+  {DBGFIELD("NullALU_Write64Bit_Write64Bit") 2, false, false,  9, 1, 12, 2,  0, 0}, // #22
+  {DBGFIELD("COPY")               65534, false, false,  0, 0,  0, 0,  0, 0}, // #23
+  {DBGFIELD("Write32Bit")         1, false, false,  2, 1,  2, 1,  0, 0}, // #24
+  {DBGFIELD("Write64Bit")         1, false, false,  2, 1,  9, 1,  0, 0}, // #25
+  {DBGFIELD("WriteSALU")          1, false, false,  5, 1,  2, 1,  0, 0} // #26
 }; // SIFullSpeedModelSchedClasses
 
 // {Name, NumMicroOps, BeginGroup, EndGroup, WriteProcResIdx,#, WriteLatencyIdx,#, ReadAdvanceIdx,#}
@@ -400,14 +430,15 @@ static const llvm::MCSchedClassDesc SIQuarterSpeedModelSchedClasses[] = {
   {DBGFIELD("NullALU_WriteDoubleAdd") 1, false, false,  2, 1,  6, 1,  0, 0}, // #15
   {DBGFIELD("NullALU_Write64Bit") 1, false, false,  2, 1,  9, 1,  0, 0}, // #16
   {DBGFIELD("NullALU_WriteQuarterRate32") 1, false, false,  2, 1,  4, 1,  0, 0}, // #17
-  {DBGFIELD("NullALU_WriteFloatFMA") 1, false, false,  2, 1, 12, 1,  0, 0}, // #18
-  {DBGFIELD("NullALU_WriteDouble") 1, false, false,  2, 1, 12, 1,  0, 0}, // #19
-  {DBGFIELD("NullALU_WriteFloatFMA_WriteSALU") 2, false, false,  7, 2, 13, 2,  0, 0}, // #20
-  {DBGFIELD("NullALU_WriteDouble_WriteSALU") 2, false, false,  7, 2, 13, 2,  0, 0}, // #21
-  {DBGFIELD("COPY")               65534, false, false,  0, 0,  0, 0,  0, 0}, // #22
-  {DBGFIELD("Write32Bit")         1, false, false,  2, 1,  2, 1,  0, 0}, // #23
-  {DBGFIELD("Write64Bit")         1, false, false,  2, 1,  9, 1,  0, 0}, // #24
-  {DBGFIELD("WriteSALU")          1, false, false,  5, 1,  2, 1,  0, 0} // #25
+  {DBGFIELD("NullALU_WriteFloatFMA") 1, false, false,  2, 1, 14, 1,  0, 0}, // #18
+  {DBGFIELD("NullALU_WriteDouble") 1, false, false,  2, 1, 14, 1,  0, 0}, // #19
+  {DBGFIELD("NullALU_WriteFloatFMA_WriteSALU") 2, false, false,  7, 2, 15, 2,  0, 0}, // #20
+  {DBGFIELD("NullALU_WriteDouble_WriteSALU") 2, false, false,  7, 2, 15, 2,  0, 0}, // #21
+  {DBGFIELD("NullALU_Write64Bit_Write64Bit") 2, false, false,  9, 1, 12, 2,  0, 0}, // #22
+  {DBGFIELD("COPY")               65534, false, false,  0, 0,  0, 0,  0, 0}, // #23
+  {DBGFIELD("Write32Bit")         1, false, false,  2, 1,  2, 1,  0, 0}, // #24
+  {DBGFIELD("Write64Bit")         1, false, false,  2, 1,  9, 1,  0, 0}, // #25
+  {DBGFIELD("WriteSALU")          1, false, false,  5, 1,  2, 1,  0, 0} // #26
 }; // SIQuarterSpeedModelSchedClasses
 
 static const llvm::MCSchedModel NoSchedModel = {
@@ -440,14 +471,14 @@ static const llvm::MCSchedModel SIFullSpeedModel = {
   MCSchedModel::DefaultLoopMicroOpBufferSize,
   MCSchedModel::DefaultLoadLatency,
   MCSchedModel::DefaultHighLatency,
-  MCSchedModel::DefaultMispredictPenalty,
+  20, // MispredictPenalty
   true, // PostRAScheduler
   true, // CompleteModel
   1, // Processor ID
   SIFullSpeedModelProcResources,
   SIFullSpeedModelSchedClasses,
   7,
-  26,
+  27,
   nullptr}; // No Itinerary
 
 static const llvm::MCSchedModel R600_VLIW5_ItinModel = {
@@ -480,14 +511,14 @@ static const llvm::MCSchedModel SIQuarterSpeedModel = {
   MCSchedModel::DefaultLoopMicroOpBufferSize,
   MCSchedModel::DefaultLoadLatency,
   MCSchedModel::DefaultHighLatency,
-  MCSchedModel::DefaultMispredictPenalty,
+  20, // MispredictPenalty
   true, // PostRAScheduler
   true, // CompleteModel
   3, // Processor ID
   SIQuarterSpeedModelProcResources,
   SIQuarterSpeedModelSchedClasses,
   7,
-  26,
+  27,
   nullptr}; // No Itinerary
 
 static const llvm::MCSchedModel R600_VLIW4_ItinModel = {
@@ -523,6 +554,8 @@ extern const llvm::SubtargetInfoKV AMDGPUProcSchedKV[] = {
   { "gfx803", (const void *)&SIQuarterSpeedModel },
   { "gfx804", (const void *)&SIQuarterSpeedModel },
   { "gfx810", (const void *)&SIQuarterSpeedModel },
+  { "gfx900", (const void *)&SIQuarterSpeedModel },
+  { "gfx901", (const void *)&SIQuarterSpeedModel },
   { "hainan", (const void *)&SIQuarterSpeedModel },
   { "hawaii", (const void *)&SIFullSpeedModel },
   { "iceland", (const void *)&SIQuarterSpeedModel },
@@ -575,9 +608,12 @@ void llvm::AMDGPUSubtarget::ParseSubtargetFeatures(StringRef CPU, StringRef FS) 
   InitMCProcessorInfo(CPU, FS);
   const FeatureBitset& Bits = getFeatureBits();
   if (Bits[AMDGPU::Feature16BitInsts]) Has16BitInsts = true;
+  if (Bits[AMDGPU::FeatureApertureRegs]) HasApertureRegs = true;
   if (Bits[AMDGPU::FeatureCFALUBug]) CFALUBug = true;
   if (Bits[AMDGPU::FeatureCIInsts]) CIInsts = true;
   if (Bits[AMDGPU::FeatureCaymanISA]) CaymanISA = true;
+  if (Bits[AMDGPU::FeatureDPP]) HasDPP = true;
+  if (Bits[AMDGPU::FeatureDX10Clamp]) DX10Clamp = true;
   if (Bits[AMDGPU::FeatureDebuggerEmitPrologue]) DebuggerEmitPrologue = true;
   if (Bits[AMDGPU::FeatureDebuggerInsertNops]) DebuggerInsertNops = true;
   if (Bits[AMDGPU::FeatureDebuggerReserveRegs]) DebuggerReserveRegs = true;
@@ -588,10 +624,11 @@ void llvm::AMDGPUSubtarget::ParseSubtargetFeatures(StringRef CPU, StringRef FS) 
   if (Bits[AMDGPU::FeatureEnableSIScheduler]) EnableSIScheduler = true;
   if (Bits[AMDGPU::FeatureEnableUnsafeDSOffsetFolding]) EnableUnsafeDSOffsetFolding = true;
   if (Bits[AMDGPU::FeatureEvergreen] && Gen < AMDGPUSubtarget::EVERGREEN) Gen = AMDGPUSubtarget::EVERGREEN;
-  if (Bits[AMDGPU::FeatureFP16Denormals]) FP16Denormals = true;
+  if (Bits[AMDGPU::FeatureFP16Denormals]) FP64FP16Denormals = true;
   if (Bits[AMDGPU::FeatureFP32Denormals]) FP32Denormals = true;
   if (Bits[AMDGPU::FeatureFP64]) FP64 = true;
-  if (Bits[AMDGPU::FeatureFP64Denormals]) FP64Denormals = true;
+  if (Bits[AMDGPU::FeatureFP64Denormals]) FP64FP16Denormals = true;
+  if (Bits[AMDGPU::FeatureFP64FP16Denormals]) FP64FP16Denormals = true;
   if (Bits[AMDGPU::FeatureFPExceptions]) FPExceptions = true;
   if (Bits[AMDGPU::FeatureFastFMAF32]) FastFMAF32 = true;
   if (Bits[AMDGPU::FeatureFetchLimit8] && TexVTXClauseSize < 8) TexVTXClauseSize = 8;
@@ -601,6 +638,8 @@ void llvm::AMDGPUSubtarget::ParseSubtargetFeatures(StringRef CPU, StringRef FS) 
   if (Bits[AMDGPU::FeatureGCN]) IsGCN = true;
   if (Bits[AMDGPU::FeatureGCN1Encoding]) GCN1Encoding = true;
   if (Bits[AMDGPU::FeatureGCN3Encoding]) GCN3Encoding = true;
+  if (Bits[AMDGPU::FeatureGFX9] && Gen < AMDGPUSubtarget::GFX9) Gen = AMDGPUSubtarget::GFX9;
+  if (Bits[AMDGPU::FeatureGFX9Insts]) GFX9Insts = true;
   if (Bits[AMDGPU::FeatureISAVersion7_0_0] && IsaVersion < ISAVersion7_0_0) IsaVersion = ISAVersion7_0_0;
   if (Bits[AMDGPU::FeatureISAVersion7_0_1] && IsaVersion < ISAVersion7_0_1) IsaVersion = ISAVersion7_0_1;
   if (Bits[AMDGPU::FeatureISAVersion7_0_2] && IsaVersion < ISAVersion7_0_2) IsaVersion = ISAVersion7_0_2;
@@ -610,6 +649,8 @@ void llvm::AMDGPUSubtarget::ParseSubtargetFeatures(StringRef CPU, StringRef FS) 
   if (Bits[AMDGPU::FeatureISAVersion8_0_3] && IsaVersion < ISAVersion8_0_3) IsaVersion = ISAVersion8_0_3;
   if (Bits[AMDGPU::FeatureISAVersion8_0_4] && IsaVersion < ISAVersion8_0_4) IsaVersion = ISAVersion8_0_4;
   if (Bits[AMDGPU::FeatureISAVersion8_1_0] && IsaVersion < ISAVersion8_1_0) IsaVersion = ISAVersion8_1_0;
+  if (Bits[AMDGPU::FeatureISAVersion9_0_0] && IsaVersion < ISAVersion9_0_0) IsaVersion = ISAVersion9_0_0;
+  if (Bits[AMDGPU::FeatureISAVersion9_0_1] && IsaVersion < ISAVersion9_0_1) IsaVersion = ISAVersion9_0_1;
   if (Bits[AMDGPU::FeatureInv2PiInlineImm]) HasInv2PiInlineImm = true;
   if (Bits[AMDGPU::FeatureLDSBankCount16] && LDSBankCount < 16) LDSBankCount = 16;
   if (Bits[AMDGPU::FeatureLDSBankCount32] && LDSBankCount < 32) LDSBankCount = 32;
@@ -625,15 +666,18 @@ void llvm::AMDGPUSubtarget::ParseSubtargetFeatures(StringRef CPU, StringRef FS) 
   if (Bits[AMDGPU::FeatureR600] && Gen < AMDGPUSubtarget::R600) Gen = AMDGPUSubtarget::R600;
   if (Bits[AMDGPU::FeatureR600ALUInst]) R600ALUInst = false;
   if (Bits[AMDGPU::FeatureR700] && Gen < AMDGPUSubtarget::R700) Gen = AMDGPUSubtarget::R700;
+  if (Bits[AMDGPU::FeatureSDWA]) HasSDWA = true;
   if (Bits[AMDGPU::FeatureSGPRInitBug]) SGPRInitBug = true;
   if (Bits[AMDGPU::FeatureSMemRealTime]) HasSMemRealTime = true;
   if (Bits[AMDGPU::FeatureScalarStores]) HasScalarStores = true;
   if (Bits[AMDGPU::FeatureSeaIslands] && Gen < AMDGPUSubtarget::SEA_ISLANDS) Gen = AMDGPUSubtarget::SEA_ISLANDS;
   if (Bits[AMDGPU::FeatureSouthernIslands] && Gen < AMDGPUSubtarget::SOUTHERN_ISLANDS) Gen = AMDGPUSubtarget::SOUTHERN_ISLANDS;
+  if (Bits[AMDGPU::FeatureTrapHandler]) TrapHandler = true;
   if (Bits[AMDGPU::FeatureUnalignedBufferAccess]) UnalignedBufferAccess = true;
   if (Bits[AMDGPU::FeatureUnalignedScratchAccess]) UnalignedScratchAccess = true;
   if (Bits[AMDGPU::FeatureVGPRIndexMode]) HasVGPRIndexMode = true;
   if (Bits[AMDGPU::FeatureVGPRSpilling]) EnableVGPRSpilling = true;
+  if (Bits[AMDGPU::FeatureVOP3P]) HasVOP3PInsts = true;
   if (Bits[AMDGPU::FeatureVertexCache]) HasVertexCache = true;
   if (Bits[AMDGPU::FeatureVolcanicIslands] && Gen < AMDGPUSubtarget::VOLCANIC_ISLANDS) Gen = AMDGPUSubtarget::VOLCANIC_ISLANDS;
   if (Bits[AMDGPU::FeatureWavefrontSize16] && WavefrontSize < 16) WavefrontSize = 16;
@@ -677,7 +721,7 @@ extern const llvm::InstrStage AMDGPUStages[];
 extern const unsigned AMDGPUOperandCycles[];
 extern const unsigned AMDGPUForwardingPaths[];
 AMDGPUGenSubtargetInfo::AMDGPUGenSubtargetInfo(const Triple &TT, StringRef CPU, StringRef FS)
-  : TargetSubtargetInfo(TT, CPU, FS, makeArrayRef(AMDGPUFeatureKV, 66), makeArrayRef(AMDGPUSubTypeKV, 43), 
+  : TargetSubtargetInfo(TT, CPU, FS, makeArrayRef(AMDGPUFeatureKV, 77), makeArrayRef(AMDGPUSubTypeKV, 45), 
                         AMDGPUProcSchedKV, AMDGPUWriteProcResTable, AMDGPUWriteLatencyTable, AMDGPUReadAdvanceTable, 
                         AMDGPUStages, AMDGPUOperandCycles, AMDGPUForwardingPaths) {}
 
@@ -689,22 +733,22 @@ unsigned AMDGPUGenSubtargetInfo
   (void)TII;
 
   switch (SchedClass) {
-  case 22: // COPY
+  case 23: // COPY
     if (SchedModel->getProcessorID() == 1) { // SIFullSpeedModel
       if ((TII->isVGPRCopy(*MI) && TII->getOpSize(*MI, 0) <= 32))
-        return 23; // Write32Bit
+        return 24; // Write32Bit
       if ((TII->isVGPRCopy(*MI) && TII->getOpSize(*MI, 0) > 32))
-        return 24; // Write64Bit
+        return 25; // Write64Bit
       if ((true))
-        return 25; // WriteSALU
+        return 26; // WriteSALU
     }
     if (SchedModel->getProcessorID() == 3) { // SIQuarterSpeedModel
       if ((TII->isVGPRCopy(*MI) && TII->getOpSize(*MI, 0) <= 32))
-        return 23; // Write32Bit
+        return 24; // Write32Bit
       if ((TII->isVGPRCopy(*MI) && TII->getOpSize(*MI, 0) > 32))
-        return 24; // Write64Bit
+        return 25; // Write64Bit
       if ((true))
-        return 25; // WriteSALU
+        return 26; // WriteSALU
     }
     break;
   };

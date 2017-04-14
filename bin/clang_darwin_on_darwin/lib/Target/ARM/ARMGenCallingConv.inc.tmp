@@ -86,7 +86,7 @@ static bool CC_ARM_AAPCS(unsigned ValNo, MVT ValVT,
 
   if (ArgFlags.isSwiftError()) {
     if (LocVT == MVT::i32) {
-      if (unsigned Reg = State.AllocateReg(ARM::R6)) {
+      if (unsigned Reg = State.AllocateReg(ARM::R8)) {
         State.addLoc(CCValAssign::getReg(ValNo, ValVT, Reg, LocVT, LocInfo));
         return false;
       }
@@ -254,7 +254,7 @@ static bool CC_ARM_AAPCS_VFP(unsigned ValNo, MVT ValVT,
 
   if (ArgFlags.isSwiftError()) {
     if (LocVT == MVT::i32) {
-      if (unsigned Reg = State.AllocateReg(ARM::R6)) {
+      if (unsigned Reg = State.AllocateReg(ARM::R8)) {
         State.addLoc(CCValAssign::getReg(ValNo, ValVT, Reg, LocVT, LocInfo));
         return false;
       }
@@ -335,7 +335,7 @@ static bool CC_ARM_APCS(unsigned ValNo, MVT ValVT,
 
   if (ArgFlags.isSwiftError()) {
     if (LocVT == MVT::i32) {
-      if (unsigned Reg = State.AllocateReg(ARM::R6)) {
+      if (unsigned Reg = State.AllocateReg(ARM::R8)) {
         State.addLoc(CCValAssign::getReg(ValNo, ValVT, Reg, LocVT, LocInfo));
         return false;
       }
@@ -599,7 +599,7 @@ static bool RetCC_ARM_AAPCS(unsigned ValNo, MVT ValVT,
 
   if (ArgFlags.isSwiftError()) {
     if (LocVT == MVT::i32) {
-      if (unsigned Reg = State.AllocateReg(ARM::R6)) {
+      if (unsigned Reg = State.AllocateReg(ARM::R8)) {
         State.addLoc(CCValAssign::getReg(ValNo, ValVT, Reg, LocVT, LocInfo));
         return false;
       }
@@ -700,7 +700,7 @@ static bool RetCC_ARM_AAPCS_VFP(unsigned ValNo, MVT ValVT,
 
   if (ArgFlags.isSwiftError()) {
     if (LocVT == MVT::i32) {
-      if (unsigned Reg = State.AllocateReg(ARM::R6)) {
+      if (unsigned Reg = State.AllocateReg(ARM::R8)) {
         State.addLoc(CCValAssign::getReg(ValNo, ValVT, Reg, LocVT, LocInfo));
         return false;
       }
@@ -776,7 +776,7 @@ static bool RetCC_ARM_APCS(unsigned ValNo, MVT ValVT,
 
   if (ArgFlags.isSwiftError()) {
     if (LocVT == MVT::i32) {
-      if (unsigned Reg = State.AllocateReg(ARM::R6)) {
+      if (unsigned Reg = State.AllocateReg(ARM::R8)) {
         State.addLoc(CCValAssign::getReg(ValNo, ValVT, Reg, LocVT, LocInfo));
         return false;
       }

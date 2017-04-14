@@ -1484,30 +1484,30 @@ extern const char PPCRegClassStrings[] = {
 };
 
 extern const MCRegisterClass PPCMCRegisterClasses[] = {
-  { VSSRC, VSSRCBits, 128, 64, sizeof(VSSRCBits), PPC::VSSRCRegClassID, 4, 4, 1, true },
-  { GPRC, GPRCBits, 102, 34, sizeof(GPRCBits), PPC::GPRCRegClassID, 4, 4, 1, true },
-  { GPRC_NOR0, GPRC_NOR0Bits, 15, 34, sizeof(GPRC_NOR0Bits), PPC::GPRC_NOR0RegClassID, 4, 4, 1, true },
-  { GPRC_and_GPRC_NOR0, GPRC_and_GPRC_NOR0Bits, 6, 33, sizeof(GPRC_and_GPRC_NOR0Bits), PPC::GPRC_and_GPRC_NOR0RegClassID, 4, 4, 1, true },
-  { CRBITRC, CRBITRCBits, 139, 32, sizeof(CRBITRCBits), PPC::CRBITRCRegClassID, 4, 4, 1, true },
-  { F4RC, F4RCBits, 51, 32, sizeof(F4RCBits), PPC::F4RCRegClassID, 4, 4, 1, true },
-  { CRRC, CRRCBits, 107, 8, sizeof(CRRCBits), PPC::CRRCRegClassID, 4, 4, 1, true },
-  { CARRYRC, CARRYRCBits, 147, 1, sizeof(CARRYRCBits), PPC::CARRYRCRegClassID, 4, 4, -1, true },
-  { CRRC0, CRRC0Bits, 0, 1, sizeof(CRRC0Bits), PPC::CRRC0RegClassID, 4, 4, 1, true },
-  { CTRRC, CTRRCBits, 112, 1, sizeof(CTRRCBits), PPC::CTRRCRegClassID, 4, 4, 1, false },
-  { VRSAVERC, VRSAVERCBits, 71, 1, sizeof(VRSAVERCBits), PPC::VRSAVERCRegClassID, 4, 4, 1, true },
-  { VSFRC, VSFRCBits, 85, 64, sizeof(VSFRCBits), PPC::VSFRCRegClassID, 8, 8, 1, true },
-  { G8RC, G8RCBits, 61, 34, sizeof(G8RCBits), PPC::G8RCRegClassID, 8, 8, 1, true },
-  { G8RC_NOX0, G8RC_NOX0Bits, 34, 34, sizeof(G8RC_NOX0Bits), PPC::G8RC_NOX0RegClassID, 8, 8, 1, true },
-  { G8RC_and_G8RC_NOX0, G8RC_and_G8RC_NOX0Bits, 25, 33, sizeof(G8RC_and_G8RC_NOX0Bits), PPC::G8RC_and_G8RC_NOX0RegClassID, 8, 8, 1, true },
-  { F8RC, F8RCBits, 56, 32, sizeof(F8RCBits), PPC::F8RCRegClassID, 8, 8, 1, true },
-  { VFRC, VFRCBits, 91, 32, sizeof(VFRCBits), PPC::VFRCRegClassID, 8, 8, 1, true },
-  { CTRRC8, CTRRC8Bits, 44, 1, sizeof(CTRRC8Bits), PPC::CTRRC8RegClassID, 8, 8, 1, false },
-  { VSRC, VSRCBits, 134, 64, sizeof(VSRCBits), PPC::VSRCRegClassID, 16, 16, 1, true },
-  { QSRC, QSRCBits, 123, 32, sizeof(QSRCBits), PPC::QSRCRegClassID, 16, 16, 1, true },
-  { VRRC, VRRCBits, 118, 32, sizeof(VRRCBits), PPC::VRRCRegClassID, 16, 16, 1, true },
-  { VSLRC, VSLRCBits, 96, 32, sizeof(VSLRCBits), PPC::VSLRCRegClassID, 16, 16, 1, true },
-  { QBRC, QBRCBits, 66, 32, sizeof(QBRCBits), PPC::QBRCRegClassID, 32, 32, 1, true },
-  { QFRC, QFRCBits, 80, 32, sizeof(QFRCBits), PPC::QFRCRegClassID, 32, 32, 1, true },
+  { VSSRC, VSSRCBits, 128, 64, sizeof(VSSRCBits), PPC::VSSRCRegClassID, 4, 1, true },
+  { GPRC, GPRCBits, 102, 34, sizeof(GPRCBits), PPC::GPRCRegClassID, 4, 1, true },
+  { GPRC_NOR0, GPRC_NOR0Bits, 15, 34, sizeof(GPRC_NOR0Bits), PPC::GPRC_NOR0RegClassID, 4, 1, true },
+  { GPRC_and_GPRC_NOR0, GPRC_and_GPRC_NOR0Bits, 6, 33, sizeof(GPRC_and_GPRC_NOR0Bits), PPC::GPRC_and_GPRC_NOR0RegClassID, 4, 1, true },
+  { CRBITRC, CRBITRCBits, 139, 32, sizeof(CRBITRCBits), PPC::CRBITRCRegClassID, 4, 1, true },
+  { F4RC, F4RCBits, 51, 32, sizeof(F4RCBits), PPC::F4RCRegClassID, 4, 1, true },
+  { CRRC, CRRCBits, 107, 8, sizeof(CRRCBits), PPC::CRRCRegClassID, 4, 1, true },
+  { CARRYRC, CARRYRCBits, 147, 1, sizeof(CARRYRCBits), PPC::CARRYRCRegClassID, 4, -1, true },
+  { CRRC0, CRRC0Bits, 0, 1, sizeof(CRRC0Bits), PPC::CRRC0RegClassID, 4, 1, true },
+  { CTRRC, CTRRCBits, 112, 1, sizeof(CTRRCBits), PPC::CTRRCRegClassID, 4, 1, false },
+  { VRSAVERC, VRSAVERCBits, 71, 1, sizeof(VRSAVERCBits), PPC::VRSAVERCRegClassID, 4, 1, true },
+  { VSFRC, VSFRCBits, 85, 64, sizeof(VSFRCBits), PPC::VSFRCRegClassID, 8, 1, true },
+  { G8RC, G8RCBits, 61, 34, sizeof(G8RCBits), PPC::G8RCRegClassID, 8, 1, true },
+  { G8RC_NOX0, G8RC_NOX0Bits, 34, 34, sizeof(G8RC_NOX0Bits), PPC::G8RC_NOX0RegClassID, 8, 1, true },
+  { G8RC_and_G8RC_NOX0, G8RC_and_G8RC_NOX0Bits, 25, 33, sizeof(G8RC_and_G8RC_NOX0Bits), PPC::G8RC_and_G8RC_NOX0RegClassID, 8, 1, true },
+  { F8RC, F8RCBits, 56, 32, sizeof(F8RCBits), PPC::F8RCRegClassID, 8, 1, true },
+  { VFRC, VFRCBits, 91, 32, sizeof(VFRCBits), PPC::VFRCRegClassID, 8, 1, true },
+  { CTRRC8, CTRRC8Bits, 44, 1, sizeof(CTRRC8Bits), PPC::CTRRC8RegClassID, 8, 1, false },
+  { VSRC, VSRCBits, 134, 64, sizeof(VSRCBits), PPC::VSRCRegClassID, 16, 1, true },
+  { QSRC, QSRCBits, 123, 32, sizeof(QSRCBits), PPC::QSRCRegClassID, 16, 1, true },
+  { VRRC, VRRCBits, 118, 32, sizeof(VRRCBits), PPC::VRRCRegClassID, 16, 1, true },
+  { VSLRC, VSLRCBits, 96, 32, sizeof(VSLRCBits), PPC::VSLRCRegClassID, 16, 1, true },
+  { QBRC, QBRCBits, 66, 32, sizeof(QBRCBits), PPC::QBRCRegClassID, 32, 1, true },
+  { QFRC, QFRCBits, 80, 32, sizeof(QFRCBits), PPC::QFRCRegClassID, 32, 1, true },
 };
 
 // PPC Dwarf<->LLVM register mappings.
@@ -3686,6 +3686,8 @@ static ArrayRef<MCPhysReg> G8RC_and_G8RC_NOX0GetRawAllocationOrder(const Machine
 namespace PPC {   // Register class instances
   extern const TargetRegisterClass VSSRCRegClass = {
     &PPCMCRegisterClasses[VSSRCRegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 6,
     VSSRCSubClassMask,
     SuperRegIdxSeqs + 2,
@@ -3699,6 +3701,8 @@ namespace PPC {   // Register class instances
 
   extern const TargetRegisterClass GPRCRegClass = {
     &PPCMCRegisterClasses[GPRCRegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 2,
     GPRCSubClassMask,
     SuperRegIdxSeqs + 0,
@@ -3712,6 +3716,8 @@ namespace PPC {   // Register class instances
 
   extern const TargetRegisterClass GPRC_NOR0RegClass = {
     &PPCMCRegisterClasses[GPRC_NOR0RegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 2,
     GPRC_NOR0SubClassMask,
     SuperRegIdxSeqs + 0,
@@ -3725,6 +3731,8 @@ namespace PPC {   // Register class instances
 
   extern const TargetRegisterClass GPRC_and_GPRC_NOR0RegClass = {
     &PPCMCRegisterClasses[GPRC_and_GPRC_NOR0RegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 2,
     GPRC_and_GPRC_NOR0SubClassMask,
     SuperRegIdxSeqs + 0,
@@ -3738,6 +3746,8 @@ namespace PPC {   // Register class instances
 
   extern const TargetRegisterClass CRBITRCRegClass = {
     &PPCMCRegisterClasses[CRBITRCRegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 0,
     CRBITRCSubClassMask,
     SuperRegIdxSeqs + 4,
@@ -3751,6 +3761,8 @@ namespace PPC {   // Register class instances
 
   extern const TargetRegisterClass F4RCRegClass = {
     &PPCMCRegisterClasses[F4RCRegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 6,
     F4RCSubClassMask,
     SuperRegIdxSeqs + 2,
@@ -3764,6 +3776,8 @@ namespace PPC {   // Register class instances
 
   extern const TargetRegisterClass CRRCRegClass = {
     &PPCMCRegisterClasses[CRRCRegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 2,
     CRRCSubClassMask,
     SuperRegIdxSeqs + 1,
@@ -3777,6 +3791,8 @@ namespace PPC {   // Register class instances
 
   extern const TargetRegisterClass CARRYRCRegClass = {
     &PPCMCRegisterClasses[CARRYRCRegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 2,
     CARRYRCSubClassMask,
     SuperRegIdxSeqs + 1,
@@ -3790,6 +3806,8 @@ namespace PPC {   // Register class instances
 
   extern const TargetRegisterClass CRRC0RegClass = {
     &PPCMCRegisterClasses[CRRC0RegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 2,
     CRRC0SubClassMask,
     SuperRegIdxSeqs + 1,
@@ -3803,6 +3821,8 @@ namespace PPC {   // Register class instances
 
   extern const TargetRegisterClass CTRRCRegClass = {
     &PPCMCRegisterClasses[CTRRCRegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 2,
     CTRRCSubClassMask,
     SuperRegIdxSeqs + 1,
@@ -3816,6 +3836,8 @@ namespace PPC {   // Register class instances
 
   extern const TargetRegisterClass VRSAVERCRegClass = {
     &PPCMCRegisterClasses[VRSAVERCRegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 2,
     VRSAVERCSubClassMask,
     SuperRegIdxSeqs + 1,
@@ -3829,6 +3851,8 @@ namespace PPC {   // Register class instances
 
   extern const TargetRegisterClass VSFRCRegClass = {
     &PPCMCRegisterClasses[VSFRCRegClassID],
+    8, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 8,
     VSFRCSubClassMask,
     SuperRegIdxSeqs + 2,
@@ -3842,6 +3866,8 @@ namespace PPC {   // Register class instances
 
   extern const TargetRegisterClass G8RCRegClass = {
     &PPCMCRegisterClasses[G8RCRegClassID],
+    8, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 4,
     G8RCSubClassMask,
     SuperRegIdxSeqs + 1,
@@ -3855,6 +3881,8 @@ namespace PPC {   // Register class instances
 
   extern const TargetRegisterClass G8RC_NOX0RegClass = {
     &PPCMCRegisterClasses[G8RC_NOX0RegClassID],
+    8, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 4,
     G8RC_NOX0SubClassMask,
     SuperRegIdxSeqs + 1,
@@ -3868,6 +3896,8 @@ namespace PPC {   // Register class instances
 
   extern const TargetRegisterClass G8RC_and_G8RC_NOX0RegClass = {
     &PPCMCRegisterClasses[G8RC_and_G8RC_NOX0RegClassID],
+    8, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 4,
     G8RC_and_G8RC_NOX0SubClassMask,
     SuperRegIdxSeqs + 1,
@@ -3881,6 +3911,8 @@ namespace PPC {   // Register class instances
 
   extern const TargetRegisterClass F8RCRegClass = {
     &PPCMCRegisterClasses[F8RCRegClassID],
+    8, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 8,
     F8RCSubClassMask,
     SuperRegIdxSeqs + 2,
@@ -3894,6 +3926,8 @@ namespace PPC {   // Register class instances
 
   extern const TargetRegisterClass VFRCRegClass = {
     &PPCMCRegisterClasses[VFRCRegClassID],
+    8, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 8,
     VFRCSubClassMask,
     SuperRegIdxSeqs + 2,
@@ -3907,6 +3941,8 @@ namespace PPC {   // Register class instances
 
   extern const TargetRegisterClass CTRRC8RegClass = {
     &PPCMCRegisterClasses[CTRRC8RegClassID],
+    8, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 4,
     CTRRC8SubClassMask,
     SuperRegIdxSeqs + 1,
@@ -3920,6 +3956,8 @@ namespace PPC {   // Register class instances
 
   extern const TargetRegisterClass VSRCRegClass = {
     &PPCMCRegisterClasses[VSRCRegClassID],
+    16, /* SpillSize */
+    16, /* SpillAlignment */
     VTLists + 12,
     VSRCSubClassMask,
     SuperRegIdxSeqs + 1,
@@ -3933,6 +3971,8 @@ namespace PPC {   // Register class instances
 
   extern const TargetRegisterClass QSRCRegClass = {
     &PPCMCRegisterClasses[QSRCRegClassID],
+    16, /* SpillSize */
+    16, /* SpillAlignment */
     VTLists + 17,
     QSRCSubClassMask,
     SuperRegIdxSeqs + 1,
@@ -3946,6 +3986,8 @@ namespace PPC {   // Register class instances
 
   extern const TargetRegisterClass VRRCRegClass = {
     &PPCMCRegisterClasses[VRRCRegClassID],
+    16, /* SpillSize */
+    16, /* SpillAlignment */
     VTLists + 19,
     VRRCSubClassMask,
     SuperRegIdxSeqs + 1,
@@ -3959,6 +4001,8 @@ namespace PPC {   // Register class instances
 
   extern const TargetRegisterClass VSLRCRegClass = {
     &PPCMCRegisterClasses[VSLRCRegClassID],
+    16, /* SpillSize */
+    16, /* SpillAlignment */
     VTLists + 12,
     VSLRCSubClassMask,
     SuperRegIdxSeqs + 1,
@@ -3972,6 +4016,8 @@ namespace PPC {   // Register class instances
 
   extern const TargetRegisterClass QBRCRegClass = {
     &PPCMCRegisterClasses[QBRCRegClassID],
+    32, /* SpillSize */
+    32, /* SpillAlignment */
     VTLists + 10,
     QBRCSubClassMask,
     SuperRegIdxSeqs + 1,
@@ -3985,6 +4031,8 @@ namespace PPC {   // Register class instances
 
   extern const TargetRegisterClass QFRCRegClass = {
     &PPCMCRegisterClasses[QFRCRegClassID],
+    32, /* SpillSize */
+    32, /* SpillAlignment */
     VTLists + 27,
     QFRCSubClassMask,
     SuperRegIdxSeqs + 1,
@@ -4373,7 +4421,7 @@ unsigned PPCGenRegisterInfo::composeSubRegIndicesImpl(unsigned IdxA, unsigned Id
 LaneBitmask PPCGenRegisterInfo::composeSubRegIndexLaneMaskImpl(unsigned IdxA, LaneBitmask LaneMask) const {
   --IdxA; assert(IdxA < 6 && "Subregister index out of bounds");
   LaneBitmask Result;
-  for (const MaskRolOp *Ops = CompositeSequences[IdxA]; !Ops->Mask.none(); ++Ops) {
+  for (const MaskRolOp *Ops = CompositeSequences[IdxA]; Ops->Mask.any(); ++Ops) {
     LaneBitmask::Type M = LaneMask.getAsInteger() & Ops->Mask.getAsInteger();
     if (unsigned S = Ops->RotateLeft)
       Result |= LaneBitmask((M << S) | (M >> (LaneBitmask::BitWidth - S)));
@@ -4387,7 +4435,7 @@ LaneBitmask PPCGenRegisterInfo::reverseComposeSubRegIndexLaneMaskImpl(unsigned I
   LaneMask &= getSubRegIndexLaneMask(IdxA);
   --IdxA; assert(IdxA < 6 && "Subregister index out of bounds");
   LaneBitmask Result;
-  for (const MaskRolOp *Ops = CompositeSequences[IdxA]; !Ops->Mask.none(); ++Ops) {
+  for (const MaskRolOp *Ops = CompositeSequences[IdxA]; Ops->Mask.any(); ++Ops) {
     LaneBitmask::Type M = LaneMask.getAsInteger();
     if (unsigned S = Ops->RotateLeft)
       Result |= LaneBitmask((M >> S) | (M << (LaneBitmask::BitWidth - S)));

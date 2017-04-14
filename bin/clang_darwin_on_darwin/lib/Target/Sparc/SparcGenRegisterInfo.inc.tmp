@@ -1234,19 +1234,19 @@ extern const char SparcRegClassStrings[] = {
 };
 
 extern const MCRegisterClass SparcMCRegisterClasses[] = {
-  { FCCRegs, FCCRegsBits, 71, 4, sizeof(FCCRegsBits), SP::FCCRegsRegClassID, 0, 0, 1, true },
-  { ASRRegs, ASRRegsBits, 102, 32, sizeof(ASRRegsBits), SP::ASRRegsRegClassID, 4, 4, 1, false },
-  { CoprocRegs, CoprocRegsBits, 110, 32, sizeof(CoprocRegsBits), SP::CoprocRegsRegClassID, 4, 4, 1, false },
-  { FPRegs, FPRegsBits, 80, 32, sizeof(FPRegsBits), SP::FPRegsRegClassID, 4, 4, 1, true },
-  { IntRegs, IntRegsBits, 121, 32, sizeof(IntRegsBits), SP::IntRegsRegClassID, 4, 4, 1, true },
-  { DFPRegs, DFPRegsBits, 79, 32, sizeof(DFPRegsBits), SP::DFPRegsRegClassID, 8, 8, 1, true },
-  { I64Regs, I64RegsBits, 63, 32, sizeof(I64RegsBits), SP::I64RegsRegClassID, 8, 8, 1, true },
-  { CoprocPair, CoprocPairBits, 44, 16, sizeof(CoprocPairBits), SP::CoprocPairRegClassID, 8, 8, 1, false },
-  { DFPRegs_with_sub_even, DFPRegs_with_sub_evenBits, 0, 16, sizeof(DFPRegs_with_sub_evenBits), SP::DFPRegs_with_sub_evenRegClassID, 8, 8, 1, true },
-  { IntPair, IntPairBits, 55, 16, sizeof(IntPairBits), SP::IntPairRegClassID, 8, 8, 1, true },
-  { PRRegs, PRRegsBits, 95, 15, sizeof(PRRegsBits), SP::PRRegsRegClassID, 8, 8, 1, true },
-  { QFPRegs, QFPRegsBits, 87, 16, sizeof(QFPRegsBits), SP::QFPRegsRegClassID, 16, 16, 1, true },
-  { QFPRegs_with_sub_even, QFPRegs_with_sub_evenBits, 22, 8, sizeof(QFPRegs_with_sub_evenBits), SP::QFPRegs_with_sub_evenRegClassID, 16, 16, 1, true },
+  { FCCRegs, FCCRegsBits, 71, 4, sizeof(FCCRegsBits), SP::FCCRegsRegClassID, 0, 1, true },
+  { ASRRegs, ASRRegsBits, 102, 32, sizeof(ASRRegsBits), SP::ASRRegsRegClassID, 4, 1, false },
+  { CoprocRegs, CoprocRegsBits, 110, 32, sizeof(CoprocRegsBits), SP::CoprocRegsRegClassID, 4, 1, false },
+  { FPRegs, FPRegsBits, 80, 32, sizeof(FPRegsBits), SP::FPRegsRegClassID, 4, 1, true },
+  { IntRegs, IntRegsBits, 121, 32, sizeof(IntRegsBits), SP::IntRegsRegClassID, 4, 1, true },
+  { DFPRegs, DFPRegsBits, 79, 32, sizeof(DFPRegsBits), SP::DFPRegsRegClassID, 8, 1, true },
+  { I64Regs, I64RegsBits, 63, 32, sizeof(I64RegsBits), SP::I64RegsRegClassID, 8, 1, true },
+  { CoprocPair, CoprocPairBits, 44, 16, sizeof(CoprocPairBits), SP::CoprocPairRegClassID, 8, 1, false },
+  { DFPRegs_with_sub_even, DFPRegs_with_sub_evenBits, 0, 16, sizeof(DFPRegs_with_sub_evenBits), SP::DFPRegs_with_sub_evenRegClassID, 8, 1, true },
+  { IntPair, IntPairBits, 55, 16, sizeof(IntPairBits), SP::IntPairRegClassID, 8, 1, true },
+  { PRRegs, PRRegsBits, 95, 15, sizeof(PRRegsBits), SP::PRRegsRegClassID, 8, 1, true },
+  { QFPRegs, QFPRegsBits, 87, 16, sizeof(QFPRegsBits), SP::QFPRegsRegClassID, 16, 1, true },
+  { QFPRegs_with_sub_even, QFPRegs_with_sub_evenBits, 22, 8, sizeof(QFPRegs_with_sub_evenBits), SP::QFPRegs_with_sub_evenRegClassID, 16, 1, true },
 };
 
 // SP Dwarf<->LLVM register mappings.
@@ -2058,6 +2058,8 @@ static const TargetRegisterClass *const QFPRegs_with_sub_evenSuperclasses[] = {
 namespace SP {   // Register class instances
   extern const TargetRegisterClass FCCRegsRegClass = {
     &SparcMCRegisterClasses[FCCRegsRegClassID],
+    0, /* SpillSize */
+    0, /* SpillAlignment */
     VTLists + 0,
     FCCRegsSubClassMask,
     SuperRegIdxSeqs + 2,
@@ -2071,6 +2073,8 @@ namespace SP {   // Register class instances
 
   extern const TargetRegisterClass ASRRegsRegClass = {
     &SparcMCRegisterClasses[ASRRegsRegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 2,
     ASRRegsSubClassMask,
     SuperRegIdxSeqs + 2,
@@ -2084,6 +2088,8 @@ namespace SP {   // Register class instances
 
   extern const TargetRegisterClass CoprocRegsRegClass = {
     &SparcMCRegisterClasses[CoprocRegsRegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 2,
     CoprocRegsSubClassMask,
     SuperRegIdxSeqs + 0,
@@ -2097,6 +2103,8 @@ namespace SP {   // Register class instances
 
   extern const TargetRegisterClass FPRegsRegClass = {
     &SparcMCRegisterClasses[FPRegsRegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 7,
     FPRegsSubClassMask,
     SuperRegIdxSeqs + 6,
@@ -2110,6 +2118,8 @@ namespace SP {   // Register class instances
 
   extern const TargetRegisterClass IntRegsRegClass = {
     &SparcMCRegisterClasses[IntRegsRegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 4,
     IntRegsSubClassMask,
     SuperRegIdxSeqs + 0,
@@ -2123,6 +2133,8 @@ namespace SP {   // Register class instances
 
   extern const TargetRegisterClass DFPRegsRegClass = {
     &SparcMCRegisterClasses[DFPRegsRegClassID],
+    8, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 9,
     DFPRegsSubClassMask,
     SuperRegIdxSeqs + 3,
@@ -2136,6 +2148,8 @@ namespace SP {   // Register class instances
 
   extern const TargetRegisterClass I64RegsRegClass = {
     &SparcMCRegisterClasses[I64RegsRegClassID],
+    8, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 5,
     I64RegsSubClassMask,
     SuperRegIdxSeqs + 0,
@@ -2149,6 +2163,8 @@ namespace SP {   // Register class instances
 
   extern const TargetRegisterClass CoprocPairRegClass = {
     &SparcMCRegisterClasses[CoprocPairRegClassID],
+    8, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 13,
     CoprocPairSubClassMask,
     SuperRegIdxSeqs + 2,
@@ -2162,6 +2178,8 @@ namespace SP {   // Register class instances
 
   extern const TargetRegisterClass DFPRegs_with_sub_evenRegClass = {
     &SparcMCRegisterClasses[DFPRegs_with_sub_evenRegClassID],
+    8, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 9,
     DFPRegs_with_sub_evenSubClassMask,
     SuperRegIdxSeqs + 3,
@@ -2175,6 +2193,8 @@ namespace SP {   // Register class instances
 
   extern const TargetRegisterClass IntPairRegClass = {
     &SparcMCRegisterClasses[IntPairRegClassID],
+    8, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 13,
     IntPairSubClassMask,
     SuperRegIdxSeqs + 2,
@@ -2188,6 +2208,8 @@ namespace SP {   // Register class instances
 
   extern const TargetRegisterClass PRRegsRegClass = {
     &SparcMCRegisterClasses[PRRegsRegClassID],
+    8, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 5,
     PRRegsSubClassMask,
     SuperRegIdxSeqs + 2,
@@ -2201,6 +2223,8 @@ namespace SP {   // Register class instances
 
   extern const TargetRegisterClass QFPRegsRegClass = {
     &SparcMCRegisterClasses[QFPRegsRegClassID],
+    16, /* SpillSize */
+    16, /* SpillAlignment */
     VTLists + 11,
     QFPRegsSubClassMask,
     SuperRegIdxSeqs + 2,
@@ -2214,6 +2238,8 @@ namespace SP {   // Register class instances
 
   extern const TargetRegisterClass QFPRegs_with_sub_evenRegClass = {
     &SparcMCRegisterClasses[QFPRegs_with_sub_evenRegClassID],
+    16, /* SpillSize */
+    16, /* SpillAlignment */
     VTLists + 11,
     QFPRegs_with_sub_evenSubClassMask,
     SuperRegIdxSeqs + 2,
@@ -2519,7 +2545,7 @@ unsigned SparcGenRegisterInfo::composeSubRegIndicesImpl(unsigned IdxA, unsigned 
 LaneBitmask SparcGenRegisterInfo::composeSubRegIndexLaneMaskImpl(unsigned IdxA, LaneBitmask LaneMask) const {
   --IdxA; assert(IdxA < 6 && "Subregister index out of bounds");
   LaneBitmask Result;
-  for (const MaskRolOp *Ops = CompositeSequences[IdxA]; !Ops->Mask.none(); ++Ops) {
+  for (const MaskRolOp *Ops = CompositeSequences[IdxA]; Ops->Mask.any(); ++Ops) {
     LaneBitmask::Type M = LaneMask.getAsInteger() & Ops->Mask.getAsInteger();
     if (unsigned S = Ops->RotateLeft)
       Result |= LaneBitmask((M << S) | (M >> (LaneBitmask::BitWidth - S)));
@@ -2533,7 +2559,7 @@ LaneBitmask SparcGenRegisterInfo::reverseComposeSubRegIndexLaneMaskImpl(unsigned
   LaneMask &= getSubRegIndexLaneMask(IdxA);
   --IdxA; assert(IdxA < 6 && "Subregister index out of bounds");
   LaneBitmask Result;
-  for (const MaskRolOp *Ops = CompositeSequences[IdxA]; !Ops->Mask.none(); ++Ops) {
+  for (const MaskRolOp *Ops = CompositeSequences[IdxA]; Ops->Mask.any(); ++Ops) {
     LaneBitmask::Type M = LaneMask.getAsInteger();
     if (unsigned S = Ops->RotateLeft)
       Result |= LaneBitmask((M >> S) | (M << (LaneBitmask::BitWidth - S)));

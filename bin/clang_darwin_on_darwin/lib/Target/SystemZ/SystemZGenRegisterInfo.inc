@@ -1013,26 +1013,26 @@ extern const char SystemZRegClassStrings[] = {
 };
 
 extern const MCRegisterClass SystemZMCRegisterClasses[] = {
-  { GRX32Bit, GRX32BitBits, 110, 32, sizeof(GRX32BitBits), SystemZ::GRX32BitRegClassID, 4, 4, 1, true },
-  { VR32Bit, VR32BitBits, 102, 32, sizeof(VR32BitBits), SystemZ::VR32BitRegClassID, 4, 4, 1, true },
-  { AR32Bit, AR32BitBits, 76, 16, sizeof(AR32BitBits), SystemZ::AR32BitRegClassID, 4, 4, 1, false },
-  { FP32Bit, FP32BitBits, 68, 16, sizeof(FP32BitBits), SystemZ::FP32BitRegClassID, 4, 4, 1, true },
-  { GR32Bit, GR32BitBits, 94, 16, sizeof(GR32BitBits), SystemZ::GR32BitRegClassID, 4, 4, 1, true },
-  { GRH32Bit, GRH32BitBits, 59, 16, sizeof(GRH32BitBits), SystemZ::GRH32BitRegClassID, 4, 4, 1, true },
-  { ADDR32Bit, ADDR32BitBits, 84, 15, sizeof(ADDR32BitBits), SystemZ::ADDR32BitRegClassID, 4, 4, 1, true },
-  { CCRegs, CCRegsBits, 52, 1, sizeof(CCRegsBits), SystemZ::CCRegsRegClassID, 4, 4, 1, false },
-  { AnyRegBit, AnyRegBitBits, 200, 48, sizeof(AnyRegBitBits), SystemZ::AnyRegBitRegClassID, 8, 8, 1, true },
-  { AnyRegBit_with_subreg_r32, AnyRegBit_with_subreg_r32Bits, 0, 32, sizeof(AnyRegBit_with_subreg_r32Bits), SystemZ::AnyRegBit_with_subreg_r32RegClassID, 8, 8, 1, true },
-  { VR64Bit, VR64BitBits, 145, 32, sizeof(VR64BitBits), SystemZ::VR64BitRegClassID, 8, 8, 1, true },
-  { AnyRegBit_with_subreg_r64, AnyRegBit_with_subreg_r64Bits, 26, 16, sizeof(AnyRegBit_with_subreg_r64Bits), SystemZ::AnyRegBit_with_subreg_r64RegClassID, 8, 8, 1, true },
-  { FP64Bit, FP64BitBits, 119, 16, sizeof(FP64BitBits), SystemZ::FP64BitRegClassID, 8, 8, 1, true },
-  { GR64Bit, GR64BitBits, 137, 16, sizeof(GR64BitBits), SystemZ::GR64BitRegClassID, 8, 8, 1, true },
-  { ADDR64Bit, ADDR64BitBits, 127, 15, sizeof(ADDR64BitBits), SystemZ::ADDR64BitRegClassID, 8, 8, 1, true },
-  { VR128Bit, VR128BitBits, 191, 32, sizeof(VR128BitBits), SystemZ::VR128BitRegClassID, 16, 16, 1, true },
-  { VF128Bit, VF128BitBits, 153, 16, sizeof(VF128BitBits), SystemZ::VF128BitRegClassID, 16, 16, 1, true },
-  { FP128Bit, FP128BitBits, 162, 8, sizeof(FP128BitBits), SystemZ::FP128BitRegClassID, 16, 16, 1, true },
-  { GR128Bit, GR128BitBits, 182, 8, sizeof(GR128BitBits), SystemZ::GR128BitRegClassID, 16, 16, 1, true },
-  { ADDR128Bit, ADDR128BitBits, 171, 7, sizeof(ADDR128BitBits), SystemZ::ADDR128BitRegClassID, 16, 16, 1, true },
+  { GRX32Bit, GRX32BitBits, 110, 32, sizeof(GRX32BitBits), SystemZ::GRX32BitRegClassID, 4, 1, true },
+  { VR32Bit, VR32BitBits, 102, 32, sizeof(VR32BitBits), SystemZ::VR32BitRegClassID, 4, 1, true },
+  { AR32Bit, AR32BitBits, 76, 16, sizeof(AR32BitBits), SystemZ::AR32BitRegClassID, 4, 1, false },
+  { FP32Bit, FP32BitBits, 68, 16, sizeof(FP32BitBits), SystemZ::FP32BitRegClassID, 4, 1, true },
+  { GR32Bit, GR32BitBits, 94, 16, sizeof(GR32BitBits), SystemZ::GR32BitRegClassID, 4, 1, true },
+  { GRH32Bit, GRH32BitBits, 59, 16, sizeof(GRH32BitBits), SystemZ::GRH32BitRegClassID, 4, 1, true },
+  { ADDR32Bit, ADDR32BitBits, 84, 15, sizeof(ADDR32BitBits), SystemZ::ADDR32BitRegClassID, 4, 1, true },
+  { CCRegs, CCRegsBits, 52, 1, sizeof(CCRegsBits), SystemZ::CCRegsRegClassID, 4, 1, false },
+  { AnyRegBit, AnyRegBitBits, 200, 48, sizeof(AnyRegBitBits), SystemZ::AnyRegBitRegClassID, 8, 1, true },
+  { AnyRegBit_with_subreg_r32, AnyRegBit_with_subreg_r32Bits, 0, 32, sizeof(AnyRegBit_with_subreg_r32Bits), SystemZ::AnyRegBit_with_subreg_r32RegClassID, 8, 1, true },
+  { VR64Bit, VR64BitBits, 145, 32, sizeof(VR64BitBits), SystemZ::VR64BitRegClassID, 8, 1, true },
+  { AnyRegBit_with_subreg_r64, AnyRegBit_with_subreg_r64Bits, 26, 16, sizeof(AnyRegBit_with_subreg_r64Bits), SystemZ::AnyRegBit_with_subreg_r64RegClassID, 8, 1, true },
+  { FP64Bit, FP64BitBits, 119, 16, sizeof(FP64BitBits), SystemZ::FP64BitRegClassID, 8, 1, true },
+  { GR64Bit, GR64BitBits, 137, 16, sizeof(GR64BitBits), SystemZ::GR64BitRegClassID, 8, 1, true },
+  { ADDR64Bit, ADDR64BitBits, 127, 15, sizeof(ADDR64BitBits), SystemZ::ADDR64BitRegClassID, 8, 1, true },
+  { VR128Bit, VR128BitBits, 191, 32, sizeof(VR128BitBits), SystemZ::VR128BitRegClassID, 16, 1, true },
+  { VF128Bit, VF128BitBits, 153, 16, sizeof(VF128BitBits), SystemZ::VF128BitRegClassID, 16, 1, true },
+  { FP128Bit, FP128BitBits, 162, 8, sizeof(FP128BitBits), SystemZ::FP128BitRegClassID, 16, 1, true },
+  { GR128Bit, GR128BitBits, 182, 8, sizeof(GR128BitBits), SystemZ::GR128BitRegClassID, 16, 1, true },
+  { ADDR128Bit, ADDR128BitBits, 171, 7, sizeof(ADDR128BitBits), SystemZ::ADDR128BitRegClassID, 16, 1, true },
 };
 
 // SystemZ Dwarf<->LLVM register mappings.
@@ -1888,6 +1888,8 @@ static const TargetRegisterClass *const ADDR128BitSuperclasses[] = {
 namespace SystemZ {   // Register class instances
   extern const TargetRegisterClass GRX32BitRegClass = {
     &SystemZMCRegisterClasses[GRX32BitRegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 0,
     GRX32BitSubClassMask,
     SuperRegIdxSeqs + 3,
@@ -1901,6 +1903,8 @@ namespace SystemZ {   // Register class instances
 
   extern const TargetRegisterClass VR32BitRegClass = {
     &SystemZMCRegisterClasses[VR32BitRegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 10,
     VR32BitSubClassMask,
     SuperRegIdxSeqs + 11,
@@ -1914,6 +1918,8 @@ namespace SystemZ {   // Register class instances
 
   extern const TargetRegisterClass AR32BitRegClass = {
     &SystemZMCRegisterClasses[AR32BitRegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 0,
     AR32BitSubClassMask,
     SuperRegIdxSeqs + 2,
@@ -1927,6 +1933,8 @@ namespace SystemZ {   // Register class instances
 
   extern const TargetRegisterClass FP32BitRegClass = {
     &SystemZMCRegisterClasses[FP32BitRegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 4,
     FP32BitSubClassMask,
     SuperRegIdxSeqs + 11,
@@ -1940,6 +1948,8 @@ namespace SystemZ {   // Register class instances
 
   extern const TargetRegisterClass GR32BitRegClass = {
     &SystemZMCRegisterClasses[GR32BitRegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 0,
     GR32BitSubClassMask,
     SuperRegIdxSeqs + 5,
@@ -1953,6 +1963,8 @@ namespace SystemZ {   // Register class instances
 
   extern const TargetRegisterClass GRH32BitRegClass = {
     &SystemZMCRegisterClasses[GRH32BitRegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 0,
     GRH32BitSubClassMask,
     SuperRegIdxSeqs + 0,
@@ -1966,6 +1978,8 @@ namespace SystemZ {   // Register class instances
 
   extern const TargetRegisterClass ADDR32BitRegClass = {
     &SystemZMCRegisterClasses[ADDR32BitRegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 0,
     ADDR32BitSubClassMask,
     SuperRegIdxSeqs + 5,
@@ -1979,6 +1993,8 @@ namespace SystemZ {   // Register class instances
 
   extern const TargetRegisterClass CCRegsRegClass = {
     &SystemZMCRegisterClasses[CCRegsRegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 0,
     CCRegsSubClassMask,
     SuperRegIdxSeqs + 2,
@@ -1992,6 +2008,8 @@ namespace SystemZ {   // Register class instances
 
   extern const TargetRegisterClass AnyRegBitRegClass = {
     &SystemZMCRegisterClasses[AnyRegBitRegClassID],
+    8, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 14,
     AnyRegBitSubClassMask,
     SuperRegIdxSeqs + 14,
@@ -2005,6 +2023,8 @@ namespace SystemZ {   // Register class instances
 
   extern const TargetRegisterClass AnyRegBit_with_subreg_r32RegClass = {
     &SystemZMCRegisterClasses[AnyRegBit_with_subreg_r32RegClassID],
+    8, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 14,
     AnyRegBit_with_subreg_r32SubClassMask,
     SuperRegIdxSeqs + 14,
@@ -2018,6 +2038,8 @@ namespace SystemZ {   // Register class instances
 
   extern const TargetRegisterClass VR64BitRegClass = {
     &SystemZMCRegisterClasses[VR64BitRegClassID],
+    8, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 15,
     VR64BitSubClassMask,
     SuperRegIdxSeqs + 14,
@@ -2031,6 +2053,8 @@ namespace SystemZ {   // Register class instances
 
   extern const TargetRegisterClass AnyRegBit_with_subreg_r64RegClass = {
     &SystemZMCRegisterClasses[AnyRegBit_with_subreg_r64RegClassID],
+    8, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 14,
     AnyRegBit_with_subreg_r64SubClassMask,
     SuperRegIdxSeqs + 2,
@@ -2044,6 +2068,8 @@ namespace SystemZ {   // Register class instances
 
   extern const TargetRegisterClass FP64BitRegClass = {
     &SystemZMCRegisterClasses[FP64BitRegClassID],
+    8, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 6,
     FP64BitSubClassMask,
     SuperRegIdxSeqs + 14,
@@ -2057,6 +2083,8 @@ namespace SystemZ {   // Register class instances
 
   extern const TargetRegisterClass GR64BitRegClass = {
     &SystemZMCRegisterClasses[GR64BitRegClassID],
+    8, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 2,
     GR64BitSubClassMask,
     SuperRegIdxSeqs + 8,
@@ -2070,6 +2098,8 @@ namespace SystemZ {   // Register class instances
 
   extern const TargetRegisterClass ADDR64BitRegClass = {
     &SystemZMCRegisterClasses[ADDR64BitRegClassID],
+    8, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 2,
     ADDR64BitSubClassMask,
     SuperRegIdxSeqs + 8,
@@ -2083,6 +2113,8 @@ namespace SystemZ {   // Register class instances
 
   extern const TargetRegisterClass VR128BitRegClass = {
     &SystemZMCRegisterClasses[VR128BitRegClassID],
+    16, /* SpillSize */
+    16, /* SpillAlignment */
     VTLists + 21,
     VR128BitSubClassMask,
     SuperRegIdxSeqs + 2,
@@ -2096,6 +2128,8 @@ namespace SystemZ {   // Register class instances
 
   extern const TargetRegisterClass VF128BitRegClass = {
     &SystemZMCRegisterClasses[VF128BitRegClassID],
+    16, /* SpillSize */
+    16, /* SpillAlignment */
     VTLists + 21,
     VF128BitSubClassMask,
     SuperRegIdxSeqs + 2,
@@ -2109,6 +2143,8 @@ namespace SystemZ {   // Register class instances
 
   extern const TargetRegisterClass FP128BitRegClass = {
     &SystemZMCRegisterClasses[FP128BitRegClassID],
+    16, /* SpillSize */
+    16, /* SpillAlignment */
     VTLists + 8,
     FP128BitSubClassMask,
     SuperRegIdxSeqs + 2,
@@ -2122,6 +2158,8 @@ namespace SystemZ {   // Register class instances
 
   extern const TargetRegisterClass GR128BitRegClass = {
     &SystemZMCRegisterClasses[GR128BitRegClassID],
+    16, /* SpillSize */
+    16, /* SpillAlignment */
     VTLists + 28,
     GR128BitSubClassMask,
     SuperRegIdxSeqs + 2,
@@ -2135,6 +2173,8 @@ namespace SystemZ {   // Register class instances
 
   extern const TargetRegisterClass ADDR128BitRegClass = {
     &SystemZMCRegisterClasses[ADDR128BitRegClassID],
+    16, /* SpillSize */
+    16, /* SpillAlignment */
     VTLists + 28,
     ADDR128BitSubClassMask,
     SuperRegIdxSeqs + 2,
@@ -2395,7 +2435,7 @@ unsigned SystemZGenRegisterInfo::composeSubRegIndicesImpl(unsigned IdxA, unsigne
 LaneBitmask SystemZGenRegisterInfo::composeSubRegIndexLaneMaskImpl(unsigned IdxA, LaneBitmask LaneMask) const {
   --IdxA; assert(IdxA < 9 && "Subregister index out of bounds");
   LaneBitmask Result;
-  for (const MaskRolOp *Ops = CompositeSequences[IdxA]; !Ops->Mask.none(); ++Ops) {
+  for (const MaskRolOp *Ops = CompositeSequences[IdxA]; Ops->Mask.any(); ++Ops) {
     LaneBitmask::Type M = LaneMask.getAsInteger() & Ops->Mask.getAsInteger();
     if (unsigned S = Ops->RotateLeft)
       Result |= LaneBitmask((M << S) | (M >> (LaneBitmask::BitWidth - S)));
@@ -2409,7 +2449,7 @@ LaneBitmask SystemZGenRegisterInfo::reverseComposeSubRegIndexLaneMaskImpl(unsign
   LaneMask &= getSubRegIndexLaneMask(IdxA);
   --IdxA; assert(IdxA < 9 && "Subregister index out of bounds");
   LaneBitmask Result;
-  for (const MaskRolOp *Ops = CompositeSequences[IdxA]; !Ops->Mask.none(); ++Ops) {
+  for (const MaskRolOp *Ops = CompositeSequences[IdxA]; Ops->Mask.any(); ++Ops) {
     LaneBitmask::Type M = LaneMask.getAsInteger();
     if (unsigned S = Ops->RotateLeft)
       Result |= LaneBitmask((M >> S) | (M << (LaneBitmask::BitWidth - S)));

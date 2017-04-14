@@ -935,8 +935,8 @@ static const llvm::MCSchedClassDesc ZEC12ModelSchedClasses[] = {
   {DBGFIELD("VONE")               0, false, false,  0, 0,  0, 0,  0, 0}, // #367
   {DBGFIELD("VGBM")               0, false, false,  0, 0,  0, 0,  0, 0}, // #368
   {DBGFIELD("VGM_VGMB_VGMF_VGMG_VGMH") 0, false, false,  0, 0,  0, 0,  0, 0}, // #369
-  {DBGFIELD("VLEIB_VLEIF_VLEIG_VLEIH") 0, false, false,  0, 0,  0, 0,  0, 0}, // #370
-  {DBGFIELD("VREPI_VREPIB_VREPIF_VREPIG_VREPIH") 0, false, false,  0, 0,  0, 0,  0, 0}, // #371
+  {DBGFIELD("VREPI_VREPIB_VREPIF_VREPIG_VREPIH") 0, false, false,  0, 0,  0, 0,  0, 0}, // #370
+  {DBGFIELD("VLEIB_VLEIF_VLEIG_VLEIH") 0, false, false,  0, 0,  0, 0,  0, 0}, // #371
   {DBGFIELD("VL_VLBB_VLL")        0, false, false,  0, 0,  0, 0,  0, 0}, // #372
   {DBGFIELD("VL32_VL64")          0, false, false,  0, 0,  0, 0,  0, 0}, // #373
   {DBGFIELD("VLLEZ_VLLEZB_VLLEZF_VLLEZG_VLLEZH") 0, false, false,  0, 0,  0, 0,  0, 0}, // #374
@@ -1461,8 +1461,8 @@ static const llvm::MCSchedClassDesc Z13ModelSchedClasses[] = {
   {DBGFIELD("VONE")               1, false, false, 73, 1, 19, 1,  0, 0}, // #367
   {DBGFIELD("VGBM")               1, false, false, 73, 1, 19, 1,  0, 0}, // #368
   {DBGFIELD("VGM_VGMB_VGMF_VGMG_VGMH") 1, false, false, 73, 1, 19, 1,  0, 0}, // #369
-  {DBGFIELD("VLEIB_VLEIF_VLEIG_VLEIH") 1, false, false, 73, 1, 19, 1,  0, 0}, // #370
-  {DBGFIELD("VREPI_VREPIB_VREPIF_VREPIG_VREPIH") 1, false, false, 73, 1, 19, 1,  0, 0}, // #371
+  {DBGFIELD("VREPI_VREPIB_VREPIF_VREPIG_VREPIH") 1, false, false, 73, 1, 19, 1,  0, 0}, // #370
+  {DBGFIELD("VLEIB_VLEIF_VLEIG_VLEIH") 1, false, false, 73, 1, 19, 1,  0, 0}, // #371
   {DBGFIELD("VL_VLBB_VLL")        1, false, false,  3, 1,  2, 1,  0, 0}, // #372
   {DBGFIELD("VL32_VL64")          1, false, false,  3, 1,  2, 1,  0, 0}, // #373
   {DBGFIELD("VLLEZ_VLLEZB_VLLEZF_VLLEZG_VLLEZH") 1, false, false,  3, 1,  2, 1,  0, 0}, // #374
@@ -1987,8 +1987,8 @@ static const llvm::MCSchedClassDesc Z196ModelSchedClasses[] = {
   {DBGFIELD("VONE")               0, false, false,  0, 0,  0, 0,  0, 0}, // #367
   {DBGFIELD("VGBM")               0, false, false,  0, 0,  0, 0,  0, 0}, // #368
   {DBGFIELD("VGM_VGMB_VGMF_VGMG_VGMH") 0, false, false,  0, 0,  0, 0,  0, 0}, // #369
-  {DBGFIELD("VLEIB_VLEIF_VLEIG_VLEIH") 0, false, false,  0, 0,  0, 0,  0, 0}, // #370
-  {DBGFIELD("VREPI_VREPIB_VREPIF_VREPIG_VREPIH") 0, false, false,  0, 0,  0, 0,  0, 0}, // #371
+  {DBGFIELD("VREPI_VREPIB_VREPIF_VREPIG_VREPIH") 0, false, false,  0, 0,  0, 0,  0, 0}, // #370
+  {DBGFIELD("VLEIB_VLEIF_VLEIG_VLEIH") 0, false, false,  0, 0,  0, 0,  0, 0}, // #371
   {DBGFIELD("VL_VLBB_VLL")        0, false, false,  0, 0,  0, 0,  0, 0}, // #372
   {DBGFIELD("VL32_VL64")          0, false, false,  0, 0,  0, 0,  0, 0}, // #373
   {DBGFIELD("VLLEZ_VLLEZB_VLLEZF_VLLEZG_VLLEZH") 0, false, false,  0, 0,  0, 0,  0, 0}, // #374

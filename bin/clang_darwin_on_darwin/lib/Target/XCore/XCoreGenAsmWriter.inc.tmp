@@ -148,17 +148,18 @@ void XCoreInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
   /* 1237 */ 'g', 'e', 't', 32, 'r', '1', '1', ',', 32, 'e', 'd', 0,
   /* 1249 */ 'g', 'e', 't', 32, 'r', '1', '1', ',', 32, 'i', 'd', 0,
   /* 1261 */ 'c', 'l', 'r', 'e', 0,
-  /* 1266 */ 'd', 'c', 'a', 'l', 'l', 0,
-  /* 1272 */ 'g', 'e', 't', 32, 'r', '1', '1', ',', 32, 'k', 'e', 'p', 0,
-  /* 1285 */ 'g', 'e', 't', 32, 'r', '1', '1', ',', 32, 'k', 's', 'p', 0,
-  /* 1298 */ 'd', 'e', 'n', 't', 's', 'p', 0,
-  /* 1305 */ 'd', 'r', 'e', 's', 't', 's', 'p', 0,
-  /* 1313 */ 't', 's', 'e', 't', 'm', 'r', 32, 'r', 0,
-  /* 1322 */ 'g', 'e', 't', 32, 'r', '1', '1', ',', 32, 'e', 't', 0,
-  /* 1334 */ 'f', 'r', 'e', 'e', 't', 0,
-  /* 1340 */ 'd', 'r', 'e', 't', 0,
-  /* 1345 */ 'k', 'r', 'e', 't', 0,
-  /* 1350 */ 'w', 'a', 'i', 't', 'e', 'u', 0,
+  /* 1266 */ '#', 32, 'F', 'E', 'n', 't', 'r', 'y', 32, 'c', 'a', 'l', 'l', 0,
+  /* 1280 */ 'd', 'c', 'a', 'l', 'l', 0,
+  /* 1286 */ 'g', 'e', 't', 32, 'r', '1', '1', ',', 32, 'k', 'e', 'p', 0,
+  /* 1299 */ 'g', 'e', 't', 32, 'r', '1', '1', ',', 32, 'k', 's', 'p', 0,
+  /* 1312 */ 'd', 'e', 'n', 't', 's', 'p', 0,
+  /* 1319 */ 'd', 'r', 'e', 's', 't', 's', 'p', 0,
+  /* 1327 */ 't', 's', 'e', 't', 'm', 'r', 32, 'r', 0,
+  /* 1336 */ 'g', 'e', 't', 32, 'r', '1', '1', ',', 32, 'e', 't', 0,
+  /* 1348 */ 'f', 'r', 'e', 'e', 't', 0,
+  /* 1354 */ 'd', 'r', 'e', 't', 0,
+  /* 1359 */ 'k', 'r', 'e', 't', 0,
+  /* 1364 */ 'w', 'a', 'i', 't', 'e', 'u', 0,
   };
 
   static const uint32_t OpInfo0[] = {
@@ -180,11 +181,12 @@ void XCoreInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     786U,	// LIFETIME_START
     744U,	// LIFETIME_END
     0U,	// STACKMAP
+    1267U,	// FENTRY_CALL
     0U,	// PATCHPOINT
     0U,	// LOAD_STACK_GUARD
     0U,	// STATEPOINT
     0U,	// LOCAL_ESCAPE
-    0U,	// FAULTING_LOAD_OP
+    0U,	// FAULTING_OP
     0U,	// PATCHABLE_OP
     663U,	// PATCHABLE_FUNCTION_ENTER
     632U,	// PATCHABLE_RET
@@ -203,20 +205,25 @@ void XCoreInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// G_FRAME_INDEX
     0U,	// G_GLOBAL_VALUE
     0U,	// G_EXTRACT
+    0U,	// G_UNMERGE_VALUES
     0U,	// G_INSERT
     0U,	// G_SEQUENCE
+    0U,	// G_MERGE_VALUES
     0U,	// G_PTRTOINT
     0U,	// G_INTTOPTR
     0U,	// G_BITCAST
     0U,	// G_LOAD
     0U,	// G_STORE
     0U,	// G_BRCOND
+    0U,	// G_BRINDIRECT
     0U,	// G_INTRINSIC
     0U,	// G_INTRINSIC_W_SIDE_EFFECTS
     0U,	// G_ANYEXT
     0U,	// G_TRUNC
     0U,	// G_CONSTANT
     0U,	// G_FCONSTANT
+    0U,	// G_VASTART
+    0U,	// G_VAARG
     0U,	// G_SEXT
     0U,	// G_ZEXT
     0U,	// G_SHL
@@ -231,11 +238,15 @@ void XCoreInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// G_SSUBO
     0U,	// G_UMULO
     0U,	// G_SMULO
+    0U,	// G_UMULH
+    0U,	// G_SMULH
     0U,	// G_FADD
     0U,	// G_FSUB
     0U,	// G_FMUL
     0U,	// G_FDIV
     0U,	// G_FREM
+    0U,	// G_FPOW
+    0U,	// G_FNEG
     0U,	// G_FPEXT
     0U,	// G_FPTRUNC
     0U,	// G_FPTOSI
@@ -243,7 +254,11 @@ void XCoreInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// G_SITOFP
     0U,	// G_UITOFP
     0U,	// G_GEP
+    0U,	// G_PTR_MASK
     0U,	// G_BR
+    0U,	// G_INSERT_VECTOR_ELT
+    0U,	// G_EXTRACT_VECTOR_ELT
+    0U,	// G_SHUFFLE_VECTOR
     2250U,	// ADD_2rus
     2250U,	// ADD_3r
     10363U,	// ADJCALLSTACKDOWN
@@ -290,13 +305,13 @@ void XCoreInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     2099807U,	// CLZ_l2r
     5247047U,	// CRC8_l4r
     17041459U,	// CRC_l3r
-    1267U,	// DCALL_0R
-    1299U,	// DENTSP_0R
+    1281U,	// DCALL_0R
+    1313U,	// DENTSP_0R
     10488U,	// DGETREG_1r
     2474U,	// DIVS_l3r
     2610U,	// DIVU_l3r
-    1306U,	// DRESTSP_0R
-    1341U,	// DRET_0R
+    1320U,	// DRESTSP_0R
+    1355U,	// DRET_0R
     10475U,	// ECALLF_1r
     10723U,	// ECALLT_1r
     19441U,	// EDU_1r
@@ -315,13 +330,13 @@ void XCoreInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     10585U,	// EXTSP_u6
     10401U,	// FRAME_TO_ARGS_OFFSET
     19355U,	// FREER_1r
-    1335U,	// FREET_0R
+    1349U,	// FREET_0R
     6334676U,	// GETD_l2r
     1238U,	// GETED_0R
-    1323U,	// GETET_0R
+    1337U,	// GETET_0R
     1250U,	// GETID_0R
-    1273U,	// GETKEP_0R
-    1286U,	// GETKSP_0R
+    1287U,	// GETKEP_0R
+    1300U,	// GETKSP_0R
     6334772U,	// GETN_l2r
     51670U,	// GETPS_l2r
     2099588U,	// GETR_rus
@@ -347,7 +362,7 @@ void XCoreInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     10568U,	// KENTSP_u6
     10576U,	// KRESTSP_lu6
     10576U,	// KRESTSP_u6
-    1346U,	// KRET_0R
+    1360U,	// KRET_0R
     45093065U,	// LADD_l5r
     12585354U,	// LD16S_3r
     12585483U,	// LD8U_3r
@@ -460,12 +475,12 @@ void XCoreInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     6334912U,	// TESTCT_2r
     6334738U,	// TESTLCL_l2r
     6334920U,	// TESTWCT_2r
-    2100514U,	// TSETMR_2r
+    2100528U,	// TSETMR_2r
     138306U,	// TSETR_3r
     19537U,	// TSTART_1R
     10467U,	// WAITEF_1R
     10715U,	// WAITET_1R
-    1351U,	// WAITEU_0R
+    1365U,	// WAITEU_0R
     2417U,	// XOR_l3r
     2361861U,	// ZEXT_2r
     2361861U,	// ZEXT_rus
@@ -484,7 +499,7 @@ void XCoreInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
   switch ((Bits >> 11) & 3) {
   default: llvm_unreachable("Invalid command number.");
   case 0:
-    // DBG_VALUE, BUNDLE, LIFETIME_START, LIFETIME_END, PATCHABLE_FUNCTION_EN...
+    // DBG_VALUE, BUNDLE, LIFETIME_START, LIFETIME_END, FENTRY_CALL, PATCHABL...
     return;
     break;
   case 1:

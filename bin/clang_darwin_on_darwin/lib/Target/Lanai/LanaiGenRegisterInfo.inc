@@ -299,9 +299,9 @@ extern const char LanaiRegClassStrings[] = {
 };
 
 extern const MCRegisterClass LanaiMCRegisterClasses[] = {
-  { GPR, GPRBits, 20, 39, sizeof(GPRBits), Lanai::GPRRegClassID, 4, 4, 1, true },
-  { GPR_with_sub_32, GPR_with_sub_32Bits, 0, 7, sizeof(GPR_with_sub_32Bits), Lanai::GPR_with_sub_32RegClassID, 4, 4, 1, true },
-  { CCR, CCRBits, 16, 1, sizeof(CCRBits), Lanai::CCRRegClassID, 4, 4, -1, false },
+  { GPR, GPRBits, 20, 39, sizeof(GPRBits), Lanai::GPRRegClassID, 4, 1, true },
+  { GPR_with_sub_32, GPR_with_sub_32Bits, 0, 7, sizeof(GPR_with_sub_32Bits), Lanai::GPR_with_sub_32RegClassID, 4, 1, true },
+  { CCR, CCRBits, 16, 1, sizeof(CCRBits), Lanai::CCRRegClassID, 4, -1, false },
 };
 
 // Lanai Dwarf<->LLVM register mappings.
@@ -650,6 +650,8 @@ static const TargetRegisterClass *const GPR_with_sub_32Superclasses[] = {
 namespace Lanai {   // Register class instances
   extern const TargetRegisterClass GPRRegClass = {
     &LanaiMCRegisterClasses[GPRRegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 0,
     GPRSubClassMask,
     SuperRegIdxSeqs + 0,
@@ -663,6 +665,8 @@ namespace Lanai {   // Register class instances
 
   extern const TargetRegisterClass GPR_with_sub_32RegClass = {
     &LanaiMCRegisterClasses[GPR_with_sub_32RegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 0,
     GPR_with_sub_32SubClassMask,
     SuperRegIdxSeqs + 1,
@@ -676,6 +680,8 @@ namespace Lanai {   // Register class instances
 
   extern const TargetRegisterClass CCRRegClass = {
     &LanaiMCRegisterClasses[CCRRegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 0,
     CCRSubClassMask,
     SuperRegIdxSeqs + 1,
@@ -764,7 +770,7 @@ unsigned LanaiGenRegisterInfo::composeSubRegIndicesImpl(unsigned IdxA, unsigned 
 LaneBitmask LanaiGenRegisterInfo::composeSubRegIndexLaneMaskImpl(unsigned IdxA, LaneBitmask LaneMask) const {
   --IdxA; assert(IdxA < 1 && "Subregister index out of bounds");
   LaneBitmask Result;
-  for (const MaskRolOp *Ops = CompositeSequences[IdxA]; !Ops->Mask.none(); ++Ops) {
+  for (const MaskRolOp *Ops = CompositeSequences[IdxA]; Ops->Mask.any(); ++Ops) {
     LaneBitmask::Type M = LaneMask.getAsInteger() & Ops->Mask.getAsInteger();
     if (unsigned S = Ops->RotateLeft)
       Result |= LaneBitmask((M << S) | (M >> (LaneBitmask::BitWidth - S)));
@@ -778,7 +784,7 @@ LaneBitmask LanaiGenRegisterInfo::reverseComposeSubRegIndexLaneMaskImpl(unsigned
   LaneMask &= getSubRegIndexLaneMask(IdxA);
   --IdxA; assert(IdxA < 1 && "Subregister index out of bounds");
   LaneBitmask Result;
-  for (const MaskRolOp *Ops = CompositeSequences[IdxA]; !Ops->Mask.none(); ++Ops) {
+  for (const MaskRolOp *Ops = CompositeSequences[IdxA]; Ops->Mask.any(); ++Ops) {
     LaneBitmask::Type M = LaneMask.getAsInteger();
     if (unsigned S = Ops->RotateLeft)
       Result |= LaneBitmask((M >> S) | (M << (LaneBitmask::BitWidth - S)));

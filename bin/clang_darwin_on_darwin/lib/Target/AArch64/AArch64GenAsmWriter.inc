@@ -528,8 +528,9 @@ void AArch64InstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInf
   /* 3890 */ 'B', 'U', 'N', 'D', 'L', 'E', 0,
   /* 3897 */ 'D', 'B', 'G', '_', 'V', 'A', 'L', 'U', 'E', 0,
   /* 3907 */ 'L', 'I', 'F', 'E', 'T', 'I', 'M', 'E', '_', 'S', 'T', 'A', 'R', 'T', 0,
-  /* 3922 */ 'd', 'r', 'p', 's', 0,
-  /* 3927 */ 'e', 'r', 'e', 't', 0,
+  /* 3922 */ '#', 32, 'F', 'E', 'n', 't', 'r', 'y', 32, 'c', 'a', 'l', 'l', 0,
+  /* 3936 */ 'd', 'r', 'p', 's', 0,
+  /* 3941 */ 'e', 'r', 'e', 't', 0,
   };
 
   static const uint32_t OpInfo0[] = {
@@ -551,11 +552,12 @@ void AArch64InstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInf
     3908U,	// LIFETIME_START
     3878U,	// LIFETIME_END
     0U,	// STACKMAP
+    3923U,	// FENTRY_CALL
     0U,	// PATCHPOINT
     0U,	// LOAD_STACK_GUARD
     0U,	// STATEPOINT
     0U,	// LOCAL_ESCAPE
-    0U,	// FAULTING_LOAD_OP
+    0U,	// FAULTING_OP
     0U,	// PATCHABLE_OP
     3810U,	// PATCHABLE_FUNCTION_ENTER
     3776U,	// PATCHABLE_RET
@@ -574,20 +576,25 @@ void AArch64InstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInf
     0U,	// G_FRAME_INDEX
     0U,	// G_GLOBAL_VALUE
     0U,	// G_EXTRACT
+    0U,	// G_UNMERGE_VALUES
     0U,	// G_INSERT
     0U,	// G_SEQUENCE
+    0U,	// G_MERGE_VALUES
     0U,	// G_PTRTOINT
     0U,	// G_INTTOPTR
     0U,	// G_BITCAST
     0U,	// G_LOAD
     0U,	// G_STORE
     0U,	// G_BRCOND
+    0U,	// G_BRINDIRECT
     0U,	// G_INTRINSIC
     0U,	// G_INTRINSIC_W_SIDE_EFFECTS
     0U,	// G_ANYEXT
     0U,	// G_TRUNC
     0U,	// G_CONSTANT
     0U,	// G_FCONSTANT
+    0U,	// G_VASTART
+    0U,	// G_VAARG
     0U,	// G_SEXT
     0U,	// G_ZEXT
     0U,	// G_SHL
@@ -602,11 +609,15 @@ void AArch64InstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInf
     0U,	// G_SSUBO
     0U,	// G_UMULO
     0U,	// G_SMULO
+    0U,	// G_UMULH
+    0U,	// G_SMULH
     0U,	// G_FADD
     0U,	// G_FSUB
     0U,	// G_FMUL
     0U,	// G_FDIV
     0U,	// G_FREM
+    0U,	// G_FPOW
+    0U,	// G_FNEG
     0U,	// G_FPEXT
     0U,	// G_FPTRUNC
     0U,	// G_FPTOSI
@@ -614,7 +625,11 @@ void AArch64InstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInf
     0U,	// G_SITOFP
     0U,	// G_UITOFP
     0U,	// G_GEP
+    0U,	// G_PTR_MASK
     0U,	// G_BR
+    0U,	// G_INSERT_VECTOR_ELT
+    0U,	// G_EXTRACT_VECTOR_ELT
+    0U,	// G_SHUFFLE_VECTOR
     7276U,	// ABSv16i8
     553921644U,	// ABSv1i64
     1074273388U,	// ABSv2i32
@@ -896,7 +911,7 @@ void AArch64InstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInf
     20889U,	// DCPS2
     20938U,	// DCPS3
     41898U,	// DMB
-    3923U,	// DRPS
+    3937U,	// DRPS
     42049U,	// DSB
     553655131U,	// DUPv16i8gpr
     2147490651U,	// DUPv16i8lane
@@ -924,7 +939,7 @@ void AArch64InstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInf
     17050627U,	// EORXrs
     2147490819U,	// EORv16i8
     3759938563U,	// EORv8i8
-    3928U,	// ERET
+    3942U,	// ERET
     17050674U,	// EXTRWrri
     17050674U,	// EXTRXrri
     2147491133U,	// EXTv16i8
@@ -2076,6 +2091,7 @@ void AArch64InstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInf
     0U,	// MOVaddrEXT
     0U,	// MOVaddrJT
     0U,	// MOVaddrTLS
+    0U,	// MOVbaseTLS
     0U,	// MOVi32imm
     0U,	// MOVi64imm
     218377426U,	// MRS
@@ -3428,11 +3444,12 @@ void AArch64InstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInf
     0U,	// LIFETIME_START
     0U,	// LIFETIME_END
     0U,	// STACKMAP
+    0U,	// FENTRY_CALL
     0U,	// PATCHPOINT
     0U,	// LOAD_STACK_GUARD
     0U,	// STATEPOINT
     0U,	// LOCAL_ESCAPE
-    0U,	// FAULTING_LOAD_OP
+    0U,	// FAULTING_OP
     0U,	// PATCHABLE_OP
     0U,	// PATCHABLE_FUNCTION_ENTER
     0U,	// PATCHABLE_RET
@@ -3451,20 +3468,25 @@ void AArch64InstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInf
     0U,	// G_FRAME_INDEX
     0U,	// G_GLOBAL_VALUE
     0U,	// G_EXTRACT
+    0U,	// G_UNMERGE_VALUES
     0U,	// G_INSERT
     0U,	// G_SEQUENCE
+    0U,	// G_MERGE_VALUES
     0U,	// G_PTRTOINT
     0U,	// G_INTTOPTR
     0U,	// G_BITCAST
     0U,	// G_LOAD
     0U,	// G_STORE
     0U,	// G_BRCOND
+    0U,	// G_BRINDIRECT
     0U,	// G_INTRINSIC
     0U,	// G_INTRINSIC_W_SIDE_EFFECTS
     0U,	// G_ANYEXT
     0U,	// G_TRUNC
     0U,	// G_CONSTANT
     0U,	// G_FCONSTANT
+    0U,	// G_VASTART
+    0U,	// G_VAARG
     0U,	// G_SEXT
     0U,	// G_ZEXT
     0U,	// G_SHL
@@ -3479,11 +3501,15 @@ void AArch64InstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInf
     0U,	// G_SSUBO
     0U,	// G_UMULO
     0U,	// G_SMULO
+    0U,	// G_UMULH
+    0U,	// G_SMULH
     0U,	// G_FADD
     0U,	// G_FSUB
     0U,	// G_FMUL
     0U,	// G_FDIV
     0U,	// G_FREM
+    0U,	// G_FPOW
+    0U,	// G_FNEG
     0U,	// G_FPEXT
     0U,	// G_FPTRUNC
     0U,	// G_FPTOSI
@@ -3491,7 +3517,11 @@ void AArch64InstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInf
     0U,	// G_SITOFP
     0U,	// G_UITOFP
     0U,	// G_GEP
+    0U,	// G_PTR_MASK
     0U,	// G_BR
+    0U,	// G_INSERT_VECTOR_ELT
+    0U,	// G_EXTRACT_VECTOR_ELT
+    0U,	// G_SHUFFLE_VECTOR
     0U,	// ABSv16i8
     0U,	// ABSv1i64
     0U,	// ABSv2i32
@@ -4953,6 +4983,7 @@ void AArch64InstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInf
     0U,	// MOVaddrEXT
     0U,	// MOVaddrJT
     0U,	// MOVaddrTLS
+    0U,	// MOVbaseTLS
     0U,	// MOVi32imm
     0U,	// MOVi64imm
     0U,	// MRS
@@ -6305,11 +6336,12 @@ void AArch64InstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInf
     0U,	// LIFETIME_START
     0U,	// LIFETIME_END
     0U,	// STACKMAP
+    0U,	// FENTRY_CALL
     0U,	// PATCHPOINT
     0U,	// LOAD_STACK_GUARD
     0U,	// STATEPOINT
     0U,	// LOCAL_ESCAPE
-    0U,	// FAULTING_LOAD_OP
+    0U,	// FAULTING_OP
     0U,	// PATCHABLE_OP
     0U,	// PATCHABLE_FUNCTION_ENTER
     0U,	// PATCHABLE_RET
@@ -6328,20 +6360,25 @@ void AArch64InstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInf
     0U,	// G_FRAME_INDEX
     0U,	// G_GLOBAL_VALUE
     0U,	// G_EXTRACT
+    0U,	// G_UNMERGE_VALUES
     0U,	// G_INSERT
     0U,	// G_SEQUENCE
+    0U,	// G_MERGE_VALUES
     0U,	// G_PTRTOINT
     0U,	// G_INTTOPTR
     0U,	// G_BITCAST
     0U,	// G_LOAD
     0U,	// G_STORE
     0U,	// G_BRCOND
+    0U,	// G_BRINDIRECT
     0U,	// G_INTRINSIC
     0U,	// G_INTRINSIC_W_SIDE_EFFECTS
     0U,	// G_ANYEXT
     0U,	// G_TRUNC
     0U,	// G_CONSTANT
     0U,	// G_FCONSTANT
+    0U,	// G_VASTART
+    0U,	// G_VAARG
     0U,	// G_SEXT
     0U,	// G_ZEXT
     0U,	// G_SHL
@@ -6356,11 +6393,15 @@ void AArch64InstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInf
     0U,	// G_SSUBO
     0U,	// G_UMULO
     0U,	// G_SMULO
+    0U,	// G_UMULH
+    0U,	// G_SMULH
     0U,	// G_FADD
     0U,	// G_FSUB
     0U,	// G_FMUL
     0U,	// G_FDIV
     0U,	// G_FREM
+    0U,	// G_FPOW
+    0U,	// G_FNEG
     0U,	// G_FPEXT
     0U,	// G_FPTRUNC
     0U,	// G_FPTOSI
@@ -6368,7 +6409,11 @@ void AArch64InstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInf
     0U,	// G_SITOFP
     0U,	// G_UITOFP
     0U,	// G_GEP
+    0U,	// G_PTR_MASK
     0U,	// G_BR
+    0U,	// G_INSERT_VECTOR_ELT
+    0U,	// G_EXTRACT_VECTOR_ELT
+    0U,	// G_SHUFFLE_VECTOR
     0U,	// ABSv16i8
     0U,	// ABSv1i64
     0U,	// ABSv2i32
@@ -7830,6 +7875,7 @@ void AArch64InstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInf
     0U,	// MOVaddrEXT
     0U,	// MOVaddrJT
     0U,	// MOVaddrTLS
+    0U,	// MOVbaseTLS
     0U,	// MOVi32imm
     0U,	// MOVi64imm
     0U,	// MRS
@@ -9178,7 +9224,7 @@ void AArch64InstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInf
   switch ((Bits >> 12) & 63) {
   default: llvm_unreachable("Invalid command number.");
   case 0:
-    // DBG_VALUE, BUNDLE, LIFETIME_START, LIFETIME_END, PATCHABLE_FUNCTION_EN...
+    // DBG_VALUE, BUNDLE, LIFETIME_START, LIFETIME_END, FENTRY_CALL, PATCHABL...
     return;
     break;
   case 1:

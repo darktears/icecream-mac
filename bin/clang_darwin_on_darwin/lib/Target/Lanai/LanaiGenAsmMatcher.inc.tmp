@@ -16,7 +16,6 @@
                        const OperandVector &Operands);
   void convertToMapAndConstraints(unsigned Kind,
                            const OperandVector &Operands) override;
-  bool mnemonicIsValid(StringRef Mnemonic, unsigned VariantID);
   unsigned MatchInstructionImpl(const OperandVector &Operands,
                                 MCInst &Inst,
                                 uint64_t &ErrorInfo, bool matchingInlineAsm,
@@ -589,13 +588,13 @@ static MatchClassKind matchTokenString(StringRef Name) {
       }
       break;
     case 'a':	 // 1 string to match.
-      if (memcmp(Name.data()+1, "dd", 2))
+      if (memcmp(Name.data()+1, "dd", 2) != 0)
         break;
       return MCK_add;	 // "add"
     }
     break;
   case 6:	 // 1 string to match.
-    if (memcmp(Name.data()+0, "return", 6))
+    if (memcmp(Name.data()+0, "return", 6) != 0)
       break;
     return MCK_return;	 // "return"
   }
@@ -897,19 +896,6 @@ static const MatchEntry MatchTable0[] = {
   { 241 /* xor.f */, Lanai::XOR_F_I_LO, Convert__Reg1_2__Reg1_0__LoImm161_1, 0, { MCK_GPR, MCK_LoImm16, MCK_GPR }, },
   { 241 /* xor.f */, Lanai::XOR_F_R, Convert__Reg1_3__Reg1_1__Reg1_2__CondCode1_0, 0, { MCK_CondCode, MCK_GPR, MCK_GPR, MCK_GPR }, },
 };
-
-bool LanaiAsmParser::
-mnemonicIsValid(StringRef Mnemonic, unsigned VariantID) {
-  // Find the appropriate table for this asm variant.
-  const MatchEntry *Start, *End;
-  switch (VariantID) {
-  default: llvm_unreachable("invalid variant!");
-  case 0: Start = std::begin(MatchTable0); End = std::end(MatchTable0); break;
-  }
-  // Search the table.
-  auto MnemonicRange = std::equal_range(Start, End, Mnemonic, LessOpcode());
-  return MnemonicRange.first != MnemonicRange.second;
-}
 
 unsigned LanaiAsmParser::
 MatchInstructionImpl(const OperandVector &Operands,

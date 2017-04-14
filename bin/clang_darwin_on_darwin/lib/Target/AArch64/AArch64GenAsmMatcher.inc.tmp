@@ -16,7 +16,6 @@
                        const OperandVector &Operands);
   void convertToMapAndConstraints(unsigned Kind,
                            const OperandVector &Operands) override;
-  bool mnemonicIsValid(StringRef Mnemonic, unsigned VariantID);
   unsigned MatchInstructionImpl(const OperandVector &Operands,
                                 MCInst &Inst,
                                 uint64_t &ErrorInfo, bool matchingInlineAsm,
@@ -44,6 +43,7 @@
   Match_InvalidImm0_1,
   Match_InvalidImm0_127,
   Match_InvalidImm0_15,
+  Match_InvalidImm0_255,
   Match_InvalidImm0_31,
   Match_InvalidImm0_63,
   Match_InvalidImm0_65535,
@@ -91,16 +91,18 @@
 
 // Flags for subtarget features that participate in instruction matching.
 enum SubtargetFeatureFlag : uint16_t {
-  Feature_HasV8_1a = (1ULL << 8),
-  Feature_HasV8_2a = (1ULL << 9),
+  Feature_HasV8_1a = (1ULL << 9),
+  Feature_HasV8_2a = (1ULL << 10),
   Feature_HasFPARMv8 = (1ULL << 2),
   Feature_HasNEON = (1ULL << 5),
   Feature_HasCrypto = (1ULL << 1),
   Feature_HasCRC = (1ULL << 0),
   Feature_HasLSE = (1ULL << 4),
   Feature_HasRAS = (1ULL << 6),
+  Feature_HasRDM = (1ULL << 7),
   Feature_HasFullFP16 = (1ULL << 3),
-  Feature_HasSPE = (1ULL << 7),
+  Feature_HasSPE = (1ULL << 8),
+  Feature_UseNegativeImmediates = (1ULL << 11),
   Feature_None = 0
 };
 
@@ -745,7 +747,7 @@ static unsigned MatchRegisterName(StringRef Name) {
     }
     break;
   case 4:	 // 1 string to match.
-    if (memcmp(Name.data()+0, "nzcv", 4))
+    if (memcmp(Name.data()+0, "nzcv", 4) != 0)
       break;
     return 3;	 // "nzcv"
   }
@@ -770,8 +772,10 @@ static const char *getSubtargetFeatureName(uint64_t Val) {
   case Feature_HasCRC: return "crc";
   case Feature_HasLSE: return "lse";
   case Feature_HasRAS: return "ras";
+  case Feature_HasRDM: return "rdm";
   case Feature_HasFullFP16: return "fullfp16";
   case Feature_HasSPE: return "spe";
+  case Feature_UseNegativeImmediates: return "NegativeImmediates";
   default: return "(unknown)";
   }
 }
@@ -4289,18 +4293,18 @@ enum MatchClassKind {
   MCK_VectorRegLo, // user defined class 'VectorRegLoAsmOperand'
   MCK_WSeqPair, // user defined class 'WSeqPairsAsmOperandClass'
   MCK_XSeqPair, // user defined class 'XSeqPairsAsmOperandClass'
-  MCK_MOVZ32_lsl0MovAlias, // user defined class 'anonymous_1101_asmoperand'
-  MCK_MOVZ32_lsl16MovAlias, // user defined class 'anonymous_1102_asmoperand'
-  MCK_MOVZ64_lsl0MovAlias, // user defined class 'anonymous_1103_asmoperand'
-  MCK_MOVZ64_lsl16MovAlias, // user defined class 'anonymous_1104_asmoperand'
-  MCK_MOVZ64_lsl32MovAlias, // user defined class 'anonymous_1105_asmoperand'
-  MCK_MOVZ64_lsl48MovAlias, // user defined class 'anonymous_1106_asmoperand'
-  MCK_MOVN32_lsl0MovAlias, // user defined class 'anonymous_1107_asmoperand'
-  MCK_MOVN32_lsl16MovAlias, // user defined class 'anonymous_1108_asmoperand'
-  MCK_MOVN64_lsl0MovAlias, // user defined class 'anonymous_1109_asmoperand'
-  MCK_MOVN64_lsl16MovAlias, // user defined class 'anonymous_1110_asmoperand'
-  MCK_MOVN64_lsl32MovAlias, // user defined class 'anonymous_1111_asmoperand'
-  MCK_MOVN64_lsl48MovAlias, // user defined class 'anonymous_1112_asmoperand'
+  MCK_MOVZ32_lsl0MovAlias, // user defined class 'anonymous_1154_asmoperand'
+  MCK_MOVZ32_lsl16MovAlias, // user defined class 'anonymous_1155_asmoperand'
+  MCK_MOVZ64_lsl0MovAlias, // user defined class 'anonymous_1156_asmoperand'
+  MCK_MOVZ64_lsl16MovAlias, // user defined class 'anonymous_1157_asmoperand'
+  MCK_MOVZ64_lsl32MovAlias, // user defined class 'anonymous_1158_asmoperand'
+  MCK_MOVZ64_lsl48MovAlias, // user defined class 'anonymous_1159_asmoperand'
+  MCK_MOVN32_lsl0MovAlias, // user defined class 'anonymous_1160_asmoperand'
+  MCK_MOVN32_lsl16MovAlias, // user defined class 'anonymous_1161_asmoperand'
+  MCK_MOVN64_lsl0MovAlias, // user defined class 'anonymous_1162_asmoperand'
+  MCK_MOVN64_lsl16MovAlias, // user defined class 'anonymous_1163_asmoperand'
+  MCK_MOVN64_lsl32MovAlias, // user defined class 'anonymous_1164_asmoperand'
+  MCK_MOVN64_lsl48MovAlias, // user defined class 'anonymous_1165_asmoperand'
   NumMatchClassKinds
 };
 
@@ -4470,7 +4474,7 @@ static MatchClassKind matchTokenString(StringRef Name) {
     }
     break;
   case 4:	 // 2 strings to match.
-    if (memcmp(Name.data()+0, ".16", 3))
+    if (memcmp(Name.data()+0, ".16", 3) != 0)
       break;
     switch (Name[3]) {
     default: break;
@@ -4848,12 +4852,12 @@ static unsigned validateOperandClass(MCParsedAsmOperand &GOp, MatchClassKind Kin
     break;
   // 'BranchTarget14' class
   case MCK_BranchTarget14:
-    if (Operand.isBranchTarget14())
+    if (Operand.isBranchTarget<14>())
       return MCTargetAsmParser::Match_Success;
-    break;
+    return AArch64AsmParser::Match_InvalidLabel;
   // 'BranchTarget26' class
   case MCK_BranchTarget26:
-    if (Operand.isBranchTarget26())
+    if (Operand.isBranchTarget<26>())
       return MCTargetAsmParser::Match_Success;
     return AArch64AsmParser::Match_InvalidLabel;
   // 'CondCode' class
@@ -4893,62 +4897,62 @@ static unsigned validateOperandClass(MCParsedAsmOperand &GOp, MatchClassKind Kin
     break;
   // 'Imm0_127' class
   case MCK_Imm0_127:
-    if (Operand.isImm0_127())
+    if (Operand.isImmInRange<0,127>())
       return MCTargetAsmParser::Match_Success;
     return AArch64AsmParser::Match_InvalidImm0_127;
   // 'Imm0_15' class
   case MCK_Imm0_15:
-    if (Operand.isImm0_15())
+    if (Operand.isImmInRange<0,15>())
       return MCTargetAsmParser::Match_Success;
     return AArch64AsmParser::Match_InvalidImm0_15;
   // 'Imm0_1' class
   case MCK_Imm0_1:
-    if (Operand.isImm0_1())
+    if (Operand.isImmInRange<0,1>())
       return MCTargetAsmParser::Match_Success;
     return AArch64AsmParser::Match_InvalidImm0_1;
   // 'Imm0_255' class
   case MCK_Imm0_255:
-    if (Operand.isImm0_255())
+    if (Operand.isImmInRange<0,255>())
       return MCTargetAsmParser::Match_Success;
-    break;
+    return AArch64AsmParser::Match_InvalidImm0_255;
   // 'Imm0_31' class
   case MCK_Imm0_31:
-    if (Operand.isImm0_31())
+    if (Operand.isImmInRange<0,31>())
       return MCTargetAsmParser::Match_Success;
     return AArch64AsmParser::Match_InvalidImm0_31;
   // 'Imm0_63' class
   case MCK_Imm0_63:
-    if (Operand.isImm0_63())
+    if (Operand.isImmInRange<0,63>())
       return MCTargetAsmParser::Match_Success;
     return AArch64AsmParser::Match_InvalidImm0_63;
   // 'Imm0_65535' class
   case MCK_Imm0_65535:
-    if (Operand.isImm0_65535())
+    if (Operand.isImmInRange<0,65535>())
       return MCTargetAsmParser::Match_Success;
     return AArch64AsmParser::Match_InvalidImm0_65535;
   // 'Imm0_7' class
   case MCK_Imm0_7:
-    if (Operand.isImm0_7())
+    if (Operand.isImmInRange<0,7>())
       return MCTargetAsmParser::Match_Success;
     return AArch64AsmParser::Match_InvalidImm0_7;
   // 'Imm1_16' class
   case MCK_Imm1_16:
-    if (Operand.isImm1_16())
+    if (Operand.isImmInRange<1,16>())
       return MCTargetAsmParser::Match_Success;
     return AArch64AsmParser::Match_InvalidImm1_16;
   // 'Imm1_32' class
   case MCK_Imm1_32:
-    if (Operand.isImm1_32())
+    if (Operand.isImmInRange<1,32>())
       return MCTargetAsmParser::Match_Success;
     return AArch64AsmParser::Match_InvalidImm1_32;
   // 'Imm1_64' class
   case MCK_Imm1_64:
-    if (Operand.isImm1_64())
+    if (Operand.isImmInRange<1,64>())
       return MCTargetAsmParser::Match_Success;
     return AArch64AsmParser::Match_InvalidImm1_64;
   // 'Imm1_8' class
   case MCK_Imm1_8:
-    if (Operand.isImm1_8())
+    if (Operand.isImmInRange<1,8>())
       return MCTargetAsmParser::Match_Success;
     return AArch64AsmParser::Match_InvalidImm1_8;
   // 'Imm' class
@@ -5078,7 +5082,7 @@ static unsigned validateOperandClass(MCParsedAsmOperand &GOp, MatchClassKind Kin
     break;
   // 'PCRelLabel19' class
   case MCK_PCRelLabel19:
-    if (Operand.isPCRelLabel19())
+    if (Operand.isBranchTarget<19>())
       return MCTargetAsmParser::Match_Success;
     return AArch64AsmParser::Match_InvalidLabel;
   // 'PSBHint' class
@@ -5208,12 +5212,12 @@ static unsigned validateOperandClass(MCParsedAsmOperand &GOp, MatchClassKind Kin
     break;
   // 'TBZImm0_31' class
   case MCK_TBZImm0_31:
-    if (Operand.isImm0_31())
+    if (Operand.isImmInRange<0,31>())
       return MCTargetAsmParser::Match_Success;
     break;
   // 'Imm32_63' class
   case MCK_Imm32_63:
-    if (Operand.isImm32_63())
+    if (Operand.isImmInRange<32,63>())
       return MCTargetAsmParser::Match_Success;
     return AArch64AsmParser::Match_InvalidImm0_63;
   // 'UImm12Offset16' class
@@ -6147,10 +6151,14 @@ ComputeAvailableFeatures(const FeatureBitset& FB) const {
     Features |= Feature_HasLSE;
   if ((FB[AArch64::FeatureRAS]))
     Features |= Feature_HasRAS;
+  if ((FB[AArch64::FeatureRDM]))
+    Features |= Feature_HasRDM;
   if ((FB[AArch64::FeatureFullFP16]))
     Features |= Feature_HasFullFP16;
   if ((FB[AArch64::FeatureSPE]))
     Features |= Feature_HasSPE;
+  if ((!FB[AArch64::FeatureNoNegativeImmediates]))
+    Features |= Feature_UseNegativeImmediates;
   return Features;
 }
 
@@ -6285,11 +6293,11 @@ static const MatchEntry MatchTable0[] = {
   { 13 /* add */, AArch64::ADDv1i64, Convert__Reg1_0__Reg1_1__Reg1_2, Feature_HasNEON, { MCK_FPR64, MCK_FPR64, MCK_FPR64 }, },
   { 13 /* add */, AArch64::ADDWrs, Convert__Reg1_0__Reg1_1__Reg1_2__imm_95_0, 0, { MCK_GPR32, MCK_GPR32, MCK_GPR32 }, },
   { 13 /* add */, AArch64::ADDWrx, Convert__Reg1_0__Reg1_1__Reg1_2__imm_95_16, 0, { MCK_GPR32sp, MCK_GPR32sponly, MCK_GPR32 }, },
-  { 13 /* add */, AArch64::SUBWri, Convert__Reg1_0__Reg1_1__AddSubImmNeg2_2, 0, { MCK_GPR32sp, MCK_GPR32sp, MCK_AddSubImmNeg }, },
+  { 13 /* add */, AArch64::SUBWri, Convert__Reg1_0__Reg1_1__AddSubImmNeg2_2, Feature_UseNegativeImmediates, { MCK_GPR32sp, MCK_GPR32sp, MCK_AddSubImmNeg }, },
   { 13 /* add */, AArch64::ADDWri, Convert__Reg1_0__Reg1_1__AddSubImm2_2, 0, { MCK_GPR32sp, MCK_GPR32sp, MCK_AddSubImm }, },
   { 13 /* add */, AArch64::ADDXrs, Convert__Reg1_0__Reg1_1__Reg1_2__imm_95_0, 0, { MCK_GPR64, MCK_GPR64, MCK_GPR64 }, },
   { 13 /* add */, AArch64::ADDXrx64, Convert__Reg1_0__Reg1_1__Reg1_2__imm_95_24, 0, { MCK_GPR64sp, MCK_GPR64sponly, MCK_GPR64 }, },
-  { 13 /* add */, AArch64::SUBXri, Convert__Reg1_0__Reg1_1__AddSubImmNeg2_2, 0, { MCK_GPR64sp, MCK_GPR64sp, MCK_AddSubImmNeg }, },
+  { 13 /* add */, AArch64::SUBXri, Convert__Reg1_0__Reg1_1__AddSubImmNeg2_2, Feature_UseNegativeImmediates, { MCK_GPR64sp, MCK_GPR64sp, MCK_AddSubImmNeg }, },
   { 13 /* add */, AArch64::ADDXri, Convert__Reg1_0__Reg1_1__AddSubImm2_2, 0, { MCK_GPR64sp, MCK_GPR64sp, MCK_AddSubImm }, },
   { 13 /* add */, AArch64::ADDWrs, Convert__Reg1_0__Reg1_1__Reg1_2__ArithmeticShifter321_3, 0, { MCK_GPR32, MCK_GPR32, MCK_GPR32, MCK_ArithmeticShifter32 }, },
   { 13 /* add */, AArch64::ADDWrx, Convert__Reg1_0__Reg1_1__Reg1_2__Extend1_3, 0, { MCK_GPR32sp, MCK_GPR32sp, MCK_GPR32, MCK_Extend }, },
@@ -6319,11 +6327,11 @@ static const MatchEntry MatchTable0[] = {
   { 30 /* addp */, AArch64::ADDPv8i8, Convert__VectorReg641_0__VectorReg641_2__VectorReg641_4, Feature_HasNEON, { MCK_VectorReg64, MCK__DOT_8b, MCK_VectorReg64, MCK__DOT_8b, MCK_VectorReg64, MCK__DOT_8b }, },
   { 35 /* adds */, AArch64::ADDSWrx, Convert__Reg1_0__Reg1_1__Reg1_2__imm_95_16, 0, { MCK_GPR32, MCK_GPR32sponly, MCK_GPR32 }, },
   { 35 /* adds */, AArch64::ADDSWrs, Convert__Reg1_0__Reg1_1__Reg1_2__imm_95_0, 0, { MCK_GPR32, MCK_GPR32, MCK_GPR32 }, },
-  { 35 /* adds */, AArch64::SUBSWri, Convert__Reg1_0__Reg1_1__AddSubImmNeg2_2, 0, { MCK_GPR32, MCK_GPR32sp, MCK_AddSubImmNeg }, },
+  { 35 /* adds */, AArch64::SUBSWri, Convert__Reg1_0__Reg1_1__AddSubImmNeg2_2, Feature_UseNegativeImmediates, { MCK_GPR32, MCK_GPR32sp, MCK_AddSubImmNeg }, },
   { 35 /* adds */, AArch64::ADDSWri, Convert__Reg1_0__Reg1_1__AddSubImm2_2, 0, { MCK_GPR32, MCK_GPR32sp, MCK_AddSubImm }, },
   { 35 /* adds */, AArch64::ADDSXrx64, Convert__Reg1_0__Reg1_1__Reg1_2__imm_95_24, 0, { MCK_GPR64, MCK_GPR64sponly, MCK_GPR64 }, },
   { 35 /* adds */, AArch64::ADDSXrs, Convert__Reg1_0__Reg1_1__Reg1_2__imm_95_0, 0, { MCK_GPR64, MCK_GPR64, MCK_GPR64 }, },
-  { 35 /* adds */, AArch64::SUBSXri, Convert__Reg1_0__Reg1_1__AddSubImmNeg2_2, 0, { MCK_GPR64, MCK_GPR64sp, MCK_AddSubImmNeg }, },
+  { 35 /* adds */, AArch64::SUBSXri, Convert__Reg1_0__Reg1_1__AddSubImmNeg2_2, Feature_UseNegativeImmediates, { MCK_GPR64, MCK_GPR64sp, MCK_AddSubImmNeg }, },
   { 35 /* adds */, AArch64::ADDSXri, Convert__Reg1_0__Reg1_1__AddSubImm2_2, 0, { MCK_GPR64, MCK_GPR64sp, MCK_AddSubImm }, },
   { 35 /* adds */, AArch64::ADDSWrs, Convert__Reg1_0__Reg1_1__Reg1_2__ArithmeticShifter321_3, 0, { MCK_GPR32, MCK_GPR32, MCK_GPR32, MCK_ArithmeticShifter32 }, },
   { 35 /* adds */, AArch64::ADDSWrx, Convert__Reg1_0__Reg1_1__Reg1_2__Extend1_3, 0, { MCK_GPR32, MCK_GPR32sp, MCK_GPR32, MCK_Extend }, },
@@ -6370,9 +6378,9 @@ static const MatchEntry MatchTable0[] = {
   { 101 /* bic */, AArch64::BICv4i32, Convert__VectorReg1281_1__Tie0__Imm0_2551_2__imm_95_0, 0, { MCK__DOT_4s, MCK_VectorReg128, MCK_Imm0_255 }, },
   { 101 /* bic */, AArch64::BICv8i16, Convert__VectorReg1281_1__Tie0__Imm0_2551_2__imm_95_0, 0, { MCK__DOT_8h, MCK_VectorReg128, MCK_Imm0_255 }, },
   { 101 /* bic */, AArch64::BICWrs, Convert__Reg1_0__Reg1_1__Reg1_2__imm_95_0, 0, { MCK_GPR32, MCK_GPR32, MCK_GPR32 }, },
-  { 101 /* bic */, AArch64::ANDWri, Convert__Reg1_0__Reg1_1__LogicalImm32Not1_2, 0, { MCK_GPR32sp, MCK_GPR32, MCK_LogicalImm32Not }, },
+  { 101 /* bic */, AArch64::ANDWri, Convert__Reg1_0__Reg1_1__LogicalImm32Not1_2, Feature_UseNegativeImmediates, { MCK_GPR32sp, MCK_GPR32, MCK_LogicalImm32Not }, },
   { 101 /* bic */, AArch64::BICXrs, Convert__Reg1_0__Reg1_1__Reg1_2__imm_95_0, 0, { MCK_GPR64, MCK_GPR64, MCK_GPR64 }, },
-  { 101 /* bic */, AArch64::ANDXri, Convert__Reg1_0__Reg1_1__LogicalImm64Not1_2, 0, { MCK_GPR64sp, MCK_GPR64, MCK_LogicalImm64Not }, },
+  { 101 /* bic */, AArch64::ANDXri, Convert__Reg1_0__Reg1_1__LogicalImm64Not1_2, Feature_UseNegativeImmediates, { MCK_GPR64sp, MCK_GPR64, MCK_LogicalImm64Not }, },
   { 101 /* bic */, AArch64::BICv4i32, Convert__VectorReg1281_0__Tie0__Imm0_2551_2__imm_95_0, 0, { MCK_VectorReg128, MCK__DOT_4s, MCK_Imm0_255 }, },
   { 101 /* bic */, AArch64::BICv8i16, Convert__VectorReg1281_0__Tie0__Imm0_2551_2__imm_95_0, 0, { MCK_VectorReg128, MCK__DOT_8h, MCK_Imm0_255 }, },
   { 101 /* bic */, AArch64::BICv2i32, Convert__VectorReg641_0__Tie0__Imm0_2551_2__imm_95_0, 0, { MCK_VectorReg64, MCK__DOT_2s, MCK_Imm0_255 }, },
@@ -6386,9 +6394,9 @@ static const MatchEntry MatchTable0[] = {
   { 101 /* bic */, AArch64::BICv16i8, Convert__VectorReg1281_0__VectorReg1281_2__VectorReg1281_4, Feature_HasNEON, { MCK_VectorReg128, MCK__DOT_16b, MCK_VectorReg128, MCK__DOT_16b, MCK_VectorReg128, MCK__DOT_16b }, },
   { 101 /* bic */, AArch64::BICv8i8, Convert__VectorReg641_0__VectorReg641_2__VectorReg641_4, Feature_HasNEON, { MCK_VectorReg64, MCK__DOT_8b, MCK_VectorReg64, MCK__DOT_8b, MCK_VectorReg64, MCK__DOT_8b }, },
   { 105 /* bics */, AArch64::BICSWrs, Convert__Reg1_0__Reg1_1__Reg1_2__imm_95_0, 0, { MCK_GPR32, MCK_GPR32, MCK_GPR32 }, },
-  { 105 /* bics */, AArch64::ANDSWri, Convert__Reg1_0__Reg1_1__LogicalImm32Not1_2, 0, { MCK_GPR32, MCK_GPR32, MCK_LogicalImm32Not }, },
+  { 105 /* bics */, AArch64::ANDSWri, Convert__Reg1_0__Reg1_1__LogicalImm32Not1_2, Feature_UseNegativeImmediates, { MCK_GPR32, MCK_GPR32, MCK_LogicalImm32Not }, },
   { 105 /* bics */, AArch64::BICSXrs, Convert__Reg1_0__Reg1_1__Reg1_2__imm_95_0, 0, { MCK_GPR64, MCK_GPR64, MCK_GPR64 }, },
-  { 105 /* bics */, AArch64::ANDSXri, Convert__Reg1_0__Reg1_1__LogicalImm64Not1_2, 0, { MCK_GPR64, MCK_GPR64, MCK_LogicalImm64Not }, },
+  { 105 /* bics */, AArch64::ANDSXri, Convert__Reg1_0__Reg1_1__LogicalImm64Not1_2, Feature_UseNegativeImmediates, { MCK_GPR64, MCK_GPR64, MCK_LogicalImm64Not }, },
   { 105 /* bics */, AArch64::BICSWrs, Convert__Reg1_0__Reg1_1__Reg1_2__LogicalShifter321_3, 0, { MCK_GPR32, MCK_GPR32, MCK_GPR32, MCK_LogicalShifter32 }, },
   { 105 /* bics */, AArch64::BICSXrs, Convert__Reg1_0__Reg1_1__Reg1_2__LogicalShifter641_3, 0, { MCK_GPR64, MCK_GPR64, MCK_GPR64, MCK_LogicalShifter64 }, },
   { 110 /* bif */, AArch64::BIFv16i8, Convert__VectorReg1281_0__VectorReg1281_2__VectorReg1281_4, Feature_HasNEON, { MCK_VectorReg128, MCK__DOT_16b, MCK_VectorReg128, MCK__DOT_16b, MCK_VectorReg128, MCK__DOT_16b }, },
@@ -6574,10 +6582,10 @@ static const MatchEntry MatchTable0[] = {
   { 316 /* cmn */, AArch64::ADDSWrx, Convert__regWZR__Reg1_0__Reg1_1__imm_95_16, 0, { MCK_GPR32sponly, MCK_GPR32 }, },
   { 316 /* cmn */, AArch64::ADDSXrx64, Convert__regXZR__Reg1_0__Reg1_1__imm_95_24, 0, { MCK_GPR64sponly, MCK_GPR64 }, },
   { 316 /* cmn */, AArch64::ADDSWrs, Convert__regWZR__Reg1_0__Reg1_1__imm_95_0, 0, { MCK_GPR32, MCK_GPR32 }, },
-  { 316 /* cmn */, AArch64::SUBSWri, Convert__regWZR__Reg1_0__AddSubImmNeg2_1, 0, { MCK_GPR32sp, MCK_AddSubImmNeg }, },
+  { 316 /* cmn */, AArch64::SUBSWri, Convert__regWZR__Reg1_0__AddSubImmNeg2_1, Feature_UseNegativeImmediates, { MCK_GPR32sp, MCK_AddSubImmNeg }, },
   { 316 /* cmn */, AArch64::ADDSWri, Convert__regWZR__Reg1_0__AddSubImm2_1, 0, { MCK_GPR32sp, MCK_AddSubImm }, },
   { 316 /* cmn */, AArch64::ADDSXrs, Convert__regXZR__Reg1_0__Reg1_1__imm_95_0, 0, { MCK_GPR64, MCK_GPR64 }, },
-  { 316 /* cmn */, AArch64::SUBSXri, Convert__regXZR__Reg1_0__AddSubImmNeg2_1, 0, { MCK_GPR64sp, MCK_AddSubImmNeg }, },
+  { 316 /* cmn */, AArch64::SUBSXri, Convert__regXZR__Reg1_0__AddSubImmNeg2_1, Feature_UseNegativeImmediates, { MCK_GPR64sp, MCK_AddSubImmNeg }, },
   { 316 /* cmn */, AArch64::ADDSXri, Convert__regXZR__Reg1_0__AddSubImm2_1, 0, { MCK_GPR64sp, MCK_AddSubImm }, },
   { 316 /* cmn */, AArch64::ADDSWrs, Convert__regWZR__Reg1_0__Reg1_1__ArithmeticShifter321_2, 0, { MCK_GPR32, MCK_GPR32, MCK_ArithmeticShifter32 }, },
   { 316 /* cmn */, AArch64::ADDSWrx, Convert__regWZR__Reg1_0__Reg1_1__Extend1_2, 0, { MCK_GPR32sp, MCK_GPR32, MCK_Extend }, },
@@ -6587,10 +6595,10 @@ static const MatchEntry MatchTable0[] = {
   { 320 /* cmp */, AArch64::SUBSWrx, Convert__regWZR__Reg1_0__Reg1_1__imm_95_16, 0, { MCK_GPR32sponly, MCK_GPR32 }, },
   { 320 /* cmp */, AArch64::SUBSXrx64, Convert__regXZR__Reg1_0__Reg1_1__imm_95_24, 0, { MCK_GPR64sponly, MCK_GPR64 }, },
   { 320 /* cmp */, AArch64::SUBSWrs, Convert__regWZR__Reg1_0__Reg1_1__imm_95_0, 0, { MCK_GPR32, MCK_GPR32 }, },
-  { 320 /* cmp */, AArch64::ADDSWri, Convert__regWZR__Reg1_0__AddSubImmNeg2_1, 0, { MCK_GPR32sp, MCK_AddSubImmNeg }, },
+  { 320 /* cmp */, AArch64::ADDSWri, Convert__regWZR__Reg1_0__AddSubImmNeg2_1, Feature_UseNegativeImmediates, { MCK_GPR32sp, MCK_AddSubImmNeg }, },
   { 320 /* cmp */, AArch64::SUBSWri, Convert__regWZR__Reg1_0__AddSubImm2_1, 0, { MCK_GPR32sp, MCK_AddSubImm }, },
   { 320 /* cmp */, AArch64::SUBSXrs, Convert__regXZR__Reg1_0__Reg1_1__imm_95_0, 0, { MCK_GPR64, MCK_GPR64 }, },
-  { 320 /* cmp */, AArch64::ADDSXri, Convert__regXZR__Reg1_0__AddSubImmNeg2_1, 0, { MCK_GPR64sp, MCK_AddSubImmNeg }, },
+  { 320 /* cmp */, AArch64::ADDSXri, Convert__regXZR__Reg1_0__AddSubImmNeg2_1, Feature_UseNegativeImmediates, { MCK_GPR64sp, MCK_AddSubImmNeg }, },
   { 320 /* cmp */, AArch64::SUBSXri, Convert__regXZR__Reg1_0__AddSubImm2_1, 0, { MCK_GPR64sp, MCK_AddSubImm }, },
   { 320 /* cmp */, AArch64::SUBSWrs, Convert__regWZR__Reg1_0__Reg1_1__ArithmeticShifter321_2, 0, { MCK_GPR32, MCK_GPR32, MCK_ArithmeticShifter32 }, },
   { 320 /* cmp */, AArch64::SUBSWrx, Convert__regWZR__Reg1_0__Reg1_1__Extend1_2, 0, { MCK_GPR32sp, MCK_GPR32, MCK_Extend }, },
@@ -6657,9 +6665,9 @@ static const MatchEntry MatchTable0[] = {
   { 464 /* dup */, AArch64::DUPv4i16lane, Convert__VectorReg641_0__VectorReg1281_2__VectorIndexH1_4, Feature_HasNEON, { MCK_VectorReg64, MCK__DOT_4h, MCK_VectorReg128, MCK__DOT_h, MCK_VectorIndexH }, },
   { 464 /* dup */, AArch64::DUPv8i8lane, Convert__VectorReg641_0__VectorReg1281_2__VectorIndexB1_4, Feature_HasNEON, { MCK_VectorReg64, MCK__DOT_8b, MCK_VectorReg128, MCK__DOT_b, MCK_VectorIndexB }, },
   { 468 /* eon */, AArch64::EONWrs, Convert__Reg1_0__Reg1_1__Reg1_2__imm_95_0, 0, { MCK_GPR32, MCK_GPR32, MCK_GPR32 }, },
-  { 468 /* eon */, AArch64::EORWri, Convert__Reg1_0__Reg1_1__LogicalImm32Not1_2, 0, { MCK_GPR32sp, MCK_GPR32, MCK_LogicalImm32Not }, },
+  { 468 /* eon */, AArch64::EORWri, Convert__Reg1_0__Reg1_1__LogicalImm32Not1_2, Feature_UseNegativeImmediates, { MCK_GPR32sp, MCK_GPR32, MCK_LogicalImm32Not }, },
   { 468 /* eon */, AArch64::EONXrs, Convert__Reg1_0__Reg1_1__Reg1_2__imm_95_0, 0, { MCK_GPR64, MCK_GPR64, MCK_GPR64 }, },
-  { 468 /* eon */, AArch64::EORXri, Convert__Reg1_0__Reg1_1__LogicalImm64Not1_2, 0, { MCK_GPR64sp, MCK_GPR64, MCK_LogicalImm64Not }, },
+  { 468 /* eon */, AArch64::EORXri, Convert__Reg1_0__Reg1_1__LogicalImm64Not1_2, Feature_UseNegativeImmediates, { MCK_GPR64sp, MCK_GPR64, MCK_LogicalImm64Not }, },
   { 468 /* eon */, AArch64::EONWrs, Convert__Reg1_0__Reg1_1__Reg1_2__LogicalShifter321_3, 0, { MCK_GPR32, MCK_GPR32, MCK_GPR32, MCK_LogicalShifter32 }, },
   { 468 /* eon */, AArch64::EONXrs, Convert__Reg1_0__Reg1_1__Reg1_2__LogicalShifter641_3, 0, { MCK_GPR64, MCK_GPR64, MCK_GPR64, MCK_LogicalShifter64 }, },
   { 472 /* eor */, AArch64::EORWrs, Convert__Reg1_0__Reg1_1__Reg1_2__imm_95_0, 0, { MCK_GPR32, MCK_GPR32, MCK_GPR32 }, },
@@ -8531,9 +8539,9 @@ static const MatchEntry MatchTable0[] = {
   { 2117 /* not */, AArch64::NOTv16i8, Convert__VectorReg1281_0__VectorReg1281_2, Feature_HasNEON, { MCK_VectorReg128, MCK__DOT_16b, MCK_VectorReg128, MCK__DOT_16b }, },
   { 2117 /* not */, AArch64::NOTv8i8, Convert__VectorReg641_0__VectorReg641_2, Feature_HasNEON, { MCK_VectorReg64, MCK__DOT_8b, MCK_VectorReg64, MCK__DOT_8b }, },
   { 2121 /* orn */, AArch64::ORNWrs, Convert__Reg1_0__Reg1_1__Reg1_2__imm_95_0, 0, { MCK_GPR32, MCK_GPR32, MCK_GPR32 }, },
-  { 2121 /* orn */, AArch64::ORRWri, Convert__Reg1_0__Reg1_1__LogicalImm32Not1_2, 0, { MCK_GPR32sp, MCK_GPR32, MCK_LogicalImm32Not }, },
+  { 2121 /* orn */, AArch64::ORRWri, Convert__Reg1_0__Reg1_1__LogicalImm32Not1_2, Feature_UseNegativeImmediates, { MCK_GPR32sp, MCK_GPR32, MCK_LogicalImm32Not }, },
   { 2121 /* orn */, AArch64::ORNXrs, Convert__Reg1_0__Reg1_1__Reg1_2__imm_95_0, 0, { MCK_GPR64, MCK_GPR64, MCK_GPR64 }, },
-  { 2121 /* orn */, AArch64::ORRXri, Convert__Reg1_0__Reg1_1__LogicalImm64Not1_2, 0, { MCK_GPR64sp, MCK_GPR64, MCK_LogicalImm64Not }, },
+  { 2121 /* orn */, AArch64::ORRXri, Convert__Reg1_0__Reg1_1__LogicalImm64Not1_2, Feature_UseNegativeImmediates, { MCK_GPR64sp, MCK_GPR64, MCK_LogicalImm64Not }, },
   { 2121 /* orn */, AArch64::ORNWrs, Convert__Reg1_0__Reg1_1__Reg1_2__LogicalShifter321_3, 0, { MCK_GPR32, MCK_GPR32, MCK_GPR32, MCK_LogicalShifter32 }, },
   { 2121 /* orn */, AArch64::ORNXrs, Convert__Reg1_0__Reg1_1__Reg1_2__LogicalShifter641_3, 0, { MCK_GPR64, MCK_GPR64, MCK_GPR64, MCK_LogicalShifter64 }, },
   { 2121 /* orn */, AArch64::ORNv16i8, Convert__VectorReg1281_0__VectorReg1281_2__VectorReg1281_4, Feature_HasNEON, { MCK_VectorReg128, MCK__DOT_16b, MCK_VectorReg128, MCK__DOT_16b, MCK_VectorReg128, MCK__DOT_16b }, },
@@ -8918,30 +8926,30 @@ static const MatchEntry MatchTable0[] = {
   { 2661 /* sqneg */, AArch64::SQNEGv2i32, Convert__VectorReg641_0__VectorReg641_2, Feature_HasNEON, { MCK_VectorReg64, MCK__DOT_2s, MCK_VectorReg64, MCK__DOT_2s }, },
   { 2661 /* sqneg */, AArch64::SQNEGv4i16, Convert__VectorReg641_0__VectorReg641_2, Feature_HasNEON, { MCK_VectorReg64, MCK__DOT_4h, MCK_VectorReg64, MCK__DOT_4h }, },
   { 2661 /* sqneg */, AArch64::SQNEGv8i8, Convert__VectorReg641_0__VectorReg641_2, Feature_HasNEON, { MCK_VectorReg64, MCK__DOT_8b, MCK_VectorReg64, MCK__DOT_8b }, },
-  { 2667 /* sqrdmlah */, AArch64::SQRDMLAHv1i16, Convert__Reg1_0__Tie0__Reg1_1__Reg1_2, Feature_HasV8_1a, { MCK_FPR16, MCK_FPR16, MCK_FPR16 }, },
-  { 2667 /* sqrdmlah */, AArch64::SQRDMLAHv1i32, Convert__Reg1_0__Tie0__Reg1_1__Reg1_2, Feature_HasV8_1a, { MCK_FPR32, MCK_FPR32, MCK_FPR32 }, },
-  { 2667 /* sqrdmlah */, AArch64::SQRDMLAHi16_indexed, Convert__Reg1_0__Tie0__Reg1_1__VectorRegLo1_2__VectorIndexH1_4, Feature_HasNEON|Feature_HasV8_1a, { MCK_FPR16, MCK_FPR16, MCK_VectorRegLo, MCK__DOT_h, MCK_VectorIndexH }, },
-  { 2667 /* sqrdmlah */, AArch64::SQRDMLAHi32_indexed, Convert__Reg1_0__Tie0__Reg1_1__VectorReg1281_2__VectorIndexS1_4, Feature_HasNEON|Feature_HasV8_1a, { MCK_FPR32, MCK_FPR32, MCK_VectorReg128, MCK__DOT_s, MCK_VectorIndexS }, },
-  { 2667 /* sqrdmlah */, AArch64::SQRDMLAHv4i32, Convert__VectorReg1281_0__Tie0__VectorReg1281_2__VectorReg1281_4, Feature_HasNEON|Feature_HasV8_1a, { MCK_VectorReg128, MCK__DOT_4s, MCK_VectorReg128, MCK__DOT_4s, MCK_VectorReg128, MCK__DOT_4s }, },
-  { 2667 /* sqrdmlah */, AArch64::SQRDMLAHv8i16, Convert__VectorReg1281_0__Tie0__VectorReg1281_2__VectorReg1281_4, Feature_HasNEON|Feature_HasV8_1a, { MCK_VectorReg128, MCK__DOT_8h, MCK_VectorReg128, MCK__DOT_8h, MCK_VectorReg128, MCK__DOT_8h }, },
-  { 2667 /* sqrdmlah */, AArch64::SQRDMLAHv2i32, Convert__VectorReg641_0__Tie0__VectorReg641_2__VectorReg641_4, Feature_HasNEON|Feature_HasV8_1a, { MCK_VectorReg64, MCK__DOT_2s, MCK_VectorReg64, MCK__DOT_2s, MCK_VectorReg64, MCK__DOT_2s }, },
-  { 2667 /* sqrdmlah */, AArch64::SQRDMLAHv4i16, Convert__VectorReg641_0__Tie0__VectorReg641_2__VectorReg641_4, Feature_HasNEON|Feature_HasV8_1a, { MCK_VectorReg64, MCK__DOT_4h, MCK_VectorReg64, MCK__DOT_4h, MCK_VectorReg64, MCK__DOT_4h }, },
-  { 2667 /* sqrdmlah */, AArch64::SQRDMLAHv4i32_indexed, Convert__VectorReg1281_0__Tie0__VectorReg1281_2__VectorReg1281_4__VectorIndexS1_6, Feature_HasNEON|Feature_HasV8_1a, { MCK_VectorReg128, MCK__DOT_4s, MCK_VectorReg128, MCK__DOT_4s, MCK_VectorReg128, MCK__DOT_s, MCK_VectorIndexS }, },
-  { 2667 /* sqrdmlah */, AArch64::SQRDMLAHv8i16_indexed, Convert__VectorReg1281_0__Tie0__VectorReg1281_2__VectorRegLo1_4__VectorIndexH1_6, Feature_HasNEON|Feature_HasV8_1a, { MCK_VectorReg128, MCK__DOT_8h, MCK_VectorReg128, MCK__DOT_8h, MCK_VectorRegLo, MCK__DOT_h, MCK_VectorIndexH }, },
-  { 2667 /* sqrdmlah */, AArch64::SQRDMLAHv2i32_indexed, Convert__VectorReg641_0__Tie0__VectorReg641_2__VectorReg1281_4__VectorIndexS1_6, Feature_HasNEON|Feature_HasV8_1a, { MCK_VectorReg64, MCK__DOT_2s, MCK_VectorReg64, MCK__DOT_2s, MCK_VectorReg128, MCK__DOT_s, MCK_VectorIndexS }, },
-  { 2667 /* sqrdmlah */, AArch64::SQRDMLAHv4i16_indexed, Convert__VectorReg641_0__Tie0__VectorReg641_2__VectorRegLo1_4__VectorIndexH1_6, Feature_HasNEON|Feature_HasV8_1a, { MCK_VectorReg64, MCK__DOT_4h, MCK_VectorReg64, MCK__DOT_4h, MCK_VectorRegLo, MCK__DOT_h, MCK_VectorIndexH }, },
-  { 2676 /* sqrdmlsh */, AArch64::SQRDMLSHv1i16, Convert__Reg1_0__Tie0__Reg1_1__Reg1_2, Feature_HasV8_1a, { MCK_FPR16, MCK_FPR16, MCK_FPR16 }, },
-  { 2676 /* sqrdmlsh */, AArch64::SQRDMLSHv1i32, Convert__Reg1_0__Tie0__Reg1_1__Reg1_2, Feature_HasV8_1a, { MCK_FPR32, MCK_FPR32, MCK_FPR32 }, },
-  { 2676 /* sqrdmlsh */, AArch64::SQRDMLSHi16_indexed, Convert__Reg1_0__Tie0__Reg1_1__VectorRegLo1_2__VectorIndexH1_4, Feature_HasNEON|Feature_HasV8_1a, { MCK_FPR16, MCK_FPR16, MCK_VectorRegLo, MCK__DOT_h, MCK_VectorIndexH }, },
-  { 2676 /* sqrdmlsh */, AArch64::SQRDMLSHi32_indexed, Convert__Reg1_0__Tie0__Reg1_1__VectorReg1281_2__VectorIndexS1_4, Feature_HasNEON|Feature_HasV8_1a, { MCK_FPR32, MCK_FPR32, MCK_VectorReg128, MCK__DOT_s, MCK_VectorIndexS }, },
-  { 2676 /* sqrdmlsh */, AArch64::SQRDMLSHv4i32, Convert__VectorReg1281_0__Tie0__VectorReg1281_2__VectorReg1281_4, Feature_HasNEON|Feature_HasV8_1a, { MCK_VectorReg128, MCK__DOT_4s, MCK_VectorReg128, MCK__DOT_4s, MCK_VectorReg128, MCK__DOT_4s }, },
-  { 2676 /* sqrdmlsh */, AArch64::SQRDMLSHv8i16, Convert__VectorReg1281_0__Tie0__VectorReg1281_2__VectorReg1281_4, Feature_HasNEON|Feature_HasV8_1a, { MCK_VectorReg128, MCK__DOT_8h, MCK_VectorReg128, MCK__DOT_8h, MCK_VectorReg128, MCK__DOT_8h }, },
-  { 2676 /* sqrdmlsh */, AArch64::SQRDMLSHv2i32, Convert__VectorReg641_0__Tie0__VectorReg641_2__VectorReg641_4, Feature_HasNEON|Feature_HasV8_1a, { MCK_VectorReg64, MCK__DOT_2s, MCK_VectorReg64, MCK__DOT_2s, MCK_VectorReg64, MCK__DOT_2s }, },
-  { 2676 /* sqrdmlsh */, AArch64::SQRDMLSHv4i16, Convert__VectorReg641_0__Tie0__VectorReg641_2__VectorReg641_4, Feature_HasNEON|Feature_HasV8_1a, { MCK_VectorReg64, MCK__DOT_4h, MCK_VectorReg64, MCK__DOT_4h, MCK_VectorReg64, MCK__DOT_4h }, },
-  { 2676 /* sqrdmlsh */, AArch64::SQRDMLSHv4i32_indexed, Convert__VectorReg1281_0__Tie0__VectorReg1281_2__VectorReg1281_4__VectorIndexS1_6, Feature_HasNEON|Feature_HasV8_1a, { MCK_VectorReg128, MCK__DOT_4s, MCK_VectorReg128, MCK__DOT_4s, MCK_VectorReg128, MCK__DOT_s, MCK_VectorIndexS }, },
-  { 2676 /* sqrdmlsh */, AArch64::SQRDMLSHv8i16_indexed, Convert__VectorReg1281_0__Tie0__VectorReg1281_2__VectorRegLo1_4__VectorIndexH1_6, Feature_HasNEON|Feature_HasV8_1a, { MCK_VectorReg128, MCK__DOT_8h, MCK_VectorReg128, MCK__DOT_8h, MCK_VectorRegLo, MCK__DOT_h, MCK_VectorIndexH }, },
-  { 2676 /* sqrdmlsh */, AArch64::SQRDMLSHv2i32_indexed, Convert__VectorReg641_0__Tie0__VectorReg641_2__VectorReg1281_4__VectorIndexS1_6, Feature_HasNEON|Feature_HasV8_1a, { MCK_VectorReg64, MCK__DOT_2s, MCK_VectorReg64, MCK__DOT_2s, MCK_VectorReg128, MCK__DOT_s, MCK_VectorIndexS }, },
-  { 2676 /* sqrdmlsh */, AArch64::SQRDMLSHv4i16_indexed, Convert__VectorReg641_0__Tie0__VectorReg641_2__VectorRegLo1_4__VectorIndexH1_6, Feature_HasNEON|Feature_HasV8_1a, { MCK_VectorReg64, MCK__DOT_4h, MCK_VectorReg64, MCK__DOT_4h, MCK_VectorRegLo, MCK__DOT_h, MCK_VectorIndexH }, },
+  { 2667 /* sqrdmlah */, AArch64::SQRDMLAHv1i16, Convert__Reg1_0__Tie0__Reg1_1__Reg1_2, Feature_HasRDM, { MCK_FPR16, MCK_FPR16, MCK_FPR16 }, },
+  { 2667 /* sqrdmlah */, AArch64::SQRDMLAHv1i32, Convert__Reg1_0__Tie0__Reg1_1__Reg1_2, Feature_HasRDM, { MCK_FPR32, MCK_FPR32, MCK_FPR32 }, },
+  { 2667 /* sqrdmlah */, AArch64::SQRDMLAHi16_indexed, Convert__Reg1_0__Tie0__Reg1_1__VectorRegLo1_2__VectorIndexH1_4, Feature_HasNEON|Feature_HasRDM, { MCK_FPR16, MCK_FPR16, MCK_VectorRegLo, MCK__DOT_h, MCK_VectorIndexH }, },
+  { 2667 /* sqrdmlah */, AArch64::SQRDMLAHi32_indexed, Convert__Reg1_0__Tie0__Reg1_1__VectorReg1281_2__VectorIndexS1_4, Feature_HasNEON|Feature_HasRDM, { MCK_FPR32, MCK_FPR32, MCK_VectorReg128, MCK__DOT_s, MCK_VectorIndexS }, },
+  { 2667 /* sqrdmlah */, AArch64::SQRDMLAHv4i32, Convert__VectorReg1281_0__Tie0__VectorReg1281_2__VectorReg1281_4, Feature_HasNEON|Feature_HasRDM, { MCK_VectorReg128, MCK__DOT_4s, MCK_VectorReg128, MCK__DOT_4s, MCK_VectorReg128, MCK__DOT_4s }, },
+  { 2667 /* sqrdmlah */, AArch64::SQRDMLAHv8i16, Convert__VectorReg1281_0__Tie0__VectorReg1281_2__VectorReg1281_4, Feature_HasNEON|Feature_HasRDM, { MCK_VectorReg128, MCK__DOT_8h, MCK_VectorReg128, MCK__DOT_8h, MCK_VectorReg128, MCK__DOT_8h }, },
+  { 2667 /* sqrdmlah */, AArch64::SQRDMLAHv2i32, Convert__VectorReg641_0__Tie0__VectorReg641_2__VectorReg641_4, Feature_HasNEON|Feature_HasRDM, { MCK_VectorReg64, MCK__DOT_2s, MCK_VectorReg64, MCK__DOT_2s, MCK_VectorReg64, MCK__DOT_2s }, },
+  { 2667 /* sqrdmlah */, AArch64::SQRDMLAHv4i16, Convert__VectorReg641_0__Tie0__VectorReg641_2__VectorReg641_4, Feature_HasNEON|Feature_HasRDM, { MCK_VectorReg64, MCK__DOT_4h, MCK_VectorReg64, MCK__DOT_4h, MCK_VectorReg64, MCK__DOT_4h }, },
+  { 2667 /* sqrdmlah */, AArch64::SQRDMLAHv4i32_indexed, Convert__VectorReg1281_0__Tie0__VectorReg1281_2__VectorReg1281_4__VectorIndexS1_6, Feature_HasNEON|Feature_HasRDM, { MCK_VectorReg128, MCK__DOT_4s, MCK_VectorReg128, MCK__DOT_4s, MCK_VectorReg128, MCK__DOT_s, MCK_VectorIndexS }, },
+  { 2667 /* sqrdmlah */, AArch64::SQRDMLAHv8i16_indexed, Convert__VectorReg1281_0__Tie0__VectorReg1281_2__VectorRegLo1_4__VectorIndexH1_6, Feature_HasNEON|Feature_HasRDM, { MCK_VectorReg128, MCK__DOT_8h, MCK_VectorReg128, MCK__DOT_8h, MCK_VectorRegLo, MCK__DOT_h, MCK_VectorIndexH }, },
+  { 2667 /* sqrdmlah */, AArch64::SQRDMLAHv2i32_indexed, Convert__VectorReg641_0__Tie0__VectorReg641_2__VectorReg1281_4__VectorIndexS1_6, Feature_HasNEON|Feature_HasRDM, { MCK_VectorReg64, MCK__DOT_2s, MCK_VectorReg64, MCK__DOT_2s, MCK_VectorReg128, MCK__DOT_s, MCK_VectorIndexS }, },
+  { 2667 /* sqrdmlah */, AArch64::SQRDMLAHv4i16_indexed, Convert__VectorReg641_0__Tie0__VectorReg641_2__VectorRegLo1_4__VectorIndexH1_6, Feature_HasNEON|Feature_HasRDM, { MCK_VectorReg64, MCK__DOT_4h, MCK_VectorReg64, MCK__DOT_4h, MCK_VectorRegLo, MCK__DOT_h, MCK_VectorIndexH }, },
+  { 2676 /* sqrdmlsh */, AArch64::SQRDMLSHv1i16, Convert__Reg1_0__Tie0__Reg1_1__Reg1_2, Feature_HasRDM, { MCK_FPR16, MCK_FPR16, MCK_FPR16 }, },
+  { 2676 /* sqrdmlsh */, AArch64::SQRDMLSHv1i32, Convert__Reg1_0__Tie0__Reg1_1__Reg1_2, Feature_HasRDM, { MCK_FPR32, MCK_FPR32, MCK_FPR32 }, },
+  { 2676 /* sqrdmlsh */, AArch64::SQRDMLSHi16_indexed, Convert__Reg1_0__Tie0__Reg1_1__VectorRegLo1_2__VectorIndexH1_4, Feature_HasNEON|Feature_HasRDM, { MCK_FPR16, MCK_FPR16, MCK_VectorRegLo, MCK__DOT_h, MCK_VectorIndexH }, },
+  { 2676 /* sqrdmlsh */, AArch64::SQRDMLSHi32_indexed, Convert__Reg1_0__Tie0__Reg1_1__VectorReg1281_2__VectorIndexS1_4, Feature_HasNEON|Feature_HasRDM, { MCK_FPR32, MCK_FPR32, MCK_VectorReg128, MCK__DOT_s, MCK_VectorIndexS }, },
+  { 2676 /* sqrdmlsh */, AArch64::SQRDMLSHv4i32, Convert__VectorReg1281_0__Tie0__VectorReg1281_2__VectorReg1281_4, Feature_HasNEON|Feature_HasRDM, { MCK_VectorReg128, MCK__DOT_4s, MCK_VectorReg128, MCK__DOT_4s, MCK_VectorReg128, MCK__DOT_4s }, },
+  { 2676 /* sqrdmlsh */, AArch64::SQRDMLSHv8i16, Convert__VectorReg1281_0__Tie0__VectorReg1281_2__VectorReg1281_4, Feature_HasNEON|Feature_HasRDM, { MCK_VectorReg128, MCK__DOT_8h, MCK_VectorReg128, MCK__DOT_8h, MCK_VectorReg128, MCK__DOT_8h }, },
+  { 2676 /* sqrdmlsh */, AArch64::SQRDMLSHv2i32, Convert__VectorReg641_0__Tie0__VectorReg641_2__VectorReg641_4, Feature_HasNEON|Feature_HasRDM, { MCK_VectorReg64, MCK__DOT_2s, MCK_VectorReg64, MCK__DOT_2s, MCK_VectorReg64, MCK__DOT_2s }, },
+  { 2676 /* sqrdmlsh */, AArch64::SQRDMLSHv4i16, Convert__VectorReg641_0__Tie0__VectorReg641_2__VectorReg641_4, Feature_HasNEON|Feature_HasRDM, { MCK_VectorReg64, MCK__DOT_4h, MCK_VectorReg64, MCK__DOT_4h, MCK_VectorReg64, MCK__DOT_4h }, },
+  { 2676 /* sqrdmlsh */, AArch64::SQRDMLSHv4i32_indexed, Convert__VectorReg1281_0__Tie0__VectorReg1281_2__VectorReg1281_4__VectorIndexS1_6, Feature_HasNEON|Feature_HasRDM, { MCK_VectorReg128, MCK__DOT_4s, MCK_VectorReg128, MCK__DOT_4s, MCK_VectorReg128, MCK__DOT_s, MCK_VectorIndexS }, },
+  { 2676 /* sqrdmlsh */, AArch64::SQRDMLSHv8i16_indexed, Convert__VectorReg1281_0__Tie0__VectorReg1281_2__VectorRegLo1_4__VectorIndexH1_6, Feature_HasNEON|Feature_HasRDM, { MCK_VectorReg128, MCK__DOT_8h, MCK_VectorReg128, MCK__DOT_8h, MCK_VectorRegLo, MCK__DOT_h, MCK_VectorIndexH }, },
+  { 2676 /* sqrdmlsh */, AArch64::SQRDMLSHv2i32_indexed, Convert__VectorReg641_0__Tie0__VectorReg641_2__VectorReg1281_4__VectorIndexS1_6, Feature_HasNEON|Feature_HasRDM, { MCK_VectorReg64, MCK__DOT_2s, MCK_VectorReg64, MCK__DOT_2s, MCK_VectorReg128, MCK__DOT_s, MCK_VectorIndexS }, },
+  { 2676 /* sqrdmlsh */, AArch64::SQRDMLSHv4i16_indexed, Convert__VectorReg641_0__Tie0__VectorReg641_2__VectorRegLo1_4__VectorIndexH1_6, Feature_HasNEON|Feature_HasRDM, { MCK_VectorReg64, MCK__DOT_4h, MCK_VectorReg64, MCK__DOT_4h, MCK_VectorRegLo, MCK__DOT_h, MCK_VectorIndexH }, },
   { 2685 /* sqrdmulh */, AArch64::SQRDMULHv1i16, Convert__Reg1_0__Reg1_1__Reg1_2, Feature_HasNEON, { MCK_FPR16, MCK_FPR16, MCK_FPR16 }, },
   { 2685 /* sqrdmulh */, AArch64::SQRDMULHv1i32, Convert__Reg1_0__Reg1_1__Reg1_2, Feature_HasNEON, { MCK_FPR32, MCK_FPR32, MCK_FPR32 }, },
   { 2685 /* sqrdmulh */, AArch64::SQRDMULHv1i16_indexed, Convert__Reg1_0__Reg1_1__VectorRegLo1_2__VectorIndexH1_4, Feature_HasNEON, { MCK_FPR16, MCK_FPR16, MCK_VectorRegLo, MCK__DOT_h, MCK_VectorIndexH }, },
@@ -9774,11 +9782,11 @@ static const MatchEntry MatchTable0[] = {
   { 3425 /* sub */, AArch64::SUBv1i64, Convert__Reg1_0__Reg1_1__Reg1_2, Feature_HasNEON, { MCK_FPR64, MCK_FPR64, MCK_FPR64 }, },
   { 3425 /* sub */, AArch64::SUBWrs, Convert__Reg1_0__Reg1_1__Reg1_2__imm_95_0, 0, { MCK_GPR32, MCK_GPR32, MCK_GPR32 }, },
   { 3425 /* sub */, AArch64::SUBWrx, Convert__Reg1_0__Reg1_1__Reg1_2__imm_95_16, 0, { MCK_GPR32sp, MCK_GPR32sponly, MCK_GPR32 }, },
-  { 3425 /* sub */, AArch64::ADDWri, Convert__Reg1_0__Reg1_1__AddSubImmNeg2_2, 0, { MCK_GPR32sp, MCK_GPR32sp, MCK_AddSubImmNeg }, },
+  { 3425 /* sub */, AArch64::ADDWri, Convert__Reg1_0__Reg1_1__AddSubImmNeg2_2, Feature_UseNegativeImmediates, { MCK_GPR32sp, MCK_GPR32sp, MCK_AddSubImmNeg }, },
   { 3425 /* sub */, AArch64::SUBWri, Convert__Reg1_0__Reg1_1__AddSubImm2_2, 0, { MCK_GPR32sp, MCK_GPR32sp, MCK_AddSubImm }, },
   { 3425 /* sub */, AArch64::SUBXrs, Convert__Reg1_0__Reg1_1__Reg1_2__imm_95_0, 0, { MCK_GPR64, MCK_GPR64, MCK_GPR64 }, },
   { 3425 /* sub */, AArch64::SUBXrx64, Convert__Reg1_0__Reg1_1__Reg1_2__imm_95_24, 0, { MCK_GPR64sp, MCK_GPR64sponly, MCK_GPR64 }, },
-  { 3425 /* sub */, AArch64::ADDXri, Convert__Reg1_0__Reg1_1__AddSubImmNeg2_2, 0, { MCK_GPR64sp, MCK_GPR64sp, MCK_AddSubImmNeg }, },
+  { 3425 /* sub */, AArch64::ADDXri, Convert__Reg1_0__Reg1_1__AddSubImmNeg2_2, Feature_UseNegativeImmediates, { MCK_GPR64sp, MCK_GPR64sp, MCK_AddSubImmNeg }, },
   { 3425 /* sub */, AArch64::SUBXri, Convert__Reg1_0__Reg1_1__AddSubImm2_2, 0, { MCK_GPR64sp, MCK_GPR64sp, MCK_AddSubImm }, },
   { 3425 /* sub */, AArch64::SUBWrs, Convert__Reg1_0__Reg1_1__Reg1_2__ArithmeticShifter321_3, 0, { MCK_GPR32, MCK_GPR32, MCK_GPR32, MCK_ArithmeticShifter32 }, },
   { 3425 /* sub */, AArch64::SUBWrx, Convert__Reg1_0__Reg1_1__Reg1_2__Extend1_3, 0, { MCK_GPR32sp, MCK_GPR32sp, MCK_GPR32, MCK_Extend }, },
@@ -9800,11 +9808,11 @@ static const MatchEntry MatchTable0[] = {
   { 3435 /* subhn2 */, AArch64::SUBHNv4i32_v8i16, Convert__VectorReg1281_0__Tie0__VectorReg1281_2__VectorReg1281_4, Feature_HasNEON, { MCK_VectorReg128, MCK__DOT_8h, MCK_VectorReg128, MCK__DOT_4s, MCK_VectorReg128, MCK__DOT_4s }, },
   { 3442 /* subs */, AArch64::SUBSWrx, Convert__Reg1_0__Reg1_1__Reg1_2__imm_95_16, 0, { MCK_GPR32, MCK_GPR32sponly, MCK_GPR32 }, },
   { 3442 /* subs */, AArch64::SUBSWrs, Convert__Reg1_0__Reg1_1__Reg1_2__imm_95_0, 0, { MCK_GPR32, MCK_GPR32, MCK_GPR32 }, },
-  { 3442 /* subs */, AArch64::ADDSWri, Convert__Reg1_0__Reg1_1__AddSubImmNeg2_2, 0, { MCK_GPR32, MCK_GPR32sp, MCK_AddSubImmNeg }, },
+  { 3442 /* subs */, AArch64::ADDSWri, Convert__Reg1_0__Reg1_1__AddSubImmNeg2_2, Feature_UseNegativeImmediates, { MCK_GPR32, MCK_GPR32sp, MCK_AddSubImmNeg }, },
   { 3442 /* subs */, AArch64::SUBSWri, Convert__Reg1_0__Reg1_1__AddSubImm2_2, 0, { MCK_GPR32, MCK_GPR32sp, MCK_AddSubImm }, },
   { 3442 /* subs */, AArch64::SUBSXrx64, Convert__Reg1_0__Reg1_1__Reg1_2__imm_95_24, 0, { MCK_GPR64, MCK_GPR64sponly, MCK_GPR64 }, },
   { 3442 /* subs */, AArch64::SUBSXrs, Convert__Reg1_0__Reg1_1__Reg1_2__imm_95_0, 0, { MCK_GPR64, MCK_GPR64, MCK_GPR64 }, },
-  { 3442 /* subs */, AArch64::ADDSXri, Convert__Reg1_0__Reg1_1__AddSubImmNeg2_2, 0, { MCK_GPR64, MCK_GPR64sp, MCK_AddSubImmNeg }, },
+  { 3442 /* subs */, AArch64::ADDSXri, Convert__Reg1_0__Reg1_1__AddSubImmNeg2_2, Feature_UseNegativeImmediates, { MCK_GPR64, MCK_GPR64sp, MCK_AddSubImmNeg }, },
   { 3442 /* subs */, AArch64::SUBSXri, Convert__Reg1_0__Reg1_1__AddSubImm2_2, 0, { MCK_GPR64, MCK_GPR64sp, MCK_AddSubImm }, },
   { 3442 /* subs */, AArch64::SUBSWrs, Convert__Reg1_0__Reg1_1__Reg1_2__ArithmeticShifter321_3, 0, { MCK_GPR32, MCK_GPR32, MCK_GPR32, MCK_ArithmeticShifter32 }, },
   { 3442 /* subs */, AArch64::SUBSWrx, Convert__Reg1_0__Reg1_1__Reg1_2__Extend1_3, 0, { MCK_GPR32, MCK_GPR32sp, MCK_GPR32, MCK_Extend }, },
@@ -10330,11 +10338,11 @@ static const MatchEntry MatchTable1[] = {
   { 13 /* add */, AArch64::ADDv1i64, Convert__Reg1_0__Reg1_1__Reg1_2, Feature_HasNEON, { MCK_FPR64, MCK_FPR64, MCK_FPR64 }, },
   { 13 /* add */, AArch64::ADDWrs, Convert__Reg1_0__Reg1_1__Reg1_2__imm_95_0, 0, { MCK_GPR32, MCK_GPR32, MCK_GPR32 }, },
   { 13 /* add */, AArch64::ADDWrx, Convert__Reg1_0__Reg1_1__Reg1_2__imm_95_16, 0, { MCK_GPR32sp, MCK_GPR32sponly, MCK_GPR32 }, },
-  { 13 /* add */, AArch64::SUBWri, Convert__Reg1_0__Reg1_1__AddSubImmNeg2_2, 0, { MCK_GPR32sp, MCK_GPR32sp, MCK_AddSubImmNeg }, },
+  { 13 /* add */, AArch64::SUBWri, Convert__Reg1_0__Reg1_1__AddSubImmNeg2_2, Feature_UseNegativeImmediates, { MCK_GPR32sp, MCK_GPR32sp, MCK_AddSubImmNeg }, },
   { 13 /* add */, AArch64::ADDWri, Convert__Reg1_0__Reg1_1__AddSubImm2_2, 0, { MCK_GPR32sp, MCK_GPR32sp, MCK_AddSubImm }, },
   { 13 /* add */, AArch64::ADDXrs, Convert__Reg1_0__Reg1_1__Reg1_2__imm_95_0, 0, { MCK_GPR64, MCK_GPR64, MCK_GPR64 }, },
   { 13 /* add */, AArch64::ADDXrx64, Convert__Reg1_0__Reg1_1__Reg1_2__imm_95_24, 0, { MCK_GPR64sp, MCK_GPR64sponly, MCK_GPR64 }, },
-  { 13 /* add */, AArch64::SUBXri, Convert__Reg1_0__Reg1_1__AddSubImmNeg2_2, 0, { MCK_GPR64sp, MCK_GPR64sp, MCK_AddSubImmNeg }, },
+  { 13 /* add */, AArch64::SUBXri, Convert__Reg1_0__Reg1_1__AddSubImmNeg2_2, Feature_UseNegativeImmediates, { MCK_GPR64sp, MCK_GPR64sp, MCK_AddSubImmNeg }, },
   { 13 /* add */, AArch64::ADDXri, Convert__Reg1_0__Reg1_1__AddSubImm2_2, 0, { MCK_GPR64sp, MCK_GPR64sp, MCK_AddSubImm }, },
   { 13 /* add */, AArch64::ADDv16i8, Convert__VectorReg1281_1__VectorReg1281_2__VectorReg1281_3, Feature_HasNEON, { MCK__DOT_16b, MCK_VectorReg128, MCK_VectorReg128, MCK_VectorReg128 }, },
   { 13 /* add */, AArch64::ADDv2i64, Convert__VectorReg1281_1__VectorReg1281_2__VectorReg1281_3, Feature_HasNEON, { MCK__DOT_2d, MCK_VectorReg128, MCK_VectorReg128, MCK_VectorReg128 }, },
@@ -10364,11 +10372,11 @@ static const MatchEntry MatchTable1[] = {
   { 30 /* addp */, AArch64::ADDPv8i16, Convert__VectorReg1281_1__VectorReg1281_2__VectorReg1281_3, Feature_HasNEON, { MCK__DOT_8h, MCK_VectorReg128, MCK_VectorReg128, MCK_VectorReg128 }, },
   { 35 /* adds */, AArch64::ADDSWrx, Convert__Reg1_0__Reg1_1__Reg1_2__imm_95_16, 0, { MCK_GPR32, MCK_GPR32sponly, MCK_GPR32 }, },
   { 35 /* adds */, AArch64::ADDSWrs, Convert__Reg1_0__Reg1_1__Reg1_2__imm_95_0, 0, { MCK_GPR32, MCK_GPR32, MCK_GPR32 }, },
-  { 35 /* adds */, AArch64::SUBSWri, Convert__Reg1_0__Reg1_1__AddSubImmNeg2_2, 0, { MCK_GPR32, MCK_GPR32sp, MCK_AddSubImmNeg }, },
+  { 35 /* adds */, AArch64::SUBSWri, Convert__Reg1_0__Reg1_1__AddSubImmNeg2_2, Feature_UseNegativeImmediates, { MCK_GPR32, MCK_GPR32sp, MCK_AddSubImmNeg }, },
   { 35 /* adds */, AArch64::ADDSWri, Convert__Reg1_0__Reg1_1__AddSubImm2_2, 0, { MCK_GPR32, MCK_GPR32sp, MCK_AddSubImm }, },
   { 35 /* adds */, AArch64::ADDSXrx64, Convert__Reg1_0__Reg1_1__Reg1_2__imm_95_24, 0, { MCK_GPR64, MCK_GPR64sponly, MCK_GPR64 }, },
   { 35 /* adds */, AArch64::ADDSXrs, Convert__Reg1_0__Reg1_1__Reg1_2__imm_95_0, 0, { MCK_GPR64, MCK_GPR64, MCK_GPR64 }, },
-  { 35 /* adds */, AArch64::SUBSXri, Convert__Reg1_0__Reg1_1__AddSubImmNeg2_2, 0, { MCK_GPR64, MCK_GPR64sp, MCK_AddSubImmNeg }, },
+  { 35 /* adds */, AArch64::SUBSXri, Convert__Reg1_0__Reg1_1__AddSubImmNeg2_2, Feature_UseNegativeImmediates, { MCK_GPR64, MCK_GPR64sp, MCK_AddSubImmNeg }, },
   { 35 /* adds */, AArch64::ADDSXri, Convert__Reg1_0__Reg1_1__AddSubImm2_2, 0, { MCK_GPR64, MCK_GPR64sp, MCK_AddSubImm }, },
   { 35 /* adds */, AArch64::ADDSWrs, Convert__Reg1_0__Reg1_1__Reg1_2__ArithmeticShifter321_3, 0, { MCK_GPR32, MCK_GPR32, MCK_GPR32, MCK_ArithmeticShifter32 }, },
   { 35 /* adds */, AArch64::ADDSWrx, Convert__Reg1_0__Reg1_1__Reg1_2__Extend1_3, 0, { MCK_GPR32, MCK_GPR32sp, MCK_GPR32, MCK_Extend }, },
@@ -10415,9 +10423,9 @@ static const MatchEntry MatchTable1[] = {
   { 101 /* bic */, AArch64::BICv4i32, Convert__VectorReg1281_1__Tie0__Imm0_2551_2__imm_95_0, 0, { MCK__DOT_4s, MCK_VectorReg128, MCK_Imm0_255 }, },
   { 101 /* bic */, AArch64::BICv8i16, Convert__VectorReg1281_1__Tie0__Imm0_2551_2__imm_95_0, 0, { MCK__DOT_8h, MCK_VectorReg128, MCK_Imm0_255 }, },
   { 101 /* bic */, AArch64::BICWrs, Convert__Reg1_0__Reg1_1__Reg1_2__imm_95_0, 0, { MCK_GPR32, MCK_GPR32, MCK_GPR32 }, },
-  { 101 /* bic */, AArch64::ANDWri, Convert__Reg1_0__Reg1_1__LogicalImm32Not1_2, 0, { MCK_GPR32sp, MCK_GPR32, MCK_LogicalImm32Not }, },
+  { 101 /* bic */, AArch64::ANDWri, Convert__Reg1_0__Reg1_1__LogicalImm32Not1_2, Feature_UseNegativeImmediates, { MCK_GPR32sp, MCK_GPR32, MCK_LogicalImm32Not }, },
   { 101 /* bic */, AArch64::BICXrs, Convert__Reg1_0__Reg1_1__Reg1_2__imm_95_0, 0, { MCK_GPR64, MCK_GPR64, MCK_GPR64 }, },
-  { 101 /* bic */, AArch64::ANDXri, Convert__Reg1_0__Reg1_1__LogicalImm64Not1_2, 0, { MCK_GPR64sp, MCK_GPR64, MCK_LogicalImm64Not }, },
+  { 101 /* bic */, AArch64::ANDXri, Convert__Reg1_0__Reg1_1__LogicalImm64Not1_2, Feature_UseNegativeImmediates, { MCK_GPR64sp, MCK_GPR64, MCK_LogicalImm64Not }, },
   { 101 /* bic */, AArch64::BICv4i32, Convert__VectorReg1281_0__Tie0__Imm0_2551_2__imm_95_0, 0, { MCK_VectorReg128, MCK__DOT_4s, MCK_Imm0_255 }, },
   { 101 /* bic */, AArch64::BICv8i16, Convert__VectorReg1281_0__Tie0__Imm0_2551_2__imm_95_0, 0, { MCK_VectorReg128, MCK__DOT_8h, MCK_Imm0_255 }, },
   { 101 /* bic */, AArch64::BICv2i32, Convert__VectorReg641_0__Tie0__Imm0_2551_2__imm_95_0, 0, { MCK_VectorReg64, MCK__DOT_2s, MCK_Imm0_255 }, },
@@ -10431,9 +10439,9 @@ static const MatchEntry MatchTable1[] = {
   { 101 /* bic */, AArch64::BICWrs, Convert__Reg1_0__Reg1_1__Reg1_2__LogicalShifter321_3, 0, { MCK_GPR32, MCK_GPR32, MCK_GPR32, MCK_LogicalShifter32 }, },
   { 101 /* bic */, AArch64::BICXrs, Convert__Reg1_0__Reg1_1__Reg1_2__LogicalShifter641_3, 0, { MCK_GPR64, MCK_GPR64, MCK_GPR64, MCK_LogicalShifter64 }, },
   { 105 /* bics */, AArch64::BICSWrs, Convert__Reg1_0__Reg1_1__Reg1_2__imm_95_0, 0, { MCK_GPR32, MCK_GPR32, MCK_GPR32 }, },
-  { 105 /* bics */, AArch64::ANDSWri, Convert__Reg1_0__Reg1_1__LogicalImm32Not1_2, 0, { MCK_GPR32, MCK_GPR32, MCK_LogicalImm32Not }, },
+  { 105 /* bics */, AArch64::ANDSWri, Convert__Reg1_0__Reg1_1__LogicalImm32Not1_2, Feature_UseNegativeImmediates, { MCK_GPR32, MCK_GPR32, MCK_LogicalImm32Not }, },
   { 105 /* bics */, AArch64::BICSXrs, Convert__Reg1_0__Reg1_1__Reg1_2__imm_95_0, 0, { MCK_GPR64, MCK_GPR64, MCK_GPR64 }, },
-  { 105 /* bics */, AArch64::ANDSXri, Convert__Reg1_0__Reg1_1__LogicalImm64Not1_2, 0, { MCK_GPR64, MCK_GPR64, MCK_LogicalImm64Not }, },
+  { 105 /* bics */, AArch64::ANDSXri, Convert__Reg1_0__Reg1_1__LogicalImm64Not1_2, Feature_UseNegativeImmediates, { MCK_GPR64, MCK_GPR64, MCK_LogicalImm64Not }, },
   { 105 /* bics */, AArch64::BICSWrs, Convert__Reg1_0__Reg1_1__Reg1_2__LogicalShifter321_3, 0, { MCK_GPR32, MCK_GPR32, MCK_GPR32, MCK_LogicalShifter32 }, },
   { 105 /* bics */, AArch64::BICSXrs, Convert__Reg1_0__Reg1_1__Reg1_2__LogicalShifter641_3, 0, { MCK_GPR64, MCK_GPR64, MCK_GPR64, MCK_LogicalShifter64 }, },
   { 110 /* bif */, AArch64::BIFv16i8, Convert__VectorReg1281_1__VectorReg1281_2__VectorReg1281_3, Feature_HasNEON, { MCK__DOT_16b, MCK_VectorReg128, MCK_VectorReg128, MCK_VectorReg128 }, },
@@ -10619,10 +10627,10 @@ static const MatchEntry MatchTable1[] = {
   { 316 /* cmn */, AArch64::ADDSWrx, Convert__regWZR__Reg1_0__Reg1_1__imm_95_16, 0, { MCK_GPR32sponly, MCK_GPR32 }, },
   { 316 /* cmn */, AArch64::ADDSXrx64, Convert__regXZR__Reg1_0__Reg1_1__imm_95_24, 0, { MCK_GPR64sponly, MCK_GPR64 }, },
   { 316 /* cmn */, AArch64::ADDSWrs, Convert__regWZR__Reg1_0__Reg1_1__imm_95_0, 0, { MCK_GPR32, MCK_GPR32 }, },
-  { 316 /* cmn */, AArch64::SUBSWri, Convert__regWZR__Reg1_0__AddSubImmNeg2_1, 0, { MCK_GPR32sp, MCK_AddSubImmNeg }, },
+  { 316 /* cmn */, AArch64::SUBSWri, Convert__regWZR__Reg1_0__AddSubImmNeg2_1, Feature_UseNegativeImmediates, { MCK_GPR32sp, MCK_AddSubImmNeg }, },
   { 316 /* cmn */, AArch64::ADDSWri, Convert__regWZR__Reg1_0__AddSubImm2_1, 0, { MCK_GPR32sp, MCK_AddSubImm }, },
   { 316 /* cmn */, AArch64::ADDSXrs, Convert__regXZR__Reg1_0__Reg1_1__imm_95_0, 0, { MCK_GPR64, MCK_GPR64 }, },
-  { 316 /* cmn */, AArch64::SUBSXri, Convert__regXZR__Reg1_0__AddSubImmNeg2_1, 0, { MCK_GPR64sp, MCK_AddSubImmNeg }, },
+  { 316 /* cmn */, AArch64::SUBSXri, Convert__regXZR__Reg1_0__AddSubImmNeg2_1, Feature_UseNegativeImmediates, { MCK_GPR64sp, MCK_AddSubImmNeg }, },
   { 316 /* cmn */, AArch64::ADDSXri, Convert__regXZR__Reg1_0__AddSubImm2_1, 0, { MCK_GPR64sp, MCK_AddSubImm }, },
   { 316 /* cmn */, AArch64::ADDSWrs, Convert__regWZR__Reg1_0__Reg1_1__ArithmeticShifter321_2, 0, { MCK_GPR32, MCK_GPR32, MCK_ArithmeticShifter32 }, },
   { 316 /* cmn */, AArch64::ADDSWrx, Convert__regWZR__Reg1_0__Reg1_1__Extend1_2, 0, { MCK_GPR32sp, MCK_GPR32, MCK_Extend }, },
@@ -10632,10 +10640,10 @@ static const MatchEntry MatchTable1[] = {
   { 320 /* cmp */, AArch64::SUBSWrx, Convert__regWZR__Reg1_0__Reg1_1__imm_95_16, 0, { MCK_GPR32sponly, MCK_GPR32 }, },
   { 320 /* cmp */, AArch64::SUBSXrx64, Convert__regXZR__Reg1_0__Reg1_1__imm_95_24, 0, { MCK_GPR64sponly, MCK_GPR64 }, },
   { 320 /* cmp */, AArch64::SUBSWrs, Convert__regWZR__Reg1_0__Reg1_1__imm_95_0, 0, { MCK_GPR32, MCK_GPR32 }, },
-  { 320 /* cmp */, AArch64::ADDSWri, Convert__regWZR__Reg1_0__AddSubImmNeg2_1, 0, { MCK_GPR32sp, MCK_AddSubImmNeg }, },
+  { 320 /* cmp */, AArch64::ADDSWri, Convert__regWZR__Reg1_0__AddSubImmNeg2_1, Feature_UseNegativeImmediates, { MCK_GPR32sp, MCK_AddSubImmNeg }, },
   { 320 /* cmp */, AArch64::SUBSWri, Convert__regWZR__Reg1_0__AddSubImm2_1, 0, { MCK_GPR32sp, MCK_AddSubImm }, },
   { 320 /* cmp */, AArch64::SUBSXrs, Convert__regXZR__Reg1_0__Reg1_1__imm_95_0, 0, { MCK_GPR64, MCK_GPR64 }, },
-  { 320 /* cmp */, AArch64::ADDSXri, Convert__regXZR__Reg1_0__AddSubImmNeg2_1, 0, { MCK_GPR64sp, MCK_AddSubImmNeg }, },
+  { 320 /* cmp */, AArch64::ADDSXri, Convert__regXZR__Reg1_0__AddSubImmNeg2_1, Feature_UseNegativeImmediates, { MCK_GPR64sp, MCK_AddSubImmNeg }, },
   { 320 /* cmp */, AArch64::SUBSXri, Convert__regXZR__Reg1_0__AddSubImm2_1, 0, { MCK_GPR64sp, MCK_AddSubImm }, },
   { 320 /* cmp */, AArch64::SUBSWrs, Convert__regWZR__Reg1_0__Reg1_1__ArithmeticShifter321_2, 0, { MCK_GPR32, MCK_GPR32, MCK_ArithmeticShifter32 }, },
   { 320 /* cmp */, AArch64::SUBSWrx, Convert__regWZR__Reg1_0__Reg1_1__Extend1_2, 0, { MCK_GPR32sp, MCK_GPR32, MCK_Extend }, },
@@ -10702,9 +10710,9 @@ static const MatchEntry MatchTable1[] = {
   { 464 /* dup */, AArch64::DUPv8i8lane, Convert__VectorReg641_1__VectorReg1281_2__VectorIndexB1_3, Feature_HasNEON, { MCK__DOT_8b, MCK_VectorReg64, MCK_VectorReg128, MCK_VectorIndexB }, },
   { 464 /* dup */, AArch64::DUPv8i16lane, Convert__VectorReg1281_1__VectorReg1281_2__VectorIndexH1_3, Feature_HasNEON, { MCK__DOT_8h, MCK_VectorReg128, MCK_VectorReg128, MCK_VectorIndexH }, },
   { 468 /* eon */, AArch64::EONWrs, Convert__Reg1_0__Reg1_1__Reg1_2__imm_95_0, 0, { MCK_GPR32, MCK_GPR32, MCK_GPR32 }, },
-  { 468 /* eon */, AArch64::EORWri, Convert__Reg1_0__Reg1_1__LogicalImm32Not1_2, 0, { MCK_GPR32sp, MCK_GPR32, MCK_LogicalImm32Not }, },
+  { 468 /* eon */, AArch64::EORWri, Convert__Reg1_0__Reg1_1__LogicalImm32Not1_2, Feature_UseNegativeImmediates, { MCK_GPR32sp, MCK_GPR32, MCK_LogicalImm32Not }, },
   { 468 /* eon */, AArch64::EONXrs, Convert__Reg1_0__Reg1_1__Reg1_2__imm_95_0, 0, { MCK_GPR64, MCK_GPR64, MCK_GPR64 }, },
-  { 468 /* eon */, AArch64::EORXri, Convert__Reg1_0__Reg1_1__LogicalImm64Not1_2, 0, { MCK_GPR64sp, MCK_GPR64, MCK_LogicalImm64Not }, },
+  { 468 /* eon */, AArch64::EORXri, Convert__Reg1_0__Reg1_1__LogicalImm64Not1_2, Feature_UseNegativeImmediates, { MCK_GPR64sp, MCK_GPR64, MCK_LogicalImm64Not }, },
   { 468 /* eon */, AArch64::EONWrs, Convert__Reg1_0__Reg1_1__Reg1_2__LogicalShifter321_3, 0, { MCK_GPR32, MCK_GPR32, MCK_GPR32, MCK_LogicalShifter32 }, },
   { 468 /* eon */, AArch64::EONXrs, Convert__Reg1_0__Reg1_1__Reg1_2__LogicalShifter641_3, 0, { MCK_GPR64, MCK_GPR64, MCK_GPR64, MCK_LogicalShifter64 }, },
   { 472 /* eor */, AArch64::EORWrs, Convert__Reg1_0__Reg1_1__Reg1_2__imm_95_0, 0, { MCK_GPR32, MCK_GPR32, MCK_GPR32 }, },
@@ -12576,9 +12584,9 @@ static const MatchEntry MatchTable1[] = {
   { 2117 /* not */, AArch64::NOTv16i8, Convert__VectorReg1281_1__VectorReg1281_2, Feature_HasNEON, { MCK__DOT_16b, MCK_VectorReg128, MCK_VectorReg128 }, },
   { 2117 /* not */, AArch64::NOTv8i8, Convert__VectorReg641_1__VectorReg641_2, Feature_HasNEON, { MCK__DOT_8b, MCK_VectorReg64, MCK_VectorReg64 }, },
   { 2121 /* orn */, AArch64::ORNWrs, Convert__Reg1_0__Reg1_1__Reg1_2__imm_95_0, 0, { MCK_GPR32, MCK_GPR32, MCK_GPR32 }, },
-  { 2121 /* orn */, AArch64::ORRWri, Convert__Reg1_0__Reg1_1__LogicalImm32Not1_2, 0, { MCK_GPR32sp, MCK_GPR32, MCK_LogicalImm32Not }, },
+  { 2121 /* orn */, AArch64::ORRWri, Convert__Reg1_0__Reg1_1__LogicalImm32Not1_2, Feature_UseNegativeImmediates, { MCK_GPR32sp, MCK_GPR32, MCK_LogicalImm32Not }, },
   { 2121 /* orn */, AArch64::ORNXrs, Convert__Reg1_0__Reg1_1__Reg1_2__imm_95_0, 0, { MCK_GPR64, MCK_GPR64, MCK_GPR64 }, },
-  { 2121 /* orn */, AArch64::ORRXri, Convert__Reg1_0__Reg1_1__LogicalImm64Not1_2, 0, { MCK_GPR64sp, MCK_GPR64, MCK_LogicalImm64Not }, },
+  { 2121 /* orn */, AArch64::ORRXri, Convert__Reg1_0__Reg1_1__LogicalImm64Not1_2, Feature_UseNegativeImmediates, { MCK_GPR64sp, MCK_GPR64, MCK_LogicalImm64Not }, },
   { 2121 /* orn */, AArch64::ORNv16i8, Convert__VectorReg1281_1__VectorReg1281_2__VectorReg1281_3, Feature_HasNEON, { MCK__DOT_16b, MCK_VectorReg128, MCK_VectorReg128, MCK_VectorReg128 }, },
   { 2121 /* orn */, AArch64::ORNv8i8, Convert__VectorReg641_1__VectorReg641_2__VectorReg641_3, Feature_HasNEON, { MCK__DOT_8b, MCK_VectorReg64, MCK_VectorReg64, MCK_VectorReg64 }, },
   { 2121 /* orn */, AArch64::ORNWrs, Convert__Reg1_0__Reg1_1__Reg1_2__LogicalShifter321_3, 0, { MCK_GPR32, MCK_GPR32, MCK_GPR32, MCK_LogicalShifter32 }, },
@@ -12963,30 +12971,30 @@ static const MatchEntry MatchTable1[] = {
   { 2661 /* sqneg */, AArch64::SQNEGv4i32, Convert__VectorReg1281_1__VectorReg1281_2, Feature_HasNEON, { MCK__DOT_4s, MCK_VectorReg128, MCK_VectorReg128 }, },
   { 2661 /* sqneg */, AArch64::SQNEGv8i8, Convert__VectorReg641_1__VectorReg641_2, Feature_HasNEON, { MCK__DOT_8b, MCK_VectorReg64, MCK_VectorReg64 }, },
   { 2661 /* sqneg */, AArch64::SQNEGv8i16, Convert__VectorReg1281_1__VectorReg1281_2, Feature_HasNEON, { MCK__DOT_8h, MCK_VectorReg128, MCK_VectorReg128 }, },
-  { 2667 /* sqrdmlah */, AArch64::SQRDMLAHv1i16, Convert__Reg1_0__Tie0__Reg1_1__Reg1_2, Feature_HasV8_1a, { MCK_FPR16, MCK_FPR16, MCK_FPR16 }, },
-  { 2667 /* sqrdmlah */, AArch64::SQRDMLAHv1i32, Convert__Reg1_0__Tie0__Reg1_1__Reg1_2, Feature_HasV8_1a, { MCK_FPR32, MCK_FPR32, MCK_FPR32 }, },
-  { 2667 /* sqrdmlah */, AArch64::SQRDMLAHv2i32, Convert__VectorReg641_1__Tie0__VectorReg641_2__VectorReg641_3, Feature_HasNEON|Feature_HasV8_1a, { MCK__DOT_2s, MCK_VectorReg64, MCK_VectorReg64, MCK_VectorReg64 }, },
-  { 2667 /* sqrdmlah */, AArch64::SQRDMLAHv4i16, Convert__VectorReg641_1__Tie0__VectorReg641_2__VectorReg641_3, Feature_HasNEON|Feature_HasV8_1a, { MCK__DOT_4h, MCK_VectorReg64, MCK_VectorReg64, MCK_VectorReg64 }, },
-  { 2667 /* sqrdmlah */, AArch64::SQRDMLAHv4i32, Convert__VectorReg1281_1__Tie0__VectorReg1281_2__VectorReg1281_3, Feature_HasNEON|Feature_HasV8_1a, { MCK__DOT_4s, MCK_VectorReg128, MCK_VectorReg128, MCK_VectorReg128 }, },
-  { 2667 /* sqrdmlah */, AArch64::SQRDMLAHv8i16, Convert__VectorReg1281_1__Tie0__VectorReg1281_2__VectorReg1281_3, Feature_HasNEON|Feature_HasV8_1a, { MCK__DOT_8h, MCK_VectorReg128, MCK_VectorReg128, MCK_VectorReg128 }, },
-  { 2667 /* sqrdmlah */, AArch64::SQRDMLAHv2i32_indexed, Convert__VectorReg641_1__Tie0__VectorReg641_2__VectorReg1281_3__VectorIndexS1_4, Feature_HasNEON|Feature_HasV8_1a, { MCK__DOT_2s, MCK_VectorReg64, MCK_VectorReg64, MCK_VectorReg128, MCK_VectorIndexS }, },
-  { 2667 /* sqrdmlah */, AArch64::SQRDMLAHv4i16_indexed, Convert__VectorReg641_1__Tie0__VectorReg641_2__VectorRegLo1_3__VectorIndexH1_4, Feature_HasNEON|Feature_HasV8_1a, { MCK__DOT_4h, MCK_VectorReg64, MCK_VectorReg64, MCK_VectorRegLo, MCK_VectorIndexH }, },
-  { 2667 /* sqrdmlah */, AArch64::SQRDMLAHv4i32_indexed, Convert__VectorReg1281_1__Tie0__VectorReg1281_2__VectorReg1281_3__VectorIndexS1_4, Feature_HasNEON|Feature_HasV8_1a, { MCK__DOT_4s, MCK_VectorReg128, MCK_VectorReg128, MCK_VectorReg128, MCK_VectorIndexS }, },
-  { 2667 /* sqrdmlah */, AArch64::SQRDMLAHv8i16_indexed, Convert__VectorReg1281_1__Tie0__VectorReg1281_2__VectorRegLo1_3__VectorIndexH1_4, Feature_HasNEON|Feature_HasV8_1a, { MCK__DOT_8h, MCK_VectorReg128, MCK_VectorReg128, MCK_VectorRegLo, MCK_VectorIndexH }, },
-  { 2667 /* sqrdmlah */, AArch64::SQRDMLAHi16_indexed, Convert__Reg1_1__Tie0__Reg1_2__VectorRegLo1_3__VectorIndexH1_4, Feature_HasNEON|Feature_HasV8_1a, { MCK__DOT_h, MCK_FPR16, MCK_FPR16, MCK_VectorRegLo, MCK_VectorIndexH }, },
-  { 2667 /* sqrdmlah */, AArch64::SQRDMLAHi32_indexed, Convert__Reg1_1__Tie0__Reg1_2__VectorReg1281_3__VectorIndexS1_4, Feature_HasNEON|Feature_HasV8_1a, { MCK__DOT_s, MCK_FPR32, MCK_FPR32, MCK_VectorReg128, MCK_VectorIndexS }, },
-  { 2676 /* sqrdmlsh */, AArch64::SQRDMLSHv1i16, Convert__Reg1_0__Tie0__Reg1_1__Reg1_2, Feature_HasV8_1a, { MCK_FPR16, MCK_FPR16, MCK_FPR16 }, },
-  { 2676 /* sqrdmlsh */, AArch64::SQRDMLSHv1i32, Convert__Reg1_0__Tie0__Reg1_1__Reg1_2, Feature_HasV8_1a, { MCK_FPR32, MCK_FPR32, MCK_FPR32 }, },
-  { 2676 /* sqrdmlsh */, AArch64::SQRDMLSHv2i32, Convert__VectorReg641_1__Tie0__VectorReg641_2__VectorReg641_3, Feature_HasNEON|Feature_HasV8_1a, { MCK__DOT_2s, MCK_VectorReg64, MCK_VectorReg64, MCK_VectorReg64 }, },
-  { 2676 /* sqrdmlsh */, AArch64::SQRDMLSHv4i16, Convert__VectorReg641_1__Tie0__VectorReg641_2__VectorReg641_3, Feature_HasNEON|Feature_HasV8_1a, { MCK__DOT_4h, MCK_VectorReg64, MCK_VectorReg64, MCK_VectorReg64 }, },
-  { 2676 /* sqrdmlsh */, AArch64::SQRDMLSHv4i32, Convert__VectorReg1281_1__Tie0__VectorReg1281_2__VectorReg1281_3, Feature_HasNEON|Feature_HasV8_1a, { MCK__DOT_4s, MCK_VectorReg128, MCK_VectorReg128, MCK_VectorReg128 }, },
-  { 2676 /* sqrdmlsh */, AArch64::SQRDMLSHv8i16, Convert__VectorReg1281_1__Tie0__VectorReg1281_2__VectorReg1281_3, Feature_HasNEON|Feature_HasV8_1a, { MCK__DOT_8h, MCK_VectorReg128, MCK_VectorReg128, MCK_VectorReg128 }, },
-  { 2676 /* sqrdmlsh */, AArch64::SQRDMLSHv2i32_indexed, Convert__VectorReg641_1__Tie0__VectorReg641_2__VectorReg1281_3__VectorIndexS1_4, Feature_HasNEON|Feature_HasV8_1a, { MCK__DOT_2s, MCK_VectorReg64, MCK_VectorReg64, MCK_VectorReg128, MCK_VectorIndexS }, },
-  { 2676 /* sqrdmlsh */, AArch64::SQRDMLSHv4i16_indexed, Convert__VectorReg641_1__Tie0__VectorReg641_2__VectorRegLo1_3__VectorIndexH1_4, Feature_HasNEON|Feature_HasV8_1a, { MCK__DOT_4h, MCK_VectorReg64, MCK_VectorReg64, MCK_VectorRegLo, MCK_VectorIndexH }, },
-  { 2676 /* sqrdmlsh */, AArch64::SQRDMLSHv4i32_indexed, Convert__VectorReg1281_1__Tie0__VectorReg1281_2__VectorReg1281_3__VectorIndexS1_4, Feature_HasNEON|Feature_HasV8_1a, { MCK__DOT_4s, MCK_VectorReg128, MCK_VectorReg128, MCK_VectorReg128, MCK_VectorIndexS }, },
-  { 2676 /* sqrdmlsh */, AArch64::SQRDMLSHv8i16_indexed, Convert__VectorReg1281_1__Tie0__VectorReg1281_2__VectorRegLo1_3__VectorIndexH1_4, Feature_HasNEON|Feature_HasV8_1a, { MCK__DOT_8h, MCK_VectorReg128, MCK_VectorReg128, MCK_VectorRegLo, MCK_VectorIndexH }, },
-  { 2676 /* sqrdmlsh */, AArch64::SQRDMLSHi16_indexed, Convert__Reg1_1__Tie0__Reg1_2__VectorRegLo1_3__VectorIndexH1_4, Feature_HasNEON|Feature_HasV8_1a, { MCK__DOT_h, MCK_FPR16, MCK_FPR16, MCK_VectorRegLo, MCK_VectorIndexH }, },
-  { 2676 /* sqrdmlsh */, AArch64::SQRDMLSHi32_indexed, Convert__Reg1_1__Tie0__Reg1_2__VectorReg1281_3__VectorIndexS1_4, Feature_HasNEON|Feature_HasV8_1a, { MCK__DOT_s, MCK_FPR32, MCK_FPR32, MCK_VectorReg128, MCK_VectorIndexS }, },
+  { 2667 /* sqrdmlah */, AArch64::SQRDMLAHv1i16, Convert__Reg1_0__Tie0__Reg1_1__Reg1_2, Feature_HasRDM, { MCK_FPR16, MCK_FPR16, MCK_FPR16 }, },
+  { 2667 /* sqrdmlah */, AArch64::SQRDMLAHv1i32, Convert__Reg1_0__Tie0__Reg1_1__Reg1_2, Feature_HasRDM, { MCK_FPR32, MCK_FPR32, MCK_FPR32 }, },
+  { 2667 /* sqrdmlah */, AArch64::SQRDMLAHv2i32, Convert__VectorReg641_1__Tie0__VectorReg641_2__VectorReg641_3, Feature_HasNEON|Feature_HasRDM, { MCK__DOT_2s, MCK_VectorReg64, MCK_VectorReg64, MCK_VectorReg64 }, },
+  { 2667 /* sqrdmlah */, AArch64::SQRDMLAHv4i16, Convert__VectorReg641_1__Tie0__VectorReg641_2__VectorReg641_3, Feature_HasNEON|Feature_HasRDM, { MCK__DOT_4h, MCK_VectorReg64, MCK_VectorReg64, MCK_VectorReg64 }, },
+  { 2667 /* sqrdmlah */, AArch64::SQRDMLAHv4i32, Convert__VectorReg1281_1__Tie0__VectorReg1281_2__VectorReg1281_3, Feature_HasNEON|Feature_HasRDM, { MCK__DOT_4s, MCK_VectorReg128, MCK_VectorReg128, MCK_VectorReg128 }, },
+  { 2667 /* sqrdmlah */, AArch64::SQRDMLAHv8i16, Convert__VectorReg1281_1__Tie0__VectorReg1281_2__VectorReg1281_3, Feature_HasNEON|Feature_HasRDM, { MCK__DOT_8h, MCK_VectorReg128, MCK_VectorReg128, MCK_VectorReg128 }, },
+  { 2667 /* sqrdmlah */, AArch64::SQRDMLAHv2i32_indexed, Convert__VectorReg641_1__Tie0__VectorReg641_2__VectorReg1281_3__VectorIndexS1_4, Feature_HasNEON|Feature_HasRDM, { MCK__DOT_2s, MCK_VectorReg64, MCK_VectorReg64, MCK_VectorReg128, MCK_VectorIndexS }, },
+  { 2667 /* sqrdmlah */, AArch64::SQRDMLAHv4i16_indexed, Convert__VectorReg641_1__Tie0__VectorReg641_2__VectorRegLo1_3__VectorIndexH1_4, Feature_HasNEON|Feature_HasRDM, { MCK__DOT_4h, MCK_VectorReg64, MCK_VectorReg64, MCK_VectorRegLo, MCK_VectorIndexH }, },
+  { 2667 /* sqrdmlah */, AArch64::SQRDMLAHv4i32_indexed, Convert__VectorReg1281_1__Tie0__VectorReg1281_2__VectorReg1281_3__VectorIndexS1_4, Feature_HasNEON|Feature_HasRDM, { MCK__DOT_4s, MCK_VectorReg128, MCK_VectorReg128, MCK_VectorReg128, MCK_VectorIndexS }, },
+  { 2667 /* sqrdmlah */, AArch64::SQRDMLAHv8i16_indexed, Convert__VectorReg1281_1__Tie0__VectorReg1281_2__VectorRegLo1_3__VectorIndexH1_4, Feature_HasNEON|Feature_HasRDM, { MCK__DOT_8h, MCK_VectorReg128, MCK_VectorReg128, MCK_VectorRegLo, MCK_VectorIndexH }, },
+  { 2667 /* sqrdmlah */, AArch64::SQRDMLAHi16_indexed, Convert__Reg1_1__Tie0__Reg1_2__VectorRegLo1_3__VectorIndexH1_4, Feature_HasNEON|Feature_HasRDM, { MCK__DOT_h, MCK_FPR16, MCK_FPR16, MCK_VectorRegLo, MCK_VectorIndexH }, },
+  { 2667 /* sqrdmlah */, AArch64::SQRDMLAHi32_indexed, Convert__Reg1_1__Tie0__Reg1_2__VectorReg1281_3__VectorIndexS1_4, Feature_HasNEON|Feature_HasRDM, { MCK__DOT_s, MCK_FPR32, MCK_FPR32, MCK_VectorReg128, MCK_VectorIndexS }, },
+  { 2676 /* sqrdmlsh */, AArch64::SQRDMLSHv1i16, Convert__Reg1_0__Tie0__Reg1_1__Reg1_2, Feature_HasRDM, { MCK_FPR16, MCK_FPR16, MCK_FPR16 }, },
+  { 2676 /* sqrdmlsh */, AArch64::SQRDMLSHv1i32, Convert__Reg1_0__Tie0__Reg1_1__Reg1_2, Feature_HasRDM, { MCK_FPR32, MCK_FPR32, MCK_FPR32 }, },
+  { 2676 /* sqrdmlsh */, AArch64::SQRDMLSHv2i32, Convert__VectorReg641_1__Tie0__VectorReg641_2__VectorReg641_3, Feature_HasNEON|Feature_HasRDM, { MCK__DOT_2s, MCK_VectorReg64, MCK_VectorReg64, MCK_VectorReg64 }, },
+  { 2676 /* sqrdmlsh */, AArch64::SQRDMLSHv4i16, Convert__VectorReg641_1__Tie0__VectorReg641_2__VectorReg641_3, Feature_HasNEON|Feature_HasRDM, { MCK__DOT_4h, MCK_VectorReg64, MCK_VectorReg64, MCK_VectorReg64 }, },
+  { 2676 /* sqrdmlsh */, AArch64::SQRDMLSHv4i32, Convert__VectorReg1281_1__Tie0__VectorReg1281_2__VectorReg1281_3, Feature_HasNEON|Feature_HasRDM, { MCK__DOT_4s, MCK_VectorReg128, MCK_VectorReg128, MCK_VectorReg128 }, },
+  { 2676 /* sqrdmlsh */, AArch64::SQRDMLSHv8i16, Convert__VectorReg1281_1__Tie0__VectorReg1281_2__VectorReg1281_3, Feature_HasNEON|Feature_HasRDM, { MCK__DOT_8h, MCK_VectorReg128, MCK_VectorReg128, MCK_VectorReg128 }, },
+  { 2676 /* sqrdmlsh */, AArch64::SQRDMLSHv2i32_indexed, Convert__VectorReg641_1__Tie0__VectorReg641_2__VectorReg1281_3__VectorIndexS1_4, Feature_HasNEON|Feature_HasRDM, { MCK__DOT_2s, MCK_VectorReg64, MCK_VectorReg64, MCK_VectorReg128, MCK_VectorIndexS }, },
+  { 2676 /* sqrdmlsh */, AArch64::SQRDMLSHv4i16_indexed, Convert__VectorReg641_1__Tie0__VectorReg641_2__VectorRegLo1_3__VectorIndexH1_4, Feature_HasNEON|Feature_HasRDM, { MCK__DOT_4h, MCK_VectorReg64, MCK_VectorReg64, MCK_VectorRegLo, MCK_VectorIndexH }, },
+  { 2676 /* sqrdmlsh */, AArch64::SQRDMLSHv4i32_indexed, Convert__VectorReg1281_1__Tie0__VectorReg1281_2__VectorReg1281_3__VectorIndexS1_4, Feature_HasNEON|Feature_HasRDM, { MCK__DOT_4s, MCK_VectorReg128, MCK_VectorReg128, MCK_VectorReg128, MCK_VectorIndexS }, },
+  { 2676 /* sqrdmlsh */, AArch64::SQRDMLSHv8i16_indexed, Convert__VectorReg1281_1__Tie0__VectorReg1281_2__VectorRegLo1_3__VectorIndexH1_4, Feature_HasNEON|Feature_HasRDM, { MCK__DOT_8h, MCK_VectorReg128, MCK_VectorReg128, MCK_VectorRegLo, MCK_VectorIndexH }, },
+  { 2676 /* sqrdmlsh */, AArch64::SQRDMLSHi16_indexed, Convert__Reg1_1__Tie0__Reg1_2__VectorRegLo1_3__VectorIndexH1_4, Feature_HasNEON|Feature_HasRDM, { MCK__DOT_h, MCK_FPR16, MCK_FPR16, MCK_VectorRegLo, MCK_VectorIndexH }, },
+  { 2676 /* sqrdmlsh */, AArch64::SQRDMLSHi32_indexed, Convert__Reg1_1__Tie0__Reg1_2__VectorReg1281_3__VectorIndexS1_4, Feature_HasNEON|Feature_HasRDM, { MCK__DOT_s, MCK_FPR32, MCK_FPR32, MCK_VectorReg128, MCK_VectorIndexS }, },
   { 2685 /* sqrdmulh */, AArch64::SQRDMULHv1i16, Convert__Reg1_0__Reg1_1__Reg1_2, Feature_HasNEON, { MCK_FPR16, MCK_FPR16, MCK_FPR16 }, },
   { 2685 /* sqrdmulh */, AArch64::SQRDMULHv1i32, Convert__Reg1_0__Reg1_1__Reg1_2, Feature_HasNEON, { MCK_FPR32, MCK_FPR32, MCK_FPR32 }, },
   { 2685 /* sqrdmulh */, AArch64::SQRDMULHv2i32, Convert__VectorReg641_1__VectorReg641_2__VectorReg641_3, Feature_HasNEON, { MCK__DOT_2s, MCK_VectorReg64, MCK_VectorReg64, MCK_VectorReg64 }, },
@@ -13819,11 +13827,11 @@ static const MatchEntry MatchTable1[] = {
   { 3425 /* sub */, AArch64::SUBv1i64, Convert__Reg1_0__Reg1_1__Reg1_2, Feature_HasNEON, { MCK_FPR64, MCK_FPR64, MCK_FPR64 }, },
   { 3425 /* sub */, AArch64::SUBWrs, Convert__Reg1_0__Reg1_1__Reg1_2__imm_95_0, 0, { MCK_GPR32, MCK_GPR32, MCK_GPR32 }, },
   { 3425 /* sub */, AArch64::SUBWrx, Convert__Reg1_0__Reg1_1__Reg1_2__imm_95_16, 0, { MCK_GPR32sp, MCK_GPR32sponly, MCK_GPR32 }, },
-  { 3425 /* sub */, AArch64::ADDWri, Convert__Reg1_0__Reg1_1__AddSubImmNeg2_2, 0, { MCK_GPR32sp, MCK_GPR32sp, MCK_AddSubImmNeg }, },
+  { 3425 /* sub */, AArch64::ADDWri, Convert__Reg1_0__Reg1_1__AddSubImmNeg2_2, Feature_UseNegativeImmediates, { MCK_GPR32sp, MCK_GPR32sp, MCK_AddSubImmNeg }, },
   { 3425 /* sub */, AArch64::SUBWri, Convert__Reg1_0__Reg1_1__AddSubImm2_2, 0, { MCK_GPR32sp, MCK_GPR32sp, MCK_AddSubImm }, },
   { 3425 /* sub */, AArch64::SUBXrs, Convert__Reg1_0__Reg1_1__Reg1_2__imm_95_0, 0, { MCK_GPR64, MCK_GPR64, MCK_GPR64 }, },
   { 3425 /* sub */, AArch64::SUBXrx64, Convert__Reg1_0__Reg1_1__Reg1_2__imm_95_24, 0, { MCK_GPR64sp, MCK_GPR64sponly, MCK_GPR64 }, },
-  { 3425 /* sub */, AArch64::ADDXri, Convert__Reg1_0__Reg1_1__AddSubImmNeg2_2, 0, { MCK_GPR64sp, MCK_GPR64sp, MCK_AddSubImmNeg }, },
+  { 3425 /* sub */, AArch64::ADDXri, Convert__Reg1_0__Reg1_1__AddSubImmNeg2_2, Feature_UseNegativeImmediates, { MCK_GPR64sp, MCK_GPR64sp, MCK_AddSubImmNeg }, },
   { 3425 /* sub */, AArch64::SUBXri, Convert__Reg1_0__Reg1_1__AddSubImm2_2, 0, { MCK_GPR64sp, MCK_GPR64sp, MCK_AddSubImm }, },
   { 3425 /* sub */, AArch64::SUBv16i8, Convert__VectorReg1281_1__VectorReg1281_2__VectorReg1281_3, Feature_HasNEON, { MCK__DOT_16b, MCK_VectorReg128, MCK_VectorReg128, MCK_VectorReg128 }, },
   { 3425 /* sub */, AArch64::SUBv2i64, Convert__VectorReg1281_1__VectorReg1281_2__VectorReg1281_3, Feature_HasNEON, { MCK__DOT_2d, MCK_VectorReg128, MCK_VectorReg128, MCK_VectorReg128 }, },
@@ -13845,11 +13853,11 @@ static const MatchEntry MatchTable1[] = {
   { 3435 /* subhn2 */, AArch64::SUBHNv4i32_v8i16, Convert__VectorReg1281_1__Tie0__VectorReg1281_2__VectorReg1281_3, Feature_HasNEON, { MCK__DOT_8h, MCK_VectorReg128, MCK_VectorReg128, MCK_VectorReg128 }, },
   { 3442 /* subs */, AArch64::SUBSWrx, Convert__Reg1_0__Reg1_1__Reg1_2__imm_95_16, 0, { MCK_GPR32, MCK_GPR32sponly, MCK_GPR32 }, },
   { 3442 /* subs */, AArch64::SUBSWrs, Convert__Reg1_0__Reg1_1__Reg1_2__imm_95_0, 0, { MCK_GPR32, MCK_GPR32, MCK_GPR32 }, },
-  { 3442 /* subs */, AArch64::ADDSWri, Convert__Reg1_0__Reg1_1__AddSubImmNeg2_2, 0, { MCK_GPR32, MCK_GPR32sp, MCK_AddSubImmNeg }, },
+  { 3442 /* subs */, AArch64::ADDSWri, Convert__Reg1_0__Reg1_1__AddSubImmNeg2_2, Feature_UseNegativeImmediates, { MCK_GPR32, MCK_GPR32sp, MCK_AddSubImmNeg }, },
   { 3442 /* subs */, AArch64::SUBSWri, Convert__Reg1_0__Reg1_1__AddSubImm2_2, 0, { MCK_GPR32, MCK_GPR32sp, MCK_AddSubImm }, },
   { 3442 /* subs */, AArch64::SUBSXrx64, Convert__Reg1_0__Reg1_1__Reg1_2__imm_95_24, 0, { MCK_GPR64, MCK_GPR64sponly, MCK_GPR64 }, },
   { 3442 /* subs */, AArch64::SUBSXrs, Convert__Reg1_0__Reg1_1__Reg1_2__imm_95_0, 0, { MCK_GPR64, MCK_GPR64, MCK_GPR64 }, },
-  { 3442 /* subs */, AArch64::ADDSXri, Convert__Reg1_0__Reg1_1__AddSubImmNeg2_2, 0, { MCK_GPR64, MCK_GPR64sp, MCK_AddSubImmNeg }, },
+  { 3442 /* subs */, AArch64::ADDSXri, Convert__Reg1_0__Reg1_1__AddSubImmNeg2_2, Feature_UseNegativeImmediates, { MCK_GPR64, MCK_GPR64sp, MCK_AddSubImmNeg }, },
   { 3442 /* subs */, AArch64::SUBSXri, Convert__Reg1_0__Reg1_1__AddSubImm2_2, 0, { MCK_GPR64, MCK_GPR64sp, MCK_AddSubImm }, },
   { 3442 /* subs */, AArch64::SUBSWrs, Convert__Reg1_0__Reg1_1__Reg1_2__ArithmeticShifter321_3, 0, { MCK_GPR32, MCK_GPR32, MCK_GPR32, MCK_ArithmeticShifter32 }, },
   { 3442 /* subs */, AArch64::SUBSWrx, Convert__Reg1_0__Reg1_1__Reg1_2__Extend1_3, 0, { MCK_GPR32, MCK_GPR32sp, MCK_GPR32, MCK_Extend }, },
@@ -14357,20 +14365,6 @@ static const MatchEntry MatchTable1[] = {
   { 4043 /* zip2 */, AArch64::ZIP2v8i16, Convert__VectorReg1281_1__VectorReg1281_2__VectorReg1281_3, Feature_HasNEON, { MCK__DOT_8h, MCK_VectorReg128, MCK_VectorReg128, MCK_VectorReg128 }, },
 };
 
-bool AArch64AsmParser::
-mnemonicIsValid(StringRef Mnemonic, unsigned VariantID) {
-  // Find the appropriate table for this asm variant.
-  const MatchEntry *Start, *End;
-  switch (VariantID) {
-  default: llvm_unreachable("invalid variant!");
-  case 0: Start = std::begin(MatchTable0); End = std::end(MatchTable0); break;
-  case 1: Start = std::begin(MatchTable1); End = std::end(MatchTable1); break;
-  }
-  // Search the table.
-  auto MnemonicRange = std::equal_range(Start, End, Mnemonic, LessOpcode());
-  return MnemonicRange.first != MnemonicRange.second;
-}
-
 unsigned AArch64AsmParser::
 MatchInstructionImpl(const OperandVector &Operands,
                      MCInst &Inst, uint64_t &ErrorInfo,
@@ -14544,20 +14538,20 @@ namespace {
 
 static const OperandMatchEntry OperandMatchTable[202] = {
   /* Operand List Mask, Mnemonic, Operand Class, Features */
-  { 0, 13 /* add */, MCK_AddSubImmNeg, 4 /* 2 */ },
-  { 0, 13 /* add */, MCK_AddSubImmNeg, 4 /* 2 */ },
+  { Feature_UseNegativeImmediates, 13 /* add */, MCK_AddSubImmNeg, 4 /* 2 */ },
+  { Feature_UseNegativeImmediates, 13 /* add */, MCK_AddSubImmNeg, 4 /* 2 */ },
   { 0, 13 /* add */, MCK_AddSubImm, 4 /* 2 */ },
   { 0, 13 /* add */, MCK_AddSubImm, 4 /* 2 */ },
-  { 0, 13 /* add */, MCK_AddSubImmNeg, 4 /* 2 */ },
-  { 0, 13 /* add */, MCK_AddSubImmNeg, 4 /* 2 */ },
+  { Feature_UseNegativeImmediates, 13 /* add */, MCK_AddSubImmNeg, 4 /* 2 */ },
+  { Feature_UseNegativeImmediates, 13 /* add */, MCK_AddSubImmNeg, 4 /* 2 */ },
   { 0, 13 /* add */, MCK_AddSubImm, 4 /* 2 */ },
   { 0, 13 /* add */, MCK_AddSubImm, 4 /* 2 */ },
-  { 0, 35 /* adds */, MCK_AddSubImmNeg, 4 /* 2 */ },
-  { 0, 35 /* adds */, MCK_AddSubImmNeg, 4 /* 2 */ },
+  { Feature_UseNegativeImmediates, 35 /* adds */, MCK_AddSubImmNeg, 4 /* 2 */ },
+  { Feature_UseNegativeImmediates, 35 /* adds */, MCK_AddSubImmNeg, 4 /* 2 */ },
   { 0, 35 /* adds */, MCK_AddSubImm, 4 /* 2 */ },
   { 0, 35 /* adds */, MCK_AddSubImm, 4 /* 2 */ },
-  { 0, 35 /* adds */, MCK_AddSubImmNeg, 4 /* 2 */ },
-  { 0, 35 /* adds */, MCK_AddSubImmNeg, 4 /* 2 */ },
+  { Feature_UseNegativeImmediates, 35 /* adds */, MCK_AddSubImmNeg, 4 /* 2 */ },
+  { Feature_UseNegativeImmediates, 35 /* adds */, MCK_AddSubImmNeg, 4 /* 2 */ },
   { 0, 35 /* adds */, MCK_AddSubImm, 4 /* 2 */ },
   { 0, 35 /* adds */, MCK_AddSubImm, 4 /* 2 */ },
   { 0, 45 /* adr */, MCK_AdrLabel, 2 /* 1 */ },
@@ -14580,20 +14574,20 @@ static const OperandMatchEntry OperandMatchTable[202] = {
   { Feature_HasLSE, 222 /* caspl */, MCK_WSeqPair, 3 /* 0, 1 */ },
   { Feature_HasLSE, 222 /* caspl */, MCK_XSeqPair, 3 /* 0, 1 */ },
   { Feature_HasLSE, 222 /* caspl */, MCK_XSeqPair, 3 /* 0, 1 */ },
-  { 0, 316 /* cmn */, MCK_AddSubImmNeg, 2 /* 1 */ },
-  { 0, 316 /* cmn */, MCK_AddSubImmNeg, 2 /* 1 */ },
+  { Feature_UseNegativeImmediates, 316 /* cmn */, MCK_AddSubImmNeg, 2 /* 1 */ },
+  { Feature_UseNegativeImmediates, 316 /* cmn */, MCK_AddSubImmNeg, 2 /* 1 */ },
   { 0, 316 /* cmn */, MCK_AddSubImm, 2 /* 1 */ },
   { 0, 316 /* cmn */, MCK_AddSubImm, 2 /* 1 */ },
-  { 0, 316 /* cmn */, MCK_AddSubImmNeg, 2 /* 1 */ },
-  { 0, 316 /* cmn */, MCK_AddSubImmNeg, 2 /* 1 */ },
+  { Feature_UseNegativeImmediates, 316 /* cmn */, MCK_AddSubImmNeg, 2 /* 1 */ },
+  { Feature_UseNegativeImmediates, 316 /* cmn */, MCK_AddSubImmNeg, 2 /* 1 */ },
   { 0, 316 /* cmn */, MCK_AddSubImm, 2 /* 1 */ },
   { 0, 316 /* cmn */, MCK_AddSubImm, 2 /* 1 */ },
-  { 0, 320 /* cmp */, MCK_AddSubImmNeg, 2 /* 1 */ },
-  { 0, 320 /* cmp */, MCK_AddSubImmNeg, 2 /* 1 */ },
+  { Feature_UseNegativeImmediates, 320 /* cmp */, MCK_AddSubImmNeg, 2 /* 1 */ },
+  { Feature_UseNegativeImmediates, 320 /* cmp */, MCK_AddSubImmNeg, 2 /* 1 */ },
   { 0, 320 /* cmp */, MCK_AddSubImm, 2 /* 1 */ },
   { 0, 320 /* cmp */, MCK_AddSubImm, 2 /* 1 */ },
-  { 0, 320 /* cmp */, MCK_AddSubImmNeg, 2 /* 1 */ },
-  { 0, 320 /* cmp */, MCK_AddSubImmNeg, 2 /* 1 */ },
+  { Feature_UseNegativeImmediates, 320 /* cmp */, MCK_AddSubImmNeg, 2 /* 1 */ },
+  { Feature_UseNegativeImmediates, 320 /* cmp */, MCK_AddSubImmNeg, 2 /* 1 */ },
   { 0, 320 /* cmp */, MCK_AddSubImm, 2 /* 1 */ },
   { 0, 320 /* cmp */, MCK_AddSubImm, 2 /* 1 */ },
   { 0, 451 /* dmb */, MCK_Barrier, 1 /* 0 */ },
@@ -14724,20 +14718,20 @@ static const OperandMatchEntry OperandMatchTable[202] = {
   { 0, 3413 /* stxrb */, MCK_GPR64sp0, 8 /* 3 */ },
   { 0, 3419 /* stxrh */, MCK_GPR64sp0, 8 /* 3 */ },
   { 0, 3419 /* stxrh */, MCK_GPR64sp0, 8 /* 3 */ },
-  { 0, 3425 /* sub */, MCK_AddSubImmNeg, 4 /* 2 */ },
-  { 0, 3425 /* sub */, MCK_AddSubImmNeg, 4 /* 2 */ },
+  { Feature_UseNegativeImmediates, 3425 /* sub */, MCK_AddSubImmNeg, 4 /* 2 */ },
+  { Feature_UseNegativeImmediates, 3425 /* sub */, MCK_AddSubImmNeg, 4 /* 2 */ },
   { 0, 3425 /* sub */, MCK_AddSubImm, 4 /* 2 */ },
   { 0, 3425 /* sub */, MCK_AddSubImm, 4 /* 2 */ },
-  { 0, 3425 /* sub */, MCK_AddSubImmNeg, 4 /* 2 */ },
-  { 0, 3425 /* sub */, MCK_AddSubImmNeg, 4 /* 2 */ },
+  { Feature_UseNegativeImmediates, 3425 /* sub */, MCK_AddSubImmNeg, 4 /* 2 */ },
+  { Feature_UseNegativeImmediates, 3425 /* sub */, MCK_AddSubImmNeg, 4 /* 2 */ },
   { 0, 3425 /* sub */, MCK_AddSubImm, 4 /* 2 */ },
   { 0, 3425 /* sub */, MCK_AddSubImm, 4 /* 2 */ },
-  { 0, 3442 /* subs */, MCK_AddSubImmNeg, 4 /* 2 */ },
-  { 0, 3442 /* subs */, MCK_AddSubImmNeg, 4 /* 2 */ },
+  { Feature_UseNegativeImmediates, 3442 /* subs */, MCK_AddSubImmNeg, 4 /* 2 */ },
+  { Feature_UseNegativeImmediates, 3442 /* subs */, MCK_AddSubImmNeg, 4 /* 2 */ },
   { 0, 3442 /* subs */, MCK_AddSubImm, 4 /* 2 */ },
   { 0, 3442 /* subs */, MCK_AddSubImm, 4 /* 2 */ },
-  { 0, 3442 /* subs */, MCK_AddSubImmNeg, 4 /* 2 */ },
-  { 0, 3442 /* subs */, MCK_AddSubImmNeg, 4 /* 2 */ },
+  { Feature_UseNegativeImmediates, 3442 /* subs */, MCK_AddSubImmNeg, 4 /* 2 */ },
+  { Feature_UseNegativeImmediates, 3442 /* subs */, MCK_AddSubImmNeg, 4 /* 2 */ },
   { 0, 3442 /* subs */, MCK_AddSubImm, 4 /* 2 */ },
   { 0, 3442 /* subs */, MCK_AddSubImm, 4 /* 2 */ },
   { 0, 3552 /* sys */, MCK_SysCR, 6 /* 1, 2 */ },

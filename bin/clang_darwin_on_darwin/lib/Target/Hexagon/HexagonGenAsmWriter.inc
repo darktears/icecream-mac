@@ -11,96 +11,106 @@
 void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
   static const char AsmStrs[] = {
   /* 0 */ '.', 'e', 'r', 'r', 'o', 'r', 32, '"', 's', 'h', 'o', 'u', 'l', 'd', 32, 'n', 'o', 't', 32, 'e', 'm', 'i', 't', '"', 32, 0,
-  /* 26 */ 'c', 'a', 'l', 'l', 32, 0,
-  /* 32 */ 'j', 'u', 'm', 'p', 32, 0,
-  /* 38 */ 'c', 'a', 'l', 'l', 'r', 32, 0,
-  /* 45 */ 'j', 'u', 'm', 'p', 'r', 32, 0,
-  /* 52 */ 'i', 'f', 32, '(', '!', 0,
-  /* 58 */ 'i', 'f', '(', '!', 0,
-  /* 63 */ '.', 'e', 'r', 'r', 'o', 'r', 32, '"', 's', 'h', 'o', 'u', 'l', 'd', 32, 'n', 'o', 't', 32, 'e', 'm', 'i', 't', '"', 0,
-  /* 88 */ 'm', 'e', 'm', 'd', '(', 'r', '2', '9', 32, '+', 32, '#', 0,
-  /* 101 */ 'm', 'e', 'm', 'w', '(', 'r', '2', '9', 32, '+', 32, '#', 0,
-  /* 114 */ 't', 'r', 'a', 'p', '0', '(', '#', 0,
-  /* 122 */ 't', 'r', 'a', 'p', '1', '(', '#', 0,
-  /* 130 */ 'm', 'e', 'm', 'b', '(', '#', 0,
-  /* 137 */ 'm', 'e', 'm', 'd', '(', '#', 0,
-  /* 144 */ 'a', 'l', 'l', 'o', 'c', 'f', 'r', 'a', 'm', 'e', '(', '#', 0,
-  /* 157 */ 'p', 'a', 'u', 's', 'e', '(', '#', 0,
-  /* 165 */ 'm', 'e', 'm', 'h', '(', '#', 0,
-  /* 172 */ 'i', 'm', 'm', 'e', 'x', 't', '(', '#', 0,
-  /* 181 */ 'm', 'e', 'm', 'w', '(', '#', 0,
-  /* 188 */ 'i', 'f', 32, '(', 0,
-  /* 193 */ 'p', '3', 32, '=', 32, 's', 'p', '1', 'l', 'o', 'o', 'p', '0', '(', 0,
-  /* 208 */ 'p', '3', 32, '=', 32, 's', 'p', '2', 'l', 'o', 'o', 'p', '0', '(', 0,
-  /* 223 */ 'p', '3', 32, '=', 32, 's', 'p', '3', 'l', 'o', 'o', 'p', '0', '(', 0,
-  /* 238 */ 'l', 'o', 'o', 'p', '1', '(', 0,
-  /* 245 */ 'l', '2', 'u', 'n', 'l', 'o', 'c', 'k', 'a', '(', 0,
-  /* 256 */ 'd', 'c', 'c', 'l', 'e', 'a', 'n', 'a', '(', 0,
-  /* 266 */ 'd', 'c', 'z', 'e', 'r', 'o', 'a', '(', 0,
-  /* 275 */ 'd', 'c', 'i', 'n', 'v', 'a', '(', 0,
-  /* 283 */ 'i', 'c', 'i', 'n', 'v', 'a', '(', 0,
-  /* 291 */ 'd', 'c', 'c', 'l', 'e', 'a', 'n', 'i', 'n', 'v', 'a', '(', 0,
-  /* 304 */ 'm', 'e', 'm', 'b', '(', 0,
-  /* 310 */ 'm', 'e', 'm', 'd', '_', 'l', 'o', 'c', 'k', 'e', 'd', '(', 0,
-  /* 323 */ 'm', 'e', 'm', 'w', '_', 'l', 'o', 'c', 'k', 'e', 'd', '(', 0,
-  /* 336 */ 'm', 'e', 'm', 'd', '(', 0,
-  /* 342 */ 't', 'r', 'a', 'c', 'e', '(', 0,
-  /* 349 */ 'v', 's', 'h', 'u', 'f', 'f', '(', 0,
-  /* 357 */ 'i', 'f', '(', 0,
-  /* 361 */ 'l', '2', 'f', 'e', 't', 'c', 'h', '(', 0,
-  /* 370 */ 'd', 'c', 'f', 'e', 't', 'c', 'h', '(', 0,
-  /* 379 */ 'm', 'e', 'm', 'h', '(', 0,
-  /* 385 */ 'v', 'd', 'e', 'a', 'l', '(', 0,
-  /* 392 */ 'v', 'm', 'e', 'm', '(', 0,
-  /* 398 */ 'l', '2', 'g', 'c', 'l', 'e', 'a', 'n', '(', 0,
-  /* 408 */ 'p', '0', 32, '=', 32, 'c', 'm', 'p', '.', 'e', 'q', '(', 0,
-  /* 421 */ 'p', '1', 32, '=', 32, 'c', 'm', 'p', '.', 'e', 'q', '(', 0,
-  /* 434 */ 'i', 'f', 32, '(', '!', 'c', 'm', 'p', '.', 'e', 'q', '(', 0,
-  /* 447 */ 'i', 'f', 32, '(', 'c', 'm', 'p', '.', 'e', 'q', '(', 0,
-  /* 459 */ 'h', 'i', 'n', 't', 'j', 'r', '(', 0,
-  /* 467 */ 'p', '0', 32, '=', 32, 'c', 'm', 'p', '.', 'g', 't', '(', 0,
-  /* 480 */ 'p', '1', 32, '=', 32, 'c', 'm', 'p', '.', 'g', 't', '(', 0,
-  /* 493 */ 'i', 'f', 32, '(', '!', 'c', 'm', 'p', '.', 'g', 't', '(', 0,
-  /* 506 */ 'i', 'f', 32, '(', 'c', 'm', 'p', '.', 'g', 't', '(', 0,
-  /* 518 */ 'p', '0', 32, '=', 32, 't', 's', 't', 'b', 'i', 't', '(', 0,
-  /* 531 */ 'p', '1', 32, '=', 32, 't', 's', 't', 'b', 'i', 't', '(', 0,
-  /* 544 */ 'i', 'f', 32, '(', '!', 't', 's', 't', 'b', 'i', 't', '(', 0,
-  /* 557 */ 'i', 'f', 32, '(', 't', 's', 't', 'b', 'i', 't', '(', 0,
-  /* 569 */ 'v', 'h', 'i', 's', 't', '(', 0,
-  /* 576 */ 'v', 'm', 'e', 'm', 'u', '(', 0,
-  /* 583 */ 'p', '0', 32, '=', 32, 'c', 'm', 'p', '.', 'g', 't', 'u', '(', 0,
-  /* 597 */ 'p', '1', 32, '=', 32, 'c', 'm', 'p', '.', 'g', 't', 'u', '(', 0,
-  /* 611 */ 'i', 'f', 32, '(', '!', 'c', 'm', 'p', '.', 'g', 't', 'u', '(', 0,
-  /* 625 */ 'i', 'f', 32, '(', 'c', 'm', 'p', '.', 'g', 't', 'u', '(', 0,
-  /* 638 */ 'l', '2', 'g', 'c', 'l', 'e', 'a', 'n', 'i', 'n', 'v', '(', 0,
-  /* 651 */ 'm', 'e', 'm', 'w', '(', 0,
-  /* 657 */ '#', 32, 'X', 'R', 'a', 'y', 32, 'F', 'u', 'n', 'c', 't', 'i', 'o', 'n', 32, 'P', 'a', 't', 'c', 'h', 'a', 'b', 'l', 'e', 32, 'R', 'E', 'T', '.', 0,
-  /* 688 */ '#', 32, 'X', 'R', 'a', 'y', 32, 'F', 'u', 'n', 'c', 't', 'i', 'o', 'n', 32, 'E', 'n', 't', 'e', 'r', '.', 0,
-  /* 711 */ '#', 32, 'X', 'R', 'a', 'y', 32, 'T', 'a', 'i', 'l', 32, 'C', 'a', 'l', 'l', 32, 'E', 'x', 'i', 't', '.', 0,
-  /* 734 */ '#', 32, 'X', 'R', 'a', 'y', 32, 'F', 'u', 'n', 'c', 't', 'i', 'o', 'n', 32, 'E', 'x', 'i', 't', '.', 0,
-  /* 756 */ ':', 'e', 'n', 'd', 'l', 'o', 'o', 'p', '0', 0,
-  /* 766 */ 'i', 'f', 32, '(', '!', 'p', '0', ')', 32, 'j', 'u', 'm', 'p', 'r', 32, 'r', '3', '1', 0,
-  /* 785 */ 'i', 'f', 32, '(', 'p', '0', ')', 32, 'j', 'u', 'm', 'p', 'r', 32, 'r', '3', '1', 0,
-  /* 803 */ 'i', 'f', 32, '(', '!', 'p', '0', '.', 'n', 'e', 'w', ')', 32, 'j', 'u', 'm', 'p', 'r', ':', 'n', 't', 32, 'r', '3', '1', 0,
-  /* 829 */ 'i', 'f', 32, '(', 'p', '0', '.', 'n', 'e', 'w', ')', 32, 'j', 'u', 'm', 'p', 'r', ':', 'n', 't', 32, 'r', '3', '1', 0,
-  /* 854 */ ':', 'e', 'n', 'd', 'l', 'o', 'o', 'p', '1', 0,
-  /* 864 */ 'L', 'I', 'F', 'E', 'T', 'I', 'M', 'E', '_', 'E', 'N', 'D', 0,
-  /* 877 */ 'B', 'U', 'N', 'D', 'L', 'E', 0,
-  /* 884 */ 'D', 'B', 'G', '_', 'V', 'A', 'L', 'U', 'E', 0,
-  /* 894 */ 'L', 'I', 'F', 'E', 'T', 'I', 'M', 'E', '_', 'S', 'T', 'A', 'R', 'T', 0,
-  /* 909 */ 'i', 's', 'y', 'n', 'c', 0,
-  /* 915 */ 'd', 'e', 'a', 'l', 'l', 'o', 'c', 'f', 'r', 'a', 'm', 'e', 0,
-  /* 928 */ 'l', '2', 'g', 'u', 'n', 'l', 'o', 'c', 'k', 0,
-  /* 938 */ 'l', '2', 'g', 'c', 'l', 'e', 'a', 'n', 0,
-  /* 947 */ 'i', 'f', 32, '(', '!', 'p', '0', ')', 32, 'd', 'e', 'a', 'l', 'l', 'o', 'c', '_', 'r', 'e', 't', 'u', 'r', 'n', 0,
-  /* 971 */ 'i', 'f', 32, '(', 'p', '0', ')', 32, 'd', 'e', 'a', 'l', 'l', 'o', 'c', '_', 'r', 'e', 't', 'u', 'r', 'n', 0,
-  /* 994 */ 'n', 'o', 'p', 0,
-  /* 998 */ 'b', 'a', 'r', 'r', 'i', 'e', 'r', 0,
-  /* 1006 */ 's', 'y', 'n', 'c', 'h', 't', 0,
-  /* 1013 */ 'i', 'f', 32, '(', '!', 'p', '0', '.', 'n', 'e', 'w', ')', 32, 'd', 'e', 'a', 'l', 'l', 'o', 'c', '_', 'r', 'e', 't', 'u', 'r', 'n', ':', 'n', 't', 0,
-  /* 1044 */ 'i', 'f', 32, '(', 'p', '0', '.', 'n', 'e', 'w', ')', 32, 'd', 'e', 'a', 'l', 'l', 'o', 'c', '_', 'r', 'e', 't', 'u', 'r', 'n', ':', 'n', 't', 0,
-  /* 1074 */ 'v', 'h', 'i', 's', 't', 0,
-  /* 1080 */ 'l', '2', 'g', 'c', 'l', 'e', 'a', 'n', 'i', 'n', 'v', 0,
+  /* 26 */ 'i', 'f', 32, '(', '!', 'p', '0', ')', 32, 0,
+  /* 36 */ 'i', 'f', 32, '(', 'p', '0', ')', 32, 0,
+  /* 45 */ 'i', 'f', 32, '(', '!', 'p', '0', '.', 'n', 'e', 'w', ')', 32, 0,
+  /* 59 */ 'i', 'f', 32, '(', 'p', '0', '.', 'n', 'e', 'w', ')', 32, 0,
+  /* 72 */ 'c', 'a', 'l', 'l', 32, 0,
+  /* 78 */ 'j', 'u', 'm', 'p', 32, 0,
+  /* 84 */ 'c', 'a', 'l', 'l', 'r', 32, 0,
+  /* 91 */ 'j', 'u', 'm', 'p', 'r', 32, 0,
+  /* 98 */ 'i', 'f', 32, '(', '!', 0,
+  /* 104 */ '.', 'e', 'r', 'r', 'o', 'r', 32, '"', 's', 'h', 'o', 'u', 'l', 'd', 32, 'n', 'o', 't', 32, 'e', 'm', 'i', 't', '"', 0,
+  /* 129 */ 't', 'r', 'a', 'p', '0', '(', '#', 0,
+  /* 137 */ 'v', 'w', 'h', 'i', 's', 't', '1', '2', '8', '(', '#', 0,
+  /* 149 */ 'm', 'e', 'm', 'b', '(', '#', 0,
+  /* 156 */ 'm', 'e', 'm', 'd', '(', '#', 0,
+  /* 163 */ 'a', 'l', 'l', 'o', 'c', 'f', 'r', 'a', 'm', 'e', '(', '#', 0,
+  /* 176 */ 'p', 'a', 'u', 's', 'e', '(', '#', 0,
+  /* 184 */ 'm', 'e', 'm', 'h', '(', '#', 0,
+  /* 191 */ 'i', 'm', 'm', 'e', 'x', 't', '(', '#', 0,
+  /* 200 */ 'm', 'e', 'm', 'w', '(', '#', 0,
+  /* 207 */ 'm', 'e', 'm', 'd', '(', 'r', '2', '9', '+', '#', 0,
+  /* 218 */ 'm', 'e', 'm', 'w', '(', 'r', '2', '9', '+', '#', 0,
+  /* 229 */ 'm', 'e', 'm', 'b', '(', 'g', 'p', '+', '#', 0,
+  /* 239 */ 'm', 'e', 'm', 'd', '(', 'g', 'p', '+', '#', 0,
+  /* 249 */ 'm', 'e', 'm', 'h', '(', 'g', 'p', '+', '#', 0,
+  /* 259 */ 'm', 'e', 'm', 'w', '(', 'g', 'p', '+', '#', 0,
+  /* 269 */ 'i', 'f', 32, '(', 0,
+  /* 274 */ 'p', '3', 32, '=', 32, 's', 'p', '1', 'l', 'o', 'o', 'p', '0', '(', 0,
+  /* 289 */ 'p', '3', 32, '=', 32, 's', 'p', '2', 'l', 'o', 'o', 'p', '0', '(', 0,
+  /* 304 */ 'p', '3', 32, '=', 32, 's', 'p', '3', 'l', 'o', 'o', 'p', '0', '(', 0,
+  /* 319 */ 'l', 'o', 'o', 'p', '1', '(', 0,
+  /* 326 */ 'v', 't', 'r', 'a', 'n', 's', '2', 'x', '2', '(', 0,
+  /* 337 */ 'v', 'w', 'h', 'i', 's', 't', '2', '5', '6', '(', 0,
+  /* 348 */ 'v', 'w', 'h', 'i', 's', 't', '1', '2', '8', '(', 0,
+  /* 359 */ 'd', 'c', 'c', 'l', 'e', 'a', 'n', 'a', '(', 0,
+  /* 369 */ 'd', 'c', 'z', 'e', 'r', 'o', 'a', '(', 0,
+  /* 378 */ 'd', 'c', 'i', 'n', 'v', 'a', '(', 0,
+  /* 386 */ 'i', 'c', 'i', 'n', 'v', 'a', '(', 0,
+  /* 394 */ 'd', 'c', 'c', 'l', 'e', 'a', 'n', 'i', 'n', 'v', 'a', '(', 0,
+  /* 407 */ 'm', 'e', 'm', 'b', '(', 0,
+  /* 413 */ 'm', 'e', 'm', 'd', '_', 'l', 'o', 'c', 'k', 'e', 'd', '(', 0,
+  /* 426 */ 'm', 'e', 'm', 'w', '_', 'l', 'o', 'c', 'k', 'e', 'd', '(', 0,
+  /* 439 */ 'm', 'e', 'm', 'd', '(', 0,
+  /* 445 */ 't', 'r', 'a', 'c', 'e', '(', 0,
+  /* 452 */ 'v', 's', 'h', 'u', 'f', 'f', '(', 0,
+  /* 460 */ 'l', '2', 'f', 'e', 't', 'c', 'h', '(', 0,
+  /* 469 */ 'd', 'c', 'f', 'e', 't', 'c', 'h', '(', 0,
+  /* 478 */ 'm', 'e', 'm', 'h', '(', 0,
+  /* 484 */ 'v', 'd', 'e', 'a', 'l', '(', 0,
+  /* 491 */ 'v', 'm', 'e', 'm', '(', 0,
+  /* 497 */ 'p', '0', 32, '=', 32, 'c', 'm', 'p', '.', 'e', 'q', '(', 0,
+  /* 510 */ 'p', '1', 32, '=', 32, 'c', 'm', 'p', '.', 'e', 'q', '(', 0,
+  /* 523 */ 'i', 'f', 32, '(', '!', 'c', 'm', 'p', '.', 'e', 'q', '(', 0,
+  /* 536 */ 'i', 'f', 32, '(', 'c', 'm', 'p', '.', 'e', 'q', '(', 0,
+  /* 548 */ 'h', 'i', 'n', 't', 'j', 'r', '(', 0,
+  /* 556 */ 'p', '0', 32, '=', 32, 'c', 'm', 'p', '.', 'g', 't', '(', 0,
+  /* 569 */ 'p', '1', 32, '=', 32, 'c', 'm', 'p', '.', 'g', 't', '(', 0,
+  /* 582 */ 'i', 'f', 32, '(', '!', 'c', 'm', 'p', '.', 'g', 't', '(', 0,
+  /* 595 */ 'i', 'f', 32, '(', 'c', 'm', 'p', '.', 'g', 't', '(', 0,
+  /* 607 */ 'p', '0', 32, '=', 32, 't', 's', 't', 'b', 'i', 't', '(', 0,
+  /* 620 */ 'p', '1', 32, '=', 32, 't', 's', 't', 'b', 'i', 't', '(', 0,
+  /* 633 */ 'i', 'f', 32, '(', '!', 't', 's', 't', 'b', 'i', 't', '(', 0,
+  /* 646 */ 'i', 'f', 32, '(', 't', 's', 't', 'b', 'i', 't', '(', 0,
+  /* 658 */ 'v', 'h', 'i', 's', 't', '(', 0,
+  /* 665 */ 'v', 'm', 'e', 'm', 'u', '(', 0,
+  /* 672 */ 'p', '0', 32, '=', 32, 'c', 'm', 'p', '.', 'g', 't', 'u', '(', 0,
+  /* 686 */ 'p', '1', 32, '=', 32, 'c', 'm', 'p', '.', 'g', 't', 'u', '(', 0,
+  /* 700 */ 'i', 'f', 32, '(', '!', 'c', 'm', 'p', '.', 'g', 't', 'u', '(', 0,
+  /* 714 */ 'i', 'f', 32, '(', 'c', 'm', 'p', '.', 'g', 't', 'u', '(', 0,
+  /* 727 */ 'm', 'e', 'm', 'w', '(', 0,
+  /* 733 */ '#', 32, 'X', 'R', 'a', 'y', 32, 'F', 'u', 'n', 'c', 't', 'i', 'o', 'n', 32, 'P', 'a', 't', 'c', 'h', 'a', 'b', 'l', 'e', 32, 'R', 'E', 'T', '.', 0,
+  /* 764 */ '#', 32, 'X', 'R', 'a', 'y', 32, 'F', 'u', 'n', 'c', 't', 'i', 'o', 'n', 32, 'E', 'n', 't', 'e', 'r', '.', 0,
+  /* 787 */ '#', 32, 'X', 'R', 'a', 'y', 32, 'T', 'a', 'i', 'l', 32, 'C', 'a', 'l', 'l', 32, 'E', 'x', 'i', 't', '.', 0,
+  /* 810 */ '#', 32, 'X', 'R', 'a', 'y', 32, 'F', 'u', 'n', 'c', 't', 'i', 'o', 'n', 32, 'E', 'x', 'i', 't', '.', 0,
+  /* 832 */ ':', 'e', 'n', 'd', 'l', 'o', 'o', 'p', '0', 0,
+  /* 842 */ 'e', 'n', 'd', 'l', 'o', 'o', 'p', '0', '1', 0,
+  /* 852 */ 'i', 'f', 32, '(', '!', 'p', '0', ')', 32, 'j', 'u', 'm', 'p', 'r', 32, 'r', '3', '1', 0,
+  /* 871 */ 'i', 'f', 32, '(', 'p', '0', ')', 32, 'j', 'u', 'm', 'p', 'r', 32, 'r', '3', '1', 0,
+  /* 889 */ 'i', 'f', 32, '(', '!', 'p', '0', '.', 'n', 'e', 'w', ')', 32, 'j', 'u', 'm', 'p', 'r', ':', 'n', 't', 32, 'r', '3', '1', 0,
+  /* 915 */ 'i', 'f', 32, '(', 'p', '0', '.', 'n', 'e', 'w', ')', 32, 'j', 'u', 'm', 'p', 'r', ':', 'n', 't', 32, 'r', '3', '1', 0,
+  /* 940 */ ':', 'e', 'n', 'd', 'l', 'o', 'o', 'p', '1', 0,
+  /* 950 */ 'v', 'w', 'h', 'i', 's', 't', '2', '5', '6', 0,
+  /* 960 */ 'v', 'w', 'h', 'i', 's', 't', '1', '2', '8', 0,
+  /* 970 */ 'L', 'I', 'F', 'E', 'T', 'I', 'M', 'E', '_', 'E', 'N', 'D', 0,
+  /* 983 */ 'B', 'U', 'N', 'D', 'L', 'E', 0,
+  /* 990 */ 'D', 'B', 'G', '_', 'V', 'A', 'L', 'U', 'E', 0,
+  /* 1000 */ 'L', 'I', 'F', 'E', 'T', 'I', 'M', 'E', '_', 'S', 'T', 'A', 'R', 'T', 0,
+  /* 1015 */ 'D', 'U', 'P', 'L', 'E', 'X', 0,
+  /* 1022 */ 'i', 's', 'y', 'n', 'c', 0,
+  /* 1028 */ 'd', 'e', 'a', 'l', 'l', 'o', 'c', 'f', 'r', 'a', 'm', 'e', 0,
+  /* 1041 */ '#', 32, 'F', 'E', 'n', 't', 'r', 'y', 32, 'c', 'a', 'l', 'l', 0,
+  /* 1055 */ 'i', 'f', 32, '(', '!', 'p', '0', ')', 32, 'd', 'e', 'a', 'l', 'l', 'o', 'c', '_', 'r', 'e', 't', 'u', 'r', 'n', 0,
+  /* 1079 */ 'i', 'f', 32, '(', 'p', '0', ')', 32, 'd', 'e', 'a', 'l', 'l', 'o', 'c', '_', 'r', 'e', 't', 'u', 'r', 'n', 0,
+  /* 1102 */ 'n', 'o', 'p', 0,
+  /* 1106 */ 'b', 'a', 'r', 'r', 'i', 'e', 'r', 0,
+  /* 1114 */ 'v', 'w', 'h', 'i', 's', 't', '2', '5', '6', ':', 's', 'a', 't', 0,
+  /* 1128 */ 's', 'y', 'n', 'c', 'h', 't', 0,
+  /* 1135 */ 'i', 'f', 32, '(', '!', 'p', '0', '.', 'n', 'e', 'w', ')', 32, 'd', 'e', 'a', 'l', 'l', 'o', 'c', '_', 'r', 'e', 't', 'u', 'r', 'n', ':', 'n', 't', 0,
+  /* 1166 */ 'i', 'f', 32, '(', 'p', '0', '.', 'n', 'e', 'w', ')', 32, 'd', 'e', 'a', 'l', 'l', 'o', 'c', '_', 'r', 'e', 't', 'u', 'r', 'n', ':', 'n', 't', 0,
+  /* 1196 */ 'b', 'r', 'k', 'p', 't', 0,
+  /* 1202 */ 'v', 'h', 'i', 's', 't', 0,
   };
 
   static const uint32_t OpInfo0[] = {
@@ -115,23 +125,24 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// IMPLICIT_DEF
     0U,	// SUBREG_TO_REG
     0U,	// COPY_TO_REGCLASS
-    885U,	// DBG_VALUE
+    991U,	// DBG_VALUE
     0U,	// REG_SEQUENCE
     0U,	// COPY
-    878U,	// BUNDLE
-    895U,	// LIFETIME_START
-    865U,	// LIFETIME_END
+    984U,	// BUNDLE
+    1001U,	// LIFETIME_START
+    971U,	// LIFETIME_END
     0U,	// STACKMAP
+    1042U,	// FENTRY_CALL
     0U,	// PATCHPOINT
     0U,	// LOAD_STACK_GUARD
     0U,	// STATEPOINT
     0U,	// LOCAL_ESCAPE
-    0U,	// FAULTING_LOAD_OP
+    0U,	// FAULTING_OP
     0U,	// PATCHABLE_OP
-    689U,	// PATCHABLE_FUNCTION_ENTER
-    658U,	// PATCHABLE_RET
-    735U,	// PATCHABLE_FUNCTION_EXIT
-    712U,	// PATCHABLE_TAIL_CALL
+    765U,	// PATCHABLE_FUNCTION_ENTER
+    734U,	// PATCHABLE_RET
+    811U,	// PATCHABLE_FUNCTION_EXIT
+    788U,	// PATCHABLE_TAIL_CALL
     0U,	// G_ADD
     0U,	// G_SUB
     0U,	// G_MUL
@@ -145,20 +156,25 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// G_FRAME_INDEX
     0U,	// G_GLOBAL_VALUE
     0U,	// G_EXTRACT
+    0U,	// G_UNMERGE_VALUES
     0U,	// G_INSERT
     0U,	// G_SEQUENCE
+    0U,	// G_MERGE_VALUES
     0U,	// G_PTRTOINT
     0U,	// G_INTTOPTR
     0U,	// G_BITCAST
     0U,	// G_LOAD
     0U,	// G_STORE
     0U,	// G_BRCOND
+    0U,	// G_BRINDIRECT
     0U,	// G_INTRINSIC
     0U,	// G_INTRINSIC_W_SIDE_EFFECTS
     0U,	// G_ANYEXT
     0U,	// G_TRUNC
     0U,	// G_CONSTANT
     0U,	// G_FCONSTANT
+    0U,	// G_VASTART
+    0U,	// G_VAARG
     0U,	// G_SEXT
     0U,	// G_ZEXT
     0U,	// G_SHL
@@ -173,11 +189,15 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// G_SSUBO
     0U,	// G_UMULO
     0U,	// G_SMULO
+    0U,	// G_UMULH
+    0U,	// G_SMULH
     0U,	// G_FADD
     0U,	// G_FSUB
     0U,	// G_FMUL
     0U,	// G_FDIV
     0U,	// G_FREM
+    0U,	// G_FPOW
+    0U,	// G_FNEG
     0U,	// G_FPEXT
     0U,	// G_FPTRUNC
     0U,	// G_FPTOSI
@@ -185,7 +205,11 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// G_SITOFP
     0U,	// G_UITOFP
     0U,	// G_GEP
+    0U,	// G_PTR_MASK
     0U,	// G_BR
+    0U,	// G_INSERT_VECTOR_ELT
+    0U,	// G_EXTRACT_VECTOR_ELT
+    0U,	// G_SHUFFLE_VECTOR
     2074U,	// A2_abs
     2074U,	// A2_absp
     16779290U,	// A2_abssat
@@ -218,7 +242,7 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     83970074U,	// A2_combine_hl
     100747290U,	// A2_combine_lh
     100747290U,	// A2_combine_ll
-    117540890U,	// A2_combineii
+    67209242U,	// A2_combineii
     50415642U,	// A2_combinew
     116762U,	// A2_iconst
     133146U,	// A2_max
@@ -229,38 +253,39 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     165914U,	// A2_minp
     182298U,	// A2_minu
     182298U,	// A2_minup
+    198682U,	// A2_neg
     198682U,	// A2_negp
     16975898U,	// A2_negsat
-    995U,	// A2_nop
+    1103U,	// A2_nop
     215066U,	// A2_not
     215066U,	// A2_notp
     50563098U,	// A2_or
     67340314U,	// A2_orir
     50563098U,	// A2_orp
-    134467637U,	// A2_paddf
-    134484021U,	// A2_paddfnew
-    134467637U,	// A2_paddif
-    134484021U,	// A2_paddifnew
-    134467773U,	// A2_paddit
-    134484157U,	// A2_padditnew
-    134467773U,	// A2_paddt
-    134484157U,	// A2_paddtnew
-    151244853U,	// A2_pandf
-    151261237U,	// A2_pandfnew
-    151244989U,	// A2_pandt
-    151261373U,	// A2_pandtnew
-    168022069U,	// A2_porf
-    168038453U,	// A2_porfnew
-    168022205U,	// A2_port
-    168038589U,	// A2_portnew
-    184799285U,	// A2_psubf
-    184815669U,	// A2_psubfnew
-    184799421U,	// A2_psubt
-    184815805U,	// A2_psubtnew
-    201576501U,	// A2_pxorf
-    201592885U,	// A2_pxorfnew
-    201576637U,	// A2_pxort
-    201593021U,	// A2_pxortnew
+    117690467U,	// A2_paddf
+    117706851U,	// A2_paddfnew
+    117690467U,	// A2_paddif
+    117706851U,	// A2_paddifnew
+    117690638U,	// A2_paddit
+    117707022U,	// A2_padditnew
+    117690638U,	// A2_paddt
+    117707022U,	// A2_paddtnew
+    134467683U,	// A2_pandf
+    134484067U,	// A2_pandfnew
+    134467854U,	// A2_pandt
+    134484238U,	// A2_pandtnew
+    151244899U,	// A2_porf
+    151261283U,	// A2_porfnew
+    151245070U,	// A2_port
+    151261454U,	// A2_portnew
+    168022115U,	// A2_psubf
+    168038499U,	// A2_psubfnew
+    168022286U,	// A2_psubt
+    168038670U,	// A2_psubtnew
+    184799331U,	// A2_pxorf
+    184815715U,	// A2_pxorfnew
+    184799502U,	// A2_pxort
+    184815886U,	// A2_pxortnew
     17057818U,	// A2_roundsat
     296986U,	// A2_sat
     313370U,	// A2_satb
@@ -285,251 +310,255 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     33933338U,	// A2_subsat
     411674U,	// A2_svaddh
     17188890U,	// A2_svaddhs
-    428058U,	// A2_svadduhs
+    17205274U,	// A2_svadduhs
     444442U,	// A2_svavgh
-    218548250U,	// A2_svavghs
+    201771034U,	// A2_svavghs
     460826U,	// A2_svnavgh
     477210U,	// A2_svsubh
     17254426U,	// A2_svsubhs
-    493594U,	// A2_svsubuhs
+    17270810U,	// A2_svsubuhs
     509978U,	// A2_swiz
     526362U,	// A2_sxtb
     542746U,	// A2_sxth
     559130U,	// A2_sxtw
-    235456538U,	// A2_tfr
-    235456538U,	// A2_tfrcrr
-    251908149U,	// A2_tfrf
-    251924533U,	// A2_tfrfnew
+    218679322U,	// A2_tfr
+    218679322U,	// A2_tfrcrr
+    235130979U,	// A2_tfrf
+    235147363U,	// A2_tfrfnew
     591898U,	// A2_tfrih
     608282U,	// A2_tfril
-    235456538U,	// A2_tfrp
-    251908149U,	// A2_tfrpf
-    251924533U,	// A2_tfrpfnew
-    34179098U,	// A2_tfrpi
-    251908285U,	// A2_tfrpt
-    251924669U,	// A2_tfrptnew
-    235456538U,	// A2_tfrrcr
-    118065178U,	// A2_tfrsi
-    251908285U,	// A2_tfrt
-    251924669U,	// A2_tfrtnew
+    218679322U,	// A2_tfrp
+    235130979U,	// A2_tfrpf
+    235147363U,	// A2_tfrpfnew
+    218728474U,	// A2_tfrpi
+    235131150U,	// A2_tfrpt
+    235147534U,	// A2_tfrptnew
+    218679322U,	// A2_tfrrcr
+    218728474U,	// A2_tfrsi
+    235131150U,	// A2_tfrt
+    235147534U,	// A2_tfrtnew
     641050U,	// A2_vabsh
     17418266U,	// A2_vabshsat
     657434U,	// A2_vabsw
     17434650U,	// A2_vabswsat
+    673818U,	// A2_vaddb_map
     411674U,	// A2_vaddh
     17188890U,	// A2_vaddhs
-    673818U,	// A2_vaddub
-    17451034U,	// A2_vaddubs
-    428058U,	// A2_vadduhs
-    690202U,	// A2_vaddw
-    17467418U,	// A2_vaddws
+    690202U,	// A2_vaddub
+    17467418U,	// A2_vaddubs
+    17205274U,	// A2_vadduhs
+    706586U,	// A2_vaddw
+    17483802U,	// A2_vaddws
     444442U,	// A2_vavgh
-    268879898U,	// A2_vavghcr
-    218548250U,	// A2_vavghr
-    706586U,	// A2_vavgub
-    218810394U,	// A2_vavgubr
-    722970U,	// A2_vavguh
-    218826778U,	// A2_vavguhr
-    739354U,	// A2_vavguw
-    218843162U,	// A2_vavguwr
-    755738U,	// A2_vavgw
-    269191194U,	// A2_vavgwcr
-    218859546U,	// A2_vavgwr
-    51103770U,	// A2_vcmpbeq
-    51120154U,	// A2_vcmpbgtu
-    51136538U,	// A2_vcmpheq
-    51152922U,	// A2_vcmphgt
-    51169306U,	// A2_vcmphgtu
-    51185690U,	// A2_vcmpweq
-    51202074U,	// A2_vcmpwgt
-    51218458U,	// A2_vcmpwgtu
-    903194U,	// A2_vconj
-    919578U,	// A2_vmaxb
-    935962U,	// A2_vmaxh
-    952346U,	// A2_vmaxub
-    968730U,	// A2_vmaxuh
-    985114U,	// A2_vmaxuw
-    1001498U,	// A2_vmaxw
-    1017882U,	// A2_vminb
-    1034266U,	// A2_vminh
-    1050650U,	// A2_vminub
-    1067034U,	// A2_vminuh
-    1083418U,	// A2_vminuw
-    1099802U,	// A2_vminw
+    252102682U,	// A2_vavghcr
+    201771034U,	// A2_vavghr
+    722970U,	// A2_vavgub
+    202049562U,	// A2_vavgubr
+    739354U,	// A2_vavguh
+    202065946U,	// A2_vavguhr
+    755738U,	// A2_vavguw
+    202082330U,	// A2_vavguwr
+    772122U,	// A2_vavgw
+    252430362U,	// A2_vavgwcr
+    202098714U,	// A2_vavgwr
+    51120154U,	// A2_vcmpbeq
+    51136538U,	// A2_vcmpbgtu
+    51152922U,	// A2_vcmpheq
+    51169306U,	// A2_vcmphgt
+    51185690U,	// A2_vcmphgtu
+    51202074U,	// A2_vcmpweq
+    51218458U,	// A2_vcmpwgt
+    51234842U,	// A2_vcmpwgtu
+    919578U,	// A2_vconj
+    935962U,	// A2_vmaxb
+    952346U,	// A2_vmaxh
+    968730U,	// A2_vmaxub
+    985114U,	// A2_vmaxuh
+    1001498U,	// A2_vmaxuw
+    1017882U,	// A2_vmaxw
+    1034266U,	// A2_vminb
+    1050650U,	// A2_vminh
+    1067034U,	// A2_vminub
+    1083418U,	// A2_vminuh
+    1099802U,	// A2_vminuw
+    1116186U,	// A2_vminw
     460826U,	// A2_vnavgh
-    285673498U,	// A2_vnavghcr
-    302450714U,	// A2_vnavghr
-    1116186U,	// A2_vnavgw
-    286328858U,	// A2_vnavgwcr
-    303106074U,	// A2_vnavgwr
-    1132570U,	// A2_vraddub
-    1148954U,	// A2_vraddub_acc
-    1165338U,	// A2_vrsadub
-    1181722U,	// A2_vrsadub_acc
+    268896282U,	// A2_vnavghcr
+    285673498U,	// A2_vnavghr
+    1132570U,	// A2_vnavgw
+    269568026U,	// A2_vnavgwcr
+    286345242U,	// A2_vnavgwr
+    1148954U,	// A2_vraddub
+    1165338U,	// A2_vraddub_acc
+    1181722U,	// A2_vrsadub
+    1198106U,	// A2_vrsadub_acc
+    1214490U,	// A2_vsubb_map
     477210U,	// A2_vsubh
     17254426U,	// A2_vsubhs
-    1198106U,	// A2_vsubub
-    17975322U,	// A2_vsububs
-    493594U,	// A2_vsubuhs
-    1214490U,	// A2_vsubw
-    17991706U,	// A2_vsubws
-    51562522U,	// A2_xor
-    51562522U,	// A2_xorp
-    1247258U,	// A2_zxtb
-    1263642U,	// A2_zxth
-    318785562U,	// A4_addp_c
-    335579162U,	// A4_andn
-    335579162U,	// A4_andnp
-    51611674U,	// A4_bitsplit
-    68388890U,	// A4_bitspliti
-    1296410U,	// A4_boundscheck
-    353634330U,	// A4_boundscheck_hi
-    370411546U,	// A4_boundscheck_lo
-    51660826U,	// A4_cmpbeq
-    68438042U,	// A4_cmpbeqi
-    51677210U,	// A4_cmpbgt
-    68454426U,	// A4_cmpbgti
-    51693594U,	// A4_cmpbgtu
-    68470810U,	// A4_cmpbgtui
-    51709978U,	// A4_cmpheq
-    68487194U,	// A4_cmpheqi
-    51726362U,	// A4_cmphgt
-    68503578U,	// A4_cmphgti
-    51742746U,	// A4_cmphgtu
-    68519962U,	// A4_cmphgtui
-    33654810U,	// A4_combineii
-    117540890U,	// A4_combineir
+    1230874U,	// A2_vsubub
+    18008090U,	// A2_vsububs
+    17270810U,	// A2_vsubuhs
+    1247258U,	// A2_vsubw
+    18024474U,	// A2_vsubws
+    1263642U,	// A2_xor
+    1263642U,	// A2_xorp
+    1280026U,	// A2_zxtb
+    1296410U,	// A2_zxth
+    302008346U,	// A4_addp_c
+    318801946U,	// A4_andn
+    318801946U,	// A4_andnp
+    51644442U,	// A4_bitsplit
+    68421658U,	// A4_bitspliti
+    1329178U,	// A4_boundscheck
+    336873498U,	// A4_boundscheck_hi
+    353650714U,	// A4_boundscheck_lo
+    51677210U,	// A4_cmpbeq
+    68454426U,	// A4_cmpbeqi
+    51693594U,	// A4_cmpbgt
+    68470810U,	// A4_cmpbgti
+    51709978U,	// A4_cmpbgtu
+    68487194U,	// A4_cmpbgtui
+    51726362U,	// A4_cmpheq
+    68503578U,	// A4_cmpheqi
+    51742746U,	// A4_cmphgt
+    68519962U,	// A4_cmphgti
+    51759130U,	// A4_cmphgtu
+    68536346U,	// A4_cmphgtui
+    67209242U,	// A4_combineii
+    50432026U,	// A4_combineir
     67192858U,	// A4_combineri
-    68536346U,	// A4_cround_ri
-    51759130U,	// A4_cround_rr
-    1444013U,	// A4_ext
-    1448109U,	// A4_ext_b
-    1448109U,	// A4_ext_c
-    8365U,	// A4_ext_g
-    1460250U,	// A4_modwrapu
-    335775770U,	// A4_orn
-    335775770U,	// A4_ornp
-    386125877U,	// A4_paslhf
-    386142261U,	// A4_paslhfnew
-    386126013U,	// A4_paslht
-    386142397U,	// A4_paslhtnew
-    402903093U,	// A4_pasrhf
-    402919477U,	// A4_pasrhfnew
-    402903229U,	// A4_pasrht
-    402919613U,	// A4_pasrhtnew
-    419680309U,	// A4_psxtbf
-    419696693U,	// A4_psxtbfnew
-    419680445U,	// A4_psxtbt
-    419696829U,	// A4_psxtbtnew
-    436457525U,	// A4_psxthf
-    436473909U,	// A4_psxthfnew
-    436457661U,	// A4_psxtht
-    436474045U,	// A4_psxthtnew
-    453234741U,	// A4_pzxtbf
-    453251125U,	// A4_pzxtbfnew
-    453234877U,	// A4_pzxtbt
-    453251261U,	// A4_pzxtbtnew
-    470011957U,	// A4_pzxthf
-    470028341U,	// A4_pzxthfnew
-    470012093U,	// A4_pzxtht
-    470028477U,	// A4_pzxthtnew
-    51808282U,	// A4_rcmpeq
-    68585498U,	// A4_rcmpeqi
-    51824666U,	// A4_rcmpneq
-    68601882U,	// A4_rcmpneqi
+    68552730U,	// A4_cround_ri
+    51775514U,	// A4_cround_rr
+    1460416U,	// A4_ext
+    1476634U,	// A4_modwrapu
+    318998554U,	// A4_orn
+    318998554U,	// A4_ornp
+    369348707U,	// A4_paslhf
+    369365091U,	// A4_paslhfnew
+    369348878U,	// A4_paslht
+    369365262U,	// A4_paslhtnew
+    386125923U,	// A4_pasrhf
+    386142307U,	// A4_pasrhfnew
+    386126094U,	// A4_pasrht
+    386142478U,	// A4_pasrhtnew
+    402903139U,	// A4_psxtbf
+    402919523U,	// A4_psxtbfnew
+    402903310U,	// A4_psxtbt
+    402919694U,	// A4_psxtbtnew
+    419680355U,	// A4_psxthf
+    419696739U,	// A4_psxthfnew
+    419680526U,	// A4_psxtht
+    419696910U,	// A4_psxthtnew
+    436457571U,	// A4_pzxtbf
+    436473955U,	// A4_pzxtbfnew
+    436457742U,	// A4_pzxtbt
+    436474126U,	// A4_pzxtbtnew
+    453234787U,	// A4_pzxthf
+    453251171U,	// A4_pzxthfnew
+    453234958U,	// A4_pzxtht
+    453251342U,	// A4_pzxthtnew
+    51824666U,	// A4_rcmpeq
+    68601882U,	// A4_rcmpeqi
+    51841050U,	// A4_rcmpneq
+    68618266U,	// A4_rcmpneqi
     67389466U,	// A4_round_ri
     67389466U,	// A4_round_ri_sat
     50612250U,	// A4_round_rr
     50612250U,	// A4_round_rr_sat
-    319146010U,	// A4_subp_c
-    235456538U,	// A4_tfrcpp
-    235456538U,	// A4_tfrpcp
-    1509402U,	// A4_tlbmatch
-    1525786U,	// A4_vcmpbeq_any
-    67880986U,	// A4_vcmpbeqi
-    51873818U,	// A4_vcmpbgt
-    68651034U,	// A4_vcmpbgti
-    67897370U,	// A4_vcmpbgtui
-    67913754U,	// A4_vcmpheqi
-    67930138U,	// A4_vcmphgti
-    67946522U,	// A4_vcmphgtui
-    67962906U,	// A4_vcmpweqi
-    67979290U,	// A4_vcmpwgti
-    67995674U,	// A4_vcmpwgtui
-    1558554U,	// A4_vrmaxh
-    1574938U,	// A4_vrmaxuh
-    1591322U,	// A4_vrmaxuw
-    1607706U,	// A4_vrmaxw
-    1624090U,	// A4_vrminh
-    1640474U,	// A4_vrminuh
-    1656858U,	// A4_vrminuw
-    1673242U,	// A4_vrminw
-    35244058U,	// A5_ACS
-    1706010U,	// A5_vaddhubs
+    302368794U,	// A4_subp_c
+    218679322U,	// A4_tfrcpp
+    218679322U,	// A4_tfrpcp
+    1525786U,	// A4_tlbmatch
+    1542170U,	// A4_vcmpbeq_any
+    67897370U,	// A4_vcmpbeqi
+    51890202U,	// A4_vcmpbgt
+    68667418U,	// A4_vcmpbgti
+    67913754U,	// A4_vcmpbgtui
+    67930138U,	// A4_vcmpheqi
+    67946522U,	// A4_vcmphgti
+    67962906U,	// A4_vcmphgtui
+    67979290U,	// A4_vcmpweqi
+    67995674U,	// A4_vcmpwgti
+    68012058U,	// A4_vcmpwgtui
+    1574938U,	// A4_vrmaxh
+    1591322U,	// A4_vrmaxuh
+    1607706U,	// A4_vrmaxuw
+    1624090U,	// A4_vrmaxw
+    1640474U,	// A4_vrminh
+    1656858U,	// A4_vrminuh
+    1673242U,	// A4_vrminuw
+    1689626U,	// A4_vrminw
+    35260442U,	// A5_ACS
+    1722394U,	// A5_vaddhubs
+    35260442U,	// A6_vminub_RdP
     1U,	// ADJCALLSTACKDOWN
     1U,	// ADJCALLSTACKUP
-    1722394U,	// C2_all8
+    1738778U,	// C2_all8
     50366490U,	// C2_and
-    486574106U,	// C2_andn
-    1738778U,	// C2_any8
-    52086810U,	// C2_bitsclr
-    68864026U,	// C2_bitsclri
-    1771546U,	// C2_bitsset
-    503566389U,	// C2_ccombinewf
-    503582773U,	// C2_ccombinewnewf
-    503582909U,	// C2_ccombinewnewt
-    503566525U,	// C2_ccombinewt
-    520343605U,	// C2_cmoveif
-    520343741U,	// C2_cmoveit
-    520359989U,	// C2_cmovenewif
-    520360125U,	// C2_cmovenewit
-    51808282U,	// C2_cmpeq
-    68585498U,	// C2_cmpeqi
-    51808282U,	// C2_cmpeqp
-    1787930U,	// C2_cmpgei
-    1804314U,	// C2_cmpgeui
-    52152346U,	// C2_cmpgt
-    68929562U,	// C2_cmpgti
-    52152346U,	// C2_cmpgtp
-    52168730U,	// C2_cmpgtu
-    68945946U,	// C2_cmpgtui
-    52168730U,	// C2_cmpgtup
-    1853466U,	// C2_mask
-    52201498U,	// C2_mux
-    68978714U,	// C2_muxii
-    52201498U,	// C2_muxir
-    68978714U,	// C2_muxri
+    469796890U,	// C2_andn
+    1755162U,	// C2_any8
+    52103194U,	// C2_bitsclr
+    68880410U,	// C2_bitsclri
+    1787930U,	// C2_bitsset
+    486789219U,	// C2_ccombinewf
+    486805603U,	// C2_ccombinewnewf
+    486805774U,	// C2_ccombinewnewt
+    486789390U,	// C2_ccombinewt
+    503566435U,	// C2_cmoveif
+    503566606U,	// C2_cmoveit
+    503582819U,	// C2_cmovenewif
+    503582990U,	// C2_cmovenewit
+    51824666U,	// C2_cmpeq
+    68601882U,	// C2_cmpeqi
+    51824666U,	// C2_cmpeqp
+    1804314U,	// C2_cmpgei
+    1820698U,	// C2_cmpgeui
+    52168730U,	// C2_cmpgt
+    68945946U,	// C2_cmpgti
+    52168730U,	// C2_cmpgtp
+    52185114U,	// C2_cmpgtu
+    68962330U,	// C2_cmpgtui
+    52185114U,	// C2_cmpgtup
+    1869850U,	// C2_cmplt
+    1886234U,	// C2_cmpltu
+    1902618U,	// C2_mask
+    52250650U,	// C2_mux
+    69027866U,	// C2_muxii
+    52250650U,	// C2_muxir
+    69027866U,	// C2_muxri
     215066U,	// C2_not
     50563098U,	// C2_or
-    486770714U,	// C2_orn
-    235456538U,	// C2_pxfer_map
-    235456538U,	// C2_tfrpr
-    235456538U,	// C2_tfrrp
-    1886234U,	// C2_vitpack
-    52234266U,	// C2_vmux
-    51562522U,	// C2_xor
-    1919002U,	// C4_addipc
-    536905754U,	// C4_and_and
-    536905754U,	// C4_and_andn
-    553682970U,	// C4_and_or
-    553682970U,	// C4_and_orn
-    52267034U,	// C4_cmplte
-    69044250U,	// C4_cmpltei
-    52283418U,	// C4_cmplteu
-    69060634U,	// C4_cmplteui
-    51824666U,	// C4_cmpneq
-    68601882U,	// C4_cmpneqi
-    1968154U,	// C4_fastcorner9
-    1984538U,	// C4_fastcorner9_not
-    52332570U,	// C4_nbitsclr
-    69109786U,	// C4_nbitsclri
-    2017306U,	// C4_nbitsset
-    537102362U,	// C4_or_and
-    537102362U,	// C4_or_andn
-    553879578U,	// C4_or_or
-    553879578U,	// C4_or_orn
-    2033690U,	// CONST32
-    2050074U,	// CONST64
+    469993498U,	// C2_orn
+    218679322U,	// C2_pxfer_map
+    218679322U,	// C2_tfrpr
+    218679322U,	// C2_tfrrp
+    1935386U,	// C2_vitpack
+    1951770U,	// C2_vmux
+    1263642U,	// C2_xor
+    1968154U,	// C4_addipc
+    520128538U,	// C4_and_and
+    520128538U,	// C4_and_andn
+    536905754U,	// C4_and_or
+    536905754U,	// C4_and_orn
+    52316186U,	// C4_cmplte
+    69093402U,	// C4_cmpltei
+    52332570U,	// C4_cmplteu
+    69109786U,	// C4_cmplteui
+    51841050U,	// C4_cmpneq
+    68618266U,	// C4_cmpneqi
+    2017306U,	// C4_fastcorner9
+    2033690U,	// C4_fastcorner9_not
+    52381722U,	// C4_nbitsclr
+    69158938U,	// C4_nbitsclri
+    2066458U,	// C4_nbitsset
+    520325146U,	// C4_or_and
+    520325146U,	// C4_or_andn
+    537102362U,	// C4_or_or
+    537102362U,	// C4_or_orn
+    2086985U,	// CALLProfile
+    2099226U,	// CONST32
+    2115610U,	// CONST64
+    1016U,	// DUPLEX_Pseudo
     0U,	// DuplexIClass0
     0U,	// DuplexIClass1
     0U,	// DuplexIClass2
@@ -546,831 +575,899 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// DuplexIClassD
     0U,	// DuplexIClassE
     0U,	// DuplexIClassF
-    2066478U,	// EH_RETURN_JMPR
-    757U,	// ENDLOOP0
-    855U,	// ENDLOOP1
-    2082842U,	// F2_conv_d2df
-    2099226U,	// F2_conv_d2sf
-    2115610U,	// F2_conv_df2d
-    572540954U,	// F2_conv_df2d_chop
-    2131994U,	// F2_conv_df2sf
-    2148378U,	// F2_conv_df2ud
-    572573722U,	// F2_conv_df2ud_chop
-    2164762U,	// F2_conv_df2uw
-    572590106U,	// F2_conv_df2uw_chop
-    2181146U,	// F2_conv_df2w
-    572606490U,	// F2_conv_df2w_chop
-    2197530U,	// F2_conv_sf2d
-    572622874U,	// F2_conv_sf2d_chop
-    2213914U,	// F2_conv_sf2df
-    2230298U,	// F2_conv_sf2ud
-    572655642U,	// F2_conv_sf2ud_chop
-    2246682U,	// F2_conv_sf2uw
-    572672026U,	// F2_conv_sf2uw_chop
-    2263066U,	// F2_conv_sf2w
-    572688410U,	// F2_conv_sf2w_chop
-    2279450U,	// F2_conv_ud2df
-    2295834U,	// F2_conv_ud2sf
-    2312218U,	// F2_conv_uw2df
-    2328602U,	// F2_conv_uw2sf
-    2344986U,	// F2_conv_w2df
-    2361370U,	// F2_conv_w2sf
-    2377754U,	// F2_dfclass
-    2394138U,	// F2_dfcmpeq
-    2410522U,	// F2_dfcmpge
-    2426906U,	// F2_dfcmpgt
-    2443290U,	// F2_dfcmpuo
-    589662234U,	// F2_dfimm_n
-    606439450U,	// F2_dfimm_p
-    2476058U,	// F2_sfadd
-    2492442U,	// F2_sfclass
-    2508826U,	// F2_sfcmpeq
-    2525210U,	// F2_sfcmpge
-    2541594U,	// F2_sfcmpgt
-    2557978U,	// F2_sfcmpuo
-    2574362U,	// F2_sffixupd
-    2590746U,	// F2_sffixupn
-    2607130U,	// F2_sffixupr
-    2623514U,	// F2_sffma
-    623380506U,	// F2_sffma_lib
-    52955162U,	// F2_sffma_sc
-    2639898U,	// F2_sffms
-    623396890U,	// F2_sffms_lib
-    589858842U,	// F2_sfimm_n
-    606636058U,	// F2_sfimm_p
-    36227098U,	// F2_sfinvsqrta
-    2689050U,	// F2_sfmax
-    2705434U,	// F2_sfmin
-    2721818U,	// F2_sfmpy
-    36227098U,	// F2_sfrecipa
-    2738202U,	// F2_sfsub
-    2754586U,	// HI
-    2070555U,	// J2_call
-    2770997U,	// J2_callf
-    2066471U,	// J2_callr
-    2787381U,	// J2_callrf
-    2787517U,	// J2_callrt
-    2771133U,	// J2_callt
-    2070561U,	// J2_jump
-    2803765U,	// J2_jumpf
-    2820149U,	// J2_jumpfnew
-    2836533U,	// J2_jumpfnewpt
-    2852917U,	// J2_jumpfpt
-    2066478U,	// J2_jumpr
-    2869301U,	// J2_jumprf
-    2885685U,	// J2_jumprfnew
-    2902069U,	// J2_jumprfnewpt
-    2918453U,	// J2_jumprfpt
-    2934973U,	// J2_jumprgtez
-    2951357U,	// J2_jumprgtezpt
-    2967741U,	// J2_jumprltez
-    2984125U,	// J2_jumprltezpt
-    3000509U,	// J2_jumprnz
-    3016893U,	// J2_jumprnzpt
-    2869437U,	// J2_jumprt
-    2885821U,	// J2_jumprtnew
-    2902205U,	// J2_jumprtnewpt
-    2918589U,	// J2_jumprtpt
-    3033277U,	// J2_jumprz
-    3049661U,	// J2_jumprzpt
-    2803901U,	// J2_jumpt
-    2820285U,	// J2_jumptnew
-    2836669U,	// J2_jumptnewpt
-    2853053U,	// J2_jumptpt
-    3070154U,	// J2_loop0i
-    3070154U,	// J2_loop0iext
-    36231370U,	// J2_loop0r
-    36231370U,	// J2_loop0rext
-    3070191U,	// J2_loop1i
-    3070191U,	// J2_loop1iext
-    36231407U,	// J2_loop1r
-    36231407U,	// J2_loop1rext
-    1443998U,	// J2_pause
-    3070146U,	// J2_ploop1si
-    36231362U,	// J2_ploop1sr
-    3070161U,	// J2_ploop2si
-    36231377U,	// J2_ploop2sr
-    3070176U,	// J2_ploop3si
-    36231392U,	// J2_ploop3sr
-    1443955U,	// J2_trap0
-    1443963U,	// J2_trap1
-    640616883U,	// J4_cmpeq_f_jumpnv_nt
-    657394099U,	// J4_cmpeq_f_jumpnv_t
-    36227481U,	// J4_cmpeq_fp0_jump_nt
-    36227481U,	// J4_cmpeq_fp0_jump_t
-    36227494U,	// J4_cmpeq_fp1_jump_nt
-    36227494U,	// J4_cmpeq_fp1_jump_t
-    640616896U,	// J4_cmpeq_t_jumpnv_nt
-    657394112U,	// J4_cmpeq_t_jumpnv_t
-    36227481U,	// J4_cmpeq_tp0_jump_nt
-    36227481U,	// J4_cmpeq_tp0_jump_t
-    36227494U,	// J4_cmpeq_tp1_jump_nt
-    36227494U,	// J4_cmpeq_tp1_jump_t
-    640633267U,	// J4_cmpeqi_f_jumpnv_nt
-    657410483U,	// J4_cmpeqi_f_jumpnv_t
-    674154905U,	// J4_cmpeqi_fp0_jump_nt
-    690932121U,	// J4_cmpeqi_fp0_jump_t
-    707709350U,	// J4_cmpeqi_fp1_jump_nt
-    724486566U,	// J4_cmpeqi_fp1_jump_t
-    640633280U,	// J4_cmpeqi_t_jumpnv_nt
-    657410496U,	// J4_cmpeqi_t_jumpnv_t
-    741263769U,	// J4_cmpeqi_tp0_jump_nt
-    758040985U,	// J4_cmpeqi_tp0_jump_t
-    774818214U,	// J4_cmpeqi_tp1_jump_nt
-    791595430U,	// J4_cmpeqi_tp1_jump_t
-    640633267U,	// J4_cmpeqn1_f_jumpnv_nt
-    657410483U,	// J4_cmpeqn1_f_jumpnv_t
-    674204057U,	// J4_cmpeqn1_fp0_jump_nt
-    690981273U,	// J4_cmpeqn1_fp0_jump_t
-    707758502U,	// J4_cmpeqn1_fp1_jump_nt
-    724535718U,	// J4_cmpeqn1_fp1_jump_t
-    640633280U,	// J4_cmpeqn1_t_jumpnv_nt
-    657410496U,	// J4_cmpeqn1_t_jumpnv_t
-    741312921U,	// J4_cmpeqn1_tp0_jump_nt
-    758090137U,	// J4_cmpeqn1_tp0_jump_t
-    774867366U,	// J4_cmpeqn1_tp1_jump_nt
-    791644582U,	// J4_cmpeqn1_tp1_jump_t
-    640616942U,	// J4_cmpgt_f_jumpnv_nt
-    657394158U,	// J4_cmpgt_f_jumpnv_t
-    36227540U,	// J4_cmpgt_fp0_jump_nt
-    36227540U,	// J4_cmpgt_fp0_jump_t
-    36227553U,	// J4_cmpgt_fp1_jump_nt
-    36227553U,	// J4_cmpgt_fp1_jump_t
-    640616955U,	// J4_cmpgt_t_jumpnv_nt
-    657394171U,	// J4_cmpgt_t_jumpnv_t
-    36227540U,	// J4_cmpgt_tp0_jump_nt
-    36227540U,	// J4_cmpgt_tp0_jump_t
-    36227553U,	// J4_cmpgt_tp1_jump_nt
-    36227553U,	// J4_cmpgt_tp1_jump_t
-    640633326U,	// J4_cmpgti_f_jumpnv_nt
-    657410542U,	// J4_cmpgti_f_jumpnv_t
-    674154964U,	// J4_cmpgti_fp0_jump_nt
-    690932180U,	// J4_cmpgti_fp0_jump_t
-    707709409U,	// J4_cmpgti_fp1_jump_nt
-    724486625U,	// J4_cmpgti_fp1_jump_t
-    640633339U,	// J4_cmpgti_t_jumpnv_nt
-    657410555U,	// J4_cmpgti_t_jumpnv_t
-    741263828U,	// J4_cmpgti_tp0_jump_nt
-    758041044U,	// J4_cmpgti_tp0_jump_t
-    774818273U,	// J4_cmpgti_tp1_jump_nt
-    791595489U,	// J4_cmpgti_tp1_jump_t
-    640633326U,	// J4_cmpgtn1_f_jumpnv_nt
-    657410542U,	// J4_cmpgtn1_f_jumpnv_t
-    674204116U,	// J4_cmpgtn1_fp0_jump_nt
-    690981332U,	// J4_cmpgtn1_fp0_jump_t
-    707758561U,	// J4_cmpgtn1_fp1_jump_nt
-    724535777U,	// J4_cmpgtn1_fp1_jump_t
-    640633339U,	// J4_cmpgtn1_t_jumpnv_nt
-    657410555U,	// J4_cmpgtn1_t_jumpnv_t
-    741312980U,	// J4_cmpgtn1_tp0_jump_nt
-    758090196U,	// J4_cmpgtn1_tp0_jump_t
-    774867425U,	// J4_cmpgtn1_tp1_jump_nt
-    791644641U,	// J4_cmpgtn1_tp1_jump_t
-    640617060U,	// J4_cmpgtu_f_jumpnv_nt
-    657394276U,	// J4_cmpgtu_f_jumpnv_t
-    36227656U,	// J4_cmpgtu_fp0_jump_nt
-    36227656U,	// J4_cmpgtu_fp0_jump_t
-    36227670U,	// J4_cmpgtu_fp1_jump_nt
-    36227670U,	// J4_cmpgtu_fp1_jump_t
-    640617074U,	// J4_cmpgtu_t_jumpnv_nt
-    657394290U,	// J4_cmpgtu_t_jumpnv_t
-    36227656U,	// J4_cmpgtu_tp0_jump_nt
-    36227656U,	// J4_cmpgtu_tp0_jump_t
-    36227670U,	// J4_cmpgtu_tp1_jump_nt
-    36227670U,	// J4_cmpgtu_tp1_jump_t
-    640633444U,	// J4_cmpgtui_f_jumpnv_nt
-    657410660U,	// J4_cmpgtui_f_jumpnv_t
-    674155080U,	// J4_cmpgtui_fp0_jump_nt
-    690932296U,	// J4_cmpgtui_fp0_jump_t
-    707709526U,	// J4_cmpgtui_fp1_jump_nt
-    724486742U,	// J4_cmpgtui_fp1_jump_t
-    640633458U,	// J4_cmpgtui_t_jumpnv_nt
-    657410674U,	// J4_cmpgtui_t_jumpnv_t
-    741263944U,	// J4_cmpgtui_tp0_jump_nt
-    758041160U,	// J4_cmpgtui_tp0_jump_t
-    774818390U,	// J4_cmpgtui_tp1_jump_nt
-    791595606U,	// J4_cmpgtui_tp1_jump_t
-    36227566U,	// J4_cmplt_f_jumpnv_nt
-    36227566U,	// J4_cmplt_f_jumpnv_t
-    36227579U,	// J4_cmplt_t_jumpnv_nt
-    36227579U,	// J4_cmplt_t_jumpnv_t
-    36227684U,	// J4_cmpltu_f_jumpnv_nt
-    36227684U,	// J4_cmpltu_f_jumpnv_t
-    36227698U,	// J4_cmpltu_t_jumpnv_nt
-    36227698U,	// J4_cmpltu_t_jumpnv_t
-    1444300U,	// J4_hintjumpr
-    34179098U,	// J4_jumpseti
-    805881882U,	// J4_jumpsetr
-    3131937U,	// J4_tstbit0_f_jumpnv_nt
-    3148321U,	// J4_tstbit0_f_jumpnv_t
-    3164679U,	// J4_tstbit0_fp0_jump_nt
-    3181063U,	// J4_tstbit0_fp0_jump_t
-    3197460U,	// J4_tstbit0_fp1_jump_nt
-    3213844U,	// J4_tstbit0_fp1_jump_t
-    3131950U,	// J4_tstbit0_t_jumpnv_nt
-    3148334U,	// J4_tstbit0_t_jumpnv_t
-    3230215U,	// J4_tstbit0_tp0_jump_nt
-    3246599U,	// J4_tstbit0_tp0_jump_t
-    3262996U,	// J4_tstbit0_tp1_jump_nt
-    3279380U,	// J4_tstbit0_tp1_jump_t
-    916U,	// L2_deallocframe
-    322062362U,	// L2_loadalignb_io
-    322062362U,	// L2_loadalignb_pbr
-    322062362U,	// L2_loadalignb_pci
-    825378842U,	// L2_loadalignb_pcr
-    825378842U,	// L2_loadalignb_pi
-    825378842U,	// L2_loadalignb_pr
-    322078746U,	// L2_loadalignh_io
-    322078746U,	// L2_loadalignh_pbr
-    322078746U,	// L2_loadalignh_pci
-    825395226U,	// L2_loadalignh_pcr
-    825395226U,	// L2_loadalignh_pi
-    825395226U,	// L2_loadalignh_pr
-    36882458U,	// L2_loadbsw2_io
-    322095130U,	// L2_loadbsw2_pbr
-    322095130U,	// L2_loadbsw2_pci
-    322095130U,	// L2_loadbsw2_pcr
-    322095130U,	// L2_loadbsw2_pi
-    322095130U,	// L2_loadbsw2_pr
-    36882458U,	// L2_loadbsw4_io
-    322095130U,	// L2_loadbsw4_pbr
-    322095130U,	// L2_loadbsw4_pci
-    322095130U,	// L2_loadbsw4_pcr
-    322095130U,	// L2_loadbsw4_pi
-    322095130U,	// L2_loadbsw4_pr
-    36898842U,	// L2_loadbzw2_io
-    322111514U,	// L2_loadbzw2_pbr
-    322111514U,	// L2_loadbzw2_pci
-    322111514U,	// L2_loadbzw2_pcr
-    322111514U,	// L2_loadbzw2_pi
-    322111514U,	// L2_loadbzw2_pr
-    36898842U,	// L2_loadbzw4_io
-    322111514U,	// L2_loadbzw4_pbr
-    322111514U,	// L2_loadbzw4_pci
-    322111514U,	// L2_loadbzw4_pcr
-    322111514U,	// L2_loadbzw4_pi
-    322111514U,	// L2_loadbzw4_pr
-    36915226U,	// L2_loadrb_io
-    322127898U,	// L2_loadrb_pbr
-    322127898U,	// L2_loadrb_pci
-    322127898U,	// L2_loadrb_pcr
-    322127898U,	// L2_loadrb_pi
-    322127898U,	// L2_loadrb_pr
-    36931610U,	// L2_loadrbgp
-    36947994U,	// L2_loadrd_io
-    322160666U,	// L2_loadrd_pbr
-    322160666U,	// L2_loadrd_pci
-    322160666U,	// L2_loadrd_pcr
-    322160666U,	// L2_loadrd_pi
-    322160666U,	// L2_loadrd_pr
-    36964378U,	// L2_loadrdgp
-    36980762U,	// L2_loadrh_io
-    322193434U,	// L2_loadrh_pbr
-    322193434U,	// L2_loadrh_pci
-    322193434U,	// L2_loadrh_pcr
-    322193434U,	// L2_loadrh_pi
-    322193434U,	// L2_loadrh_pr
-    36997146U,	// L2_loadrhgp
-    37013530U,	// L2_loadri_io
-    322226202U,	// L2_loadri_pbr
-    322226202U,	// L2_loadri_pci
-    322226202U,	// L2_loadri_pcr
-    322226202U,	// L2_loadri_pi
-    322226202U,	// L2_loadri_pr
-    37029914U,	// L2_loadrigp
-    37046298U,	// L2_loadrub_io
-    322258970U,	// L2_loadrub_pbr
-    322258970U,	// L2_loadrub_pci
-    322258970U,	// L2_loadrub_pcr
-    322258970U,	// L2_loadrub_pi
-    322258970U,	// L2_loadrub_pr
-    37062682U,	// L2_loadrubgp
-    37079066U,	// L2_loadruh_io
-    322291738U,	// L2_loadruh_pbr
-    322291738U,	// L2_loadruh_pci
-    322291738U,	// L2_loadruh_pcr
-    322291738U,	// L2_loadruh_pi
-    322291738U,	// L2_loadruh_pr
-    37095450U,	// L2_loadruhgp
-    3557402U,	// L2_loadw_locked
-    839110709U,	// L2_ploadrbf_io
-    839116853U,	// L2_ploadrbf_pi
-    839127093U,	// L2_ploadrbfnew_io
-    839133237U,	// L2_ploadrbfnew_pi
-    839110845U,	// L2_ploadrbt_io
-    839116989U,	// L2_ploadrbt_pi
-    839127229U,	// L2_ploadrbtnew_io
-    839133373U,	// L2_ploadrbtnew_pi
-    855887925U,	// L2_ploadrdf_io
-    855894069U,	// L2_ploadrdf_pi
-    855904309U,	// L2_ploadrdfnew_io
-    855910453U,	// L2_ploadrdfnew_pi
-    855888061U,	// L2_ploadrdt_io
-    855894205U,	// L2_ploadrdt_pi
-    855904445U,	// L2_ploadrdtnew_io
-    855910589U,	// L2_ploadrdtnew_pi
-    872665141U,	// L2_ploadrhf_io
-    872671285U,	// L2_ploadrhf_pi
-    872681525U,	// L2_ploadrhfnew_io
-    872687669U,	// L2_ploadrhfnew_pi
-    872665277U,	// L2_ploadrht_io
-    872671421U,	// L2_ploadrht_pi
-    872681661U,	// L2_ploadrhtnew_io
-    872687805U,	// L2_ploadrhtnew_pi
-    889442357U,	// L2_ploadrif_io
-    889448501U,	// L2_ploadrif_pi
-    889458741U,	// L2_ploadrifnew_io
-    889464885U,	// L2_ploadrifnew_pi
-    889442493U,	// L2_ploadrit_io
-    889448637U,	// L2_ploadrit_pi
-    889458877U,	// L2_ploadritnew_io
-    889465021U,	// L2_ploadritnew_pi
-    906219573U,	// L2_ploadrubf_io
-    906225717U,	// L2_ploadrubf_pi
-    906235957U,	// L2_ploadrubfnew_io
-    906242101U,	// L2_ploadrubfnew_pi
-    906219709U,	// L2_ploadrubt_io
-    906225853U,	// L2_ploadrubt_pi
-    906236093U,	// L2_ploadrubtnew_io
-    906242237U,	// L2_ploadrubtnew_pi
-    922996789U,	// L2_ploadruhf_io
-    923002933U,	// L2_ploadruhf_pi
-    923013173U,	// L2_ploadruhfnew_io
-    923019317U,	// L2_ploadruhfnew_pi
-    922996925U,	// L2_ploadruht_io
-    923003069U,	// L2_ploadruht_pi
-    923013309U,	// L2_ploadruhtnew_io
-    923019453U,	// L2_ploadruhtnew_pi
-    121014577U,	// L4_add_memopb_io
-    121014652U,	// L4_add_memoph_io
-    121014924U,	// L4_add_memopw_io
-    121014577U,	// L4_and_memopb_io
-    121014652U,	// L4_and_memoph_io
-    121014924U,	// L4_and_memopw_io
-    121014577U,	// L4_iadd_memopb_io
-    121014652U,	// L4_iadd_memoph_io
-    121014924U,	// L4_iadd_memopw_io
-    121014577U,	// L4_iand_memopb_io
-    121014652U,	// L4_iand_memoph_io
-    121014924U,	// L4_iand_memopw_io
-    121014577U,	// L4_ior_memopb_io
-    121014652U,	// L4_ior_memoph_io
-    121014924U,	// L4_ior_memopw_io
-    121014577U,	// L4_isub_memopb_io
-    121014652U,	// L4_isub_memoph_io
-    121014924U,	// L4_isub_memopw_io
-    36849690U,	// L4_loadalignb_ap
-    36849690U,	// L4_loadalignb_ur
-    36866074U,	// L4_loadalignh_ap
-    36866074U,	// L4_loadalignh_ur
-    36882458U,	// L4_loadbsw2_ap
-    36882458U,	// L4_loadbsw2_ur
-    36882458U,	// L4_loadbsw4_ap
-    36882458U,	// L4_loadbsw4_ur
-    36898842U,	// L4_loadbzw2_ap
-    36898842U,	// L4_loadbzw2_ur
-    36898842U,	// L4_loadbzw4_ap
-    36898842U,	// L4_loadbzw4_ur
-    3590170U,	// L4_loadd_locked
-    36915226U,	// L4_loadrb_ap
-    36915226U,	// L4_loadrb_rr
-    36915226U,	// L4_loadrb_ur
-    36947994U,	// L4_loadrd_ap
-    36947994U,	// L4_loadrd_rr
-    36947994U,	// L4_loadrd_ur
-    36980762U,	// L4_loadrh_ap
-    36980762U,	// L4_loadrh_rr
-    36980762U,	// L4_loadrh_ur
-    37013530U,	// L4_loadri_ap
-    37013530U,	// L4_loadri_rr
-    37013530U,	// L4_loadri_ur
-    37046298U,	// L4_loadrub_ap
-    37046298U,	// L4_loadrub_rr
-    37046298U,	// L4_loadrub_ur
-    37079066U,	// L4_loadruh_ap
-    37079066U,	// L4_loadruh_rr
-    37079066U,	// L4_loadruh_ur
-    121014577U,	// L4_or_memopb_io
-    121014652U,	// L4_or_memoph_io
-    121014924U,	// L4_or_memopw_io
-    939774005U,	// L4_ploadrbf_abs
-    839110709U,	// L4_ploadrbf_rr
-    939790389U,	// L4_ploadrbfnew_abs
-    839127093U,	// L4_ploadrbfnew_rr
-    939774141U,	// L4_ploadrbt_abs
-    839110845U,	// L4_ploadrbt_rr
-    939790525U,	// L4_ploadrbtnew_abs
-    839127229U,	// L4_ploadrbtnew_rr
-    956551221U,	// L4_ploadrdf_abs
-    855887925U,	// L4_ploadrdf_rr
-    956567605U,	// L4_ploadrdfnew_abs
-    855904309U,	// L4_ploadrdfnew_rr
-    956551357U,	// L4_ploadrdt_abs
-    855888061U,	// L4_ploadrdt_rr
-    956567741U,	// L4_ploadrdtnew_abs
-    855904445U,	// L4_ploadrdtnew_rr
-    973328437U,	// L4_ploadrhf_abs
-    872665141U,	// L4_ploadrhf_rr
-    973344821U,	// L4_ploadrhfnew_abs
-    872681525U,	// L4_ploadrhfnew_rr
-    973328573U,	// L4_ploadrht_abs
-    872665277U,	// L4_ploadrht_rr
-    973344957U,	// L4_ploadrhtnew_abs
-    872681661U,	// L4_ploadrhtnew_rr
-    990105653U,	// L4_ploadrif_abs
-    889442357U,	// L4_ploadrif_rr
-    990122037U,	// L4_ploadrifnew_abs
-    889458741U,	// L4_ploadrifnew_rr
-    990105789U,	// L4_ploadrit_abs
-    889442493U,	// L4_ploadrit_rr
-    990122173U,	// L4_ploadritnew_abs
-    889458877U,	// L4_ploadritnew_rr
-    1006882869U,	// L4_ploadrubf_abs
-    906219573U,	// L4_ploadrubf_rr
-    1006899253U,	// L4_ploadrubfnew_abs
-    906235957U,	// L4_ploadrubfnew_rr
-    1006883005U,	// L4_ploadrubt_abs
-    906219709U,	// L4_ploadrubt_rr
-    1006899389U,	// L4_ploadrubtnew_abs
-    906236093U,	// L4_ploadrubtnew_rr
-    1023660085U,	// L4_ploadruhf_abs
-    922996789U,	// L4_ploadruhf_rr
-    1023676469U,	// L4_ploadruhfnew_abs
-    923013173U,	// L4_ploadruhfnew_rr
-    1023660221U,	// L4_ploadruht_abs
-    922996925U,	// L4_ploadruht_rr
-    1023676605U,	// L4_ploadruhtnew_abs
-    923013309U,	// L4_ploadruhtnew_rr
-    957U,	// L4_return
-    3606581U,	// L4_return_f
-    3622965U,	// L4_return_fnew_pnt
-    3639349U,	// L4_return_fnew_pt
-    3606717U,	// L4_return_t
-    3623101U,	// L4_return_tnew_pnt
-    3639485U,	// L4_return_tnew_pt
-    121014577U,	// L4_sub_memopb_io
-    121014652U,	// L4_sub_memoph_io
-    121014924U,	// L4_sub_memopw_io
-    64U,	// LDriw_mod
-    64U,	// LDriw_pred
-    3655706U,	// LO
-    54003738U,	// M2_acci
-    70780954U,	// M2_accii
-    3688474U,	// M2_cmaci_s0
-    3704858U,	// M2_cmacr_s0
-    20498458U,	// M2_cmacs_s0
-    1043908634U,	// M2_cmacs_s1
-    1060685850U,	// M2_cmacsc_s0
-    1077463066U,	// M2_cmacsc_s1
-    3737626U,	// M2_cmpyi_s0
-    3754010U,	// M2_cmpyr_s0
-    305760282U,	// M2_cmpyrs_s0
-    1094289434U,	// M2_cmpyrs_s1
-    1111066650U,	// M2_cmpyrsc_s0
-    1127843866U,	// M2_cmpyrsc_s1
-    20547610U,	// M2_cmpys_s0
-    1043957786U,	// M2_cmpys_s1
-    1060735002U,	// M2_cmpysc_s0
-    1077512218U,	// M2_cmpysc_s1
-    20563994U,	// M2_cnacs_s0
-    1043974170U,	// M2_cnacs_s1
-    1060751386U,	// M2_cnacsc_s0
-    1077528602U,	// M2_cnacsc_s1
-    54134810U,	// M2_dpmpyss_acc_s0
-    54151194U,	// M2_dpmpyss_nac_s0
-    54167578U,	// M2_dpmpyss_rnd_s0
-    54167578U,	// M2_dpmpyss_s0
-    54183962U,	// M2_dpmpyuu_acc_s0
-    54200346U,	// M2_dpmpyuu_nac_s0
-    54216730U,	// M2_dpmpyuu_s0
-    54167578U,	// M2_hmmpyh_rs1
-    54167578U,	// M2_hmmpyh_s1
-    54167578U,	// M2_hmmpyl_rs1
-    54167578U,	// M2_hmmpyl_s1
-    54233114U,	// M2_maci
-    3917850U,	// M2_macsin
-    71010330U,	// M2_macsip
-    305924122U,	// M2_mmachs_rs0
-    1094453274U,	// M2_mmachs_rs1
-    20711450U,	// M2_mmachs_s0
-    1044121626U,	// M2_mmachs_s1
-    305940506U,	// M2_mmacls_rs0
-    1094469658U,	// M2_mmacls_rs1
-    20727834U,	// M2_mmacls_s0
-    1044138010U,	// M2_mmacls_s1
-    305956890U,	// M2_mmacuhs_rs0
-    1094486042U,	// M2_mmacuhs_rs1
-    20744218U,	// M2_mmacuhs_s0
-    1044154394U,	// M2_mmacuhs_s1
-    305973274U,	// M2_mmaculs_rs0
-    1094502426U,	// M2_mmaculs_rs1
-    20760602U,	// M2_mmaculs_s0
-    1044170778U,	// M2_mmaculs_s1
-    305989658U,	// M2_mmpyh_rs0
-    1094518810U,	// M2_mmpyh_rs1
-    20776986U,	// M2_mmpyh_s0
-    1044187162U,	// M2_mmpyh_s1
-    306006042U,	// M2_mmpyl_rs0
-    1094535194U,	// M2_mmpyl_rs1
-    20793370U,	// M2_mmpyl_s0
-    1044203546U,	// M2_mmpyl_s1
-    306022426U,	// M2_mmpyuh_rs0
-    1094551578U,	// M2_mmpyuh_rs1
-    20809754U,	// M2_mmpyuh_s0
-    1044219930U,	// M2_mmpyuh_s1
-    306038810U,	// M2_mmpyul_rs0
-    1094567962U,	// M2_mmpyul_rs1
-    20826138U,	// M2_mmpyul_s0
-    1044236314U,	// M2_mmpyul_s1
-    87689242U,	// M2_mpy_acc_hh_s0
-    87689242U,	// M2_mpy_acc_hh_s1
-    87689242U,	// M2_mpy_acc_hl_s0
-    87689242U,	// M2_mpy_acc_hl_s1
-    104466458U,	// M2_mpy_acc_lh_s0
-    104466458U,	// M2_mpy_acc_lh_s1
-    104466458U,	// M2_mpy_acc_ll_s0
-    104466458U,	// M2_mpy_acc_ll_s1
-    87689242U,	// M2_mpy_acc_sat_hh_s0
-    87689242U,	// M2_mpy_acc_sat_hh_s1
-    87689242U,	// M2_mpy_acc_sat_hl_s0
-    87689242U,	// M2_mpy_acc_sat_hl_s1
-    104466458U,	// M2_mpy_acc_sat_lh_s0
-    104466458U,	// M2_mpy_acc_sat_lh_s1
-    104466458U,	// M2_mpy_acc_sat_ll_s0
-    104466458U,	// M2_mpy_acc_sat_ll_s1
-    87722010U,	// M2_mpy_hh_s0
-    87722010U,	// M2_mpy_hh_s1
-    87722010U,	// M2_mpy_hl_s0
-    87722010U,	// M2_mpy_hl_s1
-    104499226U,	// M2_mpy_lh_s0
-    104499226U,	// M2_mpy_lh_s1
-    104499226U,	// M2_mpy_ll_s0
-    104499226U,	// M2_mpy_ll_s1
-    87705626U,	// M2_mpy_nac_hh_s0
-    87705626U,	// M2_mpy_nac_hh_s1
-    87705626U,	// M2_mpy_nac_hl_s0
-    87705626U,	// M2_mpy_nac_hl_s1
-    104482842U,	// M2_mpy_nac_lh_s0
-    104482842U,	// M2_mpy_nac_lh_s1
-    104482842U,	// M2_mpy_nac_ll_s0
-    104482842U,	// M2_mpy_nac_ll_s1
-    87705626U,	// M2_mpy_nac_sat_hh_s0
-    87705626U,	// M2_mpy_nac_sat_hh_s1
-    87705626U,	// M2_mpy_nac_sat_hl_s0
-    87705626U,	// M2_mpy_nac_sat_hl_s1
-    104482842U,	// M2_mpy_nac_sat_lh_s0
-    104482842U,	// M2_mpy_nac_sat_lh_s1
-    104482842U,	// M2_mpy_nac_sat_ll_s0
-    104482842U,	// M2_mpy_nac_sat_ll_s1
-    87722010U,	// M2_mpy_rnd_hh_s0
-    87722010U,	// M2_mpy_rnd_hh_s1
-    87722010U,	// M2_mpy_rnd_hl_s0
-    87722010U,	// M2_mpy_rnd_hl_s1
-    104499226U,	// M2_mpy_rnd_lh_s0
-    104499226U,	// M2_mpy_rnd_lh_s1
-    104499226U,	// M2_mpy_rnd_ll_s0
-    104499226U,	// M2_mpy_rnd_ll_s1
-    87722010U,	// M2_mpy_sat_hh_s0
-    87722010U,	// M2_mpy_sat_hh_s1
-    87722010U,	// M2_mpy_sat_hl_s0
-    87722010U,	// M2_mpy_sat_hl_s1
-    104499226U,	// M2_mpy_sat_lh_s0
-    104499226U,	// M2_mpy_sat_lh_s1
-    104499226U,	// M2_mpy_sat_ll_s0
-    104499226U,	// M2_mpy_sat_ll_s1
-    87722010U,	// M2_mpy_sat_rnd_hh_s0
-    87722010U,	// M2_mpy_sat_rnd_hh_s1
-    87722010U,	// M2_mpy_sat_rnd_hl_s0
-    87722010U,	// M2_mpy_sat_rnd_hl_s1
-    104499226U,	// M2_mpy_sat_rnd_lh_s0
-    104499226U,	// M2_mpy_sat_rnd_lh_s1
-    104499226U,	// M2_mpy_sat_rnd_ll_s0
-    104499226U,	// M2_mpy_sat_rnd_ll_s1
-    54167578U,	// M2_mpy_up
-    54167578U,	// M2_mpy_up_s1
-    54167578U,	// M2_mpy_up_s1_sat
-    87689242U,	// M2_mpyd_acc_hh_s0
-    87689242U,	// M2_mpyd_acc_hh_s1
-    87689242U,	// M2_mpyd_acc_hl_s0
-    87689242U,	// M2_mpyd_acc_hl_s1
-    104466458U,	// M2_mpyd_acc_lh_s0
-    104466458U,	// M2_mpyd_acc_lh_s1
-    104466458U,	// M2_mpyd_acc_ll_s0
-    104466458U,	// M2_mpyd_acc_ll_s1
-    87722010U,	// M2_mpyd_hh_s0
-    87722010U,	// M2_mpyd_hh_s1
-    87722010U,	// M2_mpyd_hl_s0
-    87722010U,	// M2_mpyd_hl_s1
-    104499226U,	// M2_mpyd_lh_s0
-    104499226U,	// M2_mpyd_lh_s1
-    104499226U,	// M2_mpyd_ll_s0
-    104499226U,	// M2_mpyd_ll_s1
-    87705626U,	// M2_mpyd_nac_hh_s0
-    87705626U,	// M2_mpyd_nac_hh_s1
-    87705626U,	// M2_mpyd_nac_hl_s0
-    87705626U,	// M2_mpyd_nac_hl_s1
-    104482842U,	// M2_mpyd_nac_lh_s0
-    104482842U,	// M2_mpyd_nac_lh_s1
-    104482842U,	// M2_mpyd_nac_ll_s0
-    104482842U,	// M2_mpyd_nac_ll_s1
-    87722010U,	// M2_mpyd_rnd_hh_s0
-    87722010U,	// M2_mpyd_rnd_hh_s1
-    87722010U,	// M2_mpyd_rnd_hl_s0
-    87722010U,	// M2_mpyd_rnd_hl_s1
-    104499226U,	// M2_mpyd_rnd_lh_s0
-    104499226U,	// M2_mpyd_rnd_lh_s1
-    104499226U,	// M2_mpyd_rnd_ll_s0
-    104499226U,	// M2_mpyd_rnd_ll_s1
-    54396954U,	// M2_mpyi
-    4081690U,	// M2_mpysin
-    4098074U,	// M2_mpysip
-    71174170U,	// M2_mpysmi
-    4114458U,	// M2_mpysu_up
-    87738394U,	// M2_mpyu_acc_hh_s0
-    87738394U,	// M2_mpyu_acc_hh_s1
-    87738394U,	// M2_mpyu_acc_hl_s0
-    87738394U,	// M2_mpyu_acc_hl_s1
-    104515610U,	// M2_mpyu_acc_lh_s0
-    104515610U,	// M2_mpyu_acc_lh_s1
-    104515610U,	// M2_mpyu_acc_ll_s0
-    104515610U,	// M2_mpyu_acc_ll_s1
-    87771162U,	// M2_mpyu_hh_s0
-    87771162U,	// M2_mpyu_hh_s1
-    87771162U,	// M2_mpyu_hl_s0
-    87771162U,	// M2_mpyu_hl_s1
-    104548378U,	// M2_mpyu_lh_s0
-    104548378U,	// M2_mpyu_lh_s1
-    104548378U,	// M2_mpyu_ll_s0
-    104548378U,	// M2_mpyu_ll_s1
-    87754778U,	// M2_mpyu_nac_hh_s0
-    87754778U,	// M2_mpyu_nac_hh_s1
-    87754778U,	// M2_mpyu_nac_hl_s0
-    87754778U,	// M2_mpyu_nac_hl_s1
-    104531994U,	// M2_mpyu_nac_lh_s0
-    104531994U,	// M2_mpyu_nac_lh_s1
-    104531994U,	// M2_mpyu_nac_ll_s0
-    104531994U,	// M2_mpyu_nac_ll_s1
-    54216730U,	// M2_mpyu_up
-    87738394U,	// M2_mpyud_acc_hh_s0
-    87738394U,	// M2_mpyud_acc_hh_s1
-    87738394U,	// M2_mpyud_acc_hl_s0
-    87738394U,	// M2_mpyud_acc_hl_s1
-    104515610U,	// M2_mpyud_acc_lh_s0
-    104515610U,	// M2_mpyud_acc_lh_s1
-    104515610U,	// M2_mpyud_acc_ll_s0
-    104515610U,	// M2_mpyud_acc_ll_s1
-    87771162U,	// M2_mpyud_hh_s0
-    87771162U,	// M2_mpyud_hh_s1
-    87771162U,	// M2_mpyud_hl_s0
-    87771162U,	// M2_mpyud_hl_s1
-    104548378U,	// M2_mpyud_lh_s0
-    104548378U,	// M2_mpyud_lh_s1
-    104548378U,	// M2_mpyud_ll_s0
-    104548378U,	// M2_mpyud_ll_s1
-    87754778U,	// M2_mpyud_nac_hh_s0
-    87754778U,	// M2_mpyud_nac_hh_s1
-    87754778U,	// M2_mpyud_nac_hl_s0
-    87754778U,	// M2_mpyud_nac_hl_s1
-    104531994U,	// M2_mpyud_nac_lh_s0
-    104531994U,	// M2_mpyud_nac_lh_s1
-    104531994U,	// M2_mpyud_nac_ll_s0
-    104531994U,	// M2_mpyud_nac_ll_s1
-    4130842U,	// M2_mpyui
-    54478874U,	// M2_nacci
-    71256090U,	// M2_naccii
-    4163610U,	// M2_subacc
-    4179994U,	// M2_vabsdiffh
-    4196378U,	// M2_vabsdiffw
-    4212762U,	// M2_vcmac_s0_sat_i
-    4229146U,	// M2_vcmac_s0_sat_r
-    21022746U,	// M2_vcmpy_s0_sat_i
-    21039130U,	// M2_vcmpy_s0_sat_r
-    1044432922U,	// M2_vcmpy_s1_sat_i
-    1044449306U,	// M2_vcmpy_s1_sat_r
-    21055514U,	// M2_vdmacs_s0
-    1044465690U,	// M2_vdmacs_s1
-    306284570U,	// M2_vdmpyrs_s0
-    1094813722U,	// M2_vdmpyrs_s1
-    21071898U,	// M2_vdmpys_s0
-    1044482074U,	// M2_vdmpys_s1
-    4311066U,	// M2_vmac2
-    4327450U,	// M2_vmac2es
-    21104666U,	// M2_vmac2es_s0
-    1044514842U,	// M2_vmac2es_s1
-    21088282U,	// M2_vmac2s_s0
-    1044498458U,	// M2_vmac2s_s1
-    21121050U,	// M2_vmac2su_s0
-    1044531226U,	// M2_vmac2su_s1
-    21137434U,	// M2_vmpy2es_s0
-    1044547610U,	// M2_vmpy2es_s1
-    21153818U,	// M2_vmpy2s_s0
-    306366490U,	// M2_vmpy2s_s0pack
-    1044563994U,	// M2_vmpy2s_s1
-    1094895642U,	// M2_vmpy2s_s1pack
-    21170202U,	// M2_vmpy2su_s0
-    1044580378U,	// M2_vmpy2su_s1
-    4409370U,	// M2_vraddh
-    4425754U,	// M2_vradduh
-    4442138U,	// M2_vrcmaci_s0
-    1145292826U,	// M2_vrcmaci_s0c
-    4458522U,	// M2_vrcmacr_s0
-    1145309210U,	// M2_vrcmacr_s0c
-    4474906U,	// M2_vrcmpyi_s0
-    1145325594U,	// M2_vrcmpyi_s0c
-    4491290U,	// M2_vrcmpyr_s0
-    1145341978U,	// M2_vrcmpyr_s0c
-    1044695066U,	// M2_vrcmpys_acc_s1
-    1162135578U,	// M2_vrcmpys_acc_s1_h
-    1178912794U,	// M2_vrcmpys_acc_s1_l
-    1044711450U,	// M2_vrcmpys_s1
-    1162168346U,	// M2_vrcmpys_s1_h
-    1178945562U,	// M2_vrcmpys_s1_l
-    1095043098U,	// M2_vrcmpys_s1rp
-    1195722778U,	// M2_vrcmpys_s1rp_h
-    1212499994U,	// M2_vrcmpys_s1rp_l
-    4556826U,	// M2_vrmac_s0
-    4573210U,	// M2_vrmpy_s0
-    4589594U,	// M2_xor_xacc
-    54937626U,	// M4_and_and
-    340150298U,	// M4_and_andn
-    4622362U,	// M4_and_or
-    4638746U,	// M4_and_xor
-    1095174170U,	// M4_cmpyi_wh
-    1128728602U,	// M4_cmpyi_whc
-    1095190554U,	// M4_cmpyr_wh
-    1128744986U,	// M4_cmpyr_whc
-    54134810U,	// M4_mac_up_s1_sat
-    1229424666U,	// M4_mpyri_addi
+    2082908U,	// EH_RETURN_JMPR
+    833U,	// ENDLOOP0
+    941U,	// ENDLOOP1
+    2131994U,	// F2_conv_d2df
+    2148378U,	// F2_conv_d2sf
+    2164762U,	// F2_conv_df2d
+    555812890U,	// F2_conv_df2d_chop
+    2181146U,	// F2_conv_df2sf
+    2197530U,	// F2_conv_df2ud
+    555845658U,	// F2_conv_df2ud_chop
+    2213914U,	// F2_conv_df2uw
+    555862042U,	// F2_conv_df2uw_chop
+    2230298U,	// F2_conv_df2w
+    555878426U,	// F2_conv_df2w_chop
+    2246682U,	// F2_conv_sf2d
+    555894810U,	// F2_conv_sf2d_chop
+    2263066U,	// F2_conv_sf2df
+    2279450U,	// F2_conv_sf2ud
+    555927578U,	// F2_conv_sf2ud_chop
+    2295834U,	// F2_conv_sf2uw
+    555943962U,	// F2_conv_sf2uw_chop
+    2312218U,	// F2_conv_sf2w
+    555960346U,	// F2_conv_sf2w_chop
+    2328602U,	// F2_conv_ud2df
+    2344986U,	// F2_conv_ud2sf
+    2361370U,	// F2_conv_uw2df
+    2377754U,	// F2_conv_uw2sf
+    2394138U,	// F2_conv_w2df
+    2410522U,	// F2_conv_w2sf
+    2426906U,	// F2_dfclass
+    2443290U,	// F2_dfcmpeq
+    2459674U,	// F2_dfcmpge
+    2476058U,	// F2_dfcmpgt
+    2492442U,	// F2_dfcmpuo
+    572934170U,	// F2_dfimm_n
+    589711386U,	// F2_dfimm_p
+    2525210U,	// F2_sfadd
+    2541594U,	// F2_sfclass
+    2557978U,	// F2_sfcmpeq
+    2574362U,	// F2_sfcmpge
+    2590746U,	// F2_sfcmpgt
+    2607130U,	// F2_sfcmpuo
+    2623514U,	// F2_sffixupd
+    2639898U,	// F2_sffixupn
+    2656282U,	// F2_sffixupr
+    2672666U,	// F2_sffma
+    606652442U,	// F2_sffma_lib
+    53004314U,	// F2_sffma_sc
+    2689050U,	// F2_sffms
+    606668826U,	// F2_sffms_lib
+    573130778U,	// F2_sfimm_n
+    589907994U,	// F2_sfimm_p
+    35260442U,	// F2_sfinvsqrta
+    2721818U,	// F2_sfmax
+    2738202U,	// F2_sfmin
+    2754586U,	// F2_sfmpy
+    35260442U,	// F2_sfrecipa
+    2770970U,	// F2_sfsub
+    2787354U,	// HI
+    2086985U,	// J2_call
+    2803811U,	// J2_callf
+    2082901U,	// J2_callr
+    2820195U,	// J2_callrf
+    2820366U,	// J2_callrt
+    2803982U,	// J2_callt
+    834U,	// J2_endloop0
+    843U,	// J2_endloop01
+    942U,	// J2_endloop1
+    2086991U,	// J2_jump
+    2836579U,	// J2_jumpf
+    2852963U,	// J2_jumpf_nopred_map
+    2869347U,	// J2_jumpfnew
+    2885731U,	// J2_jumpfnewpt
+    2902115U,	// J2_jumpfpt
+    2082908U,	// J2_jumpr
+    2918499U,	// J2_jumprf
+    2934883U,	// J2_jumprf_nopred_map
+    2951267U,	// J2_jumprfnew
+    2967651U,	// J2_jumprfnewpt
+    2984035U,	// J2_jumprfpt
+    3000590U,	// J2_jumprgtez
+    3016974U,	// J2_jumprgtezpt
+    3033358U,	// J2_jumprltez
+    3049742U,	// J2_jumprltezpt
+    3066126U,	// J2_jumprnz
+    3082510U,	// J2_jumprnzpt
+    2918670U,	// J2_jumprt
+    2935054U,	// J2_jumprt_nopred_map
+    2951438U,	// J2_jumprtnew
+    2967822U,	// J2_jumprtnewpt
+    2984206U,	// J2_jumprtpt
+    3098894U,	// J2_jumprz
+    3115278U,	// J2_jumprzpt
+    2836750U,	// J2_jumpt
+    2853134U,	// J2_jumpt_nopred_map
+    2869518U,	// J2_jumptnew
+    2885902U,	// J2_jumptnewpt
+    2902286U,	// J2_jumptpt
+    3135771U,	// J2_loop0i
+    3135771U,	// J2_loop0iext
+    35264795U,	// J2_loop0r
+    35264795U,	// J2_loop0rext
+    3135808U,	// J2_loop1i
+    3135808U,	// J2_loop1iext
+    35264832U,	// J2_loop1r
+    35264832U,	// J2_loop1rext
+    1460401U,	// J2_pause
+    3135763U,	// J2_ploop1si
+    35264787U,	// J2_ploop1sr
+    3135778U,	// J2_ploop2si
+    35264802U,	// J2_ploop2sr
+    3135793U,	// J2_ploop3si
+    35264817U,	// J2_ploop3sr
+    1460354U,	// J2_trap0
+    623905292U,	// J4_cmpeq_f_jumpnv_nt
+    640682508U,	// J4_cmpeq_f_jumpnv_t
+    35260914U,	// J4_cmpeq_fp0_jump_nt
+    35260914U,	// J4_cmpeq_fp0_jump_t
+    35260927U,	// J4_cmpeq_fp1_jump_nt
+    35260927U,	// J4_cmpeq_fp1_jump_t
+    623905305U,	// J4_cmpeq_t_jumpnv_nt
+    640682521U,	// J4_cmpeq_t_jumpnv_t
+    35260914U,	// J4_cmpeq_tp0_jump_nt
+    35260914U,	// J4_cmpeq_tp0_jump_t
+    35260927U,	// J4_cmpeq_tp1_jump_nt
+    35260927U,	// J4_cmpeq_tp1_jump_t
+    623921676U,	// J4_cmpeqi_f_jumpnv_nt
+    640698892U,	// J4_cmpeqi_f_jumpnv_t
+    657443314U,	// J4_cmpeqi_fp0_jump_nt
+    674220530U,	// J4_cmpeqi_fp0_jump_t
+    690997759U,	// J4_cmpeqi_fp1_jump_nt
+    707774975U,	// J4_cmpeqi_fp1_jump_t
+    623921689U,	// J4_cmpeqi_t_jumpnv_nt
+    640698905U,	// J4_cmpeqi_t_jumpnv_t
+    724552178U,	// J4_cmpeqi_tp0_jump_nt
+    741329394U,	// J4_cmpeqi_tp0_jump_t
+    758106623U,	// J4_cmpeqi_tp1_jump_nt
+    774883839U,	// J4_cmpeqi_tp1_jump_t
+    623921676U,	// J4_cmpeqn1_f_jumpnv_nt
+    640698892U,	// J4_cmpeqn1_f_jumpnv_t
+    657443314U,	// J4_cmpeqn1_fp0_jump_nt
+    674220530U,	// J4_cmpeqn1_fp0_jump_t
+    690997759U,	// J4_cmpeqn1_fp1_jump_nt
+    707774975U,	// J4_cmpeqn1_fp1_jump_t
+    623921689U,	// J4_cmpeqn1_t_jumpnv_nt
+    640698905U,	// J4_cmpeqn1_t_jumpnv_t
+    724552178U,	// J4_cmpeqn1_tp0_jump_nt
+    741329394U,	// J4_cmpeqn1_tp0_jump_t
+    758106623U,	// J4_cmpeqn1_tp1_jump_nt
+    774883839U,	// J4_cmpeqn1_tp1_jump_t
+    623905351U,	// J4_cmpgt_f_jumpnv_nt
+    640682567U,	// J4_cmpgt_f_jumpnv_t
+    35260973U,	// J4_cmpgt_fp0_jump_nt
+    35260973U,	// J4_cmpgt_fp0_jump_t
+    35260986U,	// J4_cmpgt_fp1_jump_nt
+    35260986U,	// J4_cmpgt_fp1_jump_t
+    623905364U,	// J4_cmpgt_t_jumpnv_nt
+    640682580U,	// J4_cmpgt_t_jumpnv_t
+    35260973U,	// J4_cmpgt_tp0_jump_nt
+    35260973U,	// J4_cmpgt_tp0_jump_t
+    35260986U,	// J4_cmpgt_tp1_jump_nt
+    35260986U,	// J4_cmpgt_tp1_jump_t
+    623921735U,	// J4_cmpgti_f_jumpnv_nt
+    640698951U,	// J4_cmpgti_f_jumpnv_t
+    657443373U,	// J4_cmpgti_fp0_jump_nt
+    674220589U,	// J4_cmpgti_fp0_jump_t
+    690997818U,	// J4_cmpgti_fp1_jump_nt
+    707775034U,	// J4_cmpgti_fp1_jump_t
+    623921748U,	// J4_cmpgti_t_jumpnv_nt
+    640698964U,	// J4_cmpgti_t_jumpnv_t
+    724552237U,	// J4_cmpgti_tp0_jump_nt
+    741329453U,	// J4_cmpgti_tp0_jump_t
+    758106682U,	// J4_cmpgti_tp1_jump_nt
+    774883898U,	// J4_cmpgti_tp1_jump_t
+    623921735U,	// J4_cmpgtn1_f_jumpnv_nt
+    640698951U,	// J4_cmpgtn1_f_jumpnv_t
+    657443373U,	// J4_cmpgtn1_fp0_jump_nt
+    674220589U,	// J4_cmpgtn1_fp0_jump_t
+    690997818U,	// J4_cmpgtn1_fp1_jump_nt
+    707775034U,	// J4_cmpgtn1_fp1_jump_t
+    623921748U,	// J4_cmpgtn1_t_jumpnv_nt
+    640698964U,	// J4_cmpgtn1_t_jumpnv_t
+    724552237U,	// J4_cmpgtn1_tp0_jump_nt
+    741329453U,	// J4_cmpgtn1_tp0_jump_t
+    758106682U,	// J4_cmpgtn1_tp1_jump_nt
+    774883898U,	// J4_cmpgtn1_tp1_jump_t
+    623905469U,	// J4_cmpgtu_f_jumpnv_nt
+    640682685U,	// J4_cmpgtu_f_jumpnv_t
+    35261089U,	// J4_cmpgtu_fp0_jump_nt
+    35261089U,	// J4_cmpgtu_fp0_jump_t
+    35261103U,	// J4_cmpgtu_fp1_jump_nt
+    35261103U,	// J4_cmpgtu_fp1_jump_t
+    623905483U,	// J4_cmpgtu_t_jumpnv_nt
+    640682699U,	// J4_cmpgtu_t_jumpnv_t
+    35261089U,	// J4_cmpgtu_tp0_jump_nt
+    35261089U,	// J4_cmpgtu_tp0_jump_t
+    35261103U,	// J4_cmpgtu_tp1_jump_nt
+    35261103U,	// J4_cmpgtu_tp1_jump_t
+    623921853U,	// J4_cmpgtui_f_jumpnv_nt
+    640699069U,	// J4_cmpgtui_f_jumpnv_t
+    657443489U,	// J4_cmpgtui_fp0_jump_nt
+    674220705U,	// J4_cmpgtui_fp0_jump_t
+    690997935U,	// J4_cmpgtui_fp1_jump_nt
+    707775151U,	// J4_cmpgtui_fp1_jump_t
+    623921867U,	// J4_cmpgtui_t_jumpnv_nt
+    640699083U,	// J4_cmpgtui_t_jumpnv_t
+    724552353U,	// J4_cmpgtui_tp0_jump_nt
+    741329569U,	// J4_cmpgtui_tp0_jump_t
+    758106799U,	// J4_cmpgtui_tp1_jump_nt
+    774884015U,	// J4_cmpgtui_tp1_jump_t
+    35260999U,	// J4_cmplt_f_jumpnv_nt
+    35260999U,	// J4_cmplt_f_jumpnv_t
+    35261012U,	// J4_cmplt_t_jumpnv_nt
+    35261012U,	// J4_cmplt_t_jumpnv_t
+    35261117U,	// J4_cmpltu_f_jumpnv_nt
+    35261117U,	// J4_cmpltu_f_jumpnv_t
+    35261131U,	// J4_cmpltu_t_jumpnv_nt
+    35261131U,	// J4_cmpltu_t_jumpnv_t
+    1460773U,	// J4_hintjumpr
+    789153818U,	// J4_jumpseti
+    789104666U,	// J4_jumpsetr
+    3181178U,	// J4_tstbit0_f_jumpnv_nt
+    3197562U,	// J4_tstbit0_f_jumpnv_t
+    3213920U,	// J4_tstbit0_fp0_jump_nt
+    3230304U,	// J4_tstbit0_fp0_jump_t
+    3246701U,	// J4_tstbit0_fp1_jump_nt
+    3263085U,	// J4_tstbit0_fp1_jump_t
+    3181191U,	// J4_tstbit0_t_jumpnv_nt
+    3197575U,	// J4_tstbit0_t_jumpnv_t
+    3279456U,	// J4_tstbit0_tp0_jump_nt
+    3295840U,	// J4_tstbit0_tp0_jump_t
+    3312237U,	// J4_tstbit0_tp1_jump_nt
+    3328621U,	// J4_tstbit0_tp1_jump_t
+    1029U,	// L2_deallocframe
+    305334298U,	// L2_loadalignb_io
+    36898842U,	// L2_loadalignb_pbr
+    36898842U,	// L2_loadalignb_pci
+    36898842U,	// L2_loadalignb_pcr
+    36898842U,	// L2_loadalignb_pi
+    36898842U,	// L2_loadalignb_pr
+    305334298U,	// L2_loadalignb_zomap
+    305350682U,	// L2_loadalignh_io
+    36915226U,	// L2_loadalignh_pbr
+    36915226U,	// L2_loadalignh_pci
+    36915226U,	// L2_loadalignh_pcr
+    36915226U,	// L2_loadalignh_pi
+    36915226U,	// L2_loadalignh_pr
+    305350682U,	// L2_loadalignh_zomap
+    808683546U,	// L2_loadbsw2_io
+    825460762U,	// L2_loadbsw2_pbr
+    842237978U,	// L2_loadbsw2_pci
+    859015194U,	// L2_loadbsw2_pcr
+    842237978U,	// L2_loadbsw2_pi
+    825460762U,	// L2_loadbsw2_pr
+    3377178U,	// L2_loadbsw2_zomap
+    808683546U,	// L2_loadbsw4_io
+    825460762U,	// L2_loadbsw4_pbr
+    842237978U,	// L2_loadbsw4_pci
+    859015194U,	// L2_loadbsw4_pcr
+    842237978U,	// L2_loadbsw4_pi
+    825460762U,	// L2_loadbsw4_pr
+    3377178U,	// L2_loadbsw4_zomap
+    808699930U,	// L2_loadbzw2_io
+    825477146U,	// L2_loadbzw2_pbr
+    842254362U,	// L2_loadbzw2_pci
+    859031578U,	// L2_loadbzw2_pcr
+    842254362U,	// L2_loadbzw2_pi
+    825477146U,	// L2_loadbzw2_pr
+    3393562U,	// L2_loadbzw2_zomap
+    808699930U,	// L2_loadbzw4_io
+    825477146U,	// L2_loadbzw4_pbr
+    842254362U,	// L2_loadbzw4_pci
+    859031578U,	// L2_loadbzw4_pcr
+    842254362U,	// L2_loadbzw4_pi
+    825477146U,	// L2_loadbzw4_pr
+    3393562U,	// L2_loadbzw4_zomap
+    808716314U,	// L2_loadrb_io
+    825493530U,	// L2_loadrb_pbr
+    842270746U,	// L2_loadrb_pci
+    859047962U,	// L2_loadrb_pcr
+    842270746U,	// L2_loadrb_pi
+    825493530U,	// L2_loadrb_pr
+    3409946U,	// L2_loadrb_zomap
+    3426330U,	// L2_loadrbgp
+    808749082U,	// L2_loadrd_io
+    825526298U,	// L2_loadrd_pbr
+    842303514U,	// L2_loadrd_pci
+    859080730U,	// L2_loadrd_pcr
+    842303514U,	// L2_loadrd_pi
+    825526298U,	// L2_loadrd_pr
+    3442714U,	// L2_loadrd_zomap
+    3459098U,	// L2_loadrdgp
+    808781850U,	// L2_loadrh_io
+    825559066U,	// L2_loadrh_pbr
+    842336282U,	// L2_loadrh_pci
+    859113498U,	// L2_loadrh_pcr
+    842336282U,	// L2_loadrh_pi
+    825559066U,	// L2_loadrh_pr
+    3475482U,	// L2_loadrh_zomap
+    3491866U,	// L2_loadrhgp
+    808814618U,	// L2_loadri_io
+    825591834U,	// L2_loadri_pbr
+    842369050U,	// L2_loadri_pci
+    859146266U,	// L2_loadri_pcr
+    842369050U,	// L2_loadri_pi
+    825591834U,	// L2_loadri_pr
+    3508250U,	// L2_loadri_zomap
+    3524634U,	// L2_loadrigp
+    808847386U,	// L2_loadrub_io
+    825624602U,	// L2_loadrub_pbr
+    842401818U,	// L2_loadrub_pci
+    859179034U,	// L2_loadrub_pcr
+    842401818U,	// L2_loadrub_pi
+    825624602U,	// L2_loadrub_pr
+    3541018U,	// L2_loadrub_zomap
+    3557402U,	// L2_loadrubgp
+    808880154U,	// L2_loadruh_io
+    825657370U,	// L2_loadruh_pbr
+    842434586U,	// L2_loadruh_pci
+    859211802U,	// L2_loadruh_pcr
+    842434586U,	// L2_loadruh_pi
+    825657370U,	// L2_loadruh_pr
+    3573786U,	// L2_loadruh_zomap
+    3590170U,	// L2_loadruhgp
+    3606554U,	// L2_loadw_locked
+    872665187U,	// L2_ploadrbf_io
+    872669283U,	// L2_ploadrbf_pi
+    872665187U,	// L2_ploadrbf_zomap
+    872681571U,	// L2_ploadrbfnew_io
+    872685667U,	// L2_ploadrbfnew_pi
+    872681571U,	// L2_ploadrbfnew_zomap
+    872665358U,	// L2_ploadrbt_io
+    872669454U,	// L2_ploadrbt_pi
+    872665358U,	// L2_ploadrbt_zomap
+    872681742U,	// L2_ploadrbtnew_io
+    872685838U,	// L2_ploadrbtnew_pi
+    872681742U,	// L2_ploadrbtnew_zomap
+    889442403U,	// L2_ploadrdf_io
+    889446499U,	// L2_ploadrdf_pi
+    889442403U,	// L2_ploadrdf_zomap
+    889458787U,	// L2_ploadrdfnew_io
+    889462883U,	// L2_ploadrdfnew_pi
+    889458787U,	// L2_ploadrdfnew_zomap
+    889442574U,	// L2_ploadrdt_io
+    889446670U,	// L2_ploadrdt_pi
+    889442574U,	// L2_ploadrdt_zomap
+    889458958U,	// L2_ploadrdtnew_io
+    889463054U,	// L2_ploadrdtnew_pi
+    889458958U,	// L2_ploadrdtnew_zomap
+    906219619U,	// L2_ploadrhf_io
+    906223715U,	// L2_ploadrhf_pi
+    906219619U,	// L2_ploadrhf_zomap
+    906236003U,	// L2_ploadrhfnew_io
+    906240099U,	// L2_ploadrhfnew_pi
+    906236003U,	// L2_ploadrhfnew_zomap
+    906219790U,	// L2_ploadrht_io
+    906223886U,	// L2_ploadrht_pi
+    906219790U,	// L2_ploadrht_zomap
+    906236174U,	// L2_ploadrhtnew_io
+    906240270U,	// L2_ploadrhtnew_pi
+    906236174U,	// L2_ploadrhtnew_zomap
+    922996835U,	// L2_ploadrif_io
+    923000931U,	// L2_ploadrif_pi
+    922996835U,	// L2_ploadrif_zomap
+    923013219U,	// L2_ploadrifnew_io
+    923017315U,	// L2_ploadrifnew_pi
+    923013219U,	// L2_ploadrifnew_zomap
+    922997006U,	// L2_ploadrit_io
+    923001102U,	// L2_ploadrit_pi
+    922997006U,	// L2_ploadrit_zomap
+    923013390U,	// L2_ploadritnew_io
+    923017486U,	// L2_ploadritnew_pi
+    923013390U,	// L2_ploadritnew_zomap
+    939774051U,	// L2_ploadrubf_io
+    939778147U,	// L2_ploadrubf_pi
+    939774051U,	// L2_ploadrubf_zomap
+    939790435U,	// L2_ploadrubfnew_io
+    939794531U,	// L2_ploadrubfnew_pi
+    939790435U,	// L2_ploadrubfnew_zomap
+    939774222U,	// L2_ploadrubt_io
+    939778318U,	// L2_ploadrubt_pi
+    939774222U,	// L2_ploadrubt_zomap
+    939790606U,	// L2_ploadrubtnew_io
+    939794702U,	// L2_ploadrubtnew_pi
+    939790606U,	// L2_ploadrubtnew_zomap
+    956551267U,	// L2_ploadruhf_io
+    956555363U,	// L2_ploadruhf_pi
+    956551267U,	// L2_ploadruhf_zomap
+    956567651U,	// L2_ploadruhfnew_io
+    956571747U,	// L2_ploadruhfnew_pi
+    956567651U,	// L2_ploadruhfnew_zomap
+    956551438U,	// L2_ploadruht_io
+    956555534U,	// L2_ploadruht_pi
+    956551438U,	// L2_ploadruht_zomap
+    956567822U,	// L2_ploadruhtnew_io
+    956571918U,	// L2_ploadruhtnew_pi
+    956567822U,	// L2_ploadruhtnew_zomap
+    976701848U,	// L4_add_memopb_io
+    3639704U,	// L4_add_memopb_zomap
+    976701919U,	// L4_add_memoph_io
+    3639775U,	// L4_add_memoph_zomap
+    976702168U,	// L4_add_memopw_io
+    3640024U,	// L4_add_memopw_zomap
+    993479064U,	// L4_and_memopb_io
+    3656088U,	// L4_and_memopb_zomap
+    993479135U,	// L4_and_memoph_io
+    3656159U,	// L4_and_memoph_zomap
+    993479384U,	// L4_and_memopw_io
+    3656408U,	// L4_and_memopw_zomap
+    1010256280U,	// L4_iadd_memopb_io
+    3672472U,	// L4_iadd_memopb_zomap
+    1010256351U,	// L4_iadd_memoph_io
+    3672543U,	// L4_iadd_memoph_zomap
+    1010256600U,	// L4_iadd_memopw_io
+    3672792U,	// L4_iadd_memopw_zomap
+    1027033496U,	// L4_iand_memopb_io
+    3688856U,	// L4_iand_memopb_zomap
+    1027033567U,	// L4_iand_memoph_io
+    3688927U,	// L4_iand_memoph_zomap
+    1027033816U,	// L4_iand_memopw_io
+    3689176U,	// L4_iand_memopw_zomap
+    1043810712U,	// L4_ior_memopb_io
+    3705240U,	// L4_ior_memopb_zomap
+    1043810783U,	// L4_ior_memoph_io
+    3705311U,	// L4_ior_memoph_zomap
+    1043811032U,	// L4_ior_memopw_io
+    3705560U,	// L4_ior_memopw_zomap
+    1060587928U,	// L4_isub_memopb_io
+    3721624U,	// L4_isub_memopb_zomap
+    1060587999U,	// L4_isub_memoph_io
+    3721695U,	// L4_isub_memoph_zomap
+    1060588248U,	// L4_isub_memopw_io
+    3721944U,	// L4_isub_memopw_zomap
+    36898842U,	// L4_loadalignb_ap
+    305334298U,	// L4_loadalignb_ur
+    36915226U,	// L4_loadalignh_ap
+    305350682U,	// L4_loadalignh_ur
+    1077119002U,	// L4_loadbsw2_ap
+    1093896218U,	// L4_loadbsw2_ur
+    1077119002U,	// L4_loadbsw4_ap
+    1093896218U,	// L4_loadbsw4_ur
+    1077135386U,	// L4_loadbzw2_ap
+    1093912602U,	// L4_loadbzw2_ur
+    1077135386U,	// L4_loadbzw4_ap
+    1093912602U,	// L4_loadbzw4_ur
+    3737626U,	// L4_loadd_locked
+    1077151770U,	// L4_loadrb_ap
+    1110706202U,	// L4_loadrb_rr
+    1093928986U,	// L4_loadrb_ur
+    1077184538U,	// L4_loadrd_ap
+    1110738970U,	// L4_loadrd_rr
+    1093961754U,	// L4_loadrd_ur
+    1077217306U,	// L4_loadrh_ap
+    1110771738U,	// L4_loadrh_rr
+    1093994522U,	// L4_loadrh_ur
+    1077250074U,	// L4_loadri_ap
+    1110804506U,	// L4_loadri_rr
+    1094027290U,	// L4_loadri_ur
+    1077282842U,	// L4_loadrub_ap
+    1110837274U,	// L4_loadrub_rr
+    1094060058U,	// L4_loadrub_ur
+    1077315610U,	// L4_loadruh_ap
+    1110870042U,	// L4_loadruh_rr
+    1094092826U,	// L4_loadruh_ur
+    1127696792U,	// L4_or_memopb_io
+    3754392U,	// L4_or_memopb_zomap
+    1127696863U,	// L4_or_memoph_io
+    3754463U,	// L4_or_memoph_zomap
+    1127697112U,	// L4_or_memopw_io
+    3754712U,	// L4_or_memopw_zomap
+    1141100643U,	// L4_ploadrbf_abs
+    872665187U,	// L4_ploadrbf_rr
+    1141117027U,	// L4_ploadrbfnew_abs
+    872681571U,	// L4_ploadrbfnew_rr
+    1141100814U,	// L4_ploadrbt_abs
+    872665358U,	// L4_ploadrbt_rr
+    1141117198U,	// L4_ploadrbtnew_abs
+    872681742U,	// L4_ploadrbtnew_rr
+    1157877859U,	// L4_ploadrdf_abs
+    889442403U,	// L4_ploadrdf_rr
+    1157894243U,	// L4_ploadrdfnew_abs
+    889458787U,	// L4_ploadrdfnew_rr
+    1157878030U,	// L4_ploadrdt_abs
+    889442574U,	// L4_ploadrdt_rr
+    1157894414U,	// L4_ploadrdtnew_abs
+    889458958U,	// L4_ploadrdtnew_rr
+    1174655075U,	// L4_ploadrhf_abs
+    906219619U,	// L4_ploadrhf_rr
+    1174671459U,	// L4_ploadrhfnew_abs
+    906236003U,	// L4_ploadrhfnew_rr
+    1174655246U,	// L4_ploadrht_abs
+    906219790U,	// L4_ploadrht_rr
+    1174671630U,	// L4_ploadrhtnew_abs
+    906236174U,	// L4_ploadrhtnew_rr
+    1191432291U,	// L4_ploadrif_abs
+    922996835U,	// L4_ploadrif_rr
+    1191448675U,	// L4_ploadrifnew_abs
+    923013219U,	// L4_ploadrifnew_rr
+    1191432462U,	// L4_ploadrit_abs
+    922997006U,	// L4_ploadrit_rr
+    1191448846U,	// L4_ploadritnew_abs
+    923013390U,	// L4_ploadritnew_rr
+    1208209507U,	// L4_ploadrubf_abs
+    939774051U,	// L4_ploadrubf_rr
+    1208225891U,	// L4_ploadrubfnew_abs
+    939790435U,	// L4_ploadrubfnew_rr
+    1208209678U,	// L4_ploadrubt_abs
+    939774222U,	// L4_ploadrubt_rr
+    1208226062U,	// L4_ploadrubtnew_abs
+    939790606U,	// L4_ploadrubtnew_rr
+    1224986723U,	// L4_ploadruhf_abs
+    956551267U,	// L4_ploadruhf_rr
+    1225003107U,	// L4_ploadruhfnew_abs
+    956567651U,	// L4_ploadruhfnew_rr
+    1224986894U,	// L4_ploadruht_abs
+    956551438U,	// L4_ploadruht_rr
+    1225003278U,	// L4_ploadruhtnew_abs
+    956567822U,	// L4_ploadruhtnew_rr
+    1065U,	// L4_return
+    3770467U,	// L4_return_f
+    3786851U,	// L4_return_fnew_pnt
+    3803235U,	// L4_return_fnew_pt
+    3770638U,	// L4_return_t
+    3787022U,	// L4_return_tnew_pnt
+    3803406U,	// L4_return_tnew_pt
+    1245137304U,	// L4_sub_memopb_io
+    3819928U,	// L4_sub_memopb_zomap
+    1245137375U,	// L4_sub_memoph_io
+    3819999U,	// L4_sub_memoph_zomap
+    1245137624U,	// L4_sub_memopw_io
+    3820248U,	// L4_sub_memopw_zomap
+    105U,	// LDriw_mod
+    105U,	// LDriw_pred
+    3835930U,	// LO
+    54183962U,	// M2_acci
+    70961178U,	// M2_accii
+    3868698U,	// M2_cmaci_s0
+    3885082U,	// M2_cmacr_s0
+    20678682U,	// M2_cmacs_s0
+    1262192666U,	// M2_cmacs_s1
+    1278969882U,	// M2_cmacsc_s0
+    1295747098U,	// M2_cmacsc_s1
+    3917850U,	// M2_cmpyi_s0
+    3934234U,	// M2_cmpyr_s0
+    289163290U,	// M2_cmpyrs_s0
+    1312573466U,	// M2_cmpyrs_s1
+    1329350682U,	// M2_cmpyrsc_s0
+    1346127898U,	// M2_cmpyrsc_s1
+    20727834U,	// M2_cmpys_s0
+    1262241818U,	// M2_cmpys_s1
+    1279019034U,	// M2_cmpysc_s0
+    1295796250U,	// M2_cmpysc_s1
+    20744218U,	// M2_cnacs_s0
+    1262258202U,	// M2_cnacs_s1
+    1279035418U,	// M2_cnacsc_s0
+    1295812634U,	// M2_cnacsc_s1
+    54315034U,	// M2_dpmpyss_acc_s0
+    54331418U,	// M2_dpmpyss_nac_s0
+    54347802U,	// M2_dpmpyss_rnd_s0
+    54347802U,	// M2_dpmpyss_s0
+    54364186U,	// M2_dpmpyuu_acc_s0
+    54380570U,	// M2_dpmpyuu_nac_s0
+    54396954U,	// M2_dpmpyuu_s0
+    54347802U,	// M2_hmmpyh_rs1
+    54347802U,	// M2_hmmpyh_s1
+    54347802U,	// M2_hmmpyl_rs1
+    54347802U,	// M2_hmmpyl_s1
+    54413338U,	// M2_maci
+    4098074U,	// M2_macsin
+    71190554U,	// M2_macsip
+    289327130U,	// M2_mmachs_rs0
+    1312737306U,	// M2_mmachs_rs1
+    20891674U,	// M2_mmachs_s0
+    1262405658U,	// M2_mmachs_s1
+    289343514U,	// M2_mmacls_rs0
+    1312753690U,	// M2_mmacls_rs1
+    20908058U,	// M2_mmacls_s0
+    1262422042U,	// M2_mmacls_s1
+    289359898U,	// M2_mmacuhs_rs0
+    1312770074U,	// M2_mmacuhs_rs1
+    20924442U,	// M2_mmacuhs_s0
+    1262438426U,	// M2_mmacuhs_s1
+    289376282U,	// M2_mmaculs_rs0
+    1312786458U,	// M2_mmaculs_rs1
+    20940826U,	// M2_mmaculs_s0
+    1262454810U,	// M2_mmaculs_s1
+    289392666U,	// M2_mmpyh_rs0
+    1312802842U,	// M2_mmpyh_rs1
+    20957210U,	// M2_mmpyh_s0
+    1262471194U,	// M2_mmpyh_s1
+    289409050U,	// M2_mmpyl_rs0
+    1312819226U,	// M2_mmpyl_rs1
+    20973594U,	// M2_mmpyl_s0
+    1262487578U,	// M2_mmpyl_s1
+    289425434U,	// M2_mmpyuh_rs0
+    1312835610U,	// M2_mmpyuh_rs1
+    20989978U,	// M2_mmpyuh_s0
+    1262503962U,	// M2_mmpyuh_s1
+    289441818U,	// M2_mmpyul_rs0
+    1312851994U,	// M2_mmpyul_rs1
+    21006362U,	// M2_mmpyul_s0
+    1262520346U,	// M2_mmpyul_s1
+    87869466U,	// M2_mpy_acc_hh_s0
+    87869466U,	// M2_mpy_acc_hh_s1
+    87869466U,	// M2_mpy_acc_hl_s0
+    87869466U,	// M2_mpy_acc_hl_s1
+    104646682U,	// M2_mpy_acc_lh_s0
+    104646682U,	// M2_mpy_acc_lh_s1
+    104646682U,	// M2_mpy_acc_ll_s0
+    104646682U,	// M2_mpy_acc_ll_s1
+    87869466U,	// M2_mpy_acc_sat_hh_s0
+    87869466U,	// M2_mpy_acc_sat_hh_s1
+    87869466U,	// M2_mpy_acc_sat_hl_s0
+    87869466U,	// M2_mpy_acc_sat_hl_s1
+    104646682U,	// M2_mpy_acc_sat_lh_s0
+    104646682U,	// M2_mpy_acc_sat_lh_s1
+    104646682U,	// M2_mpy_acc_sat_ll_s0
+    104646682U,	// M2_mpy_acc_sat_ll_s1
+    87902234U,	// M2_mpy_hh_s0
+    87902234U,	// M2_mpy_hh_s1
+    87902234U,	// M2_mpy_hl_s0
+    87902234U,	// M2_mpy_hl_s1
+    104679450U,	// M2_mpy_lh_s0
+    104679450U,	// M2_mpy_lh_s1
+    104679450U,	// M2_mpy_ll_s0
+    104679450U,	// M2_mpy_ll_s1
+    87885850U,	// M2_mpy_nac_hh_s0
+    87885850U,	// M2_mpy_nac_hh_s1
+    87885850U,	// M2_mpy_nac_hl_s0
+    87885850U,	// M2_mpy_nac_hl_s1
+    104663066U,	// M2_mpy_nac_lh_s0
+    104663066U,	// M2_mpy_nac_lh_s1
+    104663066U,	// M2_mpy_nac_ll_s0
+    104663066U,	// M2_mpy_nac_ll_s1
+    87885850U,	// M2_mpy_nac_sat_hh_s0
+    87885850U,	// M2_mpy_nac_sat_hh_s1
+    87885850U,	// M2_mpy_nac_sat_hl_s0
+    87885850U,	// M2_mpy_nac_sat_hl_s1
+    104663066U,	// M2_mpy_nac_sat_lh_s0
+    104663066U,	// M2_mpy_nac_sat_lh_s1
+    104663066U,	// M2_mpy_nac_sat_ll_s0
+    104663066U,	// M2_mpy_nac_sat_ll_s1
+    87902234U,	// M2_mpy_rnd_hh_s0
+    87902234U,	// M2_mpy_rnd_hh_s1
+    87902234U,	// M2_mpy_rnd_hl_s0
+    87902234U,	// M2_mpy_rnd_hl_s1
+    104679450U,	// M2_mpy_rnd_lh_s0
+    104679450U,	// M2_mpy_rnd_lh_s1
+    104679450U,	// M2_mpy_rnd_ll_s0
+    104679450U,	// M2_mpy_rnd_ll_s1
+    87902234U,	// M2_mpy_sat_hh_s0
+    87902234U,	// M2_mpy_sat_hh_s1
+    87902234U,	// M2_mpy_sat_hl_s0
+    87902234U,	// M2_mpy_sat_hl_s1
+    104679450U,	// M2_mpy_sat_lh_s0
+    104679450U,	// M2_mpy_sat_lh_s1
+    104679450U,	// M2_mpy_sat_ll_s0
+    104679450U,	// M2_mpy_sat_ll_s1
+    87902234U,	// M2_mpy_sat_rnd_hh_s0
+    87902234U,	// M2_mpy_sat_rnd_hh_s1
+    87902234U,	// M2_mpy_sat_rnd_hl_s0
+    87902234U,	// M2_mpy_sat_rnd_hl_s1
+    104679450U,	// M2_mpy_sat_rnd_lh_s0
+    104679450U,	// M2_mpy_sat_rnd_lh_s1
+    104679450U,	// M2_mpy_sat_rnd_ll_s0
+    104679450U,	// M2_mpy_sat_rnd_ll_s1
+    54347802U,	// M2_mpy_up
+    54347802U,	// M2_mpy_up_s1
+    54347802U,	// M2_mpy_up_s1_sat
+    87869466U,	// M2_mpyd_acc_hh_s0
+    87869466U,	// M2_mpyd_acc_hh_s1
+    87869466U,	// M2_mpyd_acc_hl_s0
+    87869466U,	// M2_mpyd_acc_hl_s1
+    104646682U,	// M2_mpyd_acc_lh_s0
+    104646682U,	// M2_mpyd_acc_lh_s1
+    104646682U,	// M2_mpyd_acc_ll_s0
+    104646682U,	// M2_mpyd_acc_ll_s1
+    87902234U,	// M2_mpyd_hh_s0
+    87902234U,	// M2_mpyd_hh_s1
+    87902234U,	// M2_mpyd_hl_s0
+    87902234U,	// M2_mpyd_hl_s1
+    104679450U,	// M2_mpyd_lh_s0
+    104679450U,	// M2_mpyd_lh_s1
+    104679450U,	// M2_mpyd_ll_s0
+    104679450U,	// M2_mpyd_ll_s1
+    87885850U,	// M2_mpyd_nac_hh_s0
+    87885850U,	// M2_mpyd_nac_hh_s1
+    87885850U,	// M2_mpyd_nac_hl_s0
+    87885850U,	// M2_mpyd_nac_hl_s1
+    104663066U,	// M2_mpyd_nac_lh_s0
+    104663066U,	// M2_mpyd_nac_lh_s1
+    104663066U,	// M2_mpyd_nac_ll_s0
+    104663066U,	// M2_mpyd_nac_ll_s1
+    87902234U,	// M2_mpyd_rnd_hh_s0
+    87902234U,	// M2_mpyd_rnd_hh_s1
+    87902234U,	// M2_mpyd_rnd_hl_s0
+    87902234U,	// M2_mpyd_rnd_hl_s1
+    104679450U,	// M2_mpyd_rnd_lh_s0
+    104679450U,	// M2_mpyd_rnd_lh_s1
+    104679450U,	// M2_mpyd_rnd_ll_s0
+    104679450U,	// M2_mpyd_rnd_ll_s1
+    54577178U,	// M2_mpyi
+    4261914U,	// M2_mpysin
+    4278298U,	// M2_mpysip
+    71354394U,	// M2_mpysmi
+    4294682U,	// M2_mpysu_up
+    87918618U,	// M2_mpyu_acc_hh_s0
+    87918618U,	// M2_mpyu_acc_hh_s1
+    87918618U,	// M2_mpyu_acc_hl_s0
+    87918618U,	// M2_mpyu_acc_hl_s1
+    104695834U,	// M2_mpyu_acc_lh_s0
+    104695834U,	// M2_mpyu_acc_lh_s1
+    104695834U,	// M2_mpyu_acc_ll_s0
+    104695834U,	// M2_mpyu_acc_ll_s1
+    87951386U,	// M2_mpyu_hh_s0
+    87951386U,	// M2_mpyu_hh_s1
+    87951386U,	// M2_mpyu_hl_s0
+    87951386U,	// M2_mpyu_hl_s1
+    104728602U,	// M2_mpyu_lh_s0
+    104728602U,	// M2_mpyu_lh_s1
+    104728602U,	// M2_mpyu_ll_s0
+    104728602U,	// M2_mpyu_ll_s1
+    87935002U,	// M2_mpyu_nac_hh_s0
+    87935002U,	// M2_mpyu_nac_hh_s1
+    87935002U,	// M2_mpyu_nac_hl_s0
+    87935002U,	// M2_mpyu_nac_hl_s1
+    104712218U,	// M2_mpyu_nac_lh_s0
+    104712218U,	// M2_mpyu_nac_lh_s1
+    104712218U,	// M2_mpyu_nac_ll_s0
+    104712218U,	// M2_mpyu_nac_ll_s1
+    54396954U,	// M2_mpyu_up
+    87918618U,	// M2_mpyud_acc_hh_s0
+    87918618U,	// M2_mpyud_acc_hh_s1
+    87918618U,	// M2_mpyud_acc_hl_s0
+    87918618U,	// M2_mpyud_acc_hl_s1
+    104695834U,	// M2_mpyud_acc_lh_s0
+    104695834U,	// M2_mpyud_acc_lh_s1
+    104695834U,	// M2_mpyud_acc_ll_s0
+    104695834U,	// M2_mpyud_acc_ll_s1
+    87951386U,	// M2_mpyud_hh_s0
+    87951386U,	// M2_mpyud_hh_s1
+    87951386U,	// M2_mpyud_hl_s0
+    87951386U,	// M2_mpyud_hl_s1
+    104728602U,	// M2_mpyud_lh_s0
+    104728602U,	// M2_mpyud_lh_s1
+    104728602U,	// M2_mpyud_ll_s0
+    104728602U,	// M2_mpyud_ll_s1
+    87935002U,	// M2_mpyud_nac_hh_s0
+    87935002U,	// M2_mpyud_nac_hh_s1
+    87935002U,	// M2_mpyud_nac_hl_s0
+    87935002U,	// M2_mpyud_nac_hl_s1
+    104712218U,	// M2_mpyud_nac_lh_s0
+    104712218U,	// M2_mpyud_nac_lh_s1
+    104712218U,	// M2_mpyud_nac_ll_s0
+    104712218U,	// M2_mpyud_nac_ll_s1
+    4311066U,	// M2_mpyui
+    54659098U,	// M2_nacci
+    71436314U,	// M2_naccii
+    4343834U,	// M2_subacc
+    4360218U,	// M2_vabsdiffh
+    4376602U,	// M2_vabsdiffw
+    4392986U,	// M2_vcmac_s0_sat_i
+    4409370U,	// M2_vcmac_s0_sat_r
+    21202970U,	// M2_vcmpy_s0_sat_i
+    21219354U,	// M2_vcmpy_s0_sat_r
+    1262716954U,	// M2_vcmpy_s1_sat_i
+    1262733338U,	// M2_vcmpy_s1_sat_r
+    21235738U,	// M2_vdmacs_s0
+    1262749722U,	// M2_vdmacs_s1
+    289687578U,	// M2_vdmpyrs_s0
+    1313097754U,	// M2_vdmpyrs_s1
+    21252122U,	// M2_vdmpys_s0
+    1262766106U,	// M2_vdmpys_s1
+    4491290U,	// M2_vmac2
+    4507674U,	// M2_vmac2es
+    21284890U,	// M2_vmac2es_s0
+    1262798874U,	// M2_vmac2es_s1
+    21268506U,	// M2_vmac2s_s0
+    1262782490U,	// M2_vmac2s_s1
+    21301274U,	// M2_vmac2su_s0
+    1262815258U,	// M2_vmac2su_s1
+    21317658U,	// M2_vmpy2es_s0
+    1262831642U,	// M2_vmpy2es_s1
+    21334042U,	// M2_vmpy2s_s0
+    289769498U,	// M2_vmpy2s_s0pack
+    1262848026U,	// M2_vmpy2s_s1
+    1313179674U,	// M2_vmpy2s_s1pack
+    21350426U,	// M2_vmpy2su_s0
+    1262864410U,	// M2_vmpy2su_s1
+    4589594U,	// M2_vraddh
+    4605978U,	// M2_vradduh
+    4622362U,	// M2_vrcmaci_s0
+    1363576858U,	// M2_vrcmaci_s0c
+    4638746U,	// M2_vrcmacr_s0
+    1363593242U,	// M2_vrcmacr_s0c
+    4655130U,	// M2_vrcmpyi_s0
+    1363609626U,	// M2_vrcmpyi_s0c
+    4671514U,	// M2_vrcmpyr_s0
+    1363626010U,	// M2_vrcmpyr_s0c
+    1262979098U,	// M2_vrcmpys_acc_s1
+    1380419610U,	// M2_vrcmpys_acc_s1_h
+    1397196826U,	// M2_vrcmpys_acc_s1_l
+    1262995482U,	// M2_vrcmpys_s1
+    1380435994U,	// M2_vrcmpys_s1_h
+    1397213210U,	// M2_vrcmpys_s1_l
+    1313327130U,	// M2_vrcmpys_s1rp
+    1413990426U,	// M2_vrcmpys_s1rp_h
+    1430767642U,	// M2_vrcmpys_s1rp_l
+    4720666U,	// M2_vrmac_s0
+    4737050U,	// M2_vrmpy_s0
+    4753434U,	// M2_xor_xacc
+    55101466U,	// M4_and_and
+    323536922U,	// M4_and_andn
+    4786202U,	// M4_and_or
+    4802586U,	// M4_and_xor
+    1313441818U,	// M4_cmpyi_wh
+    1346996250U,	// M4_cmpyi_whc
+    1313458202U,	// M4_cmpyr_wh
+    1347012634U,	// M4_cmpyr_whc
+    54315034U,	// M4_mac_up_s1_sat
+    1447692314U,	// M4_mpyri_addi
     33572890U,	// M4_mpyri_addr
     33572890U,	// M4_mpyri_addr_u2
-    1229424666U,	// M4_mpyrr_addi
+    1447692314U,	// M4_mpyrr_addi
     33572890U,	// M4_mpyrr_addr
-    54151194U,	// M4_nac_up_s1_sat
-    55035930U,	// M4_or_and
-    340248602U,	// M4_or_andn
-    55052314U,	// M4_or_or
-    4737050U,	// M4_or_xor
-    4753434U,	// M4_pmpyw
-    4769818U,	// M4_pmpyw_acc
-    4786202U,	// M4_vpmpyh
-    4802586U,	// M4_vpmpyh_acc
-    4818970U,	// M4_vrmpyeh_acc_s0
-    1246332954U,	// M4_vrmpyeh_acc_s1
-    4835354U,	// M4_vrmpyeh_s0
-    1246349338U,	// M4_vrmpyeh_s1
-    4851738U,	// M4_vrmpyoh_acc_s0
-    1246365722U,	// M4_vrmpyoh_acc_s1
-    4868122U,	// M4_vrmpyoh_s0
-    1246382106U,	// M4_vrmpyoh_s1
-    55216154U,	// M4_xor_and
-    340428826U,	// M4_xor_andn
-    4900890U,	// M4_xor_or
-    4589594U,	// M4_xor_xacc
-    4917274U,	// M5_vdmacbsu
-    4933658U,	// M5_vdmpybsu
-    4950042U,	// M5_vmacbsu
-    4966426U,	// M5_vmacbuu
-    4982810U,	// M5_vmpybsu
-    4999194U,	// M5_vmpybuu
-    5015578U,	// M5_vrmacbsu
-    5031962U,	// M5_vrmacbuu
-    5048346U,	// M5_vrmpybsu
-    5064730U,	// M5_vrmpybuu
+    54331418U,	// M4_nac_up_s1_sat
+    55199770U,	// M4_or_and
+    323635226U,	// M4_or_andn
+    55216154U,	// M4_or_or
+    4900890U,	// M4_or_xor
+    4917274U,	// M4_pmpyw
+    4933658U,	// M4_pmpyw_acc
+    4950042U,	// M4_vpmpyh
+    4966426U,	// M4_vpmpyh_acc
+    4982810U,	// M4_vrmpyeh_acc_s0
+    1464600602U,	// M4_vrmpyeh_acc_s1
+    4999194U,	// M4_vrmpyeh_s0
+    1464616986U,	// M4_vrmpyeh_s1
+    5015578U,	// M4_vrmpyoh_acc_s0
+    1464633370U,	// M4_vrmpyoh_acc_s1
+    5031962U,	// M4_vrmpyoh_s0
+    1464649754U,	// M4_vrmpyoh_s1
+    55379994U,	// M4_xor_and
+    323815450U,	// M4_xor_andn
+    5064730U,	// M4_xor_or
+    4753434U,	// M4_xor_xacc
+    5081114U,	// M5_vdmacbsu
+    5097498U,	// M5_vdmpybsu
+    5113882U,	// M5_vmacbsu
+    5130266U,	// M5_vmacbuu
+    5146650U,	// M5_vmpybsu
+    5163034U,	// M5_vmpybuu
+    5179418U,	// M5_vrmacbsu
+    5195802U,	// M5_vrmacbuu
+    5212186U,	// M5_vrmpybsu
+    5228570U,	// M5_vrmpybuu
+    5244954U,	// M6_vabsdiffb
+    5261338U,	// M6_vabsdiffub
     0U,	// PS_aligna
     0U,	// PS_alloca
-    2070555U,	// PS_call_nr
-    2070555U,	// PS_call_stk
-    2066471U,	// PS_callr_nr
+    0U,	// PS_call_nr
+    2086985U,	// PS_call_stk
+    2082901U,	// PS_callr_nr
     0U,	// PS_false
     0U,	// PS_fi
     0U,	// PS_fia
-    2066478U,	// PS_jmpret
-    2869301U,	// PS_jmpretf
-    2885685U,	// PS_jmpretfnew
-    2902069U,	// PS_jmpretfnewpt
-    2869437U,	// PS_jmprett
-    2885821U,	// PS_jmprettnew
-    2902205U,	// PS_jmprettnewpt
-    120817690U,	// PS_loadrbabs
-    120850458U,	// PS_loadrdabs
-    120883226U,	// PS_loadrhabs
-    120915994U,	// PS_loadriabs
-    120948762U,	// PS_loadrubabs
-    120981530U,	// PS_loadruhabs
+    2082908U,	// PS_jmpret
+    2918499U,	// PS_jmpretf
+    2951267U,	// PS_jmpretfnew
+    2967651U,	// PS_jmpretfnewpt
+    2918670U,	// PS_jmprett
+    2951438U,	// PS_jmprettnew
+    2967822U,	// PS_jmprettnewpt
+    5277722U,	// PS_loadrbabs
+    5294106U,	// PS_loadrdabs
+    5310490U,	// PS_loadrhabs
+    5326874U,	// PS_loadriabs
+    5343258U,	// PS_loadrubabs
+    5359642U,	// PS_loadruhabs
     1U,	// PS_pselect
-    2076803U,	// PS_storerbabs
-    5091459U,	// PS_storerbnewabs
-    2076810U,	// PS_storerdabs
-    5107878U,	// PS_storerfabs
-    2076838U,	// PS_storerhabs
-    5091494U,	// PS_storerhnewabs
-    2076854U,	// PS_storeriabs
-    5091510U,	// PS_storerinewabs
+    223479958U,	// PS_storerbabs
+    1481771158U,	// PS_storerbnewabs
+    223479965U,	// PS_storerdabs
+    1498548409U,	// PS_storerfabs
+    223479993U,	// PS_storerhabs
+    1481771193U,	// PS_storerhnewabs
+    223480009U,	// PS_storeriabs
+    1481771209U,	// PS_storerinewabs
     0U,	// PS_tailcall_i
-    2066478U,	// PS_tailcall_r
+    2082908U,	// PS_tailcall_r
     0U,	// PS_true
-    64U,	// PS_vloadrq_ai
-    64U,	// PS_vloadrq_ai_128B
+    1U,	// PS_vloadrq_ai
+    1U,	// PS_vloadrq_ai_128B
     0U,	// PS_vloadrw_ai
     0U,	// PS_vloadrw_ai_128B
     0U,	// PS_vloadrwu_ai
@@ -1379,1303 +1476,2118 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// PS_vmulw_acc
     0U,	// PS_vselect
     0U,	// PS_vselect_128B
-    64U,	// PS_vstorerq_ai
-    64U,	// PS_vstorerq_ai_128B
+    1U,	// PS_vstorerq_ai
+    1U,	// PS_vstorerq_ai_128B
     0U,	// PS_vstorerw_ai
     0U,	// PS_vstorerw_ai_128B
     0U,	// PS_vstorerwu_ai
     0U,	// PS_vstorerwu_ai_128B
     0U,	// PS_wselect
     0U,	// PS_wselect_128B
-    2070555U,	// RESTORE_DEALLOC_BEFORE_TAILCALL_V4
-    2070555U,	// RESTORE_DEALLOC_BEFORE_TAILCALL_V4_EXT
-    2070555U,	// RESTORE_DEALLOC_BEFORE_TAILCALL_V4_EXT_PIC
-    2070555U,	// RESTORE_DEALLOC_BEFORE_TAILCALL_V4_PIC
-    2070561U,	// RESTORE_DEALLOC_RET_JMP_V4
-    2070561U,	// RESTORE_DEALLOC_RET_JMP_V4_EXT
-    2070561U,	// RESTORE_DEALLOC_RET_JMP_V4_EXT_PIC
-    2070561U,	// RESTORE_DEALLOC_RET_JMP_V4_PIC
-    5113882U,	// S2_addasl_rrri
-    1443985U,	// S2_allocframe
-    72239130U,	// S2_asl_i_p
-    72255514U,	// S2_asl_i_p_acc
-    72271898U,	// S2_asl_i_p_and
-    72288282U,	// S2_asl_i_p_nac
-    72304666U,	// S2_asl_i_p_or
-    72321050U,	// S2_asl_i_p_xacc
-    72239130U,	// S2_asl_i_r
-    72255514U,	// S2_asl_i_r_acc
-    72271898U,	// S2_asl_i_r_and
-    72288282U,	// S2_asl_i_r_nac
-    72304666U,	// S2_asl_i_r_or
-    72239130U,	// S2_asl_i_r_sat
-    72321050U,	// S2_asl_i_r_xacc
-    72337434U,	// S2_asl_i_vh
-    72353818U,	// S2_asl_i_vw
-    55461914U,	// S2_asl_r_p
-    55478298U,	// S2_asl_r_p_acc
-    55494682U,	// S2_asl_r_p_and
-    55511066U,	// S2_asl_r_p_nac
-    55527450U,	// S2_asl_r_p_or
-    55543834U,	// S2_asl_r_p_xor
-    55461914U,	// S2_asl_r_r
-    55478298U,	// S2_asl_r_r_acc
-    55494682U,	// S2_asl_r_r_and
-    55511066U,	// S2_asl_r_r_nac
-    55527450U,	// S2_asl_r_r_or
-    55461914U,	// S2_asl_r_r_sat
-    55560218U,	// S2_asl_r_vh
-    55576602U,	// S2_asl_r_vw
-    72370202U,	// S2_asr_i_p
-    72386586U,	// S2_asr_i_p_acc
-    72402970U,	// S2_asr_i_p_and
-    72419354U,	// S2_asr_i_p_nac
-    72435738U,	// S2_asr_i_p_or
-    72370202U,	// S2_asr_i_p_rnd
-    5343258U,	// S2_asr_i_p_rnd_goodsyntax
-    72370202U,	// S2_asr_i_r
-    72386586U,	// S2_asr_i_r_acc
-    72402970U,	// S2_asr_i_r_and
-    72419354U,	// S2_asr_i_r_nac
-    72435738U,	// S2_asr_i_r_or
-    72370202U,	// S2_asr_i_r_rnd
-    5343258U,	// S2_asr_i_r_rnd_goodsyntax
-    72468506U,	// S2_asr_i_svw_trun
-    72484890U,	// S2_asr_i_vh
-    72468506U,	// S2_asr_i_vw
-    55592986U,	// S2_asr_r_p
-    55609370U,	// S2_asr_r_p_acc
-    55625754U,	// S2_asr_r_p_and
-    55642138U,	// S2_asr_r_p_nac
-    55658522U,	// S2_asr_r_p_or
-    5392410U,	// S2_asr_r_p_xor
-    55592986U,	// S2_asr_r_r
-    55609370U,	// S2_asr_r_r_acc
-    55625754U,	// S2_asr_r_r_and
-    55642138U,	// S2_asr_r_r_nac
-    55658522U,	// S2_asr_r_r_or
-    55592986U,	// S2_asr_r_r_sat
-    55691290U,	// S2_asr_r_svw_trun
-    55707674U,	// S2_asr_r_vh
-    55691290U,	// S2_asr_r_vw
-    5408794U,	// S2_brev
-    5408794U,	// S2_brevp
-    5425178U,	// S2_cabacdecbin
-    5441562U,	// S2_cabacencbin
-    5457946U,	// S2_cl0
-    5457946U,	// S2_cl0p
-    5474330U,	// S2_cl1
-    5474330U,	// S2_cl1p
-    5490714U,	// S2_clb
-    5507098U,	// S2_clbnorm
-    5490714U,	// S2_clbp
-    72632346U,	// S2_clrbit_i
-    55855130U,	// S2_clrbit_r
-    5539866U,	// S2_ct0
-    5539866U,	// S2_ct0p
-    5556250U,	// S2_ct1
-    5556250U,	// S2_ct1p
-    5572634U,	// S2_deinterleave
-    72697882U,	// S2_extractu
-    55920666U,	// S2_extractu_rp
-    72697882U,	// S2_extractup
-    55920666U,	// S2_extractup_rp
-    72714266U,	// S2_insert
-    55937050U,	// S2_insert_rp
-    72714266U,	// S2_insertp
-    55937050U,	// S2_insertp_rp
-    5621786U,	// S2_interleave
-    5638170U,	// S2_lfsp
-    5654554U,	// S2_lsl_r_p
-    5670938U,	// S2_lsl_r_p_acc
-    5687322U,	// S2_lsl_r_p_and
-    5703706U,	// S2_lsl_r_p_nac
-    5720090U,	// S2_lsl_r_p_or
-    5736474U,	// S2_lsl_r_p_xor
-    5654554U,	// S2_lsl_r_r
-    5670938U,	// S2_lsl_r_r_acc
-    5687322U,	// S2_lsl_r_r_and
-    5703706U,	// S2_lsl_r_r_nac
-    5720090U,	// S2_lsl_r_r_or
-    5752858U,	// S2_lsl_r_vh
-    5769242U,	// S2_lsl_r_vw
-    72894490U,	// S2_lsr_i_p
-    72910874U,	// S2_lsr_i_p_acc
-    72927258U,	// S2_lsr_i_p_and
-    72943642U,	// S2_lsr_i_p_nac
-    72960026U,	// S2_lsr_i_p_or
-    72976410U,	// S2_lsr_i_p_xacc
-    72894490U,	// S2_lsr_i_r
-    72910874U,	// S2_lsr_i_r_acc
-    72927258U,	// S2_lsr_i_r_and
-    72943642U,	// S2_lsr_i_r_nac
-    72960026U,	// S2_lsr_i_r_or
-    72976410U,	// S2_lsr_i_r_xacc
-    72992794U,	// S2_lsr_i_vh
-    73009178U,	// S2_lsr_i_vw
-    56117274U,	// S2_lsr_r_p
-    56133658U,	// S2_lsr_r_p_acc
-    56150042U,	// S2_lsr_r_p_and
-    56166426U,	// S2_lsr_r_p_nac
-    56182810U,	// S2_lsr_r_p_or
-    56199194U,	// S2_lsr_r_p_xor
-    56117274U,	// S2_lsr_r_r
-    56133658U,	// S2_lsr_r_r_acc
-    56150042U,	// S2_lsr_r_r_and
-    56166426U,	// S2_lsr_r_r_nac
-    56182810U,	// S2_lsr_r_r_or
-    56215578U,	// S2_lsr_r_vh
-    56231962U,	// S2_lsr_r_vw
-    5916698U,	// S2_packhl
-    5933082U,	// S2_parityp
-    39503925U,	// S2_pstorerbf_io
-    324718645U,	// S2_pstorerbf_pi
-    324735029U,	// S2_pstorerbfnew_pi
-    39503925U,	// S2_pstorerbnewf_io
-    324718645U,	// S2_pstorerbnewf_pi
-    324735029U,	// S2_pstorerbnewfnew_pi
-    39504061U,	// S2_pstorerbnewt_io
-    324718781U,	// S2_pstorerbnewt_pi
-    324735165U,	// S2_pstorerbnewtnew_pi
-    39504061U,	// S2_pstorerbt_io
-    324718781U,	// S2_pstorerbt_pi
-    324735165U,	// S2_pstorerbtnew_pi
-    39536693U,	// S2_pstorerdf_io
-    324751413U,	// S2_pstorerdf_pi
-    324767797U,	// S2_pstorerdfnew_pi
-    39536829U,	// S2_pstorerdt_io
-    324751549U,	// S2_pstorerdt_pi
-    324767933U,	// S2_pstorerdtnew_pi
-    39569461U,	// S2_pstorerff_io
-    324784181U,	// S2_pstorerff_pi
-    324800565U,	// S2_pstorerffnew_pi
-    39569597U,	// S2_pstorerft_io
-    324784317U,	// S2_pstorerft_pi
-    324800701U,	// S2_pstorerftnew_pi
-    39569461U,	// S2_pstorerhf_io
-    324784181U,	// S2_pstorerhf_pi
-    324800565U,	// S2_pstorerhfnew_pi
-    39569461U,	// S2_pstorerhnewf_io
-    324784181U,	// S2_pstorerhnewf_pi
-    324800565U,	// S2_pstorerhnewfnew_pi
-    39569597U,	// S2_pstorerhnewt_io
-    324784317U,	// S2_pstorerhnewt_pi
-    324800701U,	// S2_pstorerhnewtnew_pi
-    39569597U,	// S2_pstorerht_io
-    324784317U,	// S2_pstorerht_pi
-    324800701U,	// S2_pstorerhtnew_pi
-    39602229U,	// S2_pstorerif_io
-    324816949U,	// S2_pstorerif_pi
-    324833333U,	// S2_pstorerifnew_pi
-    39602229U,	// S2_pstorerinewf_io
-    324816949U,	// S2_pstorerinewf_pi
-    324833333U,	// S2_pstorerinewfnew_pi
-    39602365U,	// S2_pstorerinewt_io
-    324817085U,	// S2_pstorerinewt_pi
-    324833469U,	// S2_pstorerinewtnew_pi
-    39602365U,	// S2_pstorerit_io
-    324817085U,	// S2_pstorerit_pi
-    324833469U,	// S2_pstoreritnew_pi
-    73189402U,	// S2_setbit_i
-    56412186U,	// S2_setbit_r
-    6096922U,	// S2_shuffeb
-    6113306U,	// S2_shuffeh
-    6129690U,	// S2_shuffob
-    6146074U,	// S2_shuffoh
-    121014577U,	// S2_storerb_io
-    241045809U,	// S2_storerb_pbr
-    241062193U,	// S2_storerb_pci
-    241078577U,	// S2_storerb_pcr
-    324981041U,	// S2_storerb_pi
-    1264521521U,	// S2_storerb_pr
-    241125507U,	// S2_storerbgp
-    121014577U,	// S2_storerbnew_io
-    1281233201U,	// S2_storerbnew_pbr
-    1281249585U,	// S2_storerbnew_pci
-    1281265969U,	// S2_storerbnew_pcr
-    324981041U,	// S2_storerbnew_pi
-    1264521521U,	// S2_storerbnew_pr
-    1281312899U,	// S2_storerbnewgp
-    121014609U,	// S2_storerd_io
-    241045841U,	// S2_storerd_pbr
-    241062225U,	// S2_storerd_pci
-    241078609U,	// S2_storerd_pcr
-    324981073U,	// S2_storerd_pi
-    1264521553U,	// S2_storerd_pr
-    241125514U,	// S2_storerdgp
-    121014652U,	// S2_storerf_io
-    1298010492U,	// S2_storerf_pbr
-    1298026876U,	// S2_storerf_pci
-    1298043260U,	// S2_storerf_pcr
-    324981116U,	// S2_storerf_pi
-    1264521596U,	// S2_storerf_pr
-    1298090150U,	// S2_storerfgp
-    121014652U,	// S2_storerh_io
-    241045884U,	// S2_storerh_pbr
-    241062268U,	// S2_storerh_pci
-    241078652U,	// S2_storerh_pcr
-    324981116U,	// S2_storerh_pi
-    1264521596U,	// S2_storerh_pr
-    241125542U,	// S2_storerhgp
-    121014652U,	// S2_storerhnew_io
-    1281233276U,	// S2_storerhnew_pbr
-    1281249660U,	// S2_storerhnew_pci
-    1281266044U,	// S2_storerhnew_pcr
-    324981116U,	// S2_storerhnew_pi
-    1264521596U,	// S2_storerhnew_pr
-    1281312934U,	// S2_storerhnewgp
-    121014924U,	// S2_storeri_io
-    241046156U,	// S2_storeri_pbr
-    241062540U,	// S2_storeri_pci
-    241078924U,	// S2_storeri_pcr
-    324981388U,	// S2_storeri_pi
-    1264521868U,	// S2_storeri_pr
-    241125558U,	// S2_storerigp
-    121014924U,	// S2_storerinew_io
-    1281233548U,	// S2_storerinew_pbr
-    1281249932U,	// S2_storerinew_pci
-    1281266316U,	// S2_storerinew_pcr
-    324981388U,	// S2_storerinew_pi
-    1264521868U,	// S2_storerinew_pr
-    1281312950U,	// S2_storerinewgp
-    1311297860U,	// S2_storew_locked
-    6260762U,	// S2_svsathb
-    6277146U,	// S2_svsathub
-    1331693594U,	// S2_tableidxb
-    6293530U,	// S2_tableidxb_goodsyntax
-    1331709978U,	// S2_tableidxd
-    6309914U,	// S2_tableidxd_goodsyntax
-    1331726362U,	// S2_tableidxh
-    6326298U,	// S2_tableidxh_goodsyntax
-    1331742746U,	// S2_tableidxw
-    6342682U,	// S2_tableidxw_goodsyntax
-    73467930U,	// S2_togglebit_i
-    56690714U,	// S2_togglebit_r
-    73484314U,	// S2_tstbit_i
-    56707098U,	// S2_tstbit_r
-    73500698U,	// S2_valignib
-    56723482U,	// S2_valignrb
-    6408218U,	// S2_vcnegh
-    6424602U,	// S2_vcrotate
-    6440986U,	// S2_vrcnegh
-    6457370U,	// S2_vrndpackwh
-    23234586U,	// S2_vrndpackwhs
-    6260762U,	// S2_vsathb
-    6260762U,	// S2_vsathb_nopack
-    6277146U,	// S2_vsathub
-    6277146U,	// S2_vsathub_nopack
-    6473754U,	// S2_vsatwh
-    6473754U,	// S2_vsatwh_nopack
-    6490138U,	// S2_vsatwuh
-    6490138U,	// S2_vsatwuh_nopack
-    6506522U,	// S2_vsplatrb
-    6522906U,	// S2_vsplatrh
-    73648154U,	// S2_vspliceib
-    56870938U,	// S2_vsplicerb
-    6555674U,	// S2_vsxtbh
-    6572058U,	// S2_vsxthw
-    6588442U,	// S2_vtrunehb
-    6604826U,	// S2_vtrunewh
-    6621210U,	// S2_vtrunohb
-    6637594U,	// S2_vtrunowh
-    6653978U,	// S2_vzxtbh
-    6670362U,	// S2_vzxthw
+    2086985U,	// RESTORE_DEALLOC_BEFORE_TAILCALL_V4
+    2086985U,	// RESTORE_DEALLOC_BEFORE_TAILCALL_V4_EXT
+    2086985U,	// RESTORE_DEALLOC_BEFORE_TAILCALL_V4_EXT_PIC
+    2086985U,	// RESTORE_DEALLOC_BEFORE_TAILCALL_V4_PIC
+    2086991U,	// RESTORE_DEALLOC_RET_JMP_V4
+    2086991U,	// RESTORE_DEALLOC_RET_JMP_V4_EXT
+    2086991U,	// RESTORE_DEALLOC_RET_JMP_V4_EXT_PIC
+    2086991U,	// RESTORE_DEALLOC_RET_JMP_V4_PIC
+    5392410U,	// S2_addasl_rrri
+    1460388U,	// S2_allocframe
+    72517658U,	// S2_asl_i_p
+    72534042U,	// S2_asl_i_p_acc
+    72550426U,	// S2_asl_i_p_and
+    72566810U,	// S2_asl_i_p_nac
+    72583194U,	// S2_asl_i_p_or
+    72599578U,	// S2_asl_i_p_xacc
+    72517658U,	// S2_asl_i_r
+    72534042U,	// S2_asl_i_r_acc
+    72550426U,	// S2_asl_i_r_and
+    72566810U,	// S2_asl_i_r_nac
+    72583194U,	// S2_asl_i_r_or
+    72517658U,	// S2_asl_i_r_sat
+    72599578U,	// S2_asl_i_r_xacc
+    72615962U,	// S2_asl_i_vh
+    72632346U,	// S2_asl_i_vw
+    55740442U,	// S2_asl_r_p
+    55756826U,	// S2_asl_r_p_acc
+    55773210U,	// S2_asl_r_p_and
+    55789594U,	// S2_asl_r_p_nac
+    55805978U,	// S2_asl_r_p_or
+    55822362U,	// S2_asl_r_p_xor
+    55740442U,	// S2_asl_r_r
+    55756826U,	// S2_asl_r_r_acc
+    55773210U,	// S2_asl_r_r_and
+    55789594U,	// S2_asl_r_r_nac
+    55805978U,	// S2_asl_r_r_or
+    55740442U,	// S2_asl_r_r_sat
+    55838746U,	// S2_asl_r_vh
+    55855130U,	// S2_asl_r_vw
+    72648730U,	// S2_asr_i_p
+    72665114U,	// S2_asr_i_p_acc
+    72681498U,	// S2_asr_i_p_and
+    72697882U,	// S2_asr_i_p_nac
+    72714266U,	// S2_asr_i_p_or
+    72648730U,	// S2_asr_i_p_rnd
+    5621786U,	// S2_asr_i_p_rnd_goodsyntax
+    72648730U,	// S2_asr_i_r
+    72665114U,	// S2_asr_i_r_acc
+    72681498U,	// S2_asr_i_r_and
+    72697882U,	// S2_asr_i_r_nac
+    72714266U,	// S2_asr_i_r_or
+    72648730U,	// S2_asr_i_r_rnd
+    5621786U,	// S2_asr_i_r_rnd_goodsyntax
+    72747034U,	// S2_asr_i_svw_trun
+    72763418U,	// S2_asr_i_vh
+    72747034U,	// S2_asr_i_vw
+    55871514U,	// S2_asr_r_p
+    55887898U,	// S2_asr_r_p_acc
+    55904282U,	// S2_asr_r_p_and
+    55920666U,	// S2_asr_r_p_nac
+    55937050U,	// S2_asr_r_p_or
+    5670938U,	// S2_asr_r_p_xor
+    55871514U,	// S2_asr_r_r
+    55887898U,	// S2_asr_r_r_acc
+    55904282U,	// S2_asr_r_r_and
+    55920666U,	// S2_asr_r_r_nac
+    55937050U,	// S2_asr_r_r_or
+    55871514U,	// S2_asr_r_r_sat
+    55969818U,	// S2_asr_r_svw_trun
+    55986202U,	// S2_asr_r_vh
+    55969818U,	// S2_asr_r_vw
+    5687322U,	// S2_brev
+    5687322U,	// S2_brevp
+    5703706U,	// S2_cabacdecbin
+    5720090U,	// S2_cl0
+    5720090U,	// S2_cl0p
+    5736474U,	// S2_cl1
+    5736474U,	// S2_cl1p
+    5752858U,	// S2_clb
+    5769242U,	// S2_clbnorm
+    5752858U,	// S2_clbp
+    72894490U,	// S2_clrbit_i
+    56117274U,	// S2_clrbit_r
+    5802010U,	// S2_ct0
+    5802010U,	// S2_ct0p
+    5818394U,	// S2_ct1
+    5818394U,	// S2_ct1p
+    5834778U,	// S2_deinterleave
+    72960026U,	// S2_extractu
+    56182810U,	// S2_extractu_rp
+    72960026U,	// S2_extractup
+    56182810U,	// S2_extractup_rp
+    72976410U,	// S2_insert
+    56199194U,	// S2_insert_rp
+    72976410U,	// S2_insertp
+    56199194U,	// S2_insertp_rp
+    5883930U,	// S2_interleave
+    5900314U,	// S2_lfsp
+    5916698U,	// S2_lsl_r_p
+    5933082U,	// S2_lsl_r_p_acc
+    5949466U,	// S2_lsl_r_p_and
+    5965850U,	// S2_lsl_r_p_nac
+    5982234U,	// S2_lsl_r_p_or
+    5998618U,	// S2_lsl_r_p_xor
+    5916698U,	// S2_lsl_r_r
+    5933082U,	// S2_lsl_r_r_acc
+    5949466U,	// S2_lsl_r_r_and
+    5965850U,	// S2_lsl_r_r_nac
+    5982234U,	// S2_lsl_r_r_or
+    6015002U,	// S2_lsl_r_vh
+    6031386U,	// S2_lsl_r_vw
+    73156634U,	// S2_lsr_i_p
+    73173018U,	// S2_lsr_i_p_acc
+    73189402U,	// S2_lsr_i_p_and
+    73205786U,	// S2_lsr_i_p_nac
+    73222170U,	// S2_lsr_i_p_or
+    73238554U,	// S2_lsr_i_p_xacc
+    73156634U,	// S2_lsr_i_r
+    73173018U,	// S2_lsr_i_r_acc
+    73189402U,	// S2_lsr_i_r_and
+    73205786U,	// S2_lsr_i_r_nac
+    73222170U,	// S2_lsr_i_r_or
+    73238554U,	// S2_lsr_i_r_xacc
+    73254938U,	// S2_lsr_i_vh
+    73271322U,	// S2_lsr_i_vw
+    56379418U,	// S2_lsr_r_p
+    56395802U,	// S2_lsr_r_p_acc
+    56412186U,	// S2_lsr_r_p_and
+    56428570U,	// S2_lsr_r_p_nac
+    56444954U,	// S2_lsr_r_p_or
+    56461338U,	// S2_lsr_r_p_xor
+    56379418U,	// S2_lsr_r_r
+    56395802U,	// S2_lsr_r_r_acc
+    56412186U,	// S2_lsr_r_r_and
+    56428570U,	// S2_lsr_r_r_nac
+    56444954U,	// S2_lsr_r_r_or
+    56477722U,	// S2_lsr_r_vh
+    56494106U,	// S2_lsr_r_vw
+    6178842U,	// S2_packhl
+    6195226U,	// S2_parityp
+    39766115U,	// S2_pstorerbf_io
+    1516163171U,	// S2_pstorerbf_pi
+    39766115U,	// S2_pstorerbf_zomap
+    1516179555U,	// S2_pstorerbfnew_pi
+    39766115U,	// S2_pstorerbnewf_io
+    1516163171U,	// S2_pstorerbnewf_pi
+    39766115U,	// S2_pstorerbnewf_zomap
+    1516179555U,	// S2_pstorerbnewfnew_pi
+    39766286U,	// S2_pstorerbnewt_io
+    1516163342U,	// S2_pstorerbnewt_pi
+    39766286U,	// S2_pstorerbnewt_zomap
+    1516179726U,	// S2_pstorerbnewtnew_pi
+    39766286U,	// S2_pstorerbt_io
+    1516163342U,	// S2_pstorerbt_pi
+    39766286U,	// S2_pstorerbt_zomap
+    1516179726U,	// S2_pstorerbtnew_pi
+    39798883U,	// S2_pstorerdf_io
+    1516195939U,	// S2_pstorerdf_pi
+    39798883U,	// S2_pstorerdf_zomap
+    1516212323U,	// S2_pstorerdfnew_pi
+    39799054U,	// S2_pstorerdt_io
+    1516196110U,	// S2_pstorerdt_pi
+    39799054U,	// S2_pstorerdt_zomap
+    1516212494U,	// S2_pstorerdtnew_pi
+    39831651U,	// S2_pstorerff_io
+    1516228707U,	// S2_pstorerff_pi
+    39831651U,	// S2_pstorerff_zomap
+    1516245091U,	// S2_pstorerffnew_pi
+    39831822U,	// S2_pstorerft_io
+    1516228878U,	// S2_pstorerft_pi
+    39831822U,	// S2_pstorerft_zomap
+    1516245262U,	// S2_pstorerftnew_pi
+    39831651U,	// S2_pstorerhf_io
+    1516228707U,	// S2_pstorerhf_pi
+    39831651U,	// S2_pstorerhf_zomap
+    1516245091U,	// S2_pstorerhfnew_pi
+    39831651U,	// S2_pstorerhnewf_io
+    1516228707U,	// S2_pstorerhnewf_pi
+    39831651U,	// S2_pstorerhnewf_zomap
+    1516245091U,	// S2_pstorerhnewfnew_pi
+    39831822U,	// S2_pstorerhnewt_io
+    1516228878U,	// S2_pstorerhnewt_pi
+    39831822U,	// S2_pstorerhnewt_zomap
+    1516245262U,	// S2_pstorerhnewtnew_pi
+    39831822U,	// S2_pstorerht_io
+    1516228878U,	// S2_pstorerht_pi
+    39831822U,	// S2_pstorerht_zomap
+    1516245262U,	// S2_pstorerhtnew_pi
+    39864419U,	// S2_pstorerif_io
+    1516261475U,	// S2_pstorerif_pi
+    39864419U,	// S2_pstorerif_zomap
+    1516277859U,	// S2_pstorerifnew_pi
+    39864419U,	// S2_pstorerinewf_io
+    1516261475U,	// S2_pstorerinewf_pi
+    39864419U,	// S2_pstorerinewf_zomap
+    1516277859U,	// S2_pstorerinewfnew_pi
+    39864590U,	// S2_pstorerinewt_io
+    1516261646U,	// S2_pstorerinewt_pi
+    39864590U,	// S2_pstorerinewt_zomap
+    1516278030U,	// S2_pstorerinewtnew_pi
+    39864590U,	// S2_pstorerit_io
+    1516261646U,	// S2_pstorerit_pi
+    39864590U,	// S2_pstorerit_zomap
+    1516278030U,	// S2_pstoreritnew_pi
+    73451546U,	// S2_setbit_i
+    56674330U,	// S2_setbit_r
+    6359066U,	// S2_shuffeb
+    6375450U,	// S2_shuffeh
+    6391834U,	// S2_shuffob
+    6408218U,	// S2_shuffoh
+    1530349976U,	// S2_storerb_io
+    1549928856U,	// S2_storerb_pbr
+    1566722456U,	// S2_storerb_pci
+    224561560U,	// S2_storerb_pcr
+    1533168024U,	// S2_storerb_pi
+    1533151640U,	// S2_storerb_pr
+    223480216U,	// S2_storerb_zomap
+    223480038U,	// S2_storerbgp
+    1530349976U,	// S2_storerbnew_io
+    1549928856U,	// S2_storerbnew_pbr
+    1566722456U,	// S2_storerbnew_pci
+    1482852760U,	// S2_storerbnew_pcr
+    1533168024U,	// S2_storerbnew_pi
+    1533151640U,	// S2_storerbnew_pr
+    1481771416U,	// S2_storerbnew_zomap
+    1481771238U,	// S2_storerbnewgp
+    1530350008U,	// S2_storerd_io
+    1549928888U,	// S2_storerd_pbr
+    1566722488U,	// S2_storerd_pci
+    224561592U,	// S2_storerd_pcr
+    1533168056U,	// S2_storerd_pi
+    1533151672U,	// S2_storerd_pr
+    223480248U,	// S2_storerd_zomap
+    223480048U,	// S2_storerdgp
+    1530350047U,	// S2_storerf_io
+    1549928927U,	// S2_storerf_pbr
+    1566722527U,	// S2_storerf_pci
+    1499630047U,	// S2_storerf_pcr
+    1533168095U,	// S2_storerf_pi
+    1533151711U,	// S2_storerf_pr
+    1498548703U,	// S2_storerf_zomap
+    1498548474U,	// S2_storerfgp
+    1530350047U,	// S2_storerh_io
+    1549928927U,	// S2_storerh_pbr
+    1566722527U,	// S2_storerh_pci
+    224561631U,	// S2_storerh_pcr
+    1533168095U,	// S2_storerh_pi
+    1533151711U,	// S2_storerh_pr
+    223480287U,	// S2_storerh_zomap
+    223480058U,	// S2_storerhgp
+    1530350047U,	// S2_storerhnew_io
+    1549928927U,	// S2_storerhnew_pbr
+    1566722527U,	// S2_storerhnew_pci
+    1482852831U,	// S2_storerhnew_pcr
+    1533168095U,	// S2_storerhnew_pi
+    1533151711U,	// S2_storerhnew_pr
+    1481771487U,	// S2_storerhnew_zomap
+    1481771258U,	// S2_storerhnewgp
+    1530350296U,	// S2_storeri_io
+    1549929176U,	// S2_storeri_pbr
+    1566722776U,	// S2_storeri_pci
+    224561880U,	// S2_storeri_pcr
+    1533168344U,	// S2_storeri_pi
+    1533151960U,	// S2_storeri_pr
+    223480536U,	// S2_storeri_zomap
+    223480068U,	// S2_storerigp
+    1530350296U,	// S2_storerinew_io
+    1549929176U,	// S2_storerinew_pbr
+    1566722776U,	// S2_storerinew_pci
+    1482853080U,	// S2_storerinew_pcr
+    1533168344U,	// S2_storerinew_pi
+    1533151960U,	// S2_storerinew_pr
+    1481771736U,	// S2_storerinew_zomap
+    1481771268U,	// S2_storerinewgp
+    1511657899U,	// S2_storew_locked
+    6473754U,	// S2_svsathb
+    6490138U,	// S2_svsathub
+    1583564826U,	// S2_tableidxb
+    6506522U,	// S2_tableidxb_goodsyntax
+    1583581210U,	// S2_tableidxd
+    6522906U,	// S2_tableidxd_goodsyntax
+    1583597594U,	// S2_tableidxh
+    6539290U,	// S2_tableidxh_goodsyntax
+    1583613978U,	// S2_tableidxw
+    6555674U,	// S2_tableidxw_goodsyntax
+    73680922U,	// S2_togglebit_i
+    56903706U,	// S2_togglebit_r
+    73697306U,	// S2_tstbit_i
+    56920090U,	// S2_tstbit_r
+    73713690U,	// S2_valignib
+    56936474U,	// S2_valignrb
+    6621210U,	// S2_vcnegh
+    6637594U,	// S2_vcrotate
+    6653978U,	// S2_vrcnegh
+    6670362U,	// S2_vrndpackwh
+    23447578U,	// S2_vrndpackwhs
+    6473754U,	// S2_vsathb
+    6473754U,	// S2_vsathb_nopack
+    6490138U,	// S2_vsathub
+    6490138U,	// S2_vsathub_nopack
+    6686746U,	// S2_vsatwh
+    6686746U,	// S2_vsatwh_nopack
+    6703130U,	// S2_vsatwuh
+    6703130U,	// S2_vsatwuh_nopack
+    6719514U,	// S2_vsplatrb
+    6735898U,	// S2_vsplatrh
+    73861146U,	// S2_vspliceib
+    57083930U,	// S2_vsplicerb
+    6768666U,	// S2_vsxtbh
+    6785050U,	// S2_vsxthw
+    6801434U,	// S2_vtrunehb
+    6817818U,	// S2_vtrunewh
+    6834202U,	// S2_vtrunohb
+    6850586U,	// S2_vtrunowh
+    6866970U,	// S2_vzxtbh
+    6883354U,	// S2_vzxthw
     33572890U,	// S4_addaddi
-    1346865178U,	// S4_addi_asl_ri
-    1363642394U,	// S4_addi_lsr_ri
-    1348864026U,	// S4_andi_asl_ri
-    1365641242U,	// S4_andi_lsr_ri
-    6703130U,	// S4_clbaddi
-    6703130U,	// S4_clbpaddi
-    5507098U,	// S4_clbpnorm
-    73828378U,	// S4_extract
-    57051162U,	// S4_extract_rp
-    73828378U,	// S4_extractp
-    57051162U,	// S4_extractp_rp
-    6735898U,	// S4_lsli
-    73861146U,	// S4_ntstbit_i
-    57083930U,	// S4_ntstbit_r
-    71813146U,	// S4_or_andi
-    537102362U,	// S4_or_andix
-    71829530U,	// S4_or_ori
-    1348945946U,	// S4_ori_asl_ri
-    1365723162U,	// S4_ori_lsr_ri
-    5933082U,	// S4_parity
-    241666101U,	// S4_pstorerbf_abs
-    39503925U,	// S4_pstorerbf_rr
-    241682485U,	// S4_pstorerbfnew_abs
-    39520309U,	// S4_pstorerbfnew_io
-    39520309U,	// S4_pstorerbfnew_rr
-    1281853493U,	// S4_pstorerbnewf_abs
-    39503925U,	// S4_pstorerbnewf_rr
-    1281869877U,	// S4_pstorerbnewfnew_abs
-    39520309U,	// S4_pstorerbnewfnew_io
-    39520309U,	// S4_pstorerbnewfnew_rr
-    1281853629U,	// S4_pstorerbnewt_abs
-    39504061U,	// S4_pstorerbnewt_rr
-    1281870013U,	// S4_pstorerbnewtnew_abs
-    39520445U,	// S4_pstorerbnewtnew_io
-    39520445U,	// S4_pstorerbnewtnew_rr
-    241666237U,	// S4_pstorerbt_abs
-    39504061U,	// S4_pstorerbt_rr
-    241682621U,	// S4_pstorerbtnew_abs
-    39520445U,	// S4_pstorerbtnew_io
-    39520445U,	// S4_pstorerbtnew_rr
-    6817845U,	// S4_pstorerdf_abs
-    39536693U,	// S4_pstorerdf_rr
-    6834229U,	// S4_pstorerdfnew_abs
-    39553077U,	// S4_pstorerdfnew_io
-    39553077U,	// S4_pstorerdfnew_rr
-    6817981U,	// S4_pstorerdt_abs
-    39536829U,	// S4_pstorerdt_rr
-    6834365U,	// S4_pstorerdtnew_abs
-    39553213U,	// S4_pstorerdtnew_io
-    39553213U,	// S4_pstorerdtnew_rr
-    1298696245U,	// S4_pstorerff_abs
-    39569461U,	// S4_pstorerff_rr
-    1298712629U,	// S4_pstorerffnew_abs
-    39585845U,	// S4_pstorerffnew_io
-    39585845U,	// S4_pstorerffnew_rr
-    1298696381U,	// S4_pstorerft_abs
-    39569597U,	// S4_pstorerft_rr
-    1298712765U,	// S4_pstorerftnew_abs
-    39585981U,	// S4_pstorerftnew_io
-    39585981U,	// S4_pstorerftnew_rr
-    241731637U,	// S4_pstorerhf_abs
-    39569461U,	// S4_pstorerhf_rr
-    241748021U,	// S4_pstorerhfnew_abs
-    39585845U,	// S4_pstorerhfnew_io
-    39585845U,	// S4_pstorerhfnew_rr
-    1281919029U,	// S4_pstorerhnewf_abs
-    39569461U,	// S4_pstorerhnewf_rr
-    1281935413U,	// S4_pstorerhnewfnew_abs
-    39585845U,	// S4_pstorerhnewfnew_io
-    39585845U,	// S4_pstorerhnewfnew_rr
-    1281919165U,	// S4_pstorerhnewt_abs
-    39569597U,	// S4_pstorerhnewt_rr
-    1281935549U,	// S4_pstorerhnewtnew_abs
-    39585981U,	// S4_pstorerhnewtnew_io
-    39585981U,	// S4_pstorerhnewtnew_rr
-    241731773U,	// S4_pstorerht_abs
-    39569597U,	// S4_pstorerht_rr
-    241748157U,	// S4_pstorerhtnew_abs
-    39585981U,	// S4_pstorerhtnew_io
-    39585981U,	// S4_pstorerhtnew_rr
-    241764405U,	// S4_pstorerif_abs
-    39602229U,	// S4_pstorerif_rr
-    241780789U,	// S4_pstorerifnew_abs
-    39618613U,	// S4_pstorerifnew_io
-    39618613U,	// S4_pstorerifnew_rr
-    1281951797U,	// S4_pstorerinewf_abs
-    39602229U,	// S4_pstorerinewf_rr
-    1281968181U,	// S4_pstorerinewfnew_abs
-    39618613U,	// S4_pstorerinewfnew_io
-    39618613U,	// S4_pstorerinewfnew_rr
-    1281951933U,	// S4_pstorerinewt_abs
-    39602365U,	// S4_pstorerinewt_rr
-    1281968317U,	// S4_pstorerinewtnew_abs
-    39618749U,	// S4_pstorerinewtnew_io
-    39618749U,	// S4_pstorerinewtnew_rr
-    241764541U,	// S4_pstorerit_abs
-    39602365U,	// S4_pstorerit_rr
-    241780925U,	// S4_pstoreritnew_abs
-    39618749U,	// S4_pstoreritnew_io
-    39618749U,	// S4_pstoreritnew_rr
-    1311297847U,	// S4_stored_locked
-    37128497U,	// S4_storeirb_io
-    39503925U,	// S4_storeirbf_io
-    39520309U,	// S4_storeirbfnew_io
-    39504061U,	// S4_storeirbt_io
-    39520445U,	// S4_storeirbtnew_io
-    37128572U,	// S4_storeirh_io
-    39569461U,	// S4_storeirhf_io
-    39585845U,	// S4_storeirhfnew_io
-    39569597U,	// S4_storeirht_io
-    39585981U,	// S4_storeirhtnew_io
-    37128844U,	// S4_storeiri_io
-    39602229U,	// S4_storeirif_io
-    39618613U,	// S4_storeirifnew_io
-    39602365U,	// S4_storeirit_io
-    39618749U,	// S4_storeiritnew_io
-    118065457U,	// S4_storerb_ap
-    241797425U,	// S4_storerb_rr
-    241813809U,	// S4_storerb_ur
-    118065457U,	// S4_storerbnew_ap
-    1281984817U,	// S4_storerbnew_rr
-    1282001201U,	// S4_storerbnew_ur
-    118065489U,	// S4_storerd_ap
-    241797457U,	// S4_storerd_rr
-    241813841U,	// S4_storerd_ur
-    118065532U,	// S4_storerf_ap
-    1298762108U,	// S4_storerf_rr
-    1298778492U,	// S4_storerf_ur
-    118065532U,	// S4_storerh_ap
-    241797500U,	// S4_storerh_rr
-    241813884U,	// S4_storerh_ur
-    118065532U,	// S4_storerhnew_ap
-    1281984892U,	// S4_storerhnew_rr
-    1282001276U,	// S4_storerhnew_ur
-    118065804U,	// S4_storeri_ap
-    241797772U,	// S4_storeri_rr
-    241814156U,	// S4_storeri_ur
-    118065804U,	// S4_storerinew_ap
-    1281985164U,	// S4_storerinew_rr
-    1282001548U,	// S4_storerinew_ur
+    1598687258U,	// S4_addi_asl_ri
+    1615464474U,	// S4_addi_lsr_ri
+    1600735258U,	// S4_andi_asl_ri
+    1617512474U,	// S4_andi_lsr_ri
+    6916122U,	// S4_clbaddi
+    6916122U,	// S4_clbpaddi
+    5769242U,	// S4_clbpnorm
+    74041370U,	// S4_extract
+    57264154U,	// S4_extract_rp
+    74041370U,	// S4_extractp
+    57264154U,	// S4_extractp_rp
+    6948890U,	// S4_lsli
+    74074138U,	// S4_ntstbit_i
+    57296922U,	// S4_ntstbit_r
+    71976986U,	// S4_or_andi
+    520325146U,	// S4_or_andix
+    71993370U,	// S4_or_ori
+    1600817178U,	// S4_ori_asl_ri
+    1617594394U,	// S4_ori_lsr_ri
+    6195226U,	// S4_parity
+    225101923U,	// S4_pstorerbf_abs
+    39766115U,	// S4_pstorerbf_rr
+    225118307U,	// S4_pstorerbfnew_abs
+    39782499U,	// S4_pstorerbfnew_io
+    39782499U,	// S4_pstorerbfnew_rr
+    39782499U,	// S4_pstorerbfnew_zomap
+    1483393123U,	// S4_pstorerbnewf_abs
+    39766115U,	// S4_pstorerbnewf_rr
+    1483409507U,	// S4_pstorerbnewfnew_abs
+    39782499U,	// S4_pstorerbnewfnew_io
+    39782499U,	// S4_pstorerbnewfnew_rr
+    39782499U,	// S4_pstorerbnewfnew_zomap
+    1483393294U,	// S4_pstorerbnewt_abs
+    39766286U,	// S4_pstorerbnewt_rr
+    1483409678U,	// S4_pstorerbnewtnew_abs
+    39782670U,	// S4_pstorerbnewtnew_io
+    39782670U,	// S4_pstorerbnewtnew_rr
+    39782670U,	// S4_pstorerbnewtnew_zomap
+    225102094U,	// S4_pstorerbt_abs
+    39766286U,	// S4_pstorerbt_rr
+    225118478U,	// S4_pstorerbtnew_abs
+    39782670U,	// S4_pstorerbtnew_io
+    39782670U,	// S4_pstorerbtnew_rr
+    39782670U,	// S4_pstorerbtnew_zomap
+    7030883U,	// S4_pstorerdf_abs
+    39798883U,	// S4_pstorerdf_rr
+    7047267U,	// S4_pstorerdfnew_abs
+    39815267U,	// S4_pstorerdfnew_io
+    39815267U,	// S4_pstorerdfnew_rr
+    39815267U,	// S4_pstorerdfnew_zomap
+    7031054U,	// S4_pstorerdt_abs
+    39799054U,	// S4_pstorerdt_rr
+    7047438U,	// S4_pstorerdtnew_abs
+    39815438U,	// S4_pstorerdtnew_io
+    39815438U,	// S4_pstorerdtnew_rr
+    39815438U,	// S4_pstorerdtnew_zomap
+    1500235875U,	// S4_pstorerff_abs
+    39831651U,	// S4_pstorerff_rr
+    1500252259U,	// S4_pstorerffnew_abs
+    39848035U,	// S4_pstorerffnew_io
+    39848035U,	// S4_pstorerffnew_rr
+    39848035U,	// S4_pstorerffnew_zomap
+    1500236046U,	// S4_pstorerft_abs
+    39831822U,	// S4_pstorerft_rr
+    1500252430U,	// S4_pstorerftnew_abs
+    39848206U,	// S4_pstorerftnew_io
+    39848206U,	// S4_pstorerftnew_rr
+    39848206U,	// S4_pstorerftnew_zomap
+    225167459U,	// S4_pstorerhf_abs
+    39831651U,	// S4_pstorerhf_rr
+    225183843U,	// S4_pstorerhfnew_abs
+    39848035U,	// S4_pstorerhfnew_io
+    39848035U,	// S4_pstorerhfnew_rr
+    39848035U,	// S4_pstorerhfnew_zomap
+    1483458659U,	// S4_pstorerhnewf_abs
+    39831651U,	// S4_pstorerhnewf_rr
+    1483475043U,	// S4_pstorerhnewfnew_abs
+    39848035U,	// S4_pstorerhnewfnew_io
+    39848035U,	// S4_pstorerhnewfnew_rr
+    39848035U,	// S4_pstorerhnewfnew_zomap
+    1483458830U,	// S4_pstorerhnewt_abs
+    39831822U,	// S4_pstorerhnewt_rr
+    1483475214U,	// S4_pstorerhnewtnew_abs
+    39848206U,	// S4_pstorerhnewtnew_io
+    39848206U,	// S4_pstorerhnewtnew_rr
+    39848206U,	// S4_pstorerhnewtnew_zomap
+    225167630U,	// S4_pstorerht_abs
+    39831822U,	// S4_pstorerht_rr
+    225184014U,	// S4_pstorerhtnew_abs
+    39848206U,	// S4_pstorerhtnew_io
+    39848206U,	// S4_pstorerhtnew_rr
+    39848206U,	// S4_pstorerhtnew_zomap
+    225200227U,	// S4_pstorerif_abs
+    39864419U,	// S4_pstorerif_rr
+    225216611U,	// S4_pstorerifnew_abs
+    39880803U,	// S4_pstorerifnew_io
+    39880803U,	// S4_pstorerifnew_rr
+    39880803U,	// S4_pstorerifnew_zomap
+    1483491427U,	// S4_pstorerinewf_abs
+    39864419U,	// S4_pstorerinewf_rr
+    1483507811U,	// S4_pstorerinewfnew_abs
+    39880803U,	// S4_pstorerinewfnew_io
+    39880803U,	// S4_pstorerinewfnew_rr
+    39880803U,	// S4_pstorerinewfnew_zomap
+    1483491598U,	// S4_pstorerinewt_abs
+    39864590U,	// S4_pstorerinewt_rr
+    1483507982U,	// S4_pstorerinewtnew_abs
+    39880974U,	// S4_pstorerinewtnew_io
+    39880974U,	// S4_pstorerinewtnew_rr
+    39880974U,	// S4_pstorerinewtnew_zomap
+    225200398U,	// S4_pstorerit_abs
+    39864590U,	// S4_pstorerit_rr
+    225216782U,	// S4_pstoreritnew_abs
+    39880974U,	// S4_pstoreritnew_io
+    39880974U,	// S4_pstoreritnew_rr
+    39880974U,	// S4_pstoreritnew_zomap
+    1511657886U,	// S4_stored_locked
+    1631013272U,	// S4_storeirb_io
+    7129496U,	// S4_storeirb_zomap
+    39766115U,	// S4_storeirbf_io
+    39766115U,	// S4_storeirbf_zomap
+    39782499U,	// S4_storeirbfnew_io
+    39782499U,	// S4_storeirbfnew_zomap
+    39766286U,	// S4_storeirbt_io
+    39766286U,	// S4_storeirbt_zomap
+    39782670U,	// S4_storeirbtnew_io
+    39782670U,	// S4_storeirbtnew_zomap
+    1631013343U,	// S4_storeirh_io
+    7129567U,	// S4_storeirh_zomap
+    39831651U,	// S4_storeirhf_io
+    39831651U,	// S4_storeirhf_zomap
+    39848035U,	// S4_storeirhfnew_io
+    39848035U,	// S4_storeirhfnew_zomap
+    39831822U,	// S4_storeirht_io
+    39831822U,	// S4_storeirht_zomap
+    39848206U,	// S4_storeirhtnew_io
+    39848206U,	// S4_storeirhtnew_zomap
+    1631013592U,	// S4_storeiri_io
+    7129816U,	// S4_storeiri_zomap
+    39864419U,	// S4_storeirif_io
+    39864419U,	// S4_storeirif_zomap
+    39880803U,	// S4_storeirifnew_io
+    39880803U,	// S4_storeirifnew_zomap
+    39864590U,	// S4_storeirit_io
+    39864590U,	// S4_storeirit_zomap
+    39880974U,	// S4_storeiritnew_io
+    39880974U,	// S4_storeiritnew_zomap
+    225249688U,	// S4_storerb_ap
+    225266072U,	// S4_storerb_rr
+    225282456U,	// S4_storerb_ur
+    1483540888U,	// S4_storerbnew_ap
+    1483557272U,	// S4_storerbnew_rr
+    1483573656U,	// S4_storerbnew_ur
+    225249720U,	// S4_storerd_ap
+    225266104U,	// S4_storerd_rr
+    225282488U,	// S4_storerd_ur
+    1500318175U,	// S4_storerf_ap
+    1500334559U,	// S4_storerf_rr
+    1500350943U,	// S4_storerf_ur
+    225249759U,	// S4_storerh_ap
+    225266143U,	// S4_storerh_rr
+    225282527U,	// S4_storerh_ur
+    1483540959U,	// S4_storerhnew_ap
+    1483557343U,	// S4_storerhnew_rr
+    1483573727U,	// S4_storerhnew_ur
+    225250008U,	// S4_storeri_ap
+    225266392U,	// S4_storeri_rr
+    225282776U,	// S4_storeri_ur
+    1483541208U,	// S4_storerinew_ap
+    1483557592U,	// S4_storerinew_rr
+    1483573976U,	// S4_storerinew_ur
     33572890U,	// S4_subaddi
-    1342572570U,	// S4_subi_asl_ri
-    1359349786U,	// S4_subi_lsr_ri
-    6948890U,	// S4_vrcrotate
-    6965274U,	// S4_vrcrotate_acc
-    23758874U,	// S4_vxaddsubh
-    1382713370U,	// S4_vxaddsubhr
-    6998042U,	// S4_vxaddsubw
-    23791642U,	// S4_vxsubaddh
-    1382746138U,	// S4_vxsubaddhr
-    7030810U,	// S4_vxsubaddw
-    1332447258U,	// S5_asrhub_rnd_sat
-    309037082U,	// S5_asrhub_rnd_sat_goodsyntax
-    23824410U,	// S5_asrhub_sat
-    7063578U,	// S5_popcountp
-    72484890U,	// S5_vasrhrnd
-    1397884954U,	// S5_vasrhrnd_goodsyntax
-    7079962U,	// S6_rol_i_p
-    7096346U,	// S6_rol_i_p_acc
-    7112730U,	// S6_rol_i_p_and
-    7129114U,	// S6_rol_i_p_nac
-    7145498U,	// S6_rol_i_p_or
-    7161882U,	// S6_rol_i_p_xacc
-    7079962U,	// S6_rol_i_r
-    7096346U,	// S6_rol_i_r_acc
-    7112730U,	// S6_rol_i_r_and
-    7129114U,	// S6_rol_i_r_nac
-    7145498U,	// S6_rol_i_r_or
-    7161882U,	// S6_rol_i_r_xacc
+    1594230810U,	// S4_subi_asl_ri
+    1611008026U,	// S4_subi_lsr_ri
+    7194650U,	// S4_vrcrotate
+    7211034U,	// S4_vrcrotate_acc
+    24004634U,	// S4_vxaddsubh
+    1651394586U,	// S4_vxaddsubhr
+    7243802U,	// S4_vxaddsubw
+    24037402U,	// S4_vxsubaddh
+    1651427354U,	// S4_vxsubaddhr
+    7276570U,	// S4_vxsubaddw
+    74401818U,	// S5_asrhub_rnd_sat
+    74401818U,	// S5_asrhub_rnd_sat_goodsyntax
+    74401818U,	// S5_asrhub_sat
+    7309338U,	// S5_popcountp
+    72763418U,	// S5_vasrhrnd
+    72763418U,	// S5_vasrhrnd_goodsyntax
+    7325722U,	// S6_rol_i_p
+    7342106U,	// S6_rol_i_p_acc
+    7358490U,	// S6_rol_i_p_and
+    7374874U,	// S6_rol_i_p_nac
+    7391258U,	// S6_rol_i_p_or
+    7407642U,	// S6_rol_i_p_xacc
+    7325722U,	// S6_rol_i_r
+    7342106U,	// S6_rol_i_r_acc
+    7358490U,	// S6_rol_i_r_and
+    7374874U,	// S6_rol_i_r_nac
+    7391258U,	// S6_rol_i_r_or
+    7407642U,	// S6_rol_i_r_xacc
+    6719514U,	// S6_vsplatrbp
+    57133082U,	// S6_vtrunehb_ppp
+    57165850U,	// S6_vtrunohb_ppp
     33572890U,	// SA1_addi
     33572890U,	// SA1_addrx
-    7178266U,	// SA1_addsp
-    1409320986U,	// SA1_and1
-    1426313269U,	// SA1_clrf
-    1426329653U,	// SA1_clrfnew
-    1426313405U,	// SA1_clrt
-    1426329789U,	// SA1_clrtnew
-    3066265U,	// SA1_cmpeqi
-    7194650U,	// SA1_combine0i
-    7211034U,	// SA1_combine1i
-    7227418U,	// SA1_combine2i
-    7243802U,	// SA1_combine3i
-    1442924570U,	// SA1_combinerz
-    7260186U,	// SA1_combinezr
+    7424026U,	// SA1_addsp
+    1660979226U,	// SA1_and1
+    7440411U,	// SA1_clrf
+    7440430U,	// SA1_clrfnew
+    7440421U,	// SA1_clrt
+    7440444U,	// SA1_clrtnew
+    3131890U,	// SA1_cmpeqi
+    7456794U,	// SA1_combine0i
+    7473178U,	// SA1_combine1i
+    7489562U,	// SA1_combine2i
+    7505946U,	// SA1_combine3i
+    1677805594U,	// SA1_combinerz
+    7522330U,	// SA1_combinezr
     33572890U,	// SA1_dec
     33572890U,	// SA1_inc
-    118065178U,	// SA1_seti
-    7276570U,	// SA1_setin1
+    218728474U,	// SA1_seti
+    218728474U,	// SA1_setin1
     526362U,	// SA1_sxtb
     542746U,	// SA1_sxth
-    235456538U,	// SA1_tfr
-    1459652634U,	// SA1_zxtb
-    1263642U,	// SA1_zxth
-    2070555U,	// SAVE_REGISTERS_CALL_V4
-    2070555U,	// SAVE_REGISTERS_CALL_V4STK
-    2070555U,	// SAVE_REGISTERS_CALL_V4STK_EXT
-    2070555U,	// SAVE_REGISTERS_CALL_V4STK_EXT_PIC
-    2070555U,	// SAVE_REGISTERS_CALL_V4STK_PIC
-    2070555U,	// SAVE_REGISTERS_CALL_V4_EXT
-    2070555U,	// SAVE_REGISTERS_CALL_V4_EXT_PIC
-    2070555U,	// SAVE_REGISTERS_CALL_V4_PIC
-    37013530U,	// SL1_loadri_io
-    37046298U,	// SL1_loadrub_io
-    916U,	// SL2_deallocframe
-    776U,	// SL2_jumpr31
-    767U,	// SL2_jumpr31_f
-    804U,	// SL2_jumpr31_fnew
-    786U,	// SL2_jumpr31_t
-    830U,	// SL2_jumpr31_tnew
-    36915226U,	// SL2_loadrb_io
-    7292954U,	// SL2_loadrd_sp
-    36980762U,	// SL2_loadrh_io
-    7309338U,	// SL2_loadri_sp
-    37079066U,	// SL2_loadruh_io
-    957U,	// SL2_return
-    948U,	// SL2_return_f
-    1014U,	// SL2_return_fnew
-    972U,	// SL2_return_t
-    1045U,	// SL2_return_tnew
-    1265617201U,	// SS1_storeb_io
-    1265617548U,	// SS1_storew_io
-    1443985U,	// SS2_allocframe
-    1483721009U,	// SS2_storebi0
-    1500498225U,	// SS2_storebi1
-    241125465U,	// SS2_stored_sp
-    1265617276U,	// SS2_storeh_io
-    241125478U,	// SS2_storew_sp
-    1483721356U,	// SS2_storewi0
-    1500498572U,	// SS2_storewi1
-    64U,	// STriw_mod
-    64U,	// STriw_pred
-    7342106U,	// TFRI64_V2_ext
-    34179098U,	// TFRI64_V4
-    7358490U,	// V6_extractw
-    7358490U,	// V6_extractw_128B
-    0U,	// V6_hi
-    0U,	// V6_hi_128B
-    0U,	// V6_lo
-    0U,	// V6_lo_128B
-    7374874U,	// V6_lvsplatw
-    7374874U,	// V6_lvsplatw_128B
-    1509984282U,	// V6_pred_and
-    1509984282U,	// V6_pred_and_128B
-    1526761498U,	// V6_pred_and_n
-    1526761498U,	// V6_pred_and_n_128B
+    218679322U,	// SA1_tfr
+    1694533658U,	// SA1_zxtb
+    1296410U,	// SA1_zxth
+    2086985U,	// SAVE_REGISTERS_CALL_V4
+    2086985U,	// SAVE_REGISTERS_CALL_V4STK
+    2086985U,	// SAVE_REGISTERS_CALL_V4STK_EXT
+    2086985U,	// SAVE_REGISTERS_CALL_V4STK_EXT_PIC
+    2086985U,	// SAVE_REGISTERS_CALL_V4STK_PIC
+    2086985U,	// SAVE_REGISTERS_CALL_V4_EXT
+    2086985U,	// SAVE_REGISTERS_CALL_V4_EXT_PIC
+    2086985U,	// SAVE_REGISTERS_CALL_V4_PIC
+    808814618U,	// SL1_loadri_io
+    808847386U,	// SL1_loadrub_io
+    1029U,	// SL2_deallocframe
+    862U,	// SL2_jumpr31
+    853U,	// SL2_jumpr31_f
+    890U,	// SL2_jumpr31_fnew
+    872U,	// SL2_jumpr31_t
+    916U,	// SL2_jumpr31_tnew
+    808716314U,	// SL2_loadrb_io
+    7538714U,	// SL2_loadrd_sp
+    808781850U,	// SL2_loadrh_io
+    7555098U,	// SL2_loadri_sp
+    808880154U,	// SL2_loadruh_io
+    1065U,	// SL2_return
+    1056U,	// SL2_return_f
+    1136U,	// SL2_return_fnew
+    1080U,	// SL2_return_t
+    1167U,	// SL2_return_tnew
+    1530349976U,	// SS1_storeb_io
+    1530350296U,	// SS1_storew_io
+    1460388U,	// SS2_allocframe
+    1714899352U,	// SS2_storebi0
+    1731676568U,	// SS2_storebi1
+    223480016U,	// SS2_stored_sp
+    1530350047U,	// SS2_storeh_io
+    223480027U,	// SS2_storew_sp
+    1714899672U,	// SS2_storewi0
+    1731676888U,	// SS2_storewi1
+    105U,	// STriw_mod
+    105U,	// STriw_pred
+    7571482U,	// TFRI64_V2_ext
+    218728474U,	// TFRI64_V4
+    1752418330U,	// V6_MAP_equb
+    1752418330U,	// V6_MAP_equb_128B
+    1752434714U,	// V6_MAP_equb_and
+    1752434714U,	// V6_MAP_equb_and_128B
+    1752451098U,	// V6_MAP_equb_ior
+    1752451098U,	// V6_MAP_equb_ior_128B
+    1752467482U,	// V6_MAP_equb_xor
+    1752467482U,	// V6_MAP_equb_xor_128B
+    1769195546U,	// V6_MAP_equh
+    1769195546U,	// V6_MAP_equh_128B
+    1769211930U,	// V6_MAP_equh_and
+    1769211930U,	// V6_MAP_equh_and_128B
+    1769228314U,	// V6_MAP_equh_ior
+    1769228314U,	// V6_MAP_equh_ior_128B
+    1769244698U,	// V6_MAP_equh_xor
+    1769244698U,	// V6_MAP_equh_xor_128B
+    1785972762U,	// V6_MAP_equw
+    1785972762U,	// V6_MAP_equw_128B
+    1785989146U,	// V6_MAP_equw_and
+    1785989146U,	// V6_MAP_equw_and_128B
+    1786005530U,	// V6_MAP_equw_ior
+    1786005530U,	// V6_MAP_equw_ior_128B
+    1786021914U,	// V6_MAP_equw_xor
+    1786021914U,	// V6_MAP_equw_xor_128B
+    7653402U,	// V6_extractw
+    7653402U,	// V6_extractw_128B
+    7669786U,	// V6_extractw_alt
+    7669786U,	// V6_extractw_alt_128B
+    7686170U,	// V6_hi
+    7686170U,	// V6_hi_128B
+    7702554U,	// V6_ld0
+    7702554U,	// V6_ld0_128B
+    1802864666U,	// V6_ldnt0
+    1802864666U,	// V6_ldnt0_128B
+    7718938U,	// V6_ldu0
+    7718938U,	// V6_ldu0_128B
+    7735322U,	// V6_lo
+    7735322U,	// V6_lo_128B
+    7751706U,	// V6_lvsplatb
+    7751706U,	// V6_lvsplatb_128B
+    7768090U,	// V6_lvsplath
+    7768090U,	// V6_lvsplath_128B
+    7784474U,	// V6_lvsplatw
+    7784474U,	// V6_lvsplatw_128B
+    50366490U,	// V6_pred_and
+    50366490U,	// V6_pred_and_128B
+    469796890U,	// V6_pred_and_n
+    469796890U,	// V6_pred_and_n_128B
     215066U,	// V6_pred_not
     215066U,	// V6_pred_not_128B
-    1510180890U,	// V6_pred_or
-    1510180890U,	// V6_pred_or_128B
-    1526958106U,	// V6_pred_or_n
-    1526958106U,	// V6_pred_or_n_128B
-    7391258U,	// V6_pred_scalar2
-    7391258U,	// V6_pred_scalar2_128B
-    1511180314U,	// V6_pred_xor
-    1511180314U,	// V6_pred_xor_128B
-    40962074U,	// V6_vL32Ub_ai
-    40962074U,	// V6_vL32Ub_ai_128B
-    326174746U,	// V6_vL32Ub_pi
-    326174746U,	// V6_vL32Ub_pi_128B
-    326174746U,	// V6_vL32Ub_ppu
-    40978458U,	// V6_vL32b_ai
-    40978458U,	// V6_vL32b_ai_128B
-    40994842U,	// V6_vL32b_cur_ai
-    40994842U,	// V6_vL32b_cur_ai_128B
-    326207514U,	// V6_vL32b_cur_pi
-    326207514U,	// V6_vL32b_cur_pi_128B
-    326207514U,	// V6_vL32b_cur_ppu
-    40978458U,	// V6_vL32b_nt_ai
-    40978458U,	// V6_vL32b_nt_ai_128B
-    40994842U,	// V6_vL32b_nt_cur_ai
-    40994842U,	// V6_vL32b_nt_cur_ai_128B
-    326207514U,	// V6_vL32b_nt_cur_pi
-    326207514U,	// V6_vL32b_nt_cur_pi_128B
-    326207514U,	// V6_vL32b_nt_cur_ppu
-    326191130U,	// V6_vL32b_nt_pi
-    326191130U,	// V6_vL32b_nt_pi_128B
-    326191130U,	// V6_vL32b_nt_ppu
-    41011226U,	// V6_vL32b_nt_tmp_ai
-    41011226U,	// V6_vL32b_nt_tmp_ai_128B
-    326223898U,	// V6_vL32b_nt_tmp_pi
-    326223898U,	// V6_vL32b_nt_tmp_pi_128B
-    326223898U,	// V6_vL32b_nt_tmp_ppu
-    326191130U,	// V6_vL32b_pi
-    326191130U,	// V6_vL32b_pi_128B
-    326191130U,	// V6_vL32b_ppu
-    41011226U,	// V6_vL32b_tmp_ai
-    41011226U,	// V6_vL32b_tmp_ai_128B
-    326223898U,	// V6_vL32b_tmp_pi
-    326223898U,	// V6_vL32b_tmp_pi_128B
-    326223898U,	// V6_vL32b_tmp_ppu
-    1547078209U,	// V6_vS32Ub_ai
-    1563855425U,	// V6_vS32Ub_ai_128B
-    41027637U,	// V6_vS32Ub_npred_ai
-    41027637U,	// V6_vS32Ub_npred_ai_128B
-    326242357U,	// V6_vS32Ub_npred_pi
-    326242357U,	// V6_vS32Ub_npred_pi_128B
-    326242357U,	// V6_vS32Ub_npred_ppu
-    1583272513U,	// V6_vS32Ub_pi
-    1600049729U,	// V6_vS32Ub_pi_128B
-    1264521793U,	// V6_vS32Ub_ppu
-    41027773U,	// V6_vS32Ub_pred_ai
-    41027773U,	// V6_vS32Ub_pred_ai_128B
-    326242493U,	// V6_vS32Ub_pred_pi
-    326242493U,	// V6_vS32Ub_pred_pi_128B
-    326242493U,	// V6_vS32Ub_pred_ppu
-    1547078025U,	// V6_vS32b_ai
-    1563855241U,	// V6_vS32b_ai_128B
-    1547078025U,	// V6_vS32b_new_ai
-    1563855241U,	// V6_vS32b_new_ai_128B
-    41044027U,	// V6_vS32b_new_npred_ai
-    41044027U,	// V6_vS32b_new_npred_ai_128B
-    326258747U,	// V6_vS32b_new_npred_pi
-    326258747U,	// V6_vS32b_new_npred_pi_128B
-    326258747U,	// V6_vS32b_new_npred_ppu
-    1583272329U,	// V6_vS32b_new_pi
-    1600049545U,	// V6_vS32b_new_pi_128B
-    1264521609U,	// V6_vS32b_new_ppu
-    41044326U,	// V6_vS32b_new_pred_ai
-    41044326U,	// V6_vS32b_new_pred_ai_128B
-    326259046U,	// V6_vS32b_new_pred_pi
-    326259046U,	// V6_vS32b_new_pred_pi_128B
-    326259046U,	// V6_vS32b_new_pred_ppu
-    41044021U,	// V6_vS32b_npred_ai
-    41044021U,	// V6_vS32b_npred_ai_128B
-    326258741U,	// V6_vS32b_npred_pi
-    326258741U,	// V6_vS32b_npred_pi_128B
-    326258741U,	// V6_vS32b_npred_ppu
-    41044021U,	// V6_vS32b_nqpred_ai
-    41044021U,	// V6_vS32b_nqpred_ai_128B
-    326258741U,	// V6_vS32b_nqpred_pi
-    326258741U,	// V6_vS32b_nqpred_pi_128B
-    326258741U,	// V6_vS32b_nqpred_ppu
-    1547078025U,	// V6_vS32b_nt_ai
-    1563855241U,	// V6_vS32b_nt_ai_128B
-    1547078025U,	// V6_vS32b_nt_new_ai
-    1563855241U,	// V6_vS32b_nt_new_ai_128B
-    41044027U,	// V6_vS32b_nt_new_npred_ai
-    41044027U,	// V6_vS32b_nt_new_npred_ai_128B
-    326258747U,	// V6_vS32b_nt_new_npred_pi
-    326258747U,	// V6_vS32b_nt_new_npred_pi_128B
-    326258747U,	// V6_vS32b_nt_new_npred_ppu
-    1583272329U,	// V6_vS32b_nt_new_pi
-    1600049545U,	// V6_vS32b_nt_new_pi_128B
-    1616843145U,	// V6_vS32b_nt_new_ppu
-    41044326U,	// V6_vS32b_nt_new_pred_ai
-    41044326U,	// V6_vS32b_nt_new_pred_ai_128B
-    326259046U,	// V6_vS32b_nt_new_pred_pi
-    326259046U,	// V6_vS32b_nt_new_pred_pi_128B
-    326259046U,	// V6_vS32b_nt_new_pred_ppu
-    41044021U,	// V6_vS32b_nt_npred_ai
-    41044021U,	// V6_vS32b_nt_npred_ai_128B
-    326258741U,	// V6_vS32b_nt_npred_pi
-    326258741U,	// V6_vS32b_nt_npred_pi_128B
-    326258741U,	// V6_vS32b_nt_npred_ppu
-    41044021U,	// V6_vS32b_nt_nqpred_ai
-    41044021U,	// V6_vS32b_nt_nqpred_ai_128B
-    326258741U,	// V6_vS32b_nt_nqpred_pi
-    326258741U,	// V6_vS32b_nt_nqpred_pi_128B
-    326258741U,	// V6_vS32b_nt_nqpred_ppu
-    1583272329U,	// V6_vS32b_nt_pi
-    1600049545U,	// V6_vS32b_nt_pi_128B
-    1616843145U,	// V6_vS32b_nt_ppu
-    41044157U,	// V6_vS32b_nt_pred_ai
-    41044157U,	// V6_vS32b_nt_pred_ai_128B
-    326258877U,	// V6_vS32b_nt_pred_pi
-    326258877U,	// V6_vS32b_nt_pred_pi_128B
-    326258877U,	// V6_vS32b_nt_pred_ppu
-    41044157U,	// V6_vS32b_nt_qpred_ai
-    41044157U,	// V6_vS32b_nt_qpred_ai_128B
-    326258877U,	// V6_vS32b_nt_qpred_pi
-    326258877U,	// V6_vS32b_nt_qpred_pi_128B
-    326258877U,	// V6_vS32b_nt_qpred_ppu
-    1583272329U,	// V6_vS32b_pi
-    1600049545U,	// V6_vS32b_pi_128B
-    1264521609U,	// V6_vS32b_ppu
-    41044157U,	// V6_vS32b_pred_ai
-    41044157U,	// V6_vS32b_pred_ai_128B
-    326258877U,	// V6_vS32b_pred_pi
-    326258877U,	// V6_vS32b_pred_pi_128B
-    326258877U,	// V6_vS32b_pred_ppu
-    41044157U,	// V6_vS32b_qpred_ai
-    41044157U,	// V6_vS32b_qpred_ai_128B
-    326258877U,	// V6_vS32b_qpred_pi
-    326258877U,	// V6_vS32b_qpred_pi_128B
-    326258877U,	// V6_vS32b_qpred_ppu
-    1634895898U,	// V6_vabsdiffh
-    1634895898U,	// V6_vabsdiffh_128B
-    7522330U,	// V6_vabsdiffub
-    7522330U,	// V6_vabsdiffub_128B
-    1651673114U,	// V6_vabsdiffuh
-    1651673114U,	// V6_vabsdiffuh_128B
-    7538714U,	// V6_vabsdiffw
-    7538714U,	// V6_vabsdiffw_128B
-    1668499482U,	// V6_vabsh
-    1668499482U,	// V6_vabsh_128B
-    1685276698U,	// V6_vabsh_sat
-    1685276698U,	// V6_vabsh_sat_128B
-    1702070298U,	// V6_vabsw
-    1702070298U,	// V6_vabsw_128B
-    1718847514U,	// V6_vabsw_sat
-    1718847514U,	// V6_vabsw_sat_128B
-    7587866U,	// V6_vaddb
-    7587866U,	// V6_vaddb_128B
-    7587866U,	// V6_vaddb_dv
-    7587866U,	// V6_vaddb_dv_128B
-    1728303157U,	// V6_vaddbnq
-    1728303157U,	// V6_vaddbnq_128B
-    1728303293U,	// V6_vaddbq
-    1728303293U,	// V6_vaddbq_128B
-    1634994202U,	// V6_vaddh
-    1634994202U,	// V6_vaddh_128B
-    1634994202U,	// V6_vaddh_dv
-    1634994202U,	// V6_vaddh_dv_128B
-    1745080373U,	// V6_vaddhnq
-    1745080373U,	// V6_vaddhnq_128B
-    1745080509U,	// V6_vaddhq
-    1745080509U,	// V6_vaddhq_128B
-    1634994202U,	// V6_vaddhsat
-    1634994202U,	// V6_vaddhsat_128B
-    1634994202U,	// V6_vaddhsat_dv
-    1634994202U,	// V6_vaddhsat_dv_128B
-    1635010586U,	// V6_vaddhw
-    1635010586U,	// V6_vaddhw_128B
-    1769211930U,	// V6_vaddubh
-    1769211930U,	// V6_vaddubh_128B
-    7637018U,	// V6_vaddubsat
-    7637018U,	// V6_vaddubsat_128B
-    7637018U,	// V6_vaddubsat_dv
-    7637018U,	// V6_vaddubsat_dv_128B
-    7653402U,	// V6_vadduhsat
-    7653402U,	// V6_vadduhsat_128B
-    7653402U,	// V6_vadduhsat_dv
-    7653402U,	// V6_vadduhsat_dv_128B
-    1651787802U,	// V6_vadduhw
-    1651787802U,	// V6_vadduhw_128B
-    1786005530U,	// V6_vaddw
-    1786005530U,	// V6_vaddw_128B
-    1786005530U,	// V6_vaddw_dv
-    1786005530U,	// V6_vaddw_dv_128B
-    1795412021U,	// V6_vaddwnq
-    1795412021U,	// V6_vaddwnq_128B
-    1795412157U,	// V6_vaddwq
-    1795412157U,	// V6_vaddwq_128B
-    1786005530U,	// V6_vaddwsat
-    1786005530U,	// V6_vaddwsat_128B
-    1786005530U,	// V6_vaddwsat_dv
-    1786005530U,	// V6_vaddwsat_dv_128B
-    1517619226U,	// V6_valignb
-    1517619226U,	// V6_valignb_128B
-    1400178714U,	// V6_valignbi
-    1400178714U,	// V6_valignbi_128B
-    7686170U,	// V6_vand
-    7686170U,	// V6_vand_128B
-    7686170U,	// V6_vandqrt
-    7686170U,	// V6_vandqrt_128B
-    7702554U,	// V6_vandqrt_acc
-    7702554U,	// V6_vandqrt_acc_128B
-    7686170U,	// V6_vandvrt
-    7686170U,	// V6_vandvrt_128B
-    7702554U,	// V6_vandvrt_acc
-    7702554U,	// V6_vandvrt_acc_128B
-    7718938U,	// V6_vaslh
-    7718938U,	// V6_vaslh_128B
-    1668663322U,	// V6_vaslhv
-    1668663322U,	// V6_vaslhv_128B
-    7735322U,	// V6_vaslw
-    7735322U,	// V6_vaslw_128B
-    7751706U,	// V6_vaslw_acc
-    7751706U,	// V6_vaslw_acc_128B
-    1702234138U,	// V6_vaslwv
-    1702234138U,	// V6_vaslwv_128B
-    1635158042U,	// V6_vasrh
-    1635158042U,	// V6_vasrh_128B
-    7784474U,	// V6_vasrhbrndsat
-    7784474U,	// V6_vasrhbrndsat_128B
-    309790746U,	// V6_vasrhubrndsat
-    309790746U,	// V6_vasrhubrndsat_128B
-    24578074U,	// V6_vasrhubsat
-    24578074U,	// V6_vasrhubsat_128B
-    1635158042U,	// V6_vasrhv
-    1635158042U,	// V6_vasrhv_128B
-    7817242U,	// V6_vasrw
-    7817242U,	// V6_vasrw_128B
-    7833626U,	// V6_vasrw_acc
-    7833626U,	// V6_vasrw_acc_128B
-    1786152986U,	// V6_vasrwh
-    1786152986U,	// V6_vasrwh_128B
-    1786152986U,	// V6_vasrwhrndsat
-    1786152986U,	// V6_vasrwhrndsat_128B
-    1786152986U,	// V6_vasrwhsat
-    1786152986U,	// V6_vasrwhsat_128B
-    7850010U,	// V6_vasrwuhsat
-    7850010U,	// V6_vasrwuhsat_128B
-    1702316058U,	// V6_vasrwv
-    1702316058U,	// V6_vasrwv_128B
-    235456538U,	// V6_vassign
-    235456538U,	// V6_vassign_128B
-    0U,	// V6_vassignp
-    0U,	// V6_vassignp_128B
-    1668810778U,	// V6_vavgh
-    1668810778U,	// V6_vavgh_128B
-    1819805722U,	// V6_vavghrnd
-    1819805722U,	// V6_vavghrnd_128B
-    1836599322U,	// V6_vavgub
-    1836599322U,	// V6_vavgub_128B
-    1853376538U,	// V6_vavgubrnd
-    1853376538U,	// V6_vavgubrnd_128B
-    1870170138U,	// V6_vavguh
-    1870170138U,	// V6_vavguh_128B
-    1886947354U,	// V6_vavguhrnd
-    1886947354U,	// V6_vavguhrnd_128B
-    1702414362U,	// V6_vavgw
-    1702414362U,	// V6_vavgw_128B
-    1903740954U,	// V6_vavgwrnd
-    1903740954U,	// V6_vavgwrnd_128B
-    1912852669U,	// V6_vccombine
-    1912852669U,	// V6_vccombine_128B
-    7931930U,	// V6_vcl0h
-    7931930U,	// V6_vcl0h_128B
-    7948314U,	// V6_vcl0w
-    7948314U,	// V6_vcl0w_128B
-    251908285U,	// V6_vcmov
-    251908285U,	// V6_vcmov_128B
-    7964698U,	// V6_vcombine
-    7964698U,	// V6_vcombine_128B
-    7981082U,	// V6_vd0
-    7981082U,	// V6_vd0_128B
-    823781762U,	// V6_vdeal
-    823781762U,	// V6_vdeal_128B
-    7997466U,	// V6_vdealb
-    8013850U,	// V6_vdealb4w
-    8013850U,	// V6_vdealb4w_128B
-    7997466U,	// V6_vdealb_128B
-    8030234U,	// V6_vdealh
-    8030234U,	// V6_vdealh_128B
-    8046618U,	// V6_vdealvdd
-    8046618U,	// V6_vdealvdd_128B
-    8063002U,	// V6_vdelta
-    8063002U,	// V6_vdelta_128B
-    8079386U,	// V6_vdmpybus
-    8079386U,	// V6_vdmpybus_128B
-    8095770U,	// V6_vdmpybus_acc
-    8095770U,	// V6_vdmpybus_acc_128B
-    8079386U,	// V6_vdmpybus_dv
-    8079386U,	// V6_vdmpybus_dv_128B
-    8095770U,	// V6_vdmpybus_dv_acc
-    8095770U,	// V6_vdmpybus_dv_acc_128B
-    1937491994U,	// V6_vdmpyhb
-    1937491994U,	// V6_vdmpyhb_128B
-    1937508378U,	// V6_vdmpyhb_acc
-    1937508378U,	// V6_vdmpyhb_acc_128B
-    1937491994U,	// V6_vdmpyhb_dv
-    1937491994U,	// V6_vdmpyhb_dv_128B
-    1937508378U,	// V6_vdmpyhb_dv_acc
-    1937508378U,	// V6_vdmpyhb_dv_acc_128B
-    1685833754U,	// V6_vdmpyhisat
-    1685833754U,	// V6_vdmpyhisat_128B
-    1685850138U,	// V6_vdmpyhisat_acc
-    1685850138U,	// V6_vdmpyhisat_acc_128B
-    1685833754U,	// V6_vdmpyhsat
-    1685833754U,	// V6_vdmpyhsat_128B
-    1685850138U,	// V6_vdmpyhsat_acc
-    1685850138U,	// V6_vdmpyhsat_acc_128B
-    1954269210U,	// V6_vdmpyhsuisat
-    1954269210U,	// V6_vdmpyhsuisat_128B
-    1954285594U,	// V6_vdmpyhsuisat_acc
-    1954285594U,	// V6_vdmpyhsuisat_acc_128B
-    1971046426U,	// V6_vdmpyhsusat
-    1971046426U,	// V6_vdmpyhsusat_128B
-    1971062810U,	// V6_vdmpyhsusat_acc
-    1971062810U,	// V6_vdmpyhsusat_acc_128B
-    1685833754U,	// V6_vdmpyhvsat
-    1685833754U,	// V6_vdmpyhvsat_128B
-    1685850138U,	// V6_vdmpyhvsat_acc
-    1685850138U,	// V6_vdmpyhvsat_acc_128B
-    8144922U,	// V6_vdsaduh
-    8144922U,	// V6_vdsaduh_128B
-    8161306U,	// V6_vdsaduh_acc
-    8161306U,	// V6_vdsaduh_acc_128B
-    1987889178U,	// V6_veqb
-    1987889178U,	// V6_veqb_128B
-    1987905562U,	// V6_veqb_and
-    1987905562U,	// V6_veqb_and_128B
-    1987921946U,	// V6_veqb_or
-    1987921946U,	// V6_veqb_or_128B
-    1987938330U,	// V6_veqb_xor
-    1987938330U,	// V6_veqb_xor_128B
-    1635567642U,	// V6_veqh
-    1635567642U,	// V6_veqh_128B
-    1635584026U,	// V6_veqh_and
-    1635584026U,	// V6_veqh_and_128B
-    1635600410U,	// V6_veqh_or
-    1635600410U,	// V6_veqh_or_128B
-    1635616794U,	// V6_veqh_xor
-    1635616794U,	// V6_veqh_xor_128B
-    1786562586U,	// V6_veqw
-    1786562586U,	// V6_veqw_128B
-    1786578970U,	// V6_veqw_and
-    1786578970U,	// V6_veqw_and_128B
-    1786595354U,	// V6_veqw_or
-    1786595354U,	// V6_veqw_or_128B
-    1786611738U,	// V6_veqw_xor
-    1786611738U,	// V6_veqw_xor_128B
-    1987954714U,	// V6_vgtb
-    1987954714U,	// V6_vgtb_128B
-    1987971098U,	// V6_vgtb_and
-    1987971098U,	// V6_vgtb_and_128B
-    1987987482U,	// V6_vgtb_or
-    1987987482U,	// V6_vgtb_or_128B
-    1988003866U,	// V6_vgtb_xor
-    1988003866U,	// V6_vgtb_xor_128B
-    1635633178U,	// V6_vgth
-    1635633178U,	// V6_vgth_128B
-    1635649562U,	// V6_vgth_and
-    1635649562U,	// V6_vgth_and_128B
-    1635665946U,	// V6_vgth_or
-    1635665946U,	// V6_vgth_or_128B
-    1635682330U,	// V6_vgth_xor
-    1635682330U,	// V6_vgth_xor_128B
-    1769850906U,	// V6_vgtub
-    1769850906U,	// V6_vgtub_128B
-    1769867290U,	// V6_vgtub_and
-    1769867290U,	// V6_vgtub_and_128B
-    1769883674U,	// V6_vgtub_or
-    1769883674U,	// V6_vgtub_or_128B
-    1769900058U,	// V6_vgtub_xor
-    1769900058U,	// V6_vgtub_xor_128B
-    1652410394U,	// V6_vgtuh
-    1652410394U,	// V6_vgtuh_128B
-    1652426778U,	// V6_vgtuh_and
-    1652426778U,	// V6_vgtuh_and_128B
-    1652443162U,	// V6_vgtuh_or
-    1652443162U,	// V6_vgtuh_or_128B
-    1652459546U,	// V6_vgtuh_xor
-    1652459546U,	// V6_vgtuh_xor_128B
-    2004731930U,	// V6_vgtuw
-    2004731930U,	// V6_vgtuw_128B
-    2004748314U,	// V6_vgtuw_and
-    2004748314U,	// V6_vgtuw_and_128B
-    2004764698U,	// V6_vgtuw_or
-    2004764698U,	// V6_vgtuw_or_128B
-    2004781082U,	// V6_vgtuw_xor
-    2004781082U,	// V6_vgtuw_xor_128B
-    1786628122U,	// V6_vgtw
-    1786628122U,	// V6_vgtw_128B
-    1786644506U,	// V6_vgtw_and
-    1786644506U,	// V6_vgtw_and_128B
-    1786660890U,	// V6_vgtw_or
-    1786660890U,	// V6_vgtw_or_128B
-    1786677274U,	// V6_vgtw_xor
-    1786677274U,	// V6_vgtw_xor_128B
-    1075U,	// V6_vhist
-    1444410U,	// V6_vhistq
-    8308762U,	// V6_vinsertwr
-    8308762U,	// V6_vinsertwr_128B
-    1518274586U,	// V6_vlalignb
-    1518274586U,	// V6_vlalignb_128B
-    1400834074U,	// V6_vlalignbi
-    1400834074U,	// V6_vlalignbi_128B
-    8341530U,	// V6_vlsrh
-    8341530U,	// V6_vlsrh_128B
-    8357914U,	// V6_vlsrhv
-    8357914U,	// V6_vlsrhv_128B
-    8374298U,	// V6_vlsrw
-    8374298U,	// V6_vlsrw_128B
-    8390682U,	// V6_vlsrwv
-    8390682U,	// V6_vlsrwv_128B
-    8407066U,	// V6_vlutvvb
-    8407066U,	// V6_vlutvvb_128B
-    8423450U,	// V6_vlutvvb_oracc
-    8423450U,	// V6_vlutvvb_oracc_128B
-    8439834U,	// V6_vlutvwh
-    8439834U,	// V6_vlutvwh_128B
-    8456218U,	// V6_vlutvwh_oracc
-    8456218U,	// V6_vlutvwh_oracc_128B
-    8472602U,	// V6_vmaxh
-    8472602U,	// V6_vmaxh_128B
-    8488986U,	// V6_vmaxub
-    8488986U,	// V6_vmaxub_128B
-    8505370U,	// V6_vmaxuh
-    8505370U,	// V6_vmaxuh_128B
-    8521754U,	// V6_vmaxw
-    8521754U,	// V6_vmaxw_128B
-    8538138U,	// V6_vminh
-    8538138U,	// V6_vminh_128B
-    8554522U,	// V6_vminub
-    8554522U,	// V6_vminub_128B
-    8570906U,	// V6_vminuh
-    8570906U,	// V6_vminuh_128B
-    8587290U,	// V6_vminw
-    8587290U,	// V6_vminw_128B
-    1937983514U,	// V6_vmpabus
-    1937983514U,	// V6_vmpabus_128B
-    8620058U,	// V6_vmpabus_acc
-    8620058U,	// V6_vmpabus_acc_128B
-    1937983514U,	// V6_vmpabusv
-    1937983514U,	// V6_vmpabusv_128B
-    1837320218U,	// V6_vmpabuuv
-    1837320218U,	// V6_vmpabuuv_128B
-    8636442U,	// V6_vmpahb
-    8636442U,	// V6_vmpahb_128B
-    8652826U,	// V6_vmpahb_acc
-    8652826U,	// V6_vmpahb_acc_128B
-    1770276890U,	// V6_vmpybus
-    1770276890U,	// V6_vmpybus_128B
-    1770293274U,	// V6_vmpybus_acc
-    1770293274U,	// V6_vmpybus_acc_128B
-    1770276890U,	// V6_vmpybusv
-    1770276890U,	// V6_vmpybusv_128B
-    1770293274U,	// V6_vmpybusv_acc
-    1770293274U,	// V6_vmpybusv_acc_128B
-    1988380698U,	// V6_vmpybv
-    1988380698U,	// V6_vmpybv_128B
-    1988397082U,	// V6_vmpybv_acc
-    1988397082U,	// V6_vmpybv_acc_128B
-    8701978U,	// V6_vmpyewuh
-    8701978U,	// V6_vmpyewuh_128B
-    1669662746U,	// V6_vmpyh
-    1669662746U,	// V6_vmpyh_128B
-    1686456346U,	// V6_vmpyhsat_acc
-    1686456346U,	// V6_vmpyhsat_acc_128B
-    1636059162U,	// V6_vmpyhsrs
-    1636059162U,	// V6_vmpyhsrs_128B
-    1636059162U,	// V6_vmpyhss
-    1636059162U,	// V6_vmpyhss_128B
-    1870989338U,	// V6_vmpyhus
-    1870989338U,	// V6_vmpyhus_128B
-    1871005722U,	// V6_vmpyhus_acc
-    1871005722U,	// V6_vmpyhus_acc_128B
-    1669662746U,	// V6_vmpyhv
-    1669662746U,	// V6_vmpyhv_128B
-    1669679130U,	// V6_vmpyhv_acc
-    1669679130U,	// V6_vmpyhv_acc_128B
-    1636059162U,	// V6_vmpyhvsrs
-    1636059162U,	// V6_vmpyhvsrs_128B
-    8751130U,	// V6_vmpyieoh
-    8751130U,	// V6_vmpyieoh_128B
-    1669711898U,	// V6_vmpyiewh_acc
-    1669711898U,	// V6_vmpyiewh_acc_128B
-    8783898U,	// V6_vmpyiewuh
-    8783898U,	// V6_vmpyiewuh_128B
-    1871038490U,	// V6_vmpyiewuh_acc
-    1871038490U,	// V6_vmpyiewuh_acc_128B
-    1669744666U,	// V6_vmpyih
-    1669744666U,	// V6_vmpyih_128B
-    1669761050U,	// V6_vmpyih_acc
-    1669761050U,	// V6_vmpyih_acc_128B
-    1938180122U,	// V6_vmpyihb
-    1938180122U,	// V6_vmpyihb_128B
-    1938196506U,	// V6_vmpyihb_acc
-    1938196506U,	// V6_vmpyihb_acc_128B
-    8833050U,	// V6_vmpyiowh
-    8833050U,	// V6_vmpyiowh_128B
-    1938229274U,	// V6_vmpyiwb
-    1938229274U,	// V6_vmpyiwb_128B
-    1938245658U,	// V6_vmpyiwb_acc
-    1938245658U,	// V6_vmpyiwb_acc_128B
-    1669793818U,	// V6_vmpyiwh
-    1669793818U,	// V6_vmpyiwh_128B
-    1669810202U,	// V6_vmpyiwh_acc
-    1669810202U,	// V6_vmpyiwh_acc_128B
-    2022148122U,	// V6_vmpyowh
-    2022148122U,	// V6_vmpyowh_128B
-    2038925338U,	// V6_vmpyowh_rnd
-    2038925338U,	// V6_vmpyowh_rnd_128B
-    2055718938U,	// V6_vmpyowh_rnd_sacc
-    2055718938U,	// V6_vmpyowh_rnd_sacc_128B
-    2072496154U,	// V6_vmpyowh_sacc
-    2072496154U,	// V6_vmpyowh_sacc_128B
-    8914970U,	// V6_vmpyub
-    8914970U,	// V6_vmpyub_128B
-    8931354U,	// V6_vmpyub_acc
-    8931354U,	// V6_vmpyub_acc_128B
-    8914970U,	// V6_vmpyubv
-    8914970U,	// V6_vmpyubv_128B
-    8931354U,	// V6_vmpyubv_acc
-    8931354U,	// V6_vmpyubv_acc_128B
-    8947738U,	// V6_vmpyuh
-    8947738U,	// V6_vmpyuh_128B
-    8964122U,	// V6_vmpyuh_acc
-    8964122U,	// V6_vmpyuh_acc_128B
-    8947738U,	// V6_vmpyuhv
-    8947738U,	// V6_vmpyuhv_128B
-    8964122U,	// V6_vmpyuhv_acc
-    8964122U,	// V6_vmpyuhv_acc_128B
-    1511852058U,	// V6_vmux
-    1511852058U,	// V6_vmux_128B
-    8980506U,	// V6_vnavgh
-    8980506U,	// V6_vnavgh_128B
-    8996890U,	// V6_vnavgub
-    8996890U,	// V6_vnavgub_128B
-    9013274U,	// V6_vnavgw
-    9013274U,	// V6_vnavgw_128B
-    1912852533U,	// V6_vnccombine
-    1912852533U,	// V6_vnccombine_128B
-    251908149U,	// V6_vncmov
-    251908149U,	// V6_vncmov_128B
-    9029658U,	// V6_vnormamth
-    9029658U,	// V6_vnormamth_128B
-    9046042U,	// V6_vnormamtw
-    9046042U,	// V6_vnormamtw_128B
-    9062426U,	// V6_vnot
-    9062426U,	// V6_vnot_128B
-    9078810U,	// V6_vor
-    9078810U,	// V6_vor_128B
-    9095194U,	// V6_vpackeb
-    9095194U,	// V6_vpackeb_128B
-    9111578U,	// V6_vpackeh
-    9111578U,	// V6_vpackeh_128B
-    9127962U,	// V6_vpackhb_sat
-    9127962U,	// V6_vpackhb_sat_128B
-    9144346U,	// V6_vpackhub_sat
-    9144346U,	// V6_vpackhub_sat_128B
-    9160730U,	// V6_vpackob
-    9160730U,	// V6_vpackob_128B
-    9177114U,	// V6_vpackoh
-    9177114U,	// V6_vpackoh_128B
-    9193498U,	// V6_vpackwh_sat
-    9193498U,	// V6_vpackwh_sat_128B
-    9209882U,	// V6_vpackwuh_sat
-    9209882U,	// V6_vpackwuh_sat_128B
-    9226266U,	// V6_vpopcounth
-    9226266U,	// V6_vpopcounth_128B
-    9242650U,	// V6_vrdelta
-    9242650U,	// V6_vrdelta_128B
-    1770866714U,	// V6_vrmpybus
-    1770866714U,	// V6_vrmpybus_128B
-    1770883098U,	// V6_vrmpybus_acc
-    1770883098U,	// V6_vrmpybus_acc_128B
-    1770866714U,	// V6_vrmpybusi
-    1770866714U,	// V6_vrmpybusi_128B
-    1770883098U,	// V6_vrmpybusi_acc
-    1770883098U,	// V6_vrmpybusi_acc_128B
-    1770866714U,	// V6_vrmpybusv
-    1770866714U,	// V6_vrmpybusv_128B
-    1770883098U,	// V6_vrmpybusv_acc
-    1770883098U,	// V6_vrmpybusv_acc_128B
-    1988970522U,	// V6_vrmpybv
-    1988970522U,	// V6_vrmpybv_128B
-    1988986906U,	// V6_vrmpybv_acc
-    1988986906U,	// V6_vrmpybv_acc_128B
-    1838008346U,	// V6_vrmpyub
-    1838008346U,	// V6_vrmpyub_128B
-    1838024730U,	// V6_vrmpyub_acc
-    1838024730U,	// V6_vrmpyub_acc_128B
-    2089666586U,	// V6_vrmpyubi
-    2089666586U,	// V6_vrmpyubi_128B
-    2089682970U,	// V6_vrmpyubi_acc
-    2089682970U,	// V6_vrmpyubi_acc_128B
-    1838008346U,	// V6_vrmpyubv
-    1838008346U,	// V6_vrmpyubv_128B
-    1838024730U,	// V6_vrmpyubv_acc
-    1838024730U,	// V6_vrmpyubv_acc_128B
-    9324570U,	// V6_vror
-    9324570U,	// V6_vror_128B
-    9340954U,	// V6_vroundhb
-    9340954U,	// V6_vroundhb_128B
-    9357338U,	// V6_vroundhub
-    9357338U,	// V6_vroundhub_128B
-    9373722U,	// V6_vroundwh
-    9373722U,	// V6_vroundwh_128B
-    9390106U,	// V6_vroundwuh
-    9390106U,	// V6_vroundwuh_128B
-    9406490U,	// V6_vrsadubi
-    9406490U,	// V6_vrsadubi_128B
-    9422874U,	// V6_vrsadubi_acc
-    9422874U,	// V6_vrsadubi_acc_128B
-    9439258U,	// V6_vsathub
-    9439258U,	// V6_vsathub_128B
-    9455642U,	// V6_vsatwh
-    9455642U,	// V6_vsatwh_128B
-    9472026U,	// V6_vsb
-    9472026U,	// V6_vsb_128B
-    9488410U,	// V6_vsh
-    9488410U,	// V6_vsh_128B
-    9504794U,	// V6_vshufeh
-    9504794U,	// V6_vshufeh_128B
-    823781726U,	// V6_vshuff
-    823781726U,	// V6_vshuff_128B
-    9521178U,	// V6_vshuffb
-    9521178U,	// V6_vshuffb_128B
-    9537562U,	// V6_vshuffeb
-    9537562U,	// V6_vshuffeb_128B
-    9553946U,	// V6_vshuffh
-    9553946U,	// V6_vshuffh_128B
-    9570330U,	// V6_vshuffob
-    9570330U,	// V6_vshuffob_128B
-    9586714U,	// V6_vshuffvdd
-    9586714U,	// V6_vshuffvdd_128B
-    9603098U,	// V6_vshufoeb
-    9603098U,	// V6_vshufoeb_128B
-    9619482U,	// V6_vshufoeh
-    9619482U,	// V6_vshufoeh_128B
-    9635866U,	// V6_vshufoh
-    9635866U,	// V6_vshufoh_128B
-    9652250U,	// V6_vsubb
-    9652250U,	// V6_vsubb_128B
-    9652250U,	// V6_vsubb_dv
-    9652250U,	// V6_vsubb_dv_128B
-    2097401909U,	// V6_vsubbnq
-    2097401909U,	// V6_vsubbnq_128B
-    2097402045U,	// V6_vsubbq
-    2097402045U,	// V6_vsubbq_128B
-    1637058586U,	// V6_vsubh
-    1637058586U,	// V6_vsubh_128B
-    1637058586U,	// V6_vsubh_dv
-    1637058586U,	// V6_vsubh_dv_128B
-    2114179125U,	// V6_vsubhnq
-    2114179125U,	// V6_vsubhnq_128B
-    2114179261U,	// V6_vsubhq
-    2114179261U,	// V6_vsubhq_128B
-    1637058586U,	// V6_vsubhsat
-    1637058586U,	// V6_vsubhsat_128B
-    1637058586U,	// V6_vsubhsat_dv
-    1637058586U,	// V6_vsubhsat_dv_128B
-    1637074970U,	// V6_vsubhw
-    1637074970U,	// V6_vsubhw_128B
-    1771276314U,	// V6_vsububh
-    1771276314U,	// V6_vsububh_128B
-    9701402U,	// V6_vsububsat
-    9701402U,	// V6_vsububsat_128B
-    9701402U,	// V6_vsububsat_dv
-    9701402U,	// V6_vsububsat_dv_128B
-    9717786U,	// V6_vsubuhsat
-    9717786U,	// V6_vsubuhsat_128B
-    9717786U,	// V6_vsubuhsat_dv
-    9717786U,	// V6_vsubuhsat_dv_128B
-    1653852186U,	// V6_vsubuhw
-    1653852186U,	// V6_vsubuhw_128B
-    1788069914U,	// V6_vsubw
-    1788069914U,	// V6_vsubw_128B
-    1788069914U,	// V6_vsubw_dv
-    1788069914U,	// V6_vsubw_dv_128B
-    2130956341U,	// V6_vsubwnq
-    2130956341U,	// V6_vsubwnq_128B
-    2130956477U,	// V6_vsubwq
-    2130956477U,	// V6_vsubwq_128B
-    1788069914U,	// V6_vsubwsat
-    1788069914U,	// V6_vsubwsat_128B
-    1788069914U,	// V6_vsubwsat_dv
-    1788069914U,	// V6_vsubwsat_dv_128B
-    9734170U,	// V6_vswap
-    9734170U,	// V6_vswap_128B
-    1989462042U,	// V6_vtmpyb
-    1989462042U,	// V6_vtmpyb_128B
-    1989478426U,	// V6_vtmpyb_acc
-    1989478426U,	// V6_vtmpyb_acc_128B
-    1771358234U,	// V6_vtmpybus
-    1771358234U,	// V6_vtmpybus_128B
-    1771374618U,	// V6_vtmpybus_acc
-    1771374618U,	// V6_vtmpybus_acc_128B
-    9783322U,	// V6_vtmpyhb
-    9783322U,	// V6_vtmpyhb_128B
-    9799706U,	// V6_vtmpyhb_acc
-    9799706U,	// V6_vtmpyhb_acc_128B
-    9816090U,	// V6_vunpackb
-    9816090U,	// V6_vunpackb_128B
-    9832474U,	// V6_vunpackh
-    9832474U,	// V6_vunpackh_128B
-    9848858U,	// V6_vunpackob
-    9848858U,	// V6_vunpackob_128B
-    9865242U,	// V6_vunpackoh
-    9865242U,	// V6_vunpackoh_128B
-    9881626U,	// V6_vunpackub
-    9881626U,	// V6_vunpackub_128B
-    9898010U,	// V6_vunpackuh
-    9898010U,	// V6_vunpackuh_128B
-    9914394U,	// V6_vxor
-    9914394U,	// V6_vxor_128B
-    9930778U,	// V6_vzb
-    9930778U,	// V6_vzb_128B
-    9947162U,	// V6_vzh
-    9947162U,	// V6_vzh_128B
-    999U,	// Y2_barrier
-    1444097U,	// Y2_dccleana
-    1444132U,	// Y2_dccleaninva
-    7326067U,	// Y2_dcfetchbo
-    1444116U,	// Y2_dcinva
-    1444107U,	// Y2_dczeroa
-    1444124U,	// Y2_icinva
-    910U,	// Y2_isync
-    1007U,	// Y2_syncht
-    36227434U,	// Y4_l2fetch
-    1444183U,	// Y4_trace
-    36227434U,	// Y5_l2fetch
-    939U,	// Y5_l2gclean
-    1081U,	// Y5_l2gcleaninv
-    929U,	// Y5_l2gunlock
-    9963546U,	// Y5_l2locka
-    1444086U,	// Y5_l2unlocka
-    1444479U,	// Y6_l2gcleaninvpa
-    1444239U,	// Y6_l2gcleanpa
+    50563098U,	// V6_pred_or
+    50563098U,	// V6_pred_or_128B
+    469993498U,	// V6_pred_or_n
+    469993498U,	// V6_pred_or_n_128B
+    7800858U,	// V6_pred_scalar2
+    7800858U,	// V6_pred_scalar2_128B
+    7817242U,	// V6_pred_scalar2v2
+    7817242U,	// V6_pred_scalar2v2_128B
+    1263642U,	// V6_pred_xor
+    1263642U,	// V6_pred_xor_128B
+    91719706U,	// V6_shuffeqh
+    91719706U,	// V6_shuffeqh_128B
+    1819789338U,	// V6_shuffeqw
+    1819789338U,	// V6_shuffeqw_128B
+    223480300U,	// V6_st0
+    223480300U,	// V6_st0_128B
+    1481771500U,	// V6_stn0
+    1481771500U,	// V6_stn0_128B
+    1484261868U,	// V6_stnnt0
+    1484261868U,	// V6_stnnt0_128B
+    41437283U,	// V6_stnp0
+    41437283U,	// V6_stnp0_128B
+    41437283U,	// V6_stnpnt0
+    41437283U,	// V6_stnpnt0_128B
+    41437283U,	// V6_stnq0
+    41437283U,	// V6_stnq0_128B
+    41437283U,	// V6_stnqnt0
+    41437283U,	// V6_stnqnt0_128B
+    225970668U,	// V6_stnt0
+    225970668U,	// V6_stnt0_128B
+    41437454U,	// V6_stp0
+    41437454U,	// V6_stp0_128B
+    41437454U,	// V6_stpnt0
+    41437454U,	// V6_stpnt0_128B
+    41437454U,	// V6_stq0
+    41437454U,	// V6_stq0_128B
+    41437454U,	// V6_stqnt0
+    41437454U,	// V6_stqnt0_128B
+    223480474U,	// V6_stu0
+    223480474U,	// V6_stu0_128B
+    41453667U,	// V6_stunp0
+    41453667U,	// V6_stunp0_128B
+    41453838U,	// V6_stup0
+    41453838U,	// V6_stup0_128B
+    813025306U,	// V6_vL32Ub_ai
+    813025306U,	// V6_vL32Ub_ai_128B
+    846579738U,	// V6_vL32Ub_pi
+    846579738U,	// V6_vL32Ub_pi_128B
+    829802522U,	// V6_vL32Ub_ppu
+    829802522U,	// V6_vL32Ub_ppu_128B
+    813008922U,	// V6_vL32b_ai
+    813008922U,	// V6_vL32b_ai_128B
+    813221914U,	// V6_vL32b_cur_ai
+    813221914U,	// V6_vL32b_cur_ai_128B
+    1828966499U,	// V6_vL32b_cur_npred_ai
+    1828966499U,	// V6_vL32b_cur_npred_ai_128B
+    1828970595U,	// V6_vL32b_cur_npred_pi
+    1828970595U,	// V6_vL32b_cur_npred_pi_128B
+    1828970595U,	// V6_vL32b_cur_npred_ppu
+    1828970595U,	// V6_vL32b_cur_npred_ppu_128B
+    846776346U,	// V6_vL32b_cur_pi
+    846776346U,	// V6_vL32b_cur_pi_128B
+    829999130U,	// V6_vL32b_cur_ppu
+    829999130U,	// V6_vL32b_cur_ppu_128B
+    1828966670U,	// V6_vL32b_cur_pred_ai
+    1828966670U,	// V6_vL32b_cur_pred_ai_128B
+    1828970766U,	// V6_vL32b_cur_pred_pi
+    1828970766U,	// V6_vL32b_cur_pred_pi_128B
+    1828970766U,	// V6_vL32b_cur_pred_ppu
+    1828970766U,	// V6_vL32b_cur_pred_ppu_128B
+    1845743715U,	// V6_vL32b_npred_ai
+    1845743715U,	// V6_vL32b_npred_ai_128B
+    1845747811U,	// V6_vL32b_npred_pi
+    1845747811U,	// V6_vL32b_npred_pi_128B
+    1845747811U,	// V6_vL32b_npred_ppu
+    1845747811U,	// V6_vL32b_npred_ppu_128B
+    813008922U,	// V6_vL32b_nt_ai
+    813008922U,	// V6_vL32b_nt_ai_128B
+    813221914U,	// V6_vL32b_nt_cur_ai
+    813221914U,	// V6_vL32b_nt_cur_ai_128B
+    1828966499U,	// V6_vL32b_nt_cur_npred_ai
+    1828966499U,	// V6_vL32b_nt_cur_npred_ai_128B
+    1828970595U,	// V6_vL32b_nt_cur_npred_pi
+    1828970595U,	// V6_vL32b_nt_cur_npred_pi_128B
+    1828970595U,	// V6_vL32b_nt_cur_npred_ppu
+    1828970595U,	// V6_vL32b_nt_cur_npred_ppu_128B
+    846776346U,	// V6_vL32b_nt_cur_pi
+    846776346U,	// V6_vL32b_nt_cur_pi_128B
+    829999130U,	// V6_vL32b_nt_cur_ppu
+    829999130U,	// V6_vL32b_nt_cur_ppu_128B
+    1828966670U,	// V6_vL32b_nt_cur_pred_ai
+    1828966670U,	// V6_vL32b_nt_cur_pred_ai_128B
+    1828970766U,	// V6_vL32b_nt_cur_pred_pi
+    1828970766U,	// V6_vL32b_nt_cur_pred_pi_128B
+    1828970766U,	// V6_vL32b_nt_cur_pred_ppu
+    1828970766U,	// V6_vL32b_nt_cur_pred_ppu_128B
+    1845743715U,	// V6_vL32b_nt_npred_ai
+    1845743715U,	// V6_vL32b_nt_npred_ai_128B
+    1845747811U,	// V6_vL32b_nt_npred_pi
+    1845747811U,	// V6_vL32b_nt_npred_pi_128B
+    1845747811U,	// V6_vL32b_nt_npred_ppu
+    1845747811U,	// V6_vL32b_nt_npred_ppu_128B
+    846563354U,	// V6_vL32b_nt_pi
+    846563354U,	// V6_vL32b_nt_pi_128B
+    829786138U,	// V6_vL32b_nt_ppu
+    829786138U,	// V6_vL32b_nt_ppu_128B
+    1845743886U,	// V6_vL32b_nt_pred_ai
+    1845743886U,	// V6_vL32b_nt_pred_ai_128B
+    1845747982U,	// V6_vL32b_nt_pred_pi
+    1845747982U,	// V6_vL32b_nt_pred_pi_128B
+    1845747982U,	// V6_vL32b_nt_pred_ppu
+    1845747982U,	// V6_vL32b_nt_pred_ppu_128B
+    813238298U,	// V6_vL32b_nt_tmp_ai
+    813238298U,	// V6_vL32b_nt_tmp_ai_128B
+    1862520931U,	// V6_vL32b_nt_tmp_npred_ai
+    1862520931U,	// V6_vL32b_nt_tmp_npred_ai_128B
+    1862525027U,	// V6_vL32b_nt_tmp_npred_pi
+    1862525027U,	// V6_vL32b_nt_tmp_npred_pi_128B
+    1862525027U,	// V6_vL32b_nt_tmp_npred_ppu
+    1862525027U,	// V6_vL32b_nt_tmp_npred_ppu_128B
+    846792730U,	// V6_vL32b_nt_tmp_pi
+    846792730U,	// V6_vL32b_nt_tmp_pi_128B
+    830015514U,	// V6_vL32b_nt_tmp_ppu
+    830015514U,	// V6_vL32b_nt_tmp_ppu_128B
+    1862521102U,	// V6_vL32b_nt_tmp_pred_ai
+    1862521102U,	// V6_vL32b_nt_tmp_pred_ai_128B
+    1862525198U,	// V6_vL32b_nt_tmp_pred_pi
+    1862525198U,	// V6_vL32b_nt_tmp_pred_pi_128B
+    1862525198U,	// V6_vL32b_nt_tmp_pred_ppu
+    1862525198U,	// V6_vL32b_nt_tmp_pred_ppu_128B
+    846563354U,	// V6_vL32b_pi
+    846563354U,	// V6_vL32b_pi_128B
+    829786138U,	// V6_vL32b_ppu
+    829786138U,	// V6_vL32b_ppu_128B
+    1845743886U,	// V6_vL32b_pred_ai
+    1845743886U,	// V6_vL32b_pred_ai_128B
+    1845747982U,	// V6_vL32b_pred_pi
+    1845747982U,	// V6_vL32b_pred_pi_128B
+    1845747982U,	// V6_vL32b_pred_ppu
+    1845747982U,	// V6_vL32b_pred_ppu_128B
+    813238298U,	// V6_vL32b_tmp_ai
+    813238298U,	// V6_vL32b_tmp_ai_128B
+    1862520931U,	// V6_vL32b_tmp_npred_ai
+    1862520931U,	// V6_vL32b_tmp_npred_ai_128B
+    1862525027U,	// V6_vL32b_tmp_npred_pi
+    1862525027U,	// V6_vL32b_tmp_npred_pi_128B
+    1862525027U,	// V6_vL32b_tmp_npred_ppu
+    1862525027U,	// V6_vL32b_tmp_npred_ppu_128B
+    846792730U,	// V6_vL32b_tmp_pi
+    846792730U,	// V6_vL32b_tmp_pi_128B
+    830015514U,	// V6_vL32b_tmp_ppu
+    830015514U,	// V6_vL32b_tmp_ppu_128B
+    1862521102U,	// V6_vL32b_tmp_pred_ai
+    1862521102U,	// V6_vL32b_tmp_pred_ai_128B
+    1862525198U,	// V6_vL32b_tmp_pred_pi
+    1862525198U,	// V6_vL32b_tmp_pred_pi_128B
+    1862525198U,	// V6_vL32b_tmp_pred_ppu
+    1862525198U,	// V6_vL32b_tmp_pred_ppu_128B
+    1530350234U,	// V6_vS32Ub_ai
+    1530350234U,	// V6_vS32Ub_ai_128B
+    41453667U,	// V6_vS32Ub_npred_ai
+    41453667U,	// V6_vS32Ub_npred_ai_128B
+    1517850723U,	// V6_vS32Ub_npred_pi
+    1517850723U,	// V6_vS32Ub_npred_pi_128B
+    1517850723U,	// V6_vS32Ub_npred_ppu
+    1517850723U,	// V6_vS32Ub_npred_ppu_128B
+    1533168282U,	// V6_vS32Ub_pi
+    1533168282U,	// V6_vS32Ub_pi_128B
+    1533151898U,	// V6_vS32Ub_ppu
+    1533151898U,	// V6_vS32Ub_ppu_128B
+    41453838U,	// V6_vS32Ub_pred_ai
+    41453838U,	// V6_vS32Ub_pred_ai_128B
+    1517850894U,	// V6_vS32Ub_pred_pi
+    1517850894U,	// V6_vS32Ub_pred_pi_128B
+    1517850894U,	// V6_vS32Ub_pred_ppu
+    1517850894U,	// V6_vS32Ub_pred_ppu_128B
+    1530350060U,	// V6_vS32b_ai
+    1530350060U,	// V6_vS32b_ai_128B
+    1530350060U,	// V6_vS32b_new_ai
+    1530350060U,	// V6_vS32b_new_ai_128B
+    41437283U,	// V6_vS32b_new_npred_ai
+    41437283U,	// V6_vS32b_new_npred_ai_128B
+    1517834339U,	// V6_vS32b_new_npred_pi
+    1517834339U,	// V6_vS32b_new_npred_pi_128B
+    1517834339U,	// V6_vS32b_new_npred_ppu
+    1517834339U,	// V6_vS32b_new_npred_ppu_128B
+    1533168108U,	// V6_vS32b_new_pi
+    1533168108U,	// V6_vS32b_new_pi_128B
+    1533151724U,	// V6_vS32b_new_ppu
+    1533151724U,	// V6_vS32b_new_ppu_128B
+    41437454U,	// V6_vS32b_new_pred_ai
+    41437454U,	// V6_vS32b_new_pred_ai_128B
+    1517834510U,	// V6_vS32b_new_pred_pi
+    1517834510U,	// V6_vS32b_new_pred_pi_128B
+    1517834510U,	// V6_vS32b_new_pred_ppu
+    1517834510U,	// V6_vS32b_new_pred_ppu_128B
+    41437283U,	// V6_vS32b_npred_ai
+    41437283U,	// V6_vS32b_npred_ai_128B
+    1517834339U,	// V6_vS32b_npred_pi
+    1517834339U,	// V6_vS32b_npred_pi_128B
+    1517834339U,	// V6_vS32b_npred_ppu
+    1517834339U,	// V6_vS32b_npred_ppu_128B
+    41437283U,	// V6_vS32b_nqpred_ai
+    41437283U,	// V6_vS32b_nqpred_ai_128B
+    1517834339U,	// V6_vS32b_nqpred_pi
+    1517834339U,	// V6_vS32b_nqpred_pi_128B
+    1517834339U,	// V6_vS32b_nqpred_ppu
+    1517834339U,	// V6_vS32b_nqpred_ppu_128B
+    1882671596U,	// V6_vS32b_nt_ai
+    1882671596U,	// V6_vS32b_nt_ai_128B
+    1882671596U,	// V6_vS32b_nt_new_ai
+    1882671596U,	// V6_vS32b_nt_new_ai_128B
+    41437283U,	// V6_vS32b_nt_new_npred_ai
+    41437283U,	// V6_vS32b_nt_new_npred_ai_128B
+    1517834339U,	// V6_vS32b_nt_new_npred_pi
+    1517834339U,	// V6_vS32b_nt_new_npred_pi_128B
+    1517834339U,	// V6_vS32b_nt_new_npred_ppu
+    1517834339U,	// V6_vS32b_nt_new_npred_ppu_128B
+    1885489644U,	// V6_vS32b_nt_new_pi
+    1885489644U,	// V6_vS32b_nt_new_pi_128B
+    1885473260U,	// V6_vS32b_nt_new_ppu
+    1885473260U,	// V6_vS32b_nt_new_ppu_128B
+    41437454U,	// V6_vS32b_nt_new_pred_ai
+    41437454U,	// V6_vS32b_nt_new_pred_ai_128B
+    1517834510U,	// V6_vS32b_nt_new_pred_pi
+    1517834510U,	// V6_vS32b_nt_new_pred_pi_128B
+    1517834510U,	// V6_vS32b_nt_new_pred_ppu
+    1517834510U,	// V6_vS32b_nt_new_pred_ppu_128B
+    41437283U,	// V6_vS32b_nt_npred_ai
+    41437283U,	// V6_vS32b_nt_npred_ai_128B
+    1517834339U,	// V6_vS32b_nt_npred_pi
+    1517834339U,	// V6_vS32b_nt_npred_pi_128B
+    1517834339U,	// V6_vS32b_nt_npred_ppu
+    1517834339U,	// V6_vS32b_nt_npred_ppu_128B
+    41437283U,	// V6_vS32b_nt_nqpred_ai
+    41437283U,	// V6_vS32b_nt_nqpred_ai_128B
+    1517834339U,	// V6_vS32b_nt_nqpred_pi
+    1517834339U,	// V6_vS32b_nt_nqpred_pi_128B
+    1517834339U,	// V6_vS32b_nt_nqpred_ppu
+    1517834339U,	// V6_vS32b_nt_nqpred_ppu_128B
+    1885489644U,	// V6_vS32b_nt_pi
+    1885489644U,	// V6_vS32b_nt_pi_128B
+    1885473260U,	// V6_vS32b_nt_ppu
+    1885473260U,	// V6_vS32b_nt_ppu_128B
+    41437454U,	// V6_vS32b_nt_pred_ai
+    41437454U,	// V6_vS32b_nt_pred_ai_128B
+    1517834510U,	// V6_vS32b_nt_pred_pi
+    1517834510U,	// V6_vS32b_nt_pred_pi_128B
+    1517834510U,	// V6_vS32b_nt_pred_ppu
+    1517834510U,	// V6_vS32b_nt_pred_ppu_128B
+    41437454U,	// V6_vS32b_nt_qpred_ai
+    41437454U,	// V6_vS32b_nt_qpred_ai_128B
+    1517834510U,	// V6_vS32b_nt_qpred_pi
+    1517834510U,	// V6_vS32b_nt_qpred_pi_128B
+    1517834510U,	// V6_vS32b_nt_qpred_ppu
+    1517834510U,	// V6_vS32b_nt_qpred_ppu_128B
+    1533168108U,	// V6_vS32b_pi
+    1533168108U,	// V6_vS32b_pi_128B
+    1533151724U,	// V6_vS32b_ppu
+    1533151724U,	// V6_vS32b_ppu_128B
+    41437454U,	// V6_vS32b_pred_ai
+    41437454U,	// V6_vS32b_pred_ai_128B
+    1517834510U,	// V6_vS32b_pred_pi
+    1517834510U,	// V6_vS32b_pred_pi_128B
+    1517834510U,	// V6_vS32b_pred_ppu
+    1517834510U,	// V6_vS32b_pred_ppu_128B
+    41437454U,	// V6_vS32b_qpred_ai
+    41437454U,	// V6_vS32b_qpred_ai_128B
+    1517834510U,	// V6_vS32b_qpred_pi
+    1517834510U,	// V6_vS32b_qpred_pi_128B
+    1517834510U,	// V6_vS32b_qpred_ppu
+    1517834510U,	// V6_vS32b_qpred_ppu_128B
+    91834394U,	// V6_vabsdiffh
+    91834394U,	// V6_vabsdiffh_128B
+    4360218U,	// V6_vabsdiffh_alt
+    4360218U,	// V6_vabsdiffh_alt_128B
+    7964698U,	// V6_vabsdiffub
+    7964698U,	// V6_vabsdiffub_128B
+    5261338U,	// V6_vabsdiffub_alt
+    5261338U,	// V6_vabsdiffub_alt_128B
+    1769555994U,	// V6_vabsdiffuh
+    1769555994U,	// V6_vabsdiffuh_128B
+    7981082U,	// V6_vabsdiffuh_alt
+    7981082U,	// V6_vabsdiffuh_alt_128B
+    7997466U,	// V6_vabsdiffw
+    7997466U,	// V6_vabsdiffw_128B
+    4376602U,	// V6_vabsdiffw_alt
+    4376602U,	// V6_vabsdiffw_alt_128B
+    1903839258U,	// V6_vabsh
+    1903839258U,	// V6_vabsh_128B
+    641050U,	// V6_vabsh_alt
+    641050U,	// V6_vabsh_alt_128B
+    1920616474U,	// V6_vabsh_sat
+    1920616474U,	// V6_vabsh_sat_128B
+    17418266U,	// V6_vabsh_sat_alt
+    17418266U,	// V6_vabsh_sat_alt_128B
+    1937410074U,	// V6_vabsw
+    1937410074U,	// V6_vabsw_128B
+    657434U,	// V6_vabsw_alt
+    657434U,	// V6_vabsw_alt_128B
+    1954187290U,	// V6_vabsw_sat
+    1954187290U,	// V6_vabsw_sat_128B
+    17434650U,	// V6_vabsw_sat_alt
+    17434650U,	// V6_vabsw_sat_alt_128B
+    1970980890U,	// V6_vaddb
+    1970980890U,	// V6_vaddb_128B
+    673818U,	// V6_vaddb_alt
+    673818U,	// V6_vaddb_alt_128B
+    1970980890U,	// V6_vaddb_dv
+    1970980890U,	// V6_vaddb_dv_128B
+    673818U,	// V6_vaddb_dv_alt
+    673818U,	// V6_vaddb_dv_alt_128B
+    1979961443U,	// V6_vaddbnq
+    1979961443U,	// V6_vaddbnq_128B
+    1987776611U,	// V6_vaddbnq_alt
+    1987776611U,	// V6_vaddbnq_alt_128B
+    1979961614U,	// V6_vaddbq
+    1979961614U,	// V6_vaddbq_128B
+    1987776782U,	// V6_vaddbq_alt
+    1987776782U,	// V6_vaddbq_alt_128B
+    2004535322U,	// V6_vaddbsat
+    2004535322U,	// V6_vaddbsat_128B
+    17451034U,	// V6_vaddbsat_alt
+    17451034U,	// V6_vaddbsat_alt_128B
+    2004535322U,	// V6_vaddbsat_dv
+    2004535322U,	// V6_vaddbsat_dv_128B
+    17451034U,	// V6_vaddbsat_dv_alt
+    17451034U,	// V6_vaddbsat_dv_alt_128B
+    310069274U,	// V6_vaddcarry
+    310069274U,	// V6_vaddcarry_128B
+    8095770U,	// V6_vaddclbh
+    8095770U,	// V6_vaddclbh_128B
+    8112154U,	// V6_vaddclbw
+    8112154U,	// V6_vaddclbw_128B
+    92014618U,	// V6_vaddh
+    92014618U,	// V6_vaddh_128B
+    411674U,	// V6_vaddh_alt
+    411674U,	// V6_vaddh_alt_128B
+    92014618U,	// V6_vaddh_dv
+    92014618U,	// V6_vaddh_dv_128B
+    411674U,	// V6_vaddh_dv_alt
+    411674U,	// V6_vaddh_dv_alt_128B
+    2013515875U,	// V6_vaddhnq
+    2013515875U,	// V6_vaddhnq_128B
+    2021412963U,	// V6_vaddhnq_alt
+    2021412963U,	// V6_vaddhnq_alt_128B
+    2013516046U,	// V6_vaddhq
+    2013516046U,	// V6_vaddhq_128B
+    2021413134U,	// V6_vaddhq_alt
+    2021413134U,	// V6_vaddhq_alt_128B
+    92014618U,	// V6_vaddhsat
+    92014618U,	// V6_vaddhsat_128B
+    17188890U,	// V6_vaddhsat_alt
+    17188890U,	// V6_vaddhsat_alt_128B
+    92014618U,	// V6_vaddhsat_dv
+    92014618U,	// V6_vaddhsat_dv_128B
+    17188890U,	// V6_vaddhsat_dv_alt
+    17188890U,	// V6_vaddhsat_dv_alt_128B
+    41633818U,	// V6_vaddhw
+    41633818U,	// V6_vaddhw_128B
+    92047386U,	// V6_vaddhw_acc
+    92047386U,	// V6_vaddhw_acc_128B
+    8177690U,	// V6_vaddhw_acc_alt
+    8177690U,	// V6_vaddhw_acc_alt_128B
+    411674U,	// V6_vaddhw_alt
+    411674U,	// V6_vaddhw_alt_128B
+    1752959002U,	// V6_vaddubh
+    1752959002U,	// V6_vaddubh_128B
+    8194074U,	// V6_vaddubh_acc
+    8194074U,	// V6_vaddubh_acc_128B
+    8210458U,	// V6_vaddubh_acc_alt
+    8210458U,	// V6_vaddubh_acc_alt_128B
+    690202U,	// V6_vaddubh_alt
+    690202U,	// V6_vaddubh_alt_128B
+    2038269978U,	// V6_vaddubsat
+    2038269978U,	// V6_vaddubsat_128B
+    17467418U,	// V6_vaddubsat_alt
+    17467418U,	// V6_vaddubsat_alt_128B
+    2038269978U,	// V6_vaddubsat_dv
+    2038269978U,	// V6_vaddubsat_dv_128B
+    17467418U,	// V6_vaddubsat_dv_alt
+    17467418U,	// V6_vaddubsat_dv_alt_128B
+    2004715546U,	// V6_vaddububb_sat
+    2004715546U,	// V6_vaddububb_sat_128B
+    8243226U,	// V6_vadduhsat
+    8243226U,	// V6_vadduhsat_128B
+    17205274U,	// V6_vadduhsat_alt
+    17205274U,	// V6_vadduhsat_alt_128B
+    8243226U,	// V6_vadduhsat_dv
+    8243226U,	// V6_vadduhsat_dv_128B
+    17205274U,	// V6_vadduhsat_dv_alt
+    17205274U,	// V6_vadduhsat_dv_alt_128B
+    41633818U,	// V6_vadduhw
+    41633818U,	// V6_vadduhw_128B
+    1769768986U,	// V6_vadduhw_acc
+    1769768986U,	// V6_vadduhw_acc_128B
+    8259610U,	// V6_vadduhw_acc_alt
+    8259610U,	// V6_vadduhw_acc_alt_128B
+    428058U,	// V6_vadduhw_alt
+    428058U,	// V6_vadduhw_alt_128B
+    8275994U,	// V6_vadduwsat
+    8275994U,	// V6_vadduwsat_128B
+    8292378U,	// V6_vadduwsat_alt
+    8292378U,	// V6_vadduwsat_alt_128B
+    8275994U,	// V6_vadduwsat_dv
+    8275994U,	// V6_vadduwsat_dv_128B
+    8292378U,	// V6_vadduwsat_dv_alt
+    8292378U,	// V6_vadduwsat_dv_alt_128B
+    41633818U,	// V6_vaddw
+    41633818U,	// V6_vaddw_128B
+    706586U,	// V6_vaddw_alt
+    706586U,	// V6_vaddw_alt_128B
+    41633818U,	// V6_vaddw_dv
+    41633818U,	// V6_vaddw_dv_128B
+    706586U,	// V6_vaddw_dv_alt
+    706586U,	// V6_vaddw_dv_alt_128B
+    2047070307U,	// V6_vaddwnq
+    2047070307U,	// V6_vaddwnq_128B
+    2055131235U,	// V6_vaddwnq_alt
+    2055131235U,	// V6_vaddwnq_alt_128B
+    2047070478U,	// V6_vaddwq
+    2047070478U,	// V6_vaddwq_128B
+    2055131406U,	// V6_vaddwq_alt
+    2055131406U,	// V6_vaddwq_alt_128B
+    41633818U,	// V6_vaddwsat
+    41633818U,	// V6_vaddwsat_128B
+    17483802U,	// V6_vaddwsat_alt
+    17483802U,	// V6_vaddwsat_alt_128B
+    41633818U,	// V6_vaddwsat_dv
+    41633818U,	// V6_vaddwsat_dv_128B
+    17483802U,	// V6_vaddwsat_dv_alt
+    17483802U,	// V6_vaddwsat_dv_alt_128B
+    58656794U,	// V6_valignb
+    58656794U,	// V6_valignb_128B
+    75434010U,	// V6_valignbi
+    75434010U,	// V6_valignbi_128B
+    8341530U,	// V6_vand
+    8341530U,	// V6_vand_128B
+    8357914U,	// V6_vandnqrt
+    8357914U,	// V6_vandnqrt_128B
+    8374298U,	// V6_vandnqrt_acc
+    8374298U,	// V6_vandnqrt_acc_128B
+    8390682U,	// V6_vandnqrt_acc_alt
+    8390682U,	// V6_vandnqrt_acc_alt_128B
+    8407066U,	// V6_vandnqrt_alt
+    8407066U,	// V6_vandnqrt_alt_128B
+    8341530U,	// V6_vandqrt
+    8341530U,	// V6_vandqrt_128B
+    8423450U,	// V6_vandqrt_acc
+    8423450U,	// V6_vandqrt_acc_128B
+    8439834U,	// V6_vandqrt_acc_alt
+    8439834U,	// V6_vandqrt_acc_alt_128B
+    8456218U,	// V6_vandqrt_alt
+    8456218U,	// V6_vandqrt_alt_128B
+    8357914U,	// V6_vandvnqv
+    8357914U,	// V6_vandvnqv_128B
+    8341530U,	// V6_vandvqv
+    8341530U,	// V6_vandvqv_128B
+    8341530U,	// V6_vandvrt
+    8341530U,	// V6_vandvrt_128B
+    8423450U,	// V6_vandvrt_acc
+    8423450U,	// V6_vandvrt_acc_128B
+    8439834U,	// V6_vandvrt_acc_alt
+    8439834U,	// V6_vandvrt_acc_alt_128B
+    8456218U,	// V6_vandvrt_alt
+    8456218U,	// V6_vandvrt_alt_128B
+    8472602U,	// V6_vaslh
+    8472602U,	// V6_vaslh_128B
+    55838746U,	// V6_vaslh_alt
+    55838746U,	// V6_vaslh_alt_128B
+    1904298010U,	// V6_vaslhv
+    1904298010U,	// V6_vaslhv_128B
+    55838746U,	// V6_vaslhv_alt
+    55838746U,	// V6_vaslhv_alt_128B
+    8488986U,	// V6_vaslw
+    8488986U,	// V6_vaslw_128B
+    8505370U,	// V6_vaslw_acc
+    8505370U,	// V6_vaslw_acc_128B
+    8521754U,	// V6_vaslw_acc_alt
+    8521754U,	// V6_vaslw_acc_alt_128B
+    55855130U,	// V6_vaslw_alt
+    55855130U,	// V6_vaslw_alt_128B
+    1937868826U,	// V6_vaslwv
+    1937868826U,	// V6_vaslwv_128B
+    55855130U,	// V6_vaslwv_alt
+    55855130U,	// V6_vaslwv_alt_128B
+    92424218U,	// V6_vasrh
+    92424218U,	// V6_vasrh_128B
+    55986202U,	// V6_vasrh_alt
+    55986202U,	// V6_vasrh_alt_128B
+    293767194U,	// V6_vasrhbrndsat
+    293767194U,	// V6_vasrhbrndsat_128B
+    8570906U,	// V6_vasrhbrndsat_alt
+    25331738U,	// V6_vasrhbsat
+    25331738U,	// V6_vasrhbsat_128B
+    293799962U,	// V6_vasrhubrndsat
+    293799962U,	// V6_vasrhubrndsat_128B
+    57624602U,	// V6_vasrhubrndsat_alt
+    25364506U,	// V6_vasrhubsat
+    25364506U,	// V6_vasrhubsat_128B
+    57624602U,	// V6_vasrhubsat_alt
+    92424218U,	// V6_vasrhv
+    92424218U,	// V6_vasrhv_128B
+    55986202U,	// V6_vasrhv_alt
+    55986202U,	// V6_vasrhv_alt_128B
+    1786988570U,	// V6_vasruwuhrndsat
+    1786988570U,	// V6_vasruwuhrndsat_128B
+    8620058U,	// V6_vasrw
+    8620058U,	// V6_vasrw_128B
+    8636442U,	// V6_vasrw_acc
+    8636442U,	// V6_vasrw_acc_128B
+    8652826U,	// V6_vasrw_acc_alt
+    8652826U,	// V6_vasrw_acc_alt_128B
+    55969818U,	// V6_vasrw_alt
+    55969818U,	// V6_vasrw_alt_128B
+    1820477466U,	// V6_vasrwh
+    1820477466U,	// V6_vasrwh_128B
+    8669210U,	// V6_vasrwh_alt
+    1820477466U,	// V6_vasrwhrndsat
+    1820477466U,	// V6_vasrwhrndsat_128B
+    293881882U,	// V6_vasrwhrndsat_alt
+    1820477466U,	// V6_vasrwhsat
+    1820477466U,	// V6_vasrwhsat_128B
+    25446426U,	// V6_vasrwhsat_alt
+    1820543002U,	// V6_vasrwuhrndsat
+    1820543002U,	// V6_vasrwuhrndsat_128B
+    1820543002U,	// V6_vasrwuhsat
+    1820543002U,	// V6_vasrwuhsat_128B
+    8685594U,	// V6_vasrwuhsat_alt
+    1937999898U,	// V6_vasrwv
+    1937999898U,	// V6_vasrwv_128B
+    55969818U,	// V6_vasrwv_alt
+    55969818U,	// V6_vasrwv_alt_128B
+    218679322U,	// V6_vassign
+    218679322U,	// V6_vassign_128B
+    218679322U,	// V6_vassignp
+    218679322U,	// V6_vassignp_128B
+    1904527386U,	// V6_vavgh
+    1904527386U,	// V6_vavgh_128B
+    444442U,	// V6_vavgh_alt
+    444442U,	// V6_vavgh_alt_128B
+    2072299546U,	// V6_vavghrnd
+    2072299546U,	// V6_vavghrnd_128B
+    201771034U,	// V6_vavghrnd_alt
+    201771034U,	// V6_vavghrnd_alt_128B
+    2089093146U,	// V6_vavgub
+    2089093146U,	// V6_vavgub_128B
+    722970U,	// V6_vavgub_alt
+    722970U,	// V6_vavgub_alt_128B
+    2105870362U,	// V6_vavgubrnd
+    2105870362U,	// V6_vavgubrnd_128B
+    202049562U,	// V6_vavgubrnd_alt
+    202049562U,	// V6_vavgubrnd_alt_128B
+    2122663962U,	// V6_vavguh
+    2122663962U,	// V6_vavguh_128B
+    739354U,	// V6_vavguh_alt
+    739354U,	// V6_vavguh_alt_128B
+    2139441178U,	// V6_vavguhrnd
+    2139441178U,	// V6_vavguhrnd_128B
+    202065946U,	// V6_vavguhrnd_alt
+    202065946U,	// V6_vavguhrnd_alt_128B
+    1938130970U,	// V6_vavgw
+    1938130970U,	// V6_vavgw_128B
+    772122U,	// V6_vavgw_alt
+    772122U,	// V6_vavgw_alt_128B
+    2156234778U,	// V6_vavgwrnd
+    2156234778U,	// V6_vavgwrnd_128B
+    202098714U,	// V6_vavgwrnd_alt
+    202098714U,	// V6_vavgwrnd_alt_128B
+    2164510990U,	// V6_vccombine
+    2164510990U,	// V6_vccombine_128B
+    8767514U,	// V6_vcl0h
+    8767514U,	// V6_vcl0h_128B
+    8783898U,	// V6_vcl0h_alt
+    8783898U,	// V6_vcl0h_alt_128B
+    8800282U,	// V6_vcl0w
+    8800282U,	// V6_vcl0w_128B
+    8816666U,	// V6_vcl0w_alt
+    8816666U,	// V6_vcl0w_alt_128B
+    235131150U,	// V6_vcmov
+    235131150U,	// V6_vcmov_128B
+    8833050U,	// V6_vcombine
+    8833050U,	// V6_vcombine_128B
+    7440410U,	// V6_vd0
+    7440410U,	// V6_vd0_128B
+    35260901U,	// V6_vdeal
+    35260901U,	// V6_vdeal_128B
+    8849434U,	// V6_vdealb
+    8865818U,	// V6_vdealb4w
+    8865818U,	// V6_vdealb4w_128B
+    8882202U,	// V6_vdealb4w_alt
+    8882202U,	// V6_vdealb4w_alt_128B
+    8849434U,	// V6_vdealb_128B
+    8898586U,	// V6_vdealb_alt
+    8898586U,	// V6_vdealb_alt_128B
+    8914970U,	// V6_vdealh
+    8914970U,	// V6_vdealh_128B
+    8931354U,	// V6_vdealh_alt
+    8931354U,	// V6_vdealh_alt_128B
+    8947738U,	// V6_vdealvdd
+    8947738U,	// V6_vdealvdd_128B
+    8964122U,	// V6_vdelta
+    8964122U,	// V6_vdelta_128B
+    8980506U,	// V6_vdmpybus
+    8980506U,	// V6_vdmpybus_128B
+    8996890U,	// V6_vdmpybus_acc
+    8996890U,	// V6_vdmpybus_acc_128B
+    9013274U,	// V6_vdmpybus_acc_alt
+    9013274U,	// V6_vdmpybus_acc_alt_128B
+    9029658U,	// V6_vdmpybus_alt
+    9029658U,	// V6_vdmpybus_alt_128B
+    8980506U,	// V6_vdmpybus_dv
+    8980506U,	// V6_vdmpybus_dv_128B
+    8996890U,	// V6_vdmpybus_dv_acc
+    8996890U,	// V6_vdmpybus_dv_acc_128B
+    9013274U,	// V6_vdmpybus_dv_acc_alt
+    9013274U,	// V6_vdmpybus_dv_acc_alt_128B
+    9029658U,	// V6_vdmpybus_dv_alt
+    9029658U,	// V6_vdmpybus_dv_alt_128B
+    1971980314U,	// V6_vdmpyhb
+    1971980314U,	// V6_vdmpyhb_128B
+    1971996698U,	// V6_vdmpyhb_acc
+    1971996698U,	// V6_vdmpyhb_acc_128B
+    9078810U,	// V6_vdmpyhb_acc_alt
+    9078810U,	// V6_vdmpyhb_acc_alt_128B
+    9095194U,	// V6_vdmpyhb_alt
+    9095194U,	// V6_vdmpyhb_alt_128B
+    1971980314U,	// V6_vdmpyhb_dv
+    1971980314U,	// V6_vdmpyhb_dv_128B
+    1971996698U,	// V6_vdmpyhb_dv_acc
+    1971996698U,	// V6_vdmpyhb_dv_acc_128B
+    9078810U,	// V6_vdmpyhb_dv_acc_alt
+    9078810U,	// V6_vdmpyhb_dv_acc_alt_128B
+    9095194U,	// V6_vdmpyhb_dv_alt
+    9095194U,	// V6_vdmpyhb_dv_alt_128B
+    1921648666U,	// V6_vdmpyhisat
+    1921648666U,	// V6_vdmpyhisat_128B
+    1921665050U,	// V6_vdmpyhisat_acc
+    1921665050U,	// V6_vdmpyhisat_acc_128B
+    9111578U,	// V6_vdmpyhisat_acc_alt
+    9111578U,	// V6_vdmpyhisat_acc_alt_128B
+    9127962U,	// V6_vdmpyhisat_alt
+    9127962U,	// V6_vdmpyhisat_alt_128B
+    1921648666U,	// V6_vdmpyhsat
+    1921648666U,	// V6_vdmpyhsat_128B
+    1921665050U,	// V6_vdmpyhsat_acc
+    1921665050U,	// V6_vdmpyhsat_acc_128B
+    9111578U,	// V6_vdmpyhsat_acc_alt
+    9111578U,	// V6_vdmpyhsat_acc_alt_128B
+    9127962U,	// V6_vdmpyhsat_alt
+    9127962U,	// V6_vdmpyhsat_alt_128B
+    2190084122U,	// V6_vdmpyhsuisat
+    2190084122U,	// V6_vdmpyhsuisat_128B
+    2190100506U,	// V6_vdmpyhsuisat_acc
+    2190100506U,	// V6_vdmpyhsuisat_acc_128B
+    2206959642U,	// V6_vdmpyhsuisat_acc_alt
+    2206959642U,	// V6_vdmpyhsuisat_acc_alt_128B
+    2206976026U,	// V6_vdmpyhsuisat_alt
+    2206976026U,	// V6_vdmpyhsuisat_alt_128B
+    2223638554U,	// V6_vdmpyhsusat
+    2223638554U,	// V6_vdmpyhsusat_128B
+    2223654938U,	// V6_vdmpyhsusat_acc
+    2223654938U,	// V6_vdmpyhsusat_acc_128B
+    25921562U,	// V6_vdmpyhsusat_acc_alt
+    25921562U,	// V6_vdmpyhsusat_acc_alt_128B
+    25937946U,	// V6_vdmpyhsusat_alt
+    25937946U,	// V6_vdmpyhsusat_alt_128B
+    1921648666U,	// V6_vdmpyhvsat
+    1921648666U,	// V6_vdmpyhvsat_128B
+    1921665050U,	// V6_vdmpyhvsat_acc
+    1921665050U,	// V6_vdmpyhvsat_acc_128B
+    9111578U,	// V6_vdmpyhvsat_acc_alt
+    9111578U,	// V6_vdmpyhvsat_acc_alt_128B
+    9127962U,	// V6_vdmpyhvsat_alt
+    9127962U,	// V6_vdmpyhvsat_alt_128B
+    9177114U,	// V6_vdsaduh
+    9177114U,	// V6_vdsaduh_128B
+    9193498U,	// V6_vdsaduh_acc
+    9193498U,	// V6_vdsaduh_acc_128B
+    9209882U,	// V6_vdsaduh_acc_alt
+    9209882U,	// V6_vdsaduh_acc_alt_128B
+    9226266U,	// V6_vdsaduh_alt
+    9226266U,	// V6_vdsaduh_alt_128B
+    2238957594U,	// V6_veqb
+    2238957594U,	// V6_veqb_128B
+    2238973978U,	// V6_veqb_and
+    2238973978U,	// V6_veqb_and_128B
+    2238990362U,	// V6_veqb_or
+    2238990362U,	// V6_veqb_or_128B
+    2239006746U,	// V6_veqb_xor
+    2239006746U,	// V6_veqb_xor_128B
+    91473946U,	// V6_veqh
+    91473946U,	// V6_veqh_128B
+    91490330U,	// V6_veqh_and
+    91490330U,	// V6_veqh_and_128B
+    91506714U,	// V6_veqh_or
+    91506714U,	// V6_veqh_or_128B
+    91523098U,	// V6_veqh_xor
+    91523098U,	// V6_veqh_xor_128B
+    1819527194U,	// V6_veqw
+    1819527194U,	// V6_veqw_128B
+    1819543578U,	// V6_veqw_and
+    1819543578U,	// V6_veqw_and_128B
+    1819559962U,	// V6_veqw_or
+    1819559962U,	// V6_veqw_or_128B
+    1819576346U,	// V6_veqw_xor
+    1819576346U,	// V6_veqw_xor_128B
+    2240612378U,	// V6_vgtb
+    2240612378U,	// V6_vgtb_128B
+    2240628762U,	// V6_vgtb_and
+    2240628762U,	// V6_vgtb_and_128B
+    2240645146U,	// V6_vgtb_or
+    2240645146U,	// V6_vgtb_or_128B
+    2240661530U,	// V6_vgtb_xor
+    2240661530U,	// V6_vgtb_xor_128B
+    93128730U,	// V6_vgth
+    93128730U,	// V6_vgth_128B
+    93145114U,	// V6_vgth_and
+    93145114U,	// V6_vgth_and_128B
+    93161498U,	// V6_vgth_or
+    93161498U,	// V6_vgth_or_128B
+    93177882U,	// V6_vgth_xor
+    93177882U,	// V6_vgth_xor_128B
+    1754073114U,	// V6_vgtub
+    1754073114U,	// V6_vgtub_128B
+    1754089498U,	// V6_vgtub_and
+    1754089498U,	// V6_vgtub_and_128B
+    1754105882U,	// V6_vgtub_or
+    1754105882U,	// V6_vgtub_or_128B
+    1754122266U,	// V6_vgtub_xor
+    1754122266U,	// V6_vgtub_xor_128B
+    1770850330U,	// V6_vgtuh
+    1770850330U,	// V6_vgtuh_128B
+    1770866714U,	// V6_vgtuh_and
+    1770866714U,	// V6_vgtuh_and_128B
+    1770883098U,	// V6_vgtuh_or
+    1770883098U,	// V6_vgtuh_or_128B
+    1770899482U,	// V6_vgtuh_xor
+    1770899482U,	// V6_vgtuh_xor_128B
+    1787627546U,	// V6_vgtuw
+    1787627546U,	// V6_vgtuw_128B
+    1787643930U,	// V6_vgtuw_and
+    1787643930U,	// V6_vgtuw_and_128B
+    1787660314U,	// V6_vgtuw_or
+    1787660314U,	// V6_vgtuw_or_128B
+    1787676698U,	// V6_vgtuw_xor
+    1787676698U,	// V6_vgtuw_xor_128B
+    1821181978U,	// V6_vgtw
+    1821181978U,	// V6_vgtw_128B
+    1821198362U,	// V6_vgtw_and
+    1821198362U,	// V6_vgtw_and_128B
+    1821214746U,	// V6_vgtw_or
+    1821214746U,	// V6_vgtw_or_128B
+    1821231130U,	// V6_vgtw_xor
+    1821231130U,	// V6_vgtw_xor_128B
+    1203U,	// V6_vhist
+    1203U,	// V6_vhist_128B
+    1460883U,	// V6_vhistq
+    1460883U,	// V6_vhistq_128B
+    9308186U,	// V6_vinsertwr
+    9308186U,	// V6_vinsertwr_128B
+    59656218U,	// V6_vlalignb
+    59656218U,	// V6_vlalignb_128B
+    76433434U,	// V6_vlalignbi
+    76433434U,	// V6_vlalignbi_128B
+    9340954U,	// V6_vlsrb
+    9340954U,	// V6_vlsrb_128B
+    9357338U,	// V6_vlsrh
+    9357338U,	// V6_vlsrh_128B
+    56477722U,	// V6_vlsrh_alt
+    56477722U,	// V6_vlsrh_alt_128B
+    9373722U,	// V6_vlsrhv
+    9373722U,	// V6_vlsrhv_128B
+    56477722U,	// V6_vlsrhv_alt
+    56477722U,	// V6_vlsrhv_alt_128B
+    9390106U,	// V6_vlsrw
+    9390106U,	// V6_vlsrw_128B
+    56494106U,	// V6_vlsrw_alt
+    56494106U,	// V6_vlsrw_alt_128B
+    9406490U,	// V6_vlsrwv
+    9406490U,	// V6_vlsrwv_128B
+    56494106U,	// V6_vlsrwv_alt
+    56494106U,	// V6_vlsrwv_alt_128B
+    2240792602U,	// V6_vlutvvb
+    2240792602U,	// V6_vlutvvb_128B
+    2240792602U,	// V6_vlutvvb_nm
+    2240792602U,	// V6_vlutvvb_nm_128B
+    2240808986U,	// V6_vlutvvb_oracc
+    2240808986U,	// V6_vlutvvb_oracc_128B
+    2257586202U,	// V6_vlutvvb_oracci
+    2257586202U,	// V6_vlutvvb_oracci_128B
+    2257569818U,	// V6_vlutvvbi
+    2257569818U,	// V6_vlutvvbi_128B
+    93341722U,	// V6_vlutvwh
+    93341722U,	// V6_vlutvwh_128B
+    93341722U,	// V6_vlutvwh_nm
+    93341722U,	// V6_vlutvwh_nm_128B
+    93358106U,	// V6_vlutvwh_oracc
+    93358106U,	// V6_vlutvwh_oracc_128B
+    2274396186U,	// V6_vlutvwh_oracci
+    2274396186U,	// V6_vlutvwh_oracci_128B
+    2274379802U,	// V6_vlutvwhi
+    2274379802U,	// V6_vlutvwhi_128B
+    9488410U,	// V6_vmaxb
+    9488410U,	// V6_vmaxb_128B
+    935962U,	// V6_vmaxb_alt
+    935962U,	// V6_vmaxb_alt_128B
+    9504794U,	// V6_vmaxh
+    9504794U,	// V6_vmaxh_128B
+    952346U,	// V6_vmaxh_alt
+    952346U,	// V6_vmaxh_alt_128B
+    9521178U,	// V6_vmaxub
+    9521178U,	// V6_vmaxub_128B
+    968730U,	// V6_vmaxub_alt
+    968730U,	// V6_vmaxub_alt_128B
+    9537562U,	// V6_vmaxuh
+    9537562U,	// V6_vmaxuh_128B
+    985114U,	// V6_vmaxuh_alt
+    985114U,	// V6_vmaxuh_alt_128B
+    9553946U,	// V6_vmaxw
+    9553946U,	// V6_vmaxw_128B
+    1017882U,	// V6_vmaxw_alt
+    1017882U,	// V6_vmaxw_alt_128B
+    9570330U,	// V6_vminb
+    9570330U,	// V6_vminb_128B
+    1034266U,	// V6_vminb_alt
+    1034266U,	// V6_vminb_alt_128B
+    9586714U,	// V6_vminh
+    9586714U,	// V6_vminh_128B
+    1050650U,	// V6_vminh_alt
+    1050650U,	// V6_vminh_alt_128B
+    9603098U,	// V6_vminub
+    9603098U,	// V6_vminub_128B
+    1067034U,	// V6_vminub_alt
+    1067034U,	// V6_vminub_alt_128B
+    9619482U,	// V6_vminuh
+    9619482U,	// V6_vminuh_128B
+    1083418U,	// V6_vminuh_alt
+    1083418U,	// V6_vminuh_alt_128B
+    9635866U,	// V6_vminw
+    9635866U,	// V6_vminw_128B
+    1116186U,	// V6_vminw_alt
+    1116186U,	// V6_vminw_alt_128B
+    1972586522U,	// V6_vmpabus
+    1972586522U,	// V6_vmpabus_128B
+    9668634U,	// V6_vmpabus_acc
+    9668634U,	// V6_vmpabus_acc_128B
+    9685018U,	// V6_vmpabus_acc_alt
+    9685018U,	// V6_vmpabus_acc_alt_128B
+    9701402U,	// V6_vmpabus_alt
+    9701402U,	// V6_vmpabus_alt_128B
+    1972586522U,	// V6_vmpabusv
+    1972586522U,	// V6_vmpabusv_128B
+    9701402U,	// V6_vmpabusv_alt
+    9701402U,	// V6_vmpabusv_alt_128B
+    2090027034U,	// V6_vmpabuuv
+    2090027034U,	// V6_vmpabuuv_128B
+    9717786U,	// V6_vmpabuuv_alt
+    9717786U,	// V6_vmpabuuv_alt_128B
+    93620250U,	// V6_vmpahb
+    93620250U,	// V6_vmpahb_128B
+    93636634U,	// V6_vmpahb_acc
+    93636634U,	// V6_vmpahb_acc_128B
+    9766938U,	// V6_vmpahb_acc_alt
+    9766938U,	// V6_vmpahb_acc_alt_128B
+    9783322U,	// V6_vmpahb_alt
+    9783322U,	// V6_vmpahb_alt_128B
+    1771341850U,	// V6_vmpauhb
+    1771341850U,	// V6_vmpauhb_128B
+    1771358234U,	// V6_vmpauhb_acc
+    1771358234U,	// V6_vmpauhb_acc_128B
+    9799706U,	// V6_vmpauhb_acc_alt
+    9799706U,	// V6_vmpauhb_acc_alt_128B
+    9816090U,	// V6_vmpauhb_alt
+    9816090U,	// V6_vmpauhb_alt_128B
+    1754662938U,	// V6_vmpybus
+    1754662938U,	// V6_vmpybus_128B
+    1754679322U,	// V6_vmpybus_acc
+    1754679322U,	// V6_vmpybus_acc_128B
+    9865242U,	// V6_vmpybus_acc_alt
+    9865242U,	// V6_vmpybus_acc_alt_128B
+    9881626U,	// V6_vmpybus_alt
+    9881626U,	// V6_vmpybus_alt_128B
+    1754662938U,	// V6_vmpybusv
+    1754662938U,	// V6_vmpybusv_128B
+    1754679322U,	// V6_vmpybusv_acc
+    1754679322U,	// V6_vmpybusv_acc_128B
+    9865242U,	// V6_vmpybusv_acc_alt
+    9865242U,	// V6_vmpybusv_acc_alt_128B
+    9881626U,	// V6_vmpybusv_alt
+    9881626U,	// V6_vmpybusv_alt_128B
+    2241202202U,	// V6_vmpybv
+    2241202202U,	// V6_vmpybv_128B
+    2241218586U,	// V6_vmpybv_acc
+    2241218586U,	// V6_vmpybv_acc_128B
+    9898010U,	// V6_vmpybv_acc_alt
+    9898010U,	// V6_vmpybv_acc_alt_128B
+    9914394U,	// V6_vmpybv_alt
+    9914394U,	// V6_vmpybv_alt_128B
+    9930778U,	// V6_vmpyewuh
+    9930778U,	// V6_vmpyewuh_128B
+    9947162U,	// V6_vmpyewuh_64
+    9947162U,	// V6_vmpyewuh_64_128B
+    9963546U,	// V6_vmpyewuh_alt
+    9963546U,	// V6_vmpyewuh_alt_128B
+    1905805338U,	// V6_vmpyh
+    1905805338U,	// V6_vmpyh_128B
+    4556826U,	// V6_vmpyh_alt
+    4556826U,	// V6_vmpyh_alt_128B
+    1922598938U,	// V6_vmpyhsat_acc
+    1922598938U,	// V6_vmpyhsat_acc_128B
+    21268506U,	// V6_vmpyhsat_acc_alt
+    21268506U,	// V6_vmpyhsat_acc_alt_128B
+    93718554U,	// V6_vmpyhsrs
+    93718554U,	// V6_vmpyhsrs_128B
+    1313179674U,	// V6_vmpyhsrs_alt
+    1313179674U,	// V6_vmpyhsrs_alt_128B
+    93718554U,	// V6_vmpyhss
+    93718554U,	// V6_vmpyhss_128B
+    1262848026U,	// V6_vmpyhss_alt
+    1262848026U,	// V6_vmpyhss_alt_128B
+    2123909146U,	// V6_vmpyhus
+    2123909146U,	// V6_vmpyhus_128B
+    2123925530U,	// V6_vmpyhus_acc
+    2123925530U,	// V6_vmpyhus_acc_128B
+    10012698U,	// V6_vmpyhus_acc_alt
+    10012698U,	// V6_vmpyhus_acc_alt_128B
+    10029082U,	// V6_vmpyhus_alt
+    10029082U,	// V6_vmpyhus_alt_128B
+    1905805338U,	// V6_vmpyhv
+    1905805338U,	// V6_vmpyhv_128B
+    1905821722U,	// V6_vmpyhv_acc
+    1905821722U,	// V6_vmpyhv_acc_128B
+    4491290U,	// V6_vmpyhv_acc_alt
+    4491290U,	// V6_vmpyhv_acc_alt_128B
+    4556826U,	// V6_vmpyhv_alt
+    4556826U,	// V6_vmpyhv_alt_128B
+    93718554U,	// V6_vmpyhvsrs
+    93718554U,	// V6_vmpyhvsrs_128B
+    1313179674U,	// V6_vmpyhvsrs_alt
+    1313179674U,	// V6_vmpyhvsrs_alt_128B
+    10045466U,	// V6_vmpyieoh
+    10045466U,	// V6_vmpyieoh_128B
+    1905887258U,	// V6_vmpyiewh_acc
+    1905887258U,	// V6_vmpyiewh_acc_128B
+    10078234U,	// V6_vmpyiewh_acc_alt
+    10078234U,	// V6_vmpyiewh_acc_alt_128B
+    10094618U,	// V6_vmpyiewuh
+    10094618U,	// V6_vmpyiewuh_128B
+    2123991066U,	// V6_vmpyiewuh_acc
+    2123991066U,	// V6_vmpyiewuh_acc_128B
+    10111002U,	// V6_vmpyiewuh_acc_alt
+    10111002U,	// V6_vmpyiewuh_acc_alt_128B
+    10127386U,	// V6_vmpyiewuh_alt
+    10127386U,	// V6_vmpyiewuh_alt_128B
+    1905969178U,	// V6_vmpyih
+    1905969178U,	// V6_vmpyih_128B
+    1905985562U,	// V6_vmpyih_acc
+    1905985562U,	// V6_vmpyih_acc_128B
+    10176538U,	// V6_vmpyih_acc_alt
+    10176538U,	// V6_vmpyih_acc_alt_128B
+    10192922U,	// V6_vmpyih_alt
+    10192922U,	// V6_vmpyih_alt_128B
+    1973078042U,	// V6_vmpyihb
+    1973078042U,	// V6_vmpyihb_128B
+    1973094426U,	// V6_vmpyihb_acc
+    1973094426U,	// V6_vmpyihb_acc_128B
+    10209306U,	// V6_vmpyihb_acc_alt
+    10209306U,	// V6_vmpyihb_acc_alt_128B
+    10225690U,	// V6_vmpyihb_alt
+    10225690U,	// V6_vmpyihb_alt_128B
+    10242074U,	// V6_vmpyiowh
+    10242074U,	// V6_vmpyiowh_128B
+    10258458U,	// V6_vmpyiowh_alt
+    10258458U,	// V6_vmpyiowh_alt_128B
+    1973209114U,	// V6_vmpyiwb
+    1973209114U,	// V6_vmpyiwb_128B
+    1973225498U,	// V6_vmpyiwb_acc
+    1973225498U,	// V6_vmpyiwb_acc_128B
+    10307610U,	// V6_vmpyiwb_acc_alt
+    10307610U,	// V6_vmpyiwb_acc_alt_128B
+    10323994U,	// V6_vmpyiwb_alt
+    10323994U,	// V6_vmpyiwb_alt_128B
+    1906100250U,	// V6_vmpyiwh
+    1906100250U,	// V6_vmpyiwh_128B
+    1906116634U,	// V6_vmpyiwh_acc
+    1906116634U,	// V6_vmpyiwh_acc_128B
+    10340378U,	// V6_vmpyiwh_acc_alt
+    10340378U,	// V6_vmpyiwh_acc_alt_128B
+    10356762U,	// V6_vmpyiwh_alt
+    10356762U,	// V6_vmpyiwh_alt_128B
+    2090649626U,	// V6_vmpyiwub
+    2090649626U,	// V6_vmpyiwub_128B
+    2090666010U,	// V6_vmpyiwub_acc
+    2090666010U,	// V6_vmpyiwub_acc_128B
+    10373146U,	// V6_vmpyiwub_acc_alt
+    10373146U,	// V6_vmpyiwub_acc_alt_128B
+    10389530U,	// V6_vmpyiwub_alt
+    10389530U,	// V6_vmpyiwub_alt_128B
+    2292107290U,	// V6_vmpyowh
+    2292107290U,	// V6_vmpyowh_128B
+    10422298U,	// V6_vmpyowh_64_acc
+    10422298U,	// V6_vmpyowh_64_acc_128B
+    1268729882U,	// V6_vmpyowh_alt
+    1268729882U,	// V6_vmpyowh_alt_128B
+    2308884506U,	// V6_vmpyowh_rnd
+    2308884506U,	// V6_vmpyowh_rnd_128B
+    1319061530U,	// V6_vmpyowh_rnd_alt
+    1319061530U,	// V6_vmpyowh_rnd_alt_128B
+    2325710874U,	// V6_vmpyowh_rnd_sacc
+    2325710874U,	// V6_vmpyowh_rnd_sacc_128B
+    2342504474U,	// V6_vmpyowh_rnd_sacc_alt
+    2342504474U,	// V6_vmpyowh_rnd_sacc_alt_128B
+    2359265306U,	// V6_vmpyowh_sacc
+    2359265306U,	// V6_vmpyowh_sacc_128B
+    2376058906U,	// V6_vmpyowh_sacc_alt
+    2376058906U,	// V6_vmpyowh_sacc_alt_128B
+    10487834U,	// V6_vmpyub
+    10487834U,	// V6_vmpyub_128B
+    10504218U,	// V6_vmpyub_acc
+    10504218U,	// V6_vmpyub_acc_128B
+    10520602U,	// V6_vmpyub_acc_alt
+    10520602U,	// V6_vmpyub_acc_alt_128B
+    10536986U,	// V6_vmpyub_alt
+    10536986U,	// V6_vmpyub_alt_128B
+    10487834U,	// V6_vmpyubv
+    10487834U,	// V6_vmpyubv_128B
+    10504218U,	// V6_vmpyubv_acc
+    10504218U,	// V6_vmpyubv_acc_128B
+    10520602U,	// V6_vmpyubv_acc_alt
+    10520602U,	// V6_vmpyubv_acc_alt_128B
+    10536986U,	// V6_vmpyubv_alt
+    10536986U,	// V6_vmpyubv_alt_128B
+    10553370U,	// V6_vmpyuh
+    10553370U,	// V6_vmpyuh_128B
+    10569754U,	// V6_vmpyuh_acc
+    10569754U,	// V6_vmpyuh_acc_128B
+    10586138U,	// V6_vmpyuh_acc_alt
+    10586138U,	// V6_vmpyuh_acc_alt_128B
+    10602522U,	// V6_vmpyuh_alt
+    10602522U,	// V6_vmpyuh_alt_128B
+    10553370U,	// V6_vmpyuhv
+    10553370U,	// V6_vmpyuhv_128B
+    10569754U,	// V6_vmpyuhv_acc
+    10569754U,	// V6_vmpyuhv_acc_128B
+    10586138U,	// V6_vmpyuhv_acc_alt
+    10586138U,	// V6_vmpyuhv_acc_alt_128B
+    10602522U,	// V6_vmpyuhv_alt
+    10602522U,	// V6_vmpyuhv_alt_128B
+    1951770U,	// V6_vmux
+    1951770U,	// V6_vmux_128B
+    10618906U,	// V6_vnavgh
+    10618906U,	// V6_vnavgh_128B
+    460826U,	// V6_vnavgh_alt
+    460826U,	// V6_vnavgh_alt_128B
+    10635290U,	// V6_vnavgub
+    10635290U,	// V6_vnavgub_128B
+    10651674U,	// V6_vnavgub_alt
+    10651674U,	// V6_vnavgub_alt_128B
+    10668058U,	// V6_vnavgw
+    10668058U,	// V6_vnavgw_128B
+    1132570U,	// V6_vnavgw_alt
+    1132570U,	// V6_vnavgw_alt_128B
+    2164510819U,	// V6_vnccombine
+    2164510819U,	// V6_vnccombine_128B
+    235130979U,	// V6_vncmov
+    235130979U,	// V6_vncmov_128B
+    10684442U,	// V6_vnormamth
+    10684442U,	// V6_vnormamth_128B
+    10700826U,	// V6_vnormamth_alt
+    10700826U,	// V6_vnormamth_alt_128B
+    10717210U,	// V6_vnormamtw
+    10717210U,	// V6_vnormamtw_128B
+    10733594U,	// V6_vnormamtw_alt
+    10733594U,	// V6_vnormamtw_alt_128B
+    10749978U,	// V6_vnot
+    10749978U,	// V6_vnot_128B
+    10766362U,	// V6_vor
+    10766362U,	// V6_vor_128B
+    10782746U,	// V6_vpackeb
+    10782746U,	// V6_vpackeb_128B
+    10799130U,	// V6_vpackeb_alt
+    10799130U,	// V6_vpackeb_alt_128B
+    10815514U,	// V6_vpackeh
+    10815514U,	// V6_vpackeh_128B
+    10831898U,	// V6_vpackeh_alt
+    10831898U,	// V6_vpackeh_alt_128B
+    10848282U,	// V6_vpackhb_sat
+    10848282U,	// V6_vpackhb_sat_128B
+    10864666U,	// V6_vpackhb_sat_alt
+    10864666U,	// V6_vpackhb_sat_alt_128B
+    10881050U,	// V6_vpackhub_sat
+    10881050U,	// V6_vpackhub_sat_128B
+    10897434U,	// V6_vpackhub_sat_alt
+    10897434U,	// V6_vpackhub_sat_alt_128B
+    10913818U,	// V6_vpackob
+    10913818U,	// V6_vpackob_128B
+    10930202U,	// V6_vpackob_alt
+    10930202U,	// V6_vpackob_alt_128B
+    10946586U,	// V6_vpackoh
+    10946586U,	// V6_vpackoh_128B
+    10962970U,	// V6_vpackoh_alt
+    10962970U,	// V6_vpackoh_alt_128B
+    10979354U,	// V6_vpackwh_sat
+    10979354U,	// V6_vpackwh_sat_128B
+    10995738U,	// V6_vpackwh_sat_alt
+    10995738U,	// V6_vpackwh_sat_alt_128B
+    11012122U,	// V6_vpackwuh_sat
+    11012122U,	// V6_vpackwuh_sat_128B
+    11028506U,	// V6_vpackwuh_sat_alt
+    11028506U,	// V6_vpackwuh_sat_alt_128B
+    11044890U,	// V6_vpopcounth
+    11044890U,	// V6_vpopcounth_128B
+    11061274U,	// V6_vpopcounth_alt
+    11061274U,	// V6_vpopcounth_alt_128B
+    11077658U,	// V6_vrdelta
+    11077658U,	// V6_vrdelta_128B
+    1755924506U,	// V6_vrmpybus
+    1755924506U,	// V6_vrmpybus_128B
+    1755940890U,	// V6_vrmpybus_acc
+    1755940890U,	// V6_vrmpybus_acc_128B
+    11126810U,	// V6_vrmpybus_acc_alt
+    11126810U,	// V6_vrmpybus_acc_alt_128B
+    11143194U,	// V6_vrmpybus_alt
+    11143194U,	// V6_vrmpybus_alt_128B
+    1755924506U,	// V6_vrmpybusi
+    1755924506U,	// V6_vrmpybusi_128B
+    1755940890U,	// V6_vrmpybusi_acc
+    1755940890U,	// V6_vrmpybusi_acc_128B
+    78235674U,	// V6_vrmpybusi_acc_alt
+    78235674U,	// V6_vrmpybusi_acc_alt_128B
+    78252058U,	// V6_vrmpybusi_alt
+    78252058U,	// V6_vrmpybusi_alt_128B
+    1755924506U,	// V6_vrmpybusv
+    1755924506U,	// V6_vrmpybusv_128B
+    1755940890U,	// V6_vrmpybusv_acc
+    1755940890U,	// V6_vrmpybusv_acc_128B
+    11126810U,	// V6_vrmpybusv_acc_alt
+    11126810U,	// V6_vrmpybusv_acc_alt_128B
+    11143194U,	// V6_vrmpybusv_alt
+    11143194U,	// V6_vrmpybusv_alt_128B
+    2242463770U,	// V6_vrmpybv
+    2242463770U,	// V6_vrmpybv_128B
+    2242480154U,	// V6_vrmpybv_acc
+    2242480154U,	// V6_vrmpybv_acc_128B
+    11159578U,	// V6_vrmpybv_acc_alt
+    11159578U,	// V6_vrmpybv_acc_alt_128B
+    11175962U,	// V6_vrmpybv_alt
+    11175962U,	// V6_vrmpybv_alt_128B
+    2091567130U,	// V6_vrmpyub
+    2091567130U,	// V6_vrmpyub_128B
+    2091583514U,	// V6_vrmpyub_acc
+    2091583514U,	// V6_vrmpyub_acc_128B
+    11225114U,	// V6_vrmpyub_acc_alt
+    11225114U,	// V6_vrmpyub_acc_alt_128B
+    11241498U,	// V6_vrmpyub_alt
+    11241498U,	// V6_vrmpyub_alt_128B
+    2393557018U,	// V6_vrmpyubi
+    2393557018U,	// V6_vrmpyubi_128B
+    2393573402U,	// V6_vrmpyubi_acc
+    2393573402U,	// V6_vrmpyubi_acc_128B
+    78333978U,	// V6_vrmpyubi_acc_alt
+    78333978U,	// V6_vrmpyubi_acc_alt_128B
+    78350362U,	// V6_vrmpyubi_alt
+    78350362U,	// V6_vrmpyubi_alt_128B
+    2091567130U,	// V6_vrmpyubv
+    2091567130U,	// V6_vrmpyubv_128B
+    2091583514U,	// V6_vrmpyubv_acc
+    2091583514U,	// V6_vrmpyubv_acc_128B
+    11225114U,	// V6_vrmpyubv_acc_alt
+    11225114U,	// V6_vrmpyubv_acc_alt_128B
+    11241498U,	// V6_vrmpyubv_alt
+    11241498U,	// V6_vrmpyubv_alt_128B
+    11257882U,	// V6_vror
+    11257882U,	// V6_vror_128B
+    11274266U,	// V6_vroundhb
+    11274266U,	// V6_vroundhb_128B
+    11290650U,	// V6_vroundhb_alt
+    11290650U,	// V6_vroundhb_alt_128B
+    95193114U,	// V6_vroundhub
+    95193114U,	// V6_vroundhub_128B
+    11323418U,	// V6_vroundhub_alt
+    11323418U,	// V6_vroundhub_alt_128B
+    1772914714U,	// V6_vrounduhub
+    1772914714U,	// V6_vrounduhub_128B
+    11339802U,	// V6_vrounduhub_alt
+    11339802U,	// V6_vrounduhub_alt_128B
+    1789741082U,	// V6_vrounduwuh
+    1789741082U,	// V6_vrounduwuh_128B
+    11372570U,	// V6_vrounduwuh_alt
+    11372570U,	// V6_vrounduwuh_alt_128B
+    11388954U,	// V6_vroundwh
+    11388954U,	// V6_vroundwh_128B
+    11405338U,	// V6_vroundwh_alt
+    11405338U,	// V6_vroundwh_alt_128B
+    1823295514U,	// V6_vroundwuh
+    1823295514U,	// V6_vroundwuh_128B
+    11421722U,	// V6_vroundwuh_alt
+    11421722U,	// V6_vroundwuh_alt_128B
+    11438106U,	// V6_vrsadubi
+    11438106U,	// V6_vrsadubi_128B
+    11454490U,	// V6_vrsadubi_acc
+    11454490U,	// V6_vrsadubi_acc_128B
+    68306970U,	// V6_vrsadubi_acc_alt
+    68306970U,	// V6_vrsadubi_acc_alt_128B
+    68290586U,	// V6_vrsadubi_alt
+    68290586U,	// V6_vrsadubi_alt_128B
+    11470874U,	// V6_vsathub
+    11470874U,	// V6_vsathub_128B
+    56821786U,	// V6_vsathub_alt
+    56821786U,	// V6_vsathub_alt_128B
+    11487258U,	// V6_vsatuwuh
+    11487258U,	// V6_vsatuwuh_128B
+    11503642U,	// V6_vsatuwuh_alt
+    11503642U,	// V6_vsatuwuh_alt_128B
+    11520026U,	// V6_vsatwh
+    11520026U,	// V6_vsatwh_128B
+    57018394U,	// V6_vsatwh_alt
+    57018394U,	// V6_vsatwh_alt_128B
+    11536410U,	// V6_vsb
+    11536410U,	// V6_vsb_128B
+    11552794U,	// V6_vsb_alt
+    11552794U,	// V6_vsb_alt_128B
+    11569178U,	// V6_vsh
+    11569178U,	// V6_vsh_128B
+    11585562U,	// V6_vsh_alt
+    11585562U,	// V6_vsh_alt_128B
+    91736090U,	// V6_vshufeh
+    91736090U,	// V6_vshufeh_128B
+    11601946U,	// V6_vshufeh_alt
+    11601946U,	// V6_vshufeh_alt_128B
+    35260869U,	// V6_vshuff
+    35260869U,	// V6_vshuff_128B
+    11618330U,	// V6_vshuffb
+    11618330U,	// V6_vshuffb_128B
+    11634714U,	// V6_vshuffb_alt
+    11634714U,	// V6_vshuffb_alt_128B
+    2239203354U,	// V6_vshuffeb
+    2239203354U,	// V6_vshuffeb_128B
+    11651098U,	// V6_vshuffeb_alt
+    11651098U,	// V6_vshuffeb_alt_128B
+    11667482U,	// V6_vshuffh
+    11667482U,	// V6_vshuffh_128B
+    11683866U,	// V6_vshuffh_alt
+    11683866U,	// V6_vshuffh_alt_128B
+    11700250U,	// V6_vshuffob
+    11700250U,	// V6_vshuffob_128B
+    11716634U,	// V6_vshuffob_alt
+    11716634U,	// V6_vshuffob_alt_128B
+    11733018U,	// V6_vshuffvdd
+    11733018U,	// V6_vshuffvdd_128B
+    11749402U,	// V6_vshufoeb
+    11749402U,	// V6_vshufoeb_128B
+    11765786U,	// V6_vshufoeb_alt
+    11765786U,	// V6_vshufoeb_alt_128B
+    11782170U,	// V6_vshufoeh
+    11782170U,	// V6_vshufoeh_128B
+    11798554U,	// V6_vshufoeh_alt
+    11798554U,	// V6_vshufoeh_alt_128B
+    11814938U,	// V6_vshufoh
+    11814938U,	// V6_vshufoh_128B
+    11831322U,	// V6_vshufoh_alt
+    11831322U,	// V6_vshufoh_alt_128B
+    1974781978U,	// V6_vsubb
+    1974781978U,	// V6_vsubb_128B
+    1214490U,	// V6_vsubb_alt
+    1214490U,	// V6_vsubb_alt_128B
+    1974781978U,	// V6_vsubb_dv
+    1974781978U,	// V6_vsubb_dv_128B
+    1214490U,	// V6_vsubb_dv_alt
+    1214490U,	// V6_vsubb_dv_alt_128B
+    2399391843U,	// V6_vsubbnq
+    2399391843U,	// V6_vsubbnq_128B
+    2407207011U,	// V6_vsubbnq_alt
+    2407207011U,	// V6_vsubbnq_alt_128B
+    2399392014U,	// V6_vsubbq
+    2399392014U,	// V6_vsubbq_128B
+    2407207182U,	// V6_vsubbq_alt
+    2407207182U,	// V6_vsubbq_alt_128B
+    2008336410U,	// V6_vsubbsat
+    2008336410U,	// V6_vsubbsat_128B
+    17991706U,	// V6_vsubbsat_alt
+    17991706U,	// V6_vsubbsat_alt_128B
+    2008336410U,	// V6_vsubbsat_dv
+    2008336410U,	// V6_vsubbsat_dv_128B
+    17991706U,	// V6_vsubbsat_dv_alt
+    17991706U,	// V6_vsubbsat_dv_alt_128B
+    313853978U,	// V6_vsubcarry
+    313853978U,	// V6_vsubcarry_128B
+    95766554U,	// V6_vsubh
+    95766554U,	// V6_vsubh_128B
+    477210U,	// V6_vsubh_alt
+    477210U,	// V6_vsubh_alt_128B
+    95766554U,	// V6_vsubh_dv
+    95766554U,	// V6_vsubh_dv_128B
+    477210U,	// V6_vsubh_dv_alt
+    477210U,	// V6_vsubh_dv_alt_128B
+    2416169059U,	// V6_vsubhnq
+    2416169059U,	// V6_vsubhnq_128B
+    2424066147U,	// V6_vsubhnq_alt
+    2424066147U,	// V6_vsubhnq_alt_128B
+    2416169230U,	// V6_vsubhq
+    2416169230U,	// V6_vsubhq_128B
+    2424066318U,	// V6_vsubhq_alt
+    2424066318U,	// V6_vsubhq_alt_128B
+    95766554U,	// V6_vsubhsat
+    95766554U,	// V6_vsubhsat_128B
+    17254426U,	// V6_vsubhsat_alt
+    17254426U,	// V6_vsubhsat_alt_128B
+    95766554U,	// V6_vsubhsat_dv
+    95766554U,	// V6_vsubhsat_dv_128B
+    17254426U,	// V6_vsubhsat_dv_alt
+    17254426U,	// V6_vsubhsat_dv_alt_128B
+    45418522U,	// V6_vsubhw
+    45418522U,	// V6_vsubhw_128B
+    477210U,	// V6_vsubhw_alt
+    477210U,	// V6_vsubhw_alt_128B
+    1756710938U,	// V6_vsububh
+    1756710938U,	// V6_vsububh_128B
+    1230874U,	// V6_vsububh_alt
+    1230874U,	// V6_vsububh_alt_128B
+    2041939994U,	// V6_vsububsat
+    2041939994U,	// V6_vsububsat_128B
+    18008090U,	// V6_vsububsat_alt
+    18008090U,	// V6_vsububsat_alt_128B
+    2041939994U,	// V6_vsububsat_dv
+    2041939994U,	// V6_vsububsat_dv_128B
+    18008090U,	// V6_vsububsat_dv_alt
+    18008090U,	// V6_vsububsat_dv_alt_128B
+    2008385562U,	// V6_vsubububb_sat
+    2008385562U,	// V6_vsubububb_sat_128B
+    11913242U,	// V6_vsubuhsat
+    11913242U,	// V6_vsubuhsat_128B
+    17270810U,	// V6_vsubuhsat_alt
+    17270810U,	// V6_vsubuhsat_alt_128B
+    11913242U,	// V6_vsubuhsat_dv
+    11913242U,	// V6_vsubuhsat_dv_128B
+    17270810U,	// V6_vsubuhsat_dv_alt
+    17270810U,	// V6_vsubuhsat_dv_alt_128B
+    45418522U,	// V6_vsubuhw
+    45418522U,	// V6_vsubuhw_128B
+    493594U,	// V6_vsubuhw_alt
+    493594U,	// V6_vsubuhw_alt_128B
+    11929626U,	// V6_vsubuwsat
+    11929626U,	// V6_vsubuwsat_128B
+    11946010U,	// V6_vsubuwsat_alt
+    11946010U,	// V6_vsubuwsat_alt_128B
+    11929626U,	// V6_vsubuwsat_dv
+    11929626U,	// V6_vsubuwsat_dv_128B
+    11946010U,	// V6_vsubuwsat_dv_alt
+    11946010U,	// V6_vsubuwsat_dv_alt_128B
+    45418522U,	// V6_vsubw
+    45418522U,	// V6_vsubw_128B
+    1247258U,	// V6_vsubw_alt
+    1247258U,	// V6_vsubw_alt_128B
+    45418522U,	// V6_vsubw_dv
+    45418522U,	// V6_vsubw_dv_128B
+    1247258U,	// V6_vsubw_dv_alt
+    1247258U,	// V6_vsubw_dv_alt_128B
+    2432946275U,	// V6_vsubwnq
+    2432946275U,	// V6_vsubwnq_128B
+    2441007203U,	// V6_vsubwnq_alt
+    2441007203U,	// V6_vsubwnq_alt_128B
+    2432946446U,	// V6_vsubwq
+    2432946446U,	// V6_vsubwq_128B
+    2441007374U,	// V6_vsubwq_alt
+    2441007374U,	// V6_vsubwq_alt_128B
+    45418522U,	// V6_vsubwsat
+    45418522U,	// V6_vsubwsat_128B
+    18024474U,	// V6_vsubwsat_alt
+    18024474U,	// V6_vsubwsat_alt_128B
+    45418522U,	// V6_vsubwsat_dv
+    45418522U,	// V6_vsubwsat_dv_128B
+    18024474U,	// V6_vsubwsat_dv_alt
+    18024474U,	// V6_vsubwsat_dv_alt_128B
+    11962394U,	// V6_vswap
+    11962394U,	// V6_vswap_128B
+    2243348506U,	// V6_vtmpyb
+    2243348506U,	// V6_vtmpyb_128B
+    2243364890U,	// V6_vtmpyb_acc
+    2243364890U,	// V6_vtmpyb_acc_128B
+    12011546U,	// V6_vtmpyb_acc_alt
+    12011546U,	// V6_vtmpyb_acc_alt_128B
+    12027930U,	// V6_vtmpyb_alt
+    12027930U,	// V6_vtmpyb_alt_128B
+    1756809242U,	// V6_vtmpybus
+    1756809242U,	// V6_vtmpybus_128B
+    1756825626U,	// V6_vtmpybus_acc
+    1756825626U,	// V6_vtmpybus_acc_128B
+    12044314U,	// V6_vtmpybus_acc_alt
+    12044314U,	// V6_vtmpybus_acc_alt_128B
+    12060698U,	// V6_vtmpybus_alt
+    12060698U,	// V6_vtmpybus_alt_128B
+    12077082U,	// V6_vtmpyhb
+    12077082U,	// V6_vtmpyhb_128B
+    12093466U,	// V6_vtmpyhb_acc
+    12093466U,	// V6_vtmpyhb_acc_128B
+    12109850U,	// V6_vtmpyhb_acc_alt
+    12109850U,	// V6_vtmpyhb_acc_alt_128B
+    12126234U,	// V6_vtmpyhb_alt
+    12126234U,	// V6_vtmpyhb_alt_128B
+    35260743U,	// V6_vtran2x2_map
+    35260743U,	// V6_vtran2x2_map_128B
+    12142618U,	// V6_vunpackb
+    12142618U,	// V6_vunpackb_128B
+    12159002U,	// V6_vunpackb_alt
+    12159002U,	// V6_vunpackb_alt_128B
+    12175386U,	// V6_vunpackh
+    12175386U,	// V6_vunpackh_128B
+    12191770U,	// V6_vunpackh_alt
+    12191770U,	// V6_vunpackh_alt_128B
+    12208154U,	// V6_vunpackob
+    12208154U,	// V6_vunpackob_128B
+    12224538U,	// V6_vunpackob_alt
+    12224538U,	// V6_vunpackob_alt_128B
+    12240922U,	// V6_vunpackoh
+    12240922U,	// V6_vunpackoh_128B
+    12257306U,	// V6_vunpackoh_alt
+    12257306U,	// V6_vunpackoh_alt_128B
+    12273690U,	// V6_vunpackub
+    12273690U,	// V6_vunpackub_128B
+    12290074U,	// V6_vunpackub_alt
+    12290074U,	// V6_vunpackub_alt_128B
+    12306458U,	// V6_vunpackuh
+    12306458U,	// V6_vunpackuh_128B
+    12322842U,	// V6_vunpackuh_alt
+    12322842U,	// V6_vunpackuh_alt_128B
+    961U,	// V6_vwhist128
+    961U,	// V6_vwhist128_128B
+    1460362U,	// V6_vwhist128m
+    1460362U,	// V6_vwhist128m_128B
+    1460573U,	// V6_vwhist128q
+    1460573U,	// V6_vwhist128q_128B
+    3131741U,	// V6_vwhist128qm
+    3131741U,	// V6_vwhist128qm_128B
+    951U,	// V6_vwhist256
+    951U,	// V6_vwhist256_128B
+    1115U,	// V6_vwhist256_sat
+    1115U,	// V6_vwhist256_sat_128B
+    1460562U,	// V6_vwhist256q
+    1460562U,	// V6_vwhist256q_128B
+    12339538U,	// V6_vwhist256q_sat
+    12339538U,	// V6_vwhist256q_sat_128B
+    12355610U,	// V6_vxor
+    12355610U,	// V6_vxor_128B
+    12371994U,	// V6_vzb
+    12371994U,	// V6_vzb_128B
+    12388378U,	// V6_vzb_alt
+    12388378U,	// V6_vzb_alt_128B
+    12404762U,	// V6_vzh
+    12404762U,	// V6_vzh_128B
+    12421146U,	// V6_vzh_alt
+    12421146U,	// V6_vzh_alt_128B
+    1107U,	// Y2_barrier
+    1197U,	// Y2_break
+    1460584U,	// Y2_dccleana
+    1460619U,	// Y2_dccleaninva
+    1460694U,	// Y2_dcfetch
+    3623382U,	// Y2_dcfetchbo
+    1460603U,	// Y2_dcinva
+    1460594U,	// Y2_dczeroa
+    1460611U,	// Y2_icinva
+    1023U,	// Y2_isync
+    1129U,	// Y2_syncht
+    35260877U,	// Y4_l2fetch
+    1460670U,	// Y4_trace
+    35260877U,	// Y5_l2fetch
     33572890U,	// dep_A2_addsat
     33933338U,	// dep_A2_subsat
-    2153400346U,	// dep_S2_packhl
+    2455652378U,	// dep_S2_packhl
   };
 
   static const uint16_t OpInfo1[] = {
@@ -2697,11 +3609,12 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// LIFETIME_START
     0U,	// LIFETIME_END
     0U,	// STACKMAP
+    0U,	// FENTRY_CALL
     0U,	// PATCHPOINT
     0U,	// LOAD_STACK_GUARD
     0U,	// STATEPOINT
     0U,	// LOCAL_ESCAPE
-    0U,	// FAULTING_LOAD_OP
+    0U,	// FAULTING_OP
     0U,	// PATCHABLE_OP
     0U,	// PATCHABLE_FUNCTION_ENTER
     0U,	// PATCHABLE_RET
@@ -2720,20 +3633,25 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// G_FRAME_INDEX
     0U,	// G_GLOBAL_VALUE
     0U,	// G_EXTRACT
+    0U,	// G_UNMERGE_VALUES
     0U,	// G_INSERT
     0U,	// G_SEQUENCE
+    0U,	// G_MERGE_VALUES
     0U,	// G_PTRTOINT
     0U,	// G_INTTOPTR
     0U,	// G_BITCAST
     0U,	// G_LOAD
     0U,	// G_STORE
     0U,	// G_BRCOND
+    0U,	// G_BRINDIRECT
     0U,	// G_INTRINSIC
     0U,	// G_INTRINSIC_W_SIDE_EFFECTS
     0U,	// G_ANYEXT
     0U,	// G_TRUNC
     0U,	// G_CONSTANT
     0U,	// G_FCONSTANT
+    0U,	// G_VASTART
+    0U,	// G_VAARG
     0U,	// G_SEXT
     0U,	// G_ZEXT
     0U,	// G_SHL
@@ -2748,11 +3666,15 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// G_SSUBO
     0U,	// G_UMULO
     0U,	// G_SMULO
+    0U,	// G_UMULH
+    0U,	// G_SMULH
     0U,	// G_FADD
     0U,	// G_FSUB
     0U,	// G_FMUL
     0U,	// G_FDIV
     0U,	// G_FREM
+    0U,	// G_FPOW
+    0U,	// G_FNEG
     0U,	// G_FPEXT
     0U,	// G_FPTRUNC
     0U,	// G_FPTOSI
@@ -2760,7 +3682,11 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// G_SITOFP
     0U,	// G_UITOFP
     0U,	// G_GEP
+    0U,	// G_PTR_MASK
     0U,	// G_BR
+    0U,	// G_INSERT_VECTOR_ELT
+    0U,	// G_EXTRACT_VECTOR_ELT
+    0U,	// G_SHUFFLE_VECTOR
     0U,	// A2_abs
     0U,	// A2_absp
     0U,	// A2_abssat
@@ -2777,24 +3703,24 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     386U,	// A2_addh_l16_ll
     450U,	// A2_addh_l16_sat_hl
     514U,	// A2_addh_l16_sat_ll
-    579U,	// A2_addi
+    3U,	// A2_addi
     0U,	// A2_addp
     4096U,	// A2_addpsat
     4096U,	// A2_addsat
     0U,	// A2_addsp
     8192U,	// A2_addsph
     12288U,	// A2_addspl
-    644U,	// A2_and
-    645U,	// A2_andir
-    644U,	// A2_andp
+    580U,	// A2_and
+    580U,	// A2_andir
+    580U,	// A2_andp
     0U,	// A2_aslh
     0U,	// A2_asrh
     324U,	// A2_combine_hh
     388U,	// A2_combine_hl
     324U,	// A2_combine_lh
     388U,	// A2_combine_ll
-    3U,	// A2_combineii
-    644U,	// A2_combinew
+    580U,	// A2_combineii
+    580U,	// A2_combinew
     0U,	// A2_iconst
     0U,	// A2_max
     0U,	// A2_maxp
@@ -2804,22 +3730,23 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// A2_minp
     0U,	// A2_minu
     0U,	// A2_minup
+    0U,	// A2_neg
     0U,	// A2_negp
     0U,	// A2_negsat
     0U,	// A2_nop
     0U,	// A2_not
     0U,	// A2_notp
-    644U,	// A2_or
-    645U,	// A2_orir
-    644U,	// A2_orp
-    704U,	// A2_paddf
-    704U,	// A2_paddfnew
-    771U,	// A2_paddif
-    771U,	// A2_paddifnew
-    771U,	// A2_paddit
-    771U,	// A2_padditnew
-    704U,	// A2_paddt
-    704U,	// A2_paddtnew
+    580U,	// A2_or
+    580U,	// A2_orir
+    580U,	// A2_orp
+    640U,	// A2_paddf
+    640U,	// A2_paddfnew
+    643U,	// A2_paddif
+    643U,	// A2_paddifnew
+    643U,	// A2_paddit
+    643U,	// A2_padditnew
+    640U,	// A2_paddt
+    640U,	// A2_paddtnew
     0U,	// A2_pandf
     0U,	// A2_pandfnew
     0U,	// A2_pandt
@@ -2856,7 +3783,7 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     450U,	// A2_subh_l16_sat_hl
     514U,	// A2_subh_l16_sat_ll
     0U,	// A2_subp
-    644U,	// A2_subri
+    580U,	// A2_subri
     4096U,	// A2_subsat
     0U,	// A2_svaddh
     0U,	// A2_svaddhs
@@ -2880,17 +3807,18 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// A2_tfrp
     0U,	// A2_tfrpf
     0U,	// A2_tfrpfnew
-    6U,	// A2_tfrpi
+    0U,	// A2_tfrpi
     0U,	// A2_tfrpt
     0U,	// A2_tfrptnew
     0U,	// A2_tfrrcr
-    6U,	// A2_tfrsi
+    0U,	// A2_tfrsi
     0U,	// A2_tfrt
     0U,	// A2_tfrtnew
     0U,	// A2_vabsh
     0U,	// A2_vabshsat
     0U,	// A2_vabsw
     0U,	// A2_vabswsat
+    0U,	// A2_vaddb_map
     0U,	// A2_vaddh
     0U,	// A2_vaddhs
     0U,	// A2_vaddub
@@ -2910,14 +3838,14 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// A2_vavgw
     0U,	// A2_vavgwcr
     0U,	// A2_vavgwr
-    644U,	// A2_vcmpbeq
-    644U,	// A2_vcmpbgtu
-    644U,	// A2_vcmpheq
-    644U,	// A2_vcmphgt
-    644U,	// A2_vcmphgtu
-    644U,	// A2_vcmpweq
-    644U,	// A2_vcmpwgt
-    644U,	// A2_vcmpwgtu
+    580U,	// A2_vcmpbeq
+    580U,	// A2_vcmpbgtu
+    580U,	// A2_vcmpheq
+    580U,	// A2_vcmphgt
+    580U,	// A2_vcmphgtu
+    580U,	// A2_vcmpweq
+    580U,	// A2_vcmpwgt
+    580U,	// A2_vcmpwgtu
     0U,	// A2_vconj
     0U,	// A2_vmaxb
     0U,	// A2_vmaxh
@@ -2941,6 +3869,7 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// A2_vraddub_acc
     0U,	// A2_vrsadub
     0U,	// A2_vrsadub_acc
+    0U,	// A2_vsubb_map
     0U,	// A2_vsubh
     0U,	// A2_vsubhs
     0U,	// A2_vsubub
@@ -2948,42 +3877,39 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// A2_vsubuhs
     0U,	// A2_vsubw
     0U,	// A2_vsubws
-    644U,	// A2_xor
-    644U,	// A2_xorp
+    0U,	// A2_xor
+    0U,	// A2_xorp
     0U,	// A2_zxtb
     0U,	// A2_zxth
-    17088U,	// A4_addp_c
-    644U,	// A4_andn
-    644U,	// A4_andnp
-    644U,	// A4_bitsplit
-    644U,	// A4_bitspliti
+    17024U,	// A4_addp_c
+    580U,	// A4_andn
+    580U,	// A4_andnp
+    580U,	// A4_bitsplit
+    580U,	// A4_bitspliti
     0U,	// A4_boundscheck
     0U,	// A4_boundscheck_hi
     0U,	// A4_boundscheck_lo
-    644U,	// A4_cmpbeq
-    644U,	// A4_cmpbeqi
-    644U,	// A4_cmpbgt
-    644U,	// A4_cmpbgti
-    644U,	// A4_cmpbgtu
-    645U,	// A4_cmpbgtui
-    644U,	// A4_cmpheq
-    645U,	// A4_cmpheqi
-    644U,	// A4_cmphgt
-    645U,	// A4_cmphgti
-    644U,	// A4_cmphgtu
-    645U,	// A4_cmphgtui
-    579U,	// A4_combineii
-    0U,	// A4_combineir
-    645U,	// A4_combineri
-    644U,	// A4_cround_ri
-    644U,	// A4_cround_rr
+    580U,	// A4_cmpbeq
+    580U,	// A4_cmpbeqi
+    580U,	// A4_cmpbgt
+    580U,	// A4_cmpbgti
+    580U,	// A4_cmpbgtu
+    580U,	// A4_cmpbgtui
+    580U,	// A4_cmpheq
+    580U,	// A4_cmpheqi
+    580U,	// A4_cmphgt
+    580U,	// A4_cmphgti
+    580U,	// A4_cmphgtu
+    580U,	// A4_cmphgtui
+    580U,	// A4_combineii
+    580U,	// A4_combineir
+    580U,	// A4_combineri
+    580U,	// A4_cround_ri
+    580U,	// A4_cround_rr
     0U,	// A4_ext
-    0U,	// A4_ext_b
-    0U,	// A4_ext_c
-    0U,	// A4_ext_g
     0U,	// A4_modwrapu
-    644U,	// A4_orn
-    644U,	// A4_ornp
+    580U,	// A4_orn
+    580U,	// A4_ornp
     0U,	// A4_paslhf
     0U,	// A4_paslhfnew
     0U,	// A4_paslht
@@ -3008,29 +3934,29 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// A4_pzxthfnew
     0U,	// A4_pzxtht
     0U,	// A4_pzxthtnew
-    644U,	// A4_rcmpeq
-    645U,	// A4_rcmpeqi
-    644U,	// A4_rcmpneq
-    645U,	// A4_rcmpneqi
-    644U,	// A4_round_ri
-    836U,	// A4_round_ri_sat
-    644U,	// A4_round_rr
-    836U,	// A4_round_rr_sat
-    17088U,	// A4_subp_c
+    580U,	// A4_rcmpeq
+    580U,	// A4_rcmpeqi
+    580U,	// A4_rcmpneq
+    580U,	// A4_rcmpneqi
+    580U,	// A4_round_ri
+    708U,	// A4_round_ri_sat
+    580U,	// A4_round_rr
+    708U,	// A4_round_rr_sat
+    17024U,	// A4_subp_c
     0U,	// A4_tfrcpp
     0U,	// A4_tfrpcp
     0U,	// A4_tlbmatch
     0U,	// A4_vcmpbeq_any
-    644U,	// A4_vcmpbeqi
-    644U,	// A4_vcmpbgt
-    644U,	// A4_vcmpbgti
-    644U,	// A4_vcmpbgtui
-    644U,	// A4_vcmpheqi
-    644U,	// A4_vcmphgti
-    644U,	// A4_vcmphgtui
-    644U,	// A4_vcmpweqi
-    644U,	// A4_vcmpwgti
-    644U,	// A4_vcmpwgtui
+    580U,	// A4_vcmpbeqi
+    580U,	// A4_vcmpbgt
+    580U,	// A4_vcmpbgti
+    580U,	// A4_vcmpbgtui
+    580U,	// A4_vcmpheqi
+    580U,	// A4_vcmphgti
+    580U,	// A4_vcmphgtui
+    580U,	// A4_vcmpweqi
+    580U,	// A4_vcmpwgti
+    580U,	// A4_vcmpwgtui
     0U,	// A4_vrmaxh
     0U,	// A4_vrmaxuh
     0U,	// A4_vrmaxuw
@@ -3039,16 +3965,17 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// A4_vrminuh
     0U,	// A4_vrminuw
     0U,	// A4_vrminw
-    7U,	// A5_ACS
+    5U,	// A5_ACS
     0U,	// A5_vaddhubs
+    6U,	// A6_vminub_RdP
     0U,	// ADJCALLSTACKDOWN
     0U,	// ADJCALLSTACKUP
     0U,	// C2_all8
-    644U,	// C2_and
+    580U,	// C2_and
     0U,	// C2_andn
     0U,	// C2_any8
-    644U,	// C2_bitsclr
-    644U,	// C2_bitsclri
+    580U,	// C2_bitsclr
+    580U,	// C2_bitsclri
     0U,	// C2_bitsset
     0U,	// C2_ccombinewf
     0U,	// C2_ccombinewnewf
@@ -3058,53 +3985,57 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// C2_cmoveit
     0U,	// C2_cmovenewif
     0U,	// C2_cmovenewit
-    644U,	// C2_cmpeq
-    645U,	// C2_cmpeqi
-    644U,	// C2_cmpeqp
+    580U,	// C2_cmpeq
+    580U,	// C2_cmpeqi
+    580U,	// C2_cmpeqp
     0U,	// C2_cmpgei
     0U,	// C2_cmpgeui
-    644U,	// C2_cmpgt
-    645U,	// C2_cmpgti
-    644U,	// C2_cmpgtp
-    644U,	// C2_cmpgtu
-    645U,	// C2_cmpgtui
-    644U,	// C2_cmpgtup
+    580U,	// C2_cmpgt
+    580U,	// C2_cmpgti
+    580U,	// C2_cmpgtp
+    580U,	// C2_cmpgtu
+    580U,	// C2_cmpgtui
+    580U,	// C2_cmpgtup
+    0U,	// C2_cmplt
+    0U,	// C2_cmpltu
     0U,	// C2_mask
-    900U,	// C2_mux
-    21445U,	// C2_muxii
-    25540U,	// C2_muxir
-    901U,	// C2_muxri
+    772U,	// C2_mux
+    21316U,	// C2_muxii
+    21316U,	// C2_muxir
+    772U,	// C2_muxri
     0U,	// C2_not
-    644U,	// C2_or
+    580U,	// C2_or
     0U,	// C2_orn
     0U,	// C2_pxfer_map
     0U,	// C2_tfrpr
     0U,	// C2_tfrrp
     0U,	// C2_vitpack
-    900U,	// C2_vmux
-    644U,	// C2_xor
+    0U,	// C2_vmux
+    0U,	// C2_xor
     0U,	// C4_addipc
-    29376U,	// C4_and_and
-    8U,	// C4_and_andn
-    29376U,	// C4_and_or
-    8U,	// C4_and_orn
-    644U,	// C4_cmplte
-    645U,	// C4_cmpltei
-    644U,	// C4_cmplteu
-    645U,	// C4_cmplteui
-    644U,	// C4_cmpneq
-    645U,	// C4_cmpneqi
+    25216U,	// C4_and_and
+    7U,	// C4_and_andn
+    25216U,	// C4_and_or
+    7U,	// C4_and_orn
+    580U,	// C4_cmplte
+    580U,	// C4_cmpltei
+    580U,	// C4_cmplteu
+    580U,	// C4_cmplteui
+    580U,	// C4_cmpneq
+    580U,	// C4_cmpneqi
     0U,	// C4_fastcorner9
     0U,	// C4_fastcorner9_not
-    644U,	// C4_nbitsclr
-    644U,	// C4_nbitsclri
+    580U,	// C4_nbitsclr
+    580U,	// C4_nbitsclri
     0U,	// C4_nbitsset
-    29376U,	// C4_or_and
-    8U,	// C4_or_andn
-    29376U,	// C4_or_or
-    8U,	// C4_or_orn
+    25216U,	// C4_or_and
+    7U,	// C4_or_andn
+    25216U,	// C4_or_or
+    7U,	// C4_or_orn
+    0U,	// CALLProfile
     0U,	// CONST32
     0U,	// CONST64
+    0U,	// DUPLEX_Pseudo
     0U,	// DuplexIClass0
     0U,	// DuplexIClass1
     0U,	// DuplexIClass2
@@ -3168,16 +4099,16 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// F2_sffixupr
     0U,	// F2_sffma
     0U,	// F2_sffma_lib
-    1033U,	// F2_sffma_sc
+    904U,	// F2_sffma_sc
     0U,	// F2_sffms
     0U,	// F2_sffms_lib
     0U,	// F2_sfimm_n
     0U,	// F2_sfimm_p
-    10U,	// F2_sfinvsqrta
+    9U,	// F2_sfinvsqrta
     0U,	// F2_sfmax
     0U,	// F2_sfmin
     0U,	// F2_sfmpy
-    11U,	// F2_sfrecipa
+    10U,	// F2_sfrecipa
     0U,	// F2_sfsub
     0U,	// HI
     0U,	// J2_call
@@ -3186,13 +4117,18 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// J2_callrf
     0U,	// J2_callrt
     0U,	// J2_callt
+    0U,	// J2_endloop0
+    0U,	// J2_endloop01
+    0U,	// J2_endloop1
     0U,	// J2_jump
     0U,	// J2_jumpf
+    0U,	// J2_jumpf_nopred_map
     0U,	// J2_jumpfnew
     0U,	// J2_jumpfnewpt
     0U,	// J2_jumpfpt
     0U,	// J2_jumpr
     0U,	// J2_jumprf
+    0U,	// J2_jumprf_nopred_map
     0U,	// J2_jumprfnew
     0U,	// J2_jumprfnewpt
     0U,	// J2_jumprfpt
@@ -3203,44 +4139,45 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// J2_jumprnz
     0U,	// J2_jumprnzpt
     0U,	// J2_jumprt
+    0U,	// J2_jumprt_nopred_map
     0U,	// J2_jumprtnew
     0U,	// J2_jumprtnewpt
     0U,	// J2_jumprtpt
     0U,	// J2_jumprz
     0U,	// J2_jumprzpt
     0U,	// J2_jumpt
+    0U,	// J2_jumpt_nopred_map
     0U,	// J2_jumptnew
     0U,	// J2_jumptnewpt
     0U,	// J2_jumptpt
     0U,	// J2_loop0i
     0U,	// J2_loop0iext
-    12U,	// J2_loop0r
-    12U,	// J2_loop0rext
+    11U,	// J2_loop0r
+    11U,	// J2_loop0rext
     0U,	// J2_loop1i
     0U,	// J2_loop1iext
-    12U,	// J2_loop1r
-    12U,	// J2_loop1rext
+    11U,	// J2_loop1r
+    11U,	// J2_loop1rext
     0U,	// J2_pause
     0U,	// J2_ploop1si
-    12U,	// J2_ploop1sr
+    11U,	// J2_ploop1sr
     0U,	// J2_ploop2si
-    12U,	// J2_ploop2sr
+    11U,	// J2_ploop2sr
     0U,	// J2_ploop3si
-    12U,	// J2_ploop3sr
+    11U,	// J2_ploop3sr
     0U,	// J2_trap0
-    0U,	// J2_trap1
     0U,	// J4_cmpeq_f_jumpnv_nt
     0U,	// J4_cmpeq_f_jumpnv_t
-    13U,	// J4_cmpeq_fp0_jump_nt
-    14U,	// J4_cmpeq_fp0_jump_t
-    15U,	// J4_cmpeq_fp1_jump_nt
-    16U,	// J4_cmpeq_fp1_jump_t
+    12U,	// J4_cmpeq_fp0_jump_nt
+    13U,	// J4_cmpeq_fp0_jump_t
+    14U,	// J4_cmpeq_fp1_jump_nt
+    15U,	// J4_cmpeq_fp1_jump_t
     0U,	// J4_cmpeq_t_jumpnv_nt
     0U,	// J4_cmpeq_t_jumpnv_t
-    17U,	// J4_cmpeq_tp0_jump_nt
-    18U,	// J4_cmpeq_tp0_jump_t
-    19U,	// J4_cmpeq_tp1_jump_nt
-    20U,	// J4_cmpeq_tp1_jump_t
+    16U,	// J4_cmpeq_tp0_jump_nt
+    17U,	// J4_cmpeq_tp0_jump_t
+    18U,	// J4_cmpeq_tp1_jump_nt
+    19U,	// J4_cmpeq_tp1_jump_t
     0U,	// J4_cmpeqi_f_jumpnv_nt
     0U,	// J4_cmpeqi_f_jumpnv_t
     0U,	// J4_cmpeqi_fp0_jump_nt
@@ -3267,16 +4204,16 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// J4_cmpeqn1_tp1_jump_t
     0U,	// J4_cmpgt_f_jumpnv_nt
     0U,	// J4_cmpgt_f_jumpnv_t
-    13U,	// J4_cmpgt_fp0_jump_nt
-    14U,	// J4_cmpgt_fp0_jump_t
-    15U,	// J4_cmpgt_fp1_jump_nt
-    16U,	// J4_cmpgt_fp1_jump_t
+    12U,	// J4_cmpgt_fp0_jump_nt
+    13U,	// J4_cmpgt_fp0_jump_t
+    14U,	// J4_cmpgt_fp1_jump_nt
+    15U,	// J4_cmpgt_fp1_jump_t
     0U,	// J4_cmpgt_t_jumpnv_nt
     0U,	// J4_cmpgt_t_jumpnv_t
-    17U,	// J4_cmpgt_tp0_jump_nt
-    18U,	// J4_cmpgt_tp0_jump_t
-    19U,	// J4_cmpgt_tp1_jump_nt
-    20U,	// J4_cmpgt_tp1_jump_t
+    16U,	// J4_cmpgt_tp0_jump_nt
+    17U,	// J4_cmpgt_tp0_jump_t
+    18U,	// J4_cmpgt_tp1_jump_nt
+    19U,	// J4_cmpgt_tp1_jump_t
     0U,	// J4_cmpgti_f_jumpnv_nt
     0U,	// J4_cmpgti_f_jumpnv_t
     0U,	// J4_cmpgti_fp0_jump_nt
@@ -3303,16 +4240,16 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// J4_cmpgtn1_tp1_jump_t
     0U,	// J4_cmpgtu_f_jumpnv_nt
     0U,	// J4_cmpgtu_f_jumpnv_t
-    13U,	// J4_cmpgtu_fp0_jump_nt
-    14U,	// J4_cmpgtu_fp0_jump_t
-    15U,	// J4_cmpgtu_fp1_jump_nt
-    16U,	// J4_cmpgtu_fp1_jump_t
+    12U,	// J4_cmpgtu_fp0_jump_nt
+    13U,	// J4_cmpgtu_fp0_jump_t
+    14U,	// J4_cmpgtu_fp1_jump_nt
+    15U,	// J4_cmpgtu_fp1_jump_t
     0U,	// J4_cmpgtu_t_jumpnv_nt
     0U,	// J4_cmpgtu_t_jumpnv_t
-    17U,	// J4_cmpgtu_tp0_jump_nt
-    18U,	// J4_cmpgtu_tp0_jump_t
-    19U,	// J4_cmpgtu_tp1_jump_nt
-    20U,	// J4_cmpgtu_tp1_jump_t
+    16U,	// J4_cmpgtu_tp0_jump_nt
+    17U,	// J4_cmpgtu_tp0_jump_t
+    18U,	// J4_cmpgtu_tp1_jump_nt
+    19U,	// J4_cmpgtu_tp1_jump_t
     0U,	// J4_cmpgtui_f_jumpnv_nt
     0U,	// J4_cmpgtui_f_jumpnv_t
     0U,	// J4_cmpgtui_fp0_jump_nt
@@ -3325,16 +4262,16 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// J4_cmpgtui_tp0_jump_t
     0U,	// J4_cmpgtui_tp1_jump_nt
     0U,	// J4_cmpgtui_tp1_jump_t
-    21U,	// J4_cmplt_f_jumpnv_nt
-    22U,	// J4_cmplt_f_jumpnv_t
-    21U,	// J4_cmplt_t_jumpnv_nt
-    22U,	// J4_cmplt_t_jumpnv_t
-    21U,	// J4_cmpltu_f_jumpnv_nt
-    22U,	// J4_cmpltu_f_jumpnv_t
-    21U,	// J4_cmpltu_t_jumpnv_nt
-    22U,	// J4_cmpltu_t_jumpnv_t
+    20U,	// J4_cmplt_f_jumpnv_nt
+    21U,	// J4_cmplt_f_jumpnv_t
+    20U,	// J4_cmplt_t_jumpnv_nt
+    21U,	// J4_cmplt_t_jumpnv_t
+    20U,	// J4_cmpltu_f_jumpnv_nt
+    21U,	// J4_cmpltu_f_jumpnv_t
+    20U,	// J4_cmpltu_t_jumpnv_nt
+    21U,	// J4_cmpltu_t_jumpnv_t
     0U,	// J4_hintjumpr
-    23U,	// J4_jumpseti
+    0U,	// J4_jumpseti
     0U,	// J4_jumpsetr
     0U,	// J4_tstbit0_f_jumpnv_nt
     0U,	// J4_tstbit0_f_jumpnv_t
@@ -3349,233 +4286,290 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// J4_tstbit0_tp1_jump_nt
     0U,	// J4_tstbit0_tp1_jump_t
     0U,	// L2_deallocframe
-    792U,	// L2_loadalignb_io
-    25U,	// L2_loadalignb_pbr
-    26U,	// L2_loadalignb_pci
-    29787U,	// L2_loadalignb_pcr
-    1116U,	// L2_loadalignb_pi
-    1117U,	// L2_loadalignb_pr
-    792U,	// L2_loadalignh_io
-    25U,	// L2_loadalignh_pbr
-    26U,	// L2_loadalignh_pci
-    29787U,	// L2_loadalignh_pcr
-    1116U,	// L2_loadalignh_pi
-    1117U,	// L2_loadalignh_pr
-    600U,	// L2_loadbsw2_io
-    25U,	// L2_loadbsw2_pbr
-    26U,	// L2_loadbsw2_pci
-    29403U,	// L2_loadbsw2_pcr
-    732U,	// L2_loadbsw2_pi
-    733U,	// L2_loadbsw2_pr
-    600U,	// L2_loadbsw4_io
-    25U,	// L2_loadbsw4_pbr
-    26U,	// L2_loadbsw4_pci
-    29403U,	// L2_loadbsw4_pcr
-    732U,	// L2_loadbsw4_pi
-    733U,	// L2_loadbsw4_pr
-    600U,	// L2_loadbzw2_io
-    25U,	// L2_loadbzw2_pbr
-    26U,	// L2_loadbzw2_pci
-    29403U,	// L2_loadbzw2_pcr
-    732U,	// L2_loadbzw2_pi
-    733U,	// L2_loadbzw2_pr
-    600U,	// L2_loadbzw4_io
-    25U,	// L2_loadbzw4_pbr
-    26U,	// L2_loadbzw4_pci
-    29403U,	// L2_loadbzw4_pcr
-    732U,	// L2_loadbzw4_pi
-    733U,	// L2_loadbzw4_pr
-    600U,	// L2_loadrb_io
-    25U,	// L2_loadrb_pbr
-    26U,	// L2_loadrb_pci
-    29403U,	// L2_loadrb_pcr
-    732U,	// L2_loadrb_pi
-    733U,	// L2_loadrb_pr
-    12U,	// L2_loadrbgp
-    600U,	// L2_loadrd_io
-    25U,	// L2_loadrd_pbr
-    26U,	// L2_loadrd_pci
-    29403U,	// L2_loadrd_pcr
-    732U,	// L2_loadrd_pi
-    733U,	// L2_loadrd_pr
-    12U,	// L2_loadrdgp
-    600U,	// L2_loadrh_io
-    25U,	// L2_loadrh_pbr
-    26U,	// L2_loadrh_pci
-    29403U,	// L2_loadrh_pcr
-    732U,	// L2_loadrh_pi
-    733U,	// L2_loadrh_pr
-    12U,	// L2_loadrhgp
-    600U,	// L2_loadri_io
-    25U,	// L2_loadri_pbr
-    26U,	// L2_loadri_pci
-    29403U,	// L2_loadri_pcr
-    732U,	// L2_loadri_pi
-    733U,	// L2_loadri_pr
-    12U,	// L2_loadrigp
-    600U,	// L2_loadrub_io
-    25U,	// L2_loadrub_pbr
-    26U,	// L2_loadrub_pci
-    29403U,	// L2_loadrub_pcr
-    732U,	// L2_loadrub_pi
-    733U,	// L2_loadrub_pr
-    12U,	// L2_loadrubgp
-    600U,	// L2_loadruh_io
-    25U,	// L2_loadruh_pbr
-    26U,	// L2_loadruh_pci
-    29403U,	// L2_loadruh_pcr
-    732U,	// L2_loadruh_pi
-    733U,	// L2_loadruh_pr
-    12U,	// L2_loadruhgp
+    662U,	// L2_loadalignb_io
+    29655U,	// L2_loadalignb_pbr
+    33752U,	// L2_loadalignb_pci
+    25U,	// L2_loadalignb_pcr
+    984U,	// L2_loadalignb_pi
+    983U,	// L2_loadalignb_pr
+    11U,	// L2_loadalignb_zomap
+    662U,	// L2_loadalignh_io
+    29655U,	// L2_loadalignh_pbr
+    33752U,	// L2_loadalignh_pci
+    25U,	// L2_loadalignh_pcr
+    984U,	// L2_loadalignh_pi
+    983U,	// L2_loadalignh_pr
+    11U,	// L2_loadalignh_zomap
+    11U,	// L2_loadbsw2_io
+    26U,	// L2_loadbsw2_pbr
+    27U,	// L2_loadbsw2_pci
+    0U,	// L2_loadbsw2_pcr
+    11U,	// L2_loadbsw2_pi
+    11U,	// L2_loadbsw2_pr
+    0U,	// L2_loadbsw2_zomap
+    11U,	// L2_loadbsw4_io
+    26U,	// L2_loadbsw4_pbr
+    27U,	// L2_loadbsw4_pci
+    0U,	// L2_loadbsw4_pcr
+    11U,	// L2_loadbsw4_pi
+    11U,	// L2_loadbsw4_pr
+    0U,	// L2_loadbsw4_zomap
+    11U,	// L2_loadbzw2_io
+    26U,	// L2_loadbzw2_pbr
+    27U,	// L2_loadbzw2_pci
+    0U,	// L2_loadbzw2_pcr
+    11U,	// L2_loadbzw2_pi
+    11U,	// L2_loadbzw2_pr
+    0U,	// L2_loadbzw2_zomap
+    11U,	// L2_loadbzw4_io
+    26U,	// L2_loadbzw4_pbr
+    27U,	// L2_loadbzw4_pci
+    0U,	// L2_loadbzw4_pcr
+    11U,	// L2_loadbzw4_pi
+    11U,	// L2_loadbzw4_pr
+    0U,	// L2_loadbzw4_zomap
+    11U,	// L2_loadrb_io
+    26U,	// L2_loadrb_pbr
+    27U,	// L2_loadrb_pci
+    0U,	// L2_loadrb_pcr
+    11U,	// L2_loadrb_pi
+    11U,	// L2_loadrb_pr
+    0U,	// L2_loadrb_zomap
+    0U,	// L2_loadrbgp
+    11U,	// L2_loadrd_io
+    26U,	// L2_loadrd_pbr
+    27U,	// L2_loadrd_pci
+    0U,	// L2_loadrd_pcr
+    11U,	// L2_loadrd_pi
+    11U,	// L2_loadrd_pr
+    0U,	// L2_loadrd_zomap
+    0U,	// L2_loadrdgp
+    11U,	// L2_loadrh_io
+    26U,	// L2_loadrh_pbr
+    27U,	// L2_loadrh_pci
+    0U,	// L2_loadrh_pcr
+    11U,	// L2_loadrh_pi
+    11U,	// L2_loadrh_pr
+    0U,	// L2_loadrh_zomap
+    0U,	// L2_loadrhgp
+    11U,	// L2_loadri_io
+    26U,	// L2_loadri_pbr
+    27U,	// L2_loadri_pci
+    0U,	// L2_loadri_pcr
+    11U,	// L2_loadri_pi
+    11U,	// L2_loadri_pr
+    0U,	// L2_loadri_zomap
+    0U,	// L2_loadrigp
+    11U,	// L2_loadrub_io
+    26U,	// L2_loadrub_pbr
+    27U,	// L2_loadrub_pci
+    0U,	// L2_loadrub_pcr
+    11U,	// L2_loadrub_pi
+    11U,	// L2_loadrub_pr
+    0U,	// L2_loadrub_zomap
+    0U,	// L2_loadrubgp
+    11U,	// L2_loadruh_io
+    26U,	// L2_loadruh_pbr
+    27U,	// L2_loadruh_pci
+    0U,	// L2_loadruh_pcr
+    11U,	// L2_loadruh_pi
+    11U,	// L2_loadruh_pr
+    0U,	// L2_loadruh_zomap
+    0U,	// L2_loadruhgp
     0U,	// L2_loadw_locked
-    1156U,	// L2_ploadrbf_io
-    1246U,	// L2_ploadrbf_pi
-    1156U,	// L2_ploadrbfnew_io
-    1246U,	// L2_ploadrbfnew_pi
-    1156U,	// L2_ploadrbt_io
-    1246U,	// L2_ploadrbt_pi
-    1156U,	// L2_ploadrbtnew_io
-    1246U,	// L2_ploadrbtnew_pi
-    1156U,	// L2_ploadrdf_io
-    1246U,	// L2_ploadrdf_pi
-    1156U,	// L2_ploadrdfnew_io
-    1246U,	// L2_ploadrdfnew_pi
-    1156U,	// L2_ploadrdt_io
-    1246U,	// L2_ploadrdt_pi
-    1156U,	// L2_ploadrdtnew_io
-    1246U,	// L2_ploadrdtnew_pi
-    1156U,	// L2_ploadrhf_io
-    1246U,	// L2_ploadrhf_pi
-    1156U,	// L2_ploadrhfnew_io
-    1246U,	// L2_ploadrhfnew_pi
-    1156U,	// L2_ploadrht_io
-    1246U,	// L2_ploadrht_pi
-    1156U,	// L2_ploadrhtnew_io
-    1246U,	// L2_ploadrhtnew_pi
-    1156U,	// L2_ploadrif_io
-    1246U,	// L2_ploadrif_pi
-    1156U,	// L2_ploadrifnew_io
-    1246U,	// L2_ploadrifnew_pi
-    1156U,	// L2_ploadrit_io
-    1246U,	// L2_ploadrit_pi
-    1156U,	// L2_ploadritnew_io
-    1246U,	// L2_ploadritnew_pi
-    1156U,	// L2_ploadrubf_io
-    1246U,	// L2_ploadrubf_pi
-    1156U,	// L2_ploadrubfnew_io
-    1246U,	// L2_ploadrubfnew_pi
-    1156U,	// L2_ploadrubt_io
-    1246U,	// L2_ploadrubt_pi
-    1156U,	// L2_ploadrubtnew_io
-    1246U,	// L2_ploadrubtnew_pi
-    1156U,	// L2_ploadruhf_io
-    1246U,	// L2_ploadruhf_pi
-    1156U,	// L2_ploadruhfnew_io
-    1246U,	// L2_ploadruhfnew_pi
-    1156U,	// L2_ploadruht_io
-    1246U,	// L2_ploadruht_pi
-    1156U,	// L2_ploadruhtnew_io
-    1246U,	// L2_ploadruhtnew_pi
-    31U,	// L4_add_memopb_io
-    31U,	// L4_add_memoph_io
-    31U,	// L4_add_memopw_io
-    32U,	// L4_and_memopb_io
-    32U,	// L4_and_memoph_io
-    32U,	// L4_and_memopw_io
-    33U,	// L4_iadd_memopb_io
-    33U,	// L4_iadd_memoph_io
-    33U,	// L4_iadd_memopw_io
-    34U,	// L4_iand_memopb_io
-    34U,	// L4_iand_memoph_io
-    34U,	// L4_iand_memopw_io
-    35U,	// L4_ior_memopb_io
-    35U,	// L4_ior_memoph_io
-    35U,	// L4_ior_memopw_io
-    36U,	// L4_isub_memopb_io
-    36U,	// L4_isub_memoph_io
-    36U,	// L4_isub_memopw_io
-    37U,	// L4_loadalignb_ap
-    38U,	// L4_loadalignb_ur
-    37U,	// L4_loadalignh_ap
-    38U,	// L4_loadalignh_ur
-    37U,	// L4_loadbsw2_ap
-    38U,	// L4_loadbsw2_ur
-    37U,	// L4_loadbsw4_ap
-    38U,	// L4_loadbsw4_ur
-    37U,	// L4_loadbzw2_ap
-    38U,	// L4_loadbzw2_ur
-    37U,	// L4_loadbzw4_ap
-    38U,	// L4_loadbzw4_ur
+    1028U,	// L2_ploadrbf_io
+    1116U,	// L2_ploadrbf_pi
+    580U,	// L2_ploadrbf_zomap
+    1028U,	// L2_ploadrbfnew_io
+    1116U,	// L2_ploadrbfnew_pi
+    580U,	// L2_ploadrbfnew_zomap
+    1028U,	// L2_ploadrbt_io
+    1116U,	// L2_ploadrbt_pi
+    580U,	// L2_ploadrbt_zomap
+    1028U,	// L2_ploadrbtnew_io
+    1116U,	// L2_ploadrbtnew_pi
+    580U,	// L2_ploadrbtnew_zomap
+    1028U,	// L2_ploadrdf_io
+    1116U,	// L2_ploadrdf_pi
+    580U,	// L2_ploadrdf_zomap
+    1028U,	// L2_ploadrdfnew_io
+    1116U,	// L2_ploadrdfnew_pi
+    580U,	// L2_ploadrdfnew_zomap
+    1028U,	// L2_ploadrdt_io
+    1116U,	// L2_ploadrdt_pi
+    580U,	// L2_ploadrdt_zomap
+    1028U,	// L2_ploadrdtnew_io
+    1116U,	// L2_ploadrdtnew_pi
+    580U,	// L2_ploadrdtnew_zomap
+    1028U,	// L2_ploadrhf_io
+    1116U,	// L2_ploadrhf_pi
+    580U,	// L2_ploadrhf_zomap
+    1028U,	// L2_ploadrhfnew_io
+    1116U,	// L2_ploadrhfnew_pi
+    580U,	// L2_ploadrhfnew_zomap
+    1028U,	// L2_ploadrht_io
+    1116U,	// L2_ploadrht_pi
+    580U,	// L2_ploadrht_zomap
+    1028U,	// L2_ploadrhtnew_io
+    1116U,	// L2_ploadrhtnew_pi
+    580U,	// L2_ploadrhtnew_zomap
+    1028U,	// L2_ploadrif_io
+    1116U,	// L2_ploadrif_pi
+    580U,	// L2_ploadrif_zomap
+    1028U,	// L2_ploadrifnew_io
+    1116U,	// L2_ploadrifnew_pi
+    580U,	// L2_ploadrifnew_zomap
+    1028U,	// L2_ploadrit_io
+    1116U,	// L2_ploadrit_pi
+    580U,	// L2_ploadrit_zomap
+    1028U,	// L2_ploadritnew_io
+    1116U,	// L2_ploadritnew_pi
+    580U,	// L2_ploadritnew_zomap
+    1028U,	// L2_ploadrubf_io
+    1116U,	// L2_ploadrubf_pi
+    580U,	// L2_ploadrubf_zomap
+    1028U,	// L2_ploadrubfnew_io
+    1116U,	// L2_ploadrubfnew_pi
+    580U,	// L2_ploadrubfnew_zomap
+    1028U,	// L2_ploadrubt_io
+    1116U,	// L2_ploadrubt_pi
+    580U,	// L2_ploadrubt_zomap
+    1028U,	// L2_ploadrubtnew_io
+    1116U,	// L2_ploadrubtnew_pi
+    580U,	// L2_ploadrubtnew_zomap
+    1028U,	// L2_ploadruhf_io
+    1116U,	// L2_ploadruhf_pi
+    580U,	// L2_ploadruhf_zomap
+    1028U,	// L2_ploadruhfnew_io
+    1116U,	// L2_ploadruhfnew_pi
+    580U,	// L2_ploadruhfnew_zomap
+    1028U,	// L2_ploadruht_io
+    1116U,	// L2_ploadruht_pi
+    580U,	// L2_ploadruht_zomap
+    1028U,	// L2_ploadruhtnew_io
+    1116U,	// L2_ploadruhtnew_pi
+    580U,	// L2_ploadruhtnew_zomap
+    0U,	// L4_add_memopb_io
+    0U,	// L4_add_memopb_zomap
+    0U,	// L4_add_memoph_io
+    0U,	// L4_add_memoph_zomap
+    0U,	// L4_add_memopw_io
+    0U,	// L4_add_memopw_zomap
+    0U,	// L4_and_memopb_io
+    0U,	// L4_and_memopb_zomap
+    0U,	// L4_and_memoph_io
+    0U,	// L4_and_memoph_zomap
+    0U,	// L4_and_memopw_io
+    0U,	// L4_and_memopw_zomap
+    0U,	// L4_iadd_memopb_io
+    0U,	// L4_iadd_memopb_zomap
+    0U,	// L4_iadd_memoph_io
+    0U,	// L4_iadd_memoph_zomap
+    0U,	// L4_iadd_memopw_io
+    0U,	// L4_iadd_memopw_zomap
+    0U,	// L4_iand_memopb_io
+    0U,	// L4_iand_memopb_zomap
+    0U,	// L4_iand_memoph_io
+    0U,	// L4_iand_memoph_zomap
+    0U,	// L4_iand_memopw_io
+    0U,	// L4_iand_memopw_zomap
+    0U,	// L4_ior_memopb_io
+    0U,	// L4_ior_memopb_zomap
+    0U,	// L4_ior_memoph_io
+    0U,	// L4_ior_memoph_zomap
+    0U,	// L4_ior_memopw_io
+    0U,	// L4_ior_memopw_zomap
+    0U,	// L4_isub_memopb_io
+    0U,	// L4_isub_memopb_zomap
+    0U,	// L4_isub_memoph_io
+    0U,	// L4_isub_memoph_zomap
+    0U,	// L4_isub_memopw_io
+    0U,	// L4_isub_memopw_zomap
+    29U,	// L4_loadalignb_ap
+    30U,	// L4_loadalignb_ur
+    29U,	// L4_loadalignh_ap
+    30U,	// L4_loadalignh_ur
+    0U,	// L4_loadbsw2_ap
+    0U,	// L4_loadbsw2_ur
+    0U,	// L4_loadbsw4_ap
+    0U,	// L4_loadbsw4_ur
+    0U,	// L4_loadbzw2_ap
+    0U,	// L4_loadbzw2_ur
+    0U,	// L4_loadbzw4_ap
+    0U,	// L4_loadbzw4_ur
     0U,	// L4_loadd_locked
-    37U,	// L4_loadrb_ap
-    39U,	// L4_loadrb_rr
-    38U,	// L4_loadrb_ur
-    37U,	// L4_loadrd_ap
-    39U,	// L4_loadrd_rr
-    38U,	// L4_loadrd_ur
-    37U,	// L4_loadrh_ap
-    39U,	// L4_loadrh_rr
-    38U,	// L4_loadrh_ur
-    37U,	// L4_loadri_ap
-    39U,	// L4_loadri_rr
-    38U,	// L4_loadri_ur
-    37U,	// L4_loadrub_ap
-    39U,	// L4_loadrub_rr
-    38U,	// L4_loadrub_ur
-    37U,	// L4_loadruh_ap
-    39U,	// L4_loadruh_rr
-    38U,	// L4_loadruh_ur
-    40U,	// L4_or_memopb_io
-    40U,	// L4_or_memoph_io
-    40U,	// L4_or_memopw_io
+    0U,	// L4_loadrb_ap
+    0U,	// L4_loadrb_rr
+    0U,	// L4_loadrb_ur
+    0U,	// L4_loadrd_ap
+    0U,	// L4_loadrd_rr
+    0U,	// L4_loadrd_ur
+    0U,	// L4_loadrh_ap
+    0U,	// L4_loadrh_rr
+    0U,	// L4_loadrh_ur
+    0U,	// L4_loadri_ap
+    0U,	// L4_loadri_rr
+    0U,	// L4_loadri_ur
+    0U,	// L4_loadrub_ap
+    0U,	// L4_loadrub_rr
+    0U,	// L4_loadrub_ur
+    0U,	// L4_loadruh_ap
+    0U,	// L4_loadruh_rr
+    0U,	// L4_loadruh_ur
+    0U,	// L4_or_memopb_io
+    0U,	// L4_or_memopb_zomap
+    0U,	// L4_or_memoph_io
+    0U,	// L4_or_memoph_zomap
+    0U,	// L4_or_memopw_io
+    0U,	// L4_or_memopw_zomap
     0U,	// L4_ploadrbf_abs
-    1284U,	// L4_ploadrbf_rr
+    1156U,	// L4_ploadrbf_rr
     0U,	// L4_ploadrbfnew_abs
-    1284U,	// L4_ploadrbfnew_rr
+    1156U,	// L4_ploadrbfnew_rr
     0U,	// L4_ploadrbt_abs
-    1284U,	// L4_ploadrbt_rr
+    1156U,	// L4_ploadrbt_rr
     0U,	// L4_ploadrbtnew_abs
-    1284U,	// L4_ploadrbtnew_rr
+    1156U,	// L4_ploadrbtnew_rr
     0U,	// L4_ploadrdf_abs
-    1284U,	// L4_ploadrdf_rr
+    1156U,	// L4_ploadrdf_rr
     0U,	// L4_ploadrdfnew_abs
-    1284U,	// L4_ploadrdfnew_rr
+    1156U,	// L4_ploadrdfnew_rr
     0U,	// L4_ploadrdt_abs
-    1284U,	// L4_ploadrdt_rr
+    1156U,	// L4_ploadrdt_rr
     0U,	// L4_ploadrdtnew_abs
-    1284U,	// L4_ploadrdtnew_rr
+    1156U,	// L4_ploadrdtnew_rr
     0U,	// L4_ploadrhf_abs
-    1284U,	// L4_ploadrhf_rr
+    1156U,	// L4_ploadrhf_rr
     0U,	// L4_ploadrhfnew_abs
-    1284U,	// L4_ploadrhfnew_rr
+    1156U,	// L4_ploadrhfnew_rr
     0U,	// L4_ploadrht_abs
-    1284U,	// L4_ploadrht_rr
+    1156U,	// L4_ploadrht_rr
     0U,	// L4_ploadrhtnew_abs
-    1284U,	// L4_ploadrhtnew_rr
+    1156U,	// L4_ploadrhtnew_rr
     0U,	// L4_ploadrif_abs
-    1284U,	// L4_ploadrif_rr
+    1156U,	// L4_ploadrif_rr
     0U,	// L4_ploadrifnew_abs
-    1284U,	// L4_ploadrifnew_rr
+    1156U,	// L4_ploadrifnew_rr
     0U,	// L4_ploadrit_abs
-    1284U,	// L4_ploadrit_rr
+    1156U,	// L4_ploadrit_rr
     0U,	// L4_ploadritnew_abs
-    1284U,	// L4_ploadritnew_rr
+    1156U,	// L4_ploadritnew_rr
     0U,	// L4_ploadrubf_abs
-    1284U,	// L4_ploadrubf_rr
+    1156U,	// L4_ploadrubf_rr
     0U,	// L4_ploadrubfnew_abs
-    1284U,	// L4_ploadrubfnew_rr
+    1156U,	// L4_ploadrubfnew_rr
     0U,	// L4_ploadrubt_abs
-    1284U,	// L4_ploadrubt_rr
+    1156U,	// L4_ploadrubt_rr
     0U,	// L4_ploadrubtnew_abs
-    1284U,	// L4_ploadrubtnew_rr
+    1156U,	// L4_ploadrubtnew_rr
     0U,	// L4_ploadruhf_abs
-    1284U,	// L4_ploadruhf_rr
+    1156U,	// L4_ploadruhf_rr
     0U,	// L4_ploadruhfnew_abs
-    1284U,	// L4_ploadruhfnew_rr
+    1156U,	// L4_ploadruhfnew_rr
     0U,	// L4_ploadruht_abs
-    1284U,	// L4_ploadruht_rr
+    1156U,	// L4_ploadruht_rr
     0U,	// L4_ploadruhtnew_abs
-    1284U,	// L4_ploadruhtnew_rr
+    1156U,	// L4_ploadruhtnew_rr
     0U,	// L4_return
     0U,	// L4_return_f
     0U,	// L4_return_fnew_pnt
@@ -3583,14 +4577,17 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// L4_return_t
     0U,	// L4_return_tnew_pnt
     0U,	// L4_return_tnew_pt
-    41U,	// L4_sub_memopb_io
-    41U,	// L4_sub_memoph_io
-    41U,	// L4_sub_memopw_io
+    0U,	// L4_sub_memopb_io
+    0U,	// L4_sub_memopb_zomap
+    0U,	// L4_sub_memoph_io
+    0U,	// L4_sub_memoph_zomap
+    0U,	// L4_sub_memopw_io
+    0U,	// L4_sub_memopw_zomap
     0U,	// LDriw_mod
     0U,	// LDriw_pred
     0U,	// LO
-    670U,	// M2_acci
-    42U,	// M2_accii
+    607U,	// M2_acci
+    607U,	// M2_accii
     0U,	// M2_cmaci_s0
     0U,	// M2_cmacr_s0
     0U,	// M2_cmacs_s0
@@ -3611,20 +4608,20 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// M2_cnacs_s1
     0U,	// M2_cnacsc_s0
     0U,	// M2_cnacsc_s1
-    670U,	// M2_dpmpyss_acc_s0
-    670U,	// M2_dpmpyss_nac_s0
-    1348U,	// M2_dpmpyss_rnd_s0
-    644U,	// M2_dpmpyss_s0
-    670U,	// M2_dpmpyuu_acc_s0
-    670U,	// M2_dpmpyuu_nac_s0
-    644U,	// M2_dpmpyuu_s0
-    1412U,	// M2_hmmpyh_rs1
-    1476U,	// M2_hmmpyh_s1
-    1540U,	// M2_hmmpyl_rs1
-    1604U,	// M2_hmmpyl_s1
-    670U,	// M2_maci
+    607U,	// M2_dpmpyss_acc_s0
+    607U,	// M2_dpmpyss_nac_s0
+    1220U,	// M2_dpmpyss_rnd_s0
+    580U,	// M2_dpmpyss_s0
+    607U,	// M2_dpmpyuu_acc_s0
+    607U,	// M2_dpmpyuu_nac_s0
+    580U,	// M2_dpmpyuu_s0
+    1284U,	// M2_hmmpyh_rs1
+    1348U,	// M2_hmmpyh_s1
+    1412U,	// M2_hmmpyl_rs1
+    1476U,	// M2_hmmpyl_s1
+    607U,	// M2_maci
     0U,	// M2_macsin
-    42U,	// M2_macsip
+    607U,	// M2_macsip
     0U,	// M2_mmachs_rs0
     0U,	// M2_mmachs_rs1
     0U,	// M2_mmachs_s0
@@ -3657,162 +4654,162 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// M2_mmpyul_rs1
     0U,	// M2_mmpyul_s0
     0U,	// M2_mmpyul_s1
-    350U,	// M2_mpy_acc_hh_s0
-    1694U,	// M2_mpy_acc_hh_s1
-    414U,	// M2_mpy_acc_hl_s0
-    1758U,	// M2_mpy_acc_hl_s1
-    350U,	// M2_mpy_acc_lh_s0
-    1694U,	// M2_mpy_acc_lh_s1
-    414U,	// M2_mpy_acc_ll_s0
-    1758U,	// M2_mpy_acc_ll_s1
-    478U,	// M2_mpy_acc_sat_hh_s0
-    1502U,	// M2_mpy_acc_sat_hh_s1
-    542U,	// M2_mpy_acc_sat_hl_s0
-    1630U,	// M2_mpy_acc_sat_hl_s1
-    478U,	// M2_mpy_acc_sat_lh_s0
-    1502U,	// M2_mpy_acc_sat_lh_s1
-    542U,	// M2_mpy_acc_sat_ll_s0
-    1630U,	// M2_mpy_acc_sat_ll_s1
+    351U,	// M2_mpy_acc_hh_s0
+    1567U,	// M2_mpy_acc_hh_s1
+    415U,	// M2_mpy_acc_hl_s0
+    1631U,	// M2_mpy_acc_hl_s1
+    351U,	// M2_mpy_acc_lh_s0
+    1567U,	// M2_mpy_acc_lh_s1
+    415U,	// M2_mpy_acc_ll_s0
+    1631U,	// M2_mpy_acc_ll_s1
+    479U,	// M2_mpy_acc_sat_hh_s0
+    1375U,	// M2_mpy_acc_sat_hh_s1
+    543U,	// M2_mpy_acc_sat_hl_s0
+    1503U,	// M2_mpy_acc_sat_hl_s1
+    479U,	// M2_mpy_acc_sat_lh_s0
+    1375U,	// M2_mpy_acc_sat_lh_s1
+    543U,	// M2_mpy_acc_sat_ll_s0
+    1503U,	// M2_mpy_acc_sat_ll_s1
     324U,	// M2_mpy_hh_s0
-    1668U,	// M2_mpy_hh_s1
+    1540U,	// M2_mpy_hh_s1
     388U,	// M2_mpy_hl_s0
-    1732U,	// M2_mpy_hl_s1
+    1604U,	// M2_mpy_hl_s1
     324U,	// M2_mpy_lh_s0
-    1668U,	// M2_mpy_lh_s1
+    1540U,	// M2_mpy_lh_s1
     388U,	// M2_mpy_ll_s0
-    1732U,	// M2_mpy_ll_s1
-    350U,	// M2_mpy_nac_hh_s0
-    1694U,	// M2_mpy_nac_hh_s1
-    414U,	// M2_mpy_nac_hl_s0
-    1758U,	// M2_mpy_nac_hl_s1
-    350U,	// M2_mpy_nac_lh_s0
-    1694U,	// M2_mpy_nac_lh_s1
-    414U,	// M2_mpy_nac_ll_s0
-    1758U,	// M2_mpy_nac_ll_s1
-    478U,	// M2_mpy_nac_sat_hh_s0
-    1502U,	// M2_mpy_nac_sat_hh_s1
-    542U,	// M2_mpy_nac_sat_hl_s0
-    1630U,	// M2_mpy_nac_sat_hl_s1
-    478U,	// M2_mpy_nac_sat_lh_s0
-    1502U,	// M2_mpy_nac_sat_lh_s1
-    542U,	// M2_mpy_nac_sat_ll_s0
-    1630U,	// M2_mpy_nac_sat_ll_s1
-    1796U,	// M2_mpy_rnd_hh_s0
-    1860U,	// M2_mpy_rnd_hh_s1
-    1924U,	// M2_mpy_rnd_hl_s0
-    1988U,	// M2_mpy_rnd_hl_s1
-    1796U,	// M2_mpy_rnd_lh_s0
-    1860U,	// M2_mpy_rnd_lh_s1
-    1924U,	// M2_mpy_rnd_ll_s0
-    1988U,	// M2_mpy_rnd_ll_s1
+    1604U,	// M2_mpy_ll_s1
+    351U,	// M2_mpy_nac_hh_s0
+    1567U,	// M2_mpy_nac_hh_s1
+    415U,	// M2_mpy_nac_hl_s0
+    1631U,	// M2_mpy_nac_hl_s1
+    351U,	// M2_mpy_nac_lh_s0
+    1567U,	// M2_mpy_nac_lh_s1
+    415U,	// M2_mpy_nac_ll_s0
+    1631U,	// M2_mpy_nac_ll_s1
+    479U,	// M2_mpy_nac_sat_hh_s0
+    1375U,	// M2_mpy_nac_sat_hh_s1
+    543U,	// M2_mpy_nac_sat_hl_s0
+    1503U,	// M2_mpy_nac_sat_hl_s1
+    479U,	// M2_mpy_nac_sat_lh_s0
+    1375U,	// M2_mpy_nac_sat_lh_s1
+    543U,	// M2_mpy_nac_sat_ll_s0
+    1503U,	// M2_mpy_nac_sat_ll_s1
+    1668U,	// M2_mpy_rnd_hh_s0
+    1732U,	// M2_mpy_rnd_hh_s1
+    1796U,	// M2_mpy_rnd_hl_s0
+    1860U,	// M2_mpy_rnd_hl_s1
+    1668U,	// M2_mpy_rnd_lh_s0
+    1732U,	// M2_mpy_rnd_lh_s1
+    1796U,	// M2_mpy_rnd_ll_s0
+    1860U,	// M2_mpy_rnd_ll_s1
     452U,	// M2_mpy_sat_hh_s0
-    1476U,	// M2_mpy_sat_hh_s1
+    1348U,	// M2_mpy_sat_hh_s1
     516U,	// M2_mpy_sat_hl_s0
-    1604U,	// M2_mpy_sat_hl_s1
+    1476U,	// M2_mpy_sat_hl_s1
     452U,	// M2_mpy_sat_lh_s0
-    1476U,	// M2_mpy_sat_lh_s1
+    1348U,	// M2_mpy_sat_lh_s1
     516U,	// M2_mpy_sat_ll_s0
-    1604U,	// M2_mpy_sat_ll_s1
-    2052U,	// M2_mpy_sat_rnd_hh_s0
-    1412U,	// M2_mpy_sat_rnd_hh_s1
-    2116U,	// M2_mpy_sat_rnd_hl_s0
-    1540U,	// M2_mpy_sat_rnd_hl_s1
-    2052U,	// M2_mpy_sat_rnd_lh_s0
-    1412U,	// M2_mpy_sat_rnd_lh_s1
-    2116U,	// M2_mpy_sat_rnd_ll_s0
-    1540U,	// M2_mpy_sat_rnd_ll_s1
-    644U,	// M2_mpy_up
-    2180U,	// M2_mpy_up_s1
-    2244U,	// M2_mpy_up_s1_sat
-    350U,	// M2_mpyd_acc_hh_s0
-    1694U,	// M2_mpyd_acc_hh_s1
-    414U,	// M2_mpyd_acc_hl_s0
-    1758U,	// M2_mpyd_acc_hl_s1
-    350U,	// M2_mpyd_acc_lh_s0
-    1694U,	// M2_mpyd_acc_lh_s1
-    414U,	// M2_mpyd_acc_ll_s0
-    1758U,	// M2_mpyd_acc_ll_s1
+    1476U,	// M2_mpy_sat_ll_s1
+    1924U,	// M2_mpy_sat_rnd_hh_s0
+    1284U,	// M2_mpy_sat_rnd_hh_s1
+    1988U,	// M2_mpy_sat_rnd_hl_s0
+    1412U,	// M2_mpy_sat_rnd_hl_s1
+    1924U,	// M2_mpy_sat_rnd_lh_s0
+    1284U,	// M2_mpy_sat_rnd_lh_s1
+    1988U,	// M2_mpy_sat_rnd_ll_s0
+    1412U,	// M2_mpy_sat_rnd_ll_s1
+    580U,	// M2_mpy_up
+    2052U,	// M2_mpy_up_s1
+    2116U,	// M2_mpy_up_s1_sat
+    351U,	// M2_mpyd_acc_hh_s0
+    1567U,	// M2_mpyd_acc_hh_s1
+    415U,	// M2_mpyd_acc_hl_s0
+    1631U,	// M2_mpyd_acc_hl_s1
+    351U,	// M2_mpyd_acc_lh_s0
+    1567U,	// M2_mpyd_acc_lh_s1
+    415U,	// M2_mpyd_acc_ll_s0
+    1631U,	// M2_mpyd_acc_ll_s1
     324U,	// M2_mpyd_hh_s0
-    1668U,	// M2_mpyd_hh_s1
+    1540U,	// M2_mpyd_hh_s1
     388U,	// M2_mpyd_hl_s0
-    1732U,	// M2_mpyd_hl_s1
+    1604U,	// M2_mpyd_hl_s1
     324U,	// M2_mpyd_lh_s0
-    1668U,	// M2_mpyd_lh_s1
+    1540U,	// M2_mpyd_lh_s1
     388U,	// M2_mpyd_ll_s0
-    1732U,	// M2_mpyd_ll_s1
-    350U,	// M2_mpyd_nac_hh_s0
-    1694U,	// M2_mpyd_nac_hh_s1
-    414U,	// M2_mpyd_nac_hl_s0
-    1758U,	// M2_mpyd_nac_hl_s1
-    350U,	// M2_mpyd_nac_lh_s0
-    1694U,	// M2_mpyd_nac_lh_s1
-    414U,	// M2_mpyd_nac_ll_s0
-    1758U,	// M2_mpyd_nac_ll_s1
-    1796U,	// M2_mpyd_rnd_hh_s0
-    1860U,	// M2_mpyd_rnd_hh_s1
-    1924U,	// M2_mpyd_rnd_hl_s0
-    1988U,	// M2_mpyd_rnd_hl_s1
-    1796U,	// M2_mpyd_rnd_lh_s0
-    1860U,	// M2_mpyd_rnd_lh_s1
-    1924U,	// M2_mpyd_rnd_ll_s0
-    1988U,	// M2_mpyd_rnd_ll_s1
-    644U,	// M2_mpyi
+    1604U,	// M2_mpyd_ll_s1
+    351U,	// M2_mpyd_nac_hh_s0
+    1567U,	// M2_mpyd_nac_hh_s1
+    415U,	// M2_mpyd_nac_hl_s0
+    1631U,	// M2_mpyd_nac_hl_s1
+    351U,	// M2_mpyd_nac_lh_s0
+    1567U,	// M2_mpyd_nac_lh_s1
+    415U,	// M2_mpyd_nac_ll_s0
+    1631U,	// M2_mpyd_nac_ll_s1
+    1668U,	// M2_mpyd_rnd_hh_s0
+    1732U,	// M2_mpyd_rnd_hh_s1
+    1796U,	// M2_mpyd_rnd_hl_s0
+    1860U,	// M2_mpyd_rnd_hl_s1
+    1668U,	// M2_mpyd_rnd_lh_s0
+    1732U,	// M2_mpyd_rnd_lh_s1
+    1796U,	// M2_mpyd_rnd_ll_s0
+    1860U,	// M2_mpyd_rnd_ll_s1
+    580U,	// M2_mpyi
     0U,	// M2_mpysin
     0U,	// M2_mpysip
-    645U,	// M2_mpysmi
+    580U,	// M2_mpysmi
     0U,	// M2_mpysu_up
-    350U,	// M2_mpyu_acc_hh_s0
-    1694U,	// M2_mpyu_acc_hh_s1
-    414U,	// M2_mpyu_acc_hl_s0
-    1758U,	// M2_mpyu_acc_hl_s1
-    350U,	// M2_mpyu_acc_lh_s0
-    1694U,	// M2_mpyu_acc_lh_s1
-    414U,	// M2_mpyu_acc_ll_s0
-    1758U,	// M2_mpyu_acc_ll_s1
+    351U,	// M2_mpyu_acc_hh_s0
+    1567U,	// M2_mpyu_acc_hh_s1
+    415U,	// M2_mpyu_acc_hl_s0
+    1631U,	// M2_mpyu_acc_hl_s1
+    351U,	// M2_mpyu_acc_lh_s0
+    1567U,	// M2_mpyu_acc_lh_s1
+    415U,	// M2_mpyu_acc_ll_s0
+    1631U,	// M2_mpyu_acc_ll_s1
     324U,	// M2_mpyu_hh_s0
-    1668U,	// M2_mpyu_hh_s1
+    1540U,	// M2_mpyu_hh_s1
     388U,	// M2_mpyu_hl_s0
-    1732U,	// M2_mpyu_hl_s1
+    1604U,	// M2_mpyu_hl_s1
     324U,	// M2_mpyu_lh_s0
-    1668U,	// M2_mpyu_lh_s1
+    1540U,	// M2_mpyu_lh_s1
     388U,	// M2_mpyu_ll_s0
-    1732U,	// M2_mpyu_ll_s1
-    350U,	// M2_mpyu_nac_hh_s0
-    1694U,	// M2_mpyu_nac_hh_s1
-    414U,	// M2_mpyu_nac_hl_s0
-    1758U,	// M2_mpyu_nac_hl_s1
-    350U,	// M2_mpyu_nac_lh_s0
-    1694U,	// M2_mpyu_nac_lh_s1
-    414U,	// M2_mpyu_nac_ll_s0
-    1758U,	// M2_mpyu_nac_ll_s1
-    644U,	// M2_mpyu_up
-    350U,	// M2_mpyud_acc_hh_s0
-    1694U,	// M2_mpyud_acc_hh_s1
-    414U,	// M2_mpyud_acc_hl_s0
-    1758U,	// M2_mpyud_acc_hl_s1
-    350U,	// M2_mpyud_acc_lh_s0
-    1694U,	// M2_mpyud_acc_lh_s1
-    414U,	// M2_mpyud_acc_ll_s0
-    1758U,	// M2_mpyud_acc_ll_s1
+    1604U,	// M2_mpyu_ll_s1
+    351U,	// M2_mpyu_nac_hh_s0
+    1567U,	// M2_mpyu_nac_hh_s1
+    415U,	// M2_mpyu_nac_hl_s0
+    1631U,	// M2_mpyu_nac_hl_s1
+    351U,	// M2_mpyu_nac_lh_s0
+    1567U,	// M2_mpyu_nac_lh_s1
+    415U,	// M2_mpyu_nac_ll_s0
+    1631U,	// M2_mpyu_nac_ll_s1
+    580U,	// M2_mpyu_up
+    351U,	// M2_mpyud_acc_hh_s0
+    1567U,	// M2_mpyud_acc_hh_s1
+    415U,	// M2_mpyud_acc_hl_s0
+    1631U,	// M2_mpyud_acc_hl_s1
+    351U,	// M2_mpyud_acc_lh_s0
+    1567U,	// M2_mpyud_acc_lh_s1
+    415U,	// M2_mpyud_acc_ll_s0
+    1631U,	// M2_mpyud_acc_ll_s1
     324U,	// M2_mpyud_hh_s0
-    1668U,	// M2_mpyud_hh_s1
+    1540U,	// M2_mpyud_hh_s1
     388U,	// M2_mpyud_hl_s0
-    1732U,	// M2_mpyud_hl_s1
+    1604U,	// M2_mpyud_hl_s1
     324U,	// M2_mpyud_lh_s0
-    1668U,	// M2_mpyud_lh_s1
+    1540U,	// M2_mpyud_lh_s1
     388U,	// M2_mpyud_ll_s0
-    1732U,	// M2_mpyud_ll_s1
-    350U,	// M2_mpyud_nac_hh_s0
-    1694U,	// M2_mpyud_nac_hh_s1
-    414U,	// M2_mpyud_nac_hl_s0
-    1758U,	// M2_mpyud_nac_hl_s1
-    350U,	// M2_mpyud_nac_lh_s0
-    1694U,	// M2_mpyud_nac_lh_s1
-    414U,	// M2_mpyud_nac_ll_s0
-    1758U,	// M2_mpyud_nac_ll_s1
+    1604U,	// M2_mpyud_ll_s1
+    351U,	// M2_mpyud_nac_hh_s0
+    1567U,	// M2_mpyud_nac_hh_s1
+    415U,	// M2_mpyud_nac_hl_s0
+    1631U,	// M2_mpyud_nac_hl_s1
+    351U,	// M2_mpyud_nac_lh_s0
+    1567U,	// M2_mpyud_nac_lh_s1
+    415U,	// M2_mpyud_nac_ll_s0
+    1631U,	// M2_mpyud_nac_ll_s1
     0U,	// M2_mpyui
-    670U,	// M2_nacci
-    42U,	// M2_naccii
+    607U,	// M2_nacci
+    607U,	// M2_naccii
     0U,	// M2_subacc
     0U,	// M2_vabsdiffh
     0U,	// M2_vabsdiffw
@@ -3866,24 +4863,24 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// M2_vrmac_s0
     0U,	// M2_vrmpy_s0
     0U,	// M2_xor_xacc
-    670U,	// M4_and_and
-    670U,	// M4_and_andn
+    607U,	// M4_and_and
+    607U,	// M4_and_andn
     0U,	// M4_and_or
     0U,	// M4_and_xor
     0U,	// M4_cmpyi_wh
     0U,	// M4_cmpyi_whc
     0U,	// M4_cmpyr_wh
     0U,	// M4_cmpyr_whc
-    2270U,	// M4_mac_up_s1_sat
-    29379U,	// M4_mpyri_addi
-    25579U,	// M4_mpyri_addr
-    44U,	// M4_mpyri_addr_u2
-    29376U,	// M4_mpyrr_addi
-    29611U,	// M4_mpyrr_addr
-    2270U,	// M4_nac_up_s1_sat
-    670U,	// M4_or_and
-    670U,	// M4_or_andn
-    670U,	// M4_or_or
+    2143U,	// M4_mac_up_s1_sat
+    25219U,	// M4_mpyri_addi
+    21344U,	// M4_mpyri_addr
+    33U,	// M4_mpyri_addr_u2
+    25216U,	// M4_mpyrr_addi
+    25376U,	// M4_mpyrr_addr
+    2143U,	// M4_nac_up_s1_sat
+    607U,	// M4_or_and
+    607U,	// M4_or_andn
+    607U,	// M4_or_or
     0U,	// M4_or_xor
     0U,	// M4_pmpyw
     0U,	// M4_pmpyw_acc
@@ -3897,8 +4894,8 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// M4_vrmpyoh_acc_s1
     0U,	// M4_vrmpyoh_s0
     0U,	// M4_vrmpyoh_s1
-    670U,	// M4_xor_and
-    670U,	// M4_xor_andn
+    607U,	// M4_xor_and
+    607U,	// M4_xor_andn
     0U,	// M4_xor_or
     0U,	// M4_xor_xacc
     0U,	// M5_vdmacbsu
@@ -3911,6 +4908,8 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// M5_vrmacbuu
     0U,	// M5_vrmpybsu
     0U,	// M5_vrmpybuu
+    0U,	// M6_vabsdiffb
+    0U,	// M6_vabsdiffub
     0U,	// PS_aligna
     0U,	// PS_alloca
     0U,	// PS_call_nr
@@ -3926,12 +4925,12 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// PS_jmprett
     0U,	// PS_jmprettnew
     0U,	// PS_jmprettnewpt
-    12U,	// PS_loadrbabs
-    12U,	// PS_loadrdabs
-    12U,	// PS_loadrhabs
-    12U,	// PS_loadriabs
-    12U,	// PS_loadrubabs
-    12U,	// PS_loadruhabs
+    0U,	// PS_loadrbabs
+    0U,	// PS_loadrdabs
+    0U,	// PS_loadrhabs
+    0U,	// PS_loadriabs
+    0U,	// PS_loadrubabs
+    0U,	// PS_loadruhabs
     0U,	// PS_pselect
     0U,	// PS_storerbabs
     0U,	// PS_storerbnewabs
@@ -3972,71 +4971,70 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// RESTORE_DEALLOC_RET_JMP_V4_PIC
     0U,	// S2_addasl_rrri
     0U,	// S2_allocframe
-    644U,	// S2_asl_i_p
-    670U,	// S2_asl_i_p_acc
-    670U,	// S2_asl_i_p_and
-    670U,	// S2_asl_i_p_nac
-    670U,	// S2_asl_i_p_or
-    670U,	// S2_asl_i_p_xacc
-    644U,	// S2_asl_i_r
-    670U,	// S2_asl_i_r_acc
-    670U,	// S2_asl_i_r_and
-    670U,	// S2_asl_i_r_nac
-    670U,	// S2_asl_i_r_or
-    836U,	// S2_asl_i_r_sat
-    670U,	// S2_asl_i_r_xacc
-    644U,	// S2_asl_i_vh
-    644U,	// S2_asl_i_vw
-    644U,	// S2_asl_r_p
-    670U,	// S2_asl_r_p_acc
-    670U,	// S2_asl_r_p_and
-    670U,	// S2_asl_r_p_nac
-    670U,	// S2_asl_r_p_or
-    670U,	// S2_asl_r_p_xor
-    644U,	// S2_asl_r_r
-    670U,	// S2_asl_r_r_acc
-    670U,	// S2_asl_r_r_and
-    670U,	// S2_asl_r_r_nac
-    670U,	// S2_asl_r_r_or
-    836U,	// S2_asl_r_r_sat
-    644U,	// S2_asl_r_vh
-    644U,	// S2_asl_r_vw
-    644U,	// S2_asr_i_p
-    670U,	// S2_asr_i_p_acc
-    670U,	// S2_asr_i_p_and
-    670U,	// S2_asr_i_p_nac
-    670U,	// S2_asr_i_p_or
-    1348U,	// S2_asr_i_p_rnd
+    580U,	// S2_asl_i_p
+    607U,	// S2_asl_i_p_acc
+    607U,	// S2_asl_i_p_and
+    607U,	// S2_asl_i_p_nac
+    607U,	// S2_asl_i_p_or
+    607U,	// S2_asl_i_p_xacc
+    580U,	// S2_asl_i_r
+    607U,	// S2_asl_i_r_acc
+    607U,	// S2_asl_i_r_and
+    607U,	// S2_asl_i_r_nac
+    607U,	// S2_asl_i_r_or
+    708U,	// S2_asl_i_r_sat
+    607U,	// S2_asl_i_r_xacc
+    580U,	// S2_asl_i_vh
+    580U,	// S2_asl_i_vw
+    580U,	// S2_asl_r_p
+    607U,	// S2_asl_r_p_acc
+    607U,	// S2_asl_r_p_and
+    607U,	// S2_asl_r_p_nac
+    607U,	// S2_asl_r_p_or
+    607U,	// S2_asl_r_p_xor
+    580U,	// S2_asl_r_r
+    607U,	// S2_asl_r_r_acc
+    607U,	// S2_asl_r_r_and
+    607U,	// S2_asl_r_r_nac
+    607U,	// S2_asl_r_r_or
+    708U,	// S2_asl_r_r_sat
+    580U,	// S2_asl_r_vh
+    580U,	// S2_asl_r_vw
+    580U,	// S2_asr_i_p
+    607U,	// S2_asr_i_p_acc
+    607U,	// S2_asr_i_p_and
+    607U,	// S2_asr_i_p_nac
+    607U,	// S2_asr_i_p_or
+    1220U,	// S2_asr_i_p_rnd
     0U,	// S2_asr_i_p_rnd_goodsyntax
-    644U,	// S2_asr_i_r
-    670U,	// S2_asr_i_r_acc
-    670U,	// S2_asr_i_r_and
-    670U,	// S2_asr_i_r_nac
-    670U,	// S2_asr_i_r_or
-    1348U,	// S2_asr_i_r_rnd
+    580U,	// S2_asr_i_r
+    607U,	// S2_asr_i_r_acc
+    607U,	// S2_asr_i_r_and
+    607U,	// S2_asr_i_r_nac
+    607U,	// S2_asr_i_r_or
+    1220U,	// S2_asr_i_r_rnd
     0U,	// S2_asr_i_r_rnd_goodsyntax
-    644U,	// S2_asr_i_svw_trun
-    644U,	// S2_asr_i_vh
-    644U,	// S2_asr_i_vw
-    644U,	// S2_asr_r_p
-    670U,	// S2_asr_r_p_acc
-    670U,	// S2_asr_r_p_and
-    670U,	// S2_asr_r_p_nac
-    670U,	// S2_asr_r_p_or
+    580U,	// S2_asr_i_svw_trun
+    580U,	// S2_asr_i_vh
+    580U,	// S2_asr_i_vw
+    580U,	// S2_asr_r_p
+    607U,	// S2_asr_r_p_acc
+    607U,	// S2_asr_r_p_and
+    607U,	// S2_asr_r_p_nac
+    607U,	// S2_asr_r_p_or
     0U,	// S2_asr_r_p_xor
-    644U,	// S2_asr_r_r
-    670U,	// S2_asr_r_r_acc
-    670U,	// S2_asr_r_r_and
-    670U,	// S2_asr_r_r_nac
-    670U,	// S2_asr_r_r_or
-    836U,	// S2_asr_r_r_sat
-    644U,	// S2_asr_r_svw_trun
-    644U,	// S2_asr_r_vh
-    644U,	// S2_asr_r_vw
+    580U,	// S2_asr_r_r
+    607U,	// S2_asr_r_r_acc
+    607U,	// S2_asr_r_r_and
+    607U,	// S2_asr_r_r_nac
+    607U,	// S2_asr_r_r_or
+    708U,	// S2_asr_r_r_sat
+    580U,	// S2_asr_r_svw_trun
+    580U,	// S2_asr_r_vh
+    580U,	// S2_asr_r_vw
     0U,	// S2_brev
     0U,	// S2_brevp
     0U,	// S2_cabacdecbin
-    0U,	// S2_cabacencbin
     0U,	// S2_cl0
     0U,	// S2_cl0p
     0U,	// S2_cl1
@@ -4044,21 +5042,21 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// S2_clb
     0U,	// S2_clbnorm
     0U,	// S2_clbp
-    644U,	// S2_clrbit_i
-    644U,	// S2_clrbit_r
+    580U,	// S2_clrbit_i
+    580U,	// S2_clrbit_r
     0U,	// S2_ct0
     0U,	// S2_ct0p
     0U,	// S2_ct1
     0U,	// S2_ct1p
     0U,	// S2_deinterleave
-    21444U,	// S2_extractu
-    644U,	// S2_extractu_rp
-    21444U,	// S2_extractup
-    644U,	// S2_extractup_rp
-    33758U,	// S2_insert
-    670U,	// S2_insert_rp
-    33758U,	// S2_insertp
-    670U,	// S2_insertp_rp
+    21316U,	// S2_extractu
+    580U,	// S2_extractu_rp
+    21316U,	// S2_extractup
+    580U,	// S2_extractup_rp
+    37727U,	// S2_insert
+    607U,	// S2_insert_rp
+    37727U,	// S2_insertp
+    607U,	// S2_insertp_rp
     0U,	// S2_interleave
     0U,	// S2_lfsp
     0U,	// S2_lsl_r_p
@@ -4074,146 +5072,170 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// S2_lsl_r_r_or
     0U,	// S2_lsl_r_vh
     0U,	// S2_lsl_r_vw
-    644U,	// S2_lsr_i_p
-    670U,	// S2_lsr_i_p_acc
-    670U,	// S2_lsr_i_p_and
-    670U,	// S2_lsr_i_p_nac
-    670U,	// S2_lsr_i_p_or
-    670U,	// S2_lsr_i_p_xacc
-    644U,	// S2_lsr_i_r
-    670U,	// S2_lsr_i_r_acc
-    670U,	// S2_lsr_i_r_and
-    670U,	// S2_lsr_i_r_nac
-    670U,	// S2_lsr_i_r_or
-    670U,	// S2_lsr_i_r_xacc
-    644U,	// S2_lsr_i_vh
-    644U,	// S2_lsr_i_vw
-    644U,	// S2_lsr_r_p
-    670U,	// S2_lsr_r_p_acc
-    670U,	// S2_lsr_r_p_and
-    670U,	// S2_lsr_r_p_nac
-    670U,	// S2_lsr_r_p_or
-    670U,	// S2_lsr_r_p_xor
-    644U,	// S2_lsr_r_r
-    670U,	// S2_lsr_r_r_acc
-    670U,	// S2_lsr_r_r_and
-    670U,	// S2_lsr_r_r_nac
-    670U,	// S2_lsr_r_r_or
-    644U,	// S2_lsr_r_vh
-    644U,	// S2_lsr_r_vw
+    580U,	// S2_lsr_i_p
+    607U,	// S2_lsr_i_p_acc
+    607U,	// S2_lsr_i_p_and
+    607U,	// S2_lsr_i_p_nac
+    607U,	// S2_lsr_i_p_or
+    607U,	// S2_lsr_i_p_xacc
+    580U,	// S2_lsr_i_r
+    607U,	// S2_lsr_i_r_acc
+    607U,	// S2_lsr_i_r_and
+    607U,	// S2_lsr_i_r_nac
+    607U,	// S2_lsr_i_r_or
+    607U,	// S2_lsr_i_r_xacc
+    580U,	// S2_lsr_i_vh
+    580U,	// S2_lsr_i_vw
+    580U,	// S2_lsr_r_p
+    607U,	// S2_lsr_r_p_acc
+    607U,	// S2_lsr_r_p_and
+    607U,	// S2_lsr_r_p_nac
+    607U,	// S2_lsr_r_p_or
+    607U,	// S2_lsr_r_p_xor
+    580U,	// S2_lsr_r_r
+    607U,	// S2_lsr_r_r_acc
+    607U,	// S2_lsr_r_r_and
+    607U,	// S2_lsr_r_r_nac
+    607U,	// S2_lsr_r_r_or
+    580U,	// S2_lsr_r_vh
+    580U,	// S2_lsr_r_vw
     0U,	// S2_packhl
     0U,	// S2_parityp
-    37485U,	// S2_pstorerbf_io
-    37596U,	// S2_pstorerbf_pi
-    37596U,	// S2_pstorerbfnew_pi
-    37485U,	// S2_pstorerbnewf_io
-    37596U,	// S2_pstorerbnewf_pi
-    37596U,	// S2_pstorerbnewfnew_pi
-    37485U,	// S2_pstorerbnewt_io
-    37596U,	// S2_pstorerbnewt_pi
-    37596U,	// S2_pstorerbnewtnew_pi
-    37485U,	// S2_pstorerbt_io
-    37596U,	// S2_pstorerbt_pi
-    37596U,	// S2_pstorerbtnew_pi
-    37485U,	// S2_pstorerdf_io
-    37596U,	// S2_pstorerdf_pi
-    37596U,	// S2_pstorerdfnew_pi
-    37485U,	// S2_pstorerdt_io
-    37596U,	// S2_pstorerdt_pi
-    37596U,	// S2_pstorerdtnew_pi
-    37485U,	// S2_pstorerff_io
-    37596U,	// S2_pstorerff_pi
-    37596U,	// S2_pstorerffnew_pi
-    37485U,	// S2_pstorerft_io
-    37596U,	// S2_pstorerft_pi
-    37596U,	// S2_pstorerftnew_pi
-    37485U,	// S2_pstorerhf_io
-    37596U,	// S2_pstorerhf_pi
-    37596U,	// S2_pstorerhfnew_pi
-    37485U,	// S2_pstorerhnewf_io
-    37596U,	// S2_pstorerhnewf_pi
-    37596U,	// S2_pstorerhnewfnew_pi
-    37485U,	// S2_pstorerhnewt_io
-    37596U,	// S2_pstorerhnewt_pi
-    37596U,	// S2_pstorerhnewtnew_pi
-    37485U,	// S2_pstorerht_io
-    37596U,	// S2_pstorerht_pi
-    37596U,	// S2_pstorerhtnew_pi
-    37485U,	// S2_pstorerif_io
-    37596U,	// S2_pstorerif_pi
-    37596U,	// S2_pstorerifnew_pi
-    37485U,	// S2_pstorerinewf_io
-    37596U,	// S2_pstorerinewf_pi
-    37596U,	// S2_pstorerinewfnew_pi
-    37485U,	// S2_pstorerinewt_io
-    37596U,	// S2_pstorerinewt_pi
-    37596U,	// S2_pstorerinewtnew_pi
-    37485U,	// S2_pstorerit_io
-    37596U,	// S2_pstorerit_pi
-    37596U,	// S2_pstoreritnew_pi
-    644U,	// S2_setbit_i
-    644U,	// S2_setbit_r
+    40982U,	// S2_pstorerbf_io
+    41624U,	// S2_pstorerbf_pi
+    2210U,	// S2_pstorerbf_zomap
+    41624U,	// S2_pstorerbfnew_pi
+    40982U,	// S2_pstorerbnewf_io
+    41624U,	// S2_pstorerbnewf_pi
+    2274U,	// S2_pstorerbnewf_zomap
+    41624U,	// S2_pstorerbnewfnew_pi
+    40982U,	// S2_pstorerbnewt_io
+    41624U,	// S2_pstorerbnewt_pi
+    2274U,	// S2_pstorerbnewt_zomap
+    41624U,	// S2_pstorerbnewtnew_pi
+    40982U,	// S2_pstorerbt_io
+    41624U,	// S2_pstorerbt_pi
+    2210U,	// S2_pstorerbt_zomap
+    41624U,	// S2_pstorerbtnew_pi
+    40982U,	// S2_pstorerdf_io
+    41624U,	// S2_pstorerdf_pi
+    2210U,	// S2_pstorerdf_zomap
+    41624U,	// S2_pstorerdfnew_pi
+    40982U,	// S2_pstorerdt_io
+    41624U,	// S2_pstorerdt_pi
+    2210U,	// S2_pstorerdt_zomap
+    41624U,	// S2_pstorerdtnew_pi
+    40982U,	// S2_pstorerff_io
+    41624U,	// S2_pstorerff_pi
+    2338U,	// S2_pstorerff_zomap
+    41624U,	// S2_pstorerffnew_pi
+    40982U,	// S2_pstorerft_io
+    41624U,	// S2_pstorerft_pi
+    2338U,	// S2_pstorerft_zomap
+    41624U,	// S2_pstorerftnew_pi
+    40982U,	// S2_pstorerhf_io
+    41624U,	// S2_pstorerhf_pi
+    2210U,	// S2_pstorerhf_zomap
+    41624U,	// S2_pstorerhfnew_pi
+    40982U,	// S2_pstorerhnewf_io
+    41624U,	// S2_pstorerhnewf_pi
+    2274U,	// S2_pstorerhnewf_zomap
+    41624U,	// S2_pstorerhnewfnew_pi
+    40982U,	// S2_pstorerhnewt_io
+    41624U,	// S2_pstorerhnewt_pi
+    2274U,	// S2_pstorerhnewt_zomap
+    41624U,	// S2_pstorerhnewtnew_pi
+    40982U,	// S2_pstorerht_io
+    41624U,	// S2_pstorerht_pi
+    2210U,	// S2_pstorerht_zomap
+    41624U,	// S2_pstorerhtnew_pi
+    40982U,	// S2_pstorerif_io
+    41624U,	// S2_pstorerif_pi
+    2210U,	// S2_pstorerif_zomap
+    41624U,	// S2_pstorerifnew_pi
+    40982U,	// S2_pstorerinewf_io
+    41624U,	// S2_pstorerinewf_pi
+    2274U,	// S2_pstorerinewf_zomap
+    41624U,	// S2_pstorerinewfnew_pi
+    40982U,	// S2_pstorerinewt_io
+    41624U,	// S2_pstorerinewt_pi
+    2274U,	// S2_pstorerinewt_zomap
+    41624U,	// S2_pstorerinewtnew_pi
+    40982U,	// S2_pstorerit_io
+    41624U,	// S2_pstorerit_pi
+    2210U,	// S2_pstorerit_zomap
+    41624U,	// S2_pstoreritnew_pi
+    580U,	// S2_setbit_i
+    580U,	// S2_setbit_r
     0U,	// S2_shuffeb
     0U,	// S2_shuffeh
     0U,	// S2_shuffob
     0U,	// S2_shuffoh
-    41006U,	// S2_storerb_io
-    0U,	// S2_storerb_pbr
-    0U,	// S2_storerb_pci
+    2180U,	// S2_storerb_io
+    35U,	// S2_storerb_pbr
+    35U,	// S2_storerb_pci
     0U,	// S2_storerb_pcr
-    41710U,	// S2_storerb_pi
-    2334U,	// S2_storerb_pr
+    2207U,	// S2_storerb_pi
+    2207U,	// S2_storerb_pr
+    0U,	// S2_storerb_zomap
     0U,	// S2_storerbgp
-    45102U,	// S2_storerbnew_io
-    0U,	// S2_storerbnew_pbr
-    0U,	// S2_storerbnew_pci
+    2244U,	// S2_storerbnew_io
+    36U,	// S2_storerbnew_pbr
+    36U,	// S2_storerbnew_pci
     0U,	// S2_storerbnew_pcr
-    45806U,	// S2_storerbnew_pi
-    2398U,	// S2_storerbnew_pr
+    2271U,	// S2_storerbnew_pi
+    2271U,	// S2_storerbnew_pr
+    0U,	// S2_storerbnew_zomap
     0U,	// S2_storerbnewgp
-    41006U,	// S2_storerd_io
-    0U,	// S2_storerd_pbr
-    0U,	// S2_storerd_pci
+    2180U,	// S2_storerd_io
+    35U,	// S2_storerd_pbr
+    35U,	// S2_storerd_pci
     0U,	// S2_storerd_pcr
-    41710U,	// S2_storerd_pi
-    2334U,	// S2_storerd_pr
+    2207U,	// S2_storerd_pi
+    2207U,	// S2_storerd_pr
+    0U,	// S2_storerd_zomap
     0U,	// S2_storerdgp
-    49198U,	// S2_storerf_io
-    0U,	// S2_storerf_pbr
-    0U,	// S2_storerf_pci
+    2308U,	// S2_storerf_io
+    37U,	// S2_storerf_pbr
+    37U,	// S2_storerf_pci
     0U,	// S2_storerf_pcr
-    49902U,	// S2_storerf_pi
-    2462U,	// S2_storerf_pr
+    2335U,	// S2_storerf_pi
+    2335U,	// S2_storerf_pr
+    0U,	// S2_storerf_zomap
     0U,	// S2_storerfgp
-    41006U,	// S2_storerh_io
-    0U,	// S2_storerh_pbr
-    0U,	// S2_storerh_pci
+    2180U,	// S2_storerh_io
+    35U,	// S2_storerh_pbr
+    35U,	// S2_storerh_pci
     0U,	// S2_storerh_pcr
-    41710U,	// S2_storerh_pi
-    2334U,	// S2_storerh_pr
+    2207U,	// S2_storerh_pi
+    2207U,	// S2_storerh_pr
+    0U,	// S2_storerh_zomap
     0U,	// S2_storerhgp
-    45102U,	// S2_storerhnew_io
-    0U,	// S2_storerhnew_pbr
-    0U,	// S2_storerhnew_pci
+    2244U,	// S2_storerhnew_io
+    36U,	// S2_storerhnew_pbr
+    36U,	// S2_storerhnew_pci
     0U,	// S2_storerhnew_pcr
-    45806U,	// S2_storerhnew_pi
-    2398U,	// S2_storerhnew_pr
+    2271U,	// S2_storerhnew_pi
+    2271U,	// S2_storerhnew_pr
+    0U,	// S2_storerhnew_zomap
     0U,	// S2_storerhnewgp
-    41006U,	// S2_storeri_io
-    0U,	// S2_storeri_pbr
-    0U,	// S2_storeri_pci
+    2180U,	// S2_storeri_io
+    35U,	// S2_storeri_pbr
+    35U,	// S2_storeri_pci
     0U,	// S2_storeri_pcr
-    41710U,	// S2_storeri_pi
-    2334U,	// S2_storeri_pr
+    2207U,	// S2_storeri_pi
+    2207U,	// S2_storeri_pr
+    0U,	// S2_storeri_zomap
     0U,	// S2_storerigp
-    45102U,	// S2_storerinew_io
-    0U,	// S2_storerinew_pbr
-    0U,	// S2_storerinew_pci
+    2244U,	// S2_storerinew_io
+    36U,	// S2_storerinew_pbr
+    36U,	// S2_storerinew_pci
     0U,	// S2_storerinew_pcr
-    45806U,	// S2_storerinew_pi
-    2398U,	// S2_storerinew_pr
+    2271U,	// S2_storerinew_pi
+    2271U,	// S2_storerinew_pr
+    0U,	// S2_storerinew_zomap
     0U,	// S2_storerinewgp
-    0U,	// S2_storew_locked
+    2210U,	// S2_storew_locked
     0U,	// S2_svsathb
     0U,	// S2_svsathub
     0U,	// S2_tableidxb
@@ -4224,12 +5246,12 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// S2_tableidxh_goodsyntax
     0U,	// S2_tableidxw
     0U,	// S2_tableidxw_goodsyntax
-    644U,	// S2_togglebit_i
-    644U,	// S2_togglebit_r
-    644U,	// S2_tstbit_i
-    644U,	// S2_tstbit_r
-    670U,	// S2_valignib
-    670U,	// S2_valignrb
+    580U,	// S2_togglebit_i
+    580U,	// S2_togglebit_r
+    580U,	// S2_tstbit_i
+    580U,	// S2_tstbit_r
+    607U,	// S2_valignib
+    607U,	// S2_valignrb
     0U,	// S2_vcnegh
     0U,	// S2_vcrotate
     0U,	// S2_vrcnegh
@@ -4245,8 +5267,8 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// S2_vsatwuh_nopack
     0U,	// S2_vsplatrb
     0U,	// S2_vsplatrh
-    670U,	// S2_vspliceib
-    670U,	// S2_vsplicerb
+    607U,	// S2_vspliceib
+    607U,	// S2_vsplicerb
     0U,	// S2_vsxtbh
     0U,	// S2_vsxthw
     0U,	// S2_vtrunehb
@@ -4255,7 +5277,7 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// S2_vtrunowh
     0U,	// S2_vzxtbh
     0U,	// S2_vzxthw
-    47U,	// S4_addaddi
+    38U,	// S4_addaddi
     0U,	// S4_addi_asl_ri
     0U,	// S4_addi_lsr_ri
     0U,	// S4_andi_asl_ri
@@ -4263,140 +5285,171 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// S4_clbaddi
     0U,	// S4_clbpaddi
     0U,	// S4_clbpnorm
-    21444U,	// S4_extract
-    644U,	// S4_extract_rp
-    21444U,	// S4_extractp
-    644U,	// S4_extractp_rp
+    21316U,	// S4_extract
+    580U,	// S4_extract_rp
+    21316U,	// S4_extractp
+    580U,	// S4_extractp_rp
     0U,	// S4_lsli
-    644U,	// S4_ntstbit_i
-    644U,	// S4_ntstbit_r
-    42U,	// S4_or_andi
-    29443U,	// S4_or_andix
-    42U,	// S4_or_ori
+    580U,	// S4_ntstbit_i
+    580U,	// S4_ntstbit_r
+    607U,	// S4_or_andi
+    25219U,	// S4_or_andix
+    607U,	// S4_or_ori
     0U,	// S4_ori_asl_ri
     0U,	// S4_ori_lsr_ri
     0U,	// S4_parity
     0U,	// S4_pstorerbf_abs
-    2352U,	// S4_pstorerbf_rr
+    2215U,	// S4_pstorerbf_rr
     0U,	// S4_pstorerbfnew_abs
-    37485U,	// S4_pstorerbfnew_io
-    2352U,	// S4_pstorerbfnew_rr
+    40982U,	// S4_pstorerbfnew_io
+    2215U,	// S4_pstorerbfnew_rr
+    2210U,	// S4_pstorerbfnew_zomap
     0U,	// S4_pstorerbnewf_abs
-    2416U,	// S4_pstorerbnewf_rr
+    2279U,	// S4_pstorerbnewf_rr
     0U,	// S4_pstorerbnewfnew_abs
-    37485U,	// S4_pstorerbnewfnew_io
-    2416U,	// S4_pstorerbnewfnew_rr
+    40982U,	// S4_pstorerbnewfnew_io
+    2279U,	// S4_pstorerbnewfnew_rr
+    2274U,	// S4_pstorerbnewfnew_zomap
     0U,	// S4_pstorerbnewt_abs
-    2416U,	// S4_pstorerbnewt_rr
+    2279U,	// S4_pstorerbnewt_rr
     0U,	// S4_pstorerbnewtnew_abs
-    37485U,	// S4_pstorerbnewtnew_io
-    2416U,	// S4_pstorerbnewtnew_rr
+    40982U,	// S4_pstorerbnewtnew_io
+    2279U,	// S4_pstorerbnewtnew_rr
+    2274U,	// S4_pstorerbnewtnew_zomap
     0U,	// S4_pstorerbt_abs
-    2352U,	// S4_pstorerbt_rr
+    2215U,	// S4_pstorerbt_rr
     0U,	// S4_pstorerbtnew_abs
-    37485U,	// S4_pstorerbtnew_io
-    2352U,	// S4_pstorerbtnew_rr
+    40982U,	// S4_pstorerbtnew_io
+    2215U,	// S4_pstorerbtnew_rr
+    2210U,	// S4_pstorerbtnew_zomap
     0U,	// S4_pstorerdf_abs
-    2352U,	// S4_pstorerdf_rr
+    2215U,	// S4_pstorerdf_rr
     0U,	// S4_pstorerdfnew_abs
-    37485U,	// S4_pstorerdfnew_io
-    2352U,	// S4_pstorerdfnew_rr
+    40982U,	// S4_pstorerdfnew_io
+    2215U,	// S4_pstorerdfnew_rr
+    2210U,	// S4_pstorerdfnew_zomap
     0U,	// S4_pstorerdt_abs
-    2352U,	// S4_pstorerdt_rr
+    2215U,	// S4_pstorerdt_rr
     0U,	// S4_pstorerdtnew_abs
-    37485U,	// S4_pstorerdtnew_io
-    2352U,	// S4_pstorerdtnew_rr
+    40982U,	// S4_pstorerdtnew_io
+    2215U,	// S4_pstorerdtnew_rr
+    2210U,	// S4_pstorerdtnew_zomap
     0U,	// S4_pstorerff_abs
-    2480U,	// S4_pstorerff_rr
+    2343U,	// S4_pstorerff_rr
     0U,	// S4_pstorerffnew_abs
-    37485U,	// S4_pstorerffnew_io
-    2480U,	// S4_pstorerffnew_rr
+    40982U,	// S4_pstorerffnew_io
+    2343U,	// S4_pstorerffnew_rr
+    2338U,	// S4_pstorerffnew_zomap
     0U,	// S4_pstorerft_abs
-    2480U,	// S4_pstorerft_rr
+    2343U,	// S4_pstorerft_rr
     0U,	// S4_pstorerftnew_abs
-    37485U,	// S4_pstorerftnew_io
-    2480U,	// S4_pstorerftnew_rr
+    40982U,	// S4_pstorerftnew_io
+    2343U,	// S4_pstorerftnew_rr
+    2338U,	// S4_pstorerftnew_zomap
     0U,	// S4_pstorerhf_abs
-    2352U,	// S4_pstorerhf_rr
+    2215U,	// S4_pstorerhf_rr
     0U,	// S4_pstorerhfnew_abs
-    37485U,	// S4_pstorerhfnew_io
-    2352U,	// S4_pstorerhfnew_rr
+    40982U,	// S4_pstorerhfnew_io
+    2215U,	// S4_pstorerhfnew_rr
+    2210U,	// S4_pstorerhfnew_zomap
     0U,	// S4_pstorerhnewf_abs
-    2416U,	// S4_pstorerhnewf_rr
+    2279U,	// S4_pstorerhnewf_rr
     0U,	// S4_pstorerhnewfnew_abs
-    37485U,	// S4_pstorerhnewfnew_io
-    2416U,	// S4_pstorerhnewfnew_rr
+    40982U,	// S4_pstorerhnewfnew_io
+    2279U,	// S4_pstorerhnewfnew_rr
+    2274U,	// S4_pstorerhnewfnew_zomap
     0U,	// S4_pstorerhnewt_abs
-    2416U,	// S4_pstorerhnewt_rr
+    2279U,	// S4_pstorerhnewt_rr
     0U,	// S4_pstorerhnewtnew_abs
-    37485U,	// S4_pstorerhnewtnew_io
-    2416U,	// S4_pstorerhnewtnew_rr
+    40982U,	// S4_pstorerhnewtnew_io
+    2279U,	// S4_pstorerhnewtnew_rr
+    2274U,	// S4_pstorerhnewtnew_zomap
     0U,	// S4_pstorerht_abs
-    2352U,	// S4_pstorerht_rr
+    2215U,	// S4_pstorerht_rr
     0U,	// S4_pstorerhtnew_abs
-    37485U,	// S4_pstorerhtnew_io
-    2352U,	// S4_pstorerhtnew_rr
+    40982U,	// S4_pstorerhtnew_io
+    2215U,	// S4_pstorerhtnew_rr
+    2210U,	// S4_pstorerhtnew_zomap
     0U,	// S4_pstorerif_abs
-    2352U,	// S4_pstorerif_rr
+    2215U,	// S4_pstorerif_rr
     0U,	// S4_pstorerifnew_abs
-    37485U,	// S4_pstorerifnew_io
-    2352U,	// S4_pstorerifnew_rr
+    40982U,	// S4_pstorerifnew_io
+    2215U,	// S4_pstorerifnew_rr
+    2210U,	// S4_pstorerifnew_zomap
     0U,	// S4_pstorerinewf_abs
-    2416U,	// S4_pstorerinewf_rr
+    2279U,	// S4_pstorerinewf_rr
     0U,	// S4_pstorerinewfnew_abs
-    37485U,	// S4_pstorerinewfnew_io
-    2416U,	// S4_pstorerinewfnew_rr
+    40982U,	// S4_pstorerinewfnew_io
+    2279U,	// S4_pstorerinewfnew_rr
+    2274U,	// S4_pstorerinewfnew_zomap
     0U,	// S4_pstorerinewt_abs
-    2416U,	// S4_pstorerinewt_rr
+    2279U,	// S4_pstorerinewt_rr
     0U,	// S4_pstorerinewtnew_abs
-    37485U,	// S4_pstorerinewtnew_io
-    2416U,	// S4_pstorerinewtnew_rr
+    40982U,	// S4_pstorerinewtnew_io
+    2279U,	// S4_pstorerinewtnew_rr
+    2274U,	// S4_pstorerinewtnew_zomap
     0U,	// S4_pstorerit_abs
-    2352U,	// S4_pstorerit_rr
+    2215U,	// S4_pstorerit_rr
     0U,	// S4_pstoreritnew_abs
-    37485U,	// S4_pstoreritnew_io
-    2352U,	// S4_pstoreritnew_rr
-    0U,	// S4_stored_locked
-    49U,	// S4_storeirb_io
-    53293U,	// S4_storeirbf_io
-    53293U,	// S4_storeirbfnew_io
-    53293U,	// S4_storeirbt_io
-    53293U,	// S4_storeirbtnew_io
-    49U,	// S4_storeirh_io
-    53293U,	// S4_storeirhf_io
-    53293U,	// S4_storeirhfnew_io
-    53293U,	// S4_storeirht_io
-    53293U,	// S4_storeirhtnew_io
-    49U,	// S4_storeiri_io
-    53293U,	// S4_storeirif_io
-    53293U,	// S4_storeirifnew_io
-    53293U,	// S4_storeirit_io
-    53293U,	// S4_storeiritnew_io
-    41006U,	// S4_storerb_ap
+    40982U,	// S4_pstoreritnew_io
+    2215U,	// S4_pstoreritnew_rr
+    2210U,	// S4_pstoreritnew_zomap
+    2210U,	// S4_stored_locked
+    0U,	// S4_storeirb_io
+    0U,	// S4_storeirb_zomap
+    45078U,	// S4_storeirbf_io
+    40U,	// S4_storeirbf_zomap
+    45078U,	// S4_storeirbfnew_io
+    40U,	// S4_storeirbfnew_zomap
+    45078U,	// S4_storeirbt_io
+    40U,	// S4_storeirbt_zomap
+    45078U,	// S4_storeirbtnew_io
+    40U,	// S4_storeirbtnew_zomap
+    0U,	// S4_storeirh_io
+    0U,	// S4_storeirh_zomap
+    45078U,	// S4_storeirhf_io
+    40U,	// S4_storeirhf_zomap
+    45078U,	// S4_storeirhfnew_io
+    40U,	// S4_storeirhfnew_zomap
+    45078U,	// S4_storeirht_io
+    40U,	// S4_storeirht_zomap
+    45078U,	// S4_storeirhtnew_io
+    40U,	// S4_storeirhtnew_zomap
+    0U,	// S4_storeiri_io
+    0U,	// S4_storeiri_zomap
+    45078U,	// S4_storeirif_io
+    40U,	// S4_storeirif_zomap
+    45078U,	// S4_storeirifnew_io
+    40U,	// S4_storeirifnew_zomap
+    45078U,	// S4_storeirit_io
+    40U,	// S4_storeirit_zomap
+    45078U,	// S4_storeiritnew_io
+    40U,	// S4_storeiritnew_zomap
+    0U,	// S4_storerb_ap
     0U,	// S4_storerb_rr
     0U,	// S4_storerb_ur
-    45102U,	// S4_storerbnew_ap
+    0U,	// S4_storerbnew_ap
     0U,	// S4_storerbnew_rr
     0U,	// S4_storerbnew_ur
-    41006U,	// S4_storerd_ap
+    0U,	// S4_storerd_ap
     0U,	// S4_storerd_rr
     0U,	// S4_storerd_ur
-    49198U,	// S4_storerf_ap
+    0U,	// S4_storerf_ap
     0U,	// S4_storerf_rr
     0U,	// S4_storerf_ur
-    41006U,	// S4_storerh_ap
+    0U,	// S4_storerh_ap
     0U,	// S4_storerh_rr
     0U,	// S4_storerh_ur
-    45102U,	// S4_storerhnew_ap
+    0U,	// S4_storerhnew_ap
     0U,	// S4_storerhnew_rr
     0U,	// S4_storerhnew_ur
-    41006U,	// S4_storeri_ap
+    0U,	// S4_storeri_ap
     0U,	// S4_storeri_rr
     0U,	// S4_storeri_ur
-    45102U,	// S4_storerinew_ap
+    0U,	// S4_storerinew_ap
     0U,	// S4_storerinew_rr
     0U,	// S4_storerinew_ur
-    50U,	// S4_subaddi
+    41U,	// S4_subaddi
     0U,	// S4_subi_asl_ri
     0U,	// S4_subi_lsr_ri
     0U,	// S4_vrcrotate
@@ -4407,12 +5460,12 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// S4_vxsubaddh
     0U,	// S4_vxsubaddhr
     0U,	// S4_vxsubaddw
-    0U,	// S5_asrhub_rnd_sat
-    0U,	// S5_asrhub_rnd_sat_goodsyntax
-    0U,	// S5_asrhub_sat
+    2372U,	// S5_asrhub_rnd_sat
+    2436U,	// S5_asrhub_rnd_sat_goodsyntax
+    708U,	// S5_asrhub_sat
     0U,	// S5_popcountp
-    2500U,	// S5_vasrhrnd
-    1348U,	// S5_vasrhrnd_goodsyntax
+    2372U,	// S5_vasrhrnd
+    1220U,	// S5_vasrhrnd_goodsyntax
     0U,	// S6_rol_i_p
     0U,	// S6_rol_i_p_acc
     0U,	// S6_rol_i_p_and
@@ -4425,7 +5478,10 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// S6_rol_i_r_nac
     0U,	// S6_rol_i_r_or
     0U,	// S6_rol_i_r_xacc
-    579U,	// SA1_addi
+    0U,	// S6_vsplatrbp
+    580U,	// S6_vtrunehb_ppp
+    580U,	// S6_vtrunohb_ppp
+    3U,	// SA1_addi
     0U,	// SA1_addrx
     0U,	// SA1_addsp
     0U,	// SA1_and1
@@ -4440,9 +5496,9 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// SA1_combine3i
     0U,	// SA1_combinerz
     0U,	// SA1_combinezr
-    51U,	// SA1_dec
-    52U,	// SA1_inc
-    6U,	// SA1_seti
+    3U,	// SA1_dec
+    42U,	// SA1_inc
+    0U,	// SA1_seti
     0U,	// SA1_setin1
     0U,	// SA1_sxtb
     0U,	// SA1_sxth
@@ -4457,340 +5513,687 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// SAVE_REGISTERS_CALL_V4_EXT
     0U,	// SAVE_REGISTERS_CALL_V4_EXT_PIC
     0U,	// SAVE_REGISTERS_CALL_V4_PIC
-    24U,	// SL1_loadri_io
-    24U,	// SL1_loadrub_io
+    11U,	// SL1_loadri_io
+    11U,	// SL1_loadrub_io
     0U,	// SL2_deallocframe
     0U,	// SL2_jumpr31
     0U,	// SL2_jumpr31_f
     0U,	// SL2_jumpr31_fnew
     0U,	// SL2_jumpr31_t
     0U,	// SL2_jumpr31_tnew
-    24U,	// SL2_loadrb_io
+    11U,	// SL2_loadrb_io
     0U,	// SL2_loadrd_sp
-    24U,	// SL2_loadrh_io
+    11U,	// SL2_loadrh_io
     0U,	// SL2_loadri_sp
-    24U,	// SL2_loadruh_io
+    11U,	// SL2_loadruh_io
     0U,	// SL2_return
     0U,	// SL2_return_f
     0U,	// SL2_return_fnew
     0U,	// SL2_return_t
     0U,	// SL2_return_tnew
-    2308U,	// SS1_storeb_io
-    2308U,	// SS1_storew_io
+    2180U,	// SS1_storeb_io
+    2180U,	// SS1_storew_io
     0U,	// SS2_allocframe
     0U,	// SS2_storebi0
     0U,	// SS2_storebi1
     0U,	// SS2_stored_sp
-    2308U,	// SS2_storeh_io
+    2180U,	// SS2_storeh_io
     0U,	// SS2_storew_sp
     0U,	// SS2_storewi0
     0U,	// SS2_storewi1
     0U,	// STriw_mod
     0U,	// STriw_pred
     0U,	// TFRI64_V2_ext
-    6U,	// TFRI64_V4
+    0U,	// TFRI64_V4
+    2500U,	// V6_MAP_equb
+    2500U,	// V6_MAP_equb_128B
+    2527U,	// V6_MAP_equb_and
+    2527U,	// V6_MAP_equb_and_128B
+    2527U,	// V6_MAP_equb_ior
+    2527U,	// V6_MAP_equb_ior_128B
+    2527U,	// V6_MAP_equb_xor
+    2527U,	// V6_MAP_equb_xor_128B
+    2564U,	// V6_MAP_equh
+    2564U,	// V6_MAP_equh_128B
+    2591U,	// V6_MAP_equh_and
+    2591U,	// V6_MAP_equh_and_128B
+    2591U,	// V6_MAP_equh_ior
+    2591U,	// V6_MAP_equh_ior_128B
+    2591U,	// V6_MAP_equh_xor
+    2591U,	// V6_MAP_equh_xor_128B
+    2628U,	// V6_MAP_equw
+    2628U,	// V6_MAP_equw_128B
+    2655U,	// V6_MAP_equw_and
+    2655U,	// V6_MAP_equw_and_128B
+    2655U,	// V6_MAP_equw_ior
+    2655U,	// V6_MAP_equw_ior_128B
+    2655U,	// V6_MAP_equw_xor
+    2655U,	// V6_MAP_equw_xor_128B
     0U,	// V6_extractw
     0U,	// V6_extractw_128B
+    0U,	// V6_extractw_alt
+    0U,	// V6_extractw_alt_128B
     0U,	// V6_hi
     0U,	// V6_hi_128B
+    0U,	// V6_ld0
+    0U,	// V6_ld0_128B
+    0U,	// V6_ldnt0
+    0U,	// V6_ldnt0_128B
+    0U,	// V6_ldu0
+    0U,	// V6_ldu0_128B
     0U,	// V6_lo
     0U,	// V6_lo_128B
+    0U,	// V6_lvsplatb
+    0U,	// V6_lvsplatb_128B
+    0U,	// V6_lvsplath
+    0U,	// V6_lvsplath_128B
     0U,	// V6_lvsplatw
     0U,	// V6_lvsplatw_128B
-    644U,	// V6_pred_and
-    644U,	// V6_pred_and_128B
+    580U,	// V6_pred_and
+    580U,	// V6_pred_and_128B
     0U,	// V6_pred_and_n
     0U,	// V6_pred_and_n_128B
     0U,	// V6_pred_not
     0U,	// V6_pred_not_128B
-    644U,	// V6_pred_or
-    644U,	// V6_pred_or_128B
+    580U,	// V6_pred_or
+    580U,	// V6_pred_or_128B
     0U,	// V6_pred_or_n
     0U,	// V6_pred_or_n_128B
     0U,	// V6_pred_scalar2
     0U,	// V6_pred_scalar2_128B
-    644U,	// V6_pred_xor
-    644U,	// V6_pred_xor_128B
-    2605U,	// V6_vL32Ub_ai
-    2669U,	// V6_vL32Ub_ai_128B
-    2716U,	// V6_vL32Ub_pi
-    2780U,	// V6_vL32Ub_pi_128B
-    733U,	// V6_vL32Ub_ppu
-    2605U,	// V6_vL32b_ai
-    2669U,	// V6_vL32b_ai_128B
-    2605U,	// V6_vL32b_cur_ai
-    2669U,	// V6_vL32b_cur_ai_128B
-    2716U,	// V6_vL32b_cur_pi
-    2780U,	// V6_vL32b_cur_pi_128B
-    733U,	// V6_vL32b_cur_ppu
-    59949U,	// V6_vL32b_nt_ai
-    60013U,	// V6_vL32b_nt_ai_128B
-    59949U,	// V6_vL32b_nt_cur_ai
-    60013U,	// V6_vL32b_nt_cur_ai_128B
-    60060U,	// V6_vL32b_nt_cur_pi
-    60124U,	// V6_vL32b_nt_cur_pi_128B
-    58077U,	// V6_vL32b_nt_cur_ppu
-    60060U,	// V6_vL32b_nt_pi
-    60124U,	// V6_vL32b_nt_pi_128B
-    58077U,	// V6_vL32b_nt_ppu
-    59949U,	// V6_vL32b_nt_tmp_ai
-    2669U,	// V6_vL32b_nt_tmp_ai_128B
-    60060U,	// V6_vL32b_nt_tmp_pi
-    60124U,	// V6_vL32b_nt_tmp_pi_128B
-    58077U,	// V6_vL32b_nt_tmp_ppu
-    2716U,	// V6_vL32b_pi
-    2780U,	// V6_vL32b_pi_128B
-    733U,	// V6_vL32b_ppu
-    2605U,	// V6_vL32b_tmp_ai
-    2669U,	// V6_vL32b_tmp_ai_128B
-    2716U,	// V6_vL32b_tmp_pi
-    2780U,	// V6_vL32b_tmp_pi_128B
-    733U,	// V6_vL32b_tmp_ppu
-    41006U,	// V6_vS32Ub_ai
-    41006U,	// V6_vS32Ub_ai_128B
-    39469U,	// V6_vS32Ub_npred_ai
-    39533U,	// V6_vS32Ub_npred_ai_128B
-    39580U,	// V6_vS32Ub_npred_pi
-    39644U,	// V6_vS32Ub_npred_pi_128B
-    37597U,	// V6_vS32Ub_npred_ppu
-    41710U,	// V6_vS32Ub_pi
-    41710U,	// V6_vS32Ub_pi_128B
-    2334U,	// V6_vS32Ub_ppu
-    39469U,	// V6_vS32Ub_pred_ai
-    39533U,	// V6_vS32Ub_pred_ai_128B
-    39580U,	// V6_vS32Ub_pred_pi
-    39644U,	// V6_vS32Ub_pred_pi_128B
-    37597U,	// V6_vS32Ub_pred_ppu
-    41006U,	// V6_vS32b_ai
-    41006U,	// V6_vS32b_ai_128B
-    45102U,	// V6_vS32b_new_ai
-    45102U,	// V6_vS32b_new_ai_128B
-    39469U,	// V6_vS32b_new_npred_ai
-    39533U,	// V6_vS32b_new_npred_ai_128B
-    39580U,	// V6_vS32b_new_npred_pi
-    39644U,	// V6_vS32b_new_npred_pi_128B
-    37597U,	// V6_vS32b_new_npred_ppu
-    45806U,	// V6_vS32b_new_pi
-    45806U,	// V6_vS32b_new_pi_128B
-    2398U,	// V6_vS32b_new_ppu
-    39469U,	// V6_vS32b_new_pred_ai
-    39533U,	// V6_vS32b_new_pred_ai_128B
-    39580U,	// V6_vS32b_new_pred_pi
-    39644U,	// V6_vS32b_new_pred_pi_128B
-    37597U,	// V6_vS32b_new_pred_ppu
-    39469U,	// V6_vS32b_npred_ai
-    39533U,	// V6_vS32b_npred_ai_128B
-    39580U,	// V6_vS32b_npred_pi
-    39644U,	// V6_vS32b_npred_pi_128B
-    37597U,	// V6_vS32b_npred_ppu
-    39469U,	// V6_vS32b_nqpred_ai
-    39533U,	// V6_vS32b_nqpred_ai_128B
-    39580U,	// V6_vS32b_nqpred_pi
-    39644U,	// V6_vS32b_nqpred_pi_128B
-    37597U,	// V6_vS32b_nqpred_ppu
-    41013U,	// V6_vS32b_nt_ai
-    41013U,	// V6_vS32b_nt_ai_128B
-    45109U,	// V6_vS32b_nt_new_ai
-    45109U,	// V6_vS32b_nt_new_ai_128B
-    64045U,	// V6_vS32b_nt_new_npred_ai
-    64109U,	// V6_vS32b_nt_new_npred_ai_128B
-    64156U,	// V6_vS32b_nt_new_npred_pi
-    64220U,	// V6_vS32b_nt_new_npred_pi_128B
-    62173U,	// V6_vS32b_nt_new_npred_ppu
-    45813U,	// V6_vS32b_nt_new_pi
-    45813U,	// V6_vS32b_nt_new_pi_128B
-    54U,	// V6_vS32b_nt_new_ppu
-    64045U,	// V6_vS32b_nt_new_pred_ai
-    64109U,	// V6_vS32b_nt_new_pred_ai_128B
-    64156U,	// V6_vS32b_nt_new_pred_pi
-    64220U,	// V6_vS32b_nt_new_pred_pi_128B
-    62173U,	// V6_vS32b_nt_new_pred_ppu
-    64045U,	// V6_vS32b_nt_npred_ai
-    64109U,	// V6_vS32b_nt_npred_ai_128B
-    64156U,	// V6_vS32b_nt_npred_pi
-    64220U,	// V6_vS32b_nt_npred_pi_128B
-    62173U,	// V6_vS32b_nt_npred_ppu
-    64045U,	// V6_vS32b_nt_nqpred_ai
-    64109U,	// V6_vS32b_nt_nqpred_ai_128B
-    64156U,	// V6_vS32b_nt_nqpred_pi
-    64220U,	// V6_vS32b_nt_nqpred_pi_128B
-    62173U,	// V6_vS32b_nt_nqpred_ppu
-    41717U,	// V6_vS32b_nt_pi
-    41717U,	// V6_vS32b_nt_pi_128B
-    6U,	// V6_vS32b_nt_ppu
-    64045U,	// V6_vS32b_nt_pred_ai
-    64109U,	// V6_vS32b_nt_pred_ai_128B
-    64156U,	// V6_vS32b_nt_pred_pi
-    64220U,	// V6_vS32b_nt_pred_pi_128B
-    62173U,	// V6_vS32b_nt_pred_ppu
-    64045U,	// V6_vS32b_nt_qpred_ai
-    64109U,	// V6_vS32b_nt_qpred_ai_128B
-    64156U,	// V6_vS32b_nt_qpred_pi
-    64220U,	// V6_vS32b_nt_qpred_pi_128B
-    62173U,	// V6_vS32b_nt_qpred_ppu
-    41710U,	// V6_vS32b_pi
-    41710U,	// V6_vS32b_pi_128B
-    2334U,	// V6_vS32b_ppu
-    39469U,	// V6_vS32b_pred_ai
-    39533U,	// V6_vS32b_pred_ai_128B
-    39580U,	// V6_vS32b_pred_pi
-    39644U,	// V6_vS32b_pred_pi_128B
-    37597U,	// V6_vS32b_pred_ppu
-    39469U,	// V6_vS32b_qpred_ai
-    39533U,	// V6_vS32b_qpred_ai_128B
-    39580U,	// V6_vS32b_qpred_pi
-    39644U,	// V6_vS32b_qpred_pi_128B
-    37597U,	// V6_vS32b_qpred_ppu
+    0U,	// V6_pred_scalar2v2
+    0U,	// V6_pred_scalar2v2_128B
+    0U,	// V6_pred_xor
+    0U,	// V6_pred_xor_128B
+    324U,	// V6_shuffeqh
+    324U,	// V6_shuffeqh_128B
+    2692U,	// V6_shuffeqw
+    2692U,	// V6_shuffeqw_128B
+    0U,	// V6_st0
+    0U,	// V6_st0_128B
+    0U,	// V6_stn0
+    0U,	// V6_stn0_128B
+    0U,	// V6_stnnt0
+    0U,	// V6_stnnt0_128B
+    2210U,	// V6_stnp0
+    2210U,	// V6_stnp0_128B
+    43U,	// V6_stnpnt0
+    43U,	// V6_stnpnt0_128B
+    2210U,	// V6_stnq0
+    2210U,	// V6_stnq0_128B
+    43U,	// V6_stnqnt0
+    43U,	// V6_stnqnt0_128B
+    0U,	// V6_stnt0
+    0U,	// V6_stnt0_128B
+    2210U,	// V6_stp0
+    2210U,	// V6_stp0_128B
+    43U,	// V6_stpnt0
+    43U,	// V6_stpnt0_128B
+    2210U,	// V6_stq0
+    2210U,	// V6_stq0_128B
+    43U,	// V6_stqnt0
+    43U,	// V6_stqnt0_128B
+    0U,	// V6_stu0
+    0U,	// V6_stu0_128B
+    2210U,	// V6_stunp0
+    2210U,	// V6_stunp0_128B
+    2210U,	// V6_stup0
+    2210U,	// V6_stup0_128B
+    11U,	// V6_vL32Ub_ai
+    11U,	// V6_vL32Ub_ai_128B
+    11U,	// V6_vL32Ub_pi
+    11U,	// V6_vL32Ub_pi_128B
+    11U,	// V6_vL32Ub_ppu
+    11U,	// V6_vL32Ub_ppu_128B
+    11U,	// V6_vL32b_ai
+    11U,	// V6_vL32b_ai_128B
+    11U,	// V6_vL32b_cur_ai
+    11U,	// V6_vL32b_cur_ai_128B
+    1028U,	// V6_vL32b_cur_npred_ai
+    1028U,	// V6_vL32b_cur_npred_ai_128B
+    1116U,	// V6_vL32b_cur_npred_pi
+    1116U,	// V6_vL32b_cur_npred_pi_128B
+    2780U,	// V6_vL32b_cur_npred_ppu
+    2780U,	// V6_vL32b_cur_npred_ppu_128B
+    11U,	// V6_vL32b_cur_pi
+    11U,	// V6_vL32b_cur_pi_128B
+    11U,	// V6_vL32b_cur_ppu
+    11U,	// V6_vL32b_cur_ppu_128B
+    1028U,	// V6_vL32b_cur_pred_ai
+    1028U,	// V6_vL32b_cur_pred_ai_128B
+    1116U,	// V6_vL32b_cur_pred_pi
+    1116U,	// V6_vL32b_cur_pred_pi_128B
+    2780U,	// V6_vL32b_cur_pred_ppu
+    2780U,	// V6_vL32b_cur_pred_ppu_128B
+    1028U,	// V6_vL32b_npred_ai
+    1028U,	// V6_vL32b_npred_ai_128B
+    1116U,	// V6_vL32b_npred_pi
+    1116U,	// V6_vL32b_npred_pi_128B
+    2780U,	// V6_vL32b_npred_ppu
+    2780U,	// V6_vL32b_npred_ppu_128B
+    44U,	// V6_vL32b_nt_ai
+    44U,	// V6_vL32b_nt_ai_128B
+    44U,	// V6_vL32b_nt_cur_ai
+    44U,	// V6_vL32b_nt_cur_ai_128B
+    50180U,	// V6_vL32b_nt_cur_npred_ai
+    50180U,	// V6_vL32b_nt_cur_npred_ai_128B
+    50268U,	// V6_vL32b_nt_cur_npred_pi
+    50268U,	// V6_vL32b_nt_cur_npred_pi_128B
+    51932U,	// V6_vL32b_nt_cur_npred_ppu
+    51932U,	// V6_vL32b_nt_cur_npred_ppu_128B
+    44U,	// V6_vL32b_nt_cur_pi
+    44U,	// V6_vL32b_nt_cur_pi_128B
+    44U,	// V6_vL32b_nt_cur_ppu
+    44U,	// V6_vL32b_nt_cur_ppu_128B
+    50180U,	// V6_vL32b_nt_cur_pred_ai
+    50180U,	// V6_vL32b_nt_cur_pred_ai_128B
+    50268U,	// V6_vL32b_nt_cur_pred_pi
+    50268U,	// V6_vL32b_nt_cur_pred_pi_128B
+    51932U,	// V6_vL32b_nt_cur_pred_ppu
+    51932U,	// V6_vL32b_nt_cur_pred_ppu_128B
+    50180U,	// V6_vL32b_nt_npred_ai
+    50180U,	// V6_vL32b_nt_npred_ai_128B
+    50268U,	// V6_vL32b_nt_npred_pi
+    50268U,	// V6_vL32b_nt_npred_pi_128B
+    51932U,	// V6_vL32b_nt_npred_ppu
+    51932U,	// V6_vL32b_nt_npred_ppu_128B
+    44U,	// V6_vL32b_nt_pi
+    44U,	// V6_vL32b_nt_pi_128B
+    44U,	// V6_vL32b_nt_ppu
+    44U,	// V6_vL32b_nt_ppu_128B
+    50180U,	// V6_vL32b_nt_pred_ai
+    50180U,	// V6_vL32b_nt_pred_ai_128B
+    50268U,	// V6_vL32b_nt_pred_pi
+    50268U,	// V6_vL32b_nt_pred_pi_128B
+    51932U,	// V6_vL32b_nt_pred_ppu
+    51932U,	// V6_vL32b_nt_pred_ppu_128B
+    44U,	// V6_vL32b_nt_tmp_ai
+    44U,	// V6_vL32b_nt_tmp_ai_128B
+    50180U,	// V6_vL32b_nt_tmp_npred_ai
+    50180U,	// V6_vL32b_nt_tmp_npred_ai_128B
+    50268U,	// V6_vL32b_nt_tmp_npred_pi
+    50268U,	// V6_vL32b_nt_tmp_npred_pi_128B
+    51932U,	// V6_vL32b_nt_tmp_npred_ppu
+    51932U,	// V6_vL32b_nt_tmp_npred_ppu_128B
+    44U,	// V6_vL32b_nt_tmp_pi
+    44U,	// V6_vL32b_nt_tmp_pi_128B
+    44U,	// V6_vL32b_nt_tmp_ppu
+    44U,	// V6_vL32b_nt_tmp_ppu_128B
+    50180U,	// V6_vL32b_nt_tmp_pred_ai
+    50180U,	// V6_vL32b_nt_tmp_pred_ai_128B
+    50268U,	// V6_vL32b_nt_tmp_pred_pi
+    50268U,	// V6_vL32b_nt_tmp_pred_pi_128B
+    51932U,	// V6_vL32b_nt_tmp_pred_ppu
+    51932U,	// V6_vL32b_nt_tmp_pred_ppu_128B
+    11U,	// V6_vL32b_pi
+    11U,	// V6_vL32b_pi_128B
+    11U,	// V6_vL32b_ppu
+    11U,	// V6_vL32b_ppu_128B
+    1028U,	// V6_vL32b_pred_ai
+    1028U,	// V6_vL32b_pred_ai_128B
+    1116U,	// V6_vL32b_pred_pi
+    1116U,	// V6_vL32b_pred_pi_128B
+    2780U,	// V6_vL32b_pred_ppu
+    2780U,	// V6_vL32b_pred_ppu_128B
+    11U,	// V6_vL32b_tmp_ai
+    11U,	// V6_vL32b_tmp_ai_128B
+    1028U,	// V6_vL32b_tmp_npred_ai
+    1028U,	// V6_vL32b_tmp_npred_ai_128B
+    1116U,	// V6_vL32b_tmp_npred_pi
+    1116U,	// V6_vL32b_tmp_npred_pi_128B
+    2780U,	// V6_vL32b_tmp_npred_ppu
+    2780U,	// V6_vL32b_tmp_npred_ppu_128B
+    11U,	// V6_vL32b_tmp_pi
+    11U,	// V6_vL32b_tmp_pi_128B
+    11U,	// V6_vL32b_tmp_ppu
+    11U,	// V6_vL32b_tmp_ppu_128B
+    1028U,	// V6_vL32b_tmp_pred_ai
+    1028U,	// V6_vL32b_tmp_pred_ai_128B
+    1116U,	// V6_vL32b_tmp_pred_pi
+    1116U,	// V6_vL32b_tmp_pred_pi_128B
+    2780U,	// V6_vL32b_tmp_pred_ppu
+    2780U,	// V6_vL32b_tmp_pred_ppu_128B
+    2180U,	// V6_vS32Ub_ai
+    2180U,	// V6_vS32Ub_ai_128B
+    40982U,	// V6_vS32Ub_npred_ai
+    40982U,	// V6_vS32Ub_npred_ai_128B
+    41624U,	// V6_vS32Ub_npred_pi
+    41624U,	// V6_vS32Ub_npred_pi_128B
+    41623U,	// V6_vS32Ub_npred_ppu
+    41623U,	// V6_vS32Ub_npred_ppu_128B
+    2207U,	// V6_vS32Ub_pi
+    2207U,	// V6_vS32Ub_pi_128B
+    2207U,	// V6_vS32Ub_ppu
+    2207U,	// V6_vS32Ub_ppu_128B
+    40982U,	// V6_vS32Ub_pred_ai
+    40982U,	// V6_vS32Ub_pred_ai_128B
+    41624U,	// V6_vS32Ub_pred_pi
+    41624U,	// V6_vS32Ub_pred_pi_128B
+    41623U,	// V6_vS32Ub_pred_ppu
+    41623U,	// V6_vS32Ub_pred_ppu_128B
+    2180U,	// V6_vS32b_ai
+    2180U,	// V6_vS32b_ai_128B
+    2244U,	// V6_vS32b_new_ai
+    2244U,	// V6_vS32b_new_ai_128B
+    40982U,	// V6_vS32b_new_npred_ai
+    40982U,	// V6_vS32b_new_npred_ai_128B
+    41624U,	// V6_vS32b_new_npred_pi
+    41624U,	// V6_vS32b_new_npred_pi_128B
+    41623U,	// V6_vS32b_new_npred_ppu
+    41623U,	// V6_vS32b_new_npred_ppu_128B
+    2271U,	// V6_vS32b_new_pi
+    2271U,	// V6_vS32b_new_pi_128B
+    2271U,	// V6_vS32b_new_ppu
+    2271U,	// V6_vS32b_new_ppu_128B
+    40982U,	// V6_vS32b_new_pred_ai
+    40982U,	// V6_vS32b_new_pred_ai_128B
+    41624U,	// V6_vS32b_new_pred_pi
+    41624U,	// V6_vS32b_new_pred_pi_128B
+    41623U,	// V6_vS32b_new_pred_ppu
+    41623U,	// V6_vS32b_new_pred_ppu_128B
+    40982U,	// V6_vS32b_npred_ai
+    40982U,	// V6_vS32b_npred_ai_128B
+    41624U,	// V6_vS32b_npred_pi
+    41624U,	// V6_vS32b_npred_pi_128B
+    41623U,	// V6_vS32b_npred_ppu
+    41623U,	// V6_vS32b_npred_ppu_128B
+    40982U,	// V6_vS32b_nqpred_ai
+    40982U,	// V6_vS32b_nqpred_ai_128B
+    41624U,	// V6_vS32b_nqpred_pi
+    41624U,	// V6_vS32b_nqpred_pi_128B
+    41623U,	// V6_vS32b_nqpred_ppu
+    41623U,	// V6_vS32b_nqpred_ppu_128B
+    2180U,	// V6_vS32b_nt_ai
+    2180U,	// V6_vS32b_nt_ai_128B
+    2244U,	// V6_vS32b_nt_new_ai
+    2244U,	// V6_vS32b_nt_new_ai_128B
+    53270U,	// V6_vS32b_nt_new_npred_ai
+    53270U,	// V6_vS32b_nt_new_npred_ai_128B
+    53912U,	// V6_vS32b_nt_new_npred_pi
+    53912U,	// V6_vS32b_nt_new_npred_pi_128B
+    53911U,	// V6_vS32b_nt_new_npred_ppu
+    53911U,	// V6_vS32b_nt_new_npred_ppu_128B
+    2271U,	// V6_vS32b_nt_new_pi
+    2271U,	// V6_vS32b_nt_new_pi_128B
+    2271U,	// V6_vS32b_nt_new_ppu
+    2271U,	// V6_vS32b_nt_new_ppu_128B
+    53270U,	// V6_vS32b_nt_new_pred_ai
+    53270U,	// V6_vS32b_nt_new_pred_ai_128B
+    53912U,	// V6_vS32b_nt_new_pred_pi
+    53912U,	// V6_vS32b_nt_new_pred_pi_128B
+    53911U,	// V6_vS32b_nt_new_pred_ppu
+    53911U,	// V6_vS32b_nt_new_pred_ppu_128B
+    53270U,	// V6_vS32b_nt_npred_ai
+    53270U,	// V6_vS32b_nt_npred_ai_128B
+    53912U,	// V6_vS32b_nt_npred_pi
+    53912U,	// V6_vS32b_nt_npred_pi_128B
+    53911U,	// V6_vS32b_nt_npred_ppu
+    53911U,	// V6_vS32b_nt_npred_ppu_128B
+    53270U,	// V6_vS32b_nt_nqpred_ai
+    53270U,	// V6_vS32b_nt_nqpred_ai_128B
+    53912U,	// V6_vS32b_nt_nqpred_pi
+    53912U,	// V6_vS32b_nt_nqpred_pi_128B
+    53911U,	// V6_vS32b_nt_nqpred_ppu
+    53911U,	// V6_vS32b_nt_nqpred_ppu_128B
+    2207U,	// V6_vS32b_nt_pi
+    2207U,	// V6_vS32b_nt_pi_128B
+    2207U,	// V6_vS32b_nt_ppu
+    2207U,	// V6_vS32b_nt_ppu_128B
+    53270U,	// V6_vS32b_nt_pred_ai
+    53270U,	// V6_vS32b_nt_pred_ai_128B
+    53912U,	// V6_vS32b_nt_pred_pi
+    53912U,	// V6_vS32b_nt_pred_pi_128B
+    53911U,	// V6_vS32b_nt_pred_ppu
+    53911U,	// V6_vS32b_nt_pred_ppu_128B
+    53270U,	// V6_vS32b_nt_qpred_ai
+    53270U,	// V6_vS32b_nt_qpred_ai_128B
+    53912U,	// V6_vS32b_nt_qpred_pi
+    53912U,	// V6_vS32b_nt_qpred_pi_128B
+    53911U,	// V6_vS32b_nt_qpred_ppu
+    53911U,	// V6_vS32b_nt_qpred_ppu_128B
+    2207U,	// V6_vS32b_pi
+    2207U,	// V6_vS32b_pi_128B
+    2207U,	// V6_vS32b_ppu
+    2207U,	// V6_vS32b_ppu_128B
+    40982U,	// V6_vS32b_pred_ai
+    40982U,	// V6_vS32b_pred_ai_128B
+    41624U,	// V6_vS32b_pred_pi
+    41624U,	// V6_vS32b_pred_pi_128B
+    41623U,	// V6_vS32b_pred_ppu
+    41623U,	// V6_vS32b_pred_ppu_128B
+    40982U,	// V6_vS32b_qpred_ai
+    40982U,	// V6_vS32b_qpred_ai_128B
+    41624U,	// V6_vS32b_qpred_pi
+    41624U,	// V6_vS32b_qpred_pi_128B
+    41623U,	// V6_vS32b_qpred_ppu
+    41623U,	// V6_vS32b_qpred_ppu_128B
     324U,	// V6_vabsdiffh
     324U,	// V6_vabsdiffh_128B
+    0U,	// V6_vabsdiffh_alt
+    0U,	// V6_vabsdiffh_alt_128B
     0U,	// V6_vabsdiffub
     0U,	// V6_vabsdiffub_128B
-    2820U,	// V6_vabsdiffuh
-    2820U,	// V6_vabsdiffuh_128B
+    0U,	// V6_vabsdiffub_alt
+    0U,	// V6_vabsdiffub_alt_128B
+    2564U,	// V6_vabsdiffuh
+    2564U,	// V6_vabsdiffuh_128B
+    0U,	// V6_vabsdiffuh_alt
+    0U,	// V6_vabsdiffuh_alt_128B
     0U,	// V6_vabsdiffw
     0U,	// V6_vabsdiffw_128B
+    0U,	// V6_vabsdiffw_alt
+    0U,	// V6_vabsdiffw_alt_128B
     0U,	// V6_vabsh
     0U,	// V6_vabsh_128B
+    0U,	// V6_vabsh_alt
+    0U,	// V6_vabsh_alt_128B
     0U,	// V6_vabsh_sat
     0U,	// V6_vabsh_sat_128B
+    0U,	// V6_vabsh_sat_alt
+    0U,	// V6_vabsh_sat_alt_128B
     0U,	// V6_vabsw
     0U,	// V6_vabsw_128B
+    0U,	// V6_vabsw_alt
+    0U,	// V6_vabsw_alt_128B
     0U,	// V6_vabsw_sat
     0U,	// V6_vabsw_sat_128B
+    0U,	// V6_vabsw_sat_alt
+    0U,	// V6_vabsw_sat_alt_128B
     0U,	// V6_vaddb
     0U,	// V6_vaddb_128B
+    0U,	// V6_vaddb_alt
+    0U,	// V6_vaddb_alt_128B
     0U,	// V6_vaddb_dv
     0U,	// V6_vaddb_dv_128B
+    0U,	// V6_vaddb_dv_alt
+    0U,	// V6_vaddb_dv_alt_128B
     0U,	// V6_vaddbnq
     0U,	// V6_vaddbnq_128B
+    0U,	// V6_vaddbnq_alt
+    0U,	// V6_vaddbnq_alt_128B
     0U,	// V6_vaddbq
     0U,	// V6_vaddbq_128B
+    0U,	// V6_vaddbq_alt
+    0U,	// V6_vaddbq_alt_128B
+    0U,	// V6_vaddbsat
+    0U,	// V6_vaddbsat_128B
+    0U,	// V6_vaddbsat_alt
+    0U,	// V6_vaddbsat_alt_128B
+    0U,	// V6_vaddbsat_dv
+    0U,	// V6_vaddbsat_dv_128B
+    0U,	// V6_vaddbsat_dv_alt
+    0U,	// V6_vaddbsat_dv_alt_128B
+    58029U,	// V6_vaddcarry
+    58029U,	// V6_vaddcarry_128B
+    0U,	// V6_vaddclbh
+    0U,	// V6_vaddclbh_128B
+    0U,	// V6_vaddclbw
+    0U,	// V6_vaddclbw_128B
     324U,	// V6_vaddh
     324U,	// V6_vaddh_128B
+    0U,	// V6_vaddh_alt
+    0U,	// V6_vaddh_alt_128B
     324U,	// V6_vaddh_dv
     324U,	// V6_vaddh_dv_128B
+    0U,	// V6_vaddh_dv_alt
+    0U,	// V6_vaddh_dv_alt_128B
     0U,	// V6_vaddhnq
     0U,	// V6_vaddhnq_128B
+    0U,	// V6_vaddhnq_alt
+    0U,	// V6_vaddhnq_alt_128B
     0U,	// V6_vaddhq
     0U,	// V6_vaddhq_128B
+    0U,	// V6_vaddhq_alt
+    0U,	// V6_vaddhq_alt_128B
     452U,	// V6_vaddhsat
     452U,	// V6_vaddhsat_128B
+    0U,	// V6_vaddhsat_alt
+    0U,	// V6_vaddhsat_alt_128B
     452U,	// V6_vaddhsat_dv
     452U,	// V6_vaddhsat_dv_128B
-    324U,	// V6_vaddhw
-    324U,	// V6_vaddhw_128B
-    2884U,	// V6_vaddubh
-    2884U,	// V6_vaddubh_128B
+    0U,	// V6_vaddhsat_dv_alt
+    0U,	// V6_vaddhsat_dv_alt_128B
+    321U,	// V6_vaddhw
+    321U,	// V6_vaddhw_128B
+    351U,	// V6_vaddhw_acc
+    351U,	// V6_vaddhw_acc_128B
+    0U,	// V6_vaddhw_acc_alt
+    0U,	// V6_vaddhw_acc_alt_128B
+    0U,	// V6_vaddhw_alt
+    0U,	// V6_vaddhw_alt_128B
+    2500U,	// V6_vaddubh
+    2500U,	// V6_vaddubh_128B
+    0U,	// V6_vaddubh_acc
+    0U,	// V6_vaddubh_acc_128B
+    0U,	// V6_vaddubh_acc_alt
+    0U,	// V6_vaddubh_acc_alt_128B
+    0U,	// V6_vaddubh_alt
+    0U,	// V6_vaddubh_alt_128B
     0U,	// V6_vaddubsat
     0U,	// V6_vaddubsat_128B
+    0U,	// V6_vaddubsat_alt
+    0U,	// V6_vaddubsat_alt_128B
     0U,	// V6_vaddubsat_dv
     0U,	// V6_vaddubsat_dv_128B
+    0U,	// V6_vaddubsat_dv_alt
+    0U,	// V6_vaddubsat_dv_alt_128B
+    0U,	// V6_vaddububb_sat
+    0U,	// V6_vaddububb_sat_128B
     0U,	// V6_vadduhsat
     0U,	// V6_vadduhsat_128B
+    0U,	// V6_vadduhsat_alt
+    0U,	// V6_vadduhsat_alt_128B
     0U,	// V6_vadduhsat_dv
     0U,	// V6_vadduhsat_dv_128B
-    2820U,	// V6_vadduhw
-    2820U,	// V6_vadduhw_128B
-    2948U,	// V6_vaddw
-    2948U,	// V6_vaddw_128B
-    2948U,	// V6_vaddw_dv
-    2948U,	// V6_vaddw_dv_128B
+    0U,	// V6_vadduhsat_dv_alt
+    0U,	// V6_vadduhsat_dv_alt_128B
+    46U,	// V6_vadduhw
+    46U,	// V6_vadduhw_128B
+    2591U,	// V6_vadduhw_acc
+    2591U,	// V6_vadduhw_acc_128B
+    0U,	// V6_vadduhw_acc_alt
+    0U,	// V6_vadduhw_acc_alt_128B
+    0U,	// V6_vadduhw_alt
+    0U,	// V6_vadduhw_alt_128B
+    0U,	// V6_vadduwsat
+    0U,	// V6_vadduwsat_128B
+    0U,	// V6_vadduwsat_alt
+    0U,	// V6_vadduwsat_alt_128B
+    0U,	// V6_vadduwsat_dv
+    0U,	// V6_vadduwsat_dv_128B
+    0U,	// V6_vadduwsat_dv_alt
+    0U,	// V6_vadduwsat_dv_alt_128B
+    61485U,	// V6_vaddw
+    61485U,	// V6_vaddw_128B
+    0U,	// V6_vaddw_alt
+    0U,	// V6_vaddw_alt_128B
+    61485U,	// V6_vaddw_dv
+    61485U,	// V6_vaddw_dv_128B
+    0U,	// V6_vaddw_dv_alt
+    0U,	// V6_vaddw_dv_alt_128B
     0U,	// V6_vaddwnq
     0U,	// V6_vaddwnq_128B
+    0U,	// V6_vaddwnq_alt
+    0U,	// V6_vaddwnq_alt_128B
     0U,	// V6_vaddwq
     0U,	// V6_vaddwq_128B
-    3012U,	// V6_vaddwsat
-    3012U,	// V6_vaddwsat_128B
-    3012U,	// V6_vaddwsat_dv
-    3012U,	// V6_vaddwsat_dv_128B
-    670U,	// V6_valignb
-    670U,	// V6_valignb_128B
-    670U,	// V6_valignbi
-    670U,	// V6_valignbi_128B
+    0U,	// V6_vaddwq_alt
+    0U,	// V6_vaddwq_alt_128B
+    45U,	// V6_vaddwsat
+    45U,	// V6_vaddwsat_128B
+    0U,	// V6_vaddwsat_alt
+    0U,	// V6_vaddwsat_alt_128B
+    45U,	// V6_vaddwsat_dv
+    45U,	// V6_vaddwsat_dv_128B
+    0U,	// V6_vaddwsat_dv_alt
+    0U,	// V6_vaddwsat_dv_alt_128B
+    607U,	// V6_valignb
+    607U,	// V6_valignb_128B
+    607U,	// V6_valignbi
+    607U,	// V6_valignbi_128B
     0U,	// V6_vand
     0U,	// V6_vand_128B
+    0U,	// V6_vandnqrt
+    0U,	// V6_vandnqrt_128B
+    0U,	// V6_vandnqrt_acc
+    0U,	// V6_vandnqrt_acc_128B
+    0U,	// V6_vandnqrt_acc_alt
+    0U,	// V6_vandnqrt_acc_alt_128B
+    0U,	// V6_vandnqrt_alt
+    0U,	// V6_vandnqrt_alt_128B
     0U,	// V6_vandqrt
     0U,	// V6_vandqrt_128B
     0U,	// V6_vandqrt_acc
     0U,	// V6_vandqrt_acc_128B
+    0U,	// V6_vandqrt_acc_alt
+    0U,	// V6_vandqrt_acc_alt_128B
+    0U,	// V6_vandqrt_alt
+    0U,	// V6_vandqrt_alt_128B
+    0U,	// V6_vandvnqv
+    0U,	// V6_vandvnqv_128B
+    0U,	// V6_vandvqv
+    0U,	// V6_vandvqv_128B
     0U,	// V6_vandvrt
     0U,	// V6_vandvrt_128B
     0U,	// V6_vandvrt_acc
     0U,	// V6_vandvrt_acc_128B
+    0U,	// V6_vandvrt_acc_alt
+    0U,	// V6_vandvrt_acc_alt_128B
+    0U,	// V6_vandvrt_alt
+    0U,	// V6_vandvrt_alt_128B
     0U,	// V6_vaslh
     0U,	// V6_vaslh_128B
+    580U,	// V6_vaslh_alt
+    580U,	// V6_vaslh_alt_128B
     0U,	// V6_vaslhv
     0U,	// V6_vaslhv_128B
+    580U,	// V6_vaslhv_alt
+    580U,	// V6_vaslhv_alt_128B
     0U,	// V6_vaslw
     0U,	// V6_vaslw_128B
     0U,	// V6_vaslw_acc
     0U,	// V6_vaslw_acc_128B
+    0U,	// V6_vaslw_acc_alt
+    0U,	// V6_vaslw_acc_alt_128B
+    580U,	// V6_vaslw_alt
+    580U,	// V6_vaslw_alt_128B
     0U,	// V6_vaslwv
     0U,	// V6_vaslwv_128B
-    644U,	// V6_vasrh
-    644U,	// V6_vasrh_128B
+    580U,	// V6_vaslwv_alt
+    580U,	// V6_vaslwv_alt_128B
+    580U,	// V6_vasrh
+    580U,	// V6_vasrh_128B
+    580U,	// V6_vasrh_alt
+    580U,	// V6_vasrh_alt_128B
     0U,	// V6_vasrhbrndsat
     0U,	// V6_vasrhbrndsat_128B
+    0U,	// V6_vasrhbrndsat_alt
+    0U,	// V6_vasrhbsat
+    0U,	// V6_vasrhbsat_128B
     0U,	// V6_vasrhubrndsat
     0U,	// V6_vasrhubrndsat_128B
+    4868U,	// V6_vasrhubrndsat_alt
     0U,	// V6_vasrhubsat
     0U,	// V6_vasrhubsat_128B
+    4868U,	// V6_vasrhubsat_alt
     324U,	// V6_vasrhv
     324U,	// V6_vasrhv_128B
+    580U,	// V6_vasrhv_alt
+    580U,	// V6_vasrhv_alt_128B
+    2820U,	// V6_vasruwuhrndsat
+    2820U,	// V6_vasruwuhrndsat_128B
     0U,	// V6_vasrw
     0U,	// V6_vasrw_128B
     0U,	// V6_vasrw_acc
     0U,	// V6_vasrw_acc_128B
-    3076U,	// V6_vasrwh
-    3076U,	// V6_vasrwh_128B
-    3076U,	// V6_vasrwhrndsat
-    3076U,	// V6_vasrwhrndsat_128B
-    7172U,	// V6_vasrwhsat
-    7172U,	// V6_vasrwhsat_128B
-    0U,	// V6_vasrwuhsat
-    0U,	// V6_vasrwuhsat_128B
+    0U,	// V6_vasrw_acc_alt
+    0U,	// V6_vasrw_acc_alt_128B
+    580U,	// V6_vasrw_alt
+    580U,	// V6_vasrw_alt_128B
+    2884U,	// V6_vasrwh
+    2884U,	// V6_vasrwh_128B
+    0U,	// V6_vasrwh_alt
+    6980U,	// V6_vasrwhrndsat
+    6980U,	// V6_vasrwhrndsat_128B
+    0U,	// V6_vasrwhrndsat_alt
+    6980U,	// V6_vasrwhsat
+    6980U,	// V6_vasrwhsat_128B
+    0U,	// V6_vasrwhsat_alt
+    6980U,	// V6_vasrwuhrndsat
+    6980U,	// V6_vasrwuhrndsat_128B
+    6980U,	// V6_vasrwuhsat
+    6980U,	// V6_vasrwuhsat_128B
+    0U,	// V6_vasrwuhsat_alt
     0U,	// V6_vasrwv
     0U,	// V6_vasrwv_128B
+    580U,	// V6_vasrwv_alt
+    580U,	// V6_vasrwv_alt_128B
     0U,	// V6_vassign
     0U,	// V6_vassign_128B
     0U,	// V6_vassignp
     0U,	// V6_vassignp_128B
     0U,	// V6_vavgh
     0U,	// V6_vavgh_128B
+    0U,	// V6_vavgh_alt
+    0U,	// V6_vavgh_alt_128B
     0U,	// V6_vavghrnd
     0U,	// V6_vavghrnd_128B
+    0U,	// V6_vavghrnd_alt
+    0U,	// V6_vavghrnd_alt_128B
     0U,	// V6_vavgub
     0U,	// V6_vavgub_128B
+    0U,	// V6_vavgub_alt
+    0U,	// V6_vavgub_alt_128B
     0U,	// V6_vavgubrnd
     0U,	// V6_vavgubrnd_128B
+    0U,	// V6_vavgubrnd_alt
+    0U,	// V6_vavgubrnd_alt_128B
     0U,	// V6_vavguh
     0U,	// V6_vavguh_128B
+    0U,	// V6_vavguh_alt
+    0U,	// V6_vavguh_alt_128B
     0U,	// V6_vavguhrnd
     0U,	// V6_vavguhrnd_128B
+    0U,	// V6_vavguhrnd_alt
+    0U,	// V6_vavguhrnd_alt_128B
     0U,	// V6_vavgw
     0U,	// V6_vavgw_128B
+    0U,	// V6_vavgw_alt
+    0U,	// V6_vavgw_alt_128B
     0U,	// V6_vavgwrnd
     0U,	// V6_vavgwrnd_128B
+    0U,	// V6_vavgwrnd_alt
+    0U,	// V6_vavgwrnd_alt_128B
     0U,	// V6_vccombine
     0U,	// V6_vccombine_128B
     0U,	// V6_vcl0h
     0U,	// V6_vcl0h_128B
+    0U,	// V6_vcl0h_alt
+    0U,	// V6_vcl0h_alt_128B
     0U,	// V6_vcl0w
     0U,	// V6_vcl0w_128B
+    0U,	// V6_vcl0w_alt
+    0U,	// V6_vcl0w_alt_128B
     0U,	// V6_vcmov
     0U,	// V6_vcmov_128B
     0U,	// V6_vcombine
     0U,	// V6_vcombine_128B
     0U,	// V6_vd0
     0U,	// V6_vd0_128B
-    55U,	// V6_vdeal
-    55U,	// V6_vdeal_128B
+    960U,	// V6_vdeal
+    960U,	// V6_vdeal_128B
     0U,	// V6_vdealb
     0U,	// V6_vdealb4w
     0U,	// V6_vdealb4w_128B
+    0U,	// V6_vdealb4w_alt
+    0U,	// V6_vdealb4w_alt_128B
     0U,	// V6_vdealb_128B
+    0U,	// V6_vdealb_alt
+    0U,	// V6_vdealb_alt_128B
     0U,	// V6_vdealh
     0U,	// V6_vdealh_128B
+    0U,	// V6_vdealh_alt
+    0U,	// V6_vdealh_alt_128B
     0U,	// V6_vdealvdd
     0U,	// V6_vdealvdd_128B
     0U,	// V6_vdelta
@@ -4799,457 +6202,868 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// V6_vdmpybus_128B
     0U,	// V6_vdmpybus_acc
     0U,	// V6_vdmpybus_acc_128B
+    0U,	// V6_vdmpybus_acc_alt
+    0U,	// V6_vdmpybus_acc_alt_128B
+    0U,	// V6_vdmpybus_alt
+    0U,	// V6_vdmpybus_alt_128B
     0U,	// V6_vdmpybus_dv
     0U,	// V6_vdmpybus_dv_128B
     0U,	// V6_vdmpybus_dv_acc
     0U,	// V6_vdmpybus_dv_acc_128B
+    0U,	// V6_vdmpybus_dv_acc_alt
+    0U,	// V6_vdmpybus_dv_acc_alt_128B
+    0U,	// V6_vdmpybus_dv_alt
+    0U,	// V6_vdmpybus_dv_alt_128B
     0U,	// V6_vdmpyhb
     0U,	// V6_vdmpyhb_128B
     0U,	// V6_vdmpyhb_acc
     0U,	// V6_vdmpyhb_acc_128B
+    0U,	// V6_vdmpyhb_acc_alt
+    0U,	// V6_vdmpyhb_acc_alt_128B
+    0U,	// V6_vdmpyhb_alt
+    0U,	// V6_vdmpyhb_alt_128B
     0U,	// V6_vdmpyhb_dv
     0U,	// V6_vdmpyhb_dv_128B
     0U,	// V6_vdmpyhb_dv_acc
     0U,	// V6_vdmpyhb_dv_acc_128B
+    0U,	// V6_vdmpyhb_dv_acc_alt
+    0U,	// V6_vdmpyhb_dv_acc_alt_128B
+    0U,	// V6_vdmpyhb_dv_alt
+    0U,	// V6_vdmpyhb_dv_alt_128B
     0U,	// V6_vdmpyhisat
     0U,	// V6_vdmpyhisat_128B
     0U,	// V6_vdmpyhisat_acc
     0U,	// V6_vdmpyhisat_acc_128B
+    0U,	// V6_vdmpyhisat_acc_alt
+    0U,	// V6_vdmpyhisat_acc_alt_128B
+    0U,	// V6_vdmpyhisat_alt
+    0U,	// V6_vdmpyhisat_alt_128B
     0U,	// V6_vdmpyhsat
     0U,	// V6_vdmpyhsat_128B
     0U,	// V6_vdmpyhsat_acc
     0U,	// V6_vdmpyhsat_acc_128B
+    0U,	// V6_vdmpyhsat_acc_alt
+    0U,	// V6_vdmpyhsat_acc_alt_128B
+    0U,	// V6_vdmpyhsat_alt
+    0U,	// V6_vdmpyhsat_alt_128B
     0U,	// V6_vdmpyhsuisat
     0U,	// V6_vdmpyhsuisat_128B
     0U,	// V6_vdmpyhsuisat_acc
     0U,	// V6_vdmpyhsuisat_acc_128B
+    0U,	// V6_vdmpyhsuisat_acc_alt
+    0U,	// V6_vdmpyhsuisat_acc_alt_128B
+    0U,	// V6_vdmpyhsuisat_alt
+    0U,	// V6_vdmpyhsuisat_alt_128B
     0U,	// V6_vdmpyhsusat
     0U,	// V6_vdmpyhsusat_128B
     0U,	// V6_vdmpyhsusat_acc
     0U,	// V6_vdmpyhsusat_acc_128B
+    0U,	// V6_vdmpyhsusat_acc_alt
+    0U,	// V6_vdmpyhsusat_acc_alt_128B
+    0U,	// V6_vdmpyhsusat_alt
+    0U,	// V6_vdmpyhsusat_alt_128B
     0U,	// V6_vdmpyhvsat
     0U,	// V6_vdmpyhvsat_128B
     0U,	// V6_vdmpyhvsat_acc
     0U,	// V6_vdmpyhvsat_acc_128B
+    0U,	// V6_vdmpyhvsat_acc_alt
+    0U,	// V6_vdmpyhvsat_acc_alt_128B
+    0U,	// V6_vdmpyhvsat_alt
+    0U,	// V6_vdmpyhvsat_alt_128B
     0U,	// V6_vdsaduh
     0U,	// V6_vdsaduh_128B
     0U,	// V6_vdsaduh_acc
     0U,	// V6_vdsaduh_acc_128B
-    3140U,	// V6_veqb
-    3140U,	// V6_veqb_128B
-    3166U,	// V6_veqb_and
-    3166U,	// V6_veqb_and_128B
-    3166U,	// V6_veqb_or
-    3166U,	// V6_veqb_or_128B
-    3166U,	// V6_veqb_xor
-    3166U,	// V6_veqb_xor_128B
+    0U,	// V6_vdsaduh_acc_alt
+    0U,	// V6_vdsaduh_acc_alt_128B
+    0U,	// V6_vdsaduh_alt
+    0U,	// V6_vdsaduh_alt_128B
+    2948U,	// V6_veqb
+    2948U,	// V6_veqb_128B
+    2975U,	// V6_veqb_and
+    2975U,	// V6_veqb_and_128B
+    2975U,	// V6_veqb_or
+    2975U,	// V6_veqb_or_128B
+    2975U,	// V6_veqb_xor
+    2975U,	// V6_veqb_xor_128B
     324U,	// V6_veqh
     324U,	// V6_veqh_128B
-    350U,	// V6_veqh_and
-    350U,	// V6_veqh_and_128B
-    350U,	// V6_veqh_or
-    350U,	// V6_veqh_or_128B
-    350U,	// V6_veqh_xor
-    350U,	// V6_veqh_xor_128B
-    2948U,	// V6_veqw
-    2948U,	// V6_veqw_128B
-    2974U,	// V6_veqw_and
-    2974U,	// V6_veqw_and_128B
-    2974U,	// V6_veqw_or
-    2974U,	// V6_veqw_or_128B
-    2974U,	// V6_veqw_xor
-    2974U,	// V6_veqw_xor_128B
-    3140U,	// V6_vgtb
-    3140U,	// V6_vgtb_128B
-    3166U,	// V6_vgtb_and
-    3166U,	// V6_vgtb_and_128B
-    3166U,	// V6_vgtb_or
-    3166U,	// V6_vgtb_or_128B
-    3166U,	// V6_vgtb_xor
-    3166U,	// V6_vgtb_xor_128B
+    351U,	// V6_veqh_and
+    351U,	// V6_veqh_and_128B
+    351U,	// V6_veqh_or
+    351U,	// V6_veqh_or_128B
+    351U,	// V6_veqh_xor
+    351U,	// V6_veqh_xor_128B
+    2692U,	// V6_veqw
+    2692U,	// V6_veqw_128B
+    2719U,	// V6_veqw_and
+    2719U,	// V6_veqw_and_128B
+    2719U,	// V6_veqw_or
+    2719U,	// V6_veqw_or_128B
+    2719U,	// V6_veqw_xor
+    2719U,	// V6_veqw_xor_128B
+    2948U,	// V6_vgtb
+    2948U,	// V6_vgtb_128B
+    2975U,	// V6_vgtb_and
+    2975U,	// V6_vgtb_and_128B
+    2975U,	// V6_vgtb_or
+    2975U,	// V6_vgtb_or_128B
+    2975U,	// V6_vgtb_xor
+    2975U,	// V6_vgtb_xor_128B
     324U,	// V6_vgth
     324U,	// V6_vgth_128B
-    350U,	// V6_vgth_and
-    350U,	// V6_vgth_and_128B
-    350U,	// V6_vgth_or
-    350U,	// V6_vgth_or_128B
-    350U,	// V6_vgth_xor
-    350U,	// V6_vgth_xor_128B
-    2884U,	// V6_vgtub
-    2884U,	// V6_vgtub_128B
-    2910U,	// V6_vgtub_and
-    2910U,	// V6_vgtub_and_128B
-    2910U,	// V6_vgtub_or
-    2910U,	// V6_vgtub_or_128B
-    2910U,	// V6_vgtub_xor
-    2910U,	// V6_vgtub_xor_128B
-    2820U,	// V6_vgtuh
-    2820U,	// V6_vgtuh_128B
-    2846U,	// V6_vgtuh_and
-    2846U,	// V6_vgtuh_and_128B
-    2846U,	// V6_vgtuh_or
-    2846U,	// V6_vgtuh_or_128B
-    2846U,	// V6_vgtuh_xor
-    2846U,	// V6_vgtuh_xor_128B
-    3204U,	// V6_vgtuw
-    3204U,	// V6_vgtuw_128B
-    3230U,	// V6_vgtuw_and
-    3230U,	// V6_vgtuw_and_128B
-    3230U,	// V6_vgtuw_or
-    3230U,	// V6_vgtuw_or_128B
-    3230U,	// V6_vgtuw_xor
-    3230U,	// V6_vgtuw_xor_128B
-    2948U,	// V6_vgtw
-    2948U,	// V6_vgtw_128B
-    2974U,	// V6_vgtw_and
-    2974U,	// V6_vgtw_and_128B
-    2974U,	// V6_vgtw_or
-    2974U,	// V6_vgtw_or_128B
-    2974U,	// V6_vgtw_xor
-    2974U,	// V6_vgtw_xor_128B
+    351U,	// V6_vgth_and
+    351U,	// V6_vgth_and_128B
+    351U,	// V6_vgth_or
+    351U,	// V6_vgth_or_128B
+    351U,	// V6_vgth_xor
+    351U,	// V6_vgth_xor_128B
+    2500U,	// V6_vgtub
+    2500U,	// V6_vgtub_128B
+    2527U,	// V6_vgtub_and
+    2527U,	// V6_vgtub_and_128B
+    2527U,	// V6_vgtub_or
+    2527U,	// V6_vgtub_or_128B
+    2527U,	// V6_vgtub_xor
+    2527U,	// V6_vgtub_xor_128B
+    2564U,	// V6_vgtuh
+    2564U,	// V6_vgtuh_128B
+    2591U,	// V6_vgtuh_and
+    2591U,	// V6_vgtuh_and_128B
+    2591U,	// V6_vgtuh_or
+    2591U,	// V6_vgtuh_or_128B
+    2591U,	// V6_vgtuh_xor
+    2591U,	// V6_vgtuh_xor_128B
+    2628U,	// V6_vgtuw
+    2628U,	// V6_vgtuw_128B
+    2655U,	// V6_vgtuw_and
+    2655U,	// V6_vgtuw_and_128B
+    2655U,	// V6_vgtuw_or
+    2655U,	// V6_vgtuw_or_128B
+    2655U,	// V6_vgtuw_xor
+    2655U,	// V6_vgtuw_xor_128B
+    2692U,	// V6_vgtw
+    2692U,	// V6_vgtw_128B
+    2719U,	// V6_vgtw_and
+    2719U,	// V6_vgtw_and_128B
+    2719U,	// V6_vgtw_or
+    2719U,	// V6_vgtw_or_128B
+    2719U,	// V6_vgtw_xor
+    2719U,	// V6_vgtw_xor_128B
     0U,	// V6_vhist
+    0U,	// V6_vhist_128B
     0U,	// V6_vhistq
+    0U,	// V6_vhistq_128B
     0U,	// V6_vinsertwr
     0U,	// V6_vinsertwr_128B
-    670U,	// V6_vlalignb
-    670U,	// V6_vlalignb_128B
-    670U,	// V6_vlalignbi
-    670U,	// V6_vlalignbi_128B
+    607U,	// V6_vlalignb
+    607U,	// V6_vlalignb_128B
+    607U,	// V6_vlalignbi
+    607U,	// V6_vlalignbi_128B
+    0U,	// V6_vlsrb
+    0U,	// V6_vlsrb_128B
     0U,	// V6_vlsrh
     0U,	// V6_vlsrh_128B
+    580U,	// V6_vlsrh_alt
+    580U,	// V6_vlsrh_alt_128B
     0U,	// V6_vlsrhv
     0U,	// V6_vlsrhv_128B
+    580U,	// V6_vlsrhv_alt
+    580U,	// V6_vlsrhv_alt_128B
     0U,	// V6_vlsrw
     0U,	// V6_vlsrw_128B
+    580U,	// V6_vlsrw_alt
+    580U,	// V6_vlsrw_alt_128B
     0U,	// V6_vlsrwv
     0U,	// V6_vlsrwv_128B
-    0U,	// V6_vlutvvb
-    0U,	// V6_vlutvvb_128B
-    0U,	// V6_vlutvvb_oracc
-    0U,	// V6_vlutvvb_oracc_128B
-    0U,	// V6_vlutvwh
-    0U,	// V6_vlutvwh_128B
-    0U,	// V6_vlutvwh_oracc
-    0U,	// V6_vlutvwh_oracc_128B
+    580U,	// V6_vlsrwv_alt
+    580U,	// V6_vlsrwv_alt_128B
+    607U,	// V6_vlutvvb
+    607U,	// V6_vlutvvb_128B
+    3039U,	// V6_vlutvvb_nm
+    3039U,	// V6_vlutvvb_nm_128B
+    584U,	// V6_vlutvvb_oracc
+    584U,	// V6_vlutvvb_oracc_128B
+    584U,	// V6_vlutvvb_oracci
+    584U,	// V6_vlutvvb_oracci_128B
+    607U,	// V6_vlutvvbi
+    607U,	// V6_vlutvvbi_128B
+    607U,	// V6_vlutvwh
+    607U,	// V6_vlutvwh_128B
+    3039U,	// V6_vlutvwh_nm
+    3039U,	// V6_vlutvwh_nm_128B
+    584U,	// V6_vlutvwh_oracc
+    584U,	// V6_vlutvwh_oracc_128B
+    584U,	// V6_vlutvwh_oracci
+    584U,	// V6_vlutvwh_oracci_128B
+    607U,	// V6_vlutvwhi
+    607U,	// V6_vlutvwhi_128B
+    0U,	// V6_vmaxb
+    0U,	// V6_vmaxb_128B
+    0U,	// V6_vmaxb_alt
+    0U,	// V6_vmaxb_alt_128B
     0U,	// V6_vmaxh
     0U,	// V6_vmaxh_128B
+    0U,	// V6_vmaxh_alt
+    0U,	// V6_vmaxh_alt_128B
     0U,	// V6_vmaxub
     0U,	// V6_vmaxub_128B
+    0U,	// V6_vmaxub_alt
+    0U,	// V6_vmaxub_alt_128B
     0U,	// V6_vmaxuh
     0U,	// V6_vmaxuh_128B
+    0U,	// V6_vmaxuh_alt
+    0U,	// V6_vmaxuh_alt_128B
     0U,	// V6_vmaxw
     0U,	// V6_vmaxw_128B
+    0U,	// V6_vmaxw_alt
+    0U,	// V6_vmaxw_alt_128B
+    0U,	// V6_vminb
+    0U,	// V6_vminb_128B
+    0U,	// V6_vminb_alt
+    0U,	// V6_vminb_alt_128B
     0U,	// V6_vminh
     0U,	// V6_vminh_128B
+    0U,	// V6_vminh_alt
+    0U,	// V6_vminh_alt_128B
     0U,	// V6_vminub
     0U,	// V6_vminub_128B
+    0U,	// V6_vminub_alt
+    0U,	// V6_vminub_alt_128B
     0U,	// V6_vminuh
     0U,	// V6_vminuh_128B
+    0U,	// V6_vminuh_alt
+    0U,	// V6_vminuh_alt_128B
     0U,	// V6_vminw
     0U,	// V6_vminw_128B
+    0U,	// V6_vminw_alt
+    0U,	// V6_vminw_alt_128B
     0U,	// V6_vmpabus
     0U,	// V6_vmpabus_128B
     0U,	// V6_vmpabus_acc
     0U,	// V6_vmpabus_acc_128B
+    0U,	// V6_vmpabus_acc_alt
+    0U,	// V6_vmpabus_acc_alt_128B
+    0U,	// V6_vmpabus_alt
+    0U,	// V6_vmpabus_alt_128B
     0U,	// V6_vmpabusv
     0U,	// V6_vmpabusv_128B
+    0U,	// V6_vmpabusv_alt
+    0U,	// V6_vmpabusv_alt_128B
     0U,	// V6_vmpabuuv
     0U,	// V6_vmpabuuv_128B
-    0U,	// V6_vmpahb
-    0U,	// V6_vmpahb_128B
-    0U,	// V6_vmpahb_acc
-    0U,	// V6_vmpahb_acc_128B
-    3140U,	// V6_vmpybus
-    3140U,	// V6_vmpybus_128B
-    3166U,	// V6_vmpybus_acc
-    3166U,	// V6_vmpybus_acc_128B
-    3140U,	// V6_vmpybusv
-    3140U,	// V6_vmpybusv_128B
-    3166U,	// V6_vmpybusv_acc
-    3166U,	// V6_vmpybusv_acc_128B
-    3140U,	// V6_vmpybv
-    3140U,	// V6_vmpybv_128B
-    3166U,	// V6_vmpybv_acc
-    3166U,	// V6_vmpybv_acc_128B
+    0U,	// V6_vmpabuuv_alt
+    0U,	// V6_vmpabuuv_alt_128B
+    2948U,	// V6_vmpahb
+    2948U,	// V6_vmpahb_128B
+    2975U,	// V6_vmpahb_acc
+    2975U,	// V6_vmpahb_acc_128B
+    0U,	// V6_vmpahb_acc_alt
+    0U,	// V6_vmpahb_acc_alt_128B
+    0U,	// V6_vmpahb_alt
+    0U,	// V6_vmpahb_alt_128B
+    2948U,	// V6_vmpauhb
+    2948U,	// V6_vmpauhb_128B
+    2975U,	// V6_vmpauhb_acc
+    2975U,	// V6_vmpauhb_acc_128B
+    0U,	// V6_vmpauhb_acc_alt
+    0U,	// V6_vmpauhb_acc_alt_128B
+    0U,	// V6_vmpauhb_alt
+    0U,	// V6_vmpauhb_alt_128B
+    2948U,	// V6_vmpybus
+    2948U,	// V6_vmpybus_128B
+    2975U,	// V6_vmpybus_acc
+    2975U,	// V6_vmpybus_acc_128B
+    0U,	// V6_vmpybus_acc_alt
+    0U,	// V6_vmpybus_acc_alt_128B
+    0U,	// V6_vmpybus_alt
+    0U,	// V6_vmpybus_alt_128B
+    2948U,	// V6_vmpybusv
+    2948U,	// V6_vmpybusv_128B
+    2975U,	// V6_vmpybusv_acc
+    2975U,	// V6_vmpybusv_acc_128B
+    0U,	// V6_vmpybusv_acc_alt
+    0U,	// V6_vmpybusv_acc_alt_128B
+    0U,	// V6_vmpybusv_alt
+    0U,	// V6_vmpybusv_alt_128B
+    2948U,	// V6_vmpybv
+    2948U,	// V6_vmpybv_128B
+    2975U,	// V6_vmpybv_acc
+    2975U,	// V6_vmpybv_acc_128B
+    0U,	// V6_vmpybv_acc_alt
+    0U,	// V6_vmpybv_acc_alt_128B
+    0U,	// V6_vmpybv_alt
+    0U,	// V6_vmpybv_alt_128B
     0U,	// V6_vmpyewuh
     0U,	// V6_vmpyewuh_128B
+    0U,	// V6_vmpyewuh_64
+    0U,	// V6_vmpyewuh_64_128B
+    0U,	// V6_vmpyewuh_alt
+    0U,	// V6_vmpyewuh_alt_128B
     0U,	// V6_vmpyh
     0U,	// V6_vmpyh_128B
+    0U,	// V6_vmpyh_alt
+    0U,	// V6_vmpyh_alt_128B
     0U,	// V6_vmpyhsat_acc
     0U,	// V6_vmpyhsat_acc_128B
-    1412U,	// V6_vmpyhsrs
-    1412U,	// V6_vmpyhsrs_128B
-    1476U,	// V6_vmpyhss
-    1476U,	// V6_vmpyhss_128B
+    0U,	// V6_vmpyhsat_acc_alt
+    0U,	// V6_vmpyhsat_acc_alt_128B
+    1284U,	// V6_vmpyhsrs
+    1284U,	// V6_vmpyhsrs_128B
+    0U,	// V6_vmpyhsrs_alt
+    0U,	// V6_vmpyhsrs_alt_128B
+    1348U,	// V6_vmpyhss
+    1348U,	// V6_vmpyhss_128B
+    0U,	// V6_vmpyhss_alt
+    0U,	// V6_vmpyhss_alt_128B
     0U,	// V6_vmpyhus
     0U,	// V6_vmpyhus_128B
     0U,	// V6_vmpyhus_acc
     0U,	// V6_vmpyhus_acc_128B
+    0U,	// V6_vmpyhus_acc_alt
+    0U,	// V6_vmpyhus_acc_alt_128B
+    0U,	// V6_vmpyhus_alt
+    0U,	// V6_vmpyhus_alt_128B
     0U,	// V6_vmpyhv
     0U,	// V6_vmpyhv_128B
     0U,	// V6_vmpyhv_acc
     0U,	// V6_vmpyhv_acc_128B
-    1412U,	// V6_vmpyhvsrs
-    1412U,	// V6_vmpyhvsrs_128B
+    0U,	// V6_vmpyhv_acc_alt
+    0U,	// V6_vmpyhv_acc_alt_128B
+    0U,	// V6_vmpyhv_alt
+    0U,	// V6_vmpyhv_alt_128B
+    1284U,	// V6_vmpyhvsrs
+    1284U,	// V6_vmpyhvsrs_128B
+    0U,	// V6_vmpyhvsrs_alt
+    0U,	// V6_vmpyhvsrs_alt_128B
     0U,	// V6_vmpyieoh
     0U,	// V6_vmpyieoh_128B
     0U,	// V6_vmpyiewh_acc
     0U,	// V6_vmpyiewh_acc_128B
+    0U,	// V6_vmpyiewh_acc_alt
+    0U,	// V6_vmpyiewh_acc_alt_128B
     0U,	// V6_vmpyiewuh
     0U,	// V6_vmpyiewuh_128B
     0U,	// V6_vmpyiewuh_acc
     0U,	// V6_vmpyiewuh_acc_128B
+    0U,	// V6_vmpyiewuh_acc_alt
+    0U,	// V6_vmpyiewuh_acc_alt_128B
+    0U,	// V6_vmpyiewuh_alt
+    0U,	// V6_vmpyiewuh_alt_128B
     0U,	// V6_vmpyih
     0U,	// V6_vmpyih_128B
     0U,	// V6_vmpyih_acc
     0U,	// V6_vmpyih_acc_128B
+    0U,	// V6_vmpyih_acc_alt
+    0U,	// V6_vmpyih_acc_alt_128B
+    0U,	// V6_vmpyih_alt
+    0U,	// V6_vmpyih_alt_128B
     0U,	// V6_vmpyihb
     0U,	// V6_vmpyihb_128B
     0U,	// V6_vmpyihb_acc
     0U,	// V6_vmpyihb_acc_128B
+    0U,	// V6_vmpyihb_acc_alt
+    0U,	// V6_vmpyihb_acc_alt_128B
+    0U,	// V6_vmpyihb_alt
+    0U,	// V6_vmpyihb_alt_128B
     0U,	// V6_vmpyiowh
     0U,	// V6_vmpyiowh_128B
+    0U,	// V6_vmpyiowh_alt
+    0U,	// V6_vmpyiowh_alt_128B
     0U,	// V6_vmpyiwb
     0U,	// V6_vmpyiwb_128B
     0U,	// V6_vmpyiwb_acc
     0U,	// V6_vmpyiwb_acc_128B
+    0U,	// V6_vmpyiwb_acc_alt
+    0U,	// V6_vmpyiwb_acc_alt_128B
+    0U,	// V6_vmpyiwb_alt
+    0U,	// V6_vmpyiwb_alt_128B
     0U,	// V6_vmpyiwh
     0U,	// V6_vmpyiwh_128B
     0U,	// V6_vmpyiwh_acc
     0U,	// V6_vmpyiwh_acc_128B
+    0U,	// V6_vmpyiwh_acc_alt
+    0U,	// V6_vmpyiwh_acc_alt_128B
+    0U,	// V6_vmpyiwh_alt
+    0U,	// V6_vmpyiwh_alt_128B
+    0U,	// V6_vmpyiwub
+    0U,	// V6_vmpyiwub_128B
+    0U,	// V6_vmpyiwub_acc
+    0U,	// V6_vmpyiwub_acc_128B
+    0U,	// V6_vmpyiwub_acc_alt
+    0U,	// V6_vmpyiwub_acc_alt_128B
+    0U,	// V6_vmpyiwub_alt
+    0U,	// V6_vmpyiwub_alt_128B
     0U,	// V6_vmpyowh
     0U,	// V6_vmpyowh_128B
+    0U,	// V6_vmpyowh_64_acc
+    0U,	// V6_vmpyowh_64_acc_128B
+    0U,	// V6_vmpyowh_alt
+    0U,	// V6_vmpyowh_alt_128B
     0U,	// V6_vmpyowh_rnd
     0U,	// V6_vmpyowh_rnd_128B
+    0U,	// V6_vmpyowh_rnd_alt
+    0U,	// V6_vmpyowh_rnd_alt_128B
     0U,	// V6_vmpyowh_rnd_sacc
     0U,	// V6_vmpyowh_rnd_sacc_128B
+    0U,	// V6_vmpyowh_rnd_sacc_alt
+    0U,	// V6_vmpyowh_rnd_sacc_alt_128B
     0U,	// V6_vmpyowh_sacc
     0U,	// V6_vmpyowh_sacc_128B
+    0U,	// V6_vmpyowh_sacc_alt
+    0U,	// V6_vmpyowh_sacc_alt_128B
     0U,	// V6_vmpyub
     0U,	// V6_vmpyub_128B
     0U,	// V6_vmpyub_acc
     0U,	// V6_vmpyub_acc_128B
+    0U,	// V6_vmpyub_acc_alt
+    0U,	// V6_vmpyub_acc_alt_128B
+    0U,	// V6_vmpyub_alt
+    0U,	// V6_vmpyub_alt_128B
     0U,	// V6_vmpyubv
     0U,	// V6_vmpyubv_128B
     0U,	// V6_vmpyubv_acc
     0U,	// V6_vmpyubv_acc_128B
+    0U,	// V6_vmpyubv_acc_alt
+    0U,	// V6_vmpyubv_acc_alt_128B
+    0U,	// V6_vmpyubv_alt
+    0U,	// V6_vmpyubv_alt_128B
     0U,	// V6_vmpyuh
     0U,	// V6_vmpyuh_128B
     0U,	// V6_vmpyuh_acc
     0U,	// V6_vmpyuh_acc_128B
+    0U,	// V6_vmpyuh_acc_alt
+    0U,	// V6_vmpyuh_acc_alt_128B
+    0U,	// V6_vmpyuh_alt
+    0U,	// V6_vmpyuh_alt_128B
     0U,	// V6_vmpyuhv
     0U,	// V6_vmpyuhv_128B
     0U,	// V6_vmpyuhv_acc
     0U,	// V6_vmpyuhv_acc_128B
-    3268U,	// V6_vmux
-    3268U,	// V6_vmux_128B
+    0U,	// V6_vmpyuhv_acc_alt
+    0U,	// V6_vmpyuhv_acc_alt_128B
+    0U,	// V6_vmpyuhv_alt
+    0U,	// V6_vmpyuhv_alt_128B
+    0U,	// V6_vmux
+    0U,	// V6_vmux_128B
     0U,	// V6_vnavgh
     0U,	// V6_vnavgh_128B
+    0U,	// V6_vnavgh_alt
+    0U,	// V6_vnavgh_alt_128B
     0U,	// V6_vnavgub
     0U,	// V6_vnavgub_128B
+    0U,	// V6_vnavgub_alt
+    0U,	// V6_vnavgub_alt_128B
     0U,	// V6_vnavgw
     0U,	// V6_vnavgw_128B
+    0U,	// V6_vnavgw_alt
+    0U,	// V6_vnavgw_alt_128B
     0U,	// V6_vnccombine
     0U,	// V6_vnccombine_128B
     0U,	// V6_vncmov
     0U,	// V6_vncmov_128B
     0U,	// V6_vnormamth
     0U,	// V6_vnormamth_128B
+    0U,	// V6_vnormamth_alt
+    0U,	// V6_vnormamth_alt_128B
     0U,	// V6_vnormamtw
     0U,	// V6_vnormamtw_128B
+    0U,	// V6_vnormamtw_alt
+    0U,	// V6_vnormamtw_alt_128B
     0U,	// V6_vnot
     0U,	// V6_vnot_128B
     0U,	// V6_vor
     0U,	// V6_vor_128B
     0U,	// V6_vpackeb
     0U,	// V6_vpackeb_128B
+    0U,	// V6_vpackeb_alt
+    0U,	// V6_vpackeb_alt_128B
     0U,	// V6_vpackeh
     0U,	// V6_vpackeh_128B
+    0U,	// V6_vpackeh_alt
+    0U,	// V6_vpackeh_alt_128B
     0U,	// V6_vpackhb_sat
     0U,	// V6_vpackhb_sat_128B
+    0U,	// V6_vpackhb_sat_alt
+    0U,	// V6_vpackhb_sat_alt_128B
     0U,	// V6_vpackhub_sat
     0U,	// V6_vpackhub_sat_128B
+    0U,	// V6_vpackhub_sat_alt
+    0U,	// V6_vpackhub_sat_alt_128B
     0U,	// V6_vpackob
     0U,	// V6_vpackob_128B
+    0U,	// V6_vpackob_alt
+    0U,	// V6_vpackob_alt_128B
     0U,	// V6_vpackoh
     0U,	// V6_vpackoh_128B
+    0U,	// V6_vpackoh_alt
+    0U,	// V6_vpackoh_alt_128B
     0U,	// V6_vpackwh_sat
     0U,	// V6_vpackwh_sat_128B
+    0U,	// V6_vpackwh_sat_alt
+    0U,	// V6_vpackwh_sat_alt_128B
     0U,	// V6_vpackwuh_sat
     0U,	// V6_vpackwuh_sat_128B
+    0U,	// V6_vpackwuh_sat_alt
+    0U,	// V6_vpackwuh_sat_alt_128B
     0U,	// V6_vpopcounth
     0U,	// V6_vpopcounth_128B
+    0U,	// V6_vpopcounth_alt
+    0U,	// V6_vpopcounth_alt_128B
     0U,	// V6_vrdelta
     0U,	// V6_vrdelta_128B
-    3140U,	// V6_vrmpybus
-    3140U,	// V6_vrmpybus_128B
-    3166U,	// V6_vrmpybus_acc
-    3166U,	// V6_vrmpybus_acc_128B
-    23812U,	// V6_vrmpybusi
-    23812U,	// V6_vrmpybusi_128B
-    36126U,	// V6_vrmpybusi_acc
-    36126U,	// V6_vrmpybusi_acc_128B
-    3140U,	// V6_vrmpybusv
-    3140U,	// V6_vrmpybusv_128B
-    3166U,	// V6_vrmpybusv_acc
-    3166U,	// V6_vrmpybusv_acc_128B
-    3140U,	// V6_vrmpybv
-    3140U,	// V6_vrmpybv_128B
-    3166U,	// V6_vrmpybv_acc
-    3166U,	// V6_vrmpybv_acc_128B
+    2948U,	// V6_vrmpybus
+    2948U,	// V6_vrmpybus_128B
+    2975U,	// V6_vrmpybus_acc
+    2975U,	// V6_vrmpybus_acc_128B
+    0U,	// V6_vrmpybus_acc_alt
+    0U,	// V6_vrmpybus_acc_alt_128B
+    0U,	// V6_vrmpybus_alt
+    0U,	// V6_vrmpybus_alt_128B
+    23556U,	// V6_vrmpybusi
+    23556U,	// V6_vrmpybusi_128B
+    39967U,	// V6_vrmpybusi_acc
+    39967U,	// V6_vrmpybusi_acc_128B
+    584U,	// V6_vrmpybusi_acc_alt
+    584U,	// V6_vrmpybusi_acc_alt_128B
+    607U,	// V6_vrmpybusi_alt
+    607U,	// V6_vrmpybusi_alt_128B
+    2948U,	// V6_vrmpybusv
+    2948U,	// V6_vrmpybusv_128B
+    2975U,	// V6_vrmpybusv_acc
+    2975U,	// V6_vrmpybusv_acc_128B
+    0U,	// V6_vrmpybusv_acc_alt
+    0U,	// V6_vrmpybusv_acc_alt_128B
+    0U,	// V6_vrmpybusv_alt
+    0U,	// V6_vrmpybusv_alt_128B
+    2948U,	// V6_vrmpybv
+    2948U,	// V6_vrmpybv_128B
+    2975U,	// V6_vrmpybv_acc
+    2975U,	// V6_vrmpybv_acc_128B
+    0U,	// V6_vrmpybv_acc_alt
+    0U,	// V6_vrmpybv_acc_alt_128B
+    0U,	// V6_vrmpybv_alt
+    0U,	// V6_vrmpybv_alt_128B
     0U,	// V6_vrmpyub
     0U,	// V6_vrmpyub_128B
     0U,	// V6_vrmpyub_acc
     0U,	// V6_vrmpyub_acc_128B
-    670U,	// V6_vrmpyubi
-    670U,	// V6_vrmpyubi_128B
-    649U,	// V6_vrmpyubi_acc
-    649U,	// V6_vrmpyubi_acc_128B
+    0U,	// V6_vrmpyub_acc_alt
+    0U,	// V6_vrmpyub_acc_alt_128B
+    0U,	// V6_vrmpyub_alt
+    0U,	// V6_vrmpyub_alt_128B
+    607U,	// V6_vrmpyubi
+    607U,	// V6_vrmpyubi_128B
+    584U,	// V6_vrmpyubi_acc
+    584U,	// V6_vrmpyubi_acc_128B
+    584U,	// V6_vrmpyubi_acc_alt
+    584U,	// V6_vrmpyubi_acc_alt_128B
+    607U,	// V6_vrmpyubi_alt
+    607U,	// V6_vrmpyubi_alt_128B
     0U,	// V6_vrmpyubv
     0U,	// V6_vrmpyubv_128B
     0U,	// V6_vrmpyubv_acc
     0U,	// V6_vrmpyubv_acc_128B
+    0U,	// V6_vrmpyubv_acc_alt
+    0U,	// V6_vrmpyubv_acc_alt_128B
+    0U,	// V6_vrmpyubv_alt
+    0U,	// V6_vrmpyubv_alt_128B
     0U,	// V6_vror
     0U,	// V6_vror_128B
     0U,	// V6_vroundhb
     0U,	// V6_vroundhb_128B
-    0U,	// V6_vroundhub
-    0U,	// V6_vroundhub_128B
+    0U,	// V6_vroundhb_alt
+    0U,	// V6_vroundhb_alt_128B
+    452U,	// V6_vroundhub
+    452U,	// V6_vroundhub_128B
+    0U,	// V6_vroundhub_alt
+    0U,	// V6_vroundhub_alt_128B
+    3140U,	// V6_vrounduhub
+    3140U,	// V6_vrounduhub_128B
+    0U,	// V6_vrounduhub_alt
+    0U,	// V6_vrounduhub_alt_128B
+    3204U,	// V6_vrounduwuh
+    3204U,	// V6_vrounduwuh_128B
+    0U,	// V6_vrounduwuh_alt
+    0U,	// V6_vrounduwuh_alt_128B
     0U,	// V6_vroundwh
     0U,	// V6_vroundwh_128B
-    0U,	// V6_vroundwuh
-    0U,	// V6_vroundwuh_128B
+    0U,	// V6_vroundwh_alt
+    0U,	// V6_vroundwh_alt_128B
+    3268U,	// V6_vroundwuh
+    3268U,	// V6_vroundwuh_128B
+    0U,	// V6_vroundwuh_alt
+    0U,	// V6_vroundwuh_alt_128B
     0U,	// V6_vrsadubi
     0U,	// V6_vrsadubi_128B
     0U,	// V6_vrsadubi_acc
     0U,	// V6_vrsadubi_acc_128B
+    584U,	// V6_vrsadubi_acc_alt
+    584U,	// V6_vrsadubi_acc_alt_128B
+    607U,	// V6_vrsadubi_alt
+    607U,	// V6_vrsadubi_alt_128B
     0U,	// V6_vsathub
     0U,	// V6_vsathub_128B
+    580U,	// V6_vsathub_alt
+    580U,	// V6_vsathub_alt_128B
+    0U,	// V6_vsatuwuh
+    0U,	// V6_vsatuwuh_128B
+    0U,	// V6_vsatuwuh_alt
+    0U,	// V6_vsatuwuh_alt_128B
     0U,	// V6_vsatwh
     0U,	// V6_vsatwh_128B
+    580U,	// V6_vsatwh_alt
+    580U,	// V6_vsatwh_alt_128B
     0U,	// V6_vsb
     0U,	// V6_vsb_128B
+    0U,	// V6_vsb_alt
+    0U,	// V6_vsb_alt_128B
     0U,	// V6_vsh
     0U,	// V6_vsh_128B
-    0U,	// V6_vshufeh
-    0U,	// V6_vshufeh_128B
-    55U,	// V6_vshuff
-    55U,	// V6_vshuff_128B
+    0U,	// V6_vsh_alt
+    0U,	// V6_vsh_alt_128B
+    324U,	// V6_vshufeh
+    324U,	// V6_vshufeh_128B
+    0U,	// V6_vshufeh_alt
+    0U,	// V6_vshufeh_alt_128B
+    960U,	// V6_vshuff
+    960U,	// V6_vshuff_128B
     0U,	// V6_vshuffb
     0U,	// V6_vshuffb_128B
-    0U,	// V6_vshuffeb
-    0U,	// V6_vshuffeb_128B
+    0U,	// V6_vshuffb_alt
+    0U,	// V6_vshuffb_alt_128B
+    2948U,	// V6_vshuffeb
+    2948U,	// V6_vshuffeb_128B
+    0U,	// V6_vshuffeb_alt
+    0U,	// V6_vshuffeb_alt_128B
     0U,	// V6_vshuffh
     0U,	// V6_vshuffh_128B
+    0U,	// V6_vshuffh_alt
+    0U,	// V6_vshuffh_alt_128B
     0U,	// V6_vshuffob
     0U,	// V6_vshuffob_128B
+    0U,	// V6_vshuffob_alt
+    0U,	// V6_vshuffob_alt_128B
     0U,	// V6_vshuffvdd
     0U,	// V6_vshuffvdd_128B
     0U,	// V6_vshufoeb
     0U,	// V6_vshufoeb_128B
+    0U,	// V6_vshufoeb_alt
+    0U,	// V6_vshufoeb_alt_128B
     0U,	// V6_vshufoeh
     0U,	// V6_vshufoeh_128B
+    0U,	// V6_vshufoeh_alt
+    0U,	// V6_vshufoeh_alt_128B
     0U,	// V6_vshufoh
     0U,	// V6_vshufoh_128B
+    0U,	// V6_vshufoh_alt
+    0U,	// V6_vshufoh_alt_128B
     0U,	// V6_vsubb
     0U,	// V6_vsubb_128B
+    0U,	// V6_vsubb_alt
+    0U,	// V6_vsubb_alt_128B
     0U,	// V6_vsubb_dv
     0U,	// V6_vsubb_dv_128B
+    0U,	// V6_vsubb_dv_alt
+    0U,	// V6_vsubb_dv_alt_128B
     0U,	// V6_vsubbnq
     0U,	// V6_vsubbnq_128B
+    0U,	// V6_vsubbnq_alt
+    0U,	// V6_vsubbnq_alt_128B
     0U,	// V6_vsubbq
     0U,	// V6_vsubbq_128B
+    0U,	// V6_vsubbq_alt
+    0U,	// V6_vsubbq_alt_128B
+    0U,	// V6_vsubbsat
+    0U,	// V6_vsubbsat_128B
+    0U,	// V6_vsubbsat_alt
+    0U,	// V6_vsubbsat_alt_128B
+    0U,	// V6_vsubbsat_dv
+    0U,	// V6_vsubbsat_dv_128B
+    0U,	// V6_vsubbsat_dv_alt
+    0U,	// V6_vsubbsat_dv_alt_128B
+    58029U,	// V6_vsubcarry
+    58029U,	// V6_vsubcarry_128B
     324U,	// V6_vsubh
     324U,	// V6_vsubh_128B
+    0U,	// V6_vsubh_alt
+    0U,	// V6_vsubh_alt_128B
     324U,	// V6_vsubh_dv
     324U,	// V6_vsubh_dv_128B
+    0U,	// V6_vsubh_dv_alt
+    0U,	// V6_vsubh_dv_alt_128B
     0U,	// V6_vsubhnq
     0U,	// V6_vsubhnq_128B
+    0U,	// V6_vsubhnq_alt
+    0U,	// V6_vsubhnq_alt_128B
     0U,	// V6_vsubhq
     0U,	// V6_vsubhq_128B
+    0U,	// V6_vsubhq_alt
+    0U,	// V6_vsubhq_alt_128B
     452U,	// V6_vsubhsat
     452U,	// V6_vsubhsat_128B
+    0U,	// V6_vsubhsat_alt
+    0U,	// V6_vsubhsat_alt_128B
     452U,	// V6_vsubhsat_dv
     452U,	// V6_vsubhsat_dv_128B
-    324U,	// V6_vsubhw
-    324U,	// V6_vsubhw_128B
-    2884U,	// V6_vsububh
-    2884U,	// V6_vsububh_128B
+    0U,	// V6_vsubhsat_dv_alt
+    0U,	// V6_vsubhsat_dv_alt_128B
+    321U,	// V6_vsubhw
+    321U,	// V6_vsubhw_128B
+    0U,	// V6_vsubhw_alt
+    0U,	// V6_vsubhw_alt_128B
+    2500U,	// V6_vsububh
+    2500U,	// V6_vsububh_128B
+    0U,	// V6_vsububh_alt
+    0U,	// V6_vsububh_alt_128B
     0U,	// V6_vsububsat
     0U,	// V6_vsububsat_128B
+    0U,	// V6_vsububsat_alt
+    0U,	// V6_vsububsat_alt_128B
     0U,	// V6_vsububsat_dv
     0U,	// V6_vsububsat_dv_128B
+    0U,	// V6_vsububsat_dv_alt
+    0U,	// V6_vsububsat_dv_alt_128B
+    0U,	// V6_vsubububb_sat
+    0U,	// V6_vsubububb_sat_128B
     0U,	// V6_vsubuhsat
     0U,	// V6_vsubuhsat_128B
+    0U,	// V6_vsubuhsat_alt
+    0U,	// V6_vsubuhsat_alt_128B
     0U,	// V6_vsubuhsat_dv
     0U,	// V6_vsubuhsat_dv_128B
-    2820U,	// V6_vsubuhw
-    2820U,	// V6_vsubuhw_128B
-    2948U,	// V6_vsubw
-    2948U,	// V6_vsubw_128B
-    2948U,	// V6_vsubw_dv
-    2948U,	// V6_vsubw_dv_128B
+    0U,	// V6_vsubuhsat_dv_alt
+    0U,	// V6_vsubuhsat_dv_alt_128B
+    46U,	// V6_vsubuhw
+    46U,	// V6_vsubuhw_128B
+    0U,	// V6_vsubuhw_alt
+    0U,	// V6_vsubuhw_alt_128B
+    0U,	// V6_vsubuwsat
+    0U,	// V6_vsubuwsat_128B
+    0U,	// V6_vsubuwsat_alt
+    0U,	// V6_vsubuwsat_alt_128B
+    0U,	// V6_vsubuwsat_dv
+    0U,	// V6_vsubuwsat_dv_128B
+    0U,	// V6_vsubuwsat_dv_alt
+    0U,	// V6_vsubuwsat_dv_alt_128B
+    61485U,	// V6_vsubw
+    61485U,	// V6_vsubw_128B
+    0U,	// V6_vsubw_alt
+    0U,	// V6_vsubw_alt_128B
+    61485U,	// V6_vsubw_dv
+    61485U,	// V6_vsubw_dv_128B
+    0U,	// V6_vsubw_dv_alt
+    0U,	// V6_vsubw_dv_alt_128B
     0U,	// V6_vsubwnq
     0U,	// V6_vsubwnq_128B
+    0U,	// V6_vsubwnq_alt
+    0U,	// V6_vsubwnq_alt_128B
     0U,	// V6_vsubwq
     0U,	// V6_vsubwq_128B
-    3012U,	// V6_vsubwsat
-    3012U,	// V6_vsubwsat_128B
-    3012U,	// V6_vsubwsat_dv
-    3012U,	// V6_vsubwsat_dv_128B
+    0U,	// V6_vsubwq_alt
+    0U,	// V6_vsubwq_alt_128B
+    45U,	// V6_vsubwsat
+    45U,	// V6_vsubwsat_128B
+    0U,	// V6_vsubwsat_alt
+    0U,	// V6_vsubwsat_alt_128B
+    45U,	// V6_vsubwsat_dv
+    45U,	// V6_vsubwsat_dv_128B
+    0U,	// V6_vsubwsat_dv_alt
+    0U,	// V6_vsubwsat_dv_alt_128B
     0U,	// V6_vswap
     0U,	// V6_vswap_128B
-    3140U,	// V6_vtmpyb
-    3140U,	// V6_vtmpyb_128B
-    3166U,	// V6_vtmpyb_acc
-    3166U,	// V6_vtmpyb_acc_128B
-    3140U,	// V6_vtmpybus
-    3140U,	// V6_vtmpybus_128B
-    3166U,	// V6_vtmpybus_acc
-    3166U,	// V6_vtmpybus_acc_128B
+    2948U,	// V6_vtmpyb
+    2948U,	// V6_vtmpyb_128B
+    2975U,	// V6_vtmpyb_acc
+    2975U,	// V6_vtmpyb_acc_128B
+    0U,	// V6_vtmpyb_acc_alt
+    0U,	// V6_vtmpyb_acc_alt_128B
+    0U,	// V6_vtmpyb_alt
+    0U,	// V6_vtmpyb_alt_128B
+    2948U,	// V6_vtmpybus
+    2948U,	// V6_vtmpybus_128B
+    2975U,	// V6_vtmpybus_acc
+    2975U,	// V6_vtmpybus_acc_128B
+    0U,	// V6_vtmpybus_acc_alt
+    0U,	// V6_vtmpybus_acc_alt_128B
+    0U,	// V6_vtmpybus_alt
+    0U,	// V6_vtmpybus_alt_128B
     0U,	// V6_vtmpyhb
     0U,	// V6_vtmpyhb_128B
     0U,	// V6_vtmpyhb_acc
     0U,	// V6_vtmpyhb_acc_128B
+    0U,	// V6_vtmpyhb_acc_alt
+    0U,	// V6_vtmpyhb_acc_alt_128B
+    0U,	// V6_vtmpyhb_alt
+    0U,	// V6_vtmpyhb_alt_128B
+    960U,	// V6_vtran2x2_map
+    960U,	// V6_vtran2x2_map_128B
     0U,	// V6_vunpackb
     0U,	// V6_vunpackb_128B
+    0U,	// V6_vunpackb_alt
+    0U,	// V6_vunpackb_alt_128B
     0U,	// V6_vunpackh
     0U,	// V6_vunpackh_128B
+    0U,	// V6_vunpackh_alt
+    0U,	// V6_vunpackh_alt_128B
     0U,	// V6_vunpackob
     0U,	// V6_vunpackob_128B
+    0U,	// V6_vunpackob_alt
+    0U,	// V6_vunpackob_alt_128B
     0U,	// V6_vunpackoh
     0U,	// V6_vunpackoh_128B
+    0U,	// V6_vunpackoh_alt
+    0U,	// V6_vunpackoh_alt_128B
     0U,	// V6_vunpackub
     0U,	// V6_vunpackub_128B
+    0U,	// V6_vunpackub_alt
+    0U,	// V6_vunpackub_alt_128B
     0U,	// V6_vunpackuh
     0U,	// V6_vunpackuh_128B
+    0U,	// V6_vunpackuh_alt
+    0U,	// V6_vunpackuh_alt_128B
+    0U,	// V6_vwhist128
+    0U,	// V6_vwhist128_128B
+    0U,	// V6_vwhist128m
+    0U,	// V6_vwhist128m_128B
+    0U,	// V6_vwhist128q
+    0U,	// V6_vwhist128q_128B
+    0U,	// V6_vwhist128qm
+    0U,	// V6_vwhist128qm_128B
+    0U,	// V6_vwhist256
+    0U,	// V6_vwhist256_128B
+    0U,	// V6_vwhist256_sat
+    0U,	// V6_vwhist256_sat_128B
+    0U,	// V6_vwhist256q
+    0U,	// V6_vwhist256q_128B
+    0U,	// V6_vwhist256q_sat
+    0U,	// V6_vwhist256q_sat_128B
     0U,	// V6_vxor
     0U,	// V6_vxor_128B
     0U,	// V6_vzb
     0U,	// V6_vzb_128B
+    0U,	// V6_vzb_alt
+    0U,	// V6_vzb_alt_128B
     0U,	// V6_vzh
     0U,	// V6_vzh_128B
+    0U,	// V6_vzh_alt
+    0U,	// V6_vzh_alt_128B
     0U,	// Y2_barrier
+    0U,	// Y2_break
     0U,	// Y2_dccleana
     0U,	// Y2_dccleaninva
+    0U,	// Y2_dcfetch
     0U,	// Y2_dcfetchbo
     0U,	// Y2_dcinva
     0U,	// Y2_dczeroa
     0U,	// Y2_icinva
     0U,	// Y2_isync
     0U,	// Y2_syncht
-    12U,	// Y4_l2fetch
+    11U,	// Y4_l2fetch
     0U,	// Y4_trace
-    12U,	// Y5_l2fetch
-    0U,	// Y5_l2gclean
-    0U,	// Y5_l2gcleaninv
-    0U,	// Y5_l2gunlock
-    0U,	// Y5_l2locka
-    0U,	// Y5_l2unlocka
-    0U,	// Y6_l2gcleaninvpa
-    0U,	// Y6_l2gcleanpa
-    4096U,	// dep_A2_addsat
-    4096U,	// dep_A2_subsat
+    11U,	// Y5_l2fetch
+    8192U,	// dep_A2_addsat
+    8192U,	// dep_A2_subsat
     0U,	// dep_S2_packhl
   };
 
@@ -5272,11 +7086,12 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// LIFETIME_START
     0U,	// LIFETIME_END
     0U,	// STACKMAP
+    0U,	// FENTRY_CALL
     0U,	// PATCHPOINT
     0U,	// LOAD_STACK_GUARD
     0U,	// STATEPOINT
     0U,	// LOCAL_ESCAPE
-    0U,	// FAULTING_LOAD_OP
+    0U,	// FAULTING_OP
     0U,	// PATCHABLE_OP
     0U,	// PATCHABLE_FUNCTION_ENTER
     0U,	// PATCHABLE_RET
@@ -5295,20 +7110,25 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// G_FRAME_INDEX
     0U,	// G_GLOBAL_VALUE
     0U,	// G_EXTRACT
+    0U,	// G_UNMERGE_VALUES
     0U,	// G_INSERT
     0U,	// G_SEQUENCE
+    0U,	// G_MERGE_VALUES
     0U,	// G_PTRTOINT
     0U,	// G_INTTOPTR
     0U,	// G_BITCAST
     0U,	// G_LOAD
     0U,	// G_STORE
     0U,	// G_BRCOND
+    0U,	// G_BRINDIRECT
     0U,	// G_INTRINSIC
     0U,	// G_INTRINSIC_W_SIDE_EFFECTS
     0U,	// G_ANYEXT
     0U,	// G_TRUNC
     0U,	// G_CONSTANT
     0U,	// G_FCONSTANT
+    0U,	// G_VASTART
+    0U,	// G_VAARG
     0U,	// G_SEXT
     0U,	// G_ZEXT
     0U,	// G_SHL
@@ -5323,11 +7143,15 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// G_SSUBO
     0U,	// G_UMULO
     0U,	// G_SMULO
+    0U,	// G_UMULH
+    0U,	// G_SMULH
     0U,	// G_FADD
     0U,	// G_FSUB
     0U,	// G_FMUL
     0U,	// G_FDIV
     0U,	// G_FREM
+    0U,	// G_FPOW
+    0U,	// G_FNEG
     0U,	// G_FPEXT
     0U,	// G_FPTRUNC
     0U,	// G_FPTOSI
@@ -5335,7 +7159,11 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// G_SITOFP
     0U,	// G_UITOFP
     0U,	// G_GEP
+    0U,	// G_PTR_MASK
     0U,	// G_BR
+    0U,	// G_INSERT_VECTOR_ELT
+    0U,	// G_EXTRACT_VECTOR_ELT
+    0U,	// G_SHUFFLE_VECTOR
     0U,	// A2_abs
     0U,	// A2_absp
     0U,	// A2_abssat
@@ -5379,6 +7207,7 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// A2_minp
     0U,	// A2_minu
     0U,	// A2_minup
+    0U,	// A2_neg
     0U,	// A2_negp
     0U,	// A2_negsat
     0U,	// A2_nop
@@ -5466,6 +7295,7 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// A2_vabshsat
     0U,	// A2_vabsw
     0U,	// A2_vabswsat
+    0U,	// A2_vaddb_map
     0U,	// A2_vaddh
     0U,	// A2_vaddhs
     0U,	// A2_vaddub
@@ -5516,6 +7346,7 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// A2_vraddub_acc
     0U,	// A2_vrsadub
     0U,	// A2_vrsadub_acc
+    0U,	// A2_vsubb_map
     0U,	// A2_vsubh
     0U,	// A2_vsubhs
     0U,	// A2_vsubub
@@ -5553,9 +7384,6 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// A4_cround_ri
     0U,	// A4_cround_rr
     0U,	// A4_ext
-    0U,	// A4_ext_b
-    0U,	// A4_ext_c
-    0U,	// A4_ext_g
     0U,	// A4_modwrapu
     0U,	// A4_orn
     0U,	// A4_ornp
@@ -5616,6 +7444,7 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// A4_vrminw
     0U,	// A5_ACS
     0U,	// A5_vaddhubs
+    0U,	// A6_vminub_RdP
     0U,	// ADJCALLSTACKDOWN
     0U,	// ADJCALLSTACKUP
     0U,	// C2_all8
@@ -5644,6 +7473,8 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// C2_cmpgtu
     0U,	// C2_cmpgtui
     0U,	// C2_cmpgtup
+    0U,	// C2_cmplt
+    0U,	// C2_cmpltu
     0U,	// C2_mask
     0U,	// C2_mux
     0U,	// C2_muxii
@@ -5678,8 +7509,10 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// C4_or_andn
     0U,	// C4_or_or
     0U,	// C4_or_orn
+    0U,	// CALLProfile
     0U,	// CONST32
     0U,	// CONST64
+    0U,	// DUPLEX_Pseudo
     0U,	// DuplexIClass0
     0U,	// DuplexIClass1
     0U,	// DuplexIClass2
@@ -5761,13 +7594,18 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// J2_callrf
     0U,	// J2_callrt
     0U,	// J2_callt
+    0U,	// J2_endloop0
+    0U,	// J2_endloop01
+    0U,	// J2_endloop1
     0U,	// J2_jump
     0U,	// J2_jumpf
+    0U,	// J2_jumpf_nopred_map
     0U,	// J2_jumpfnew
     0U,	// J2_jumpfnewpt
     0U,	// J2_jumpfpt
     0U,	// J2_jumpr
     0U,	// J2_jumprf
+    0U,	// J2_jumprf_nopred_map
     0U,	// J2_jumprfnew
     0U,	// J2_jumprfnewpt
     0U,	// J2_jumprfpt
@@ -5778,12 +7616,14 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// J2_jumprnz
     0U,	// J2_jumprnzpt
     0U,	// J2_jumprt
+    0U,	// J2_jumprt_nopred_map
     0U,	// J2_jumprtnew
     0U,	// J2_jumprtnewpt
     0U,	// J2_jumprtpt
     0U,	// J2_jumprz
     0U,	// J2_jumprzpt
     0U,	// J2_jumpt
+    0U,	// J2_jumpt_nopred_map
     0U,	// J2_jumptnew
     0U,	// J2_jumptnewpt
     0U,	// J2_jumptpt
@@ -5803,7 +7643,6 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// J2_ploop3si
     0U,	// J2_ploop3sr
     0U,	// J2_trap0
-    0U,	// J2_trap1
     0U,	// J4_cmpeq_f_jumpnv_nt
     0U,	// J4_cmpeq_f_jumpnv_t
     0U,	// J4_cmpeq_fp0_jump_nt
@@ -5930,42 +7769,49 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// L2_loadalignb_pcr
     0U,	// L2_loadalignb_pi
     0U,	// L2_loadalignb_pr
+    0U,	// L2_loadalignb_zomap
     0U,	// L2_loadalignh_io
     0U,	// L2_loadalignh_pbr
     0U,	// L2_loadalignh_pci
     0U,	// L2_loadalignh_pcr
     0U,	// L2_loadalignh_pi
     0U,	// L2_loadalignh_pr
+    0U,	// L2_loadalignh_zomap
     0U,	// L2_loadbsw2_io
     0U,	// L2_loadbsw2_pbr
     0U,	// L2_loadbsw2_pci
     0U,	// L2_loadbsw2_pcr
     0U,	// L2_loadbsw2_pi
     0U,	// L2_loadbsw2_pr
+    0U,	// L2_loadbsw2_zomap
     0U,	// L2_loadbsw4_io
     0U,	// L2_loadbsw4_pbr
     0U,	// L2_loadbsw4_pci
     0U,	// L2_loadbsw4_pcr
     0U,	// L2_loadbsw4_pi
     0U,	// L2_loadbsw4_pr
+    0U,	// L2_loadbsw4_zomap
     0U,	// L2_loadbzw2_io
     0U,	// L2_loadbzw2_pbr
     0U,	// L2_loadbzw2_pci
     0U,	// L2_loadbzw2_pcr
     0U,	// L2_loadbzw2_pi
     0U,	// L2_loadbzw2_pr
+    0U,	// L2_loadbzw2_zomap
     0U,	// L2_loadbzw4_io
     0U,	// L2_loadbzw4_pbr
     0U,	// L2_loadbzw4_pci
     0U,	// L2_loadbzw4_pcr
     0U,	// L2_loadbzw4_pi
     0U,	// L2_loadbzw4_pr
+    0U,	// L2_loadbzw4_zomap
     0U,	// L2_loadrb_io
     0U,	// L2_loadrb_pbr
     0U,	// L2_loadrb_pci
     0U,	// L2_loadrb_pcr
     0U,	// L2_loadrb_pi
     0U,	// L2_loadrb_pr
+    0U,	// L2_loadrb_zomap
     0U,	// L2_loadrbgp
     0U,	// L2_loadrd_io
     0U,	// L2_loadrd_pbr
@@ -5973,6 +7819,7 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// L2_loadrd_pcr
     0U,	// L2_loadrd_pi
     0U,	// L2_loadrd_pr
+    0U,	// L2_loadrd_zomap
     0U,	// L2_loadrdgp
     0U,	// L2_loadrh_io
     0U,	// L2_loadrh_pbr
@@ -5980,6 +7827,7 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// L2_loadrh_pcr
     0U,	// L2_loadrh_pi
     0U,	// L2_loadrh_pr
+    0U,	// L2_loadrh_zomap
     0U,	// L2_loadrhgp
     0U,	// L2_loadri_io
     0U,	// L2_loadri_pbr
@@ -5987,6 +7835,7 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// L2_loadri_pcr
     0U,	// L2_loadri_pi
     0U,	// L2_loadri_pr
+    0U,	// L2_loadri_zomap
     0U,	// L2_loadrigp
     0U,	// L2_loadrub_io
     0U,	// L2_loadrub_pbr
@@ -5994,6 +7843,7 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// L2_loadrub_pcr
     0U,	// L2_loadrub_pi
     0U,	// L2_loadrub_pr
+    0U,	// L2_loadrub_zomap
     0U,	// L2_loadrubgp
     0U,	// L2_loadruh_io
     0U,	// L2_loadruh_pbr
@@ -6001,74 +7851,117 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// L2_loadruh_pcr
     0U,	// L2_loadruh_pi
     0U,	// L2_loadruh_pr
+    0U,	// L2_loadruh_zomap
     0U,	// L2_loadruhgp
     0U,	// L2_loadw_locked
     0U,	// L2_ploadrbf_io
     0U,	// L2_ploadrbf_pi
+    0U,	// L2_ploadrbf_zomap
     0U,	// L2_ploadrbfnew_io
     0U,	// L2_ploadrbfnew_pi
+    0U,	// L2_ploadrbfnew_zomap
     0U,	// L2_ploadrbt_io
     0U,	// L2_ploadrbt_pi
+    0U,	// L2_ploadrbt_zomap
     0U,	// L2_ploadrbtnew_io
     0U,	// L2_ploadrbtnew_pi
+    0U,	// L2_ploadrbtnew_zomap
     0U,	// L2_ploadrdf_io
     0U,	// L2_ploadrdf_pi
+    0U,	// L2_ploadrdf_zomap
     0U,	// L2_ploadrdfnew_io
     0U,	// L2_ploadrdfnew_pi
+    0U,	// L2_ploadrdfnew_zomap
     0U,	// L2_ploadrdt_io
     0U,	// L2_ploadrdt_pi
+    0U,	// L2_ploadrdt_zomap
     0U,	// L2_ploadrdtnew_io
     0U,	// L2_ploadrdtnew_pi
+    0U,	// L2_ploadrdtnew_zomap
     0U,	// L2_ploadrhf_io
     0U,	// L2_ploadrhf_pi
+    0U,	// L2_ploadrhf_zomap
     0U,	// L2_ploadrhfnew_io
     0U,	// L2_ploadrhfnew_pi
+    0U,	// L2_ploadrhfnew_zomap
     0U,	// L2_ploadrht_io
     0U,	// L2_ploadrht_pi
+    0U,	// L2_ploadrht_zomap
     0U,	// L2_ploadrhtnew_io
     0U,	// L2_ploadrhtnew_pi
+    0U,	// L2_ploadrhtnew_zomap
     0U,	// L2_ploadrif_io
     0U,	// L2_ploadrif_pi
+    0U,	// L2_ploadrif_zomap
     0U,	// L2_ploadrifnew_io
     0U,	// L2_ploadrifnew_pi
+    0U,	// L2_ploadrifnew_zomap
     0U,	// L2_ploadrit_io
     0U,	// L2_ploadrit_pi
+    0U,	// L2_ploadrit_zomap
     0U,	// L2_ploadritnew_io
     0U,	// L2_ploadritnew_pi
+    0U,	// L2_ploadritnew_zomap
     0U,	// L2_ploadrubf_io
     0U,	// L2_ploadrubf_pi
+    0U,	// L2_ploadrubf_zomap
     0U,	// L2_ploadrubfnew_io
     0U,	// L2_ploadrubfnew_pi
+    0U,	// L2_ploadrubfnew_zomap
     0U,	// L2_ploadrubt_io
     0U,	// L2_ploadrubt_pi
+    0U,	// L2_ploadrubt_zomap
     0U,	// L2_ploadrubtnew_io
     0U,	// L2_ploadrubtnew_pi
+    0U,	// L2_ploadrubtnew_zomap
     0U,	// L2_ploadruhf_io
     0U,	// L2_ploadruhf_pi
+    0U,	// L2_ploadruhf_zomap
     0U,	// L2_ploadruhfnew_io
     0U,	// L2_ploadruhfnew_pi
+    0U,	// L2_ploadruhfnew_zomap
     0U,	// L2_ploadruht_io
     0U,	// L2_ploadruht_pi
+    0U,	// L2_ploadruht_zomap
     0U,	// L2_ploadruhtnew_io
     0U,	// L2_ploadruhtnew_pi
+    0U,	// L2_ploadruhtnew_zomap
     0U,	// L4_add_memopb_io
+    0U,	// L4_add_memopb_zomap
     0U,	// L4_add_memoph_io
+    0U,	// L4_add_memoph_zomap
     0U,	// L4_add_memopw_io
+    0U,	// L4_add_memopw_zomap
     0U,	// L4_and_memopb_io
+    0U,	// L4_and_memopb_zomap
     0U,	// L4_and_memoph_io
+    0U,	// L4_and_memoph_zomap
     0U,	// L4_and_memopw_io
+    0U,	// L4_and_memopw_zomap
     0U,	// L4_iadd_memopb_io
+    0U,	// L4_iadd_memopb_zomap
     0U,	// L4_iadd_memoph_io
+    0U,	// L4_iadd_memoph_zomap
     0U,	// L4_iadd_memopw_io
+    0U,	// L4_iadd_memopw_zomap
     0U,	// L4_iand_memopb_io
+    0U,	// L4_iand_memopb_zomap
     0U,	// L4_iand_memoph_io
+    0U,	// L4_iand_memoph_zomap
     0U,	// L4_iand_memopw_io
+    0U,	// L4_iand_memopw_zomap
     0U,	// L4_ior_memopb_io
+    0U,	// L4_ior_memopb_zomap
     0U,	// L4_ior_memoph_io
+    0U,	// L4_ior_memoph_zomap
     0U,	// L4_ior_memopw_io
+    0U,	// L4_ior_memopw_zomap
     0U,	// L4_isub_memopb_io
+    0U,	// L4_isub_memopb_zomap
     0U,	// L4_isub_memoph_io
+    0U,	// L4_isub_memoph_zomap
     0U,	// L4_isub_memopw_io
+    0U,	// L4_isub_memopw_zomap
     0U,	// L4_loadalignb_ap
     0U,	// L4_loadalignb_ur
     0U,	// L4_loadalignh_ap
@@ -6101,8 +7994,11 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// L4_loadruh_rr
     0U,	// L4_loadruh_ur
     0U,	// L4_or_memopb_io
+    0U,	// L4_or_memopb_zomap
     0U,	// L4_or_memoph_io
+    0U,	// L4_or_memoph_zomap
     0U,	// L4_or_memopw_io
+    0U,	// L4_or_memopw_zomap
     0U,	// L4_ploadrbf_abs
     0U,	// L4_ploadrbf_rr
     0U,	// L4_ploadrbfnew_abs
@@ -6159,8 +8055,11 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// L4_return_tnew_pnt
     0U,	// L4_return_tnew_pt
     0U,	// L4_sub_memopb_io
+    0U,	// L4_sub_memopb_zomap
     0U,	// L4_sub_memoph_io
+    0U,	// L4_sub_memoph_zomap
     0U,	// L4_sub_memopw_io
+    0U,	// L4_sub_memopw_zomap
     0U,	// LDriw_mod
     0U,	// LDriw_pred
     0U,	// LO
@@ -6486,6 +8385,8 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// M5_vrmacbuu
     0U,	// M5_vrmpybsu
     0U,	// M5_vrmpybuu
+    0U,	// M6_vabsdiffb
+    0U,	// M6_vabsdiffub
     0U,	// PS_aligna
     0U,	// PS_alloca
     0U,	// PS_call_nr
@@ -6611,7 +8512,6 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// S2_brev
     0U,	// S2_brevp
     0U,	// S2_cabacdecbin
-    0U,	// S2_cabacencbin
     0U,	// S2_cl0
     0U,	// S2_cl0p
     0U,	// S2_cl1
@@ -6680,51 +8580,67 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// S2_parityp
     4U,	// S2_pstorerbf_io
     6U,	// S2_pstorerbf_pi
+    0U,	// S2_pstorerbf_zomap
     6U,	// S2_pstorerbfnew_pi
     12U,	// S2_pstorerbnewf_io
     14U,	// S2_pstorerbnewf_pi
+    0U,	// S2_pstorerbnewf_zomap
     14U,	// S2_pstorerbnewfnew_pi
     12U,	// S2_pstorerbnewt_io
     14U,	// S2_pstorerbnewt_pi
+    0U,	// S2_pstorerbnewt_zomap
     14U,	// S2_pstorerbnewtnew_pi
     4U,	// S2_pstorerbt_io
     6U,	// S2_pstorerbt_pi
+    0U,	// S2_pstorerbt_zomap
     6U,	// S2_pstorerbtnew_pi
     4U,	// S2_pstorerdf_io
     6U,	// S2_pstorerdf_pi
+    0U,	// S2_pstorerdf_zomap
     6U,	// S2_pstorerdfnew_pi
     4U,	// S2_pstorerdt_io
     6U,	// S2_pstorerdt_pi
+    0U,	// S2_pstorerdt_zomap
     6U,	// S2_pstorerdtnew_pi
     20U,	// S2_pstorerff_io
     22U,	// S2_pstorerff_pi
+    0U,	// S2_pstorerff_zomap
     22U,	// S2_pstorerffnew_pi
     20U,	// S2_pstorerft_io
     22U,	// S2_pstorerft_pi
+    0U,	// S2_pstorerft_zomap
     22U,	// S2_pstorerftnew_pi
     4U,	// S2_pstorerhf_io
     6U,	// S2_pstorerhf_pi
+    0U,	// S2_pstorerhf_zomap
     6U,	// S2_pstorerhfnew_pi
     12U,	// S2_pstorerhnewf_io
     14U,	// S2_pstorerhnewf_pi
+    0U,	// S2_pstorerhnewf_zomap
     14U,	// S2_pstorerhnewfnew_pi
     12U,	// S2_pstorerhnewt_io
     14U,	// S2_pstorerhnewt_pi
+    0U,	// S2_pstorerhnewt_zomap
     14U,	// S2_pstorerhnewtnew_pi
     4U,	// S2_pstorerht_io
     6U,	// S2_pstorerht_pi
+    0U,	// S2_pstorerht_zomap
     6U,	// S2_pstorerhtnew_pi
     4U,	// S2_pstorerif_io
     6U,	// S2_pstorerif_pi
+    0U,	// S2_pstorerif_zomap
     6U,	// S2_pstorerifnew_pi
     12U,	// S2_pstorerinewf_io
     14U,	// S2_pstorerinewf_pi
+    0U,	// S2_pstorerinewf_zomap
     14U,	// S2_pstorerinewfnew_pi
     12U,	// S2_pstorerinewt_io
     14U,	// S2_pstorerinewt_pi
+    0U,	// S2_pstorerinewt_zomap
     14U,	// S2_pstorerinewtnew_pi
     4U,	// S2_pstorerit_io
     6U,	// S2_pstorerit_pi
+    0U,	// S2_pstorerit_zomap
     6U,	// S2_pstoreritnew_pi
     0U,	// S2_setbit_i
     0U,	// S2_setbit_r
@@ -6738,6 +8654,7 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// S2_storerb_pcr
     0U,	// S2_storerb_pi
     0U,	// S2_storerb_pr
+    0U,	// S2_storerb_zomap
     0U,	// S2_storerbgp
     0U,	// S2_storerbnew_io
     0U,	// S2_storerbnew_pbr
@@ -6745,6 +8662,7 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// S2_storerbnew_pcr
     0U,	// S2_storerbnew_pi
     0U,	// S2_storerbnew_pr
+    0U,	// S2_storerbnew_zomap
     0U,	// S2_storerbnewgp
     0U,	// S2_storerd_io
     0U,	// S2_storerd_pbr
@@ -6752,6 +8670,7 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// S2_storerd_pcr
     0U,	// S2_storerd_pi
     0U,	// S2_storerd_pr
+    0U,	// S2_storerd_zomap
     0U,	// S2_storerdgp
     0U,	// S2_storerf_io
     0U,	// S2_storerf_pbr
@@ -6759,6 +8678,7 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// S2_storerf_pcr
     0U,	// S2_storerf_pi
     0U,	// S2_storerf_pr
+    0U,	// S2_storerf_zomap
     0U,	// S2_storerfgp
     0U,	// S2_storerh_io
     0U,	// S2_storerh_pbr
@@ -6766,6 +8686,7 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// S2_storerh_pcr
     0U,	// S2_storerh_pi
     0U,	// S2_storerh_pr
+    0U,	// S2_storerh_zomap
     0U,	// S2_storerhgp
     0U,	// S2_storerhnew_io
     0U,	// S2_storerhnew_pbr
@@ -6773,6 +8694,7 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// S2_storerhnew_pcr
     0U,	// S2_storerhnew_pi
     0U,	// S2_storerhnew_pr
+    0U,	// S2_storerhnew_zomap
     0U,	// S2_storerhnewgp
     0U,	// S2_storeri_io
     0U,	// S2_storeri_pbr
@@ -6780,6 +8702,7 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// S2_storeri_pcr
     0U,	// S2_storeri_pi
     0U,	// S2_storeri_pr
+    0U,	// S2_storeri_zomap
     0U,	// S2_storerigp
     0U,	// S2_storerinew_io
     0U,	// S2_storerinew_pbr
@@ -6787,6 +8710,7 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// S2_storerinew_pcr
     0U,	// S2_storerinew_pi
     0U,	// S2_storerinew_pr
+    0U,	// S2_storerinew_zomap
     0U,	// S2_storerinewgp
     0U,	// S2_storew_locked
     0U,	// S2_svsathb
@@ -6856,97 +8780,128 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// S4_pstorerbfnew_abs
     4U,	// S4_pstorerbfnew_io
     0U,	// S4_pstorerbfnew_rr
+    0U,	// S4_pstorerbfnew_zomap
     0U,	// S4_pstorerbnewf_abs
     0U,	// S4_pstorerbnewf_rr
     0U,	// S4_pstorerbnewfnew_abs
     12U,	// S4_pstorerbnewfnew_io
     0U,	// S4_pstorerbnewfnew_rr
+    0U,	// S4_pstorerbnewfnew_zomap
     0U,	// S4_pstorerbnewt_abs
     0U,	// S4_pstorerbnewt_rr
     0U,	// S4_pstorerbnewtnew_abs
     12U,	// S4_pstorerbnewtnew_io
     0U,	// S4_pstorerbnewtnew_rr
+    0U,	// S4_pstorerbnewtnew_zomap
     0U,	// S4_pstorerbt_abs
     0U,	// S4_pstorerbt_rr
     0U,	// S4_pstorerbtnew_abs
     4U,	// S4_pstorerbtnew_io
     0U,	// S4_pstorerbtnew_rr
+    0U,	// S4_pstorerbtnew_zomap
     0U,	// S4_pstorerdf_abs
     0U,	// S4_pstorerdf_rr
     0U,	// S4_pstorerdfnew_abs
     4U,	// S4_pstorerdfnew_io
     0U,	// S4_pstorerdfnew_rr
+    0U,	// S4_pstorerdfnew_zomap
     0U,	// S4_pstorerdt_abs
     0U,	// S4_pstorerdt_rr
     0U,	// S4_pstorerdtnew_abs
     4U,	// S4_pstorerdtnew_io
     0U,	// S4_pstorerdtnew_rr
+    0U,	// S4_pstorerdtnew_zomap
     0U,	// S4_pstorerff_abs
     0U,	// S4_pstorerff_rr
     0U,	// S4_pstorerffnew_abs
     20U,	// S4_pstorerffnew_io
     0U,	// S4_pstorerffnew_rr
+    0U,	// S4_pstorerffnew_zomap
     0U,	// S4_pstorerft_abs
     0U,	// S4_pstorerft_rr
     0U,	// S4_pstorerftnew_abs
     20U,	// S4_pstorerftnew_io
     0U,	// S4_pstorerftnew_rr
+    0U,	// S4_pstorerftnew_zomap
     0U,	// S4_pstorerhf_abs
     0U,	// S4_pstorerhf_rr
     0U,	// S4_pstorerhfnew_abs
     4U,	// S4_pstorerhfnew_io
     0U,	// S4_pstorerhfnew_rr
+    0U,	// S4_pstorerhfnew_zomap
     0U,	// S4_pstorerhnewf_abs
     0U,	// S4_pstorerhnewf_rr
     0U,	// S4_pstorerhnewfnew_abs
     12U,	// S4_pstorerhnewfnew_io
     0U,	// S4_pstorerhnewfnew_rr
+    0U,	// S4_pstorerhnewfnew_zomap
     0U,	// S4_pstorerhnewt_abs
     0U,	// S4_pstorerhnewt_rr
     0U,	// S4_pstorerhnewtnew_abs
     12U,	// S4_pstorerhnewtnew_io
     0U,	// S4_pstorerhnewtnew_rr
+    0U,	// S4_pstorerhnewtnew_zomap
     0U,	// S4_pstorerht_abs
     0U,	// S4_pstorerht_rr
     0U,	// S4_pstorerhtnew_abs
     4U,	// S4_pstorerhtnew_io
     0U,	// S4_pstorerhtnew_rr
+    0U,	// S4_pstorerhtnew_zomap
     0U,	// S4_pstorerif_abs
     0U,	// S4_pstorerif_rr
     0U,	// S4_pstorerifnew_abs
     4U,	// S4_pstorerifnew_io
     0U,	// S4_pstorerifnew_rr
+    0U,	// S4_pstorerifnew_zomap
     0U,	// S4_pstorerinewf_abs
     0U,	// S4_pstorerinewf_rr
     0U,	// S4_pstorerinewfnew_abs
     12U,	// S4_pstorerinewfnew_io
     0U,	// S4_pstorerinewfnew_rr
+    0U,	// S4_pstorerinewfnew_zomap
     0U,	// S4_pstorerinewt_abs
     0U,	// S4_pstorerinewt_rr
     0U,	// S4_pstorerinewtnew_abs
     12U,	// S4_pstorerinewtnew_io
     0U,	// S4_pstorerinewtnew_rr
+    0U,	// S4_pstorerinewtnew_zomap
     0U,	// S4_pstorerit_abs
     0U,	// S4_pstorerit_rr
     0U,	// S4_pstoreritnew_abs
     4U,	// S4_pstoreritnew_io
     0U,	// S4_pstoreritnew_rr
+    0U,	// S4_pstoreritnew_zomap
     0U,	// S4_stored_locked
     0U,	// S4_storeirb_io
+    0U,	// S4_storeirb_zomap
     0U,	// S4_storeirbf_io
+    0U,	// S4_storeirbf_zomap
     0U,	// S4_storeirbfnew_io
+    0U,	// S4_storeirbfnew_zomap
     0U,	// S4_storeirbt_io
+    0U,	// S4_storeirbt_zomap
     0U,	// S4_storeirbtnew_io
+    0U,	// S4_storeirbtnew_zomap
     0U,	// S4_storeirh_io
+    0U,	// S4_storeirh_zomap
     0U,	// S4_storeirhf_io
+    0U,	// S4_storeirhf_zomap
     0U,	// S4_storeirhfnew_io
+    0U,	// S4_storeirhfnew_zomap
     0U,	// S4_storeirht_io
+    0U,	// S4_storeirht_zomap
     0U,	// S4_storeirhtnew_io
+    0U,	// S4_storeirhtnew_zomap
     0U,	// S4_storeiri_io
+    0U,	// S4_storeiri_zomap
     0U,	// S4_storeirif_io
+    0U,	// S4_storeirif_zomap
     0U,	// S4_storeirifnew_io
+    0U,	// S4_storeirifnew_zomap
     0U,	// S4_storeirit_io
+    0U,	// S4_storeirit_zomap
     0U,	// S4_storeiritnew_io
+    0U,	// S4_storeiritnew_zomap
     0U,	// S4_storerb_ap
     0U,	// S4_storerb_rr
     0U,	// S4_storerb_ur
@@ -7000,6 +8955,9 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// S6_rol_i_r_nac
     0U,	// S6_rol_i_r_or
     0U,	// S6_rol_i_r_xacc
+    0U,	// S6_vsplatrbp
+    0U,	// S6_vtrunehb_ppp
+    0U,	// S6_vtrunohb_ppp
     0U,	// SA1_addi
     0U,	// SA1_addrx
     0U,	// SA1_addsp
@@ -7064,12 +9022,48 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// STriw_pred
     0U,	// TFRI64_V2_ext
     0U,	// TFRI64_V4
+    0U,	// V6_MAP_equb
+    0U,	// V6_MAP_equb_128B
+    0U,	// V6_MAP_equb_and
+    0U,	// V6_MAP_equb_and_128B
+    0U,	// V6_MAP_equb_ior
+    0U,	// V6_MAP_equb_ior_128B
+    0U,	// V6_MAP_equb_xor
+    0U,	// V6_MAP_equb_xor_128B
+    0U,	// V6_MAP_equh
+    0U,	// V6_MAP_equh_128B
+    0U,	// V6_MAP_equh_and
+    0U,	// V6_MAP_equh_and_128B
+    0U,	// V6_MAP_equh_ior
+    0U,	// V6_MAP_equh_ior_128B
+    0U,	// V6_MAP_equh_xor
+    0U,	// V6_MAP_equh_xor_128B
+    0U,	// V6_MAP_equw
+    0U,	// V6_MAP_equw_128B
+    0U,	// V6_MAP_equw_and
+    0U,	// V6_MAP_equw_and_128B
+    0U,	// V6_MAP_equw_ior
+    0U,	// V6_MAP_equw_ior_128B
+    0U,	// V6_MAP_equw_xor
+    0U,	// V6_MAP_equw_xor_128B
     0U,	// V6_extractw
     0U,	// V6_extractw_128B
+    0U,	// V6_extractw_alt
+    0U,	// V6_extractw_alt_128B
     0U,	// V6_hi
     0U,	// V6_hi_128B
+    0U,	// V6_ld0
+    0U,	// V6_ld0_128B
+    0U,	// V6_ldnt0
+    0U,	// V6_ldnt0_128B
+    0U,	// V6_ldu0
+    0U,	// V6_ldu0_128B
     0U,	// V6_lo
     0U,	// V6_lo_128B
+    0U,	// V6_lvsplatb
+    0U,	// V6_lvsplatb_128B
+    0U,	// V6_lvsplath
+    0U,	// V6_lvsplath_128B
     0U,	// V6_lvsplatw
     0U,	// V6_lvsplatw_128B
     0U,	// V6_pred_and
@@ -7084,43 +9078,158 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// V6_pred_or_n_128B
     0U,	// V6_pred_scalar2
     0U,	// V6_pred_scalar2_128B
+    0U,	// V6_pred_scalar2v2
+    0U,	// V6_pred_scalar2v2_128B
     0U,	// V6_pred_xor
     0U,	// V6_pred_xor_128B
+    0U,	// V6_shuffeqh
+    0U,	// V6_shuffeqh_128B
+    0U,	// V6_shuffeqw
+    0U,	// V6_shuffeqw_128B
+    0U,	// V6_st0
+    0U,	// V6_st0_128B
+    0U,	// V6_stn0
+    0U,	// V6_stn0_128B
+    0U,	// V6_stnnt0
+    0U,	// V6_stnnt0_128B
+    0U,	// V6_stnp0
+    0U,	// V6_stnp0_128B
+    0U,	// V6_stnpnt0
+    0U,	// V6_stnpnt0_128B
+    0U,	// V6_stnq0
+    0U,	// V6_stnq0_128B
+    0U,	// V6_stnqnt0
+    0U,	// V6_stnqnt0_128B
+    0U,	// V6_stnt0
+    0U,	// V6_stnt0_128B
+    0U,	// V6_stp0
+    0U,	// V6_stp0_128B
+    0U,	// V6_stpnt0
+    0U,	// V6_stpnt0_128B
+    0U,	// V6_stq0
+    0U,	// V6_stq0_128B
+    0U,	// V6_stqnt0
+    0U,	// V6_stqnt0_128B
+    0U,	// V6_stu0
+    0U,	// V6_stu0_128B
+    0U,	// V6_stunp0
+    0U,	// V6_stunp0_128B
+    0U,	// V6_stup0
+    0U,	// V6_stup0_128B
     0U,	// V6_vL32Ub_ai
     0U,	// V6_vL32Ub_ai_128B
     0U,	// V6_vL32Ub_pi
     0U,	// V6_vL32Ub_pi_128B
     0U,	// V6_vL32Ub_ppu
+    0U,	// V6_vL32Ub_ppu_128B
     0U,	// V6_vL32b_ai
     0U,	// V6_vL32b_ai_128B
     0U,	// V6_vL32b_cur_ai
     0U,	// V6_vL32b_cur_ai_128B
+    0U,	// V6_vL32b_cur_npred_ai
+    0U,	// V6_vL32b_cur_npred_ai_128B
+    0U,	// V6_vL32b_cur_npred_pi
+    0U,	// V6_vL32b_cur_npred_pi_128B
+    0U,	// V6_vL32b_cur_npred_ppu
+    0U,	// V6_vL32b_cur_npred_ppu_128B
     0U,	// V6_vL32b_cur_pi
     0U,	// V6_vL32b_cur_pi_128B
     0U,	// V6_vL32b_cur_ppu
+    0U,	// V6_vL32b_cur_ppu_128B
+    0U,	// V6_vL32b_cur_pred_ai
+    0U,	// V6_vL32b_cur_pred_ai_128B
+    0U,	// V6_vL32b_cur_pred_pi
+    0U,	// V6_vL32b_cur_pred_pi_128B
+    0U,	// V6_vL32b_cur_pred_ppu
+    0U,	// V6_vL32b_cur_pred_ppu_128B
+    0U,	// V6_vL32b_npred_ai
+    0U,	// V6_vL32b_npred_ai_128B
+    0U,	// V6_vL32b_npred_pi
+    0U,	// V6_vL32b_npred_pi_128B
+    0U,	// V6_vL32b_npred_ppu
+    0U,	// V6_vL32b_npred_ppu_128B
     0U,	// V6_vL32b_nt_ai
     0U,	// V6_vL32b_nt_ai_128B
     0U,	// V6_vL32b_nt_cur_ai
     0U,	// V6_vL32b_nt_cur_ai_128B
+    0U,	// V6_vL32b_nt_cur_npred_ai
+    0U,	// V6_vL32b_nt_cur_npred_ai_128B
+    0U,	// V6_vL32b_nt_cur_npred_pi
+    0U,	// V6_vL32b_nt_cur_npred_pi_128B
+    0U,	// V6_vL32b_nt_cur_npred_ppu
+    0U,	// V6_vL32b_nt_cur_npred_ppu_128B
     0U,	// V6_vL32b_nt_cur_pi
     0U,	// V6_vL32b_nt_cur_pi_128B
     0U,	// V6_vL32b_nt_cur_ppu
+    0U,	// V6_vL32b_nt_cur_ppu_128B
+    0U,	// V6_vL32b_nt_cur_pred_ai
+    0U,	// V6_vL32b_nt_cur_pred_ai_128B
+    0U,	// V6_vL32b_nt_cur_pred_pi
+    0U,	// V6_vL32b_nt_cur_pred_pi_128B
+    0U,	// V6_vL32b_nt_cur_pred_ppu
+    0U,	// V6_vL32b_nt_cur_pred_ppu_128B
+    0U,	// V6_vL32b_nt_npred_ai
+    0U,	// V6_vL32b_nt_npred_ai_128B
+    0U,	// V6_vL32b_nt_npred_pi
+    0U,	// V6_vL32b_nt_npred_pi_128B
+    0U,	// V6_vL32b_nt_npred_ppu
+    0U,	// V6_vL32b_nt_npred_ppu_128B
     0U,	// V6_vL32b_nt_pi
     0U,	// V6_vL32b_nt_pi_128B
     0U,	// V6_vL32b_nt_ppu
+    0U,	// V6_vL32b_nt_ppu_128B
+    0U,	// V6_vL32b_nt_pred_ai
+    0U,	// V6_vL32b_nt_pred_ai_128B
+    0U,	// V6_vL32b_nt_pred_pi
+    0U,	// V6_vL32b_nt_pred_pi_128B
+    0U,	// V6_vL32b_nt_pred_ppu
+    0U,	// V6_vL32b_nt_pred_ppu_128B
     0U,	// V6_vL32b_nt_tmp_ai
     0U,	// V6_vL32b_nt_tmp_ai_128B
+    0U,	// V6_vL32b_nt_tmp_npred_ai
+    0U,	// V6_vL32b_nt_tmp_npred_ai_128B
+    0U,	// V6_vL32b_nt_tmp_npred_pi
+    0U,	// V6_vL32b_nt_tmp_npred_pi_128B
+    0U,	// V6_vL32b_nt_tmp_npred_ppu
+    0U,	// V6_vL32b_nt_tmp_npred_ppu_128B
     0U,	// V6_vL32b_nt_tmp_pi
     0U,	// V6_vL32b_nt_tmp_pi_128B
     0U,	// V6_vL32b_nt_tmp_ppu
+    0U,	// V6_vL32b_nt_tmp_ppu_128B
+    0U,	// V6_vL32b_nt_tmp_pred_ai
+    0U,	// V6_vL32b_nt_tmp_pred_ai_128B
+    0U,	// V6_vL32b_nt_tmp_pred_pi
+    0U,	// V6_vL32b_nt_tmp_pred_pi_128B
+    0U,	// V6_vL32b_nt_tmp_pred_ppu
+    0U,	// V6_vL32b_nt_tmp_pred_ppu_128B
     0U,	// V6_vL32b_pi
     0U,	// V6_vL32b_pi_128B
     0U,	// V6_vL32b_ppu
+    0U,	// V6_vL32b_ppu_128B
+    0U,	// V6_vL32b_pred_ai
+    0U,	// V6_vL32b_pred_ai_128B
+    0U,	// V6_vL32b_pred_pi
+    0U,	// V6_vL32b_pred_pi_128B
+    0U,	// V6_vL32b_pred_ppu
+    0U,	// V6_vL32b_pred_ppu_128B
     0U,	// V6_vL32b_tmp_ai
     0U,	// V6_vL32b_tmp_ai_128B
+    0U,	// V6_vL32b_tmp_npred_ai
+    0U,	// V6_vL32b_tmp_npred_ai_128B
+    0U,	// V6_vL32b_tmp_npred_pi
+    0U,	// V6_vL32b_tmp_npred_pi_128B
+    0U,	// V6_vL32b_tmp_npred_ppu
+    0U,	// V6_vL32b_tmp_npred_ppu_128B
     0U,	// V6_vL32b_tmp_pi
     0U,	// V6_vL32b_tmp_pi_128B
     0U,	// V6_vL32b_tmp_ppu
+    0U,	// V6_vL32b_tmp_ppu_128B
+    0U,	// V6_vL32b_tmp_pred_ai
+    0U,	// V6_vL32b_tmp_pred_ai_128B
+    0U,	// V6_vL32b_tmp_pred_pi
+    0U,	// V6_vL32b_tmp_pred_pi_128B
+    0U,	// V6_vL32b_tmp_pred_ppu
+    0U,	// V6_vL32b_tmp_pred_ppu_128B
     0U,	// V6_vS32Ub_ai
     0U,	// V6_vS32Ub_ai_128B
     4U,	// V6_vS32Ub_npred_ai
@@ -7128,14 +9237,17 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     6U,	// V6_vS32Ub_npred_pi
     6U,	// V6_vS32Ub_npred_pi_128B
     6U,	// V6_vS32Ub_npred_ppu
+    6U,	// V6_vS32Ub_npred_ppu_128B
     0U,	// V6_vS32Ub_pi
     0U,	// V6_vS32Ub_pi_128B
     0U,	// V6_vS32Ub_ppu
+    0U,	// V6_vS32Ub_ppu_128B
     4U,	// V6_vS32Ub_pred_ai
     4U,	// V6_vS32Ub_pred_ai_128B
     6U,	// V6_vS32Ub_pred_pi
     6U,	// V6_vS32Ub_pred_pi_128B
     6U,	// V6_vS32Ub_pred_ppu
+    6U,	// V6_vS32Ub_pred_ppu_128B
     0U,	// V6_vS32b_ai
     0U,	// V6_vS32b_ai_128B
     0U,	// V6_vS32b_new_ai
@@ -7145,24 +9257,29 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     14U,	// V6_vS32b_new_npred_pi
     14U,	// V6_vS32b_new_npred_pi_128B
     14U,	// V6_vS32b_new_npred_ppu
+    14U,	// V6_vS32b_new_npred_ppu_128B
     0U,	// V6_vS32b_new_pi
     0U,	// V6_vS32b_new_pi_128B
     0U,	// V6_vS32b_new_ppu
+    0U,	// V6_vS32b_new_ppu_128B
     12U,	// V6_vS32b_new_pred_ai
     12U,	// V6_vS32b_new_pred_ai_128B
     14U,	// V6_vS32b_new_pred_pi
     14U,	// V6_vS32b_new_pred_pi_128B
     14U,	// V6_vS32b_new_pred_ppu
+    14U,	// V6_vS32b_new_pred_ppu_128B
     4U,	// V6_vS32b_npred_ai
     4U,	// V6_vS32b_npred_ai_128B
     6U,	// V6_vS32b_npred_pi
     6U,	// V6_vS32b_npred_pi_128B
     6U,	// V6_vS32b_npred_ppu
+    6U,	// V6_vS32b_npred_ppu_128B
     4U,	// V6_vS32b_nqpred_ai
     4U,	// V6_vS32b_nqpred_ai_128B
     6U,	// V6_vS32b_nqpred_pi
     6U,	// V6_vS32b_nqpred_pi_128B
     6U,	// V6_vS32b_nqpred_ppu
+    6U,	// V6_vS32b_nqpred_ppu_128B
     0U,	// V6_vS32b_nt_ai
     0U,	// V6_vS32b_nt_ai_128B
     0U,	// V6_vS32b_nt_new_ai
@@ -7172,186 +9289,368 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     14U,	// V6_vS32b_nt_new_npred_pi
     14U,	// V6_vS32b_nt_new_npred_pi_128B
     14U,	// V6_vS32b_nt_new_npred_ppu
+    14U,	// V6_vS32b_nt_new_npred_ppu_128B
     0U,	// V6_vS32b_nt_new_pi
     0U,	// V6_vS32b_nt_new_pi_128B
     0U,	// V6_vS32b_nt_new_ppu
+    0U,	// V6_vS32b_nt_new_ppu_128B
     12U,	// V6_vS32b_nt_new_pred_ai
     12U,	// V6_vS32b_nt_new_pred_ai_128B
     14U,	// V6_vS32b_nt_new_pred_pi
     14U,	// V6_vS32b_nt_new_pred_pi_128B
     14U,	// V6_vS32b_nt_new_pred_ppu
+    14U,	// V6_vS32b_nt_new_pred_ppu_128B
     4U,	// V6_vS32b_nt_npred_ai
     4U,	// V6_vS32b_nt_npred_ai_128B
     6U,	// V6_vS32b_nt_npred_pi
     6U,	// V6_vS32b_nt_npred_pi_128B
     6U,	// V6_vS32b_nt_npred_ppu
+    6U,	// V6_vS32b_nt_npred_ppu_128B
     4U,	// V6_vS32b_nt_nqpred_ai
     4U,	// V6_vS32b_nt_nqpred_ai_128B
     6U,	// V6_vS32b_nt_nqpred_pi
     6U,	// V6_vS32b_nt_nqpred_pi_128B
     6U,	// V6_vS32b_nt_nqpred_ppu
+    6U,	// V6_vS32b_nt_nqpred_ppu_128B
     0U,	// V6_vS32b_nt_pi
     0U,	// V6_vS32b_nt_pi_128B
     0U,	// V6_vS32b_nt_ppu
+    0U,	// V6_vS32b_nt_ppu_128B
     4U,	// V6_vS32b_nt_pred_ai
     4U,	// V6_vS32b_nt_pred_ai_128B
     6U,	// V6_vS32b_nt_pred_pi
     6U,	// V6_vS32b_nt_pred_pi_128B
     6U,	// V6_vS32b_nt_pred_ppu
+    6U,	// V6_vS32b_nt_pred_ppu_128B
     4U,	// V6_vS32b_nt_qpred_ai
     4U,	// V6_vS32b_nt_qpred_ai_128B
     6U,	// V6_vS32b_nt_qpred_pi
     6U,	// V6_vS32b_nt_qpred_pi_128B
     6U,	// V6_vS32b_nt_qpred_ppu
+    6U,	// V6_vS32b_nt_qpred_ppu_128B
     0U,	// V6_vS32b_pi
     0U,	// V6_vS32b_pi_128B
     0U,	// V6_vS32b_ppu
+    0U,	// V6_vS32b_ppu_128B
     4U,	// V6_vS32b_pred_ai
     4U,	// V6_vS32b_pred_ai_128B
     6U,	// V6_vS32b_pred_pi
     6U,	// V6_vS32b_pred_pi_128B
     6U,	// V6_vS32b_pred_ppu
+    6U,	// V6_vS32b_pred_ppu_128B
     4U,	// V6_vS32b_qpred_ai
     4U,	// V6_vS32b_qpred_ai_128B
     6U,	// V6_vS32b_qpred_pi
     6U,	// V6_vS32b_qpred_pi_128B
     6U,	// V6_vS32b_qpred_ppu
+    6U,	// V6_vS32b_qpred_ppu_128B
     0U,	// V6_vabsdiffh
     0U,	// V6_vabsdiffh_128B
+    0U,	// V6_vabsdiffh_alt
+    0U,	// V6_vabsdiffh_alt_128B
     0U,	// V6_vabsdiffub
     0U,	// V6_vabsdiffub_128B
+    0U,	// V6_vabsdiffub_alt
+    0U,	// V6_vabsdiffub_alt_128B
     0U,	// V6_vabsdiffuh
     0U,	// V6_vabsdiffuh_128B
+    0U,	// V6_vabsdiffuh_alt
+    0U,	// V6_vabsdiffuh_alt_128B
     0U,	// V6_vabsdiffw
     0U,	// V6_vabsdiffw_128B
+    0U,	// V6_vabsdiffw_alt
+    0U,	// V6_vabsdiffw_alt_128B
     0U,	// V6_vabsh
     0U,	// V6_vabsh_128B
+    0U,	// V6_vabsh_alt
+    0U,	// V6_vabsh_alt_128B
     0U,	// V6_vabsh_sat
     0U,	// V6_vabsh_sat_128B
+    0U,	// V6_vabsh_sat_alt
+    0U,	// V6_vabsh_sat_alt_128B
     0U,	// V6_vabsw
     0U,	// V6_vabsw_128B
+    0U,	// V6_vabsw_alt
+    0U,	// V6_vabsw_alt_128B
     0U,	// V6_vabsw_sat
     0U,	// V6_vabsw_sat_128B
+    0U,	// V6_vabsw_sat_alt
+    0U,	// V6_vabsw_sat_alt_128B
     0U,	// V6_vaddb
     0U,	// V6_vaddb_128B
+    0U,	// V6_vaddb_alt
+    0U,	// V6_vaddb_alt_128B
     0U,	// V6_vaddb_dv
     0U,	// V6_vaddb_dv_128B
+    0U,	// V6_vaddb_dv_alt
+    0U,	// V6_vaddb_dv_alt_128B
     0U,	// V6_vaddbnq
     0U,	// V6_vaddbnq_128B
+    0U,	// V6_vaddbnq_alt
+    0U,	// V6_vaddbnq_alt_128B
     0U,	// V6_vaddbq
     0U,	// V6_vaddbq_128B
+    0U,	// V6_vaddbq_alt
+    0U,	// V6_vaddbq_alt_128B
+    0U,	// V6_vaddbsat
+    0U,	// V6_vaddbsat_128B
+    0U,	// V6_vaddbsat_alt
+    0U,	// V6_vaddbsat_alt_128B
+    0U,	// V6_vaddbsat_dv
+    0U,	// V6_vaddbsat_dv_128B
+    0U,	// V6_vaddbsat_dv_alt
+    0U,	// V6_vaddbsat_dv_alt_128B
+    0U,	// V6_vaddcarry
+    0U,	// V6_vaddcarry_128B
+    0U,	// V6_vaddclbh
+    0U,	// V6_vaddclbh_128B
+    0U,	// V6_vaddclbw
+    0U,	// V6_vaddclbw_128B
     0U,	// V6_vaddh
     0U,	// V6_vaddh_128B
+    0U,	// V6_vaddh_alt
+    0U,	// V6_vaddh_alt_128B
     0U,	// V6_vaddh_dv
     0U,	// V6_vaddh_dv_128B
+    0U,	// V6_vaddh_dv_alt
+    0U,	// V6_vaddh_dv_alt_128B
     0U,	// V6_vaddhnq
     0U,	// V6_vaddhnq_128B
+    0U,	// V6_vaddhnq_alt
+    0U,	// V6_vaddhnq_alt_128B
     0U,	// V6_vaddhq
     0U,	// V6_vaddhq_128B
+    0U,	// V6_vaddhq_alt
+    0U,	// V6_vaddhq_alt_128B
     0U,	// V6_vaddhsat
     0U,	// V6_vaddhsat_128B
+    0U,	// V6_vaddhsat_alt
+    0U,	// V6_vaddhsat_alt_128B
     0U,	// V6_vaddhsat_dv
     0U,	// V6_vaddhsat_dv_128B
+    0U,	// V6_vaddhsat_dv_alt
+    0U,	// V6_vaddhsat_dv_alt_128B
     0U,	// V6_vaddhw
     0U,	// V6_vaddhw_128B
+    0U,	// V6_vaddhw_acc
+    0U,	// V6_vaddhw_acc_128B
+    0U,	// V6_vaddhw_acc_alt
+    0U,	// V6_vaddhw_acc_alt_128B
+    0U,	// V6_vaddhw_alt
+    0U,	// V6_vaddhw_alt_128B
     0U,	// V6_vaddubh
     0U,	// V6_vaddubh_128B
+    0U,	// V6_vaddubh_acc
+    0U,	// V6_vaddubh_acc_128B
+    0U,	// V6_vaddubh_acc_alt
+    0U,	// V6_vaddubh_acc_alt_128B
+    0U,	// V6_vaddubh_alt
+    0U,	// V6_vaddubh_alt_128B
     0U,	// V6_vaddubsat
     0U,	// V6_vaddubsat_128B
+    0U,	// V6_vaddubsat_alt
+    0U,	// V6_vaddubsat_alt_128B
     0U,	// V6_vaddubsat_dv
     0U,	// V6_vaddubsat_dv_128B
+    0U,	// V6_vaddubsat_dv_alt
+    0U,	// V6_vaddubsat_dv_alt_128B
+    0U,	// V6_vaddububb_sat
+    0U,	// V6_vaddububb_sat_128B
     0U,	// V6_vadduhsat
     0U,	// V6_vadduhsat_128B
+    0U,	// V6_vadduhsat_alt
+    0U,	// V6_vadduhsat_alt_128B
     0U,	// V6_vadduhsat_dv
     0U,	// V6_vadduhsat_dv_128B
+    0U,	// V6_vadduhsat_dv_alt
+    0U,	// V6_vadduhsat_dv_alt_128B
     0U,	// V6_vadduhw
     0U,	// V6_vadduhw_128B
+    0U,	// V6_vadduhw_acc
+    0U,	// V6_vadduhw_acc_128B
+    0U,	// V6_vadduhw_acc_alt
+    0U,	// V6_vadduhw_acc_alt_128B
+    0U,	// V6_vadduhw_alt
+    0U,	// V6_vadduhw_alt_128B
+    0U,	// V6_vadduwsat
+    0U,	// V6_vadduwsat_128B
+    0U,	// V6_vadduwsat_alt
+    0U,	// V6_vadduwsat_alt_128B
+    0U,	// V6_vadduwsat_dv
+    0U,	// V6_vadduwsat_dv_128B
+    0U,	// V6_vadduwsat_dv_alt
+    0U,	// V6_vadduwsat_dv_alt_128B
     0U,	// V6_vaddw
     0U,	// V6_vaddw_128B
+    0U,	// V6_vaddw_alt
+    0U,	// V6_vaddw_alt_128B
     0U,	// V6_vaddw_dv
     0U,	// V6_vaddw_dv_128B
+    0U,	// V6_vaddw_dv_alt
+    0U,	// V6_vaddw_dv_alt_128B
     0U,	// V6_vaddwnq
     0U,	// V6_vaddwnq_128B
+    0U,	// V6_vaddwnq_alt
+    0U,	// V6_vaddwnq_alt_128B
     0U,	// V6_vaddwq
     0U,	// V6_vaddwq_128B
-    0U,	// V6_vaddwsat
-    0U,	// V6_vaddwsat_128B
-    0U,	// V6_vaddwsat_dv
-    0U,	// V6_vaddwsat_dv_128B
+    0U,	// V6_vaddwq_alt
+    0U,	// V6_vaddwq_alt_128B
+    1U,	// V6_vaddwsat
+    1U,	// V6_vaddwsat_128B
+    0U,	// V6_vaddwsat_alt
+    0U,	// V6_vaddwsat_alt_128B
+    1U,	// V6_vaddwsat_dv
+    1U,	// V6_vaddwsat_dv_128B
+    0U,	// V6_vaddwsat_dv_alt
+    0U,	// V6_vaddwsat_dv_alt_128B
     0U,	// V6_valignb
     0U,	// V6_valignb_128B
     0U,	// V6_valignbi
     0U,	// V6_valignbi_128B
     0U,	// V6_vand
     0U,	// V6_vand_128B
+    0U,	// V6_vandnqrt
+    0U,	// V6_vandnqrt_128B
+    0U,	// V6_vandnqrt_acc
+    0U,	// V6_vandnqrt_acc_128B
+    0U,	// V6_vandnqrt_acc_alt
+    0U,	// V6_vandnqrt_acc_alt_128B
+    0U,	// V6_vandnqrt_alt
+    0U,	// V6_vandnqrt_alt_128B
     0U,	// V6_vandqrt
     0U,	// V6_vandqrt_128B
     0U,	// V6_vandqrt_acc
     0U,	// V6_vandqrt_acc_128B
+    0U,	// V6_vandqrt_acc_alt
+    0U,	// V6_vandqrt_acc_alt_128B
+    0U,	// V6_vandqrt_alt
+    0U,	// V6_vandqrt_alt_128B
+    0U,	// V6_vandvnqv
+    0U,	// V6_vandvnqv_128B
+    0U,	// V6_vandvqv
+    0U,	// V6_vandvqv_128B
     0U,	// V6_vandvrt
     0U,	// V6_vandvrt_128B
     0U,	// V6_vandvrt_acc
     0U,	// V6_vandvrt_acc_128B
+    0U,	// V6_vandvrt_acc_alt
+    0U,	// V6_vandvrt_acc_alt_128B
+    0U,	// V6_vandvrt_alt
+    0U,	// V6_vandvrt_alt_128B
     0U,	// V6_vaslh
     0U,	// V6_vaslh_128B
+    0U,	// V6_vaslh_alt
+    0U,	// V6_vaslh_alt_128B
     0U,	// V6_vaslhv
     0U,	// V6_vaslhv_128B
+    0U,	// V6_vaslhv_alt
+    0U,	// V6_vaslhv_alt_128B
     0U,	// V6_vaslw
     0U,	// V6_vaslw_128B
     0U,	// V6_vaslw_acc
     0U,	// V6_vaslw_acc_128B
+    0U,	// V6_vaslw_acc_alt
+    0U,	// V6_vaslw_acc_alt_128B
+    0U,	// V6_vaslw_alt
+    0U,	// V6_vaslw_alt_128B
     0U,	// V6_vaslwv
     0U,	// V6_vaslwv_128B
+    0U,	// V6_vaslwv_alt
+    0U,	// V6_vaslwv_alt_128B
     0U,	// V6_vasrh
     0U,	// V6_vasrh_128B
+    0U,	// V6_vasrh_alt
+    0U,	// V6_vasrh_alt_128B
     0U,	// V6_vasrhbrndsat
     0U,	// V6_vasrhbrndsat_128B
+    0U,	// V6_vasrhbrndsat_alt
+    0U,	// V6_vasrhbsat
+    0U,	// V6_vasrhbsat_128B
     0U,	// V6_vasrhubrndsat
     0U,	// V6_vasrhubrndsat_128B
+    1U,	// V6_vasrhubrndsat_alt
     0U,	// V6_vasrhubsat
     0U,	// V6_vasrhubsat_128B
+    0U,	// V6_vasrhubsat_alt
     0U,	// V6_vasrhv
     0U,	// V6_vasrhv_128B
+    0U,	// V6_vasrhv_alt
+    0U,	// V6_vasrhv_alt_128B
+    0U,	// V6_vasruwuhrndsat
+    0U,	// V6_vasruwuhrndsat_128B
     0U,	// V6_vasrw
     0U,	// V6_vasrw_128B
     0U,	// V6_vasrw_acc
     0U,	// V6_vasrw_acc_128B
+    0U,	// V6_vasrw_acc_alt
+    0U,	// V6_vasrw_acc_alt_128B
+    0U,	// V6_vasrw_alt
+    0U,	// V6_vasrw_alt_128B
     0U,	// V6_vasrwh
     0U,	// V6_vasrwh_128B
+    0U,	// V6_vasrwh_alt
     1U,	// V6_vasrwhrndsat
     1U,	// V6_vasrwhrndsat_128B
+    0U,	// V6_vasrwhrndsat_alt
     0U,	// V6_vasrwhsat
     0U,	// V6_vasrwhsat_128B
+    0U,	// V6_vasrwhsat_alt
+    1U,	// V6_vasrwuhrndsat
+    1U,	// V6_vasrwuhrndsat_128B
     0U,	// V6_vasrwuhsat
     0U,	// V6_vasrwuhsat_128B
+    0U,	// V6_vasrwuhsat_alt
     0U,	// V6_vasrwv
     0U,	// V6_vasrwv_128B
+    0U,	// V6_vasrwv_alt
+    0U,	// V6_vasrwv_alt_128B
     0U,	// V6_vassign
     0U,	// V6_vassign_128B
     0U,	// V6_vassignp
     0U,	// V6_vassignp_128B
     0U,	// V6_vavgh
     0U,	// V6_vavgh_128B
+    0U,	// V6_vavgh_alt
+    0U,	// V6_vavgh_alt_128B
     0U,	// V6_vavghrnd
     0U,	// V6_vavghrnd_128B
+    0U,	// V6_vavghrnd_alt
+    0U,	// V6_vavghrnd_alt_128B
     0U,	// V6_vavgub
     0U,	// V6_vavgub_128B
+    0U,	// V6_vavgub_alt
+    0U,	// V6_vavgub_alt_128B
     0U,	// V6_vavgubrnd
     0U,	// V6_vavgubrnd_128B
+    0U,	// V6_vavgubrnd_alt
+    0U,	// V6_vavgubrnd_alt_128B
     0U,	// V6_vavguh
     0U,	// V6_vavguh_128B
+    0U,	// V6_vavguh_alt
+    0U,	// V6_vavguh_alt_128B
     0U,	// V6_vavguhrnd
     0U,	// V6_vavguhrnd_128B
+    0U,	// V6_vavguhrnd_alt
+    0U,	// V6_vavguhrnd_alt_128B
     0U,	// V6_vavgw
     0U,	// V6_vavgw_128B
+    0U,	// V6_vavgw_alt
+    0U,	// V6_vavgw_alt_128B
     0U,	// V6_vavgwrnd
     0U,	// V6_vavgwrnd_128B
+    0U,	// V6_vavgwrnd_alt
+    0U,	// V6_vavgwrnd_alt_128B
     0U,	// V6_vccombine
     0U,	// V6_vccombine_128B
     0U,	// V6_vcl0h
     0U,	// V6_vcl0h_128B
+    0U,	// V6_vcl0h_alt
+    0U,	// V6_vcl0h_alt_128B
     0U,	// V6_vcl0w
     0U,	// V6_vcl0w_128B
+    0U,	// V6_vcl0w_alt
+    0U,	// V6_vcl0w_alt_128B
     0U,	// V6_vcmov
     0U,	// V6_vcmov_128B
     0U,	// V6_vcombine
@@ -7363,9 +9662,15 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// V6_vdealb
     0U,	// V6_vdealb4w
     0U,	// V6_vdealb4w_128B
+    0U,	// V6_vdealb4w_alt
+    0U,	// V6_vdealb4w_alt_128B
     0U,	// V6_vdealb_128B
+    0U,	// V6_vdealb_alt
+    0U,	// V6_vdealb_alt_128B
     0U,	// V6_vdealh
     0U,	// V6_vdealh_128B
+    0U,	// V6_vdealh_alt
+    0U,	// V6_vdealh_alt_128B
     0U,	// V6_vdealvdd
     0U,	// V6_vdealvdd_128B
     0U,	// V6_vdelta
@@ -7374,42 +9679,82 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// V6_vdmpybus_128B
     0U,	// V6_vdmpybus_acc
     0U,	// V6_vdmpybus_acc_128B
+    0U,	// V6_vdmpybus_acc_alt
+    0U,	// V6_vdmpybus_acc_alt_128B
+    0U,	// V6_vdmpybus_alt
+    0U,	// V6_vdmpybus_alt_128B
     0U,	// V6_vdmpybus_dv
     0U,	// V6_vdmpybus_dv_128B
     0U,	// V6_vdmpybus_dv_acc
     0U,	// V6_vdmpybus_dv_acc_128B
+    0U,	// V6_vdmpybus_dv_acc_alt
+    0U,	// V6_vdmpybus_dv_acc_alt_128B
+    0U,	// V6_vdmpybus_dv_alt
+    0U,	// V6_vdmpybus_dv_alt_128B
     0U,	// V6_vdmpyhb
     0U,	// V6_vdmpyhb_128B
     0U,	// V6_vdmpyhb_acc
     0U,	// V6_vdmpyhb_acc_128B
+    0U,	// V6_vdmpyhb_acc_alt
+    0U,	// V6_vdmpyhb_acc_alt_128B
+    0U,	// V6_vdmpyhb_alt
+    0U,	// V6_vdmpyhb_alt_128B
     0U,	// V6_vdmpyhb_dv
     0U,	// V6_vdmpyhb_dv_128B
     0U,	// V6_vdmpyhb_dv_acc
     0U,	// V6_vdmpyhb_dv_acc_128B
+    0U,	// V6_vdmpyhb_dv_acc_alt
+    0U,	// V6_vdmpyhb_dv_acc_alt_128B
+    0U,	// V6_vdmpyhb_dv_alt
+    0U,	// V6_vdmpyhb_dv_alt_128B
     0U,	// V6_vdmpyhisat
     0U,	// V6_vdmpyhisat_128B
     0U,	// V6_vdmpyhisat_acc
     0U,	// V6_vdmpyhisat_acc_128B
+    0U,	// V6_vdmpyhisat_acc_alt
+    0U,	// V6_vdmpyhisat_acc_alt_128B
+    0U,	// V6_vdmpyhisat_alt
+    0U,	// V6_vdmpyhisat_alt_128B
     0U,	// V6_vdmpyhsat
     0U,	// V6_vdmpyhsat_128B
     0U,	// V6_vdmpyhsat_acc
     0U,	// V6_vdmpyhsat_acc_128B
+    0U,	// V6_vdmpyhsat_acc_alt
+    0U,	// V6_vdmpyhsat_acc_alt_128B
+    0U,	// V6_vdmpyhsat_alt
+    0U,	// V6_vdmpyhsat_alt_128B
     0U,	// V6_vdmpyhsuisat
     0U,	// V6_vdmpyhsuisat_128B
     0U,	// V6_vdmpyhsuisat_acc
     0U,	// V6_vdmpyhsuisat_acc_128B
+    0U,	// V6_vdmpyhsuisat_acc_alt
+    0U,	// V6_vdmpyhsuisat_acc_alt_128B
+    0U,	// V6_vdmpyhsuisat_alt
+    0U,	// V6_vdmpyhsuisat_alt_128B
     0U,	// V6_vdmpyhsusat
     0U,	// V6_vdmpyhsusat_128B
     0U,	// V6_vdmpyhsusat_acc
     0U,	// V6_vdmpyhsusat_acc_128B
+    0U,	// V6_vdmpyhsusat_acc_alt
+    0U,	// V6_vdmpyhsusat_acc_alt_128B
+    0U,	// V6_vdmpyhsusat_alt
+    0U,	// V6_vdmpyhsusat_alt_128B
     0U,	// V6_vdmpyhvsat
     0U,	// V6_vdmpyhvsat_128B
     0U,	// V6_vdmpyhvsat_acc
     0U,	// V6_vdmpyhvsat_acc_128B
+    0U,	// V6_vdmpyhvsat_acc_alt
+    0U,	// V6_vdmpyhvsat_acc_alt_128B
+    0U,	// V6_vdmpyhvsat_alt
+    0U,	// V6_vdmpyhvsat_alt_128B
     0U,	// V6_vdsaduh
     0U,	// V6_vdsaduh_128B
     0U,	// V6_vdsaduh_acc
     0U,	// V6_vdsaduh_acc_128B
+    0U,	// V6_vdsaduh_acc_alt
+    0U,	// V6_vdsaduh_acc_alt_128B
+    0U,	// V6_vdsaduh_alt
+    0U,	// V6_vdsaduh_alt_128B
     0U,	// V6_veqb
     0U,	// V6_veqb_128B
     0U,	// V6_veqb_and
@@ -7483,330 +9828,708 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// V6_vgtw_xor
     0U,	// V6_vgtw_xor_128B
     0U,	// V6_vhist
+    0U,	// V6_vhist_128B
     0U,	// V6_vhistq
+    0U,	// V6_vhistq_128B
     0U,	// V6_vinsertwr
     0U,	// V6_vinsertwr_128B
     0U,	// V6_vlalignb
     0U,	// V6_vlalignb_128B
     0U,	// V6_vlalignbi
     0U,	// V6_vlalignbi_128B
+    0U,	// V6_vlsrb
+    0U,	// V6_vlsrb_128B
     0U,	// V6_vlsrh
     0U,	// V6_vlsrh_128B
+    0U,	// V6_vlsrh_alt
+    0U,	// V6_vlsrh_alt_128B
     0U,	// V6_vlsrhv
     0U,	// V6_vlsrhv_128B
+    0U,	// V6_vlsrhv_alt
+    0U,	// V6_vlsrhv_alt_128B
     0U,	// V6_vlsrw
     0U,	// V6_vlsrw_128B
+    0U,	// V6_vlsrw_alt
+    0U,	// V6_vlsrw_alt_128B
     0U,	// V6_vlsrwv
     0U,	// V6_vlsrwv_128B
+    0U,	// V6_vlsrwv_alt
+    0U,	// V6_vlsrwv_alt_128B
     0U,	// V6_vlutvvb
     0U,	// V6_vlutvvb_128B
+    0U,	// V6_vlutvvb_nm
+    0U,	// V6_vlutvvb_nm_128B
     0U,	// V6_vlutvvb_oracc
     0U,	// V6_vlutvvb_oracc_128B
+    0U,	// V6_vlutvvb_oracci
+    0U,	// V6_vlutvvb_oracci_128B
+    0U,	// V6_vlutvvbi
+    0U,	// V6_vlutvvbi_128B
     0U,	// V6_vlutvwh
     0U,	// V6_vlutvwh_128B
+    0U,	// V6_vlutvwh_nm
+    0U,	// V6_vlutvwh_nm_128B
     0U,	// V6_vlutvwh_oracc
     0U,	// V6_vlutvwh_oracc_128B
+    0U,	// V6_vlutvwh_oracci
+    0U,	// V6_vlutvwh_oracci_128B
+    0U,	// V6_vlutvwhi
+    0U,	// V6_vlutvwhi_128B
+    0U,	// V6_vmaxb
+    0U,	// V6_vmaxb_128B
+    0U,	// V6_vmaxb_alt
+    0U,	// V6_vmaxb_alt_128B
     0U,	// V6_vmaxh
     0U,	// V6_vmaxh_128B
+    0U,	// V6_vmaxh_alt
+    0U,	// V6_vmaxh_alt_128B
     0U,	// V6_vmaxub
     0U,	// V6_vmaxub_128B
+    0U,	// V6_vmaxub_alt
+    0U,	// V6_vmaxub_alt_128B
     0U,	// V6_vmaxuh
     0U,	// V6_vmaxuh_128B
+    0U,	// V6_vmaxuh_alt
+    0U,	// V6_vmaxuh_alt_128B
     0U,	// V6_vmaxw
     0U,	// V6_vmaxw_128B
+    0U,	// V6_vmaxw_alt
+    0U,	// V6_vmaxw_alt_128B
+    0U,	// V6_vminb
+    0U,	// V6_vminb_128B
+    0U,	// V6_vminb_alt
+    0U,	// V6_vminb_alt_128B
     0U,	// V6_vminh
     0U,	// V6_vminh_128B
+    0U,	// V6_vminh_alt
+    0U,	// V6_vminh_alt_128B
     0U,	// V6_vminub
     0U,	// V6_vminub_128B
+    0U,	// V6_vminub_alt
+    0U,	// V6_vminub_alt_128B
     0U,	// V6_vminuh
     0U,	// V6_vminuh_128B
+    0U,	// V6_vminuh_alt
+    0U,	// V6_vminuh_alt_128B
     0U,	// V6_vminw
     0U,	// V6_vminw_128B
+    0U,	// V6_vminw_alt
+    0U,	// V6_vminw_alt_128B
     0U,	// V6_vmpabus
     0U,	// V6_vmpabus_128B
     0U,	// V6_vmpabus_acc
     0U,	// V6_vmpabus_acc_128B
+    0U,	// V6_vmpabus_acc_alt
+    0U,	// V6_vmpabus_acc_alt_128B
+    0U,	// V6_vmpabus_alt
+    0U,	// V6_vmpabus_alt_128B
     0U,	// V6_vmpabusv
     0U,	// V6_vmpabusv_128B
+    0U,	// V6_vmpabusv_alt
+    0U,	// V6_vmpabusv_alt_128B
     0U,	// V6_vmpabuuv
     0U,	// V6_vmpabuuv_128B
+    0U,	// V6_vmpabuuv_alt
+    0U,	// V6_vmpabuuv_alt_128B
     0U,	// V6_vmpahb
     0U,	// V6_vmpahb_128B
     0U,	// V6_vmpahb_acc
     0U,	// V6_vmpahb_acc_128B
+    0U,	// V6_vmpahb_acc_alt
+    0U,	// V6_vmpahb_acc_alt_128B
+    0U,	// V6_vmpahb_alt
+    0U,	// V6_vmpahb_alt_128B
+    0U,	// V6_vmpauhb
+    0U,	// V6_vmpauhb_128B
+    0U,	// V6_vmpauhb_acc
+    0U,	// V6_vmpauhb_acc_128B
+    0U,	// V6_vmpauhb_acc_alt
+    0U,	// V6_vmpauhb_acc_alt_128B
+    0U,	// V6_vmpauhb_alt
+    0U,	// V6_vmpauhb_alt_128B
     0U,	// V6_vmpybus
     0U,	// V6_vmpybus_128B
     0U,	// V6_vmpybus_acc
     0U,	// V6_vmpybus_acc_128B
+    0U,	// V6_vmpybus_acc_alt
+    0U,	// V6_vmpybus_acc_alt_128B
+    0U,	// V6_vmpybus_alt
+    0U,	// V6_vmpybus_alt_128B
     0U,	// V6_vmpybusv
     0U,	// V6_vmpybusv_128B
     0U,	// V6_vmpybusv_acc
     0U,	// V6_vmpybusv_acc_128B
+    0U,	// V6_vmpybusv_acc_alt
+    0U,	// V6_vmpybusv_acc_alt_128B
+    0U,	// V6_vmpybusv_alt
+    0U,	// V6_vmpybusv_alt_128B
     0U,	// V6_vmpybv
     0U,	// V6_vmpybv_128B
     0U,	// V6_vmpybv_acc
     0U,	// V6_vmpybv_acc_128B
+    0U,	// V6_vmpybv_acc_alt
+    0U,	// V6_vmpybv_acc_alt_128B
+    0U,	// V6_vmpybv_alt
+    0U,	// V6_vmpybv_alt_128B
     0U,	// V6_vmpyewuh
     0U,	// V6_vmpyewuh_128B
+    0U,	// V6_vmpyewuh_64
+    0U,	// V6_vmpyewuh_64_128B
+    0U,	// V6_vmpyewuh_alt
+    0U,	// V6_vmpyewuh_alt_128B
     0U,	// V6_vmpyh
     0U,	// V6_vmpyh_128B
+    0U,	// V6_vmpyh_alt
+    0U,	// V6_vmpyh_alt_128B
     0U,	// V6_vmpyhsat_acc
     0U,	// V6_vmpyhsat_acc_128B
+    0U,	// V6_vmpyhsat_acc_alt
+    0U,	// V6_vmpyhsat_acc_alt_128B
     0U,	// V6_vmpyhsrs
     0U,	// V6_vmpyhsrs_128B
+    0U,	// V6_vmpyhsrs_alt
+    0U,	// V6_vmpyhsrs_alt_128B
     0U,	// V6_vmpyhss
     0U,	// V6_vmpyhss_128B
+    0U,	// V6_vmpyhss_alt
+    0U,	// V6_vmpyhss_alt_128B
     0U,	// V6_vmpyhus
     0U,	// V6_vmpyhus_128B
     0U,	// V6_vmpyhus_acc
     0U,	// V6_vmpyhus_acc_128B
+    0U,	// V6_vmpyhus_acc_alt
+    0U,	// V6_vmpyhus_acc_alt_128B
+    0U,	// V6_vmpyhus_alt
+    0U,	// V6_vmpyhus_alt_128B
     0U,	// V6_vmpyhv
     0U,	// V6_vmpyhv_128B
     0U,	// V6_vmpyhv_acc
     0U,	// V6_vmpyhv_acc_128B
+    0U,	// V6_vmpyhv_acc_alt
+    0U,	// V6_vmpyhv_acc_alt_128B
+    0U,	// V6_vmpyhv_alt
+    0U,	// V6_vmpyhv_alt_128B
     0U,	// V6_vmpyhvsrs
     0U,	// V6_vmpyhvsrs_128B
+    0U,	// V6_vmpyhvsrs_alt
+    0U,	// V6_vmpyhvsrs_alt_128B
     0U,	// V6_vmpyieoh
     0U,	// V6_vmpyieoh_128B
     0U,	// V6_vmpyiewh_acc
     0U,	// V6_vmpyiewh_acc_128B
+    0U,	// V6_vmpyiewh_acc_alt
+    0U,	// V6_vmpyiewh_acc_alt_128B
     0U,	// V6_vmpyiewuh
     0U,	// V6_vmpyiewuh_128B
     0U,	// V6_vmpyiewuh_acc
     0U,	// V6_vmpyiewuh_acc_128B
+    0U,	// V6_vmpyiewuh_acc_alt
+    0U,	// V6_vmpyiewuh_acc_alt_128B
+    0U,	// V6_vmpyiewuh_alt
+    0U,	// V6_vmpyiewuh_alt_128B
     0U,	// V6_vmpyih
     0U,	// V6_vmpyih_128B
     0U,	// V6_vmpyih_acc
     0U,	// V6_vmpyih_acc_128B
+    0U,	// V6_vmpyih_acc_alt
+    0U,	// V6_vmpyih_acc_alt_128B
+    0U,	// V6_vmpyih_alt
+    0U,	// V6_vmpyih_alt_128B
     0U,	// V6_vmpyihb
     0U,	// V6_vmpyihb_128B
     0U,	// V6_vmpyihb_acc
     0U,	// V6_vmpyihb_acc_128B
+    0U,	// V6_vmpyihb_acc_alt
+    0U,	// V6_vmpyihb_acc_alt_128B
+    0U,	// V6_vmpyihb_alt
+    0U,	// V6_vmpyihb_alt_128B
     0U,	// V6_vmpyiowh
     0U,	// V6_vmpyiowh_128B
+    0U,	// V6_vmpyiowh_alt
+    0U,	// V6_vmpyiowh_alt_128B
     0U,	// V6_vmpyiwb
     0U,	// V6_vmpyiwb_128B
     0U,	// V6_vmpyiwb_acc
     0U,	// V6_vmpyiwb_acc_128B
+    0U,	// V6_vmpyiwb_acc_alt
+    0U,	// V6_vmpyiwb_acc_alt_128B
+    0U,	// V6_vmpyiwb_alt
+    0U,	// V6_vmpyiwb_alt_128B
     0U,	// V6_vmpyiwh
     0U,	// V6_vmpyiwh_128B
     0U,	// V6_vmpyiwh_acc
     0U,	// V6_vmpyiwh_acc_128B
+    0U,	// V6_vmpyiwh_acc_alt
+    0U,	// V6_vmpyiwh_acc_alt_128B
+    0U,	// V6_vmpyiwh_alt
+    0U,	// V6_vmpyiwh_alt_128B
+    0U,	// V6_vmpyiwub
+    0U,	// V6_vmpyiwub_128B
+    0U,	// V6_vmpyiwub_acc
+    0U,	// V6_vmpyiwub_acc_128B
+    0U,	// V6_vmpyiwub_acc_alt
+    0U,	// V6_vmpyiwub_acc_alt_128B
+    0U,	// V6_vmpyiwub_alt
+    0U,	// V6_vmpyiwub_alt_128B
     0U,	// V6_vmpyowh
     0U,	// V6_vmpyowh_128B
+    0U,	// V6_vmpyowh_64_acc
+    0U,	// V6_vmpyowh_64_acc_128B
+    0U,	// V6_vmpyowh_alt
+    0U,	// V6_vmpyowh_alt_128B
     0U,	// V6_vmpyowh_rnd
     0U,	// V6_vmpyowh_rnd_128B
+    0U,	// V6_vmpyowh_rnd_alt
+    0U,	// V6_vmpyowh_rnd_alt_128B
     0U,	// V6_vmpyowh_rnd_sacc
     0U,	// V6_vmpyowh_rnd_sacc_128B
+    0U,	// V6_vmpyowh_rnd_sacc_alt
+    0U,	// V6_vmpyowh_rnd_sacc_alt_128B
     0U,	// V6_vmpyowh_sacc
     0U,	// V6_vmpyowh_sacc_128B
+    0U,	// V6_vmpyowh_sacc_alt
+    0U,	// V6_vmpyowh_sacc_alt_128B
     0U,	// V6_vmpyub
     0U,	// V6_vmpyub_128B
     0U,	// V6_vmpyub_acc
     0U,	// V6_vmpyub_acc_128B
+    0U,	// V6_vmpyub_acc_alt
+    0U,	// V6_vmpyub_acc_alt_128B
+    0U,	// V6_vmpyub_alt
+    0U,	// V6_vmpyub_alt_128B
     0U,	// V6_vmpyubv
     0U,	// V6_vmpyubv_128B
     0U,	// V6_vmpyubv_acc
     0U,	// V6_vmpyubv_acc_128B
+    0U,	// V6_vmpyubv_acc_alt
+    0U,	// V6_vmpyubv_acc_alt_128B
+    0U,	// V6_vmpyubv_alt
+    0U,	// V6_vmpyubv_alt_128B
     0U,	// V6_vmpyuh
     0U,	// V6_vmpyuh_128B
     0U,	// V6_vmpyuh_acc
     0U,	// V6_vmpyuh_acc_128B
+    0U,	// V6_vmpyuh_acc_alt
+    0U,	// V6_vmpyuh_acc_alt_128B
+    0U,	// V6_vmpyuh_alt
+    0U,	// V6_vmpyuh_alt_128B
     0U,	// V6_vmpyuhv
     0U,	// V6_vmpyuhv_128B
     0U,	// V6_vmpyuhv_acc
     0U,	// V6_vmpyuhv_acc_128B
+    0U,	// V6_vmpyuhv_acc_alt
+    0U,	// V6_vmpyuhv_acc_alt_128B
+    0U,	// V6_vmpyuhv_alt
+    0U,	// V6_vmpyuhv_alt_128B
     0U,	// V6_vmux
     0U,	// V6_vmux_128B
     0U,	// V6_vnavgh
     0U,	// V6_vnavgh_128B
+    0U,	// V6_vnavgh_alt
+    0U,	// V6_vnavgh_alt_128B
     0U,	// V6_vnavgub
     0U,	// V6_vnavgub_128B
+    0U,	// V6_vnavgub_alt
+    0U,	// V6_vnavgub_alt_128B
     0U,	// V6_vnavgw
     0U,	// V6_vnavgw_128B
+    0U,	// V6_vnavgw_alt
+    0U,	// V6_vnavgw_alt_128B
     0U,	// V6_vnccombine
     0U,	// V6_vnccombine_128B
     0U,	// V6_vncmov
     0U,	// V6_vncmov_128B
     0U,	// V6_vnormamth
     0U,	// V6_vnormamth_128B
+    0U,	// V6_vnormamth_alt
+    0U,	// V6_vnormamth_alt_128B
     0U,	// V6_vnormamtw
     0U,	// V6_vnormamtw_128B
+    0U,	// V6_vnormamtw_alt
+    0U,	// V6_vnormamtw_alt_128B
     0U,	// V6_vnot
     0U,	// V6_vnot_128B
     0U,	// V6_vor
     0U,	// V6_vor_128B
     0U,	// V6_vpackeb
     0U,	// V6_vpackeb_128B
+    0U,	// V6_vpackeb_alt
+    0U,	// V6_vpackeb_alt_128B
     0U,	// V6_vpackeh
     0U,	// V6_vpackeh_128B
+    0U,	// V6_vpackeh_alt
+    0U,	// V6_vpackeh_alt_128B
     0U,	// V6_vpackhb_sat
     0U,	// V6_vpackhb_sat_128B
+    0U,	// V6_vpackhb_sat_alt
+    0U,	// V6_vpackhb_sat_alt_128B
     0U,	// V6_vpackhub_sat
     0U,	// V6_vpackhub_sat_128B
+    0U,	// V6_vpackhub_sat_alt
+    0U,	// V6_vpackhub_sat_alt_128B
     0U,	// V6_vpackob
     0U,	// V6_vpackob_128B
+    0U,	// V6_vpackob_alt
+    0U,	// V6_vpackob_alt_128B
     0U,	// V6_vpackoh
     0U,	// V6_vpackoh_128B
+    0U,	// V6_vpackoh_alt
+    0U,	// V6_vpackoh_alt_128B
     0U,	// V6_vpackwh_sat
     0U,	// V6_vpackwh_sat_128B
+    0U,	// V6_vpackwh_sat_alt
+    0U,	// V6_vpackwh_sat_alt_128B
     0U,	// V6_vpackwuh_sat
     0U,	// V6_vpackwuh_sat_128B
+    0U,	// V6_vpackwuh_sat_alt
+    0U,	// V6_vpackwuh_sat_alt_128B
     0U,	// V6_vpopcounth
     0U,	// V6_vpopcounth_128B
+    0U,	// V6_vpopcounth_alt
+    0U,	// V6_vpopcounth_alt_128B
     0U,	// V6_vrdelta
     0U,	// V6_vrdelta_128B
     0U,	// V6_vrmpybus
     0U,	// V6_vrmpybus_128B
     0U,	// V6_vrmpybus_acc
     0U,	// V6_vrmpybus_acc_128B
+    0U,	// V6_vrmpybus_acc_alt
+    0U,	// V6_vrmpybus_acc_alt_128B
+    0U,	// V6_vrmpybus_alt
+    0U,	// V6_vrmpybus_alt_128B
     0U,	// V6_vrmpybusi
     0U,	// V6_vrmpybusi_128B
     0U,	// V6_vrmpybusi_acc
     0U,	// V6_vrmpybusi_acc_128B
+    0U,	// V6_vrmpybusi_acc_alt
+    0U,	// V6_vrmpybusi_acc_alt_128B
+    0U,	// V6_vrmpybusi_alt
+    0U,	// V6_vrmpybusi_alt_128B
     0U,	// V6_vrmpybusv
     0U,	// V6_vrmpybusv_128B
     0U,	// V6_vrmpybusv_acc
     0U,	// V6_vrmpybusv_acc_128B
+    0U,	// V6_vrmpybusv_acc_alt
+    0U,	// V6_vrmpybusv_acc_alt_128B
+    0U,	// V6_vrmpybusv_alt
+    0U,	// V6_vrmpybusv_alt_128B
     0U,	// V6_vrmpybv
     0U,	// V6_vrmpybv_128B
     0U,	// V6_vrmpybv_acc
     0U,	// V6_vrmpybv_acc_128B
+    0U,	// V6_vrmpybv_acc_alt
+    0U,	// V6_vrmpybv_acc_alt_128B
+    0U,	// V6_vrmpybv_alt
+    0U,	// V6_vrmpybv_alt_128B
     0U,	// V6_vrmpyub
     0U,	// V6_vrmpyub_128B
     0U,	// V6_vrmpyub_acc
     0U,	// V6_vrmpyub_acc_128B
+    0U,	// V6_vrmpyub_acc_alt
+    0U,	// V6_vrmpyub_acc_alt_128B
+    0U,	// V6_vrmpyub_alt
+    0U,	// V6_vrmpyub_alt_128B
     0U,	// V6_vrmpyubi
     0U,	// V6_vrmpyubi_128B
     0U,	// V6_vrmpyubi_acc
     0U,	// V6_vrmpyubi_acc_128B
+    0U,	// V6_vrmpyubi_acc_alt
+    0U,	// V6_vrmpyubi_acc_alt_128B
+    0U,	// V6_vrmpyubi_alt
+    0U,	// V6_vrmpyubi_alt_128B
     0U,	// V6_vrmpyubv
     0U,	// V6_vrmpyubv_128B
     0U,	// V6_vrmpyubv_acc
     0U,	// V6_vrmpyubv_acc_128B
+    0U,	// V6_vrmpyubv_acc_alt
+    0U,	// V6_vrmpyubv_acc_alt_128B
+    0U,	// V6_vrmpyubv_alt
+    0U,	// V6_vrmpyubv_alt_128B
     0U,	// V6_vror
     0U,	// V6_vror_128B
     0U,	// V6_vroundhb
     0U,	// V6_vroundhb_128B
+    0U,	// V6_vroundhb_alt
+    0U,	// V6_vroundhb_alt_128B
     0U,	// V6_vroundhub
     0U,	// V6_vroundhub_128B
+    0U,	// V6_vroundhub_alt
+    0U,	// V6_vroundhub_alt_128B
+    0U,	// V6_vrounduhub
+    0U,	// V6_vrounduhub_128B
+    0U,	// V6_vrounduhub_alt
+    0U,	// V6_vrounduhub_alt_128B
+    0U,	// V6_vrounduwuh
+    0U,	// V6_vrounduwuh_128B
+    0U,	// V6_vrounduwuh_alt
+    0U,	// V6_vrounduwuh_alt_128B
     0U,	// V6_vroundwh
     0U,	// V6_vroundwh_128B
+    0U,	// V6_vroundwh_alt
+    0U,	// V6_vroundwh_alt_128B
     0U,	// V6_vroundwuh
     0U,	// V6_vroundwuh_128B
+    0U,	// V6_vroundwuh_alt
+    0U,	// V6_vroundwuh_alt_128B
     0U,	// V6_vrsadubi
     0U,	// V6_vrsadubi_128B
     0U,	// V6_vrsadubi_acc
     0U,	// V6_vrsadubi_acc_128B
+    0U,	// V6_vrsadubi_acc_alt
+    0U,	// V6_vrsadubi_acc_alt_128B
+    0U,	// V6_vrsadubi_alt
+    0U,	// V6_vrsadubi_alt_128B
     0U,	// V6_vsathub
     0U,	// V6_vsathub_128B
+    0U,	// V6_vsathub_alt
+    0U,	// V6_vsathub_alt_128B
+    0U,	// V6_vsatuwuh
+    0U,	// V6_vsatuwuh_128B
+    0U,	// V6_vsatuwuh_alt
+    0U,	// V6_vsatuwuh_alt_128B
     0U,	// V6_vsatwh
     0U,	// V6_vsatwh_128B
+    0U,	// V6_vsatwh_alt
+    0U,	// V6_vsatwh_alt_128B
     0U,	// V6_vsb
     0U,	// V6_vsb_128B
+    0U,	// V6_vsb_alt
+    0U,	// V6_vsb_alt_128B
     0U,	// V6_vsh
     0U,	// V6_vsh_128B
+    0U,	// V6_vsh_alt
+    0U,	// V6_vsh_alt_128B
     0U,	// V6_vshufeh
     0U,	// V6_vshufeh_128B
+    0U,	// V6_vshufeh_alt
+    0U,	// V6_vshufeh_alt_128B
     0U,	// V6_vshuff
     0U,	// V6_vshuff_128B
     0U,	// V6_vshuffb
     0U,	// V6_vshuffb_128B
+    0U,	// V6_vshuffb_alt
+    0U,	// V6_vshuffb_alt_128B
     0U,	// V6_vshuffeb
     0U,	// V6_vshuffeb_128B
+    0U,	// V6_vshuffeb_alt
+    0U,	// V6_vshuffeb_alt_128B
     0U,	// V6_vshuffh
     0U,	// V6_vshuffh_128B
+    0U,	// V6_vshuffh_alt
+    0U,	// V6_vshuffh_alt_128B
     0U,	// V6_vshuffob
     0U,	// V6_vshuffob_128B
+    0U,	// V6_vshuffob_alt
+    0U,	// V6_vshuffob_alt_128B
     0U,	// V6_vshuffvdd
     0U,	// V6_vshuffvdd_128B
     0U,	// V6_vshufoeb
     0U,	// V6_vshufoeb_128B
+    0U,	// V6_vshufoeb_alt
+    0U,	// V6_vshufoeb_alt_128B
     0U,	// V6_vshufoeh
     0U,	// V6_vshufoeh_128B
+    0U,	// V6_vshufoeh_alt
+    0U,	// V6_vshufoeh_alt_128B
     0U,	// V6_vshufoh
     0U,	// V6_vshufoh_128B
+    0U,	// V6_vshufoh_alt
+    0U,	// V6_vshufoh_alt_128B
     0U,	// V6_vsubb
     0U,	// V6_vsubb_128B
+    0U,	// V6_vsubb_alt
+    0U,	// V6_vsubb_alt_128B
     0U,	// V6_vsubb_dv
     0U,	// V6_vsubb_dv_128B
+    0U,	// V6_vsubb_dv_alt
+    0U,	// V6_vsubb_dv_alt_128B
     0U,	// V6_vsubbnq
     0U,	// V6_vsubbnq_128B
+    0U,	// V6_vsubbnq_alt
+    0U,	// V6_vsubbnq_alt_128B
     0U,	// V6_vsubbq
     0U,	// V6_vsubbq_128B
+    0U,	// V6_vsubbq_alt
+    0U,	// V6_vsubbq_alt_128B
+    0U,	// V6_vsubbsat
+    0U,	// V6_vsubbsat_128B
+    0U,	// V6_vsubbsat_alt
+    0U,	// V6_vsubbsat_alt_128B
+    0U,	// V6_vsubbsat_dv
+    0U,	// V6_vsubbsat_dv_128B
+    0U,	// V6_vsubbsat_dv_alt
+    0U,	// V6_vsubbsat_dv_alt_128B
+    0U,	// V6_vsubcarry
+    0U,	// V6_vsubcarry_128B
     0U,	// V6_vsubh
     0U,	// V6_vsubh_128B
+    0U,	// V6_vsubh_alt
+    0U,	// V6_vsubh_alt_128B
     0U,	// V6_vsubh_dv
     0U,	// V6_vsubh_dv_128B
+    0U,	// V6_vsubh_dv_alt
+    0U,	// V6_vsubh_dv_alt_128B
     0U,	// V6_vsubhnq
     0U,	// V6_vsubhnq_128B
+    0U,	// V6_vsubhnq_alt
+    0U,	// V6_vsubhnq_alt_128B
     0U,	// V6_vsubhq
     0U,	// V6_vsubhq_128B
+    0U,	// V6_vsubhq_alt
+    0U,	// V6_vsubhq_alt_128B
     0U,	// V6_vsubhsat
     0U,	// V6_vsubhsat_128B
+    0U,	// V6_vsubhsat_alt
+    0U,	// V6_vsubhsat_alt_128B
     0U,	// V6_vsubhsat_dv
     0U,	// V6_vsubhsat_dv_128B
+    0U,	// V6_vsubhsat_dv_alt
+    0U,	// V6_vsubhsat_dv_alt_128B
     0U,	// V6_vsubhw
     0U,	// V6_vsubhw_128B
+    0U,	// V6_vsubhw_alt
+    0U,	// V6_vsubhw_alt_128B
     0U,	// V6_vsububh
     0U,	// V6_vsububh_128B
+    0U,	// V6_vsububh_alt
+    0U,	// V6_vsububh_alt_128B
     0U,	// V6_vsububsat
     0U,	// V6_vsububsat_128B
+    0U,	// V6_vsububsat_alt
+    0U,	// V6_vsububsat_alt_128B
     0U,	// V6_vsububsat_dv
     0U,	// V6_vsububsat_dv_128B
+    0U,	// V6_vsububsat_dv_alt
+    0U,	// V6_vsububsat_dv_alt_128B
+    0U,	// V6_vsubububb_sat
+    0U,	// V6_vsubububb_sat_128B
     0U,	// V6_vsubuhsat
     0U,	// V6_vsubuhsat_128B
+    0U,	// V6_vsubuhsat_alt
+    0U,	// V6_vsubuhsat_alt_128B
     0U,	// V6_vsubuhsat_dv
     0U,	// V6_vsubuhsat_dv_128B
+    0U,	// V6_vsubuhsat_dv_alt
+    0U,	// V6_vsubuhsat_dv_alt_128B
     0U,	// V6_vsubuhw
     0U,	// V6_vsubuhw_128B
+    0U,	// V6_vsubuhw_alt
+    0U,	// V6_vsubuhw_alt_128B
+    0U,	// V6_vsubuwsat
+    0U,	// V6_vsubuwsat_128B
+    0U,	// V6_vsubuwsat_alt
+    0U,	// V6_vsubuwsat_alt_128B
+    0U,	// V6_vsubuwsat_dv
+    0U,	// V6_vsubuwsat_dv_128B
+    0U,	// V6_vsubuwsat_dv_alt
+    0U,	// V6_vsubuwsat_dv_alt_128B
     0U,	// V6_vsubw
     0U,	// V6_vsubw_128B
+    0U,	// V6_vsubw_alt
+    0U,	// V6_vsubw_alt_128B
     0U,	// V6_vsubw_dv
     0U,	// V6_vsubw_dv_128B
+    0U,	// V6_vsubw_dv_alt
+    0U,	// V6_vsubw_dv_alt_128B
     0U,	// V6_vsubwnq
     0U,	// V6_vsubwnq_128B
+    0U,	// V6_vsubwnq_alt
+    0U,	// V6_vsubwnq_alt_128B
     0U,	// V6_vsubwq
     0U,	// V6_vsubwq_128B
-    0U,	// V6_vsubwsat
-    0U,	// V6_vsubwsat_128B
-    0U,	// V6_vsubwsat_dv
-    0U,	// V6_vsubwsat_dv_128B
+    0U,	// V6_vsubwq_alt
+    0U,	// V6_vsubwq_alt_128B
+    1U,	// V6_vsubwsat
+    1U,	// V6_vsubwsat_128B
+    0U,	// V6_vsubwsat_alt
+    0U,	// V6_vsubwsat_alt_128B
+    1U,	// V6_vsubwsat_dv
+    1U,	// V6_vsubwsat_dv_128B
+    0U,	// V6_vsubwsat_dv_alt
+    0U,	// V6_vsubwsat_dv_alt_128B
     0U,	// V6_vswap
     0U,	// V6_vswap_128B
     0U,	// V6_vtmpyb
     0U,	// V6_vtmpyb_128B
     0U,	// V6_vtmpyb_acc
     0U,	// V6_vtmpyb_acc_128B
+    0U,	// V6_vtmpyb_acc_alt
+    0U,	// V6_vtmpyb_acc_alt_128B
+    0U,	// V6_vtmpyb_alt
+    0U,	// V6_vtmpyb_alt_128B
     0U,	// V6_vtmpybus
     0U,	// V6_vtmpybus_128B
     0U,	// V6_vtmpybus_acc
     0U,	// V6_vtmpybus_acc_128B
+    0U,	// V6_vtmpybus_acc_alt
+    0U,	// V6_vtmpybus_acc_alt_128B
+    0U,	// V6_vtmpybus_alt
+    0U,	// V6_vtmpybus_alt_128B
     0U,	// V6_vtmpyhb
     0U,	// V6_vtmpyhb_128B
     0U,	// V6_vtmpyhb_acc
     0U,	// V6_vtmpyhb_acc_128B
+    0U,	// V6_vtmpyhb_acc_alt
+    0U,	// V6_vtmpyhb_acc_alt_128B
+    0U,	// V6_vtmpyhb_alt
+    0U,	// V6_vtmpyhb_alt_128B
+    0U,	// V6_vtran2x2_map
+    0U,	// V6_vtran2x2_map_128B
     0U,	// V6_vunpackb
     0U,	// V6_vunpackb_128B
+    0U,	// V6_vunpackb_alt
+    0U,	// V6_vunpackb_alt_128B
     0U,	// V6_vunpackh
     0U,	// V6_vunpackh_128B
+    0U,	// V6_vunpackh_alt
+    0U,	// V6_vunpackh_alt_128B
     0U,	// V6_vunpackob
     0U,	// V6_vunpackob_128B
+    0U,	// V6_vunpackob_alt
+    0U,	// V6_vunpackob_alt_128B
     0U,	// V6_vunpackoh
     0U,	// V6_vunpackoh_128B
+    0U,	// V6_vunpackoh_alt
+    0U,	// V6_vunpackoh_alt_128B
     0U,	// V6_vunpackub
     0U,	// V6_vunpackub_128B
+    0U,	// V6_vunpackub_alt
+    0U,	// V6_vunpackub_alt_128B
     0U,	// V6_vunpackuh
     0U,	// V6_vunpackuh_128B
+    0U,	// V6_vunpackuh_alt
+    0U,	// V6_vunpackuh_alt_128B
+    0U,	// V6_vwhist128
+    0U,	// V6_vwhist128_128B
+    0U,	// V6_vwhist128m
+    0U,	// V6_vwhist128m_128B
+    0U,	// V6_vwhist128q
+    0U,	// V6_vwhist128q_128B
+    0U,	// V6_vwhist128qm
+    0U,	// V6_vwhist128qm_128B
+    0U,	// V6_vwhist256
+    0U,	// V6_vwhist256_128B
+    0U,	// V6_vwhist256_sat
+    0U,	// V6_vwhist256_sat_128B
+    0U,	// V6_vwhist256q
+    0U,	// V6_vwhist256q_128B
+    0U,	// V6_vwhist256q_sat
+    0U,	// V6_vwhist256q_sat_128B
     0U,	// V6_vxor
     0U,	// V6_vxor_128B
     0U,	// V6_vzb
     0U,	// V6_vzb_128B
+    0U,	// V6_vzb_alt
+    0U,	// V6_vzb_alt_128B
     0U,	// V6_vzh
     0U,	// V6_vzh_128B
+    0U,	// V6_vzh_alt
+    0U,	// V6_vzh_alt_128B
     0U,	// Y2_barrier
+    0U,	// Y2_break
     0U,	// Y2_dccleana
     0U,	// Y2_dccleaninva
+    0U,	// Y2_dcfetch
     0U,	// Y2_dcfetchbo
     0U,	// Y2_dcinva
     0U,	// Y2_dczeroa
@@ -7816,13 +10539,6 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// Y4_l2fetch
     0U,	// Y4_trace
     0U,	// Y5_l2fetch
-    0U,	// Y5_l2gclean
-    0U,	// Y5_l2gcleaninv
-    0U,	// Y5_l2gunlock
-    0U,	// Y5_l2locka
-    0U,	// Y5_l2unlocka
-    0U,	// Y6_l2gcleaninvpa
-    0U,	// Y6_l2gcleanpa
     1U,	// dep_A2_addsat
     1U,	// dep_A2_subsat
     0U,	// dep_S2_packhl
@@ -7839,11 +10555,11 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
   O << AsmStrs+(Bits & 2047)-1;
 
 
-  // Fragment 0 encoded into 3 bits for 7 unique commands.
+  // Fragment 0 encoded into 3 bits for 5 unique commands.
   switch ((Bits >> 11) & 7) {
   default: llvm_unreachable("Invalid command number.");
   case 0:
-    // DBG_VALUE, BUNDLE, LIFETIME_START, LIFETIME_END, PATCHABLE_FUNCTION_EN...
+    // DBG_VALUE, BUNDLE, LIFETIME_START, LIFETIME_END, FENTRY_CALL, PATCHABL...
     return;
     break;
   case 1:
@@ -7855,29 +10571,17 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     printOperand(MI, 1, O);
     break;
   case 3:
-    // A4_ext_b, A4_ext_c, J2_call, J2_jump, J2_loop0i, J2_loop0iext, J2_loop...
+    // CALLProfile, J2_call, J2_jump, J2_loop0i, J2_loop0iext, J2_loop0r, J2_...
     printBrtarget(MI, 0, O);
     break;
   case 4:
-    // A4_ext_g
-    printGlobalOperand(MI, 0, O);
-    O << ')';
-    return;
-    break;
-  case 5:
     // L2_ploadrbf_pi, L2_ploadrbfnew_pi, L2_ploadrbt_pi, L2_ploadrbtnew_pi, ...
     printOperand(MI, 2, O);
-    break;
-  case 6:
-    // PS_storerbabs, PS_storerbnewabs, PS_storerdabs, PS_storerfabs, PS_stor...
-    printExtOperand(MI, 0, O);
-    O << ") = ";
-    printOperand(MI, 1, O);
     break;
   }
 
 
-  // Fragment 1 encoded into 10 bits for 609 unique commands.
+  // Fragment 1 encoded into 10 bits for 759 unique commands.
   switch ((Bits >> 14) & 1023) {
   default: llvm_unreachable("Invalid command number.");
   case 0:
@@ -7916,10 +10620,11 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
   case 6:
     // A2_combineii, A4_combineii, A4_combineir
     O << " = combine(#";
+    printOperand(MI, 1, O);
     break;
   case 7:
     // A2_iconst
-    O << " = iconst(#";
+    O << "=iconst(#";
     printOperand(MI, 1, O);
     O << ')';
     return;
@@ -7928,7 +10633,7 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     // A2_max, A2_maxp
     O << " = max(";
     printOperand(MI, 1, O);
-    O << ", ";
+    O << ',';
     printOperand(MI, 2, O);
     O << ')';
     return;
@@ -7937,7 +10642,7 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     // A2_maxu, A2_maxup
     O << " = maxu(";
     printOperand(MI, 1, O);
-    O << ", ";
+    O << ',';
     printOperand(MI, 2, O);
     O << ')';
     return;
@@ -7946,7 +10651,7 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     // A2_min, A2_minp
     O << " = min(";
     printOperand(MI, 1, O);
-    O << ", ";
+    O << ',';
     printOperand(MI, 2, O);
     O << ')';
     return;
@@ -7955,13 +10660,13 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     // A2_minu, A2_minup
     O << " = minu(";
     printOperand(MI, 1, O);
-    O << ", ";
+    O << ',';
     printOperand(MI, 2, O);
     O << ')';
     return;
     break;
   case 12:
-    // A2_negp, A2_negsat
+    // A2_neg, A2_negp, A2_negsat
     O << " = neg(";
     printOperand(MI, 1, O);
     break;
@@ -8034,53 +10739,49 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
   case 24:
     // A2_subri, S4_subi_asl_ri, S4_subi_lsr_ri
     O << " = sub(#";
-    printExtOperand(MI, 1, O);
+    printOperand(MI, 1, O);
     break;
   case 25:
-    // A2_svaddh, A2_svaddhs, A2_vaddh, A2_vaddhs
+    // A2_svaddh, A2_svaddhs, A2_vaddh, A2_vaddhs, V6_vaddh_alt, V6_vaddh_alt...
     O << " = vaddh(";
     printOperand(MI, 1, O);
-    O << ", ";
+    O << ',';
     printOperand(MI, 2, O);
     break;
   case 26:
-    // A2_svadduhs, A2_vadduhs
+    // A2_svadduhs, A2_vadduhs, V6_vadduhsat_alt, V6_vadduhsat_alt_128B, V6_v...
     O << " = vadduh(";
     printOperand(MI, 1, O);
-    O << ", ";
+    O << ',';
     printOperand(MI, 2, O);
-    O << "):sat";
-    return;
     break;
   case 27:
-    // A2_svavgh, A2_svavghs, A2_vavgh, A2_vavghcr, A2_vavghr
+    // A2_svavgh, A2_svavghs, A2_vavgh, A2_vavghcr, A2_vavghr, V6_vavgh_alt, ...
     O << " = vavgh(";
     printOperand(MI, 1, O);
-    O << ", ";
+    O << ',';
     printOperand(MI, 2, O);
     break;
   case 28:
-    // A2_svnavgh, A2_vnavgh, A2_vnavghcr, A2_vnavghr
+    // A2_svnavgh, A2_vnavgh, A2_vnavghcr, A2_vnavghr, V6_vnavgh_alt, V6_vnav...
     O << " = vnavgh(";
     printOperand(MI, 1, O);
-    O << ", ";
+    O << ',';
     printOperand(MI, 2, O);
     break;
   case 29:
-    // A2_svsubh, A2_svsubhs, A2_vsubh, A2_vsubhs
+    // A2_svsubh, A2_svsubhs, A2_vsubh, A2_vsubhs, V6_vsubh_alt, V6_vsubh_alt...
     O << " = vsubh(";
     printOperand(MI, 1, O);
-    O << ", ";
+    O << ',';
     printOperand(MI, 2, O);
     break;
   case 30:
-    // A2_svsubuhs, A2_vsubuhs
+    // A2_svsubuhs, A2_vsubuhs, V6_vsubuhsat_alt, V6_vsubuhsat_alt_128B, V6_v...
     O << " = vsubuh(";
     printOperand(MI, 1, O);
-    O << ", ";
+    O << ',';
     printOperand(MI, 2, O);
-    O << "):sat";
-    return;
     break;
   case 31:
     // A2_swiz
@@ -8128,2706 +10829,2836 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     return;
     break;
   case 38:
-    // A2_tfrpi, A2_tfrsi, J4_jumpseti, S4_storerb_ap, S4_storerbnew_ap, S4_s...
+    // A2_tfrpi, A2_tfrsi, J4_jumpseti, SA1_seti, SA1_setin1, TFRI64_V4
     O << " = #";
+    printOperand(MI, 1, O);
     break;
   case 39:
-    // A2_vabsh, A2_vabshsat
+    // A2_vabsh, A2_vabshsat, V6_vabsh_alt, V6_vabsh_alt_128B, V6_vabsh_sat_a...
     O << " = vabsh(";
     printOperand(MI, 1, O);
     break;
   case 40:
-    // A2_vabsw, A2_vabswsat
+    // A2_vabsw, A2_vabswsat, V6_vabsw_alt, V6_vabsw_alt_128B, V6_vabsw_sat_a...
     O << " = vabsw(";
     printOperand(MI, 1, O);
     break;
   case 41:
-    // A2_vaddub, A2_vaddubs
-    O << " = vaddub(";
+    // A2_vaddb_map, V6_vaddb_alt, V6_vaddb_alt_128B, V6_vaddb_dv_alt, V6_vad...
+    O << " = vaddb(";
     printOperand(MI, 1, O);
-    O << ", ";
+    O << ',';
     printOperand(MI, 2, O);
     break;
   case 42:
-    // A2_vaddw, A2_vaddws
-    O << " = vaddw(";
+    // A2_vaddub, A2_vaddubs, V6_vaddubh_alt, V6_vaddubh_alt_128B, V6_vaddubs...
+    O << " = vaddub(";
     printOperand(MI, 1, O);
-    O << ", ";
+    O << ',';
     printOperand(MI, 2, O);
     break;
   case 43:
-    // A2_vavgub, A2_vavgubr
-    O << " = vavgub(";
+    // A2_vaddw, A2_vaddws, V6_vaddw_alt, V6_vaddw_alt_128B, V6_vaddw_dv_alt,...
+    O << " = vaddw(";
     printOperand(MI, 1, O);
-    O << ", ";
+    O << ',';
     printOperand(MI, 2, O);
     break;
   case 44:
-    // A2_vavguh, A2_vavguhr
-    O << " = vavguh(";
+    // A2_vavgub, A2_vavgubr, V6_vavgub_alt, V6_vavgub_alt_128B, V6_vavgubrnd...
+    O << " = vavgub(";
     printOperand(MI, 1, O);
-    O << ", ";
+    O << ',';
     printOperand(MI, 2, O);
     break;
   case 45:
-    // A2_vavguw, A2_vavguwr
-    O << " = vavguw(";
+    // A2_vavguh, A2_vavguhr, V6_vavguh_alt, V6_vavguh_alt_128B, V6_vavguhrnd...
+    O << " = vavguh(";
     printOperand(MI, 1, O);
-    O << ", ";
+    O << ',';
     printOperand(MI, 2, O);
     break;
   case 46:
-    // A2_vavgw, A2_vavgwcr, A2_vavgwr
-    O << " = vavgw(";
+    // A2_vavguw, A2_vavguwr
+    O << " = vavguw(";
     printOperand(MI, 1, O);
-    O << ", ";
+    O << ',';
     printOperand(MI, 2, O);
     break;
   case 47:
+    // A2_vavgw, A2_vavgwcr, A2_vavgwr, V6_vavgw_alt, V6_vavgw_alt_128B, V6_v...
+    O << " = vavgw(";
+    printOperand(MI, 1, O);
+    O << ',';
+    printOperand(MI, 2, O);
+    break;
+  case 48:
     // A2_vcmpbeq, A4_vcmpbeqi
     O << " = vcmpb.eq(";
     printOperand(MI, 1, O);
     break;
-  case 48:
+  case 49:
     // A2_vcmpbgtu, A4_vcmpbgtui
     O << " = vcmpb.gtu(";
     printOperand(MI, 1, O);
     break;
-  case 49:
+  case 50:
     // A2_vcmpheq, A4_vcmpheqi
     O << " = vcmph.eq(";
     printOperand(MI, 1, O);
     break;
-  case 50:
+  case 51:
     // A2_vcmphgt, A4_vcmphgti
     O << " = vcmph.gt(";
     printOperand(MI, 1, O);
     break;
-  case 51:
+  case 52:
     // A2_vcmphgtu, A4_vcmphgtui
     O << " = vcmph.gtu(";
     printOperand(MI, 1, O);
     break;
-  case 52:
+  case 53:
     // A2_vcmpweq, A4_vcmpweqi
     O << " = vcmpw.eq(";
     printOperand(MI, 1, O);
     break;
-  case 53:
+  case 54:
     // A2_vcmpwgt, A4_vcmpwgti
     O << " = vcmpw.gt(";
     printOperand(MI, 1, O);
     break;
-  case 54:
+  case 55:
     // A2_vcmpwgtu, A4_vcmpwgtui
     O << " = vcmpw.gtu(";
     printOperand(MI, 1, O);
     break;
-  case 55:
+  case 56:
     // A2_vconj
     O << " = vconj(";
     printOperand(MI, 1, O);
     O << "):sat";
     return;
     break;
-  case 56:
-    // A2_vmaxb
+  case 57:
+    // A2_vmaxb, V6_vmaxb_alt, V6_vmaxb_alt_128B
     O << " = vmaxb(";
     printOperand(MI, 1, O);
-    O << ", ";
-    printOperand(MI, 2, O);
-    O << ')';
-    return;
-    break;
-  case 57:
-    // A2_vmaxh
-    O << " = vmaxh(";
-    printOperand(MI, 1, O);
-    O << ", ";
+    O << ',';
     printOperand(MI, 2, O);
     O << ')';
     return;
     break;
   case 58:
-    // A2_vmaxub
-    O << " = vmaxub(";
+    // A2_vmaxh, V6_vmaxh_alt, V6_vmaxh_alt_128B
+    O << " = vmaxh(";
     printOperand(MI, 1, O);
-    O << ", ";
+    O << ',';
     printOperand(MI, 2, O);
     O << ')';
     return;
     break;
   case 59:
-    // A2_vmaxuh
-    O << " = vmaxuh(";
+    // A2_vmaxub, V6_vmaxub_alt, V6_vmaxub_alt_128B
+    O << " = vmaxub(";
     printOperand(MI, 1, O);
-    O << ", ";
+    O << ',';
     printOperand(MI, 2, O);
     O << ')';
     return;
     break;
   case 60:
-    // A2_vmaxuw
-    O << " = vmaxuw(";
+    // A2_vmaxuh, V6_vmaxuh_alt, V6_vmaxuh_alt_128B
+    O << " = vmaxuh(";
     printOperand(MI, 1, O);
-    O << ", ";
+    O << ',';
     printOperand(MI, 2, O);
     O << ')';
     return;
     break;
   case 61:
-    // A2_vmaxw
-    O << " = vmaxw(";
+    // A2_vmaxuw
+    O << " = vmaxuw(";
     printOperand(MI, 1, O);
-    O << ", ";
+    O << ',';
     printOperand(MI, 2, O);
     O << ')';
     return;
     break;
   case 62:
-    // A2_vminb
-    O << " = vminb(";
+    // A2_vmaxw, V6_vmaxw_alt, V6_vmaxw_alt_128B
+    O << " = vmaxw(";
     printOperand(MI, 1, O);
-    O << ", ";
+    O << ',';
     printOperand(MI, 2, O);
     O << ')';
     return;
     break;
   case 63:
-    // A2_vminh
-    O << " = vminh(";
+    // A2_vminb, V6_vminb_alt, V6_vminb_alt_128B
+    O << " = vminb(";
     printOperand(MI, 1, O);
-    O << ", ";
+    O << ',';
     printOperand(MI, 2, O);
     O << ')';
     return;
     break;
   case 64:
-    // A2_vminub
-    O << " = vminub(";
+    // A2_vminh, V6_vminh_alt, V6_vminh_alt_128B
+    O << " = vminh(";
     printOperand(MI, 1, O);
-    O << ", ";
+    O << ',';
     printOperand(MI, 2, O);
     O << ')';
     return;
     break;
   case 65:
-    // A2_vminuh
-    O << " = vminuh(";
+    // A2_vminub, V6_vminub_alt, V6_vminub_alt_128B
+    O << " = vminub(";
     printOperand(MI, 1, O);
-    O << ", ";
+    O << ',';
     printOperand(MI, 2, O);
     O << ')';
     return;
     break;
   case 66:
-    // A2_vminuw
-    O << " = vminuw(";
+    // A2_vminuh, V6_vminuh_alt, V6_vminuh_alt_128B
+    O << " = vminuh(";
     printOperand(MI, 1, O);
-    O << ", ";
+    O << ',';
     printOperand(MI, 2, O);
     O << ')';
     return;
     break;
   case 67:
-    // A2_vminw
-    O << " = vminw(";
+    // A2_vminuw
+    O << " = vminuw(";
     printOperand(MI, 1, O);
-    O << ", ";
+    O << ',';
     printOperand(MI, 2, O);
     O << ')';
     return;
     break;
   case 68:
-    // A2_vnavgw, A2_vnavgwcr, A2_vnavgwr
-    O << " = vnavgw(";
+    // A2_vminw, V6_vminw_alt, V6_vminw_alt_128B
+    O << " = vminw(";
     printOperand(MI, 1, O);
-    O << ", ";
-    printOperand(MI, 2, O);
-    break;
-  case 69:
-    // A2_vraddub
-    O << " = vraddub(";
-    printOperand(MI, 1, O);
-    O << ", ";
+    O << ',';
     printOperand(MI, 2, O);
     O << ')';
     return;
     break;
-  case 70:
-    // A2_vraddub_acc
-    O << " += vraddub(";
+  case 69:
+    // A2_vnavgw, A2_vnavgwcr, A2_vnavgwr, V6_vnavgw_alt, V6_vnavgw_alt_128B
+    O << " = vnavgw(";
+    printOperand(MI, 1, O);
+    O << ',';
     printOperand(MI, 2, O);
-    O << ", ";
-    printOperand(MI, 3, O);
+    break;
+  case 70:
+    // A2_vraddub
+    O << " = vraddub(";
+    printOperand(MI, 1, O);
+    O << ',';
+    printOperand(MI, 2, O);
     O << ')';
     return;
     break;
   case 71:
-    // A2_vrsadub
-    O << " = vrsadub(";
-    printOperand(MI, 1, O);
-    O << ", ";
+    // A2_vraddub_acc
+    O << " += vraddub(";
     printOperand(MI, 2, O);
-    O << ')';
-    return;
-    break;
-  case 72:
-    // A2_vrsadub_acc
-    O << " += vrsadub(";
-    printOperand(MI, 2, O);
-    O << ", ";
+    O << ',';
     printOperand(MI, 3, O);
     O << ')';
     return;
     break;
-  case 73:
-    // A2_vsubub, A2_vsububs
-    O << " = vsubub(";
+  case 72:
+    // A2_vrsadub, V6_vrsadubi_alt, V6_vrsadubi_alt_128B
+    O << " = vrsadub(";
     printOperand(MI, 1, O);
-    O << ", ";
+    O << ',';
     printOperand(MI, 2, O);
     break;
+  case 73:
+    // A2_vrsadub_acc, V6_vrsadubi_acc_alt, V6_vrsadubi_acc_alt_128B
+    O << " += vrsadub(";
+    printOperand(MI, 2, O);
+    O << ',';
+    printOperand(MI, 3, O);
+    break;
   case 74:
-    // A2_vsubw, A2_vsubws
-    O << " = vsubw(";
+    // A2_vsubb_map, V6_vsubb_alt, V6_vsubb_alt_128B, V6_vsubb_dv_alt, V6_vsu...
+    O << " = vsubb(";
     printOperand(MI, 1, O);
-    O << ", ";
+    O << ',';
     printOperand(MI, 2, O);
     break;
   case 75:
+    // A2_vsubub, A2_vsububs, V6_vsububh_alt, V6_vsububh_alt_128B, V6_vsububs...
+    O << " = vsubub(";
+    printOperand(MI, 1, O);
+    O << ',';
+    printOperand(MI, 2, O);
+    break;
+  case 76:
+    // A2_vsubw, A2_vsubws, V6_vsubw_alt, V6_vsubw_alt_128B, V6_vsubw_dv_alt,...
+    O << " = vsubw(";
+    printOperand(MI, 1, O);
+    O << ',';
+    printOperand(MI, 2, O);
+    break;
+  case 77:
     // A2_xor, A2_xorp, C2_xor, V6_pred_xor, V6_pred_xor_128B
     O << " = xor(";
     printOperand(MI, 1, O);
+    O << ',';
+    printOperand(MI, 2, O);
+    O << ')';
+    return;
     break;
-  case 76:
+  case 78:
     // A2_zxtb
     O << " = zxtb(";
     printOperand(MI, 1, O);
     O << ')';
     return;
     break;
-  case 77:
+  case 79:
     // A2_zxth, SA1_zxth
     O << " = zxth(";
     printOperand(MI, 1, O);
     O << ')';
     return;
     break;
-  case 78:
+  case 80:
     // A4_bitsplit, A4_bitspliti
     O << " = bitsplit(";
     printOperand(MI, 1, O);
     break;
-  case 79:
-    // A4_boundscheck
-    O << "=boundscheck(";
+  case 81:
+    // A4_boundscheck, A4_boundscheck_hi, A4_boundscheck_lo
+    O << " = boundscheck(";
+    printOperand(MI, 1, O);
+    O << ',';
+    printOperand(MI, 2, O);
+    break;
+  case 82:
+    // A4_cmpbeq, A4_cmpbeqi
+    O << " = cmpb.eq(";
+    printOperand(MI, 1, O);
+    break;
+  case 83:
+    // A4_cmpbgt, A4_cmpbgti
+    O << " = cmpb.gt(";
+    printOperand(MI, 1, O);
+    break;
+  case 84:
+    // A4_cmpbgtu, A4_cmpbgtui
+    O << " = cmpb.gtu(";
+    printOperand(MI, 1, O);
+    break;
+  case 85:
+    // A4_cmpheq, A4_cmpheqi
+    O << " = cmph.eq(";
+    printOperand(MI, 1, O);
+    break;
+  case 86:
+    // A4_cmphgt, A4_cmphgti
+    O << " = cmph.gt(";
+    printOperand(MI, 1, O);
+    break;
+  case 87:
+    // A4_cmphgtu, A4_cmphgtui
+    O << " = cmph.gtu(";
+    printOperand(MI, 1, O);
+    break;
+  case 88:
+    // A4_cround_ri, A4_cround_rr
+    O << " = cround(";
+    printOperand(MI, 1, O);
+    break;
+  case 89:
+    // A4_ext, J2_pause, J2_trap0, J4_hintjumpr, S2_allocframe, SS2_allocfram...
+    O << ')';
+    return;
+    break;
+  case 90:
+    // A4_modwrapu
+    O << " = modwrap(";
     printOperand(MI, 1, O);
     O << ',';
     printOperand(MI, 2, O);
     O << ')';
     return;
     break;
-  case 80:
-    // A4_boundscheck_hi, A4_boundscheck_lo
-    O << " = boundscheck(";
-    printOperand(MI, 1, O);
-    O << ", ";
-    printOperand(MI, 2, O);
-    break;
-  case 81:
-    // A4_cmpbeq, A4_cmpbeqi
-    O << " = cmpb.eq(";
-    printOperand(MI, 1, O);
-    break;
-  case 82:
-    // A4_cmpbgt, A4_cmpbgti
-    O << " = cmpb.gt(";
-    printOperand(MI, 1, O);
-    break;
-  case 83:
-    // A4_cmpbgtu, A4_cmpbgtui
-    O << " = cmpb.gtu(";
-    printOperand(MI, 1, O);
-    break;
-  case 84:
-    // A4_cmpheq, A4_cmpheqi
-    O << " = cmph.eq(";
-    printOperand(MI, 1, O);
-    break;
-  case 85:
-    // A4_cmphgt, A4_cmphgti
-    O << " = cmph.gt(";
-    printOperand(MI, 1, O);
-    break;
-  case 86:
-    // A4_cmphgtu, A4_cmphgtui
-    O << " = cmph.gtu(";
-    printOperand(MI, 1, O);
-    break;
-  case 87:
-    // A4_cround_ri, A4_cround_rr
-    O << " = cround(";
-    printOperand(MI, 1, O);
-    break;
-  case 88:
-    // A4_ext, A4_ext_b, A4_ext_c, J2_pause, J2_trap0, J2_trap1, J4_hintjumpr...
-    O << ')';
-    return;
-    break;
-  case 89:
-    // A4_modwrapu
-    O << " = modwrap(";
-    printOperand(MI, 1, O);
-    O << ", ";
-    printOperand(MI, 2, O);
-    O << ')';
-    return;
-    break;
-  case 90:
+  case 91:
     // A4_rcmpeq, A4_rcmpeqi, C2_cmpeq, C2_cmpeqi, C2_cmpeqp
     O << " = cmp.eq(";
     printOperand(MI, 1, O);
     break;
-  case 91:
+  case 92:
     // A4_rcmpneq, A4_rcmpneqi, C4_cmpneq, C4_cmpneqi
     O << " = !cmp.eq(";
     printOperand(MI, 1, O);
     break;
-  case 92:
+  case 93:
     // A4_tlbmatch
     O << " = tlbmatch(";
     printOperand(MI, 1, O);
-    O << ", ";
+    O << ',';
     printOperand(MI, 2, O);
     O << ')';
     return;
     break;
-  case 93:
+  case 94:
     // A4_vcmpbeq_any
     O << " = any8(vcmpb.eq(";
     printOperand(MI, 1, O);
-    O << ", ";
+    O << ',';
     printOperand(MI, 2, O);
     O << "))";
     return;
     break;
-  case 94:
+  case 95:
     // A4_vcmpbgt, A4_vcmpbgti
     O << " = vcmpb.gt(";
     printOperand(MI, 1, O);
     break;
-  case 95:
+  case 96:
     // A4_vrmaxh
     O << " = vrmaxh(";
     printOperand(MI, 2, O);
-    O << ", ";
-    printOperand(MI, 3, O);
-    O << ')';
-    return;
-    break;
-  case 96:
-    // A4_vrmaxuh
-    O << " = vrmaxuh(";
-    printOperand(MI, 2, O);
-    O << ", ";
+    O << ',';
     printOperand(MI, 3, O);
     O << ')';
     return;
     break;
   case 97:
-    // A4_vrmaxuw
-    O << " = vrmaxuw(";
+    // A4_vrmaxuh
+    O << " = vrmaxuh(";
     printOperand(MI, 2, O);
-    O << ", ";
+    O << ',';
     printOperand(MI, 3, O);
     O << ')';
     return;
     break;
   case 98:
-    // A4_vrmaxw
-    O << " = vrmaxw(";
+    // A4_vrmaxuw
+    O << " = vrmaxuw(";
     printOperand(MI, 2, O);
-    O << ", ";
+    O << ',';
     printOperand(MI, 3, O);
     O << ')';
     return;
     break;
   case 99:
-    // A4_vrminh
-    O << " = vrminh(";
+    // A4_vrmaxw
+    O << " = vrmaxw(";
     printOperand(MI, 2, O);
-    O << ", ";
+    O << ',';
     printOperand(MI, 3, O);
     O << ')';
     return;
     break;
   case 100:
-    // A4_vrminuh
-    O << " = vrminuh(";
+    // A4_vrminh
+    O << " = vrminh(";
     printOperand(MI, 2, O);
-    O << ", ";
+    O << ',';
     printOperand(MI, 3, O);
     O << ')';
     return;
     break;
   case 101:
-    // A4_vrminuw
-    O << " = vrminuw(";
+    // A4_vrminuh
+    O << " = vrminuh(";
     printOperand(MI, 2, O);
-    O << ", ";
+    O << ',';
     printOperand(MI, 3, O);
     O << ')';
     return;
     break;
   case 102:
-    // A4_vrminw
-    O << " = vrminw(";
+    // A4_vrminuw
+    O << " = vrminuw(";
     printOperand(MI, 2, O);
-    O << ", ";
+    O << ',';
     printOperand(MI, 3, O);
     O << ')';
     return;
     break;
   case 103:
-    // A5_ACS, V6_vdeal, V6_vdeal_128B, V6_vshuff, V6_vshuff_128B
+    // A4_vrminw
+    O << " = vrminw(";
+    printOperand(MI, 2, O);
     O << ',';
+    printOperand(MI, 3, O);
+    O << ')';
+    return;
     break;
   case 104:
+    // A5_ACS, A6_vminub_RdP, F2_sfinvsqrta, F2_sfrecipa, J2_loop0r, J2_loop0...
+    O << ',';
+    break;
+  case 105:
     // A5_vaddhubs
     O << " = vaddhub(";
     printOperand(MI, 1, O);
-    O << ", ";
+    O << ',';
     printOperand(MI, 2, O);
     O << "):sat";
     return;
     break;
-  case 105:
+  case 106:
     // C2_all8
     O << " = all8(";
     printOperand(MI, 1, O);
     O << ')';
     return;
     break;
-  case 106:
+  case 107:
     // C2_any8
     O << " = any8(";
     printOperand(MI, 1, O);
     O << ')';
     return;
     break;
-  case 107:
+  case 108:
     // C2_bitsclr, C2_bitsclri
     O << " = bitsclr(";
     printOperand(MI, 1, O);
     break;
-  case 108:
+  case 109:
     // C2_bitsset
     O << " = bitsset(";
     printOperand(MI, 1, O);
-    O << ", ";
+    O << ',';
     printOperand(MI, 2, O);
     O << ')';
     return;
     break;
-  case 109:
+  case 110:
     // C2_cmpgei
     O << " = cmp.ge(";
     printOperand(MI, 1, O);
-    O << ", #";
-    printExtOperand(MI, 2, O);
-    O << ')';
-    return;
-    break;
-  case 110:
-    // C2_cmpgeui
-    O << " = cmp.geu(";
-    printOperand(MI, 1, O);
-    O << ", #";
-    printExtOperand(MI, 2, O);
+    O << ",#";
+    printOperand(MI, 2, O);
     O << ')';
     return;
     break;
   case 111:
+    // C2_cmpgeui
+    O << " = cmp.geu(";
+    printOperand(MI, 1, O);
+    O << ",#";
+    printOperand(MI, 2, O);
+    O << ')';
+    return;
+    break;
+  case 112:
     // C2_cmpgt, C2_cmpgti, C2_cmpgtp
     O << " = cmp.gt(";
     printOperand(MI, 1, O);
     break;
-  case 112:
+  case 113:
     // C2_cmpgtu, C2_cmpgtui, C2_cmpgtup
     O << " = cmp.gtu(";
     printOperand(MI, 1, O);
     break;
-  case 113:
+  case 114:
+    // C2_cmplt
+    O << " = cmp.lt(";
+    printOperand(MI, 1, O);
+    O << ',';
+    printOperand(MI, 2, O);
+    O << ')';
+    return;
+    break;
+  case 115:
+    // C2_cmpltu
+    O << " = cmp.ltu(";
+    printOperand(MI, 1, O);
+    O << ',';
+    printOperand(MI, 2, O);
+    O << ')';
+    return;
+    break;
+  case 116:
     // C2_mask
     O << " = mask(";
     printOperand(MI, 1, O);
     O << ')';
     return;
     break;
-  case 114:
+  case 117:
     // C2_mux, C2_muxii, C2_muxir, C2_muxri
     O << " = mux(";
     printOperand(MI, 1, O);
     break;
-  case 115:
+  case 118:
     // C2_vitpack
     O << " = vitpack(";
     printOperand(MI, 1, O);
-    O << ", ";
+    O << ',';
     printOperand(MI, 2, O);
     O << ')';
     return;
     break;
-  case 116:
+  case 119:
     // C2_vmux, V6_vmux, V6_vmux_128B
     O << " = vmux(";
     printOperand(MI, 1, O);
-    break;
-  case 117:
-    // C4_addipc
-    O << " = add(pc, #";
-    printExtOperand(MI, 1, O);
+    O << ',';
+    printOperand(MI, 2, O);
+    O << ',';
+    printOperand(MI, 3, O);
     O << ')';
     return;
     break;
-  case 118:
-    // C4_cmplte, C4_cmpltei
-    O << " = !cmp.gt(";
-    printOperand(MI, 1, O);
-    break;
-  case 119:
-    // C4_cmplteu, C4_cmplteui
-    O << " = !cmp.gtu(";
-    printOperand(MI, 1, O);
-    break;
   case 120:
-    // C4_fastcorner9
-    O << " = fastcorner9(";
+    // C4_addipc
+    O << " = add(pc,#";
     printOperand(MI, 1, O);
-    O << ", ";
-    printOperand(MI, 2, O);
     O << ')';
     return;
     break;
   case 121:
-    // C4_fastcorner9_not
-    O << " = !fastcorner9(";
+    // C4_cmplte, C4_cmpltei
+    O << " = !cmp.gt(";
     printOperand(MI, 1, O);
-    O << ", ";
-    printOperand(MI, 2, O);
-    O << ')';
-    return;
     break;
   case 122:
-    // C4_nbitsclr, C4_nbitsclri
-    O << " = !bitsclr(";
+    // C4_cmplteu, C4_cmplteui
+    O << " = !cmp.gtu(";
     printOperand(MI, 1, O);
     break;
   case 123:
-    // C4_nbitsset
-    O << " = !bitsset(";
+    // C4_fastcorner9
+    O << " = fastcorner9(";
     printOperand(MI, 1, O);
-    O << ", ";
+    O << ',';
     printOperand(MI, 2, O);
     O << ')';
     return;
     break;
   case 124:
+    // C4_fastcorner9_not
+    O << " = !fastcorner9(";
+    printOperand(MI, 1, O);
+    O << ',';
+    printOperand(MI, 2, O);
+    O << ')';
+    return;
+    break;
+  case 125:
+    // C4_nbitsclr, C4_nbitsclri
+    O << " = !bitsclr(";
+    printOperand(MI, 1, O);
+    break;
+  case 126:
+    // C4_nbitsset
+    O << " = !bitsset(";
+    printOperand(MI, 1, O);
+    O << ',';
+    printOperand(MI, 2, O);
+    O << ')';
+    return;
+    break;
+  case 127:
+    // CALLProfile, EH_RETURN_JMPR, J2_call, J2_callr, J2_jump, J2_jumpr, PS_...
+    return;
+    break;
+  case 128:
     // CONST32
     O << " = CONST32(#";
     printOperand(MI, 1, O);
     O << ')';
     return;
     break;
-  case 125:
+  case 129:
     // CONST64
     O << " = CONST64(#";
     printOperand(MI, 1, O);
     O << ')';
     return;
     break;
-  case 126:
-    // EH_RETURN_JMPR, J2_call, J2_callr, J2_jump, J2_jumpr, PS_call_nr, PS_c...
-    return;
-    break;
-  case 127:
+  case 130:
     // F2_conv_d2df
     O << " = convert_d2df(";
     printOperand(MI, 1, O);
     O << ')';
     return;
     break;
-  case 128:
+  case 131:
     // F2_conv_d2sf
     O << " = convert_d2sf(";
     printOperand(MI, 1, O);
     O << ')';
     return;
     break;
-  case 129:
+  case 132:
     // F2_conv_df2d, F2_conv_df2d_chop
     O << " = convert_df2d(";
     printOperand(MI, 1, O);
     break;
-  case 130:
+  case 133:
     // F2_conv_df2sf
     O << " = convert_df2sf(";
     printOperand(MI, 1, O);
     O << ')';
     return;
     break;
-  case 131:
+  case 134:
     // F2_conv_df2ud, F2_conv_df2ud_chop
     O << " = convert_df2ud(";
     printOperand(MI, 1, O);
     break;
-  case 132:
+  case 135:
     // F2_conv_df2uw, F2_conv_df2uw_chop
     O << " = convert_df2uw(";
     printOperand(MI, 1, O);
     break;
-  case 133:
+  case 136:
     // F2_conv_df2w, F2_conv_df2w_chop
     O << " = convert_df2w(";
     printOperand(MI, 1, O);
     break;
-  case 134:
+  case 137:
     // F2_conv_sf2d, F2_conv_sf2d_chop
     O << " = convert_sf2d(";
     printOperand(MI, 1, O);
     break;
-  case 135:
+  case 138:
     // F2_conv_sf2df
     O << " = convert_sf2df(";
     printOperand(MI, 1, O);
     O << ')';
     return;
     break;
-  case 136:
+  case 139:
     // F2_conv_sf2ud, F2_conv_sf2ud_chop
     O << " = convert_sf2ud(";
     printOperand(MI, 1, O);
     break;
-  case 137:
+  case 140:
     // F2_conv_sf2uw, F2_conv_sf2uw_chop
     O << " = convert_sf2uw(";
     printOperand(MI, 1, O);
     break;
-  case 138:
+  case 141:
     // F2_conv_sf2w, F2_conv_sf2w_chop
     O << " = convert_sf2w(";
     printOperand(MI, 1, O);
     break;
-  case 139:
+  case 142:
     // F2_conv_ud2df
     O << " = convert_ud2df(";
     printOperand(MI, 1, O);
     O << ')';
     return;
     break;
-  case 140:
+  case 143:
     // F2_conv_ud2sf
     O << " = convert_ud2sf(";
     printOperand(MI, 1, O);
     O << ')';
     return;
     break;
-  case 141:
+  case 144:
     // F2_conv_uw2df
     O << " = convert_uw2df(";
     printOperand(MI, 1, O);
     O << ')';
     return;
     break;
-  case 142:
+  case 145:
     // F2_conv_uw2sf
     O << " = convert_uw2sf(";
     printOperand(MI, 1, O);
     O << ')';
     return;
     break;
-  case 143:
+  case 146:
     // F2_conv_w2df
     O << " = convert_w2df(";
     printOperand(MI, 1, O);
     O << ')';
     return;
     break;
-  case 144:
+  case 147:
     // F2_conv_w2sf
     O << " = convert_w2sf(";
     printOperand(MI, 1, O);
     O << ')';
     return;
     break;
-  case 145:
+  case 148:
     // F2_dfclass
     O << " = dfclass(";
     printOperand(MI, 1, O);
-    O << ", #";
-    printOperand(MI, 2, O);
-    O << ')';
-    return;
-    break;
-  case 146:
-    // F2_dfcmpeq
-    O << " = dfcmp.eq(";
-    printOperand(MI, 1, O);
-    O << ", ";
-    printOperand(MI, 2, O);
-    O << ')';
-    return;
-    break;
-  case 147:
-    // F2_dfcmpge
-    O << " = dfcmp.ge(";
-    printOperand(MI, 1, O);
-    O << ", ";
-    printOperand(MI, 2, O);
-    O << ')';
-    return;
-    break;
-  case 148:
-    // F2_dfcmpgt
-    O << " = dfcmp.gt(";
-    printOperand(MI, 1, O);
-    O << ", ";
+    O << ",#";
     printOperand(MI, 2, O);
     O << ')';
     return;
     break;
   case 149:
-    // F2_dfcmpuo
-    O << " = dfcmp.uo(";
+    // F2_dfcmpeq
+    O << " = dfcmp.eq(";
     printOperand(MI, 1, O);
-    O << ", ";
+    O << ',';
     printOperand(MI, 2, O);
     O << ')';
     return;
     break;
   case 150:
-    // F2_dfimm_n, F2_dfimm_p
-    O << " = dfmake(#";
+    // F2_dfcmpge
+    O << " = dfcmp.ge(";
     printOperand(MI, 1, O);
+    O << ',';
+    printOperand(MI, 2, O);
+    O << ')';
+    return;
     break;
   case 151:
-    // F2_sfadd
-    O << " = sfadd(";
+    // F2_dfcmpgt
+    O << " = dfcmp.gt(";
     printOperand(MI, 1, O);
-    O << ", ";
+    O << ',';
     printOperand(MI, 2, O);
     O << ')';
     return;
     break;
   case 152:
-    // F2_sfclass
-    O << " = sfclass(";
+    // F2_dfcmpuo
+    O << " = dfcmp.uo(";
     printOperand(MI, 1, O);
-    O << ", #";
+    O << ',';
     printOperand(MI, 2, O);
     O << ')';
     return;
     break;
   case 153:
-    // F2_sfcmpeq
-    O << " = sfcmp.eq(";
+    // F2_dfimm_n, F2_dfimm_p
+    O << " = dfmake(#";
     printOperand(MI, 1, O);
-    O << ", ";
-    printOperand(MI, 2, O);
-    O << ')';
-    return;
     break;
   case 154:
-    // F2_sfcmpge
-    O << " = sfcmp.ge(";
+    // F2_sfadd
+    O << " = sfadd(";
     printOperand(MI, 1, O);
-    O << ", ";
+    O << ',';
     printOperand(MI, 2, O);
     O << ')';
     return;
     break;
   case 155:
-    // F2_sfcmpgt
-    O << " = sfcmp.gt(";
+    // F2_sfclass
+    O << " = sfclass(";
     printOperand(MI, 1, O);
-    O << ", ";
+    O << ",#";
     printOperand(MI, 2, O);
     O << ')';
     return;
     break;
   case 156:
-    // F2_sfcmpuo
-    O << " = sfcmp.uo(";
+    // F2_sfcmpeq
+    O << " = sfcmp.eq(";
     printOperand(MI, 1, O);
-    O << ", ";
+    O << ',';
     printOperand(MI, 2, O);
     O << ')';
     return;
     break;
   case 157:
-    // F2_sffixupd
-    O << " = sffixupd(";
+    // F2_sfcmpge
+    O << " = sfcmp.ge(";
     printOperand(MI, 1, O);
-    O << ", ";
+    O << ',';
     printOperand(MI, 2, O);
     O << ')';
     return;
     break;
   case 158:
-    // F2_sffixupn
-    O << " = sffixupn(";
+    // F2_sfcmpgt
+    O << " = sfcmp.gt(";
     printOperand(MI, 1, O);
-    O << ", ";
+    O << ',';
     printOperand(MI, 2, O);
     O << ')';
     return;
     break;
   case 159:
+    // F2_sfcmpuo
+    O << " = sfcmp.uo(";
+    printOperand(MI, 1, O);
+    O << ',';
+    printOperand(MI, 2, O);
+    O << ')';
+    return;
+    break;
+  case 160:
+    // F2_sffixupd
+    O << " = sffixupd(";
+    printOperand(MI, 1, O);
+    O << ',';
+    printOperand(MI, 2, O);
+    O << ')';
+    return;
+    break;
+  case 161:
+    // F2_sffixupn
+    O << " = sffixupn(";
+    printOperand(MI, 1, O);
+    O << ',';
+    printOperand(MI, 2, O);
+    O << ')';
+    return;
+    break;
+  case 162:
     // F2_sffixupr
     O << " = sffixupr(";
     printOperand(MI, 1, O);
     O << ')';
     return;
     break;
-  case 160:
+  case 163:
     // F2_sffma, F2_sffma_lib, F2_sffma_sc
     O << " += sfmpy(";
     printOperand(MI, 2, O);
-    O << ", ";
+    O << ',';
     printOperand(MI, 3, O);
     break;
-  case 161:
+  case 164:
     // F2_sffms, F2_sffms_lib
     O << " -= sfmpy(";
     printOperand(MI, 2, O);
-    O << ", ";
+    O << ',';
     printOperand(MI, 3, O);
     break;
-  case 162:
+  case 165:
     // F2_sfimm_n, F2_sfimm_p
     O << " = sfmake(#";
     printOperand(MI, 1, O);
     break;
-  case 163:
-    // F2_sfinvsqrta, F2_sfrecipa, J2_loop0r, J2_loop0rext, J2_loop1r, J2_loo...
-    O << ", ";
-    break;
-  case 164:
+  case 166:
     // F2_sfmax
     O << " = sfmax(";
     printOperand(MI, 1, O);
-    O << ", ";
-    printOperand(MI, 2, O);
-    O << ')';
-    return;
-    break;
-  case 165:
-    // F2_sfmin
-    O << " = sfmin(";
-    printOperand(MI, 1, O);
-    O << ", ";
-    printOperand(MI, 2, O);
-    O << ')';
-    return;
-    break;
-  case 166:
-    // F2_sfmpy
-    O << " = sfmpy(";
-    printOperand(MI, 1, O);
-    O << ", ";
+    O << ',';
     printOperand(MI, 2, O);
     O << ')';
     return;
     break;
   case 167:
-    // F2_sfsub
-    O << " = sfsub(";
+    // F2_sfmin
+    O << " = sfmin(";
     printOperand(MI, 1, O);
-    O << ", ";
+    O << ',';
     printOperand(MI, 2, O);
     O << ')';
     return;
     break;
   case 168:
-    // HI
-    O << ".h = ";
+    // F2_sfmpy
+    O << " = sfmpy(";
     printOperand(MI, 1, O);
+    O << ',';
+    printOperand(MI, 2, O);
+    O << ')';
     return;
     break;
   case 169:
+    // F2_sfsub
+    O << " = sfsub(";
+    printOperand(MI, 1, O);
+    O << ',';
+    printOperand(MI, 2, O);
+    O << ')';
+    return;
+    break;
+  case 170:
+    // HI
+    O << ".h=#";
+    printOperand(MI, 1, O);
+    return;
+    break;
+  case 171:
     // J2_callf, J2_callt
     O << ") call ";
     printBrtarget(MI, 1, O);
     return;
     break;
-  case 170:
+  case 172:
     // J2_callrf, J2_callrt
     O << ") callr ";
     printOperand(MI, 1, O);
     return;
     break;
-  case 171:
+  case 173:
     // J2_jumpf, J2_jumpt
     O << ") jump:nt ";
     printBrtarget(MI, 1, O);
     return;
     break;
-  case 172:
+  case 174:
+    // J2_jumpf_nopred_map, J2_jumpt_nopred_map
+    O << ") jump ";
+    printBrtarget(MI, 1, O);
+    return;
+    break;
+  case 175:
     // J2_jumpfnew, J2_jumptnew
     O << ".new) jump:nt ";
     printBrtarget(MI, 1, O);
     return;
     break;
-  case 173:
+  case 176:
     // J2_jumpfnewpt, J2_jumptnewpt
     O << ".new) jump:t ";
     printBrtarget(MI, 1, O);
     return;
     break;
-  case 174:
+  case 177:
     // J2_jumpfpt, J2_jumptpt
     O << ") jump:t ";
     printBrtarget(MI, 1, O);
     return;
     break;
-  case 175:
+  case 178:
     // J2_jumprf, J2_jumprt, PS_jmpretf, PS_jmprett
     O << ") jumpr:nt ";
     printOperand(MI, 1, O);
     return;
     break;
-  case 176:
+  case 179:
+    // J2_jumprf_nopred_map, J2_jumprt_nopred_map
+    O << ") jumpr ";
+    printOperand(MI, 1, O);
+    return;
+    break;
+  case 180:
     // J2_jumprfnew, J2_jumprtnew, PS_jmpretfnew, PS_jmprettnew
     O << ".new) jumpr:nt ";
     printOperand(MI, 1, O);
     return;
     break;
-  case 177:
+  case 181:
     // J2_jumprfnewpt, J2_jumprtnewpt, PS_jmpretfnewpt, PS_jmprettnewpt
     O << ".new) jumpr:t ";
     printOperand(MI, 1, O);
     return;
     break;
-  case 178:
+  case 182:
     // J2_jumprfpt, J2_jumprtpt
     O << ") jumpr:t ";
     printOperand(MI, 1, O);
     return;
     break;
-  case 179:
+  case 183:
     // J2_jumprgtez
     O << ">=#0) jump:nt ";
     printBrtarget(MI, 1, O);
     return;
     break;
-  case 180:
+  case 184:
     // J2_jumprgtezpt
     O << ">=#0) jump:t ";
     printBrtarget(MI, 1, O);
     return;
     break;
-  case 181:
+  case 185:
     // J2_jumprltez
     O << "<=#0) jump:nt ";
     printBrtarget(MI, 1, O);
     return;
     break;
-  case 182:
+  case 186:
     // J2_jumprltezpt
     O << "<=#0) jump:t ";
     printBrtarget(MI, 1, O);
     return;
     break;
-  case 183:
+  case 187:
     // J2_jumprnz
     O << "==#0) jump:nt ";
     printBrtarget(MI, 1, O);
     return;
     break;
-  case 184:
+  case 188:
     // J2_jumprnzpt
     O << "==#0) jump:t ";
     printBrtarget(MI, 1, O);
     return;
     break;
-  case 185:
+  case 189:
     // J2_jumprz
     O << "!=#0) jump:nt ";
     printBrtarget(MI, 1, O);
     return;
     break;
-  case 186:
+  case 190:
     // J2_jumprzpt
     O << "!=#0) jump:t ";
     printBrtarget(MI, 1, O);
     return;
     break;
-  case 187:
+  case 191:
     // J2_loop0i, J2_loop0iext, J2_loop1i, J2_loop1iext, J2_ploop1si, J2_ploo...
-    O << ", #";
-    printOperand(MI, 1, O);
-    break;
-  case 188:
-    // J4_cmpeq_f_jumpnv_nt, J4_cmpeq_f_jumpnv_t, J4_cmpeq_t_jumpnv_nt, J4_cm...
-    O << ".new, ";
-    printOperand(MI, 1, O);
-    break;
-  case 189:
-    // J4_cmpeqi_f_jumpnv_nt, J4_cmpeqi_f_jumpnv_t, J4_cmpeqi_t_jumpnv_nt, J4...
-    O << ".new, #";
-    printOperand(MI, 1, O);
-    break;
-  case 190:
-    // J4_cmpeqn1_fp0_jump_nt, J4_cmpeqn1_fp0_jump_t, J4_cmpeqn1_fp1_jump_nt,...
     O << ",#";
     printOperand(MI, 1, O);
     break;
-  case 191:
-    // J4_tstbit0_f_jumpnv_nt, J4_tstbit0_t_jumpnv_nt
-    O << ".new, #0)) jump:nt ";
-    printBrtarget(MI, 1, O);
-    return;
-    break;
   case 192:
-    // J4_tstbit0_f_jumpnv_t, J4_tstbit0_t_jumpnv_t
-    O << ".new, #0)) jump:t ";
-    printBrtarget(MI, 1, O);
-    return;
+    // J4_cmpeq_f_jumpnv_nt, J4_cmpeq_f_jumpnv_t, J4_cmpeq_t_jumpnv_nt, J4_cm...
+    O << ".new,";
+    printOperand(MI, 1, O);
     break;
   case 193:
-    // J4_tstbit0_fp0_jump_nt
-    O << ", #0); if (!p0.new) jump:nt ";
-    printBrtarget(MI, 1, O);
-    return;
+    // J4_cmpeqi_f_jumpnv_nt, J4_cmpeqi_f_jumpnv_t, J4_cmpeqi_t_jumpnv_nt, J4...
+    O << ".new,#";
+    printOperand(MI, 1, O);
     break;
   case 194:
-    // J4_tstbit0_fp0_jump_t
-    O << ", #0); if (!p0.new) jump:t ";
+    // J4_tstbit0_f_jumpnv_nt, J4_tstbit0_t_jumpnv_nt
+    O << ".new,#0)) jump:nt ";
     printBrtarget(MI, 1, O);
     return;
     break;
   case 195:
-    // J4_tstbit0_fp1_jump_nt
-    O << ", #0); if (!p1.new) jump:nt ";
+    // J4_tstbit0_f_jumpnv_t, J4_tstbit0_t_jumpnv_t
+    O << ".new,#0)) jump:t ";
     printBrtarget(MI, 1, O);
     return;
     break;
   case 196:
-    // J4_tstbit0_fp1_jump_t
-    O << ", #0); if (!p1.new) jump:t ";
+    // J4_tstbit0_fp0_jump_nt
+    O << ",#0); if (!p0.new) jump:nt ";
     printBrtarget(MI, 1, O);
     return;
     break;
   case 197:
-    // J4_tstbit0_tp0_jump_nt
-    O << ", #0); if (p0.new) jump:nt ";
+    // J4_tstbit0_fp0_jump_t
+    O << ",#0); if (!p0.new) jump:t ";
     printBrtarget(MI, 1, O);
     return;
     break;
   case 198:
-    // J4_tstbit0_tp0_jump_t
-    O << ", #0); if (p0.new) jump:t ";
+    // J4_tstbit0_fp1_jump_nt
+    O << ",#0); if (!p1.new) jump:nt ";
     printBrtarget(MI, 1, O);
     return;
     break;
   case 199:
-    // J4_tstbit0_tp1_jump_nt
-    O << ", #0); if (p1.new) jump:nt ";
+    // J4_tstbit0_fp1_jump_t
+    O << ",#0); if (!p1.new) jump:t ";
     printBrtarget(MI, 1, O);
     return;
     break;
   case 200:
-    // J4_tstbit0_tp1_jump_t
-    O << ", #0); if (p1.new) jump:t ";
+    // J4_tstbit0_tp0_jump_nt
+    O << ",#0); if (p0.new) jump:nt ";
     printBrtarget(MI, 1, O);
     return;
     break;
   case 201:
+    // J4_tstbit0_tp0_jump_t
+    O << ",#0); if (p0.new) jump:t ";
+    printBrtarget(MI, 1, O);
+    return;
+    break;
+  case 202:
+    // J4_tstbit0_tp1_jump_nt
+    O << ",#0); if (p1.new) jump:nt ";
+    printBrtarget(MI, 1, O);
+    return;
+    break;
+  case 203:
+    // J4_tstbit0_tp1_jump_t
+    O << ",#0); if (p1.new) jump:t ";
+    printBrtarget(MI, 1, O);
+    return;
+    break;
+  case 204:
     // L2_loadalignb_io, L2_loadalignb_pbr, L2_loadalignb_pci, L2_loadalignb_...
     O << " = memb_fifo(";
     break;
-  case 202:
+  case 205:
     // L2_loadalignh_io, L2_loadalignh_pbr, L2_loadalignh_pci, L2_loadalignh_...
     O << " = memh_fifo(";
     break;
-  case 203:
+  case 206:
     // L2_loadbsw2_io, L2_loadbsw2_pbr, L2_loadbsw2_pci, L2_loadbsw2_pcr, L2_...
     O << " = membh(";
-    break;
-  case 204:
-    // L2_loadbzw2_io, L2_loadbzw2_pbr, L2_loadbzw2_pci, L2_loadbzw2_pcr, L2_...
-    O << " = memubh(";
-    break;
-  case 205:
-    // L2_loadrb_io, L2_loadrb_pbr, L2_loadrb_pci, L2_loadrb_pcr, L2_loadrb_p...
-    O << " = memb(";
-    break;
-  case 206:
-    // L2_loadrbgp, PS_loadrbabs
-    O << " = memb(#";
+    printOperand(MI, 1, O);
     break;
   case 207:
-    // L2_loadrd_io, L2_loadrd_pbr, L2_loadrd_pci, L2_loadrd_pcr, L2_loadrd_p...
-    O << " = memd(";
+    // L2_loadbzw2_io, L2_loadbzw2_pbr, L2_loadbzw2_pci, L2_loadbzw2_pcr, L2_...
+    O << " = memubh(";
+    printOperand(MI, 1, O);
     break;
   case 208:
-    // L2_loadrdgp, PS_loadrdabs
-    O << " = memd(#";
+    // L2_loadrb_io, L2_loadrb_pbr, L2_loadrb_pci, L2_loadrb_pcr, L2_loadrb_p...
+    O << " = memb(";
+    printOperand(MI, 1, O);
     break;
   case 209:
-    // L2_loadrh_io, L2_loadrh_pbr, L2_loadrh_pci, L2_loadrh_pcr, L2_loadrh_p...
-    O << " = memh(";
+    // L2_loadrbgp
+    O << " = memb(gp+#";
+    printOperand(MI, 1, O);
+    O << ')';
+    return;
     break;
   case 210:
-    // L2_loadrhgp, PS_loadrhabs
-    O << " = memh(#";
+    // L2_loadrd_io, L2_loadrd_pbr, L2_loadrd_pci, L2_loadrd_pcr, L2_loadrd_p...
+    O << " = memd(";
+    printOperand(MI, 1, O);
     break;
   case 211:
-    // L2_loadri_io, L2_loadri_pbr, L2_loadri_pci, L2_loadri_pcr, L2_loadri_p...
-    O << " = memw(";
+    // L2_loadrdgp
+    O << " = memd(gp+#";
+    printOperand(MI, 1, O);
+    O << ')';
+    return;
     break;
   case 212:
-    // L2_loadrigp, PS_loadriabs
-    O << " = memw(#";
+    // L2_loadrh_io, L2_loadrh_pbr, L2_loadrh_pci, L2_loadrh_pcr, L2_loadrh_p...
+    O << " = memh(";
+    printOperand(MI, 1, O);
     break;
   case 213:
-    // L2_loadrub_io, L2_loadrub_pbr, L2_loadrub_pci, L2_loadrub_pcr, L2_load...
-    O << " = memub(";
+    // L2_loadrhgp
+    O << " = memh(gp+#";
+    printOperand(MI, 1, O);
+    O << ')';
+    return;
     break;
   case 214:
-    // L2_loadrubgp, PS_loadrubabs
-    O << " = memub(#";
+    // L2_loadri_io, L2_loadri_pbr, L2_loadri_pci, L2_loadri_pcr, L2_loadri_p...
+    O << " = memw(";
+    printOperand(MI, 1, O);
     break;
   case 215:
-    // L2_loadruh_io, L2_loadruh_pbr, L2_loadruh_pci, L2_loadruh_pcr, L2_load...
-    O << " = memuh(";
+    // L2_loadrigp
+    O << " = memw(gp+#";
+    printOperand(MI, 1, O);
+    O << ')';
+    return;
     break;
   case 216:
-    // L2_loadruhgp, PS_loadruhabs
-    O << " = memuh(#";
+    // L2_loadrub_io, L2_loadrub_pbr, L2_loadrub_pci, L2_loadrub_pcr, L2_load...
+    O << " = memub(";
+    printOperand(MI, 1, O);
     break;
   case 217:
+    // L2_loadrubgp
+    O << " = memub(gp+#";
+    printOperand(MI, 1, O);
+    O << ')';
+    return;
+    break;
+  case 218:
+    // L2_loadruh_io, L2_loadruh_pbr, L2_loadruh_pci, L2_loadruh_pcr, L2_load...
+    O << " = memuh(";
+    printOperand(MI, 1, O);
+    break;
+  case 219:
+    // L2_loadruhgp
+    O << " = memuh(gp+#";
+    printOperand(MI, 1, O);
+    O << ')';
+    return;
+    break;
+  case 220:
     // L2_loadw_locked
     O << " = memw_locked(";
     printOperand(MI, 1, O);
     O << ')';
     return;
     break;
-  case 218:
+  case 221:
     // L4_add_memopb_io, L4_add_memoph_io, L4_add_memopw_io, L4_and_memopb_io...
     O << "+#";
+    printOperand(MI, 1, O);
     break;
-  case 219:
+  case 222:
+    // L4_add_memopb_zomap, L4_add_memoph_zomap, L4_add_memopw_zomap
+    O << ") += ";
+    printOperand(MI, 1, O);
+    return;
+    break;
+  case 223:
+    // L4_and_memopb_zomap, L4_and_memoph_zomap, L4_and_memopw_zomap
+    O << ") &= ";
+    printOperand(MI, 1, O);
+    return;
+    break;
+  case 224:
+    // L4_iadd_memopb_zomap, L4_iadd_memoph_zomap, L4_iadd_memopw_zomap
+    O << ") += #";
+    printOperand(MI, 1, O);
+    return;
+    break;
+  case 225:
+    // L4_iand_memopb_zomap, L4_iand_memoph_zomap, L4_iand_memopw_zomap
+    O << ") = clrbit(#";
+    printOperand(MI, 1, O);
+    O << ')';
+    return;
+    break;
+  case 226:
+    // L4_ior_memopb_zomap, L4_ior_memoph_zomap, L4_ior_memopw_zomap
+    O << ") = setbit(#";
+    printOperand(MI, 1, O);
+    O << ')';
+    return;
+    break;
+  case 227:
+    // L4_isub_memopb_zomap, L4_isub_memoph_zomap, L4_isub_memopw_zomap
+    O << ") -= #";
+    printOperand(MI, 1, O);
+    return;
+    break;
+  case 228:
     // L4_loadd_locked
     O << " = memd_locked(";
     printOperand(MI, 1, O);
     O << ')';
     return;
     break;
-  case 220:
+  case 229:
+    // L4_or_memopb_zomap, L4_or_memoph_zomap, L4_or_memopw_zomap
+    O << ") |= ";
+    printOperand(MI, 1, O);
+    return;
+    break;
+  case 230:
     // L4_return_f, L4_return_t
     O << ") dealloc_return";
     return;
     break;
-  case 221:
+  case 231:
     // L4_return_fnew_pnt, L4_return_tnew_pnt
     O << ".new) dealloc_return:nt";
     return;
     break;
-  case 222:
+  case 232:
     // L4_return_fnew_pt, L4_return_tnew_pt
     O << ".new) dealloc_return:t";
     return;
     break;
-  case 223:
-    // LO
-    O << ".l = ";
+  case 233:
+    // L4_sub_memopb_zomap, L4_sub_memoph_zomap, L4_sub_memopw_zomap
+    O << ") -= ";
     printOperand(MI, 1, O);
     return;
     break;
-  case 224:
+  case 234:
+    // LO
+    O << ".l=#";
+    printOperand(MI, 1, O);
+    return;
+    break;
+  case 235:
     // M2_acci, M2_accii
     O << " += add(";
     printOperand(MI, 2, O);
     break;
-  case 225:
+  case 236:
     // M2_cmaci_s0
     O << " += cmpyi(";
     printOperand(MI, 2, O);
-    O << ", ";
+    O << ',';
     printOperand(MI, 3, O);
     O << ')';
     return;
     break;
-  case 226:
+  case 237:
     // M2_cmacr_s0
     O << " += cmpyr(";
     printOperand(MI, 2, O);
-    O << ", ";
+    O << ',';
     printOperand(MI, 3, O);
     O << ')';
     return;
     break;
-  case 227:
+  case 238:
     // M2_cmacs_s0, M2_cmacs_s1, M2_cmacsc_s0, M2_cmacsc_s1
     O << " += cmpy(";
     printOperand(MI, 2, O);
-    O << ", ";
+    O << ',';
     printOperand(MI, 3, O);
     break;
-  case 228:
+  case 239:
     // M2_cmpyi_s0
     O << " = cmpyi(";
     printOperand(MI, 1, O);
-    O << ", ";
+    O << ',';
     printOperand(MI, 2, O);
-    O << ')';
-    return;
-    break;
-  case 229:
-    // M2_cmpyr_s0
-    O << " = cmpyr(";
-    printOperand(MI, 1, O);
-    O << ", ";
-    printOperand(MI, 2, O);
-    O << ')';
-    return;
-    break;
-  case 230:
-    // M2_cmpyrs_s0, M2_cmpyrs_s1, M2_cmpyrsc_s0, M2_cmpyrsc_s1, M2_cmpys_s0,...
-    O << " = cmpy(";
-    printOperand(MI, 1, O);
-    O << ", ";
-    printOperand(MI, 2, O);
-    break;
-  case 231:
-    // M2_cnacs_s0, M2_cnacs_s1, M2_cnacsc_s0, M2_cnacsc_s1
-    O << " -= cmpy(";
-    printOperand(MI, 2, O);
-    O << ", ";
-    printOperand(MI, 3, O);
-    break;
-  case 232:
-    // M2_dpmpyss_acc_s0, M2_mpy_acc_hh_s0, M2_mpy_acc_hh_s1, M2_mpy_acc_hl_s...
-    O << " += mpy(";
-    printOperand(MI, 2, O);
-    break;
-  case 233:
-    // M2_dpmpyss_nac_s0, M2_mpy_nac_hh_s0, M2_mpy_nac_hh_s1, M2_mpy_nac_hl_s...
-    O << " -= mpy(";
-    printOperand(MI, 2, O);
-    break;
-  case 234:
-    // M2_dpmpyss_rnd_s0, M2_dpmpyss_s0, M2_hmmpyh_rs1, M2_hmmpyh_s1, M2_hmmp...
-    O << " = mpy(";
-    printOperand(MI, 1, O);
-    break;
-  case 235:
-    // M2_dpmpyuu_acc_s0, M2_mpyu_acc_hh_s0, M2_mpyu_acc_hh_s1, M2_mpyu_acc_h...
-    O << " += mpyu(";
-    printOperand(MI, 2, O);
-    break;
-  case 236:
-    // M2_dpmpyuu_nac_s0, M2_mpyu_nac_hh_s0, M2_mpyu_nac_hh_s1, M2_mpyu_nac_h...
-    O << " -= mpyu(";
-    printOperand(MI, 2, O);
-    break;
-  case 237:
-    // M2_dpmpyuu_s0, M2_mpyu_hh_s0, M2_mpyu_hh_s1, M2_mpyu_hl_s0, M2_mpyu_hl...
-    O << " = mpyu(";
-    printOperand(MI, 1, O);
-    break;
-  case 238:
-    // M2_maci, M2_macsip
-    O << " += mpyi(";
-    printOperand(MI, 2, O);
-    break;
-  case 239:
-    // M2_macsin
-    O << " -= mpyi(";
-    printOperand(MI, 2, O);
-    O << ", #";
-    printExtOperand(MI, 3, O);
     O << ')';
     return;
     break;
   case 240:
-    // M2_mmachs_rs0, M2_mmachs_rs1, M2_mmachs_s0, M2_mmachs_s1
-    O << " += vmpywoh(";
+    // M2_cmpyr_s0
+    O << " = cmpyr(";
+    printOperand(MI, 1, O);
+    O << ',';
     printOperand(MI, 2, O);
-    O << ", ";
-    printOperand(MI, 3, O);
+    O << ')';
+    return;
     break;
   case 241:
-    // M2_mmacls_rs0, M2_mmacls_rs1, M2_mmacls_s0, M2_mmacls_s1
-    O << " += vmpyweh(";
-    printOperand(MI, 2, O);
-    O << ", ";
-    printOperand(MI, 3, O);
-    break;
-  case 242:
-    // M2_mmacuhs_rs0, M2_mmacuhs_rs1, M2_mmacuhs_s0, M2_mmacuhs_s1
-    O << " += vmpywouh(";
-    printOperand(MI, 2, O);
-    O << ", ";
-    printOperand(MI, 3, O);
-    break;
-  case 243:
-    // M2_mmaculs_rs0, M2_mmaculs_rs1, M2_mmaculs_s0, M2_mmaculs_s1
-    O << " += vmpyweuh(";
-    printOperand(MI, 2, O);
-    O << ", ";
-    printOperand(MI, 3, O);
-    break;
-  case 244:
-    // M2_mmpyh_rs0, M2_mmpyh_rs1, M2_mmpyh_s0, M2_mmpyh_s1
-    O << " = vmpywoh(";
-    printOperand(MI, 1, O);
-    O << ", ";
-    printOperand(MI, 2, O);
-    break;
-  case 245:
-    // M2_mmpyl_rs0, M2_mmpyl_rs1, M2_mmpyl_s0, M2_mmpyl_s1
-    O << " = vmpyweh(";
-    printOperand(MI, 1, O);
-    O << ", ";
-    printOperand(MI, 2, O);
-    break;
-  case 246:
-    // M2_mmpyuh_rs0, M2_mmpyuh_rs1, M2_mmpyuh_s0, M2_mmpyuh_s1
-    O << " = vmpywouh(";
-    printOperand(MI, 1, O);
-    O << ", ";
-    printOperand(MI, 2, O);
-    break;
-  case 247:
-    // M2_mmpyul_rs0, M2_mmpyul_rs1, M2_mmpyul_s0, M2_mmpyul_s1
-    O << " = vmpyweuh(";
-    printOperand(MI, 1, O);
-    O << ", ";
-    printOperand(MI, 2, O);
-    break;
-  case 248:
-    // M2_mpyi, M2_mpysmi
-    O << " = mpyi(";
-    printOperand(MI, 1, O);
-    break;
-  case 249:
-    // M2_mpysin
-    O << " =- mpyi(";
-    printOperand(MI, 1, O);
-    O << ", #";
-    printOperand(MI, 2, O);
-    O << ')';
-    return;
-    break;
-  case 250:
-    // M2_mpysip
-    O << " =+ mpyi(";
-    printOperand(MI, 1, O);
-    O << ", #";
-    printExtOperand(MI, 2, O);
-    O << ')';
-    return;
-    break;
-  case 251:
-    // M2_mpysu_up
-    O << " = mpysu(";
-    printOperand(MI, 1, O);
-    O << ", ";
-    printOperand(MI, 2, O);
-    O << ')';
-    return;
-    break;
-  case 252:
-    // M2_mpyui
-    O << " = mpyui(";
-    printOperand(MI, 1, O);
-    O << ", ";
-    printOperand(MI, 2, O);
-    O << ')';
-    return;
-    break;
-  case 253:
-    // M2_nacci, M2_naccii
-    O << " -= add(";
-    printOperand(MI, 2, O);
-    break;
-  case 254:
-    // M2_subacc
-    O << " += sub(";
-    printOperand(MI, 2, O);
-    O << ", ";
-    printOperand(MI, 3, O);
-    O << ')';
-    return;
-    break;
-  case 255:
-    // M2_vabsdiffh
-    O << " = vabsdiffh(";
-    printOperand(MI, 1, O);
-    O << ", ";
-    printOperand(MI, 2, O);
-    O << ')';
-    return;
-    break;
-  case 256:
-    // M2_vabsdiffw
-    O << " = vabsdiffw(";
-    printOperand(MI, 1, O);
-    O << ", ";
-    printOperand(MI, 2, O);
-    O << ')';
-    return;
-    break;
-  case 257:
-    // M2_vcmac_s0_sat_i
-    O << " += vcmpyi(";
-    printOperand(MI, 2, O);
-    O << ", ";
-    printOperand(MI, 3, O);
-    O << "):sat";
-    return;
-    break;
-  case 258:
-    // M2_vcmac_s0_sat_r
-    O << " += vcmpyr(";
-    printOperand(MI, 2, O);
-    O << ", ";
-    printOperand(MI, 3, O);
-    O << "):sat";
-    return;
-    break;
-  case 259:
-    // M2_vcmpy_s0_sat_i, M2_vcmpy_s1_sat_i
-    O << " = vcmpyi(";
-    printOperand(MI, 1, O);
-    O << ", ";
-    printOperand(MI, 2, O);
-    break;
-  case 260:
-    // M2_vcmpy_s0_sat_r, M2_vcmpy_s1_sat_r
-    O << " = vcmpyr(";
-    printOperand(MI, 1, O);
-    O << ", ";
-    printOperand(MI, 2, O);
-    break;
-  case 261:
-    // M2_vdmacs_s0, M2_vdmacs_s1
-    O << " += vdmpy(";
-    printOperand(MI, 2, O);
-    O << ", ";
-    printOperand(MI, 3, O);
-    break;
-  case 262:
-    // M2_vdmpyrs_s0, M2_vdmpyrs_s1, M2_vdmpys_s0, M2_vdmpys_s1
-    O << " = vdmpy(";
-    printOperand(MI, 1, O);
-    O << ", ";
-    printOperand(MI, 2, O);
-    break;
-  case 263:
-    // M2_vmac2, M2_vmac2s_s0, M2_vmac2s_s1
-    O << " += vmpyh(";
-    printOperand(MI, 2, O);
-    O << ", ";
-    printOperand(MI, 3, O);
-    break;
-  case 264:
-    // M2_vmac2es, M2_vmac2es_s0, M2_vmac2es_s1
-    O << " += vmpyeh(";
-    printOperand(MI, 2, O);
-    O << ", ";
-    printOperand(MI, 3, O);
-    break;
-  case 265:
-    // M2_vmac2su_s0, M2_vmac2su_s1
-    O << " += vmpyhsu(";
-    printOperand(MI, 2, O);
-    O << ", ";
-    printOperand(MI, 3, O);
-    break;
-  case 266:
-    // M2_vmpy2es_s0, M2_vmpy2es_s1
-    O << " = vmpyeh(";
-    printOperand(MI, 1, O);
-    O << ", ";
-    printOperand(MI, 2, O);
-    break;
-  case 267:
-    // M2_vmpy2s_s0, M2_vmpy2s_s0pack, M2_vmpy2s_s1, M2_vmpy2s_s1pack
-    O << " = vmpyh(";
-    printOperand(MI, 1, O);
-    O << ", ";
-    printOperand(MI, 2, O);
-    break;
-  case 268:
-    // M2_vmpy2su_s0, M2_vmpy2su_s1
-    O << " = vmpyhsu(";
-    printOperand(MI, 1, O);
-    O << ", ";
-    printOperand(MI, 2, O);
-    break;
-  case 269:
-    // M2_vraddh
-    O << " = vraddh(";
-    printOperand(MI, 1, O);
-    O << ", ";
-    printOperand(MI, 2, O);
-    O << ')';
-    return;
-    break;
-  case 270:
-    // M2_vradduh
-    O << " = vradduh(";
-    printOperand(MI, 1, O);
-    O << ", ";
-    printOperand(MI, 2, O);
-    O << ')';
-    return;
-    break;
-  case 271:
-    // M2_vrcmaci_s0, M2_vrcmaci_s0c
-    O << " += vrcmpyi(";
-    printOperand(MI, 2, O);
-    O << ", ";
-    printOperand(MI, 3, O);
-    break;
-  case 272:
-    // M2_vrcmacr_s0, M2_vrcmacr_s0c
-    O << " += vrcmpyr(";
-    printOperand(MI, 2, O);
-    O << ", ";
-    printOperand(MI, 3, O);
-    break;
-  case 273:
-    // M2_vrcmpyi_s0, M2_vrcmpyi_s0c
-    O << " = vrcmpyi(";
-    printOperand(MI, 1, O);
-    O << ", ";
-    printOperand(MI, 2, O);
-    break;
-  case 274:
-    // M2_vrcmpyr_s0, M2_vrcmpyr_s0c
-    O << " = vrcmpyr(";
-    printOperand(MI, 1, O);
-    O << ", ";
-    printOperand(MI, 2, O);
-    break;
-  case 275:
-    // M2_vrcmpys_acc_s1, M2_vrcmpys_acc_s1_h, M2_vrcmpys_acc_s1_l
-    O << " += vrcmpys(";
-    printOperand(MI, 2, O);
-    O << ", ";
-    printOperand(MI, 3, O);
-    break;
-  case 276:
-    // M2_vrcmpys_s1, M2_vrcmpys_s1rp
-    O << "=vrcmpys(";
+    // M2_cmpyrs_s0, M2_cmpyrs_s1, M2_cmpyrsc_s0, M2_cmpyrsc_s1, M2_cmpys_s0,...
+    O << " = cmpy(";
     printOperand(MI, 1, O);
     O << ',';
     printOperand(MI, 2, O);
     break;
-  case 277:
-    // M2_vrcmpys_s1_h, M2_vrcmpys_s1_l, M2_vrcmpys_s1rp_h, M2_vrcmpys_s1rp_l
-    O << " = vrcmpys(";
+  case 242:
+    // M2_cnacs_s0, M2_cnacs_s1, M2_cnacsc_s0, M2_cnacsc_s1
+    O << " -= cmpy(";
+    printOperand(MI, 2, O);
+    O << ',';
+    printOperand(MI, 3, O);
+    break;
+  case 243:
+    // M2_dpmpyss_acc_s0, M2_mpy_acc_hh_s0, M2_mpy_acc_hh_s1, M2_mpy_acc_hl_s...
+    O << " += mpy(";
+    printOperand(MI, 2, O);
+    break;
+  case 244:
+    // M2_dpmpyss_nac_s0, M2_mpy_nac_hh_s0, M2_mpy_nac_hh_s1, M2_mpy_nac_hl_s...
+    O << " -= mpy(";
+    printOperand(MI, 2, O);
+    break;
+  case 245:
+    // M2_dpmpyss_rnd_s0, M2_dpmpyss_s0, M2_hmmpyh_rs1, M2_hmmpyh_s1, M2_hmmp...
+    O << " = mpy(";
     printOperand(MI, 1, O);
-    O << ", ";
+    break;
+  case 246:
+    // M2_dpmpyuu_acc_s0, M2_mpyu_acc_hh_s0, M2_mpyu_acc_hh_s1, M2_mpyu_acc_h...
+    O << " += mpyu(";
+    printOperand(MI, 2, O);
+    break;
+  case 247:
+    // M2_dpmpyuu_nac_s0, M2_mpyu_nac_hh_s0, M2_mpyu_nac_hh_s1, M2_mpyu_nac_h...
+    O << " -= mpyu(";
+    printOperand(MI, 2, O);
+    break;
+  case 248:
+    // M2_dpmpyuu_s0, M2_mpyu_hh_s0, M2_mpyu_hh_s1, M2_mpyu_hl_s0, M2_mpyu_hl...
+    O << " = mpyu(";
+    printOperand(MI, 1, O);
+    break;
+  case 249:
+    // M2_maci, M2_macsip
+    O << " += mpyi(";
+    printOperand(MI, 2, O);
+    break;
+  case 250:
+    // M2_macsin
+    O << " -= mpyi(";
+    printOperand(MI, 2, O);
+    O << ",#";
+    printOperand(MI, 3, O);
+    O << ')';
+    return;
+    break;
+  case 251:
+    // M2_mmachs_rs0, M2_mmachs_rs1, M2_mmachs_s0, M2_mmachs_s1
+    O << " += vmpywoh(";
+    printOperand(MI, 2, O);
+    O << ',';
+    printOperand(MI, 3, O);
+    break;
+  case 252:
+    // M2_mmacls_rs0, M2_mmacls_rs1, M2_mmacls_s0, M2_mmacls_s1
+    O << " += vmpyweh(";
+    printOperand(MI, 2, O);
+    O << ',';
+    printOperand(MI, 3, O);
+    break;
+  case 253:
+    // M2_mmacuhs_rs0, M2_mmacuhs_rs1, M2_mmacuhs_s0, M2_mmacuhs_s1
+    O << " += vmpywouh(";
+    printOperand(MI, 2, O);
+    O << ',';
+    printOperand(MI, 3, O);
+    break;
+  case 254:
+    // M2_mmaculs_rs0, M2_mmaculs_rs1, M2_mmaculs_s0, M2_mmaculs_s1
+    O << " += vmpyweuh(";
+    printOperand(MI, 2, O);
+    O << ',';
+    printOperand(MI, 3, O);
+    break;
+  case 255:
+    // M2_mmpyh_rs0, M2_mmpyh_rs1, M2_mmpyh_s0, M2_mmpyh_s1
+    O << " = vmpywoh(";
+    printOperand(MI, 1, O);
+    O << ',';
+    printOperand(MI, 2, O);
+    break;
+  case 256:
+    // M2_mmpyl_rs0, M2_mmpyl_rs1, M2_mmpyl_s0, M2_mmpyl_s1
+    O << " = vmpyweh(";
+    printOperand(MI, 1, O);
+    O << ',';
+    printOperand(MI, 2, O);
+    break;
+  case 257:
+    // M2_mmpyuh_rs0, M2_mmpyuh_rs1, M2_mmpyuh_s0, M2_mmpyuh_s1
+    O << " = vmpywouh(";
+    printOperand(MI, 1, O);
+    O << ',';
+    printOperand(MI, 2, O);
+    break;
+  case 258:
+    // M2_mmpyul_rs0, M2_mmpyul_rs1, M2_mmpyul_s0, M2_mmpyul_s1
+    O << " = vmpyweuh(";
+    printOperand(MI, 1, O);
+    O << ',';
+    printOperand(MI, 2, O);
+    break;
+  case 259:
+    // M2_mpyi, M2_mpysmi
+    O << " = mpyi(";
+    printOperand(MI, 1, O);
+    break;
+  case 260:
+    // M2_mpysin
+    O << " = -mpyi(";
+    printOperand(MI, 1, O);
+    O << ",#";
+    printOperand(MI, 2, O);
+    O << ')';
+    return;
+    break;
+  case 261:
+    // M2_mpysip
+    O << " = +mpyi(";
+    printOperand(MI, 1, O);
+    O << ",#";
+    printOperand(MI, 2, O);
+    O << ')';
+    return;
+    break;
+  case 262:
+    // M2_mpysu_up
+    O << " = mpysu(";
+    printOperand(MI, 1, O);
+    O << ',';
+    printOperand(MI, 2, O);
+    O << ')';
+    return;
+    break;
+  case 263:
+    // M2_mpyui
+    O << " = mpyui(";
+    printOperand(MI, 1, O);
+    O << ',';
+    printOperand(MI, 2, O);
+    O << ')';
+    return;
+    break;
+  case 264:
+    // M2_nacci, M2_naccii
+    O << " -= add(";
+    printOperand(MI, 2, O);
+    break;
+  case 265:
+    // M2_subacc
+    O << " += sub(";
+    printOperand(MI, 2, O);
+    O << ',';
+    printOperand(MI, 3, O);
+    O << ')';
+    return;
+    break;
+  case 266:
+    // M2_vabsdiffh, V6_vabsdiffh_alt, V6_vabsdiffh_alt_128B
+    O << " = vabsdiffh(";
+    printOperand(MI, 1, O);
+    O << ',';
+    printOperand(MI, 2, O);
+    O << ')';
+    return;
+    break;
+  case 267:
+    // M2_vabsdiffw, V6_vabsdiffw_alt, V6_vabsdiffw_alt_128B
+    O << " = vabsdiffw(";
+    printOperand(MI, 1, O);
+    O << ',';
+    printOperand(MI, 2, O);
+    O << ')';
+    return;
+    break;
+  case 268:
+    // M2_vcmac_s0_sat_i
+    O << " += vcmpyi(";
+    printOperand(MI, 2, O);
+    O << ',';
+    printOperand(MI, 3, O);
+    O << "):sat";
+    return;
+    break;
+  case 269:
+    // M2_vcmac_s0_sat_r
+    O << " += vcmpyr(";
+    printOperand(MI, 2, O);
+    O << ',';
+    printOperand(MI, 3, O);
+    O << "):sat";
+    return;
+    break;
+  case 270:
+    // M2_vcmpy_s0_sat_i, M2_vcmpy_s1_sat_i
+    O << " = vcmpyi(";
+    printOperand(MI, 1, O);
+    O << ',';
+    printOperand(MI, 2, O);
+    break;
+  case 271:
+    // M2_vcmpy_s0_sat_r, M2_vcmpy_s1_sat_r
+    O << " = vcmpyr(";
+    printOperand(MI, 1, O);
+    O << ',';
+    printOperand(MI, 2, O);
+    break;
+  case 272:
+    // M2_vdmacs_s0, M2_vdmacs_s1
+    O << " += vdmpy(";
+    printOperand(MI, 2, O);
+    O << ',';
+    printOperand(MI, 3, O);
+    break;
+  case 273:
+    // M2_vdmpyrs_s0, M2_vdmpyrs_s1, M2_vdmpys_s0, M2_vdmpys_s1
+    O << " = vdmpy(";
+    printOperand(MI, 1, O);
+    O << ',';
+    printOperand(MI, 2, O);
+    break;
+  case 274:
+    // M2_vmac2, M2_vmac2s_s0, M2_vmac2s_s1, V6_vmpyhsat_acc_alt, V6_vmpyhsat...
+    O << " += vmpyh(";
+    printOperand(MI, 2, O);
+    O << ',';
+    printOperand(MI, 3, O);
+    break;
+  case 275:
+    // M2_vmac2es, M2_vmac2es_s0, M2_vmac2es_s1
+    O << " += vmpyeh(";
+    printOperand(MI, 2, O);
+    O << ',';
+    printOperand(MI, 3, O);
+    break;
+  case 276:
+    // M2_vmac2su_s0, M2_vmac2su_s1
+    O << " += vmpyhsu(";
+    printOperand(MI, 2, O);
+    O << ',';
+    printOperand(MI, 3, O);
+    break;
+  case 277:
+    // M2_vmpy2es_s0, M2_vmpy2es_s1
+    O << " = vmpyeh(";
+    printOperand(MI, 1, O);
+    O << ',';
     printOperand(MI, 2, O);
     break;
   case 278:
-    // M2_vrmac_s0
-    O << " += vrmpyh(";
+    // M2_vmpy2s_s0, M2_vmpy2s_s0pack, M2_vmpy2s_s1, M2_vmpy2s_s1pack, V6_vmp...
+    O << " = vmpyh(";
+    printOperand(MI, 1, O);
+    O << ',';
     printOperand(MI, 2, O);
-    O << ", ";
-    printOperand(MI, 3, O);
-    O << ')';
-    return;
     break;
   case 279:
-    // M2_vrmpy_s0
-    O << " = vrmpyh(";
+    // M2_vmpy2su_s0, M2_vmpy2su_s1
+    O << " = vmpyhsu(";
     printOperand(MI, 1, O);
-    O << ", ";
+    O << ',';
     printOperand(MI, 2, O);
-    O << ')';
-    return;
     break;
   case 280:
-    // M2_xor_xacc, M4_xor_xacc
-    O << " ^= xor(";
+    // M2_vraddh
+    O << " = vraddh(";
+    printOperand(MI, 1, O);
+    O << ',';
     printOperand(MI, 2, O);
-    O << ", ";
-    printOperand(MI, 3, O);
     O << ')';
     return;
     break;
   case 281:
-    // M4_and_and, M4_and_andn
-    O << " &= and(";
+    // M2_vradduh
+    O << " = vradduh(";
+    printOperand(MI, 1, O);
+    O << ',';
     printOperand(MI, 2, O);
+    O << ')';
+    return;
     break;
   case 282:
-    // M4_and_or
-    O << " &= or(";
+    // M2_vrcmaci_s0, M2_vrcmaci_s0c
+    O << " += vrcmpyi(";
     printOperand(MI, 2, O);
-    O << ", ";
+    O << ',';
     printOperand(MI, 3, O);
-    O << ')';
-    return;
     break;
   case 283:
-    // M4_and_xor
-    O << " &= xor(";
+    // M2_vrcmacr_s0, M2_vrcmacr_s0c
+    O << " += vrcmpyr(";
     printOperand(MI, 2, O);
-    O << ", ";
+    O << ',';
     printOperand(MI, 3, O);
-    O << ')';
-    return;
     break;
   case 284:
-    // M4_cmpyi_wh, M4_cmpyi_whc
-    O << " = cmpyiwh(";
+    // M2_vrcmpyi_s0, M2_vrcmpyi_s0c
+    O << " = vrcmpyi(";
     printOperand(MI, 1, O);
-    O << ", ";
+    O << ',';
     printOperand(MI, 2, O);
     break;
   case 285:
-    // M4_cmpyr_wh, M4_cmpyr_whc
-    O << " = cmpyrwh(";
+    // M2_vrcmpyr_s0, M2_vrcmpyr_s0c
+    O << " = vrcmpyr(";
     printOperand(MI, 1, O);
-    O << ", ";
+    O << ',';
     printOperand(MI, 2, O);
     break;
   case 286:
-    // M4_mpyri_addi, M4_mpyrr_addi, S4_addi_asl_ri, S4_addi_lsr_ri
-    O << " = add(#";
-    printExtOperand(MI, 1, O);
+    // M2_vrcmpys_acc_s1, M2_vrcmpys_acc_s1_h, M2_vrcmpys_acc_s1_l
+    O << " += vrcmpys(";
+    printOperand(MI, 2, O);
+    O << ',';
+    printOperand(MI, 3, O);
     break;
   case 287:
-    // M4_or_and, M4_or_andn, S4_or_andi
-    O << " |= and(";
+    // M2_vrcmpys_s1, M2_vrcmpys_s1_h, M2_vrcmpys_s1_l, M2_vrcmpys_s1rp, M2_v...
+    O << " = vrcmpys(";
+    printOperand(MI, 1, O);
+    O << ',';
     printOperand(MI, 2, O);
     break;
   case 288:
-    // M4_or_or, S4_or_ori
-    O << " |= or(";
+    // M2_vrmac_s0
+    O << " += vrmpyh(";
     printOperand(MI, 2, O);
+    O << ',';
+    printOperand(MI, 3, O);
+    O << ')';
+    return;
     break;
   case 289:
-    // M4_or_xor
-    O << " |= xor(";
+    // M2_vrmpy_s0
+    O << " = vrmpyh(";
+    printOperand(MI, 1, O);
+    O << ',';
     printOperand(MI, 2, O);
-    O << ", ";
-    printOperand(MI, 3, O);
     O << ')';
     return;
     break;
   case 290:
-    // M4_pmpyw
-    O << " = pmpyw(";
-    printOperand(MI, 1, O);
-    O << ", ";
+    // M2_xor_xacc, M4_xor_xacc
+    O << " ^= xor(";
     printOperand(MI, 2, O);
-    O << ')';
-    return;
-    break;
-  case 291:
-    // M4_pmpyw_acc
-    O << " ^= pmpyw(";
-    printOperand(MI, 2, O);
-    O << ", ";
+    O << ',';
     printOperand(MI, 3, O);
     O << ')';
     return;
     break;
-  case 292:
-    // M4_vpmpyh
-    O << " = vpmpyh(";
-    printOperand(MI, 1, O);
-    O << ", ";
+  case 291:
+    // M4_and_and, M4_and_andn
+    O << " &= and(";
     printOperand(MI, 2, O);
+    break;
+  case 292:
+    // M4_and_or
+    O << " &= or(";
+    printOperand(MI, 2, O);
+    O << ',';
+    printOperand(MI, 3, O);
     O << ')';
     return;
     break;
   case 293:
-    // M4_vpmpyh_acc
-    O << " ^= vpmpyh(";
+    // M4_and_xor
+    O << " &= xor(";
     printOperand(MI, 2, O);
-    O << ", ";
+    O << ',';
     printOperand(MI, 3, O);
     O << ')';
     return;
     break;
   case 294:
-    // M4_vrmpyeh_acc_s0, M4_vrmpyeh_acc_s1
-    O << " += vrmpyweh(";
+    // M4_cmpyi_wh, M4_cmpyi_whc
+    O << " = cmpyiwh(";
+    printOperand(MI, 1, O);
+    O << ',';
     printOperand(MI, 2, O);
-    O << ", ";
-    printOperand(MI, 3, O);
     break;
   case 295:
-    // M4_vrmpyeh_s0, M4_vrmpyeh_s1
-    O << " = vrmpyweh(";
+    // M4_cmpyr_wh, M4_cmpyr_whc
+    O << " = cmpyrwh(";
     printOperand(MI, 1, O);
-    O << ", ";
+    O << ',';
     printOperand(MI, 2, O);
     break;
   case 296:
-    // M4_vrmpyoh_acc_s0, M4_vrmpyoh_acc_s1
-    O << " += vrmpywoh(";
-    printOperand(MI, 2, O);
-    O << ", ";
-    printOperand(MI, 3, O);
+    // M4_mpyri_addi, M4_mpyrr_addi, S4_addi_asl_ri, S4_addi_lsr_ri
+    O << " = add(#";
+    printOperand(MI, 1, O);
     break;
   case 297:
-    // M4_vrmpyoh_s0, M4_vrmpyoh_s1
-    O << " = vrmpywoh(";
-    printOperand(MI, 1, O);
-    O << ", ";
+    // M4_or_and, M4_or_andn, S4_or_andi
+    O << " |= and(";
     printOperand(MI, 2, O);
     break;
   case 298:
-    // M4_xor_and, M4_xor_andn
-    O << " ^= and(";
+    // M4_or_or, S4_or_ori
+    O << " |= or(";
     printOperand(MI, 2, O);
     break;
   case 299:
-    // M4_xor_or
-    O << " ^= or(";
+    // M4_or_xor
+    O << " |= xor(";
     printOperand(MI, 2, O);
-    O << ", ";
+    O << ',';
     printOperand(MI, 3, O);
     O << ')';
     return;
     break;
   case 300:
-    // M5_vdmacbsu
-    O << " += vdmpybsu(";
+    // M4_pmpyw
+    O << " = pmpyw(";
+    printOperand(MI, 1, O);
+    O << ',';
     printOperand(MI, 2, O);
-    O << ", ";
-    printOperand(MI, 3, O);
-    O << "):sat";
+    O << ')';
     return;
     break;
   case 301:
-    // M5_vdmpybsu
-    O << " = vdmpybsu(";
-    printOperand(MI, 1, O);
-    O << ", ";
+    // M4_pmpyw_acc
+    O << " ^= pmpyw(";
     printOperand(MI, 2, O);
-    O << "):sat";
-    return;
-    break;
-  case 302:
-    // M5_vmacbsu
-    O << " += vmpybsu(";
-    printOperand(MI, 2, O);
-    O << ", ";
+    O << ',';
     printOperand(MI, 3, O);
     O << ')';
     return;
     break;
-  case 303:
-    // M5_vmacbuu
-    O << " += vmpybu(";
+  case 302:
+    // M4_vpmpyh
+    O << " = vpmpyh(";
+    printOperand(MI, 1, O);
+    O << ',';
     printOperand(MI, 2, O);
-    O << ", ";
+    O << ')';
+    return;
+    break;
+  case 303:
+    // M4_vpmpyh_acc
+    O << " ^= vpmpyh(";
+    printOperand(MI, 2, O);
+    O << ',';
     printOperand(MI, 3, O);
     O << ')';
     return;
     break;
   case 304:
-    // M5_vmpybsu
-    O << " = vmpybsu(";
-    printOperand(MI, 1, O);
-    O << ", ";
+    // M4_vrmpyeh_acc_s0, M4_vrmpyeh_acc_s1
+    O << " += vrmpyweh(";
     printOperand(MI, 2, O);
-    O << ')';
-    return;
+    O << ',';
+    printOperand(MI, 3, O);
     break;
   case 305:
-    // M5_vmpybuu
-    O << " = vmpybu(";
+    // M4_vrmpyeh_s0, M4_vrmpyeh_s1
+    O << " = vrmpyweh(";
     printOperand(MI, 1, O);
-    O << ", ";
+    O << ',';
     printOperand(MI, 2, O);
-    O << ')';
-    return;
     break;
   case 306:
-    // M5_vrmacbsu
-    O << " += vrmpybsu(";
+    // M4_vrmpyoh_acc_s0, M4_vrmpyoh_acc_s1
+    O << " += vrmpywoh(";
     printOperand(MI, 2, O);
-    O << ", ";
+    O << ',';
     printOperand(MI, 3, O);
-    O << ')';
-    return;
     break;
   case 307:
-    // M5_vrmacbuu
-    O << " += vrmpybu(";
+    // M4_vrmpyoh_s0, M4_vrmpyoh_s1
+    O << " = vrmpywoh(";
+    printOperand(MI, 1, O);
+    O << ',';
     printOperand(MI, 2, O);
-    O << ", ";
-    printOperand(MI, 3, O);
-    O << ')';
-    return;
     break;
   case 308:
-    // M5_vrmpybsu
-    O << " = vrmpybsu(";
-    printOperand(MI, 1, O);
-    O << ", ";
+    // M4_xor_and, M4_xor_andn
+    O << " ^= and(";
     printOperand(MI, 2, O);
-    O << ')';
-    return;
     break;
   case 309:
-    // M5_vrmpybuu
-    O << " = vrmpybu(";
-    printOperand(MI, 1, O);
-    O << ", ";
+    // M4_xor_or
+    O << " ^= or(";
     printOperand(MI, 2, O);
+    O << ',';
+    printOperand(MI, 3, O);
     O << ')';
     return;
     break;
   case 310:
-    // PS_storerbnewabs, PS_storerhnewabs, PS_storerinewabs
-    O << ".new";
+    // M5_vdmacbsu
+    O << " += vdmpybsu(";
+    printOperand(MI, 2, O);
+    O << ',';
+    printOperand(MI, 3, O);
+    O << "):sat";
     return;
     break;
   case 311:
-    // PS_storerfabs
-    O << ".h";
+    // M5_vdmpybsu
+    O << " = vdmpybsu(";
+    printOperand(MI, 1, O);
+    O << ',';
+    printOperand(MI, 2, O);
+    O << "):sat";
     return;
     break;
   case 312:
-    // S2_addasl_rrri
-    O << " = addasl(";
-    printOperand(MI, 1, O);
-    O << ", ";
+    // M5_vmacbsu
+    O << " += vmpybsu(";
     printOperand(MI, 2, O);
-    O << ", #";
+    O << ',';
     printOperand(MI, 3, O);
     O << ')';
     return;
     break;
   case 313:
-    // S2_asl_i_p, S2_asl_i_r, S2_asl_i_r_sat, S2_asl_r_p, S2_asl_r_r, S2_asl...
-    O << " = asl(";
-    printOperand(MI, 1, O);
+    // M5_vmacbuu
+    O << " += vmpybu(";
+    printOperand(MI, 2, O);
+    O << ',';
+    printOperand(MI, 3, O);
+    O << ')';
+    return;
     break;
   case 314:
-    // S2_asl_i_p_acc, S2_asl_i_r_acc, S2_asl_r_p_acc, S2_asl_r_r_acc
-    O << " += asl(";
-    printOperand(MI, 2, O);
-    break;
-  case 315:
-    // S2_asl_i_p_and, S2_asl_i_r_and, S2_asl_r_p_and, S2_asl_r_r_and
-    O << " &= asl(";
-    printOperand(MI, 2, O);
-    break;
-  case 316:
-    // S2_asl_i_p_nac, S2_asl_i_r_nac, S2_asl_r_p_nac, S2_asl_r_r_nac
-    O << " -= asl(";
-    printOperand(MI, 2, O);
-    break;
-  case 317:
-    // S2_asl_i_p_or, S2_asl_i_r_or, S2_asl_r_p_or, S2_asl_r_r_or
-    O << " |= asl(";
-    printOperand(MI, 2, O);
-    break;
-  case 318:
-    // S2_asl_i_p_xacc, S2_asl_i_r_xacc, S2_asl_r_p_xor
-    O << " ^= asl(";
-    printOperand(MI, 2, O);
-    break;
-  case 319:
-    // S2_asl_i_vh, S2_asl_r_vh
-    O << " = vaslh(";
+    // M5_vmpybsu
+    O << " = vmpybsu(";
     printOperand(MI, 1, O);
-    break;
-  case 320:
-    // S2_asl_i_vw, S2_asl_r_vw
-    O << " = vaslw(";
-    printOperand(MI, 1, O);
-    break;
-  case 321:
-    // S2_asr_i_p, S2_asr_i_p_rnd, S2_asr_i_r, S2_asr_i_r_rnd, S2_asr_r_p, S2...
-    O << " = asr(";
-    printOperand(MI, 1, O);
-    break;
-  case 322:
-    // S2_asr_i_p_acc, S2_asr_i_r_acc, S2_asr_r_p_acc, S2_asr_r_r_acc
-    O << " += asr(";
-    printOperand(MI, 2, O);
-    break;
-  case 323:
-    // S2_asr_i_p_and, S2_asr_i_r_and, S2_asr_r_p_and, S2_asr_r_r_and
-    O << " &= asr(";
-    printOperand(MI, 2, O);
-    break;
-  case 324:
-    // S2_asr_i_p_nac, S2_asr_i_r_nac, S2_asr_r_p_nac, S2_asr_r_r_nac
-    O << " -= asr(";
-    printOperand(MI, 2, O);
-    break;
-  case 325:
-    // S2_asr_i_p_or, S2_asr_i_r_or, S2_asr_r_p_or, S2_asr_r_r_or
-    O << " |= asr(";
-    printOperand(MI, 2, O);
-    break;
-  case 326:
-    // S2_asr_i_p_rnd_goodsyntax, S2_asr_i_r_rnd_goodsyntax
-    O << " = asrrnd(";
-    printOperand(MI, 1, O);
-    O << ", #";
+    O << ',';
     printOperand(MI, 2, O);
     O << ')';
     return;
     break;
-  case 327:
-    // S2_asr_i_svw_trun, S2_asr_i_vw, S2_asr_r_svw_trun, S2_asr_r_vw
-    O << " = vasrw(";
+  case 315:
+    // M5_vmpybuu
+    O << " = vmpybu(";
     printOperand(MI, 1, O);
+    O << ',';
+    printOperand(MI, 2, O);
+    O << ')';
+    return;
+    break;
+  case 316:
+    // M5_vrmacbsu
+    O << " += vrmpybsu(";
+    printOperand(MI, 2, O);
+    O << ',';
+    printOperand(MI, 3, O);
+    O << ')';
+    return;
+    break;
+  case 317:
+    // M5_vrmacbuu
+    O << " += vrmpybu(";
+    printOperand(MI, 2, O);
+    O << ',';
+    printOperand(MI, 3, O);
+    O << ')';
+    return;
+    break;
+  case 318:
+    // M5_vrmpybsu
+    O << " = vrmpybsu(";
+    printOperand(MI, 1, O);
+    O << ',';
+    printOperand(MI, 2, O);
+    O << ')';
+    return;
+    break;
+  case 319:
+    // M5_vrmpybuu
+    O << " = vrmpybu(";
+    printOperand(MI, 1, O);
+    O << ',';
+    printOperand(MI, 2, O);
+    O << ')';
+    return;
+    break;
+  case 320:
+    // M6_vabsdiffb
+    O << " = vabsdiffb(";
+    printOperand(MI, 1, O);
+    O << ',';
+    printOperand(MI, 2, O);
+    O << ')';
+    return;
+    break;
+  case 321:
+    // M6_vabsdiffub, V6_vabsdiffub_alt, V6_vabsdiffub_alt_128B
+    O << " = vabsdiffub(";
+    printOperand(MI, 1, O);
+    O << ',';
+    printOperand(MI, 2, O);
+    O << ')';
+    return;
+    break;
+  case 322:
+    // PS_loadrbabs
+    O << " = memb(#";
+    printOperand(MI, 1, O);
+    O << ')';
+    return;
+    break;
+  case 323:
+    // PS_loadrdabs
+    O << " = memd(#";
+    printOperand(MI, 1, O);
+    O << ')';
+    return;
+    break;
+  case 324:
+    // PS_loadrhabs
+    O << " = memh(#";
+    printOperand(MI, 1, O);
+    O << ')';
+    return;
+    break;
+  case 325:
+    // PS_loadriabs
+    O << " = memw(#";
+    printOperand(MI, 1, O);
+    O << ')';
+    return;
+    break;
+  case 326:
+    // PS_loadrubabs
+    O << " = memub(#";
+    printOperand(MI, 1, O);
+    O << ')';
+    return;
+    break;
+  case 327:
+    // PS_loadruhabs
+    O << " = memuh(#";
+    printOperand(MI, 1, O);
+    O << ')';
+    return;
     break;
   case 328:
-    // S2_asr_i_vh, S2_asr_r_vh, S5_vasrhrnd, S5_vasrhrnd_goodsyntax
-    O << " = vasrh(";
+    // PS_storerbabs, PS_storerbnewabs, PS_storerdabs, PS_storerfabs, PS_stor...
+    O << ") = ";
     printOperand(MI, 1, O);
     break;
   case 329:
-    // S2_asr_r_p_xor
-    O << " ^= asr(";
+    // S2_addasl_rrri
+    O << " = addasl(";
+    printOperand(MI, 1, O);
+    O << ',';
     printOperand(MI, 2, O);
-    O << ", ";
+    O << ",#";
     printOperand(MI, 3, O);
     O << ')';
     return;
     break;
   case 330:
+    // S2_asl_i_p, S2_asl_i_r, S2_asl_i_r_sat, S2_asl_r_p, S2_asl_r_r, S2_asl...
+    O << " = asl(";
+    printOperand(MI, 1, O);
+    break;
+  case 331:
+    // S2_asl_i_p_acc, S2_asl_i_r_acc, S2_asl_r_p_acc, S2_asl_r_r_acc
+    O << " += asl(";
+    printOperand(MI, 2, O);
+    break;
+  case 332:
+    // S2_asl_i_p_and, S2_asl_i_r_and, S2_asl_r_p_and, S2_asl_r_r_and
+    O << " &= asl(";
+    printOperand(MI, 2, O);
+    break;
+  case 333:
+    // S2_asl_i_p_nac, S2_asl_i_r_nac, S2_asl_r_p_nac, S2_asl_r_r_nac
+    O << " -= asl(";
+    printOperand(MI, 2, O);
+    break;
+  case 334:
+    // S2_asl_i_p_or, S2_asl_i_r_or, S2_asl_r_p_or, S2_asl_r_r_or
+    O << " |= asl(";
+    printOperand(MI, 2, O);
+    break;
+  case 335:
+    // S2_asl_i_p_xacc, S2_asl_i_r_xacc, S2_asl_r_p_xor
+    O << " ^= asl(";
+    printOperand(MI, 2, O);
+    break;
+  case 336:
+    // S2_asl_i_vh, S2_asl_r_vh, V6_vaslh_alt, V6_vaslh_alt_128B, V6_vaslhv_a...
+    O << " = vaslh(";
+    printOperand(MI, 1, O);
+    break;
+  case 337:
+    // S2_asl_i_vw, S2_asl_r_vw, V6_vaslw_alt, V6_vaslw_alt_128B, V6_vaslwv_a...
+    O << " = vaslw(";
+    printOperand(MI, 1, O);
+    break;
+  case 338:
+    // S2_asr_i_p, S2_asr_i_p_rnd, S2_asr_i_r, S2_asr_i_r_rnd, S2_asr_r_p, S2...
+    O << " = asr(";
+    printOperand(MI, 1, O);
+    break;
+  case 339:
+    // S2_asr_i_p_acc, S2_asr_i_r_acc, S2_asr_r_p_acc, S2_asr_r_r_acc
+    O << " += asr(";
+    printOperand(MI, 2, O);
+    break;
+  case 340:
+    // S2_asr_i_p_and, S2_asr_i_r_and, S2_asr_r_p_and, S2_asr_r_r_and
+    O << " &= asr(";
+    printOperand(MI, 2, O);
+    break;
+  case 341:
+    // S2_asr_i_p_nac, S2_asr_i_r_nac, S2_asr_r_p_nac, S2_asr_r_r_nac
+    O << " -= asr(";
+    printOperand(MI, 2, O);
+    break;
+  case 342:
+    // S2_asr_i_p_or, S2_asr_i_r_or, S2_asr_r_p_or, S2_asr_r_r_or
+    O << " |= asr(";
+    printOperand(MI, 2, O);
+    break;
+  case 343:
+    // S2_asr_i_p_rnd_goodsyntax, S2_asr_i_r_rnd_goodsyntax
+    O << " = asrrnd(";
+    printOperand(MI, 1, O);
+    O << ",#";
+    printOperand(MI, 2, O);
+    O << ')';
+    return;
+    break;
+  case 344:
+    // S2_asr_i_svw_trun, S2_asr_i_vw, S2_asr_r_svw_trun, S2_asr_r_vw, V6_vas...
+    O << " = vasrw(";
+    printOperand(MI, 1, O);
+    break;
+  case 345:
+    // S2_asr_i_vh, S2_asr_r_vh, S5_vasrhrnd, S5_vasrhrnd_goodsyntax, V6_vasr...
+    O << " = vasrh(";
+    printOperand(MI, 1, O);
+    break;
+  case 346:
+    // S2_asr_r_p_xor
+    O << " ^= asr(";
+    printOperand(MI, 2, O);
+    O << ',';
+    printOperand(MI, 3, O);
+    O << ')';
+    return;
+    break;
+  case 347:
     // S2_brev, S2_brevp
     O << " = brev(";
     printOperand(MI, 1, O);
     O << ')';
     return;
     break;
-  case 331:
+  case 348:
     // S2_cabacdecbin
     O << " = decbin(";
     printOperand(MI, 1, O);
-    O << ", ";
+    O << ',';
     printOperand(MI, 2, O);
     O << ')';
     return;
     break;
-  case 332:
-    // S2_cabacencbin
-    O << " = encbin(";
-    printOperand(MI, 1, O);
-    O << ',';
-    printOperand(MI, 2, O);
-    O << ',';
-    printOperand(MI, 3, O);
-    O << ')';
-    return;
-    break;
-  case 333:
+  case 349:
     // S2_cl0, S2_cl0p
     O << " = cl0(";
     printOperand(MI, 1, O);
     O << ')';
     return;
     break;
-  case 334:
+  case 350:
     // S2_cl1, S2_cl1p
     O << " = cl1(";
     printOperand(MI, 1, O);
     O << ')';
     return;
     break;
-  case 335:
+  case 351:
     // S2_clb, S2_clbp
     O << " = clb(";
     printOperand(MI, 1, O);
     O << ')';
     return;
     break;
-  case 336:
+  case 352:
     // S2_clbnorm, S4_clbpnorm
     O << " = normamt(";
     printOperand(MI, 1, O);
     O << ')';
     return;
     break;
-  case 337:
+  case 353:
     // S2_clrbit_i, S2_clrbit_r
     O << " = clrbit(";
     printOperand(MI, 1, O);
     break;
-  case 338:
+  case 354:
     // S2_ct0, S2_ct0p
     O << " = ct0(";
     printOperand(MI, 1, O);
     O << ')';
     return;
     break;
-  case 339:
+  case 355:
     // S2_ct1, S2_ct1p
     O << " = ct1(";
     printOperand(MI, 1, O);
     O << ')';
     return;
     break;
-  case 340:
+  case 356:
     // S2_deinterleave
     O << " = deinterleave(";
     printOperand(MI, 1, O);
     O << ')';
     return;
     break;
-  case 341:
+  case 357:
     // S2_extractu, S2_extractu_rp, S2_extractup, S2_extractup_rp
     O << " = extractu(";
     printOperand(MI, 1, O);
     break;
-  case 342:
+  case 358:
     // S2_insert, S2_insert_rp, S2_insertp, S2_insertp_rp
     O << " = insert(";
     printOperand(MI, 2, O);
     break;
-  case 343:
+  case 359:
     // S2_interleave
     O << " = interleave(";
     printOperand(MI, 1, O);
     O << ')';
     return;
     break;
-  case 344:
+  case 360:
     // S2_lfsp
     O << " = lfs(";
     printOperand(MI, 1, O);
-    O << ", ";
+    O << ',';
     printOperand(MI, 2, O);
     O << ')';
     return;
     break;
-  case 345:
+  case 361:
     // S2_lsl_r_p, S2_lsl_r_r
     O << " = lsl(";
     printOperand(MI, 1, O);
-    O << ", ";
+    O << ',';
     printOperand(MI, 2, O);
     O << ')';
     return;
     break;
-  case 346:
+  case 362:
     // S2_lsl_r_p_acc, S2_lsl_r_r_acc
     O << " += lsl(";
     printOperand(MI, 2, O);
-    O << ", ";
+    O << ',';
     printOperand(MI, 3, O);
-    O << ')';
-    return;
-    break;
-  case 347:
-    // S2_lsl_r_p_and, S2_lsl_r_r_and
-    O << " &= lsl(";
-    printOperand(MI, 2, O);
-    O << ", ";
-    printOperand(MI, 3, O);
-    O << ')';
-    return;
-    break;
-  case 348:
-    // S2_lsl_r_p_nac, S2_lsl_r_r_nac
-    O << " -= lsl(";
-    printOperand(MI, 2, O);
-    O << ", ";
-    printOperand(MI, 3, O);
-    O << ')';
-    return;
-    break;
-  case 349:
-    // S2_lsl_r_p_or, S2_lsl_r_r_or
-    O << " |= lsl(";
-    printOperand(MI, 2, O);
-    O << ", ";
-    printOperand(MI, 3, O);
-    O << ')';
-    return;
-    break;
-  case 350:
-    // S2_lsl_r_p_xor
-    O << " ^= lsl(";
-    printOperand(MI, 2, O);
-    O << ", ";
-    printOperand(MI, 3, O);
-    O << ')';
-    return;
-    break;
-  case 351:
-    // S2_lsl_r_vh
-    O << " = vlslh(";
-    printOperand(MI, 1, O);
-    O << ", ";
-    printOperand(MI, 2, O);
-    O << ')';
-    return;
-    break;
-  case 352:
-    // S2_lsl_r_vw
-    O << " = vlslw(";
-    printOperand(MI, 1, O);
-    O << ", ";
-    printOperand(MI, 2, O);
-    O << ')';
-    return;
-    break;
-  case 353:
-    // S2_lsr_i_p, S2_lsr_i_r, S2_lsr_r_p, S2_lsr_r_r
-    O << " = lsr(";
-    printOperand(MI, 1, O);
-    break;
-  case 354:
-    // S2_lsr_i_p_acc, S2_lsr_i_r_acc, S2_lsr_r_p_acc, S2_lsr_r_r_acc
-    O << " += lsr(";
-    printOperand(MI, 2, O);
-    break;
-  case 355:
-    // S2_lsr_i_p_and, S2_lsr_i_r_and, S2_lsr_r_p_and, S2_lsr_r_r_and
-    O << " &= lsr(";
-    printOperand(MI, 2, O);
-    break;
-  case 356:
-    // S2_lsr_i_p_nac, S2_lsr_i_r_nac, S2_lsr_r_p_nac, S2_lsr_r_r_nac
-    O << " -= lsr(";
-    printOperand(MI, 2, O);
-    break;
-  case 357:
-    // S2_lsr_i_p_or, S2_lsr_i_r_or, S2_lsr_r_p_or, S2_lsr_r_r_or
-    O << " |= lsr(";
-    printOperand(MI, 2, O);
-    break;
-  case 358:
-    // S2_lsr_i_p_xacc, S2_lsr_i_r_xacc, S2_lsr_r_p_xor
-    O << " ^= lsr(";
-    printOperand(MI, 2, O);
-    break;
-  case 359:
-    // S2_lsr_i_vh, S2_lsr_r_vh
-    O << " = vlsrh(";
-    printOperand(MI, 1, O);
-    break;
-  case 360:
-    // S2_lsr_i_vw, S2_lsr_r_vw
-    O << " = vlsrw(";
-    printOperand(MI, 1, O);
-    break;
-  case 361:
-    // S2_packhl, dep_S2_packhl
-    O << " = packhl(";
-    printOperand(MI, 1, O);
-    O << ", ";
-    printOperand(MI, 2, O);
-    break;
-  case 362:
-    // S2_parityp, S4_parity
-    O << " = parity(";
-    printOperand(MI, 1, O);
-    O << ", ";
-    printOperand(MI, 2, O);
     O << ')';
     return;
     break;
   case 363:
-    // S2_pstorerbf_io, S2_pstorerbf_pi, S2_pstorerbnewf_io, S2_pstorerbnewf_...
-    O << ") memb(";
+    // S2_lsl_r_p_and, S2_lsl_r_r_and
+    O << " &= lsl(";
+    printOperand(MI, 2, O);
+    O << ',';
+    printOperand(MI, 3, O);
+    O << ')';
+    return;
     break;
   case 364:
+    // S2_lsl_r_p_nac, S2_lsl_r_r_nac
+    O << " -= lsl(";
+    printOperand(MI, 2, O);
+    O << ',';
+    printOperand(MI, 3, O);
+    O << ')';
+    return;
+    break;
+  case 365:
+    // S2_lsl_r_p_or, S2_lsl_r_r_or
+    O << " |= lsl(";
+    printOperand(MI, 2, O);
+    O << ',';
+    printOperand(MI, 3, O);
+    O << ')';
+    return;
+    break;
+  case 366:
+    // S2_lsl_r_p_xor
+    O << " ^= lsl(";
+    printOperand(MI, 2, O);
+    O << ',';
+    printOperand(MI, 3, O);
+    O << ')';
+    return;
+    break;
+  case 367:
+    // S2_lsl_r_vh
+    O << " = vlslh(";
+    printOperand(MI, 1, O);
+    O << ',';
+    printOperand(MI, 2, O);
+    O << ')';
+    return;
+    break;
+  case 368:
+    // S2_lsl_r_vw
+    O << " = vlslw(";
+    printOperand(MI, 1, O);
+    O << ',';
+    printOperand(MI, 2, O);
+    O << ')';
+    return;
+    break;
+  case 369:
+    // S2_lsr_i_p, S2_lsr_i_r, S2_lsr_r_p, S2_lsr_r_r
+    O << " = lsr(";
+    printOperand(MI, 1, O);
+    break;
+  case 370:
+    // S2_lsr_i_p_acc, S2_lsr_i_r_acc, S2_lsr_r_p_acc, S2_lsr_r_r_acc
+    O << " += lsr(";
+    printOperand(MI, 2, O);
+    break;
+  case 371:
+    // S2_lsr_i_p_and, S2_lsr_i_r_and, S2_lsr_r_p_and, S2_lsr_r_r_and
+    O << " &= lsr(";
+    printOperand(MI, 2, O);
+    break;
+  case 372:
+    // S2_lsr_i_p_nac, S2_lsr_i_r_nac, S2_lsr_r_p_nac, S2_lsr_r_r_nac
+    O << " -= lsr(";
+    printOperand(MI, 2, O);
+    break;
+  case 373:
+    // S2_lsr_i_p_or, S2_lsr_i_r_or, S2_lsr_r_p_or, S2_lsr_r_r_or
+    O << " |= lsr(";
+    printOperand(MI, 2, O);
+    break;
+  case 374:
+    // S2_lsr_i_p_xacc, S2_lsr_i_r_xacc, S2_lsr_r_p_xor
+    O << " ^= lsr(";
+    printOperand(MI, 2, O);
+    break;
+  case 375:
+    // S2_lsr_i_vh, S2_lsr_r_vh, V6_vlsrh_alt, V6_vlsrh_alt_128B, V6_vlsrhv_a...
+    O << " = vlsrh(";
+    printOperand(MI, 1, O);
+    break;
+  case 376:
+    // S2_lsr_i_vw, S2_lsr_r_vw, V6_vlsrw_alt, V6_vlsrw_alt_128B, V6_vlsrwv_a...
+    O << " = vlsrw(";
+    printOperand(MI, 1, O);
+    break;
+  case 377:
+    // S2_packhl, dep_S2_packhl
+    O << " = packhl(";
+    printOperand(MI, 1, O);
+    O << ',';
+    printOperand(MI, 2, O);
+    break;
+  case 378:
+    // S2_parityp, S4_parity
+    O << " = parity(";
+    printOperand(MI, 1, O);
+    O << ',';
+    printOperand(MI, 2, O);
+    O << ')';
+    return;
+    break;
+  case 379:
+    // S2_pstorerbf_io, S2_pstorerbf_pi, S2_pstorerbf_zomap, S2_pstorerbnewf_...
+    O << ") memb(";
+    break;
+  case 380:
     // S2_pstorerbfnew_pi, S2_pstorerbnewfnew_pi, S2_pstorerbnewtnew_pi, S2_p...
     O << ".new) memb(";
     break;
-  case 365:
-    // S2_pstorerdf_io, S2_pstorerdf_pi, S2_pstorerdt_io, S2_pstorerdt_pi, S4...
+  case 381:
+    // S2_pstorerdf_io, S2_pstorerdf_pi, S2_pstorerdf_zomap, S2_pstorerdt_io,...
     O << ") memd(";
     break;
-  case 366:
+  case 382:
     // S2_pstorerdfnew_pi, S2_pstorerdtnew_pi, S4_pstorerdfnew_io, S4_pstorer...
     O << ".new) memd(";
     break;
-  case 367:
-    // S2_pstorerff_io, S2_pstorerff_pi, S2_pstorerft_io, S2_pstorerft_pi, S2...
+  case 383:
+    // S2_pstorerff_io, S2_pstorerff_pi, S2_pstorerff_zomap, S2_pstorerft_io,...
     O << ") memh(";
     break;
-  case 368:
+  case 384:
     // S2_pstorerffnew_pi, S2_pstorerftnew_pi, S2_pstorerhfnew_pi, S2_pstorer...
     O << ".new) memh(";
     break;
-  case 369:
-    // S2_pstorerif_io, S2_pstorerif_pi, S2_pstorerinewf_io, S2_pstorerinewf_...
+  case 385:
+    // S2_pstorerif_io, S2_pstorerif_pi, S2_pstorerif_zomap, S2_pstorerinewf_...
     O << ") memw(";
     break;
-  case 370:
+  case 386:
     // S2_pstorerifnew_pi, S2_pstorerinewfnew_pi, S2_pstorerinewtnew_pi, S2_p...
     O << ".new) memw(";
     break;
-  case 371:
+  case 387:
     // S2_setbit_i, S2_setbit_r
     O << " = setbit(";
     printOperand(MI, 1, O);
     break;
-  case 372:
+  case 388:
     // S2_shuffeb
     O << " = shuffeb(";
     printOperand(MI, 1, O);
-    O << ", ";
+    O << ',';
     printOperand(MI, 2, O);
     O << ')';
     return;
     break;
-  case 373:
+  case 389:
     // S2_shuffeh
     O << " = shuffeh(";
     printOperand(MI, 1, O);
-    O << ", ";
+    O << ',';
     printOperand(MI, 2, O);
     O << ')';
     return;
     break;
-  case 374:
+  case 390:
     // S2_shuffob
     O << " = shuffob(";
     printOperand(MI, 1, O);
-    O << ", ";
+    O << ',';
     printOperand(MI, 2, O);
     O << ')';
     return;
     break;
-  case 375:
+  case 391:
     // S2_shuffoh
     O << " = shuffoh(";
     printOperand(MI, 1, O);
-    O << ", ";
+    O << ',';
     printOperand(MI, 2, O);
     O << ')';
     return;
     break;
-  case 376:
-    // S2_storerb_pbr, S2_storerbnew_pbr, S2_storerd_pbr, S2_storerf_pbr, S2_...
-    O << " ++ ";
-    printOperand(MI, 2, O);
-    O << ":brev) = ";
-    printOperand(MI, 3, O);
-    break;
-  case 377:
-    // S2_storerb_pci, S2_storerbnew_pci, S2_storerd_pci, S2_storerf_pci, S2_...
-    O << " ++ #";
-    printOperand(MI, 2, O);
-    O << ":circ(";
-    printOperand(MI, 3, O);
-    O << ")) = ";
-    printOperand(MI, 4, O);
-    break;
-  case 378:
-    // S2_storerb_pcr, S2_storerbnew_pcr, S2_storerd_pcr, S2_storerf_pcr, S2_...
-    O << " ++ I:circ(";
-    printOperand(MI, 2, O);
-    O << ")) = ";
-    printOperand(MI, 3, O);
-    break;
-  case 379:
-    // S2_storerb_pi, S2_storerbnew_pi, S2_storerd_pi, S2_storerf_pi, S2_stor...
-    O << "++#";
-    break;
-  case 380:
-    // S2_storerb_pr, S2_storerbnew_pr, S2_storerd_pr, S2_storerf_pr, S2_stor...
+  case 392:
+    // S2_storerb_pbr, S2_storerb_pr, S2_storerbnew_pbr, S2_storerbnew_pr, S2...
     O << "++";
     printOperand(MI, 2, O);
     break;
-  case 381:
-    // S2_storerbgp, S2_storerbnewgp, S2_storerdgp, S2_storerfgp, S2_storerhg...
-    O << ") = ";
-    printOperand(MI, 1, O);
+  case 393:
+    // S2_storerb_pci, S2_storerb_pi, S2_storerbnew_pci, S2_storerbnew_pi, S2...
+    O << "++#";
+    printOperand(MI, 2, O);
     break;
-  case 382:
+  case 394:
+    // S2_storerb_pcr, S2_storerbnew_pcr, S2_storerd_pcr, S2_storerf_pcr, S2_...
+    O << "++I:circ(";
+    printOperand(MI, 2, O);
+    O << ")) = ";
+    printOperand(MI, 3, O);
+    break;
+  case 395:
     // S2_svsathb, S2_vsathb, S2_vsathb_nopack
     O << " = vsathb(";
     printOperand(MI, 1, O);
     O << ')';
     return;
     break;
-  case 383:
-    // S2_svsathub, S2_vsathub, S2_vsathub_nopack
+  case 396:
+    // S2_svsathub, S2_vsathub, S2_vsathub_nopack, V6_vsathub_alt, V6_vsathub...
     O << " = vsathub(";
     printOperand(MI, 1, O);
-    O << ')';
-    return;
     break;
-  case 384:
+  case 397:
     // S2_tableidxb, S2_tableidxb_goodsyntax
     O << " = tableidxb(";
     printOperand(MI, 2, O);
-    O << ", #";
+    O << ",#";
     printOperand(MI, 3, O);
-    O << ", #";
+    O << ",#";
     printOperand(MI, 4, O);
     break;
-  case 385:
+  case 398:
     // S2_tableidxd, S2_tableidxd_goodsyntax
     O << " = tableidxd(";
     printOperand(MI, 2, O);
-    O << ", #";
+    O << ",#";
     printOperand(MI, 3, O);
-    O << ", #";
+    O << ",#";
     printOperand(MI, 4, O);
     break;
-  case 386:
+  case 399:
     // S2_tableidxh, S2_tableidxh_goodsyntax
     O << " = tableidxh(";
     printOperand(MI, 2, O);
-    O << ", #";
+    O << ",#";
     printOperand(MI, 3, O);
-    O << ", #";
+    O << ",#";
     printOperand(MI, 4, O);
     break;
-  case 387:
+  case 400:
     // S2_tableidxw, S2_tableidxw_goodsyntax
     O << " = tableidxw(";
     printOperand(MI, 2, O);
-    O << ", #";
+    O << ",#";
     printOperand(MI, 3, O);
-    O << ", #";
+    O << ",#";
     printOperand(MI, 4, O);
     break;
-  case 388:
+  case 401:
     // S2_togglebit_i, S2_togglebit_r
     O << " = togglebit(";
     printOperand(MI, 1, O);
     break;
-  case 389:
+  case 402:
     // S2_tstbit_i, S2_tstbit_r
     O << " = tstbit(";
     printOperand(MI, 1, O);
     break;
-  case 390:
+  case 403:
     // S2_valignib, S2_valignrb
     O << " = valignb(";
     printOperand(MI, 1, O);
-    O << ", ";
+    O << ',';
     printOperand(MI, 2, O);
     break;
-  case 391:
+  case 404:
     // S2_vcnegh
     O << " = vcnegh(";
     printOperand(MI, 1, O);
-    O << ", ";
+    O << ',';
     printOperand(MI, 2, O);
     O << ')';
     return;
     break;
-  case 392:
+  case 405:
     // S2_vcrotate
     O << " = vcrotate(";
     printOperand(MI, 1, O);
-    O << ", ";
+    O << ',';
     printOperand(MI, 2, O);
     O << ')';
     return;
     break;
-  case 393:
+  case 406:
     // S2_vrcnegh
     O << " += vrcnegh(";
     printOperand(MI, 2, O);
-    O << ", ";
+    O << ',';
     printOperand(MI, 3, O);
     O << ')';
     return;
     break;
-  case 394:
+  case 407:
     // S2_vrndpackwh, S2_vrndpackwhs
     O << " = vrndwh(";
     printOperand(MI, 1, O);
     break;
-  case 395:
-    // S2_vsatwh, S2_vsatwh_nopack
+  case 408:
+    // S2_vsatwh, S2_vsatwh_nopack, V6_vsatwh_alt, V6_vsatwh_alt_128B
     O << " = vsatwh(";
     printOperand(MI, 1, O);
-    O << ')';
-    return;
     break;
-  case 396:
+  case 409:
     // S2_vsatwuh, S2_vsatwuh_nopack
     O << " = vsatwuh(";
     printOperand(MI, 1, O);
     O << ')';
     return;
     break;
-  case 397:
-    // S2_vsplatrb
+  case 410:
+    // S2_vsplatrb, S6_vsplatrbp
     O << " = vsplatb(";
     printOperand(MI, 1, O);
     O << ')';
     return;
     break;
-  case 398:
+  case 411:
     // S2_vsplatrh
     O << " = vsplath(";
     printOperand(MI, 1, O);
     O << ')';
     return;
     break;
-  case 399:
+  case 412:
     // S2_vspliceib, S2_vsplicerb
     O << " = vspliceb(";
     printOperand(MI, 1, O);
-    O << ", ";
+    O << ',';
     printOperand(MI, 2, O);
     break;
-  case 400:
+  case 413:
     // S2_vsxtbh
     O << " = vsxtbh(";
     printOperand(MI, 1, O);
     O << ')';
     return;
     break;
-  case 401:
+  case 414:
     // S2_vsxthw
     O << " = vsxthw(";
     printOperand(MI, 1, O);
     O << ')';
     return;
     break;
-  case 402:
-    // S2_vtrunehb
+  case 415:
+    // S2_vtrunehb, S6_vtrunehb_ppp
     O << " = vtrunehb(";
     printOperand(MI, 1, O);
-    O << ')';
-    return;
     break;
-  case 403:
+  case 416:
     // S2_vtrunewh
     O << " = vtrunewh(";
     printOperand(MI, 1, O);
-    O << ", ";
+    O << ',';
     printOperand(MI, 2, O);
     O << ')';
     return;
     break;
-  case 404:
-    // S2_vtrunohb
+  case 417:
+    // S2_vtrunohb, S6_vtrunohb_ppp
     O << " = vtrunohb(";
     printOperand(MI, 1, O);
-    O << ')';
-    return;
     break;
-  case 405:
+  case 418:
     // S2_vtrunowh
     O << " = vtrunowh(";
     printOperand(MI, 1, O);
-    O << ", ";
+    O << ',';
     printOperand(MI, 2, O);
     O << ')';
     return;
     break;
-  case 406:
+  case 419:
     // S2_vzxtbh
     O << " = vzxtbh(";
     printOperand(MI, 1, O);
     O << ')';
     return;
     break;
-  case 407:
+  case 420:
     // S2_vzxthw
     O << " = vzxthw(";
     printOperand(MI, 1, O);
     O << ')';
     return;
     break;
-  case 408:
+  case 421:
     // S4_andi_asl_ri, S4_andi_lsr_ri
     O << " = and(#";
-    printExtOperand(MI, 1, O);
+    printOperand(MI, 1, O);
     break;
-  case 409:
+  case 422:
     // S4_clbaddi, S4_clbpaddi
     O << " = add(clb(";
     printOperand(MI, 1, O);
-    O << "), #";
+    O << "),#";
     printOperand(MI, 2, O);
     O << ')';
     return;
     break;
-  case 410:
+  case 423:
     // S4_extract, S4_extract_rp, S4_extractp, S4_extractp_rp
     O << " = extract(";
     printOperand(MI, 1, O);
     break;
-  case 411:
+  case 424:
     // S4_lsli
     O << " = lsl(#";
     printOperand(MI, 1, O);
-    O << ", ";
+    O << ',';
     printOperand(MI, 2, O);
-    O << ')';
-    return;
-    break;
-  case 412:
-    // S4_ntstbit_i, S4_ntstbit_r
-    O << " = !tstbit(";
-    printOperand(MI, 1, O);
-    break;
-  case 413:
-    // S4_ori_asl_ri, S4_ori_lsr_ri
-    O << " = or(#";
-    printExtOperand(MI, 1, O);
-    break;
-  case 414:
-    // S4_pstorerbf_abs, S4_pstorerbnewf_abs, S4_pstorerbnewt_abs, S4_pstorer...
-    O << ") memb(#";
-    printExtOperand(MI, 1, O);
-    O << ") = ";
-    printOperand(MI, 2, O);
-    break;
-  case 415:
-    // S4_pstorerbfnew_abs, S4_pstorerbnewfnew_abs, S4_pstorerbnewtnew_abs, S...
-    O << ".new) memb(#";
-    printExtOperand(MI, 1, O);
-    O << ") = ";
-    printOperand(MI, 2, O);
-    break;
-  case 416:
-    // S4_pstorerdf_abs, S4_pstorerdt_abs
-    O << ") memd(#";
-    printExtOperand(MI, 1, O);
-    O << ") = ";
-    printOperand(MI, 2, O);
-    return;
-    break;
-  case 417:
-    // S4_pstorerdfnew_abs, S4_pstorerdtnew_abs
-    O << ".new) memd(#";
-    printExtOperand(MI, 1, O);
-    O << ") = ";
-    printOperand(MI, 2, O);
-    return;
-    break;
-  case 418:
-    // S4_pstorerff_abs, S4_pstorerft_abs, S4_pstorerhf_abs, S4_pstorerhnewf_...
-    O << ") memh(#";
-    printExtOperand(MI, 1, O);
-    O << ") = ";
-    printOperand(MI, 2, O);
-    break;
-  case 419:
-    // S4_pstorerffnew_abs, S4_pstorerftnew_abs, S4_pstorerhfnew_abs, S4_psto...
-    O << ".new) memh(#";
-    printExtOperand(MI, 1, O);
-    O << ") = ";
-    printOperand(MI, 2, O);
-    break;
-  case 420:
-    // S4_pstorerif_abs, S4_pstorerinewf_abs, S4_pstorerinewt_abs, S4_pstorer...
-    O << ") memw(#";
-    printExtOperand(MI, 1, O);
-    O << ") = ";
-    printOperand(MI, 2, O);
-    break;
-  case 421:
-    // S4_pstorerifnew_abs, S4_pstorerinewfnew_abs, S4_pstorerinewtnew_abs, S...
-    O << ".new) memw(#";
-    printExtOperand(MI, 1, O);
-    O << ") = ";
-    printOperand(MI, 2, O);
-    break;
-  case 422:
-    // S4_storerb_rr, S4_storerbnew_rr, S4_storerd_rr, S4_storerf_rr, S4_stor...
-    O << " + ";
-    printOperand(MI, 1, O);
-    O << "<<#";
-    printOperand(MI, 2, O);
-    O << ") = ";
-    printOperand(MI, 3, O);
-    break;
-  case 423:
-    // S4_storerb_ur, S4_storerbnew_ur, S4_storerd_ur, S4_storerf_ur, S4_stor...
-    O << "<<#";
-    printOperand(MI, 1, O);
-    O << " + #";
-    printExtOperand(MI, 2, O);
-    O << ") = ";
-    printOperand(MI, 3, O);
-    break;
-  case 424:
-    // S4_vrcrotate
-    O << " = vrcrotate(";
-    printOperand(MI, 1, O);
-    O << ", ";
-    printOperand(MI, 2, O);
-    O << ", #";
-    printOperand(MI, 3, O);
     O << ')';
     return;
     break;
   case 425:
+    // S4_ntstbit_i, S4_ntstbit_r
+    O << " = !tstbit(";
+    printOperand(MI, 1, O);
+    break;
+  case 426:
+    // S4_ori_asl_ri, S4_ori_lsr_ri
+    O << " = or(#";
+    printOperand(MI, 1, O);
+    break;
+  case 427:
+    // S4_pstorerbf_abs, S4_pstorerbnewf_abs, S4_pstorerbnewt_abs, S4_pstorer...
+    O << ") memb(#";
+    printOperand(MI, 1, O);
+    O << ") = ";
+    printOperand(MI, 2, O);
+    break;
+  case 428:
+    // S4_pstorerbfnew_abs, S4_pstorerbnewfnew_abs, S4_pstorerbnewtnew_abs, S...
+    O << ".new) memb(#";
+    printOperand(MI, 1, O);
+    O << ") = ";
+    printOperand(MI, 2, O);
+    break;
+  case 429:
+    // S4_pstorerdf_abs, S4_pstorerdt_abs
+    O << ") memd(#";
+    printOperand(MI, 1, O);
+    O << ") = ";
+    printOperand(MI, 2, O);
+    return;
+    break;
+  case 430:
+    // S4_pstorerdfnew_abs, S4_pstorerdtnew_abs
+    O << ".new) memd(#";
+    printOperand(MI, 1, O);
+    O << ") = ";
+    printOperand(MI, 2, O);
+    return;
+    break;
+  case 431:
+    // S4_pstorerff_abs, S4_pstorerft_abs, S4_pstorerhf_abs, S4_pstorerhnewf_...
+    O << ") memh(#";
+    printOperand(MI, 1, O);
+    O << ") = ";
+    printOperand(MI, 2, O);
+    break;
+  case 432:
+    // S4_pstorerffnew_abs, S4_pstorerftnew_abs, S4_pstorerhfnew_abs, S4_psto...
+    O << ".new) memh(#";
+    printOperand(MI, 1, O);
+    O << ") = ";
+    printOperand(MI, 2, O);
+    break;
+  case 433:
+    // S4_pstorerif_abs, S4_pstorerinewf_abs, S4_pstorerinewt_abs, S4_pstorer...
+    O << ") memw(#";
+    printOperand(MI, 1, O);
+    O << ") = ";
+    printOperand(MI, 2, O);
+    break;
+  case 434:
+    // S4_pstorerifnew_abs, S4_pstorerinewfnew_abs, S4_pstorerinewtnew_abs, S...
+    O << ".new) memw(#";
+    printOperand(MI, 1, O);
+    O << ") = ";
+    printOperand(MI, 2, O);
+    break;
+  case 435:
+    // S4_storeirb_zomap, S4_storeirh_zomap, S4_storeiri_zomap
+    O << ") = #";
+    printOperand(MI, 1, O);
+    return;
+    break;
+  case 436:
+    // S4_storerb_ap, S4_storerbnew_ap, S4_storerd_ap, S4_storerf_ap, S4_stor...
+    O << "=#";
+    printOperand(MI, 1, O);
+    O << ") = ";
+    printOperand(MI, 2, O);
+    break;
+  case 437:
+    // S4_storerb_rr, S4_storerbnew_rr, S4_storerd_rr, S4_storerf_rr, S4_stor...
+    O << '+';
+    printOperand(MI, 1, O);
+    O << "<<#";
+    printOperand(MI, 2, O);
+    O << ") = ";
+    printOperand(MI, 3, O);
+    break;
+  case 438:
+    // S4_storerb_ur, S4_storerbnew_ur, S4_storerd_ur, S4_storerf_ur, S4_stor...
+    O << "<<#";
+    printOperand(MI, 1, O);
+    O << "+#";
+    printOperand(MI, 2, O);
+    O << ") = ";
+    printOperand(MI, 3, O);
+    break;
+  case 439:
+    // S4_vrcrotate
+    O << " = vrcrotate(";
+    printOperand(MI, 1, O);
+    O << ',';
+    printOperand(MI, 2, O);
+    O << ",#";
+    printOperand(MI, 3, O);
+    O << ')';
+    return;
+    break;
+  case 440:
     // S4_vrcrotate_acc
     O << " += vrcrotate(";
     printOperand(MI, 2, O);
-    O << ", ";
+    O << ',';
     printOperand(MI, 3, O);
-    O << ", #";
+    O << ",#";
     printOperand(MI, 4, O);
     O << ')';
     return;
     break;
-  case 426:
+  case 441:
     // S4_vxaddsubh, S4_vxaddsubhr
     O << " = vxaddsubh(";
     printOperand(MI, 1, O);
-    O << ", ";
+    O << ',';
     printOperand(MI, 2, O);
     break;
-  case 427:
+  case 442:
     // S4_vxaddsubw
     O << " = vxaddsubw(";
     printOperand(MI, 1, O);
-    O << ", ";
+    O << ',';
     printOperand(MI, 2, O);
     O << "):sat";
     return;
     break;
-  case 428:
+  case 443:
     // S4_vxsubaddh, S4_vxsubaddhr
     O << " = vxsubaddh(";
     printOperand(MI, 1, O);
-    O << ", ";
+    O << ',';
     printOperand(MI, 2, O);
     break;
-  case 429:
+  case 444:
     // S4_vxsubaddw
     O << " = vxsubaddw(";
     printOperand(MI, 1, O);
-    O << ", ";
+    O << ',';
     printOperand(MI, 2, O);
     O << "):sat";
     return;
     break;
-  case 430:
-    // S5_asrhub_rnd_sat, S5_asrhub_rnd_sat_goodsyntax, S5_asrhub_sat
+  case 445:
+    // S5_asrhub_rnd_sat, S5_asrhub_rnd_sat_goodsyntax, S5_asrhub_sat, V6_vas...
     O << " = vasrhub(";
     printOperand(MI, 1, O);
-    O << ", #";
-    printOperand(MI, 2, O);
     break;
-  case 431:
+  case 446:
     // S5_popcountp
     O << " = popcount(";
     printOperand(MI, 1, O);
     O << ')';
     return;
     break;
-  case 432:
+  case 447:
     // S6_rol_i_p, S6_rol_i_r
     O << " = rol(";
     printOperand(MI, 1, O);
@@ -10836,7 +13667,7 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     O << ')';
     return;
     break;
-  case 433:
+  case 448:
     // S6_rol_i_p_acc, S6_rol_i_r_acc
     O << " += rol(";
     printOperand(MI, 2, O);
@@ -10845,7 +13676,7 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     O << ')';
     return;
     break;
-  case 434:
+  case 449:
     // S6_rol_i_p_and, S6_rol_i_r_and
     O << " &= rol(";
     printOperand(MI, 2, O);
@@ -10854,7 +13685,7 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     O << ')';
     return;
     break;
-  case 435:
+  case 450:
     // S6_rol_i_p_nac, S6_rol_i_r_nac
     O << " -= rol(";
     printOperand(MI, 2, O);
@@ -10863,7 +13694,7 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     O << ')';
     return;
     break;
-  case 436:
+  case 451:
     // S6_rol_i_p_or, S6_rol_i_r_or
     O << " |= rol(";
     printOperand(MI, 2, O);
@@ -10872,7 +13703,7 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     O << ')';
     return;
     break;
-  case 437:
+  case 452:
     // S6_rol_i_p_xacc, S6_rol_i_r_xacc
     O << " ^= rol(";
     printOperand(MI, 2, O);
@@ -10881,82 +13712,97 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     O << ')';
     return;
     break;
-  case 438:
+  case 453:
     // SA1_addsp
-    O << " = add(r29, #";
+    O << " = add(r29,#";
     printOperand(MI, 1, O);
     O << ')';
     return;
     break;
-  case 439:
+  case 454:
+    // SA1_clrf, SA1_clrfnew, SA1_clrt, SA1_clrtnew, V6_vd0, V6_vd0_128B
+    O << " = #0";
+    return;
+    break;
+  case 455:
     // SA1_combine0i
-    O << " = combine(#0, #";
+    O << " = combine(#0,#";
     printOperand(MI, 1, O);
     O << ')';
     return;
     break;
-  case 440:
+  case 456:
     // SA1_combine1i
-    O << " = combine(#1, #";
+    O << " = combine(#1,#";
     printOperand(MI, 1, O);
     O << ')';
     return;
     break;
-  case 441:
+  case 457:
     // SA1_combine2i
-    O << " = combine(#2, #";
+    O << " = combine(#2,#";
     printOperand(MI, 1, O);
     O << ')';
     return;
     break;
-  case 442:
+  case 458:
     // SA1_combine3i
-    O << " = combine(#3, #";
+    O << " = combine(#3,#";
     printOperand(MI, 1, O);
     O << ')';
     return;
     break;
-  case 443:
+  case 459:
     // SA1_combinezr
-    O << " = combine(#0, ";
+    O << " = combine(#0,";
     printOperand(MI, 1, O);
     O << ')';
     return;
     break;
-  case 444:
-    // SA1_setin1
-    O << " = #-1";
-    return;
-    break;
-  case 445:
+  case 460:
     // SL2_loadrd_sp
-    O << " = memd(r29 + #";
+    O << " = memd(r29+#";
     printOperand(MI, 1, O);
     O << ')';
     return;
     break;
-  case 446:
+  case 461:
     // SL2_loadri_sp
-    O << " = memw(r29 + #";
+    O << " = memw(r29+#";
     printOperand(MI, 1, O);
     O << ')';
     return;
     break;
-  case 447:
-    // SS1_storeb_io, SS1_storew_io, SS2_storebi0, SS2_storebi1, SS2_storeh_i...
-    O << " + #";
-    printOperand(MI, 1, O);
-    break;
-  case 448:
+  case 462:
     // TFRI64_V2_ext
-    O << " = combine(##";
-    printExtOperand(MI, 1, O);
-    O << ", #";
+    O << "=combine(#";
+    printOperand(MI, 1, O);
+    O << ",#";
     printOperand(MI, 2, O);
     O << ')';
     return;
     break;
-  case 449:
+  case 463:
+    // V6_MAP_equb, V6_MAP_equb_128B, V6_MAP_equh, V6_MAP_equh_128B, V6_MAP_e...
+    O << " = vcmp.eq(";
+    printOperand(MI, 1, O);
+    break;
+  case 464:
+    // V6_MAP_equb_and, V6_MAP_equb_and_128B, V6_MAP_equh_and, V6_MAP_equh_an...
+    O << " &= vcmp.eq(";
+    printOperand(MI, 2, O);
+    break;
+  case 465:
+    // V6_MAP_equb_ior, V6_MAP_equb_ior_128B, V6_MAP_equh_ior, V6_MAP_equh_io...
+    O << " |= vcmp.eq(";
+    printOperand(MI, 2, O);
+    break;
+  case 466:
+    // V6_MAP_equb_xor, V6_MAP_equb_xor_128B, V6_MAP_equh_xor, V6_MAP_equh_xo...
+    O << " ^= vcmp.eq(";
+    printOperand(MI, 2, O);
+    break;
+  case 467:
     // V6_extractw, V6_extractw_128B
     O << " = vextract(";
     printOperand(MI, 1, O);
@@ -10965,50 +13811,113 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     O << ')';
     return;
     break;
-  case 450:
+  case 468:
+    // V6_extractw_alt, V6_extractw_alt_128B
+    O << ".w = vextract(";
+    printOperand(MI, 1, O);
+    O << ',';
+    printOperand(MI, 2, O);
+    O << ')';
+    return;
+    break;
+  case 469:
+    // V6_hi, V6_hi_128B
+    O << " = hi(";
+    printOperand(MI, 1, O);
+    O << ')';
+    return;
+    break;
+  case 470:
+    // V6_ld0, V6_ld0_128B, V6_ldnt0, V6_ldnt0_128B, V6_vL32b_ai, V6_vL32b_ai...
+    O << " = vmem(";
+    printOperand(MI, 1, O);
+    break;
+  case 471:
+    // V6_ldu0, V6_ldu0_128B, V6_vL32Ub_ai, V6_vL32Ub_ai_128B, V6_vL32Ub_pi, ...
+    O << " = vmemu(";
+    printOperand(MI, 1, O);
+    break;
+  case 472:
+    // V6_lo, V6_lo_128B
+    O << " = lo(";
+    printOperand(MI, 1, O);
+    O << ')';
+    return;
+    break;
+  case 473:
+    // V6_lvsplatb, V6_lvsplatb_128B
+    O << ".b = vsplat(";
+    printOperand(MI, 1, O);
+    O << ')';
+    return;
+    break;
+  case 474:
+    // V6_lvsplath, V6_lvsplath_128B
+    O << ".h = vsplat(";
+    printOperand(MI, 1, O);
+    O << ')';
+    return;
+    break;
+  case 475:
     // V6_lvsplatw, V6_lvsplatw_128B
     O << " = vsplat(";
     printOperand(MI, 1, O);
     O << ')';
     return;
     break;
-  case 451:
+  case 476:
     // V6_pred_scalar2, V6_pred_scalar2_128B
     O << " = vsetq(";
     printOperand(MI, 1, O);
     O << ')';
     return;
     break;
-  case 452:
-    // V6_vL32Ub_ai, V6_vL32Ub_ai_128B, V6_vL32Ub_pi, V6_vL32Ub_pi_128B, V6_v...
-    O << " = vmemu(";
+  case 477:
+    // V6_pred_scalar2v2, V6_pred_scalar2v2_128B
+    O << " = vsetq2(";
+    printOperand(MI, 1, O);
+    O << ')';
+    return;
     break;
-  case 453:
-    // V6_vL32b_ai, V6_vL32b_ai_128B, V6_vL32b_nt_ai, V6_vL32b_nt_ai_128B, V6...
-    O << " = vmem(";
+  case 478:
+    // V6_shuffeqh, V6_shuffeqh_128B, V6_vshuffeb, V6_vshuffeb_128B
+    O << ".b = vshuffe(";
+    printOperand(MI, 1, O);
     break;
-  case 454:
-    // V6_vL32b_cur_ai, V6_vL32b_cur_ai_128B, V6_vL32b_cur_pi, V6_vL32b_cur_p...
-    O << ".cur = vmem(";
+  case 479:
+    // V6_shuffeqw, V6_shuffeqw_128B, V6_vshufeh, V6_vshufeh_128B
+    O << ".h = vshuffe(";
+    printOperand(MI, 1, O);
     break;
-  case 455:
-    // V6_vL32b_nt_tmp_ai, V6_vL32b_nt_tmp_ai_128B, V6_vL32b_nt_tmp_pi, V6_vL...
-    O << ".tmp = vmem(";
+  case 480:
+    // V6_stnnt0, V6_stnnt0_128B, V6_stnt0, V6_stnt0_128B
+    O << "):nt = ";
+    printOperand(MI, 1, O);
     break;
-  case 456:
-    // V6_vS32Ub_npred_ai, V6_vS32Ub_npred_ai_128B, V6_vS32Ub_npred_pi, V6_vS...
-    O << ") vmemu(";
-    break;
-  case 457:
-    // V6_vS32b_new_npred_ai, V6_vS32b_new_npred_ai_128B, V6_vS32b_new_npred_...
+  case 481:
+    // V6_stnp0, V6_stnp0_128B, V6_stnpnt0, V6_stnpnt0_128B, V6_stnq0, V6_stn...
     O << ") vmem(";
     break;
-  case 458:
+  case 482:
+    // V6_stunp0, V6_stunp0_128B, V6_stup0, V6_stup0_128B, V6_vS32Ub_npred_ai...
+    O << ") vmemu(";
+    break;
+  case 483:
+    // V6_vL32b_cur_ai, V6_vL32b_cur_ai_128B, V6_vL32b_cur_pi, V6_vL32b_cur_p...
+    O << ".cur = vmem(";
+    printOperand(MI, 1, O);
+    break;
+  case 484:
+    // V6_vL32b_nt_tmp_ai, V6_vL32b_nt_tmp_ai_128B, V6_vL32b_nt_tmp_pi, V6_vL...
+    O << ".tmp = vmem(";
+    printOperand(MI, 1, O);
+    break;
+  case 485:
     // V6_vabsdiffh, V6_vabsdiffh_128B, V6_vabsdiffuh, V6_vabsdiffuh_128B
     O << ".uh = vabsdiff(";
     printOperand(MI, 1, O);
     break;
-  case 459:
+  case 486:
     // V6_vabsdiffub, V6_vabsdiffub_128B
     O << ".ub = vabsdiff(";
     printOperand(MI, 1, O);
@@ -11017,7 +13926,16 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     O << ".ub)";
     return;
     break;
-  case 460:
+  case 487:
+    // V6_vabsdiffuh_alt, V6_vabsdiffuh_alt_128B
+    O << " = vabsdiffuh(";
+    printOperand(MI, 1, O);
+    O << ',';
+    printOperand(MI, 2, O);
+    O << ')';
+    return;
+    break;
+  case 488:
     // V6_vabsdiffw, V6_vabsdiffw_128B
     O << ".uw = vabsdiff(";
     printOperand(MI, 1, O);
@@ -11026,45 +13944,100 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     O << ".w)";
     return;
     break;
-  case 461:
+  case 489:
     // V6_vabsh, V6_vabsh_128B, V6_vabsh_sat, V6_vabsh_sat_128B
     O << ".h = vabs(";
     printOperand(MI, 1, O);
     break;
-  case 462:
+  case 490:
     // V6_vabsw, V6_vabsw_128B, V6_vabsw_sat, V6_vabsw_sat_128B
     O << ".w = vabs(";
     printOperand(MI, 1, O);
     break;
-  case 463:
-    // V6_vaddb, V6_vaddb_128B, V6_vaddb_dv, V6_vaddb_dv_128B
+  case 491:
+    // V6_vaddb, V6_vaddb_128B, V6_vaddb_dv, V6_vaddb_dv_128B, V6_vaddbsat, V...
     O << ".b = vadd(";
     printOperand(MI, 1, O);
     O << ".b,";
     printOperand(MI, 2, O);
-    O << ".b)";
+    break;
+  case 492:
+    // V6_vaddbnq_alt, V6_vaddbnq_alt_128B, V6_vaddbq_alt, V6_vaddbq_alt_128B...
+    O << ".b) ";
+    printOperand(MI, 0, O);
+    break;
+  case 493:
+    // V6_vaddcarry, V6_vaddcarry_128B, V6_vaddhw, V6_vaddhw_128B, V6_vadduhw...
+    O << ".w = vadd(";
+    break;
+  case 494:
+    // V6_vaddclbh, V6_vaddclbh_128B
+    O << ".h = vadd(vclb(";
+    printOperand(MI, 1, O);
+    O << ".h),";
+    printOperand(MI, 2, O);
+    O << ".h)";
     return;
     break;
-  case 464:
+  case 495:
+    // V6_vaddclbw, V6_vaddclbw_128B
+    O << ".w = vadd(vclb(";
+    printOperand(MI, 1, O);
+    O << ".w),";
+    printOperand(MI, 2, O);
+    O << ".w)";
+    return;
+    break;
+  case 496:
     // V6_vaddh, V6_vaddh_128B, V6_vaddh_dv, V6_vaddh_dv_128B, V6_vaddhsat, V...
     O << ".h = vadd(";
     printOperand(MI, 1, O);
     break;
-  case 465:
-    // V6_vaddhw, V6_vaddhw_128B, V6_vadduhw, V6_vadduhw_128B, V6_vaddw, V6_v...
-    O << ".w = vadd(";
-    printOperand(MI, 1, O);
+  case 497:
+    // V6_vaddhnq_alt, V6_vaddhnq_alt_128B, V6_vaddhq_alt, V6_vaddhq_alt_128B...
+    O << ".h) ";
+    printOperand(MI, 0, O);
     break;
-  case 466:
-    // V6_vaddubsat, V6_vaddubsat_128B, V6_vaddubsat_dv, V6_vaddubsat_dv_128B
+  case 498:
+    // V6_vaddhw_acc, V6_vaddhw_acc_128B, V6_vadduhw_acc, V6_vadduhw_acc_128B
+    O << ".w += vadd(";
+    printOperand(MI, 2, O);
+    break;
+  case 499:
+    // V6_vaddhw_acc_alt, V6_vaddhw_acc_alt_128B
+    O << " += vaddh(";
+    printOperand(MI, 2, O);
+    O << ',';
+    printOperand(MI, 3, O);
+    O << ')';
+    return;
+    break;
+  case 500:
+    // V6_vaddubh_acc, V6_vaddubh_acc_128B
+    O << ".h += vadd(";
+    printOperand(MI, 2, O);
+    O << ".ub,";
+    printOperand(MI, 3, O);
+    O << ".ub)";
+    return;
+    break;
+  case 501:
+    // V6_vaddubh_acc_alt, V6_vaddubh_acc_alt_128B
+    O << " += vaddub(";
+    printOperand(MI, 2, O);
+    O << ',';
+    printOperand(MI, 3, O);
+    O << ')';
+    return;
+    break;
+  case 502:
+    // V6_vaddubsat, V6_vaddubsat_128B, V6_vaddubsat_dv, V6_vaddubsat_dv_128B...
     O << ".ub = vadd(";
     printOperand(MI, 1, O);
     O << ".ub,";
     printOperand(MI, 2, O);
-    O << ".ub):sat";
-    return;
     break;
-  case 467:
+  case 503:
     // V6_vadduhsat, V6_vadduhsat_128B, V6_vadduhsat_dv, V6_vadduhsat_dv_128B
     O << ".uh = vadd(";
     printOperand(MI, 1, O);
@@ -11073,15 +14046,47 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     O << ".uh):sat";
     return;
     break;
-  case 468:
+  case 504:
+    // V6_vadduhw_acc_alt, V6_vadduhw_acc_alt_128B
+    O << " += vadduh(";
+    printOperand(MI, 2, O);
+    O << ',';
+    printOperand(MI, 3, O);
+    O << ')';
+    return;
+    break;
+  case 505:
+    // V6_vadduwsat, V6_vadduwsat_128B, V6_vadduwsat_dv, V6_vadduwsat_dv_128B
+    O << ".uw = vadd(";
+    printOperand(MI, 1, O);
+    O << ".uw,";
+    printOperand(MI, 2, O);
+    O << ".uw):sat";
+    return;
+    break;
+  case 506:
+    // V6_vadduwsat_alt, V6_vadduwsat_alt_128B, V6_vadduwsat_dv_alt, V6_vaddu...
+    O << " = vadduw(";
+    printOperand(MI, 1, O);
+    O << ',';
+    printOperand(MI, 2, O);
+    O << "):sat";
+    return;
+    break;
+  case 507:
+    // V6_vaddwnq_alt, V6_vaddwnq_alt_128B, V6_vaddwq_alt, V6_vaddwq_alt_128B...
+    O << ".w) ";
+    printOperand(MI, 0, O);
+    break;
+  case 508:
     // V6_valignb, V6_valignb_128B, V6_valignbi, V6_valignbi_128B
     O << " = valign(";
     printOperand(MI, 1, O);
     O << ',';
     printOperand(MI, 2, O);
     break;
-  case 469:
-    // V6_vand, V6_vand_128B, V6_vandqrt, V6_vandqrt_128B, V6_vandvrt, V6_van...
+  case 509:
+    // V6_vand, V6_vand_128B, V6_vandqrt, V6_vandqrt_128B, V6_vandvqv, V6_van...
     O << " = vand(";
     printOperand(MI, 1, O);
     O << ',';
@@ -11089,7 +14094,43 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     O << ')';
     return;
     break;
-  case 470:
+  case 510:
+    // V6_vandnqrt, V6_vandnqrt_128B, V6_vandvnqv, V6_vandvnqv_128B
+    O << " = vand(!";
+    printOperand(MI, 1, O);
+    O << ',';
+    printOperand(MI, 2, O);
+    O << ')';
+    return;
+    break;
+  case 511:
+    // V6_vandnqrt_acc, V6_vandnqrt_acc_128B
+    O << " |= vand(!";
+    printOperand(MI, 2, O);
+    O << ',';
+    printOperand(MI, 3, O);
+    O << ')';
+    return;
+    break;
+  case 512:
+    // V6_vandnqrt_acc_alt, V6_vandnqrt_acc_alt_128B
+    O << ".ub |= vand(!";
+    printOperand(MI, 2, O);
+    O << ".ub,";
+    printOperand(MI, 3, O);
+    O << ".ub)";
+    return;
+    break;
+  case 513:
+    // V6_vandnqrt_alt, V6_vandnqrt_alt_128B
+    O << ".ub = vand(!";
+    printOperand(MI, 1, O);
+    O << ".ub,";
+    printOperand(MI, 2, O);
+    O << ".ub)";
+    return;
+    break;
+  case 514:
     // V6_vandqrt_acc, V6_vandqrt_acc_128B, V6_vandvrt_acc, V6_vandvrt_acc_12...
     O << " |= vand(";
     printOperand(MI, 2, O);
@@ -11098,21 +14139,39 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     O << ')';
     return;
     break;
-  case 471:
+  case 515:
+    // V6_vandqrt_acc_alt, V6_vandqrt_acc_alt_128B, V6_vandvrt_acc_alt, V6_va...
+    O << ".ub |= vand(";
+    printOperand(MI, 2, O);
+    O << ".ub,";
+    printOperand(MI, 3, O);
+    O << ".ub)";
+    return;
+    break;
+  case 516:
+    // V6_vandqrt_alt, V6_vandqrt_alt_128B, V6_vandvrt_alt, V6_vandvrt_alt_12...
+    O << ".ub = vand(";
+    printOperand(MI, 1, O);
+    O << ".ub,";
+    printOperand(MI, 2, O);
+    O << ".ub)";
+    return;
+    break;
+  case 517:
     // V6_vaslh, V6_vaslh_128B, V6_vaslhv, V6_vaslhv_128B
     O << ".h = vasl(";
     printOperand(MI, 1, O);
     O << ".h,";
     printOperand(MI, 2, O);
     break;
-  case 472:
+  case 518:
     // V6_vaslw, V6_vaslw_128B, V6_vaslwv, V6_vaslwv_128B
     O << ".w = vasl(";
     printOperand(MI, 1, O);
     O << ".w,";
     printOperand(MI, 2, O);
     break;
-  case 473:
+  case 519:
     // V6_vaslw_acc, V6_vaslw_acc_128B
     O << ".w += vasl(";
     printOperand(MI, 2, O);
@@ -11121,23 +14180,41 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     O << ')';
     return;
     break;
-  case 474:
+  case 520:
+    // V6_vaslw_acc_alt, V6_vaslw_acc_alt_128B
+    O << " += vaslw(";
+    printOperand(MI, 2, O);
+    O << ',';
+    printOperand(MI, 3, O);
+    O << ')';
+    return;
+    break;
+  case 521:
     // V6_vasrh, V6_vasrh_128B, V6_vasrhv, V6_vasrhv_128B, V6_vasrwh, V6_vasr...
     O << ".h = vasr(";
     printOperand(MI, 1, O);
     break;
-  case 475:
-    // V6_vasrhbrndsat, V6_vasrhbrndsat_128B
+  case 522:
+    // V6_vasrhbrndsat, V6_vasrhbrndsat_128B, V6_vasrhbsat, V6_vasrhbsat_128B
     O << ".b = vasr(";
     printOperand(MI, 1, O);
     O << ".h,";
     printOperand(MI, 2, O);
     O << ".h,";
     printOperand(MI, 3, O);
+    break;
+  case 523:
+    // V6_vasrhbrndsat_alt
+    O << " = vasrhb(";
+    printOperand(MI, 1, O);
+    O << ',';
+    printOperand(MI, 2, O);
+    O << ',';
+    printOperand(MI, 3, O);
     O << "):rnd:sat";
     return;
     break;
-  case 476:
+  case 524:
     // V6_vasrhubrndsat, V6_vasrhubrndsat_128B, V6_vasrhubsat, V6_vasrhubsat_...
     O << ".ub = vasr(";
     printOperand(MI, 1, O);
@@ -11146,14 +14223,19 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     O << ".h,";
     printOperand(MI, 3, O);
     break;
-  case 477:
+  case 525:
+    // V6_vasruwuhrndsat, V6_vasruwuhrndsat_128B, V6_vasrwuhrndsat, V6_vasrwu...
+    O << ".uh = vasr(";
+    printOperand(MI, 1, O);
+    break;
+  case 526:
     // V6_vasrw, V6_vasrw_128B, V6_vasrwv, V6_vasrwv_128B
     O << ".w = vasr(";
     printOperand(MI, 1, O);
     O << ".w,";
     printOperand(MI, 2, O);
     break;
-  case 478:
+  case 527:
     // V6_vasrw_acc, V6_vasrw_acc_128B
     O << ".w += vasr(";
     printOperand(MI, 2, O);
@@ -11162,60 +14244,92 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     O << ')';
     return;
     break;
-  case 479:
-    // V6_vasrwuhsat, V6_vasrwuhsat_128B
-    O << ".uh = vasr(";
-    printOperand(MI, 1, O);
-    O << ".w,";
+  case 528:
+    // V6_vasrw_acc_alt, V6_vasrw_acc_alt_128B
+    O << " += vasrw(";
     printOperand(MI, 2, O);
-    O << ".w,";
+    O << ',';
+    printOperand(MI, 3, O);
+    O << ')';
+    return;
+    break;
+  case 529:
+    // V6_vasrwh_alt, V6_vasrwhrndsat_alt, V6_vasrwhsat_alt
+    O << " = vasrwh(";
+    printOperand(MI, 1, O);
+    O << ',';
+    printOperand(MI, 2, O);
+    O << ',';
+    printOperand(MI, 3, O);
+    break;
+  case 530:
+    // V6_vasrwuhsat_alt
+    O << " = vasrwuh(";
+    printOperand(MI, 1, O);
+    O << ',';
+    printOperand(MI, 2, O);
+    O << ',';
     printOperand(MI, 3, O);
     O << "):sat";
     return;
     break;
-  case 480:
+  case 531:
     // V6_vavgh, V6_vavgh_128B, V6_vavghrnd, V6_vavghrnd_128B
     O << ".h = vavg(";
     printOperand(MI, 1, O);
     O << ".h,";
     printOperand(MI, 2, O);
     break;
-  case 481:
+  case 532:
     // V6_vavgub, V6_vavgub_128B, V6_vavgubrnd, V6_vavgubrnd_128B
     O << ".ub = vavg(";
     printOperand(MI, 1, O);
     O << ".ub,";
     printOperand(MI, 2, O);
     break;
-  case 482:
+  case 533:
     // V6_vavguh, V6_vavguh_128B, V6_vavguhrnd, V6_vavguhrnd_128B
     O << ".uh = vavg(";
     printOperand(MI, 1, O);
     O << ".uh,";
     printOperand(MI, 2, O);
     break;
-  case 483:
+  case 534:
     // V6_vavgw, V6_vavgw_128B, V6_vavgwrnd, V6_vavgwrnd_128B
     O << ".w = vavg(";
     printOperand(MI, 1, O);
     O << ".w,";
     printOperand(MI, 2, O);
     break;
-  case 484:
+  case 535:
     // V6_vcl0h, V6_vcl0h_128B
     O << ".uh = vcl0(";
     printOperand(MI, 1, O);
     O << ".uh)";
     return;
     break;
-  case 485:
+  case 536:
+    // V6_vcl0h_alt, V6_vcl0h_alt_128B
+    O << " = vcl0h(";
+    printOperand(MI, 1, O);
+    O << ')';
+    return;
+    break;
+  case 537:
     // V6_vcl0w, V6_vcl0w_128B
     O << ".uw = vcl0(";
     printOperand(MI, 1, O);
     O << ".uw)";
     return;
     break;
-  case 486:
+  case 538:
+    // V6_vcl0w_alt, V6_vcl0w_alt_128B
+    O << " = vcl0w(";
+    printOperand(MI, 1, O);
+    O << ')';
+    return;
+    break;
+  case 539:
     // V6_vcombine, V6_vcombine_128B
     O << " = vcombine(";
     printOperand(MI, 1, O);
@@ -11224,19 +14338,14 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     O << ')';
     return;
     break;
-  case 487:
-    // V6_vd0, V6_vd0_128B
-    O << " = #0";
-    return;
-    break;
-  case 488:
+  case 540:
     // V6_vdealb, V6_vdealb_128B
     O << ".b = vdeal(";
     printOperand(MI, 1, O);
     O << ".b)";
     return;
     break;
-  case 489:
+  case 541:
     // V6_vdealb4w, V6_vdealb4w_128B
     O << ".b = vdeale(";
     printOperand(MI, 1, O);
@@ -11245,14 +14354,37 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     O << ".b)";
     return;
     break;
-  case 490:
+  case 542:
+    // V6_vdealb4w_alt, V6_vdealb4w_alt_128B
+    O << " = vdealb4w(";
+    printOperand(MI, 1, O);
+    O << ',';
+    printOperand(MI, 2, O);
+    O << ')';
+    return;
+    break;
+  case 543:
+    // V6_vdealb_alt, V6_vdealb_alt_128B
+    O << " = vdealb(";
+    printOperand(MI, 1, O);
+    O << ')';
+    return;
+    break;
+  case 544:
     // V6_vdealh, V6_vdealh_128B
     O << ".h = vdeal(";
     printOperand(MI, 1, O);
     O << ".h)";
     return;
     break;
-  case 491:
+  case 545:
+    // V6_vdealh_alt, V6_vdealh_alt_128B
+    O << " = vdealh(";
+    printOperand(MI, 1, O);
+    O << ')';
+    return;
+    break;
+  case 546:
     // V6_vdealvdd, V6_vdealvdd_128B
     O << " = vdeal(";
     printOperand(MI, 1, O);
@@ -11263,7 +14395,7 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     O << ')';
     return;
     break;
-  case 492:
+  case 547:
     // V6_vdelta, V6_vdelta_128B
     O << " = vdelta(";
     printOperand(MI, 1, O);
@@ -11272,7 +14404,7 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     O << ')';
     return;
     break;
-  case 493:
+  case 548:
     // V6_vdmpybus, V6_vdmpybus_128B, V6_vdmpybus_dv, V6_vdmpybus_dv_128B
     O << ".h = vdmpy(";
     printOperand(MI, 1, O);
@@ -11281,7 +14413,7 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     O << ".b)";
     return;
     break;
-  case 494:
+  case 549:
     // V6_vdmpybus_acc, V6_vdmpybus_acc_128B, V6_vdmpybus_dv_acc, V6_vdmpybus...
     O << ".h += vdmpy(";
     printOperand(MI, 2, O);
@@ -11290,21 +14422,89 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     O << ".b)";
     return;
     break;
-  case 495:
+  case 550:
+    // V6_vdmpybus_acc_alt, V6_vdmpybus_acc_alt_128B, V6_vdmpybus_dv_acc_alt,...
+    O << " += vdmpybus(";
+    printOperand(MI, 2, O);
+    O << ',';
+    printOperand(MI, 3, O);
+    O << ')';
+    return;
+    break;
+  case 551:
+    // V6_vdmpybus_alt, V6_vdmpybus_alt_128B, V6_vdmpybus_dv_alt, V6_vdmpybus...
+    O << " = vdmpybus(";
+    printOperand(MI, 1, O);
+    O << ',';
+    printOperand(MI, 2, O);
+    O << ')';
+    return;
+    break;
+  case 552:
     // V6_vdmpyhb, V6_vdmpyhb_128B, V6_vdmpyhb_dv, V6_vdmpyhb_dv_128B, V6_vdm...
     O << ".w = vdmpy(";
     printOperand(MI, 1, O);
     O << ".h,";
     printOperand(MI, 2, O);
     break;
-  case 496:
+  case 553:
     // V6_vdmpyhb_acc, V6_vdmpyhb_acc_128B, V6_vdmpyhb_dv_acc, V6_vdmpyhb_dv_...
     O << ".w += vdmpy(";
     printOperand(MI, 2, O);
     O << ".h,";
     printOperand(MI, 3, O);
     break;
-  case 497:
+  case 554:
+    // V6_vdmpyhb_acc_alt, V6_vdmpyhb_acc_alt_128B, V6_vdmpyhb_dv_acc_alt, V6...
+    O << " += vdmpyhb(";
+    printOperand(MI, 2, O);
+    O << ',';
+    printOperand(MI, 3, O);
+    O << ')';
+    return;
+    break;
+  case 555:
+    // V6_vdmpyhb_alt, V6_vdmpyhb_alt_128B, V6_vdmpyhb_dv_alt, V6_vdmpyhb_dv_...
+    O << " = vdmpyhb(";
+    printOperand(MI, 1, O);
+    O << ',';
+    printOperand(MI, 2, O);
+    O << ')';
+    return;
+    break;
+  case 556:
+    // V6_vdmpyhisat_acc_alt, V6_vdmpyhisat_acc_alt_128B, V6_vdmpyhsat_acc_al...
+    O << " += vdmpyh(";
+    printOperand(MI, 2, O);
+    O << ',';
+    printOperand(MI, 3, O);
+    O << "):sat";
+    return;
+    break;
+  case 557:
+    // V6_vdmpyhisat_alt, V6_vdmpyhisat_alt_128B, V6_vdmpyhsat_alt, V6_vdmpyh...
+    O << " = vdmpyh(";
+    printOperand(MI, 1, O);
+    O << ',';
+    printOperand(MI, 2, O);
+    O << "):sat";
+    return;
+    break;
+  case 558:
+    // V6_vdmpyhsuisat_acc_alt, V6_vdmpyhsuisat_acc_alt_128B, V6_vdmpyhsusat_...
+    O << " += vdmpyhsu(";
+    printOperand(MI, 2, O);
+    O << ',';
+    printOperand(MI, 3, O);
+    break;
+  case 559:
+    // V6_vdmpyhsuisat_alt, V6_vdmpyhsuisat_alt_128B, V6_vdmpyhsusat_alt, V6_...
+    O << " = vdmpyhsu(";
+    printOperand(MI, 1, O);
+    O << ',';
+    printOperand(MI, 2, O);
+    break;
+  case 560:
     // V6_vdsaduh, V6_vdsaduh_128B
     O << ".uw = vdsad(";
     printOperand(MI, 1, O);
@@ -11313,7 +14513,7 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     O << ".uh)";
     return;
     break;
-  case 498:
+  case 561:
     // V6_vdsaduh_acc, V6_vdsaduh_acc_128B
     O << ".uw += vdsad(";
     printOperand(MI, 2, O);
@@ -11322,61 +14522,68 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     O << ".uh)";
     return;
     break;
-  case 499:
-    // V6_veqb, V6_veqb_128B, V6_veqh, V6_veqh_128B, V6_veqw, V6_veqw_128B
-    O << " = vcmp.eq(";
+  case 562:
+    // V6_vdsaduh_acc_alt, V6_vdsaduh_acc_alt_128B
+    O << " += vdsaduh(";
+    printOperand(MI, 2, O);
+    O << ',';
+    printOperand(MI, 3, O);
+    O << ')';
+    return;
+    break;
+  case 563:
+    // V6_vdsaduh_alt, V6_vdsaduh_alt_128B
+    O << " = vdsaduh(";
     printOperand(MI, 1, O);
-    break;
-  case 500:
-    // V6_veqb_and, V6_veqb_and_128B, V6_veqh_and, V6_veqh_and_128B, V6_veqw_...
-    O << " &= vcmp.eq(";
+    O << ',';
     printOperand(MI, 2, O);
+    O << ')';
+    return;
     break;
-  case 501:
-    // V6_veqb_or, V6_veqb_or_128B, V6_veqh_or, V6_veqh_or_128B, V6_veqw_or, ...
-    O << " |= vcmp.eq(";
-    printOperand(MI, 2, O);
-    break;
-  case 502:
-    // V6_veqb_xor, V6_veqb_xor_128B, V6_veqh_xor, V6_veqh_xor_128B, V6_veqw_...
-    O << " ^= vcmp.eq(";
-    printOperand(MI, 2, O);
-    break;
-  case 503:
+  case 564:
     // V6_vgtb, V6_vgtb_128B, V6_vgth, V6_vgth_128B, V6_vgtub, V6_vgtub_128B,...
     O << " = vcmp.gt(";
     printOperand(MI, 1, O);
     break;
-  case 504:
+  case 565:
     // V6_vgtb_and, V6_vgtb_and_128B, V6_vgth_and, V6_vgth_and_128B, V6_vgtub...
     O << " &= vcmp.gt(";
     printOperand(MI, 2, O);
     break;
-  case 505:
+  case 566:
     // V6_vgtb_or, V6_vgtb_or_128B, V6_vgth_or, V6_vgth_or_128B, V6_vgtub_or,...
     O << " |= vcmp.gt(";
     printOperand(MI, 2, O);
     break;
-  case 506:
+  case 567:
     // V6_vgtb_xor, V6_vgtb_xor_128B, V6_vgth_xor, V6_vgth_xor_128B, V6_vgtub...
     O << " ^= vcmp.gt(";
     printOperand(MI, 2, O);
     break;
-  case 507:
+  case 568:
     // V6_vinsertwr, V6_vinsertwr_128B
     O << ".w = vinsert(";
     printOperand(MI, 2, O);
     O << ')';
     return;
     break;
-  case 508:
+  case 569:
     // V6_vlalignb, V6_vlalignb_128B, V6_vlalignbi, V6_vlalignbi_128B
     O << " = vlalign(";
     printOperand(MI, 1, O);
     O << ',';
     printOperand(MI, 2, O);
     break;
-  case 509:
+  case 570:
+    // V6_vlsrb, V6_vlsrb_128B
+    O << ".ub = vlsr(";
+    printOperand(MI, 1, O);
+    O << ".ub,";
+    printOperand(MI, 2, O);
+    O << ')';
+    return;
+    break;
+  case 571:
     // V6_vlsrh, V6_vlsrh_128B
     O << ".uh = vlsr(";
     printOperand(MI, 1, O);
@@ -11385,7 +14592,7 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     O << ')';
     return;
     break;
-  case 510:
+  case 572:
     // V6_vlsrhv, V6_vlsrhv_128B
     O << ".h = vlsr(";
     printOperand(MI, 1, O);
@@ -11394,7 +14601,7 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     O << ".h)";
     return;
     break;
-  case 511:
+  case 573:
     // V6_vlsrw, V6_vlsrw_128B
     O << ".uw = vlsr(";
     printOperand(MI, 1, O);
@@ -11403,7 +14610,7 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     O << ')';
     return;
     break;
-  case 512:
+  case 574:
     // V6_vlsrwv, V6_vlsrwv_128B
     O << ".w = vlsr(";
     printOperand(MI, 1, O);
@@ -11412,51 +14619,44 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     O << ".w)";
     return;
     break;
-  case 513:
-    // V6_vlutvvb, V6_vlutvvb_128B
+  case 575:
+    // V6_vlutvvb, V6_vlutvvb_128B, V6_vlutvvb_nm, V6_vlutvvb_nm_128B, V6_vlu...
     O << ".b = vlut32(";
     printOperand(MI, 1, O);
     O << ".b,";
     printOperand(MI, 2, O);
-    O << ".b,";
-    printOperand(MI, 3, O);
-    O << ')';
-    return;
     break;
-  case 514:
-    // V6_vlutvvb_oracc, V6_vlutvvb_oracc_128B
+  case 576:
+    // V6_vlutvvb_oracc, V6_vlutvvb_oracc_128B, V6_vlutvvb_oracci, V6_vlutvvb...
     O << ".b |= vlut32(";
     printOperand(MI, 2, O);
     O << ".b,";
     printOperand(MI, 3, O);
-    O << ".b,";
-    printOperand(MI, 4, O);
-    O << ')';
-    return;
     break;
-  case 515:
-    // V6_vlutvwh, V6_vlutvwh_128B
+  case 577:
+    // V6_vlutvwh, V6_vlutvwh_128B, V6_vlutvwh_nm, V6_vlutvwh_nm_128B, V6_vlu...
     O << ".h = vlut16(";
     printOperand(MI, 1, O);
     O << ".b,";
     printOperand(MI, 2, O);
-    O << ".h,";
-    printOperand(MI, 3, O);
-    O << ')';
-    return;
     break;
-  case 516:
-    // V6_vlutvwh_oracc, V6_vlutvwh_oracc_128B
+  case 578:
+    // V6_vlutvwh_oracc, V6_vlutvwh_oracc_128B, V6_vlutvwh_oracci, V6_vlutvwh...
     O << ".h |= vlut16(";
     printOperand(MI, 2, O);
     O << ".b,";
     printOperand(MI, 3, O);
-    O << ".h,";
-    printOperand(MI, 4, O);
-    O << ')';
+    break;
+  case 579:
+    // V6_vmaxb, V6_vmaxb_128B
+    O << ".b = vmax(";
+    printOperand(MI, 1, O);
+    O << ".b,";
+    printOperand(MI, 2, O);
+    O << ".b)";
     return;
     break;
-  case 517:
+  case 580:
     // V6_vmaxh, V6_vmaxh_128B
     O << ".h = vmax(";
     printOperand(MI, 1, O);
@@ -11465,7 +14665,7 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     O << ".h)";
     return;
     break;
-  case 518:
+  case 581:
     // V6_vmaxub, V6_vmaxub_128B
     O << ".ub = vmax(";
     printOperand(MI, 1, O);
@@ -11474,7 +14674,7 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     O << ".ub)";
     return;
     break;
-  case 519:
+  case 582:
     // V6_vmaxuh, V6_vmaxuh_128B
     O << ".uh = vmax(";
     printOperand(MI, 1, O);
@@ -11483,7 +14683,7 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     O << ".uh)";
     return;
     break;
-  case 520:
+  case 583:
     // V6_vmaxw, V6_vmaxw_128B
     O << ".w = vmax(";
     printOperand(MI, 1, O);
@@ -11492,7 +14692,16 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     O << ".w)";
     return;
     break;
-  case 521:
+  case 584:
+    // V6_vminb, V6_vminb_128B
+    O << ".b = vmin(";
+    printOperand(MI, 1, O);
+    O << ".b,";
+    printOperand(MI, 2, O);
+    O << ".b)";
+    return;
+    break;
+  case 585:
     // V6_vminh, V6_vminh_128B
     O << ".h = vmin(";
     printOperand(MI, 1, O);
@@ -11501,7 +14710,7 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     O << ".h)";
     return;
     break;
-  case 522:
+  case 586:
     // V6_vminub, V6_vminub_128B
     O << ".ub = vmin(";
     printOperand(MI, 1, O);
@@ -11510,7 +14719,7 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     O << ".ub)";
     return;
     break;
-  case 523:
+  case 587:
     // V6_vminuh, V6_vminuh_128B
     O << ".uh = vmin(";
     printOperand(MI, 1, O);
@@ -11519,7 +14728,7 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     O << ".uh)";
     return;
     break;
-  case 524:
+  case 588:
     // V6_vminw, V6_vminw_128B
     O << ".w = vmin(";
     printOperand(MI, 1, O);
@@ -11528,14 +14737,14 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     O << ".w)";
     return;
     break;
-  case 525:
+  case 589:
     // V6_vmpabus, V6_vmpabus_128B, V6_vmpabusv, V6_vmpabusv_128B, V6_vmpabuu...
     O << ".h = vmpa(";
     printOperand(MI, 1, O);
     O << ".ub,";
     printOperand(MI, 2, O);
     break;
-  case 526:
+  case 590:
     // V6_vmpabus_acc, V6_vmpabus_acc_128B
     O << ".h += vmpa(";
     printOperand(MI, 2, O);
@@ -11544,35 +14753,126 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     O << ".b)";
     return;
     break;
-  case 527:
-    // V6_vmpahb, V6_vmpahb_128B
+  case 591:
+    // V6_vmpabus_acc_alt, V6_vmpabus_acc_alt_128B
+    O << " += vmpabus(";
+    printOperand(MI, 2, O);
+    O << ',';
+    printOperand(MI, 3, O);
+    O << ')';
+    return;
+    break;
+  case 592:
+    // V6_vmpabus_alt, V6_vmpabus_alt_128B, V6_vmpabusv_alt, V6_vmpabusv_alt_...
+    O << " = vmpabus(";
+    printOperand(MI, 1, O);
+    O << ',';
+    printOperand(MI, 2, O);
+    O << ')';
+    return;
+    break;
+  case 593:
+    // V6_vmpabuuv_alt, V6_vmpabuuv_alt_128B
+    O << " = vmpabuu(";
+    printOperand(MI, 1, O);
+    O << ',';
+    printOperand(MI, 2, O);
+    O << ')';
+    return;
+    break;
+  case 594:
+    // V6_vmpahb, V6_vmpahb_128B, V6_vmpauhb, V6_vmpauhb_128B
     O << ".w = vmpa(";
     printOperand(MI, 1, O);
-    O << ".h,";
-    printOperand(MI, 2, O);
-    O << ".b)";
-    return;
     break;
-  case 528:
-    // V6_vmpahb_acc, V6_vmpahb_acc_128B
+  case 595:
+    // V6_vmpahb_acc, V6_vmpahb_acc_128B, V6_vmpauhb_acc, V6_vmpauhb_acc_128B
     O << ".w += vmpa(";
     printOperand(MI, 2, O);
-    O << ".h,";
+    break;
+  case 596:
+    // V6_vmpahb_acc_alt, V6_vmpahb_acc_alt_128B
+    O << " += vmpahb(";
+    printOperand(MI, 2, O);
+    O << ',';
     printOperand(MI, 3, O);
-    O << ".b)";
+    O << ')';
     return;
     break;
-  case 529:
+  case 597:
+    // V6_vmpahb_alt, V6_vmpahb_alt_128B
+    O << " = vmpahb(";
+    printOperand(MI, 1, O);
+    O << ',';
+    printOperand(MI, 2, O);
+    O << ')';
+    return;
+    break;
+  case 598:
+    // V6_vmpauhb_acc_alt, V6_vmpauhb_acc_alt_128B
+    O << " += vmpauhb(";
+    printOperand(MI, 2, O);
+    O << ',';
+    printOperand(MI, 3, O);
+    O << ')';
+    return;
+    break;
+  case 599:
+    // V6_vmpauhb_alt, V6_vmpauhb_alt_128B
+    O << " = vmpauhb(";
+    printOperand(MI, 1, O);
+    O << ',';
+    printOperand(MI, 2, O);
+    O << ')';
+    return;
+    break;
+  case 600:
     // V6_vmpybus, V6_vmpybus_128B, V6_vmpybusv, V6_vmpybusv_128B, V6_vmpybv,...
     O << ".h = vmpy(";
     printOperand(MI, 1, O);
     break;
-  case 530:
+  case 601:
     // V6_vmpybus_acc, V6_vmpybus_acc_128B, V6_vmpybusv_acc, V6_vmpybusv_acc_...
     O << ".h += vmpy(";
     printOperand(MI, 2, O);
     break;
-  case 531:
+  case 602:
+    // V6_vmpybus_acc_alt, V6_vmpybus_acc_alt_128B, V6_vmpybusv_acc_alt, V6_v...
+    O << " += vmpybus(";
+    printOperand(MI, 2, O);
+    O << ',';
+    printOperand(MI, 3, O);
+    O << ')';
+    return;
+    break;
+  case 603:
+    // V6_vmpybus_alt, V6_vmpybus_alt_128B, V6_vmpybusv_alt, V6_vmpybusv_alt_...
+    O << " = vmpybus(";
+    printOperand(MI, 1, O);
+    O << ',';
+    printOperand(MI, 2, O);
+    O << ')';
+    return;
+    break;
+  case 604:
+    // V6_vmpybv_acc_alt, V6_vmpybv_acc_alt_128B
+    O << " += vmpyb(";
+    printOperand(MI, 2, O);
+    O << ',';
+    printOperand(MI, 3, O);
+    O << ')';
+    return;
+    break;
+  case 605:
+    // V6_vmpybv_alt, V6_vmpybv_alt_128B
+    O << " = vmpyb(";
+    printOperand(MI, 1, O);
+    O << ',';
+    printOperand(MI, 2, O);
+    O << ')';
+    return;
+    break;
+  case 606:
     // V6_vmpyewuh, V6_vmpyewuh_128B
     O << ".w = vmpye(";
     printOperand(MI, 1, O);
@@ -11581,21 +14881,57 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     O << ".uh)";
     return;
     break;
-  case 532:
+  case 607:
+    // V6_vmpyewuh_64, V6_vmpyewuh_64_128B
+    O << " = vmpye(";
+    printOperand(MI, 1, O);
+    O << ".w,";
+    printOperand(MI, 2, O);
+    O << ".uh)";
+    return;
+    break;
+  case 608:
+    // V6_vmpyewuh_alt, V6_vmpyewuh_alt_128B
+    O << " = vmpyewuh(";
+    printOperand(MI, 1, O);
+    O << ',';
+    printOperand(MI, 2, O);
+    O << ')';
+    return;
+    break;
+  case 609:
     // V6_vmpyh, V6_vmpyh_128B, V6_vmpyhus, V6_vmpyhus_128B, V6_vmpyhv, V6_vm...
     O << ".w = vmpy(";
     printOperand(MI, 1, O);
     O << ".h,";
     printOperand(MI, 2, O);
     break;
-  case 533:
+  case 610:
     // V6_vmpyhsat_acc, V6_vmpyhsat_acc_128B, V6_vmpyhus_acc, V6_vmpyhus_acc_...
     O << ".w += vmpy(";
     printOperand(MI, 2, O);
     O << ".h,";
     printOperand(MI, 3, O);
     break;
-  case 534:
+  case 611:
+    // V6_vmpyhus_acc_alt, V6_vmpyhus_acc_alt_128B
+    O << " += vmpyhus(";
+    printOperand(MI, 2, O);
+    O << ',';
+    printOperand(MI, 3, O);
+    O << ')';
+    return;
+    break;
+  case 612:
+    // V6_vmpyhus_alt, V6_vmpyhus_alt_128B
+    O << " = vmpyhus(";
+    printOperand(MI, 1, O);
+    O << ',';
+    printOperand(MI, 2, O);
+    O << ')';
+    return;
+    break;
+  case 613:
     // V6_vmpyieoh, V6_vmpyieoh_128B
     O << ".w = vmpyieo(";
     printOperand(MI, 1, O);
@@ -11604,14 +14940,23 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     O << ".h)";
     return;
     break;
-  case 535:
+  case 614:
     // V6_vmpyiewh_acc, V6_vmpyiewh_acc_128B, V6_vmpyiewuh_acc, V6_vmpyiewuh_...
     O << ".w += vmpyie(";
     printOperand(MI, 2, O);
     O << ".w,";
     printOperand(MI, 3, O);
     break;
-  case 536:
+  case 615:
+    // V6_vmpyiewh_acc_alt, V6_vmpyiewh_acc_alt_128B
+    O << " += vmpyiewh(";
+    printOperand(MI, 2, O);
+    O << ',';
+    printOperand(MI, 3, O);
+    O << ')';
+    return;
+    break;
+  case 616:
     // V6_vmpyiewuh, V6_vmpyiewuh_128B
     O << ".w = vmpyie(";
     printOperand(MI, 1, O);
@@ -11620,21 +14965,75 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     O << ".uh)";
     return;
     break;
-  case 537:
+  case 617:
+    // V6_vmpyiewuh_acc_alt, V6_vmpyiewuh_acc_alt_128B
+    O << " += vmpyiewuh(";
+    printOperand(MI, 2, O);
+    O << ',';
+    printOperand(MI, 3, O);
+    O << ')';
+    return;
+    break;
+  case 618:
+    // V6_vmpyiewuh_alt, V6_vmpyiewuh_alt_128B
+    O << " = vmpyiewuh(";
+    printOperand(MI, 1, O);
+    O << ',';
+    printOperand(MI, 2, O);
+    O << ')';
+    return;
+    break;
+  case 619:
     // V6_vmpyih, V6_vmpyih_128B, V6_vmpyihb, V6_vmpyihb_128B
     O << ".h = vmpyi(";
     printOperand(MI, 1, O);
     O << ".h,";
     printOperand(MI, 2, O);
     break;
-  case 538:
+  case 620:
     // V6_vmpyih_acc, V6_vmpyih_acc_128B, V6_vmpyihb_acc, V6_vmpyihb_acc_128B
     O << ".h += vmpyi(";
     printOperand(MI, 2, O);
     O << ".h,";
     printOperand(MI, 3, O);
     break;
-  case 539:
+  case 621:
+    // V6_vmpyih_acc_alt, V6_vmpyih_acc_alt_128B
+    O << " += vmpyih(";
+    printOperand(MI, 2, O);
+    O << ',';
+    printOperand(MI, 3, O);
+    O << ')';
+    return;
+    break;
+  case 622:
+    // V6_vmpyih_alt, V6_vmpyih_alt_128B
+    O << " = vmpyih(";
+    printOperand(MI, 1, O);
+    O << ',';
+    printOperand(MI, 2, O);
+    O << ')';
+    return;
+    break;
+  case 623:
+    // V6_vmpyihb_acc_alt, V6_vmpyihb_acc_alt_128B
+    O << " += vmpyihb(";
+    printOperand(MI, 2, O);
+    O << ',';
+    printOperand(MI, 3, O);
+    O << ')';
+    return;
+    break;
+  case 624:
+    // V6_vmpyihb_alt, V6_vmpyihb_alt_128B
+    O << " = vmpyihb(";
+    printOperand(MI, 1, O);
+    O << ',';
+    printOperand(MI, 2, O);
+    O << ')';
+    return;
+    break;
+  case 625:
     // V6_vmpyiowh, V6_vmpyiowh_128B
     O << ".w = vmpyio(";
     printOperand(MI, 1, O);
@@ -11643,35 +15042,121 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     O << ".h)";
     return;
     break;
-  case 540:
-    // V6_vmpyiwb, V6_vmpyiwb_128B, V6_vmpyiwh, V6_vmpyiwh_128B
+  case 626:
+    // V6_vmpyiowh_alt, V6_vmpyiowh_alt_128B
+    O << " = vmpyiowh(";
+    printOperand(MI, 1, O);
+    O << ',';
+    printOperand(MI, 2, O);
+    O << ')';
+    return;
+    break;
+  case 627:
+    // V6_vmpyiwb, V6_vmpyiwb_128B, V6_vmpyiwh, V6_vmpyiwh_128B, V6_vmpyiwub,...
     O << ".w = vmpyi(";
     printOperand(MI, 1, O);
     O << ".w,";
     printOperand(MI, 2, O);
     break;
-  case 541:
+  case 628:
     // V6_vmpyiwb_acc, V6_vmpyiwb_acc_128B, V6_vmpyiwh_acc, V6_vmpyiwh_acc_12...
     O << ".w += vmpyi(";
     printOperand(MI, 2, O);
     O << ".w,";
     printOperand(MI, 3, O);
     break;
-  case 542:
+  case 629:
+    // V6_vmpyiwb_acc_alt, V6_vmpyiwb_acc_alt_128B
+    O << " += vmpyiwb(";
+    printOperand(MI, 2, O);
+    O << ',';
+    printOperand(MI, 3, O);
+    O << ')';
+    return;
+    break;
+  case 630:
+    // V6_vmpyiwb_alt, V6_vmpyiwb_alt_128B
+    O << " = vmpyiwb(";
+    printOperand(MI, 1, O);
+    O << ',';
+    printOperand(MI, 2, O);
+    O << ')';
+    return;
+    break;
+  case 631:
+    // V6_vmpyiwh_acc_alt, V6_vmpyiwh_acc_alt_128B
+    O << " += vmpyiwh(";
+    printOperand(MI, 2, O);
+    O << ',';
+    printOperand(MI, 3, O);
+    O << ')';
+    return;
+    break;
+  case 632:
+    // V6_vmpyiwh_alt, V6_vmpyiwh_alt_128B
+    O << " = vmpyiwh(";
+    printOperand(MI, 1, O);
+    O << ',';
+    printOperand(MI, 2, O);
+    O << ')';
+    return;
+    break;
+  case 633:
+    // V6_vmpyiwub_acc_alt, V6_vmpyiwub_acc_alt_128B
+    O << " += vmpyiwub(";
+    printOperand(MI, 2, O);
+    O << ',';
+    printOperand(MI, 3, O);
+    O << ')';
+    return;
+    break;
+  case 634:
+    // V6_vmpyiwub_alt, V6_vmpyiwub_alt_128B
+    O << " = vmpyiwub(";
+    printOperand(MI, 1, O);
+    O << ',';
+    printOperand(MI, 2, O);
+    O << ')';
+    return;
+    break;
+  case 635:
     // V6_vmpyowh, V6_vmpyowh_128B, V6_vmpyowh_rnd, V6_vmpyowh_rnd_128B
     O << ".w = vmpyo(";
     printOperand(MI, 1, O);
     O << ".w,";
     printOperand(MI, 2, O);
     break;
-  case 543:
+  case 636:
+    // V6_vmpyowh_64_acc, V6_vmpyowh_64_acc_128B
+    O << " += vmpyo(";
+    printOperand(MI, 2, O);
+    O << ".w,";
+    printOperand(MI, 3, O);
+    O << ".h)";
+    return;
+    break;
+  case 637:
+    // V6_vmpyowh_alt, V6_vmpyowh_alt_128B, V6_vmpyowh_rnd_alt, V6_vmpyowh_rn...
+    O << " = vmpyowh(";
+    printOperand(MI, 1, O);
+    O << ',';
+    printOperand(MI, 2, O);
+    break;
+  case 638:
     // V6_vmpyowh_rnd_sacc, V6_vmpyowh_rnd_sacc_128B, V6_vmpyowh_sacc, V6_vmp...
     O << ".w += vmpyo(";
     printOperand(MI, 2, O);
     O << ".w,";
     printOperand(MI, 3, O);
     break;
-  case 544:
+  case 639:
+    // V6_vmpyowh_rnd_sacc_alt, V6_vmpyowh_rnd_sacc_alt_128B, V6_vmpyowh_sacc...
+    O << " += vmpyowh(";
+    printOperand(MI, 2, O);
+    O << ',';
+    printOperand(MI, 3, O);
+    break;
+  case 640:
     // V6_vmpyub, V6_vmpyub_128B, V6_vmpyubv, V6_vmpyubv_128B
     O << ".uh = vmpy(";
     printOperand(MI, 1, O);
@@ -11680,7 +15165,7 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     O << ".ub)";
     return;
     break;
-  case 545:
+  case 641:
     // V6_vmpyub_acc, V6_vmpyub_acc_128B, V6_vmpyubv_acc, V6_vmpyubv_acc_128B
     O << ".uh += vmpy(";
     printOperand(MI, 2, O);
@@ -11689,7 +15174,25 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     O << ".ub)";
     return;
     break;
-  case 546:
+  case 642:
+    // V6_vmpyub_acc_alt, V6_vmpyub_acc_alt_128B, V6_vmpyubv_acc_alt, V6_vmpy...
+    O << " += vmpyub(";
+    printOperand(MI, 2, O);
+    O << ',';
+    printOperand(MI, 3, O);
+    O << ')';
+    return;
+    break;
+  case 643:
+    // V6_vmpyub_alt, V6_vmpyub_alt_128B, V6_vmpyubv_alt, V6_vmpyubv_alt_128B
+    O << " = vmpyub(";
+    printOperand(MI, 1, O);
+    O << ',';
+    printOperand(MI, 2, O);
+    O << ')';
+    return;
+    break;
+  case 644:
     // V6_vmpyuh, V6_vmpyuh_128B, V6_vmpyuhv, V6_vmpyuhv_128B
     O << ".uw = vmpy(";
     printOperand(MI, 1, O);
@@ -11698,7 +15201,7 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     O << ".uh)";
     return;
     break;
-  case 547:
+  case 645:
     // V6_vmpyuh_acc, V6_vmpyuh_acc_128B, V6_vmpyuhv_acc, V6_vmpyuhv_acc_128B
     O << ".uw += vmpy(";
     printOperand(MI, 2, O);
@@ -11707,7 +15210,25 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     O << ".uh)";
     return;
     break;
-  case 548:
+  case 646:
+    // V6_vmpyuh_acc_alt, V6_vmpyuh_acc_alt_128B, V6_vmpyuhv_acc_alt, V6_vmpy...
+    O << " += vmpyuh(";
+    printOperand(MI, 2, O);
+    O << ',';
+    printOperand(MI, 3, O);
+    O << ')';
+    return;
+    break;
+  case 647:
+    // V6_vmpyuh_alt, V6_vmpyuh_alt_128B, V6_vmpyuhv_alt, V6_vmpyuhv_alt_128B
+    O << " = vmpyuh(";
+    printOperand(MI, 1, O);
+    O << ',';
+    printOperand(MI, 2, O);
+    O << ')';
+    return;
+    break;
+  case 648:
     // V6_vnavgh, V6_vnavgh_128B
     O << ".h = vnavg(";
     printOperand(MI, 1, O);
@@ -11716,7 +15237,7 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     O << ".h)";
     return;
     break;
-  case 549:
+  case 649:
     // V6_vnavgub, V6_vnavgub_128B
     O << ".b = vnavg(";
     printOperand(MI, 1, O);
@@ -11725,7 +15246,16 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     O << ".ub)";
     return;
     break;
-  case 550:
+  case 650:
+    // V6_vnavgub_alt, V6_vnavgub_alt_128B
+    O << " = vnavgub(";
+    printOperand(MI, 1, O);
+    O << ',';
+    printOperand(MI, 2, O);
+    O << ')';
+    return;
+    break;
+  case 651:
     // V6_vnavgw, V6_vnavgw_128B
     O << ".w = vnavg(";
     printOperand(MI, 1, O);
@@ -11734,28 +15264,42 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     O << ".w)";
     return;
     break;
-  case 551:
+  case 652:
     // V6_vnormamth, V6_vnormamth_128B
     O << ".h = vnormamt(";
     printOperand(MI, 1, O);
     O << ".h)";
     return;
     break;
-  case 552:
+  case 653:
+    // V6_vnormamth_alt, V6_vnormamth_alt_128B
+    O << " = vnormamth(";
+    printOperand(MI, 1, O);
+    O << ')';
+    return;
+    break;
+  case 654:
     // V6_vnormamtw, V6_vnormamtw_128B
     O << ".w = vnormamt(";
     printOperand(MI, 1, O);
     O << ".w)";
     return;
     break;
-  case 553:
+  case 655:
+    // V6_vnormamtw_alt, V6_vnormamtw_alt_128B
+    O << " = vnormamtw(";
+    printOperand(MI, 1, O);
+    O << ')';
+    return;
+    break;
+  case 656:
     // V6_vnot, V6_vnot_128B
     O << " = vnot(";
     printOperand(MI, 1, O);
     O << ')';
     return;
     break;
-  case 554:
+  case 657:
     // V6_vor, V6_vor_128B
     O << " = vor(";
     printOperand(MI, 1, O);
@@ -11764,7 +15308,7 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     O << ')';
     return;
     break;
-  case 555:
+  case 658:
     // V6_vpackeb, V6_vpackeb_128B
     O << ".b = vpacke(";
     printOperand(MI, 1, O);
@@ -11773,7 +15317,16 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     O << ".h)";
     return;
     break;
-  case 556:
+  case 659:
+    // V6_vpackeb_alt, V6_vpackeb_alt_128B
+    O << " = vpackeb(";
+    printOperand(MI, 1, O);
+    O << ',';
+    printOperand(MI, 2, O);
+    O << ')';
+    return;
+    break;
+  case 660:
     // V6_vpackeh, V6_vpackeh_128B
     O << ".h = vpacke(";
     printOperand(MI, 1, O);
@@ -11782,7 +15335,16 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     O << ".w)";
     return;
     break;
-  case 557:
+  case 661:
+    // V6_vpackeh_alt, V6_vpackeh_alt_128B
+    O << " = vpackeh(";
+    printOperand(MI, 1, O);
+    O << ',';
+    printOperand(MI, 2, O);
+    O << ')';
+    return;
+    break;
+  case 662:
     // V6_vpackhb_sat, V6_vpackhb_sat_128B
     O << ".b = vpack(";
     printOperand(MI, 1, O);
@@ -11791,7 +15353,16 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     O << ".h):sat";
     return;
     break;
-  case 558:
+  case 663:
+    // V6_vpackhb_sat_alt, V6_vpackhb_sat_alt_128B
+    O << " = vpackhb(";
+    printOperand(MI, 1, O);
+    O << ',';
+    printOperand(MI, 2, O);
+    O << "):sat";
+    return;
+    break;
+  case 664:
     // V6_vpackhub_sat, V6_vpackhub_sat_128B
     O << ".ub = vpack(";
     printOperand(MI, 1, O);
@@ -11800,7 +15371,16 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     O << ".h):sat";
     return;
     break;
-  case 559:
+  case 665:
+    // V6_vpackhub_sat_alt, V6_vpackhub_sat_alt_128B
+    O << " = vpackhub(";
+    printOperand(MI, 1, O);
+    O << ',';
+    printOperand(MI, 2, O);
+    O << "):sat";
+    return;
+    break;
+  case 666:
     // V6_vpackob, V6_vpackob_128B
     O << ".b = vpacko(";
     printOperand(MI, 1, O);
@@ -11809,7 +15389,16 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     O << ".h)";
     return;
     break;
-  case 560:
+  case 667:
+    // V6_vpackob_alt, V6_vpackob_alt_128B
+    O << " = vpackob(";
+    printOperand(MI, 1, O);
+    O << ',';
+    printOperand(MI, 2, O);
+    O << ')';
+    return;
+    break;
+  case 668:
     // V6_vpackoh, V6_vpackoh_128B
     O << ".h = vpacko(";
     printOperand(MI, 1, O);
@@ -11818,7 +15407,16 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     O << ".w)";
     return;
     break;
-  case 561:
+  case 669:
+    // V6_vpackoh_alt, V6_vpackoh_alt_128B
+    O << " = vpackoh(";
+    printOperand(MI, 1, O);
+    O << ',';
+    printOperand(MI, 2, O);
+    O << ')';
+    return;
+    break;
+  case 670:
     // V6_vpackwh_sat, V6_vpackwh_sat_128B
     O << ".h = vpack(";
     printOperand(MI, 1, O);
@@ -11827,7 +15425,16 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     O << ".w):sat";
     return;
     break;
-  case 562:
+  case 671:
+    // V6_vpackwh_sat_alt, V6_vpackwh_sat_alt_128B
+    O << " = vpackwh(";
+    printOperand(MI, 1, O);
+    O << ',';
+    printOperand(MI, 2, O);
+    O << "):sat";
+    return;
+    break;
+  case 672:
     // V6_vpackwuh_sat, V6_vpackwuh_sat_128B
     O << ".uh = vpack(";
     printOperand(MI, 1, O);
@@ -11836,14 +15443,30 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     O << ".w):sat";
     return;
     break;
-  case 563:
+  case 673:
+    // V6_vpackwuh_sat_alt, V6_vpackwuh_sat_alt_128B
+    O << " = vpackwuh(";
+    printOperand(MI, 1, O);
+    O << ',';
+    printOperand(MI, 2, O);
+    O << "):sat";
+    return;
+    break;
+  case 674:
     // V6_vpopcounth, V6_vpopcounth_128B
     O << ".h = vpopcount(";
     printOperand(MI, 1, O);
     O << ".h)";
     return;
     break;
-  case 564:
+  case 675:
+    // V6_vpopcounth_alt, V6_vpopcounth_alt_128B
+    O << " = vpopcounth(";
+    printOperand(MI, 1, O);
+    O << ')';
+    return;
+    break;
+  case 676:
     // V6_vrdelta, V6_vrdelta_128B
     O << " = vrdelta(";
     printOperand(MI, 1, O);
@@ -11852,31 +15475,77 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     O << ')';
     return;
     break;
-  case 565:
+  case 677:
     // V6_vrmpybus, V6_vrmpybus_128B, V6_vrmpybusi, V6_vrmpybusi_128B, V6_vrm...
     O << ".w = vrmpy(";
     printOperand(MI, 1, O);
     break;
-  case 566:
+  case 678:
     // V6_vrmpybus_acc, V6_vrmpybus_acc_128B, V6_vrmpybusi_acc, V6_vrmpybusi_...
     O << ".w += vrmpy(";
     printOperand(MI, 2, O);
     break;
-  case 567:
+  case 679:
+    // V6_vrmpybus_acc_alt, V6_vrmpybus_acc_alt_128B, V6_vrmpybusi_acc_alt, V...
+    O << " += vrmpybus(";
+    printOperand(MI, 2, O);
+    O << ',';
+    printOperand(MI, 3, O);
+    break;
+  case 680:
+    // V6_vrmpybus_alt, V6_vrmpybus_alt_128B, V6_vrmpybusi_alt, V6_vrmpybusi_...
+    O << " = vrmpybus(";
+    printOperand(MI, 1, O);
+    O << ',';
+    printOperand(MI, 2, O);
+    break;
+  case 681:
+    // V6_vrmpybv_acc_alt, V6_vrmpybv_acc_alt_128B
+    O << " += vrmpyb(";
+    printOperand(MI, 2, O);
+    O << ',';
+    printOperand(MI, 3, O);
+    O << ')';
+    return;
+    break;
+  case 682:
+    // V6_vrmpybv_alt, V6_vrmpybv_alt_128B
+    O << " = vrmpyb(";
+    printOperand(MI, 1, O);
+    O << ',';
+    printOperand(MI, 2, O);
+    O << ')';
+    return;
+    break;
+  case 683:
     // V6_vrmpyub, V6_vrmpyub_128B, V6_vrmpyubi, V6_vrmpyubi_128B, V6_vrmpyub...
     O << ".uw = vrmpy(";
     printOperand(MI, 1, O);
     O << ".ub,";
     printOperand(MI, 2, O);
     break;
-  case 568:
+  case 684:
     // V6_vrmpyub_acc, V6_vrmpyub_acc_128B, V6_vrmpyubi_acc, V6_vrmpyubi_acc_...
     O << ".uw += vrmpy(";
     printOperand(MI, 2, O);
     O << ".ub,";
     printOperand(MI, 3, O);
     break;
-  case 569:
+  case 685:
+    // V6_vrmpyub_acc_alt, V6_vrmpyub_acc_alt_128B, V6_vrmpyubi_acc_alt, V6_v...
+    O << " += vrmpyub(";
+    printOperand(MI, 2, O);
+    O << ',';
+    printOperand(MI, 3, O);
+    break;
+  case 686:
+    // V6_vrmpyub_alt, V6_vrmpyub_alt_128B, V6_vrmpyubi_alt, V6_vrmpyubi_alt_...
+    O << " = vrmpyub(";
+    printOperand(MI, 1, O);
+    O << ',';
+    printOperand(MI, 2, O);
+    break;
+  case 687:
     // V6_vror, V6_vror_128B
     O << " = vror(";
     printOperand(MI, 1, O);
@@ -11885,7 +15554,7 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     O << ')';
     return;
     break;
-  case 570:
+  case 688:
     // V6_vroundhb, V6_vroundhb_128B
     O << ".b = vround(";
     printOperand(MI, 1, O);
@@ -11894,16 +15563,53 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     O << ".h):sat";
     return;
     break;
-  case 571:
-    // V6_vroundhub, V6_vroundhub_128B
-    O << ".ub = vround(";
+  case 689:
+    // V6_vroundhb_alt, V6_vroundhb_alt_128B
+    O << " = vroundhb(";
     printOperand(MI, 1, O);
-    O << ".h,";
+    O << ',';
     printOperand(MI, 2, O);
-    O << ".h):sat";
+    O << "):sat";
     return;
     break;
-  case 572:
+  case 690:
+    // V6_vroundhub, V6_vroundhub_128B, V6_vrounduhub, V6_vrounduhub_128B
+    O << ".ub = vround(";
+    printOperand(MI, 1, O);
+    break;
+  case 691:
+    // V6_vroundhub_alt, V6_vroundhub_alt_128B
+    O << " = vroundhub(";
+    printOperand(MI, 1, O);
+    O << ',';
+    printOperand(MI, 2, O);
+    O << "):sat";
+    return;
+    break;
+  case 692:
+    // V6_vrounduhub_alt, V6_vrounduhub_alt_128B
+    O << " = vrounduhub(";
+    printOperand(MI, 1, O);
+    O << ',';
+    printOperand(MI, 2, O);
+    O << "):sat";
+    return;
+    break;
+  case 693:
+    // V6_vrounduwuh, V6_vrounduwuh_128B, V6_vroundwuh, V6_vroundwuh_128B
+    O << ".uh = vround(";
+    printOperand(MI, 1, O);
+    break;
+  case 694:
+    // V6_vrounduwuh_alt, V6_vrounduwuh_alt_128B
+    O << " = vrounduwuh(";
+    printOperand(MI, 1, O);
+    O << ',';
+    printOperand(MI, 2, O);
+    O << "):sat";
+    return;
+    break;
+  case 695:
     // V6_vroundwh, V6_vroundwh_128B
     O << ".h = vround(";
     printOperand(MI, 1, O);
@@ -11912,16 +15618,25 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     O << ".w):sat";
     return;
     break;
-  case 573:
-    // V6_vroundwuh, V6_vroundwuh_128B
-    O << ".uh = vround(";
+  case 696:
+    // V6_vroundwh_alt, V6_vroundwh_alt_128B
+    O << " = vroundwh(";
     printOperand(MI, 1, O);
-    O << ".w,";
+    O << ',';
     printOperand(MI, 2, O);
-    O << ".w):sat";
+    O << "):sat";
     return;
     break;
-  case 574:
+  case 697:
+    // V6_vroundwuh_alt, V6_vroundwuh_alt_128B
+    O << " = vroundwuh(";
+    printOperand(MI, 1, O);
+    O << ',';
+    printOperand(MI, 2, O);
+    O << "):sat";
+    return;
+    break;
+  case 698:
     // V6_vrsadubi, V6_vrsadubi_128B
     O << ".uw = vrsad(";
     printOperand(MI, 1, O);
@@ -11932,7 +15647,7 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     O << ')';
     return;
     break;
-  case 575:
+  case 699:
     // V6_vrsadubi_acc, V6_vrsadubi_acc_128B
     O << ".uw += vrsad(";
     printOperand(MI, 2, O);
@@ -11943,7 +15658,7 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     O << ')';
     return;
     break;
-  case 576:
+  case 700:
     // V6_vsathub, V6_vsathub_128B
     O << ".ub = vsat(";
     printOperand(MI, 1, O);
@@ -11952,7 +15667,25 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     O << ".h)";
     return;
     break;
-  case 577:
+  case 701:
+    // V6_vsatuwuh, V6_vsatuwuh_128B
+    O << ".uh = vsat(";
+    printOperand(MI, 1, O);
+    O << ".uw,";
+    printOperand(MI, 2, O);
+    O << ".uw)";
+    return;
+    break;
+  case 702:
+    // V6_vsatuwuh_alt, V6_vsatuwuh_alt_128B
+    O << " = vsatuwuh(";
+    printOperand(MI, 1, O);
+    O << ',';
+    printOperand(MI, 2, O);
+    O << ')';
+    return;
+    break;
+  case 703:
     // V6_vsatwh, V6_vsatwh_128B
     O << ".h = vsat(";
     printOperand(MI, 1, O);
@@ -11961,53 +15694,81 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     O << ".w)";
     return;
     break;
-  case 578:
+  case 704:
     // V6_vsb, V6_vsb_128B
     O << ".h = vsxt(";
     printOperand(MI, 1, O);
     O << ".b)";
     return;
     break;
-  case 579:
+  case 705:
+    // V6_vsb_alt, V6_vsb_alt_128B
+    O << " = vsxtb(";
+    printOperand(MI, 1, O);
+    O << ')';
+    return;
+    break;
+  case 706:
     // V6_vsh, V6_vsh_128B
     O << ".w = vsxt(";
     printOperand(MI, 1, O);
     O << ".h)";
     return;
     break;
-  case 580:
-    // V6_vshufeh, V6_vshufeh_128B
-    O << ".h = vshuffe(";
+  case 707:
+    // V6_vsh_alt, V6_vsh_alt_128B
+    O << " = vsxth(";
     printOperand(MI, 1, O);
-    O << ".h,";
-    printOperand(MI, 2, O);
-    O << ".h)";
+    O << ')';
     return;
     break;
-  case 581:
+  case 708:
+    // V6_vshufeh_alt, V6_vshufeh_alt_128B
+    O << " = vshuffeh(";
+    printOperand(MI, 1, O);
+    O << ',';
+    printOperand(MI, 2, O);
+    O << ')';
+    return;
+    break;
+  case 709:
     // V6_vshuffb, V6_vshuffb_128B
     O << ".b = vshuff(";
     printOperand(MI, 1, O);
     O << ".b)";
     return;
     break;
-  case 582:
-    // V6_vshuffeb, V6_vshuffeb_128B
-    O << ".b = vshuffe(";
+  case 710:
+    // V6_vshuffb_alt, V6_vshuffb_alt_128B
+    O << " = vshuffb(";
     printOperand(MI, 1, O);
-    O << ".b,";
-    printOperand(MI, 2, O);
-    O << ".b)";
+    O << ')';
     return;
     break;
-  case 583:
+  case 711:
+    // V6_vshuffeb_alt, V6_vshuffeb_alt_128B
+    O << " = vshuffeb(";
+    printOperand(MI, 1, O);
+    O << ',';
+    printOperand(MI, 2, O);
+    O << ')';
+    return;
+    break;
+  case 712:
     // V6_vshuffh, V6_vshuffh_128B
     O << ".h = vshuff(";
     printOperand(MI, 1, O);
     O << ".h)";
     return;
     break;
-  case 584:
+  case 713:
+    // V6_vshuffh_alt, V6_vshuffh_alt_128B
+    O << " = vshuffh(";
+    printOperand(MI, 1, O);
+    O << ')';
+    return;
+    break;
+  case 714:
     // V6_vshuffob, V6_vshuffob_128B
     O << ".b = vshuffo(";
     printOperand(MI, 1, O);
@@ -12016,7 +15777,16 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     O << ".b)";
     return;
     break;
-  case 585:
+  case 715:
+    // V6_vshuffob_alt, V6_vshuffob_alt_128B
+    O << " = vshuffob(";
+    printOperand(MI, 1, O);
+    O << ',';
+    printOperand(MI, 2, O);
+    O << ')';
+    return;
+    break;
+  case 716:
     // V6_vshuffvdd, V6_vshuffvdd_128B
     O << " = vshuff(";
     printOperand(MI, 1, O);
@@ -12027,7 +15797,7 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     O << ')';
     return;
     break;
-  case 586:
+  case 717:
     // V6_vshufoeb, V6_vshufoeb_128B
     O << ".b = vshuffoe(";
     printOperand(MI, 1, O);
@@ -12036,7 +15806,16 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     O << ".b)";
     return;
     break;
-  case 587:
+  case 718:
+    // V6_vshufoeb_alt, V6_vshufoeb_alt_128B
+    O << " = vshuffoeb(";
+    printOperand(MI, 1, O);
+    O << ',';
+    printOperand(MI, 2, O);
+    O << ')';
+    return;
+    break;
+  case 719:
     // V6_vshufoeh, V6_vshufoeh_128B
     O << ".h = vshuffoe(";
     printOperand(MI, 1, O);
@@ -12045,7 +15824,16 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     O << ".h)";
     return;
     break;
-  case 588:
+  case 720:
+    // V6_vshufoeh_alt, V6_vshufoeh_alt_128B
+    O << " = vshuffoeh(";
+    printOperand(MI, 1, O);
+    O << ',';
+    printOperand(MI, 2, O);
+    O << ')';
+    return;
+    break;
+  case 721:
     // V6_vshufoh, V6_vshufoh_128B
     O << ".h = vshuffo(";
     printOperand(MI, 1, O);
@@ -12054,35 +15842,39 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     O << ".h)";
     return;
     break;
-  case 589:
-    // V6_vsubb, V6_vsubb_128B, V6_vsubb_dv, V6_vsubb_dv_128B
+  case 722:
+    // V6_vshufoh_alt, V6_vshufoh_alt_128B
+    O << " = vshuffoh(";
+    printOperand(MI, 1, O);
+    O << ',';
+    printOperand(MI, 2, O);
+    O << ')';
+    return;
+    break;
+  case 723:
+    // V6_vsubb, V6_vsubb_128B, V6_vsubb_dv, V6_vsubb_dv_128B, V6_vsubbsat, V...
     O << ".b = vsub(";
     printOperand(MI, 1, O);
     O << ".b,";
     printOperand(MI, 2, O);
-    O << ".b)";
-    return;
     break;
-  case 590:
+  case 724:
+    // V6_vsubcarry, V6_vsubcarry_128B, V6_vsubhw, V6_vsubhw_128B, V6_vsubuhw...
+    O << ".w = vsub(";
+    break;
+  case 725:
     // V6_vsubh, V6_vsubh_128B, V6_vsubh_dv, V6_vsubh_dv_128B, V6_vsubhsat, V...
     O << ".h = vsub(";
     printOperand(MI, 1, O);
     break;
-  case 591:
-    // V6_vsubhw, V6_vsubhw_128B, V6_vsubuhw, V6_vsubuhw_128B, V6_vsubw, V6_v...
-    O << ".w = vsub(";
-    printOperand(MI, 1, O);
-    break;
-  case 592:
-    // V6_vsububsat, V6_vsububsat_128B, V6_vsububsat_dv, V6_vsububsat_dv_128B
+  case 726:
+    // V6_vsububsat, V6_vsububsat_128B, V6_vsububsat_dv, V6_vsububsat_dv_128B...
     O << ".ub = vsub(";
     printOperand(MI, 1, O);
     O << ".ub,";
     printOperand(MI, 2, O);
-    O << ".ub):sat";
-    return;
     break;
-  case 593:
+  case 727:
     // V6_vsubuhsat, V6_vsubuhsat_128B, V6_vsubuhsat_dv, V6_vsubuhsat_dv_128B
     O << ".uh = vsub(";
     printOperand(MI, 1, O);
@@ -12091,7 +15883,25 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     O << ".uh):sat";
     return;
     break;
-  case 594:
+  case 728:
+    // V6_vsubuwsat, V6_vsubuwsat_128B, V6_vsubuwsat_dv, V6_vsubuwsat_dv_128B
+    O << ".uw = vsub(";
+    printOperand(MI, 1, O);
+    O << ".uw,";
+    printOperand(MI, 2, O);
+    O << ".uw):sat";
+    return;
+    break;
+  case 729:
+    // V6_vsubuwsat_alt, V6_vsubuwsat_alt_128B, V6_vsubuwsat_dv_alt, V6_vsubu...
+    O << " = vsubuw(";
+    printOperand(MI, 1, O);
+    O << ',';
+    printOperand(MI, 2, O);
+    O << "):sat";
+    return;
+    break;
+  case 730:
     // V6_vswap, V6_vswap_128B
     O << " = vswap(";
     printOperand(MI, 1, O);
@@ -12102,17 +15912,53 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     O << ')';
     return;
     break;
-  case 595:
+  case 731:
     // V6_vtmpyb, V6_vtmpyb_128B, V6_vtmpybus, V6_vtmpybus_128B
     O << ".h = vtmpy(";
     printOperand(MI, 1, O);
     break;
-  case 596:
+  case 732:
     // V6_vtmpyb_acc, V6_vtmpyb_acc_128B, V6_vtmpybus_acc, V6_vtmpybus_acc_12...
     O << ".h += vtmpy(";
     printOperand(MI, 2, O);
     break;
-  case 597:
+  case 733:
+    // V6_vtmpyb_acc_alt, V6_vtmpyb_acc_alt_128B
+    O << " += vtmpyb(";
+    printOperand(MI, 2, O);
+    O << ',';
+    printOperand(MI, 3, O);
+    O << ')';
+    return;
+    break;
+  case 734:
+    // V6_vtmpyb_alt, V6_vtmpyb_alt_128B
+    O << " = vtmpyb(";
+    printOperand(MI, 1, O);
+    O << ',';
+    printOperand(MI, 2, O);
+    O << ')';
+    return;
+    break;
+  case 735:
+    // V6_vtmpybus_acc_alt, V6_vtmpybus_acc_alt_128B
+    O << " += vtmpybus(";
+    printOperand(MI, 2, O);
+    O << ',';
+    printOperand(MI, 3, O);
+    O << ')';
+    return;
+    break;
+  case 736:
+    // V6_vtmpybus_alt, V6_vtmpybus_alt_128B
+    O << " = vtmpybus(";
+    printOperand(MI, 1, O);
+    O << ',';
+    printOperand(MI, 2, O);
+    O << ')';
+    return;
+    break;
+  case 737:
     // V6_vtmpyhb, V6_vtmpyhb_128B
     O << ".w = vtmpy(";
     printOperand(MI, 1, O);
@@ -12121,7 +15967,7 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     O << ".b)";
     return;
     break;
-  case 598:
+  case 738:
     // V6_vtmpyhb_acc, V6_vtmpyhb_acc_128B
     O << ".w += vtmpy(";
     printOperand(MI, 2, O);
@@ -12130,49 +15976,114 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     O << ".b)";
     return;
     break;
-  case 599:
+  case 739:
+    // V6_vtmpyhb_acc_alt, V6_vtmpyhb_acc_alt_128B
+    O << " += vtmpyhb(";
+    printOperand(MI, 2, O);
+    O << ',';
+    printOperand(MI, 3, O);
+    O << ')';
+    return;
+    break;
+  case 740:
+    // V6_vtmpyhb_alt, V6_vtmpyhb_alt_128B
+    O << " = vtmpyhb(";
+    printOperand(MI, 1, O);
+    O << ',';
+    printOperand(MI, 2, O);
+    O << ')';
+    return;
+    break;
+  case 741:
     // V6_vunpackb, V6_vunpackb_128B
     O << ".h = vunpack(";
     printOperand(MI, 1, O);
     O << ".b)";
     return;
     break;
-  case 600:
+  case 742:
+    // V6_vunpackb_alt, V6_vunpackb_alt_128B
+    O << " = vunpackb(";
+    printOperand(MI, 1, O);
+    O << ')';
+    return;
+    break;
+  case 743:
     // V6_vunpackh, V6_vunpackh_128B
     O << ".w = vunpack(";
     printOperand(MI, 1, O);
     O << ".h)";
     return;
     break;
-  case 601:
+  case 744:
+    // V6_vunpackh_alt, V6_vunpackh_alt_128B
+    O << " = vunpackh(";
+    printOperand(MI, 1, O);
+    O << ')';
+    return;
+    break;
+  case 745:
     // V6_vunpackob, V6_vunpackob_128B
     O << ".h |= vunpacko(";
     printOperand(MI, 2, O);
     O << ".b)";
     return;
     break;
-  case 602:
+  case 746:
+    // V6_vunpackob_alt, V6_vunpackob_alt_128B
+    O << " |= vunpackob(";
+    printOperand(MI, 2, O);
+    O << ')';
+    return;
+    break;
+  case 747:
     // V6_vunpackoh, V6_vunpackoh_128B
     O << ".w |= vunpacko(";
     printOperand(MI, 2, O);
     O << ".h)";
     return;
     break;
-  case 603:
+  case 748:
+    // V6_vunpackoh_alt, V6_vunpackoh_alt_128B
+    O << " |= vunpackoh(";
+    printOperand(MI, 2, O);
+    O << ')';
+    return;
+    break;
+  case 749:
     // V6_vunpackub, V6_vunpackub_128B
     O << ".uh = vunpack(";
     printOperand(MI, 1, O);
     O << ".ub)";
     return;
     break;
-  case 604:
+  case 750:
+    // V6_vunpackub_alt, V6_vunpackub_alt_128B
+    O << " = vunpackub(";
+    printOperand(MI, 1, O);
+    O << ')';
+    return;
+    break;
+  case 751:
     // V6_vunpackuh, V6_vunpackuh_128B
     O << ".uw = vunpack(";
     printOperand(MI, 1, O);
     O << ".uh)";
     return;
     break;
-  case 605:
+  case 752:
+    // V6_vunpackuh_alt, V6_vunpackuh_alt_128B
+    O << " = vunpackuh(";
+    printOperand(MI, 1, O);
+    O << ')';
+    return;
+    break;
+  case 753:
+    // V6_vwhist256q_sat, V6_vwhist256q_sat_128B
+    O << "):sat";
+    return;
+    break;
+  case 754:
     // V6_vxor, V6_vxor_128B
     O << " = vxor(";
     printOperand(MI, 1, O);
@@ -12181,23 +16092,30 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     O << ')';
     return;
     break;
-  case 606:
+  case 755:
     // V6_vzb, V6_vzb_128B
     O << ".uh = vzxt(";
     printOperand(MI, 1, O);
     O << ".ub)";
     return;
     break;
-  case 607:
+  case 756:
+    // V6_vzb_alt, V6_vzb_alt_128B
+    O << " = vzxtb(";
+    printOperand(MI, 1, O);
+    O << ')';
+    return;
+    break;
+  case 757:
     // V6_vzh, V6_vzh_128B
     O << ".uw = vzxt(";
     printOperand(MI, 1, O);
     O << ".uh)";
     return;
     break;
-  case 608:
-    // Y5_l2locka
-    O << " = l2locka(";
+  case 758:
+    // V6_vzh_alt, V6_vzh_alt_128B
+    O << " = vzxth(";
     printOperand(MI, 1, O);
     O << ')';
     return;
@@ -12205,16 +16123,16 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
   }
 
 
-  // Fragment 2 encoded into 8 bits for 129 unique commands.
+  // Fragment 2 encoded into 8 bits for 147 unique commands.
   switch ((Bits >> 24) & 255) {
   default: llvm_unreachable("Invalid command number.");
   case 0:
-    // A2_abs, A2_absp, A2_negp, A2_svaddh, A2_svavgh, A2_svnavgh, A2_svsubh,...
+    // A2_abs, A2_absp, A2_neg, A2_negp, A2_svaddh, A2_svavgh, A2_svnavgh, A2...
     O << ')';
     return;
     break;
   case 1:
-    // A2_abssat, A2_negsat, A2_roundsat, A2_svaddhs, A2_svsubhs, A2_vabshsat...
+    // A2_abssat, A2_negsat, A2_roundsat, A2_svaddhs, A2_svadduhs, A2_svsubhs...
     O << "):sat";
     return;
     break;
@@ -12224,611 +16142,710 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     break;
   case 3:
     // A2_and, A2_andp, A2_combinew, A2_or, A2_orp, A2_subri, A2_vcmpbeq, A2_...
-    O << ", ";
+    O << ',';
     break;
   case 4:
-    // A2_andir, A2_orir, A4_bitspliti, A4_cmpbeqi, A4_cmpbgti, A4_cmpbgtui, ...
-    O << ", #";
+    // A2_andir, A2_combineii, A2_orir, A4_bitspliti, A4_cmpbeqi, A4_cmpbgti,...
+    O << ",#";
     break;
   case 5:
     // A2_combine_hh, A2_combine_hl, M2_mpy_acc_hh_s0, M2_mpy_acc_hh_s1, M2_m...
-    O << ".h, ";
+    O << ".h,";
     break;
   case 6:
     // A2_combine_lh, A2_combine_ll, M2_mpy_acc_lh_s0, M2_mpy_acc_lh_s1, M2_m...
-    O << ".l, ";
+    O << ".l,";
     break;
   case 7:
-    // A2_combineii, A2_tfrsi, A4_combineir, L4_add_memopb_io, L4_add_memoph_...
-    printExtOperand(MI, 1, O);
-    break;
-  case 8:
     // A2_paddf, A2_paddfnew, A2_paddif, A2_paddifnew, A2_paddit, A2_padditne...
     O << " = add(";
     printOperand(MI, 2, O);
     break;
-  case 9:
+  case 8:
     // A2_pandf, A2_pandfnew, A2_pandt, A2_pandtnew
     O << " = and(";
     printOperand(MI, 2, O);
-    O << ", ";
+    O << ',';
+    printOperand(MI, 3, O);
+    O << ')';
+    return;
+    break;
+  case 9:
+    // A2_porf, A2_porfnew, A2_port, A2_portnew
+    O << " = or(";
+    printOperand(MI, 2, O);
+    O << ',';
     printOperand(MI, 3, O);
     O << ')';
     return;
     break;
   case 10:
-    // A2_porf, A2_porfnew, A2_port, A2_portnew
-    O << " = or(";
+    // A2_psubf, A2_psubfnew, A2_psubt, A2_psubtnew
+    O << " = sub(";
     printOperand(MI, 2, O);
-    O << ", ";
+    O << ',';
     printOperand(MI, 3, O);
     O << ')';
     return;
     break;
   case 11:
-    // A2_psubf, A2_psubfnew, A2_psubt, A2_psubtnew
-    O << " = sub(";
+    // A2_pxorf, A2_pxorfnew, A2_pxort, A2_pxortnew
+    O << " = xor(";
     printOperand(MI, 2, O);
-    O << ", ";
+    O << ',';
     printOperand(MI, 3, O);
     O << ')';
     return;
     break;
   case 12:
-    // A2_pxorf, A2_pxorfnew, A2_pxort, A2_pxortnew
-    O << " = xor(";
-    printOperand(MI, 2, O);
-    O << ", ";
-    printOperand(MI, 3, O);
-    O << ')';
-    return;
-    break;
-  case 13:
-    // A2_svavghs, A2_vavghr, A2_vavgubr, A2_vavguhr, A2_vavguwr, A2_vavgwr
+    // A2_svavghs, A2_vavghr, A2_vavgubr, A2_vavguhr, A2_vavguwr, A2_vavgwr, ...
     O << "):rnd";
     return;
     break;
-  case 14:
-    // A2_tfr, A2_tfrcrr, A2_tfrp, A2_tfrrcr, A4_tfrcpp, A4_tfrpcp, C2_pxfer_...
+  case 13:
+    // A2_tfr, A2_tfrcrr, A2_tfrp, A2_tfrpi, A2_tfrrcr, A2_tfrsi, A4_tfrcpp, ...
     return;
     break;
-  case 15:
+  case 14:
     // A2_tfrf, A2_tfrfnew, A2_tfrpf, A2_tfrpfnew, A2_tfrpt, A2_tfrptnew, A2_...
     O << " = ";
     printOperand(MI, 2, O);
     return;
     break;
-  case 16:
+  case 15:
     // A2_vavghcr, A2_vavgwcr
     O << "):crnd";
     return;
     break;
-  case 17:
+  case 16:
     // A2_vnavghcr, A2_vnavgwcr
     O << "):crnd:sat";
     return;
     break;
-  case 18:
+  case 17:
     // A2_vnavghr, A2_vnavgwr, M2_cmpyrs_s0, M2_mmachs_rs0, M2_mmacls_rs0, M2...
     O << "):rnd:sat";
     return;
     break;
-  case 19:
-    // A4_addp_c, A4_subp_c, L2_loadalignb_io, L2_loadalignb_pbr, L2_loadalig...
+  case 18:
+    // A4_addp_c, A4_subp_c, L2_loadalignb_io, L2_loadalignb_zomap, L2_loadal...
     printOperand(MI, 2, O);
     break;
-  case 20:
+  case 19:
     // A4_andn, A4_andnp, A4_orn, A4_ornp, M4_and_andn, M4_or_andn, M4_xor_an...
-    O << ", ~";
+    O << ",~";
     break;
-  case 21:
+  case 20:
     // A4_boundscheck_hi
     O << "):raw:hi";
     return;
     break;
-  case 22:
+  case 21:
     // A4_boundscheck_lo
     O << "):raw:lo";
     return;
     break;
-  case 23:
+  case 22:
     // A4_paslhf, A4_paslhfnew, A4_paslht, A4_paslhtnew
     O << " = aslh(";
     printOperand(MI, 2, O);
     O << ')';
     return;
     break;
-  case 24:
+  case 23:
     // A4_pasrhf, A4_pasrhfnew, A4_pasrht, A4_pasrhtnew
     O << " = asrh(";
     printOperand(MI, 2, O);
     O << ')';
     return;
     break;
-  case 25:
+  case 24:
     // A4_psxtbf, A4_psxtbfnew, A4_psxtbt, A4_psxtbtnew
     O << " = sxtb(";
     printOperand(MI, 2, O);
     O << ')';
     return;
     break;
-  case 26:
+  case 25:
     // A4_psxthf, A4_psxthfnew, A4_psxtht, A4_psxthtnew
     O << " = sxth(";
     printOperand(MI, 2, O);
     O << ')';
     return;
     break;
-  case 27:
+  case 26:
     // A4_pzxtbf, A4_pzxtbfnew, A4_pzxtbt, A4_pzxtbtnew
     O << " = zxtb(";
     printOperand(MI, 2, O);
     O << ')';
     return;
     break;
-  case 28:
+  case 27:
     // A4_pzxthf, A4_pzxthfnew, A4_pzxtht, A4_pzxthtnew
     O << " = zxth(";
     printOperand(MI, 2, O);
     O << ')';
     return;
     break;
-  case 29:
-    // C2_andn, C2_orn
-    O << ", !";
-    printOperand(MI, 2, O);
-    O << ')';
-    return;
-    break;
-  case 30:
-    // C2_ccombinewf, C2_ccombinewnewf, C2_ccombinewnewt, C2_ccombinewt
-    O << " = combine(";
-    printOperand(MI, 2, O);
-    O << ", ";
-    printOperand(MI, 3, O);
-    O << ')';
-    return;
-    break;
-  case 31:
-    // C2_cmoveif, C2_cmoveit, C2_cmovenewif, C2_cmovenewit
-    O << " = #";
-    printExtOperand(MI, 2, O);
-    return;
-    break;
-  case 32:
-    // C4_and_and, C4_and_andn, C4_or_and, C4_or_andn, S4_or_andix
-    O << ", and(";
-    printOperand(MI, 2, O);
-    break;
-  case 33:
-    // C4_and_or, C4_and_orn, C4_or_or, C4_or_orn
-    O << ", or(";
-    printOperand(MI, 2, O);
-    break;
-  case 34:
-    // F2_conv_df2d_chop, F2_conv_df2ud_chop, F2_conv_df2uw_chop, F2_conv_df2...
-    O << "):chop";
-    return;
-    break;
-  case 35:
-    // F2_dfimm_n, F2_sfimm_n
-    O << "):neg";
-    return;
-    break;
-  case 36:
-    // F2_dfimm_p, F2_sfimm_p
-    O << "):pos";
-    return;
-    break;
-  case 37:
-    // F2_sffma_lib, F2_sffms_lib
-    O << "):lib";
-    return;
-    break;
-  case 38:
-    // J4_cmpeq_f_jumpnv_nt, J4_cmpeq_t_jumpnv_nt, J4_cmpeqi_f_jumpnv_nt, J4_...
-    O << ")) jump:nt ";
-    printBrtarget(MI, 2, O);
-    return;
-    break;
-  case 39:
-    // J4_cmpeq_f_jumpnv_t, J4_cmpeq_t_jumpnv_t, J4_cmpeqi_f_jumpnv_t, J4_cmp...
-    O << ")) jump:t ";
-    printBrtarget(MI, 2, O);
-    return;
-    break;
-  case 40:
-    // J4_cmpeqi_fp0_jump_nt, J4_cmpeqn1_fp0_jump_nt, J4_cmpgti_fp0_jump_nt, ...
-    O << "); if (!p0.new) jump:nt ";
-    printBrtarget(MI, 2, O);
-    return;
-    break;
-  case 41:
-    // J4_cmpeqi_fp0_jump_t, J4_cmpeqn1_fp0_jump_t, J4_cmpgti_fp0_jump_t, J4_...
-    O << "); if (!p0.new) jump:t ";
-    printBrtarget(MI, 2, O);
-    return;
-    break;
-  case 42:
-    // J4_cmpeqi_fp1_jump_nt, J4_cmpeqn1_fp1_jump_nt, J4_cmpgti_fp1_jump_nt, ...
-    O << "); if (!p1.new) jump:nt ";
-    printBrtarget(MI, 2, O);
-    return;
-    break;
-  case 43:
-    // J4_cmpeqi_fp1_jump_t, J4_cmpeqn1_fp1_jump_t, J4_cmpgti_fp1_jump_t, J4_...
-    O << "); if (!p1.new) jump:t ";
-    printBrtarget(MI, 2, O);
-    return;
-    break;
-  case 44:
-    // J4_cmpeqi_tp0_jump_nt, J4_cmpeqn1_tp0_jump_nt, J4_cmpgti_tp0_jump_nt, ...
-    O << "); if (p0.new) jump:nt ";
-    printBrtarget(MI, 2, O);
-    return;
-    break;
-  case 45:
-    // J4_cmpeqi_tp0_jump_t, J4_cmpeqn1_tp0_jump_t, J4_cmpgti_tp0_jump_t, J4_...
-    O << "); if (p0.new) jump:t ";
-    printBrtarget(MI, 2, O);
-    return;
-    break;
-  case 46:
-    // J4_cmpeqi_tp1_jump_nt, J4_cmpeqn1_tp1_jump_nt, J4_cmpgti_tp1_jump_nt, ...
-    O << "); if (p1.new) jump:nt ";
-    printBrtarget(MI, 2, O);
-    return;
-    break;
-  case 47:
-    // J4_cmpeqi_tp1_jump_t, J4_cmpeqn1_tp1_jump_t, J4_cmpgti_tp1_jump_t, J4_...
-    O << "); if (p1.new) jump:t ";
-    printBrtarget(MI, 2, O);
-    return;
-    break;
-  case 48:
-    // J4_jumpsetr
-    O << " ; jump ";
-    printBrtarget(MI, 2, O);
-    return;
-    break;
-  case 49:
-    // L2_loadalignb_pcr, L2_loadalignb_pi, L2_loadalignb_pr, L2_loadalignh_p...
-    printOperand(MI, 3, O);
-    break;
-  case 50:
-    // L2_ploadrbf_io, L2_ploadrbf_pi, L2_ploadrbfnew_io, L2_ploadrbfnew_pi, ...
-    O << " = memb(";
-    break;
-  case 51:
-    // L2_ploadrdf_io, L2_ploadrdf_pi, L2_ploadrdfnew_io, L2_ploadrdfnew_pi, ...
-    O << " = memd(";
-    break;
-  case 52:
-    // L2_ploadrhf_io, L2_ploadrhf_pi, L2_ploadrhfnew_io, L2_ploadrhfnew_pi, ...
-    O << " = memh(";
-    break;
-  case 53:
-    // L2_ploadrif_io, L2_ploadrif_pi, L2_ploadrifnew_io, L2_ploadrifnew_pi, ...
-    O << " = memw(";
-    break;
-  case 54:
-    // L2_ploadrubf_io, L2_ploadrubf_pi, L2_ploadrubfnew_io, L2_ploadrubfnew_...
-    O << " = memub(";
-    break;
-  case 55:
-    // L2_ploadruhf_io, L2_ploadruhf_pi, L2_ploadruhfnew_io, L2_ploadruhfnew_...
-    O << " = memuh(";
-    break;
-  case 56:
-    // L4_ploadrbf_abs, L4_ploadrbfnew_abs, L4_ploadrbt_abs, L4_ploadrbtnew_a...
-    O << " = memb(#";
-    printExtOperand(MI, 2, O);
-    O << ')';
-    return;
-    break;
-  case 57:
-    // L4_ploadrdf_abs, L4_ploadrdfnew_abs, L4_ploadrdt_abs, L4_ploadrdtnew_a...
-    O << " = memd(#";
-    printExtOperand(MI, 2, O);
-    O << ')';
-    return;
-    break;
-  case 58:
-    // L4_ploadrhf_abs, L4_ploadrhfnew_abs, L4_ploadrht_abs, L4_ploadrhtnew_a...
-    O << " = memh(#";
-    printExtOperand(MI, 2, O);
-    O << ')';
-    return;
-    break;
-  case 59:
-    // L4_ploadrif_abs, L4_ploadrifnew_abs, L4_ploadrit_abs, L4_ploadritnew_a...
-    O << " = memw(#";
-    printExtOperand(MI, 2, O);
-    O << ')';
-    return;
-    break;
-  case 60:
-    // L4_ploadrubf_abs, L4_ploadrubfnew_abs, L4_ploadrubt_abs, L4_ploadrubtn...
-    O << " = memub(#";
-    printExtOperand(MI, 2, O);
-    O << ')';
-    return;
-    break;
-  case 61:
-    // L4_ploadruhf_abs, L4_ploadruhfnew_abs, L4_ploadruht_abs, L4_ploadruhtn...
-    O << " = memuh(#";
-    printExtOperand(MI, 2, O);
-    O << ')';
-    return;
-    break;
-  case 62:
-    // M2_cmacs_s1, M2_cmpys_s1, M2_cnacs_s1, M2_mmachs_s1, M2_mmacls_s1, M2_...
-    O << "):<<1:sat";
-    return;
-    break;
-  case 63:
-    // M2_cmacsc_s0, M2_cmpysc_s0, M2_cnacsc_s0
-    O << "*):sat";
-    return;
-    break;
-  case 64:
-    // M2_cmacsc_s1, M2_cmpysc_s1, M2_cnacsc_s1
-    O << "*):<<1:sat";
-    return;
-    break;
-  case 65:
-    // M2_cmpyrs_s1, M2_mmachs_rs1, M2_mmacls_rs1, M2_mmacuhs_rs1, M2_mmaculs...
-    O << "):<<1:rnd:sat";
-    return;
-    break;
-  case 66:
-    // M2_cmpyrsc_s0
-    O << "*):rnd:sat";
-    return;
-    break;
-  case 67:
-    // M2_cmpyrsc_s1, M4_cmpyi_whc, M4_cmpyr_whc
-    O << "*):<<1:rnd:sat";
-    return;
-    break;
-  case 68:
-    // M2_vrcmaci_s0c, M2_vrcmacr_s0c, M2_vrcmpyi_s0c, M2_vrcmpyr_s0c
-    O << "*)";
-    return;
-    break;
-  case 69:
-    // M2_vrcmpys_acc_s1_h, M2_vrcmpys_s1_h
-    O << "):<<1:sat:raw:hi";
-    return;
-    break;
-  case 70:
-    // M2_vrcmpys_acc_s1_l, M2_vrcmpys_s1_l
-    O << "):<<1:sat:raw:lo";
-    return;
-    break;
-  case 71:
-    // M2_vrcmpys_s1rp_h
-    O << "):<<1:rnd:sat:raw:hi";
-    return;
-    break;
-  case 72:
-    // M2_vrcmpys_s1rp_l
-    O << "):<<1:rnd:sat:raw:lo";
-    return;
-    break;
-  case 73:
-    // M4_mpyri_addi, M4_mpyrr_addi
-    O << ", mpyi(";
-    printOperand(MI, 2, O);
-    break;
-  case 74:
-    // M4_vrmpyeh_acc_s1, M4_vrmpyeh_s1, M4_vrmpyoh_acc_s1, M4_vrmpyoh_s1
-    O << "):<<1";
-    return;
-    break;
-  case 75:
-    // S2_storerb_pr, S2_storerbnew_pr, S2_storerd_pr, S2_storerf_pr, S2_stor...
-    O << ") = ";
-    break;
-  case 76:
-    // S2_storerbnew_pbr, S2_storerbnew_pci, S2_storerbnew_pcr, S2_storerbnew...
-    O << ".new";
-    return;
-    break;
-  case 77:
-    // S2_storerf_pbr, S2_storerf_pci, S2_storerf_pcr, S2_storerfgp, S4_pstor...
-    O << ".h";
-    return;
-    break;
-  case 78:
-    // S2_storew_locked, S4_stored_locked
-    printOperand(MI, 0, O);
-    O << ") = ";
-    printOperand(MI, 2, O);
-    return;
-    break;
-  case 79:
-    // S2_tableidxb, S2_tableidxd, S2_tableidxh, S2_tableidxw, S5_asrhub_rnd_...
-    O << "):raw";
-    return;
-    break;
-  case 80:
-    // S4_addi_asl_ri, S4_andi_asl_ri, S4_ori_asl_ri, S4_subi_asl_ri
-    O << ", asl(";
-    printOperand(MI, 2, O);
-    O << ", #";
-    printOperand(MI, 3, O);
-    O << "))";
-    return;
-    break;
-  case 81:
-    // S4_addi_lsr_ri, S4_andi_lsr_ri, S4_ori_lsr_ri, S4_subi_lsr_ri
-    O << ", lsr(";
-    printOperand(MI, 2, O);
-    O << ", #";
-    printOperand(MI, 3, O);
-    O << "))";
-    return;
-    break;
-  case 82:
-    // S4_vxaddsubhr, S4_vxsubaddhr
-    O << "):rnd:>>1:sat";
-    return;
-    break;
-  case 83:
-    // S5_vasrhrnd_goodsyntax, V6_valignbi, V6_valignbi_128B, V6_vlalignbi, V...
-    O << ",#";
-    break;
-  case 84:
-    // SA1_and1
-    O << ", #1)";
-    return;
-    break;
-  case 85:
-    // SA1_clrf, SA1_clrfnew, SA1_clrt, SA1_clrtnew
-    O << " = #0";
-    return;
-    break;
-  case 86:
-    // SA1_combinerz
-    O << ", #0)";
-    return;
-    break;
-  case 87:
-    // SA1_zxtb
-    O << ", #255)";
-    return;
-    break;
-  case 88:
-    // SS2_storebi0, SS2_storewi0
-    O << ")=#0";
-    return;
-    break;
-  case 89:
-    // SS2_storebi1, SS2_storewi1
-    O << ")=#1";
-    return;
-    break;
-  case 90:
-    // V6_pred_and, V6_pred_and_128B, V6_pred_or, V6_pred_or_128B, V6_pred_xo...
-    O << ',';
-    break;
-  case 91:
-    // V6_pred_and_n, V6_pred_and_n_128B, V6_pred_or_n, V6_pred_or_n_128B
+  case 28:
+    // C2_andn, C2_orn, V6_pred_and_n, V6_pred_and_n_128B, V6_pred_or_n, V6_p...
     O << ",!";
     printOperand(MI, 2, O);
     O << ')';
     return;
     break;
-  case 92:
-    // V6_vS32Ub_ai, V6_vS32b_ai, V6_vS32b_new_ai, V6_vS32b_nt_ai, V6_vS32b_n...
-    prints4_6ImmOperand(MI, 1, O);
+  case 29:
+    // C2_ccombinewf, C2_ccombinewnewf, C2_ccombinewnewt, C2_ccombinewt
+    O << " = combine(";
+    printOperand(MI, 2, O);
+    O << ',';
+    printOperand(MI, 3, O);
+    O << ')';
+    return;
     break;
-  case 93:
-    // V6_vS32Ub_ai_128B, V6_vS32b_ai_128B, V6_vS32b_new_ai_128B, V6_vS32b_nt...
-    prints4_7ImmOperand(MI, 1, O);
+  case 30:
+    // C2_cmoveif, C2_cmoveit, C2_cmovenewif, C2_cmovenewit
+    O << " = #";
+    printOperand(MI, 2, O);
+    return;
     break;
-  case 94:
-    // V6_vS32Ub_pi, V6_vS32b_new_pi, V6_vS32b_nt_new_pi, V6_vS32b_nt_pi, V6_...
-    prints3_6ImmOperand(MI, 2, O);
+  case 31:
+    // C4_and_and, C4_and_andn, C4_or_and, C4_or_andn, S4_or_andix
+    O << ",and(";
+    printOperand(MI, 2, O);
     break;
-  case 95:
-    // V6_vS32Ub_pi_128B, V6_vS32b_new_pi_128B, V6_vS32b_nt_new_pi_128B, V6_v...
-    prints3_7ImmOperand(MI, 2, O);
+  case 32:
+    // C4_and_or, C4_and_orn, C4_or_or, C4_or_orn
+    O << ",or(";
+    printOperand(MI, 2, O);
     break;
-  case 96:
-    // V6_vS32b_nt_new_ppu, V6_vS32b_nt_ppu
-    O << "):nt = ";
+  case 33:
+    // F2_conv_df2d_chop, F2_conv_df2ud_chop, F2_conv_df2uw_chop, F2_conv_df2...
+    O << "):chop";
+    return;
+    break;
+  case 34:
+    // F2_dfimm_n, F2_sfimm_n
+    O << "):neg";
+    return;
+    break;
+  case 35:
+    // F2_dfimm_p, F2_sfimm_p
+    O << "):pos";
+    return;
+    break;
+  case 36:
+    // F2_sffma_lib, F2_sffms_lib
+    O << "):lib";
+    return;
+    break;
+  case 37:
+    // J4_cmpeq_f_jumpnv_nt, J4_cmpeq_t_jumpnv_nt, J4_cmpeqi_f_jumpnv_nt, J4_...
+    O << ")) jump:nt ";
+    printBrtarget(MI, 2, O);
+    return;
+    break;
+  case 38:
+    // J4_cmpeq_f_jumpnv_t, J4_cmpeq_t_jumpnv_t, J4_cmpeqi_f_jumpnv_t, J4_cmp...
+    O << ")) jump:t ";
+    printBrtarget(MI, 2, O);
+    return;
+    break;
+  case 39:
+    // J4_cmpeqi_fp0_jump_nt, J4_cmpeqn1_fp0_jump_nt, J4_cmpgti_fp0_jump_nt, ...
+    O << "); if (!p0.new) jump:nt ";
+    printBrtarget(MI, 2, O);
+    return;
+    break;
+  case 40:
+    // J4_cmpeqi_fp0_jump_t, J4_cmpeqn1_fp0_jump_t, J4_cmpgti_fp0_jump_t, J4_...
+    O << "); if (!p0.new) jump:t ";
+    printBrtarget(MI, 2, O);
+    return;
+    break;
+  case 41:
+    // J4_cmpeqi_fp1_jump_nt, J4_cmpeqn1_fp1_jump_nt, J4_cmpgti_fp1_jump_nt, ...
+    O << "); if (!p1.new) jump:nt ";
+    printBrtarget(MI, 2, O);
+    return;
+    break;
+  case 42:
+    // J4_cmpeqi_fp1_jump_t, J4_cmpeqn1_fp1_jump_t, J4_cmpgti_fp1_jump_t, J4_...
+    O << "); if (!p1.new) jump:t ";
+    printBrtarget(MI, 2, O);
+    return;
+    break;
+  case 43:
+    // J4_cmpeqi_tp0_jump_nt, J4_cmpeqn1_tp0_jump_nt, J4_cmpgti_tp0_jump_nt, ...
+    O << "); if (p0.new) jump:nt ";
+    printBrtarget(MI, 2, O);
+    return;
+    break;
+  case 44:
+    // J4_cmpeqi_tp0_jump_t, J4_cmpeqn1_tp0_jump_t, J4_cmpgti_tp0_jump_t, J4_...
+    O << "); if (p0.new) jump:t ";
+    printBrtarget(MI, 2, O);
+    return;
+    break;
+  case 45:
+    // J4_cmpeqi_tp1_jump_nt, J4_cmpeqn1_tp1_jump_nt, J4_cmpgti_tp1_jump_nt, ...
+    O << "); if (p1.new) jump:nt ";
+    printBrtarget(MI, 2, O);
+    return;
+    break;
+  case 46:
+    // J4_cmpeqi_tp1_jump_t, J4_cmpeqn1_tp1_jump_t, J4_cmpgti_tp1_jump_t, J4_...
+    O << "); if (p1.new) jump:t ";
+    printBrtarget(MI, 2, O);
+    return;
+    break;
+  case 47:
+    // J4_jumpseti, J4_jumpsetr
+    O << " ; jump ";
+    printBrtarget(MI, 2, O);
+    return;
+    break;
+  case 48:
+    // L2_loadbsw2_io, L2_loadbsw4_io, L2_loadbzw2_io, L2_loadbzw4_io, L2_loa...
+    O << "+#";
+    printOperand(MI, 2, O);
+    break;
+  case 49:
+    // L2_loadbsw2_pbr, L2_loadbsw2_pr, L2_loadbsw4_pbr, L2_loadbsw4_pr, L2_l...
+    O << "++";
     printOperand(MI, 3, O);
     break;
+  case 50:
+    // L2_loadbsw2_pci, L2_loadbsw2_pi, L2_loadbsw4_pci, L2_loadbsw4_pi, L2_l...
+    O << "++#";
+    printOperand(MI, 3, O);
+    break;
+  case 51:
+    // L2_loadbsw2_pcr, L2_loadbsw4_pcr, L2_loadbzw2_pcr, L2_loadbzw4_pcr, L2...
+    O << "++I:circ(";
+    printOperand(MI, 3, O);
+    O << "))";
+    return;
+    break;
+  case 52:
+    // L2_ploadrbf_io, L2_ploadrbf_pi, L2_ploadrbf_zomap, L2_ploadrbfnew_io, ...
+    O << " = memb(";
+    break;
+  case 53:
+    // L2_ploadrdf_io, L2_ploadrdf_pi, L2_ploadrdf_zomap, L2_ploadrdfnew_io, ...
+    O << " = memd(";
+    break;
+  case 54:
+    // L2_ploadrhf_io, L2_ploadrhf_pi, L2_ploadrhf_zomap, L2_ploadrhfnew_io, ...
+    O << " = memh(";
+    break;
+  case 55:
+    // L2_ploadrif_io, L2_ploadrif_pi, L2_ploadrif_zomap, L2_ploadrifnew_io, ...
+    O << " = memw(";
+    break;
+  case 56:
+    // L2_ploadrubf_io, L2_ploadrubf_pi, L2_ploadrubf_zomap, L2_ploadrubfnew_...
+    O << " = memub(";
+    break;
+  case 57:
+    // L2_ploadruhf_io, L2_ploadruhf_pi, L2_ploadruhf_zomap, L2_ploadruhfnew_...
+    O << " = memuh(";
+    break;
+  case 58:
+    // L4_add_memopb_io, L4_add_memoph_io, L4_add_memopw_io
+    O << ") += ";
+    printOperand(MI, 2, O);
+    return;
+    break;
+  case 59:
+    // L4_and_memopb_io, L4_and_memoph_io, L4_and_memopw_io
+    O << ") &= ";
+    printOperand(MI, 2, O);
+    return;
+    break;
+  case 60:
+    // L4_iadd_memopb_io, L4_iadd_memoph_io, L4_iadd_memopw_io
+    O << ") += #";
+    printOperand(MI, 2, O);
+    return;
+    break;
+  case 61:
+    // L4_iand_memopb_io, L4_iand_memoph_io, L4_iand_memopw_io
+    O << ") = clrbit(#";
+    printOperand(MI, 2, O);
+    O << ')';
+    return;
+    break;
+  case 62:
+    // L4_ior_memopb_io, L4_ior_memoph_io, L4_ior_memopw_io
+    O << ") = setbit(#";
+    printOperand(MI, 2, O);
+    O << ')';
+    return;
+    break;
+  case 63:
+    // L4_isub_memopb_io, L4_isub_memoph_io, L4_isub_memopw_io
+    O << ") -= #";
+    printOperand(MI, 2, O);
+    return;
+    break;
+  case 64:
+    // L4_loadbsw2_ap, L4_loadbsw4_ap, L4_loadbzw2_ap, L4_loadbzw4_ap, L4_loa...
+    O << "=#";
+    printOperand(MI, 2, O);
+    O << ')';
+    return;
+    break;
+  case 65:
+    // L4_loadbsw2_ur, L4_loadbsw4_ur, L4_loadbzw2_ur, L4_loadbzw4_ur, L4_loa...
+    O << "<<#";
+    printOperand(MI, 2, O);
+    O << "+#";
+    printOperand(MI, 3, O);
+    O << ')';
+    return;
+    break;
+  case 66:
+    // L4_loadrb_rr, L4_loadrd_rr, L4_loadrh_rr, L4_loadri_rr, L4_loadrub_rr,...
+    O << '+';
+    printOperand(MI, 2, O);
+    O << "<<#";
+    printOperand(MI, 3, O);
+    O << ')';
+    return;
+    break;
+  case 67:
+    // L4_or_memopb_io, L4_or_memoph_io, L4_or_memopw_io
+    O << ") |= ";
+    printOperand(MI, 2, O);
+    return;
+    break;
+  case 68:
+    // L4_ploadrbf_abs, L4_ploadrbfnew_abs, L4_ploadrbt_abs, L4_ploadrbtnew_a...
+    O << " = memb(#";
+    printOperand(MI, 2, O);
+    O << ')';
+    return;
+    break;
+  case 69:
+    // L4_ploadrdf_abs, L4_ploadrdfnew_abs, L4_ploadrdt_abs, L4_ploadrdtnew_a...
+    O << " = memd(#";
+    printOperand(MI, 2, O);
+    O << ')';
+    return;
+    break;
+  case 70:
+    // L4_ploadrhf_abs, L4_ploadrhfnew_abs, L4_ploadrht_abs, L4_ploadrhtnew_a...
+    O << " = memh(#";
+    printOperand(MI, 2, O);
+    O << ')';
+    return;
+    break;
+  case 71:
+    // L4_ploadrif_abs, L4_ploadrifnew_abs, L4_ploadrit_abs, L4_ploadritnew_a...
+    O << " = memw(#";
+    printOperand(MI, 2, O);
+    O << ')';
+    return;
+    break;
+  case 72:
+    // L4_ploadrubf_abs, L4_ploadrubfnew_abs, L4_ploadrubt_abs, L4_ploadrubtn...
+    O << " = memub(#";
+    printOperand(MI, 2, O);
+    O << ')';
+    return;
+    break;
+  case 73:
+    // L4_ploadruhf_abs, L4_ploadruhfnew_abs, L4_ploadruht_abs, L4_ploadruhtn...
+    O << " = memuh(#";
+    printOperand(MI, 2, O);
+    O << ')';
+    return;
+    break;
+  case 74:
+    // L4_sub_memopb_io, L4_sub_memoph_io, L4_sub_memopw_io
+    O << ") -= ";
+    printOperand(MI, 2, O);
+    return;
+    break;
+  case 75:
+    // M2_cmacs_s1, M2_cmpys_s1, M2_cnacs_s1, M2_mmachs_s1, M2_mmacls_s1, M2_...
+    O << "):<<1:sat";
+    return;
+    break;
+  case 76:
+    // M2_cmacsc_s0, M2_cmpysc_s0, M2_cnacsc_s0
+    O << "*):sat";
+    return;
+    break;
+  case 77:
+    // M2_cmacsc_s1, M2_cmpysc_s1, M2_cnacsc_s1
+    O << "*):<<1:sat";
+    return;
+    break;
+  case 78:
+    // M2_cmpyrs_s1, M2_mmachs_rs1, M2_mmacls_rs1, M2_mmacuhs_rs1, M2_mmaculs...
+    O << "):<<1:rnd:sat";
+    return;
+    break;
+  case 79:
+    // M2_cmpyrsc_s0
+    O << "*):rnd:sat";
+    return;
+    break;
+  case 80:
+    // M2_cmpyrsc_s1, M4_cmpyi_whc, M4_cmpyr_whc
+    O << "*):<<1:rnd:sat";
+    return;
+    break;
+  case 81:
+    // M2_vrcmaci_s0c, M2_vrcmacr_s0c, M2_vrcmpyi_s0c, M2_vrcmpyr_s0c
+    O << "*)";
+    return;
+    break;
+  case 82:
+    // M2_vrcmpys_acc_s1_h, M2_vrcmpys_s1_h
+    O << "):<<1:sat:raw:hi";
+    return;
+    break;
+  case 83:
+    // M2_vrcmpys_acc_s1_l, M2_vrcmpys_s1_l
+    O << "):<<1:sat:raw:lo";
+    return;
+    break;
+  case 84:
+    // M2_vrcmpys_s1rp_h
+    O << "):<<1:rnd:sat:raw:hi";
+    return;
+    break;
+  case 85:
+    // M2_vrcmpys_s1rp_l
+    O << "):<<1:rnd:sat:raw:lo";
+    return;
+    break;
+  case 86:
+    // M4_mpyri_addi, M4_mpyrr_addi
+    O << ",mpyi(";
+    printOperand(MI, 2, O);
+    break;
+  case 87:
+    // M4_vrmpyeh_acc_s1, M4_vrmpyeh_s1, M4_vrmpyoh_acc_s1, M4_vrmpyoh_s1
+    O << "):<<1";
+    return;
+    break;
+  case 88:
+    // PS_storerbnewabs, PS_storerhnewabs, PS_storerinewabs, S2_storerbnew_pc...
+    O << ".new";
+    return;
+    break;
+  case 89:
+    // PS_storerfabs, S2_storerf_pcr, S2_storerf_zomap, S2_storerfgp, S4_psto...
+    O << ".h";
+    return;
+    break;
+  case 90:
+    // S2_pstorerbf_pi, S2_pstorerbfnew_pi, S2_pstorerbnewf_pi, S2_pstorerbne...
+    printOperand(MI, 0, O);
+    break;
+  case 91:
+    // S2_storerb_io, S2_storerb_pi, S2_storerb_pr, S2_storerbnew_io, S2_stor...
+    O << ") = ";
+    break;
+  case 92:
+    // S2_storerb_pbr, S2_storerbnew_pbr, S2_storerd_pbr, S2_storerf_pbr, S2_...
+    O << ":brev) = ";
+    printOperand(MI, 3, O);
+    break;
+  case 93:
+    // S2_storerb_pci, S2_storerbnew_pci, S2_storerd_pci, S2_storerf_pci, S2_...
+    O << ":circ(";
+    printOperand(MI, 3, O);
+    O << ")) = ";
+    printOperand(MI, 4, O);
+    break;
+  case 94:
+    // S2_tableidxb, S2_tableidxd, S2_tableidxh, S2_tableidxw
+    O << "):raw";
+    return;
+    break;
+  case 95:
+    // S4_addi_asl_ri, S4_andi_asl_ri, S4_ori_asl_ri, S4_subi_asl_ri
+    O << ",asl(";
+    printOperand(MI, 2, O);
+    O << ",#";
+    printOperand(MI, 3, O);
+    O << "))";
+    return;
+    break;
+  case 96:
+    // S4_addi_lsr_ri, S4_andi_lsr_ri, S4_ori_lsr_ri, S4_subi_lsr_ri
+    O << ",lsr(";
+    printOperand(MI, 2, O);
+    O << ",#";
+    printOperand(MI, 3, O);
+    O << "))";
+    return;
+    break;
   case 97:
-    // V6_vabsdiffh, V6_vabsdiffh_128B, V6_vaddh, V6_vaddh_128B, V6_vaddh_dv,...
-    O << ".h,";
+    // S4_storeirb_io, S4_storeirh_io, S4_storeiri_io
+    O << ") = #";
+    printOperand(MI, 2, O);
+    return;
     break;
   case 98:
-    // V6_vabsdiffuh, V6_vabsdiffuh_128B, V6_vadduhw, V6_vadduhw_128B, V6_vgt...
-    O << ".uh,";
+    // S4_vxaddsubhr, S4_vxsubaddhr
+    O << "):rnd:>>1:sat";
+    return;
     break;
   case 99:
+    // SA1_and1
+    O << ",#1)";
+    return;
+    break;
+  case 100:
+    // SA1_combinerz
+    O << ",#0)";
+    return;
+    break;
+  case 101:
+    // SA1_zxtb
+    O << ",#255)";
+    return;
+    break;
+  case 102:
+    // SS2_storebi0, SS2_storewi0
+    O << ") = #0";
+    return;
+    break;
+  case 103:
+    // SS2_storebi1, SS2_storewi1
+    O << ") = #1";
+    return;
+    break;
+  case 104:
+    // V6_MAP_equb, V6_MAP_equb_128B, V6_MAP_equb_and, V6_MAP_equb_and_128B, ...
+    O << ".ub,";
+    break;
+  case 105:
+    // V6_MAP_equh, V6_MAP_equh_128B, V6_MAP_equh_and, V6_MAP_equh_and_128B, ...
+    O << ".uh,";
+    break;
+  case 106:
+    // V6_MAP_equw, V6_MAP_equw_128B, V6_MAP_equw_and, V6_MAP_equw_and_128B, ...
+    O << ".uw,";
+    break;
+  case 107:
+    // V6_ldnt0, V6_ldnt0_128B
+    O << "):nt";
+    return;
+    break;
+  case 108:
+    // V6_shuffeqw, V6_shuffeqw_128B, V6_vasrwh, V6_vasrwh_128B, V6_vasrwhrnd...
+    O << ".w,";
+    break;
+  case 109:
+    // V6_vL32b_cur_npred_ai, V6_vL32b_cur_npred_ai_128B, V6_vL32b_cur_npred_...
+    O << ".cur = vmem(";
+    break;
+  case 110:
+    // V6_vL32b_npred_ai, V6_vL32b_npred_ai_128B, V6_vL32b_npred_pi, V6_vL32b...
+    O << " = vmem(";
+    break;
+  case 111:
+    // V6_vL32b_nt_tmp_npred_ai, V6_vL32b_nt_tmp_npred_ai_128B, V6_vL32b_nt_t...
+    O << ".tmp = vmem(";
+    break;
+  case 112:
+    // V6_vS32b_nt_ai, V6_vS32b_nt_ai_128B, V6_vS32b_nt_new_ai, V6_vS32b_nt_n...
+    O << "):nt = ";
+    break;
+  case 113:
     // V6_vabsh, V6_vabsh_128B, V6_vaslhv, V6_vaslhv_128B, V6_vavgh, V6_vavgh...
     O << ".h)";
     return;
     break;
-  case 100:
+  case 114:
     // V6_vabsh_sat, V6_vabsh_sat_128B, V6_vdmpyhisat, V6_vdmpyhisat_128B, V6...
     O << ".h):sat";
     return;
     break;
-  case 101:
+  case 115:
     // V6_vabsw, V6_vabsw_128B, V6_vaslwv, V6_vaslwv_128B, V6_vasrwv, V6_vasr...
     O << ".w)";
     return;
     break;
-  case 102:
+  case 116:
     // V6_vabsw_sat, V6_vabsw_sat_128B
     O << ".w):sat";
     return;
     break;
-  case 103:
-    // V6_vaddbnq, V6_vaddbnq_128B, V6_vaddbq, V6_vaddbq_128B
+  case 117:
+    // V6_vaddb, V6_vaddb_128B, V6_vaddb_dv, V6_vaddb_dv_128B, V6_vdmpyhb, V6...
+    O << ".b)";
+    return;
+    break;
+  case 118:
+    // V6_vaddbnq, V6_vaddbnq_128B, V6_vaddbnq_alt, V6_vaddbnq_alt_128B, V6_v...
     O << ".b += ";
     printOperand(MI, 3, O);
     O << ".b";
     return;
     break;
-  case 104:
-    // V6_vaddhnq, V6_vaddhnq_128B, V6_vaddhq, V6_vaddhq_128B
+  case 119:
+    // V6_vaddbsat, V6_vaddbsat_128B, V6_vaddbsat_dv, V6_vaddbsat_dv_128B, V6...
+    O << ".b):sat";
+    return;
+    break;
+  case 120:
+    // V6_vaddhnq, V6_vaddhnq_128B, V6_vaddhnq_alt, V6_vaddhnq_alt_128B, V6_v...
     O << ".h += ";
     printOperand(MI, 3, O);
     O << ".h";
     return;
     break;
-  case 105:
-    // V6_vaddubh, V6_vaddubh_128B, V6_vgtub, V6_vgtub_128B, V6_vgtub_and, V6...
-    O << ".ub,";
+  case 121:
+    // V6_vaddubsat, V6_vaddubsat_128B, V6_vaddubsat_dv, V6_vaddubsat_dv_128B...
+    O << ".ub):sat";
+    return;
     break;
-  case 106:
-    // V6_vaddw, V6_vaddw_128B, V6_vaddw_dv, V6_vaddw_dv_128B, V6_vaddwsat, V...
-    O << ".w,";
-    break;
-  case 107:
-    // V6_vaddwnq, V6_vaddwnq_128B, V6_vaddwq, V6_vaddwq_128B
+  case 122:
+    // V6_vaddwnq, V6_vaddwnq_128B, V6_vaddwnq_alt, V6_vaddwnq_alt_128B, V6_v...
     O << ".w += ";
     printOperand(MI, 3, O);
     O << ".w";
     return;
     break;
-  case 108:
+  case 123:
     // V6_vavghrnd, V6_vavghrnd_128B
     O << ".h):rnd";
     return;
     break;
-  case 109:
-    // V6_vavgub, V6_vavgub_128B, V6_vmpabuuv, V6_vmpabuuv_128B, V6_vrmpyub, ...
+  case 124:
+    // V6_vavgub, V6_vavgub_128B, V6_vmpabuuv, V6_vmpabuuv_128B, V6_vmpyiwub,...
     O << ".ub)";
     return;
     break;
-  case 110:
+  case 125:
     // V6_vavgubrnd, V6_vavgubrnd_128B
     O << ".ub):rnd";
     return;
     break;
-  case 111:
+  case 126:
     // V6_vavguh, V6_vavguh_128B, V6_vmpyhus, V6_vmpyhus_128B, V6_vmpyhus_acc...
     O << ".uh)";
     return;
     break;
-  case 112:
+  case 127:
     // V6_vavguhrnd, V6_vavguhrnd_128B
     O << ".uh):rnd";
     return;
     break;
-  case 113:
+  case 128:
     // V6_vavgwrnd, V6_vavgwrnd_128B
     O << ".w):rnd";
     return;
     break;
-  case 114:
+  case 129:
     // V6_vccombine, V6_vccombine_128B, V6_vnccombine, V6_vnccombine_128B
     O << " = vcombine(";
     printOperand(MI, 2, O);
@@ -12837,75 +16854,89 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     O << ')';
     return;
     break;
-  case 115:
-    // V6_vdmpyhb, V6_vdmpyhb_128B, V6_vdmpyhb_acc, V6_vdmpyhb_acc_128B, V6_v...
-    O << ".b)";
-    return;
-    break;
-  case 116:
+  case 130:
     // V6_vdmpyhsuisat, V6_vdmpyhsuisat_128B, V6_vdmpyhsuisat_acc, V6_vdmpyhs...
     O << ".uh,#1):sat";
     return;
     break;
-  case 117:
+  case 131:
+    // V6_vdmpyhsuisat_acc_alt, V6_vdmpyhsuisat_acc_alt_128B, V6_vdmpyhsuisat...
+    O << ",#1):sat";
+    return;
+    break;
+  case 132:
     // V6_vdmpyhsusat, V6_vdmpyhsusat_128B, V6_vdmpyhsusat_acc, V6_vdmpyhsusa...
     O << ".uh):sat";
     return;
     break;
-  case 118:
+  case 133:
     // V6_veqb, V6_veqb_128B, V6_veqb_and, V6_veqb_and_128B, V6_veqb_or, V6_v...
     O << ".b,";
     break;
-  case 119:
-    // V6_vgtuw, V6_vgtuw_128B, V6_vgtuw_and, V6_vgtuw_and_128B, V6_vgtuw_or,...
-    O << ".uw,";
+  case 134:
+    // V6_vlutvvb_oracci, V6_vlutvvb_oracci_128B, V6_vlutvvbi, V6_vlutvvbi_12...
+    O << ".b,#";
     break;
-  case 120:
+  case 135:
+    // V6_vlutvwh_oracci, V6_vlutvwh_oracci_128B, V6_vlutvwhi, V6_vlutvwhi_12...
+    O << ".h,#";
+    break;
+  case 136:
     // V6_vmpyowh, V6_vmpyowh_128B
     O << ".h):<<1:sat";
     return;
     break;
-  case 121:
+  case 137:
     // V6_vmpyowh_rnd, V6_vmpyowh_rnd_128B
     O << ".h):<<1:rnd:sat";
     return;
     break;
-  case 122:
+  case 138:
     // V6_vmpyowh_rnd_sacc, V6_vmpyowh_rnd_sacc_128B
     O << ".h):<<1:rnd:sat:shift";
     return;
     break;
-  case 123:
+  case 139:
+    // V6_vmpyowh_rnd_sacc_alt, V6_vmpyowh_rnd_sacc_alt_128B
+    O << "):<<1:rnd:sat:shift";
+    return;
+    break;
+  case 140:
     // V6_vmpyowh_sacc, V6_vmpyowh_sacc_128B
     O << ".h):<<1:sat:shift";
     return;
     break;
-  case 124:
+  case 141:
+    // V6_vmpyowh_sacc_alt, V6_vmpyowh_sacc_alt_128B
+    O << "):<<1:sat:shift";
+    return;
+    break;
+  case 142:
     // V6_vrmpyubi, V6_vrmpyubi_128B, V6_vrmpyubi_acc, V6_vrmpyubi_acc_128B
     O << ".ub,#";
     break;
-  case 125:
-    // V6_vsubbnq, V6_vsubbnq_128B, V6_vsubbq, V6_vsubbq_128B
+  case 143:
+    // V6_vsubbnq, V6_vsubbnq_128B, V6_vsubbnq_alt, V6_vsubbnq_alt_128B, V6_v...
     O << ".b -= ";
     printOperand(MI, 3, O);
     O << ".b";
     return;
     break;
-  case 126:
-    // V6_vsubhnq, V6_vsubhnq_128B, V6_vsubhq, V6_vsubhq_128B
+  case 144:
+    // V6_vsubhnq, V6_vsubhnq_128B, V6_vsubhnq_alt, V6_vsubhnq_alt_128B, V6_v...
     O << ".h -= ";
     printOperand(MI, 3, O);
     O << ".h";
     return;
     break;
-  case 127:
-    // V6_vsubwnq, V6_vsubwnq_128B, V6_vsubwq, V6_vsubwq_128B
+  case 145:
+    // V6_vsubwnq, V6_vsubwnq_128B, V6_vsubwnq_alt, V6_vsubwnq_alt_128B, V6_v...
     O << ".w -= ";
     printOperand(MI, 3, O);
     O << ".w";
     return;
     break;
-  case 128:
+  case 146:
     // dep_S2_packhl
     O << "):deprecated";
     return;
@@ -12913,40 +16944,32 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
   }
 
 
-  // Fragment 3 encoded into 6 bits for 56 unique commands.
+  // Fragment 3 encoded into 6 bits for 47 unique commands.
   switch ((Bits >> 32) & 63) {
   default: llvm_unreachable("Invalid command number.");
   case 0:
     // A2_add, A2_addp, A2_addpsat, A2_addsat, A2_addsp, A2_addsph, A2_addspl...
-    O << ", ";
+    O << ',';
     break;
   case 1:
     // A2_addh_h16_hh, A2_addh_h16_hl, A2_addh_h16_sat_hh, A2_addh_h16_sat_hl...
-    O << ".h, ";
+    O << ".h,";
     printOperand(MI, 2, O);
     break;
   case 2:
     // A2_addh_h16_lh, A2_addh_h16_ll, A2_addh_h16_sat_lh, A2_addh_h16_sat_ll...
-    O << ".l, ";
+    O << ".l,";
     printOperand(MI, 2, O);
     break;
   case 3:
-    // A2_addi, A2_combineii, A2_paddif, A2_paddifnew, A2_paddit, A2_padditne...
-    O << ", #";
+    // A2_addi, A2_paddif, A2_paddifnew, A2_paddit, A2_padditnew, M4_mpyri_ad...
+    O << ",#";
     break;
   case 4:
-    // A2_and, A2_andp, A2_combine_hh, A2_combine_hl, A2_combine_lh, A2_combi...
+    // A2_and, A2_andir, A2_andp, A2_combine_hh, A2_combine_hl, A2_combine_lh...
     printOperand(MI, 2, O);
     break;
   case 5:
-    // A2_andir, A2_orir, A4_cmpbgtui, A4_cmpheqi, A4_cmphgti, A4_cmphgtui, A...
-    printExtOperand(MI, 2, O);
-    break;
-  case 6:
-    // A2_tfrpi, A2_tfrsi, SA1_seti, TFRI64_V4, V6_vS32b_nt_ppu
-    return;
-    break;
-  case 7:
     // A5_ACS
     O << " = vacsh(";
     printOperand(MI, 3, O);
@@ -12955,253 +16978,205 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     O << ')';
     return;
     break;
-  case 8:
+  case 6:
+    // A6_vminub_RdP
+    O << " = vminub(";
+    printOperand(MI, 2, O);
+    O << ',';
+    printOperand(MI, 3, O);
+    O << ')';
+    return;
+    break;
+  case 7:
     // C4_and_andn, C4_and_orn, C4_or_andn, C4_or_orn
-    O << ", !";
+    O << ",!";
     printOperand(MI, 3, O);
     O << "))";
     return;
     break;
-  case 9:
-    // F2_sffma_sc, V6_vrmpyubi_acc, V6_vrmpyubi_acc_128B
+  case 8:
+    // F2_sffma_sc, V6_vlutvvb_oracc, V6_vlutvvb_oracc_128B, V6_vlutvvb_oracc...
     printOperand(MI, 4, O);
     break;
-  case 10:
+  case 9:
     // F2_sfinvsqrta
     O << " = sfinvsqrta(";
     printOperand(MI, 2, O);
     O << ')';
     return;
     break;
-  case 11:
+  case 10:
     // F2_sfrecipa
     O << " = sfrecipa(";
     printOperand(MI, 2, O);
-    O << ", ";
+    O << ',';
     printOperand(MI, 3, O);
     O << ')';
     return;
     break;
-  case 12:
+  case 11:
     // J2_loop0r, J2_loop0rext, J2_loop1r, J2_loop1rext, J2_ploop1sr, J2_ploo...
     O << ')';
     return;
     break;
-  case 13:
+  case 12:
     // J4_cmpeq_fp0_jump_nt, J4_cmpgt_fp0_jump_nt, J4_cmpgtu_fp0_jump_nt
     O << "); if (!p0.new) jump:nt ";
     printBrtarget(MI, 2, O);
     return;
     break;
-  case 14:
+  case 13:
     // J4_cmpeq_fp0_jump_t, J4_cmpgt_fp0_jump_t, J4_cmpgtu_fp0_jump_t
     O << "); if (!p0.new) jump:t ";
     printBrtarget(MI, 2, O);
     return;
     break;
-  case 15:
+  case 14:
     // J4_cmpeq_fp1_jump_nt, J4_cmpgt_fp1_jump_nt, J4_cmpgtu_fp1_jump_nt
     O << "); if (!p1.new) jump:nt ";
     printBrtarget(MI, 2, O);
     return;
     break;
-  case 16:
+  case 15:
     // J4_cmpeq_fp1_jump_t, J4_cmpgt_fp1_jump_t, J4_cmpgtu_fp1_jump_t
     O << "); if (!p1.new) jump:t ";
     printBrtarget(MI, 2, O);
     return;
     break;
-  case 17:
+  case 16:
     // J4_cmpeq_tp0_jump_nt, J4_cmpgt_tp0_jump_nt, J4_cmpgtu_tp0_jump_nt
     O << "); if (p0.new) jump:nt ";
     printBrtarget(MI, 2, O);
     return;
     break;
-  case 18:
+  case 17:
     // J4_cmpeq_tp0_jump_t, J4_cmpgt_tp0_jump_t, J4_cmpgtu_tp0_jump_t
     O << "); if (p0.new) jump:t ";
     printBrtarget(MI, 2, O);
     return;
     break;
-  case 19:
+  case 18:
     // J4_cmpeq_tp1_jump_nt, J4_cmpgt_tp1_jump_nt, J4_cmpgtu_tp1_jump_nt
     O << "); if (p1.new) jump:nt ";
     printBrtarget(MI, 2, O);
     return;
     break;
-  case 20:
+  case 19:
     // J4_cmpeq_tp1_jump_t, J4_cmpgt_tp1_jump_t, J4_cmpgtu_tp1_jump_t
     O << "); if (p1.new) jump:t ";
     printBrtarget(MI, 2, O);
     return;
     break;
-  case 21:
+  case 20:
     // J4_cmplt_f_jumpnv_nt, J4_cmplt_t_jumpnv_nt, J4_cmpltu_f_jumpnv_nt, J4_...
     O << ".new)) jump:nt ";
     printBrtarget(MI, 2, O);
     return;
     break;
-  case 22:
+  case 21:
     // J4_cmplt_f_jumpnv_t, J4_cmplt_t_jumpnv_t, J4_cmpltu_f_jumpnv_t, J4_cmp...
     O << ".new)) jump:t ";
     printBrtarget(MI, 2, O);
     return;
     break;
+  case 22:
+    // L2_loadalignb_io, L2_loadalignh_io, S2_pstorerbf_io, S2_pstorerbnewf_i...
+    O << "+#";
+    break;
   case 23:
-    // J4_jumpseti
-    O << " ; jump ";
-    printBrtarget(MI, 2, O);
-    return;
+    // L2_loadalignb_pbr, L2_loadalignb_pr, L2_loadalignh_pbr, L2_loadalignh_...
+    O << "++";
     break;
   case 24:
-    // L2_loadalignb_io, L2_loadalignh_io, L2_loadbsw2_io, L2_loadbsw4_io, L2...
-    O << " + #";
+    // L2_loadalignb_pci, L2_loadalignb_pi, L2_loadalignh_pci, L2_loadalignh_...
+    O << "++#";
     break;
   case 25:
-    // L2_loadalignb_pbr, L2_loadalignh_pbr, L2_loadbsw2_pbr, L2_loadbsw4_pbr...
-    O << " ++ ";
-    printOperand(MI, 3, O);
-    O << ":brev)";
+    // L2_loadalignb_pcr, L2_loadalignh_pcr
+    O << "++I:circ(";
+    printOperand(MI, 4, O);
+    O << "))";
     return;
     break;
   case 26:
-    // L2_loadalignb_pci, L2_loadalignh_pci, L2_loadbsw2_pci, L2_loadbsw4_pci...
-    O << " ++ #";
-    printOperand(MI, 3, O);
+    // L2_loadbsw2_pbr, L2_loadbsw4_pbr, L2_loadbzw2_pbr, L2_loadbzw4_pbr, L2...
+    O << ":brev)";
+    return;
+    break;
+  case 27:
+    // L2_loadbsw2_pci, L2_loadbsw4_pci, L2_loadbzw2_pci, L2_loadbzw4_pci, L2...
     O << ":circ(";
     printOperand(MI, 4, O);
     O << "))";
     return;
     break;
-  case 27:
-    // L2_loadalignb_pcr, L2_loadalignh_pcr, L2_loadbsw2_pcr, L2_loadbsw4_pcr...
-    O << " ++ I:circ(";
-    break;
   case 28:
-    // L2_loadalignb_pi, L2_loadalignh_pi, L2_loadbsw2_pi, L2_loadbsw4_pi, L2...
-    O << "++#";
+    // L2_ploadrbf_pi, L2_ploadrbfnew_pi, L2_ploadrbt_pi, L2_ploadrbtnew_pi, ...
+    printOperand(MI, 1, O);
     break;
   case 29:
-    // L2_loadalignb_pr, L2_loadalignh_pr, L2_loadbsw2_pr, L2_loadbsw4_pr, L2...
-    O << "++";
+    // L4_loadalignb_ap, L4_loadalignh_ap
+    O << "=#";
+    printOperand(MI, 3, O);
+    O << ')';
+    return;
     break;
   case 30:
-    // L2_ploadrbf_pi, L2_ploadrbfnew_pi, L2_ploadrbt_pi, L2_ploadrbtnew_pi, ...
+    // L4_loadalignb_ur, L4_loadalignh_ur
+    O << "<<#";
     printOperand(MI, 3, O);
+    O << "+#";
+    printOperand(MI, 4, O);
+    O << ')';
+    return;
     break;
   case 31:
-    // L4_add_memopb_io, L4_add_memoph_io, L4_add_memopw_io
-    O << ") += ";
-    printOperand(MI, 2, O);
-    return;
+    // M2_acci, M2_accii, M2_dpmpyss_acc_s0, M2_dpmpyss_nac_s0, M2_dpmpyuu_ac...
+    printOperand(MI, 3, O);
     break;
   case 32:
-    // L4_and_memopb_io, L4_and_memoph_io, L4_and_memopw_io
-    O << ") &= ";
+    // M4_mpyri_addr, M4_mpyrr_addr
+    O << ",mpyi(";
     printOperand(MI, 2, O);
-    return;
     break;
   case 33:
-    // L4_iadd_memopb_io, L4_iadd_memoph_io, L4_iadd_memopw_io
-    O << ") += #";
+    // M4_mpyri_addr_u2
+    O << ",mpyi(#";
     printOperand(MI, 2, O);
+    O << ',';
+    printOperand(MI, 3, O);
+    O << "))";
     return;
     break;
   case 34:
-    // L4_iand_memopb_io, L4_iand_memoph_io, L4_iand_memopw_io
-    O << ") = clrbit(#";
+    // S2_pstorerbf_zomap, S2_pstorerbnewf_zomap, S2_pstorerbnewt_zomap, S2_p...
+    O << ") = ";
     printOperand(MI, 2, O);
-    O << ')';
-    return;
     break;
   case 35:
-    // L4_ior_memopb_io, L4_ior_memoph_io, L4_ior_memopw_io
-    O << ") = setbit(#";
-    printOperand(MI, 2, O);
-    O << ')';
+    // S2_storerb_pbr, S2_storerb_pci, S2_storerd_pbr, S2_storerd_pci, S2_sto...
     return;
     break;
   case 36:
-    // L4_isub_memopb_io, L4_isub_memoph_io, L4_isub_memopw_io
-    O << ") -= #";
-    printOperand(MI, 2, O);
+    // S2_storerbnew_pbr, S2_storerbnew_pci, S2_storerhnew_pbr, S2_storerhnew...
+    O << ".new";
     return;
     break;
   case 37:
-    // L4_loadalignb_ap, L4_loadalignh_ap, L4_loadbsw2_ap, L4_loadbsw4_ap, L4...
-    O << " = #";
-    printExtOperand(MI, 2, O);
-    O << ')';
+    // S2_storerf_pbr, S2_storerf_pci
+    O << ".h";
     return;
     break;
   case 38:
-    // L4_loadalignb_ur, L4_loadalignh_ur, L4_loadbsw2_ur, L4_loadbsw4_ur, L4...
-    O << "<<#";
+    // S4_addaddi
+    O << ",add(";
     printOperand(MI, 2, O);
-    O << " + #";
-    printExtOperand(MI, 3, O);
-    O << ')';
+    O << ",#";
+    printOperand(MI, 3, O);
+    O << "))";
     return;
     break;
   case 39:
-    // L4_loadrb_rr, L4_loadrd_rr, L4_loadrh_rr, L4_loadri_rr, L4_loadrub_rr,...
-    O << " + ";
-    printOperand(MI, 2, O);
-    O << "<<#";
-    printOperand(MI, 3, O);
-    O << ')';
-    return;
-    break;
-  case 40:
-    // L4_or_memopb_io, L4_or_memoph_io, L4_or_memopw_io
-    O << ") |= ";
-    printOperand(MI, 2, O);
-    return;
-    break;
-  case 41:
-    // L4_sub_memopb_io, L4_sub_memoph_io, L4_sub_memopw_io
-    O << ") -= ";
-    printOperand(MI, 2, O);
-    return;
-    break;
-  case 42:
-    // M2_accii, M2_macsip, M2_naccii, S4_or_andi, S4_or_ori
-    printExtOperand(MI, 3, O);
-    O << ')';
-    return;
-    break;
-  case 43:
-    // M4_mpyri_addr, M4_mpyrr_addr
-    O << ", mpyi(";
-    printOperand(MI, 2, O);
-    break;
-  case 44:
-    // M4_mpyri_addr_u2
-    O << ", mpyi(#";
-    printOperand(MI, 2, O);
-    O << ", ";
-    printOperand(MI, 3, O);
-    O << "))";
-    return;
-    break;
-  case 45:
-    // S2_pstorerbf_io, S2_pstorerbnewf_io, S2_pstorerbnewt_io, S2_pstorerbt_...
-    O << "+#";
-    break;
-  case 46:
-    // S2_storerb_io, S2_storerb_pi, S2_storerbnew_io, S2_storerbnew_pi, S2_s...
-    O << ") = ";
-    break;
-  case 47:
-    // S4_addaddi
-    O << ", add(";
-    printOperand(MI, 2, O);
-    O << ", #";
-    printExtOperand(MI, 3, O);
-    O << "))";
-    return;
-    break;
-  case 48:
     // S4_pstorerbf_rr, S4_pstorerbfnew_rr, S4_pstorerbnewf_rr, S4_pstorerbne...
     O << '+';
     printOperand(MI, 2, O);
@@ -13210,55 +17185,56 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     O << ") = ";
     printOperand(MI, 4, O);
     break;
-  case 49:
-    // S4_storeirb_io, S4_storeirh_io, S4_storeiri_io
-    O << ")=#";
-    printExtOperand(MI, 2, O);
+  case 40:
+    // S4_storeirbf_zomap, S4_storeirbfnew_zomap, S4_storeirbt_zomap, S4_stor...
+    O << ") = #";
+    printOperand(MI, 2, O);
     return;
     break;
-  case 50:
+  case 41:
     // S4_subaddi
-    O << ", sub(#";
-    printExtOperand(MI, 2, O);
-    O << ", ";
+    O << ",sub(#";
+    printOperand(MI, 2, O);
+    O << ',';
     printOperand(MI, 3, O);
     O << "))";
     return;
     break;
-  case 51:
-    // SA1_dec
-    O << ",#-1)";
-    return;
-    break;
-  case 52:
+  case 42:
     // SA1_inc
-    O << ", #1)";
+    O << ",#1)";
     return;
     break;
-  case 53:
-    // V6_vS32b_nt_ai, V6_vS32b_nt_ai_128B, V6_vS32b_nt_new_ai, V6_vS32b_nt_n...
+  case 43:
+    // V6_stnpnt0, V6_stnpnt0_128B, V6_stnqnt0, V6_stnqnt0_128B, V6_stpnt0, V...
     O << "):nt = ";
-    break;
-  case 54:
-    // V6_vS32b_nt_new_ppu
-    O << ".new";
+    printOperand(MI, 2, O);
     return;
     break;
-  case 55:
-    // V6_vdeal, V6_vdeal_128B, V6_vshuff, V6_vshuff_128B
-    O << ',';
-    printOperand(MI, 4, O);
-    O << ')';
+  case 44:
+    // V6_vL32b_nt_ai, V6_vL32b_nt_ai_128B, V6_vL32b_nt_cur_ai, V6_vL32b_nt_c...
+    O << "):nt";
+    return;
+    break;
+  case 45:
+    // V6_vaddcarry, V6_vaddcarry_128B, V6_vaddw, V6_vaddw_128B, V6_vaddw_dv,...
+    O << ".w,";
+    break;
+  case 46:
+    // V6_vadduhw, V6_vadduhw_128B, V6_vsubuhw, V6_vsubuhw_128B
+    O << ".uh,";
+    printOperand(MI, 2, O);
+    O << ".uh)";
     return;
     break;
   }
 
 
-  // Fragment 4 encoded into 6 bits for 53 unique commands.
+  // Fragment 4 encoded into 6 bits for 52 unique commands.
   switch ((Bits >> 38) & 63) {
   default: llvm_unreachable("Invalid command number.");
   case 0:
-    // A2_add, A2_addp, A2_addpsat, A2_addsat, A2_addsp, A2_addsph, A2_addspl...
+    // A2_add, A2_addi, A2_addp, A2_addpsat, A2_addsat, A2_addsp, A2_addsph, ...
     printOperand(MI, 2, O);
     break;
   case 1:
@@ -13302,60 +17278,48 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     return;
     break;
   case 9:
-    // A2_addi, A4_combineii, L2_loadbsw2_io, L2_loadbsw4_io, L2_loadbzw2_io,...
-    printExtOperand(MI, 2, O);
-    break;
-  case 10:
-    // A2_and, A2_andir, A2_andp, A2_combinew, A2_or, A2_orir, A2_orp, A2_sub...
+    // A2_and, A2_andir, A2_andp, A2_combineii, A2_combinew, A2_or, A2_orir, ...
     O << ')';
     return;
     break;
-  case 11:
-    // A2_paddf, A2_paddfnew, A2_paddt, A2_paddtnew, A4_addp_c, A4_subp_c, C4...
+  case 10:
+    // A2_paddf, A2_paddfnew, A2_paddif, A2_paddifnew, A2_paddit, A2_padditne...
     printOperand(MI, 3, O);
     break;
-  case 12:
-    // A2_paddif, A2_paddifnew, A2_paddit, A2_padditnew, L2_loadalignb_io, L2...
-    printExtOperand(MI, 3, O);
-    break;
-  case 13:
+  case 11:
     // A4_round_ri_sat, A4_round_rr_sat, S2_asl_i_r_sat, S2_asl_r_r_sat, S2_a...
     O << "):sat";
     return;
     break;
-  case 14:
-    // C2_mux, C2_muxri, C2_vmux, M4_mpyrr_addr
-    O << ", ";
+  case 12:
+    // C2_mux, C2_muxri, M4_mpyrr_addr, V6_vasrhubrndsat_alt, V6_vasrhubsat_a...
+    O << ',';
     printOperand(MI, 3, O);
     break;
-  case 15:
+  case 13:
     // C2_muxii, C2_muxir, M4_mpyri_addr, S2_extractu, S2_extractup, S2_inser...
-    O << ", #";
+    O << ",#";
     break;
-  case 16:
+  case 14:
     // F2_sffma_sc
     O << "):scale";
     return;
     break;
-  case 17:
-    // L2_loadalignb_pcr, L2_loadalignb_pi, L2_loadalignb_pr, L2_loadalignh_p...
+  case 15:
+    // L2_loadalignb_pbr, L2_loadalignb_pci, L2_loadalignb_pi, L2_loadalignb_...
     printOperand(MI, 4, O);
     break;
-  case 18:
+  case 16:
     // L2_ploadrbf_io, L2_ploadrbfnew_io, L2_ploadrbt_io, L2_ploadrbtnew_io, ...
-    O << " + #";
-    printExtOperand(MI, 3, O);
-    O << ')';
-    return;
+    O << "+#";
+    printOperand(MI, 3, O);
     break;
-  case 19:
+  case 17:
     // L2_ploadrbf_pi, L2_ploadrbfnew_pi, L2_ploadrbt_pi, L2_ploadrbtnew_pi, ...
     O << "++#";
     printOperand(MI, 4, O);
-    O << ')';
-    return;
     break;
-  case 20:
+  case 18:
     // L4_ploadrbf_rr, L4_ploadrbfnew_rr, L4_ploadrbt_rr, L4_ploadrbtnew_rr, ...
     O << '+';
     printOperand(MI, 3, O);
@@ -13364,175 +17328,184 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     O << ')';
     return;
     break;
-  case 21:
+  case 19:
     // M2_dpmpyss_rnd_s0, S2_asr_i_p_rnd, S2_asr_i_r_rnd, S5_vasrhrnd_goodsyn...
     O << "):rnd";
     return;
     break;
-  case 22:
+  case 20:
     // M2_hmmpyh_rs1, M2_mpy_sat_rnd_hh_s1, M2_mpy_sat_rnd_lh_s1, V6_vmpyhsrs...
     O << ".h):<<1:rnd:sat";
     return;
     break;
-  case 23:
+  case 21:
     // M2_hmmpyh_s1, M2_mpy_acc_sat_hh_s1, M2_mpy_acc_sat_lh_s1, M2_mpy_nac_s...
     O << ".h):<<1:sat";
     return;
     break;
-  case 24:
+  case 22:
     // M2_hmmpyl_rs1, M2_mpy_sat_rnd_hl_s1, M2_mpy_sat_rnd_ll_s1
     O << ".l):<<1:rnd:sat";
     return;
     break;
-  case 25:
+  case 23:
     // M2_hmmpyl_s1, M2_mpy_acc_sat_hl_s1, M2_mpy_acc_sat_ll_s1, M2_mpy_nac_s...
     O << ".l):<<1:sat";
     return;
     break;
-  case 26:
+  case 24:
     // M2_mpy_acc_hh_s1, M2_mpy_acc_lh_s1, M2_mpy_hh_s1, M2_mpy_lh_s1, M2_mpy...
     O << ".h):<<1";
     return;
     break;
-  case 27:
+  case 25:
     // M2_mpy_acc_hl_s1, M2_mpy_acc_ll_s1, M2_mpy_hl_s1, M2_mpy_ll_s1, M2_mpy...
     O << ".l):<<1";
     return;
     break;
-  case 28:
+  case 26:
     // M2_mpy_rnd_hh_s0, M2_mpy_rnd_lh_s0, M2_mpyd_rnd_hh_s0, M2_mpyd_rnd_lh_...
     O << ".h):rnd";
     return;
     break;
-  case 29:
+  case 27:
     // M2_mpy_rnd_hh_s1, M2_mpy_rnd_lh_s1, M2_mpyd_rnd_hh_s1, M2_mpyd_rnd_lh_...
     O << ".h):<<1:rnd";
     return;
     break;
-  case 30:
+  case 28:
     // M2_mpy_rnd_hl_s0, M2_mpy_rnd_ll_s0, M2_mpyd_rnd_hl_s0, M2_mpyd_rnd_ll_...
     O << ".l):rnd";
     return;
     break;
-  case 31:
+  case 29:
     // M2_mpy_rnd_hl_s1, M2_mpy_rnd_ll_s1, M2_mpyd_rnd_hl_s1, M2_mpyd_rnd_ll_...
     O << ".l):<<1:rnd";
     return;
     break;
-  case 32:
+  case 30:
     // M2_mpy_sat_rnd_hh_s0, M2_mpy_sat_rnd_lh_s0
     O << ".h):rnd:sat";
     return;
     break;
-  case 33:
+  case 31:
     // M2_mpy_sat_rnd_hl_s0, M2_mpy_sat_rnd_ll_s0
     O << ".l):rnd:sat";
     return;
     break;
-  case 34:
+  case 32:
     // M2_mpy_up_s1
     O << "):<<1";
     return;
     break;
-  case 35:
+  case 33:
     // M2_mpy_up_s1_sat, M4_mac_up_s1_sat, M4_nac_up_s1_sat
     O << "):<<1:sat";
     return;
     break;
-  case 36:
-    // S2_storerb_pr, S2_storerd_pr, S2_storerh_pr, S2_storeri_pr, S4_pstorer...
+  case 34:
+    // S2_pstorerbf_zomap, S2_pstorerbt_zomap, S2_pstorerdf_zomap, S2_pstorer...
     return;
     break;
-  case 37:
-    // S2_storerbnew_pr, S2_storerhnew_pr, S2_storerinew_pr, S4_pstorerbnewf_...
+  case 35:
+    // S2_pstorerbnewf_zomap, S2_pstorerbnewt_zomap, S2_pstorerhnewf_zomap, S...
     O << ".new";
     return;
     break;
-  case 38:
-    // S2_storerf_pr, S4_pstorerff_rr, S4_pstorerffnew_rr, S4_pstorerft_rr, S...
+  case 36:
+    // S2_pstorerff_zomap, S2_pstorerft_zomap, S2_storerf_io, S2_storerf_pi, ...
     O << ".h";
     return;
     break;
-  case 39:
-    // S5_vasrhrnd
+  case 37:
+    // S5_asrhub_rnd_sat, S5_vasrhrnd
     O << "):raw";
     return;
     break;
-  case 40:
-    // V6_vL32Ub_ai, V6_vL32b_ai, V6_vL32b_cur_ai, V6_vL32b_nt_ai, V6_vL32b_n...
-    prints4_6ImmOperand(MI, 2, O);
-    break;
-  case 41:
-    // V6_vL32Ub_ai_128B, V6_vL32b_ai_128B, V6_vL32b_cur_ai_128B, V6_vL32b_nt...
-    prints4_7ImmOperand(MI, 2, O);
-    break;
-  case 42:
-    // V6_vL32Ub_pi, V6_vL32b_cur_pi, V6_vL32b_nt_cur_pi, V6_vL32b_nt_pi, V6_...
-    prints3_6ImmOperand(MI, 3, O);
-    break;
-  case 43:
-    // V6_vL32Ub_pi_128B, V6_vL32b_cur_pi_128B, V6_vL32b_nt_cur_pi_128B, V6_v...
-    prints3_7ImmOperand(MI, 3, O);
-    break;
-  case 44:
-    // V6_vabsdiffuh, V6_vabsdiffuh_128B, V6_vadduhw, V6_vadduhw_128B, V6_vgt...
-    O << ".uh)";
+  case 38:
+    // S5_asrhub_rnd_sat_goodsyntax
+    O << "):rnd:sat";
     return;
     break;
-  case 45:
-    // V6_vaddubh, V6_vaddubh_128B, V6_vgtub, V6_vgtub_128B, V6_vgtub_and, V6...
+  case 39:
+    // V6_MAP_equb, V6_MAP_equb_128B, V6_MAP_equb_and, V6_MAP_equb_and_128B, ...
     O << ".ub)";
     return;
     break;
-  case 46:
-    // V6_vaddw, V6_vaddw_128B, V6_vaddw_dv, V6_vaddw_dv_128B, V6_veqw, V6_ve...
+  case 40:
+    // V6_MAP_equh, V6_MAP_equh_128B, V6_MAP_equh_and, V6_MAP_equh_and_128B, ...
+    O << ".uh)";
+    return;
+    break;
+  case 41:
+    // V6_MAP_equw, V6_MAP_equw_128B, V6_MAP_equw_and, V6_MAP_equw_and_128B, ...
+    O << ".uw)";
+    return;
+    break;
+  case 42:
+    // V6_shuffeqw, V6_shuffeqw_128B, V6_veqw, V6_veqw_128B, V6_veqw_and, V6_...
     O << ".w)";
     return;
     break;
-  case 47:
-    // V6_vaddwsat, V6_vaddwsat_128B, V6_vaddwsat_dv, V6_vaddwsat_dv_128B, V6...
-    O << ".w):sat";
+  case 43:
+    // V6_vL32b_cur_npred_ppu, V6_vL32b_cur_npred_ppu_128B, V6_vL32b_cur_pred...
+    O << "++";
+    printOperand(MI, 4, O);
+    break;
+  case 44:
+    // V6_vasruwuhrndsat, V6_vasruwuhrndsat_128B
+    O << ".uw,";
+    printOperand(MI, 3, O);
+    O << "):rnd:sat";
     return;
     break;
-  case 48:
+  case 45:
     // V6_vasrwh, V6_vasrwh_128B, V6_vasrwhrndsat, V6_vasrwhrndsat_128B, V6_v...
     O << ".w,";
     printOperand(MI, 3, O);
     break;
-  case 49:
+  case 46:
     // V6_veqb, V6_veqb_128B, V6_veqb_and, V6_veqb_and_128B, V6_veqb_or, V6_v...
     O << ".b)";
     return;
     break;
+  case 47:
+    // V6_vlutvvb_nm, V6_vlutvvb_nm_128B, V6_vlutvwh_nm, V6_vlutvwh_nm_128B
+    O << "):nomatch";
+    return;
+    break;
+  case 48:
+    // V6_vrmpybusi, V6_vrmpybusi_128B, V6_vrmpybusi_acc, V6_vrmpybusi_acc_12...
+    O << ".b,#";
+    break;
+  case 49:
+    // V6_vrounduhub, V6_vrounduhub_128B
+    O << ".uh):sat";
+    return;
+    break;
   case 50:
-    // V6_vgtuw, V6_vgtuw_128B, V6_vgtuw_and, V6_vgtuw_and_128B, V6_vgtuw_or,...
-    O << ".uw)";
+    // V6_vrounduwuh, V6_vrounduwuh_128B
+    O << ".uw):sat";
     return;
     break;
   case 51:
-    // V6_vmux, V6_vmux_128B
-    O << ',';
-    printOperand(MI, 3, O);
-    O << ')';
+    // V6_vroundwuh, V6_vroundwuh_128B
+    O << ".w):sat";
     return;
-    break;
-  case 52:
-    // V6_vrmpybusi, V6_vrmpybusi_128B, V6_vrmpybusi_acc, V6_vrmpybusi_acc_12...
-    O << ".b,#";
     break;
   }
 
 
-  // Fragment 5 encoded into 5 bits for 18 unique commands.
+  // Fragment 5 encoded into 5 bits for 19 unique commands.
   switch ((Bits >> 44) & 31) {
   default: llvm_unreachable("Invalid command number.");
   case 0:
-    // A2_add, A2_addi, A2_addp, A2_addsp, A2_combineii, A2_paddf, A2_paddfne...
+    // A2_add, A2_addi, A2_addp, A2_addsp, A2_paddf, A2_paddfnew, A2_paddif, ...
     O << ')';
     return;
     break;
   case 1:
-    // A2_addpsat, A2_addsat, A2_subsat, V6_vasrwhsat, V6_vasrwhsat_128B
+    // A2_addpsat, A2_addsat, A2_subsat, V6_vasrhubsat_alt, V6_vasrwhsat, V6_...
     O << "):sat";
     return;
     break;
@@ -13548,71 +17521,80 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     break;
   case 4:
     // A4_addp_c, A4_subp_c
-    O << ", ";
-    printOperand(MI, 4, O);
+    O << ',';
+    printOperand(MI, 1, O);
     O << "):carry";
     return;
     break;
   case 5:
-    // C2_muxii, S2_extractu, S2_extractup, S4_extract, S4_extractp, V6_vrmpy...
+    // C2_muxii, C2_muxir, M4_mpyri_addr, S2_extractu, S2_extractup, S4_extra...
     printOperand(MI, 3, O);
-    O << ')';
-    return;
     break;
   case 6:
-    // C2_muxir, M4_mpyri_addr
-    printExtOperand(MI, 3, O);
-    break;
-  case 7:
-    // C4_and_and, C4_and_or, C4_or_and, C4_or_or, L2_loadalignb_pcr, L2_load...
+    // C4_and_and, C4_and_or, C4_or_and, C4_or_or, M4_mpyri_addi, M4_mpyrr_ad...
     O << "))";
     return;
     break;
+  case 7:
+    // L2_loadalignb_pbr, L2_loadalignh_pbr
+    O << ":brev)";
+    return;
+    break;
   case 8:
+    // L2_loadalignb_pci, L2_loadalignh_pci
+    O << ":circ(";
+    printOperand(MI, 5, O);
+    O << "))";
+    return;
+    break;
+  case 9:
     // S2_insert, S2_insertp, V6_vrmpybusi_acc, V6_vrmpybusi_acc_128B
     printOperand(MI, 4, O);
     O << ')';
     return;
     break;
-  case 9:
+  case 10:
     // S2_pstorerbf_io, S2_pstorerbf_pi, S2_pstorerbfnew_pi, S2_pstorerbnewf_...
     O << ") = ";
     break;
-  case 10:
-    // S2_storerb_io, S2_storerb_pi, S2_storerd_io, S2_storerd_pi, S2_storerh...
-    return;
-    break;
   case 11:
-    // S2_storerbnew_io, S2_storerbnew_pi, S2_storerhnew_io, S2_storerhnew_pi...
-    O << ".new";
+    // S4_storeirbf_io, S4_storeirbfnew_io, S4_storeirbt_io, S4_storeirbtnew_...
+    O << ") = #";
+    printOperand(MI, 3, O);
     return;
     break;
   case 12:
-    // S2_storerf_io, S2_storerf_pi, S4_storerf_ap
-    O << ".h";
-    return;
-    break;
-  case 13:
-    // S4_storeirbf_io, S4_storeirbfnew_io, S4_storeirbt_io, S4_storeirbtnew_...
-    O << ")=#";
-    printExtOperand(MI, 3, O);
-    return;
-    break;
-  case 14:
-    // V6_vL32b_nt_ai, V6_vL32b_nt_ai_128B, V6_vL32b_nt_cur_ai, V6_vL32b_nt_c...
+    // V6_vL32b_nt_cur_npred_ai, V6_vL32b_nt_cur_npred_ai_128B, V6_vL32b_nt_c...
     O << "):nt";
     return;
     break;
-  case 15:
+  case 13:
     // V6_vS32b_nt_new_npred_ai, V6_vS32b_nt_new_npred_ai_128B, V6_vS32b_nt_n...
     O << "):nt = ";
     break;
+  case 14:
+    // V6_vaddcarry, V6_vaddcarry_128B, V6_vsubcarry, V6_vsubcarry_128B
+    O << ".w,";
+    printOperand(MI, 1, O);
+    O << "):carry";
+    return;
+    break;
+  case 15:
+    // V6_vaddw, V6_vaddw_128B, V6_vaddw_dv, V6_vaddw_dv_128B, V6_vsubw, V6_v...
+    O << ".w)";
+    return;
+    break;
   case 16:
-    // V6_vasrwhrndsat, V6_vasrwhrndsat_128B
-    O << "):rnd:sat";
+    // V6_vaddwsat, V6_vaddwsat_128B, V6_vaddwsat_dv, V6_vaddwsat_dv_128B, V6...
+    O << ".w):sat";
     return;
     break;
   case 17:
+    // V6_vasrhubrndsat_alt, V6_vasrwhrndsat, V6_vasrwhrndsat_128B, V6_vasrwu...
+    O << "):rnd:sat";
+    return;
+    break;
+  case 18:
     // dep_A2_addsat, dep_A2_subsat
     O << "):sat:deprecated";
     return;
@@ -13624,7 +17606,7 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
   switch ((Bits >> 49) & 3) {
   default: llvm_unreachable("Invalid command number.");
   case 0:
-    // C2_muxir
+    // C2_muxii, C2_muxir, S2_extractu, S2_extractup, S4_extract, S4_extractp...
     O << ')';
     return;
     break;
@@ -13670,7 +17652,7 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
 /// from the register set description.  This returns the assembler name
 /// for the specified register.
 const char *HexagonInstPrinter::getRegisterName(unsigned RegNo) {
-  assert(RegNo && RegNo < 133 && "Invalid register number!");
+  assert(RegNo && RegNo < 142 && "Invalid register number!");
 
   static const char AsmStrs[] = {
   /* 0 */ 'c', '1', '1', ':', '1', '0', 0,
@@ -13682,141 +17664,151 @@ const char *HexagonInstPrinter::getRegisterName(unsigned RegNo) {
   /* 36 */ 'v', '2', '1', ':', '2', '0', 0,
   /* 43 */ 'r', '2', '0', 0,
   /* 47 */ 'v', '2', '0', 0,
-  /* 51 */ 'r', '3', '1', ':', '3', '0', 0,
-  /* 58 */ 'v', '3', '1', ':', '3', '0', 0,
-  /* 65 */ 'r', '3', '0', 0,
-  /* 69 */ 'v', '3', '0', 0,
-  /* 73 */ 'c', '1', ':', '0', 0,
-  /* 78 */ 'r', '1', ':', '0', 0,
-  /* 83 */ 'v', '1', ':', '0', 0,
-  /* 88 */ 'p', '3', ':', '0', 0,
-  /* 93 */ 's', 'a', '0', 0,
-  /* 97 */ 'l', 'c', '0', 0,
-  /* 101 */ 'm', '0', 0,
-  /* 104 */ 'p', '0', 0,
-  /* 107 */ 'q', '0', 0,
-  /* 110 */ 'r', '0', 0,
-  /* 113 */ 'c', 's', '0', 0,
-  /* 117 */ 'v', '0', 0,
-  /* 120 */ 'r', '1', '1', 0,
-  /* 124 */ 'v', '1', '1', 0,
-  /* 128 */ 'r', '2', '1', 0,
-  /* 132 */ 'v', '2', '1', 0,
-  /* 136 */ 'r', '3', '1', 0,
-  /* 140 */ 'v', '3', '1', 0,
-  /* 144 */ 's', 'a', '1', 0,
-  /* 148 */ 'l', 'c', '1', 0,
-  /* 152 */ 'm', '1', 0,
-  /* 155 */ 'p', '1', 0,
-  /* 158 */ 'q', '1', 0,
-  /* 161 */ 'r', '1', 0,
-  /* 164 */ 'c', 's', '1', 0,
-  /* 168 */ 'v', '1', 0,
-  /* 171 */ 'c', '1', '3', ':', '1', '2', 0,
-  /* 178 */ 'r', '1', '3', ':', '1', '2', 0,
-  /* 185 */ 'v', '1', '3', ':', '1', '2', 0,
-  /* 192 */ 'r', '1', '2', 0,
-  /* 196 */ 'v', '1', '2', 0,
-  /* 200 */ 'r', '2', '3', ':', '2', '2', 0,
-  /* 207 */ 'v', '2', '3', ':', '2', '2', 0,
-  /* 214 */ 'r', '2', '2', 0,
-  /* 218 */ 'v', '2', '2', 0,
-  /* 222 */ 'c', '3', ':', '2', 0,
-  /* 227 */ 'r', '3', ':', '2', 0,
-  /* 232 */ 'v', '3', ':', '2', 0,
-  /* 237 */ 'p', '2', 0,
-  /* 240 */ 'q', '2', 0,
-  /* 243 */ 'r', '2', 0,
-  /* 246 */ 'v', '2', 0,
-  /* 249 */ 'r', '1', '3', 0,
-  /* 253 */ 'v', '1', '3', 0,
-  /* 257 */ 'r', '2', '3', 0,
-  /* 261 */ 'v', '2', '3', 0,
-  /* 265 */ 'p', '3', 0,
-  /* 268 */ 'q', '3', 0,
-  /* 271 */ 'r', '3', 0,
-  /* 274 */ 'v', '3', 0,
-  /* 277 */ 'c', '1', '5', ':', '1', '4', 0,
-  /* 284 */ 'r', '1', '5', ':', '1', '4', 0,
-  /* 291 */ 'v', '1', '5', ':', '1', '4', 0,
-  /* 298 */ 'r', '1', '4', 0,
-  /* 302 */ 'v', '1', '4', 0,
-  /* 306 */ 'r', '2', '5', ':', '2', '4', 0,
-  /* 313 */ 'v', '2', '5', ':', '2', '4', 0,
-  /* 320 */ 'r', '2', '4', 0,
-  /* 324 */ 'v', '2', '4', 0,
-  /* 328 */ 'c', '5', ':', '4', 0,
-  /* 333 */ 'r', '5', ':', '4', 0,
-  /* 338 */ 'v', '5', ':', '4', 0,
-  /* 343 */ 'r', '4', 0,
-  /* 346 */ 'v', '4', 0,
-  /* 349 */ 'r', '1', '5', 0,
-  /* 353 */ 'v', '1', '5', 0,
-  /* 357 */ 'r', '2', '5', 0,
-  /* 361 */ 'v', '2', '5', 0,
-  /* 365 */ 'c', '5', 0,
-  /* 368 */ 'r', '5', 0,
-  /* 371 */ 'v', '5', 0,
-  /* 374 */ 'r', '1', '7', ':', '1', '6', 0,
-  /* 381 */ 'v', '1', '7', ':', '1', '6', 0,
-  /* 388 */ 'r', '1', '6', 0,
-  /* 392 */ 'v', '1', '6', 0,
-  /* 396 */ 'r', '2', '7', ':', '2', '6', 0,
-  /* 403 */ 'v', '2', '7', ':', '2', '6', 0,
-  /* 410 */ 'r', '2', '6', 0,
-  /* 414 */ 'v', '2', '6', 0,
-  /* 418 */ 'c', '7', ':', '6', 0,
-  /* 423 */ 'r', '7', ':', '6', 0,
-  /* 428 */ 'v', '7', ':', '6', 0,
-  /* 433 */ 'c', '6', 0,
-  /* 436 */ 'r', '6', 0,
-  /* 439 */ 'v', '6', 0,
-  /* 442 */ 'r', '1', '7', 0,
-  /* 446 */ 'v', '1', '7', 0,
-  /* 450 */ 'r', '2', '7', 0,
-  /* 454 */ 'v', '2', '7', 0,
-  /* 458 */ 'c', '7', 0,
-  /* 461 */ 'r', '7', 0,
-  /* 464 */ 'v', '7', 0,
-  /* 467 */ 'r', '1', '9', ':', '1', '8', 0,
-  /* 474 */ 'v', '1', '9', ':', '1', '8', 0,
-  /* 481 */ 'r', '1', '8', 0,
-  /* 485 */ 'v', '1', '8', 0,
-  /* 489 */ 'r', '2', '9', ':', '2', '8', 0,
-  /* 496 */ 'v', '2', '9', ':', '2', '8', 0,
-  /* 503 */ 'r', '2', '8', 0,
-  /* 507 */ 'v', '2', '8', 0,
-  /* 511 */ 'c', '9', ':', '8', 0,
-  /* 516 */ 'r', '9', ':', '8', 0,
-  /* 521 */ 'v', '9', ':', '8', 0,
-  /* 526 */ 'c', '8', 0,
-  /* 529 */ 'r', '8', 0,
-  /* 532 */ 'v', '8', 0,
-  /* 535 */ 'r', '1', '9', 0,
-  /* 539 */ 'v', '1', '9', 0,
-  /* 543 */ 'r', '2', '9', 0,
-  /* 547 */ 'v', '2', '9', 0,
-  /* 551 */ 'r', '9', 0,
-  /* 554 */ 'v', '9', 0,
-  /* 557 */ 'p', 'c', 0,
-  /* 560 */ 'u', 's', 'r', '.', 'o', 'v', 'f', 0,
-  /* 568 */ 'u', 'p', 'c', 'y', 'c', 'l', 'e', 'h', 'i', 0,
-  /* 578 */ 'u', 'p', 'c', 'y', 'c', 'l', 'e', 'l', 'o', 0,
-  /* 588 */ 'u', 'g', 'p', 0,
-  /* 592 */ 'u', 's', 'r', 0,
+  /* 51 */ 'c', '3', '1', ':', '3', '0', 0,
+  /* 58 */ 'r', '3', '1', ':', '3', '0', 0,
+  /* 65 */ 'v', '3', '1', ':', '3', '0', 0,
+  /* 72 */ 'r', '3', '0', 0,
+  /* 76 */ 'v', '3', '0', 0,
+  /* 80 */ 'c', '1', ':', '0', 0,
+  /* 85 */ 'r', '1', ':', '0', 0,
+  /* 90 */ 'v', '1', ':', '0', 0,
+  /* 95 */ 'p', '3', ':', '0', 0,
+  /* 100 */ 's', 'a', '0', 0,
+  /* 104 */ 'l', 'c', '0', 0,
+  /* 108 */ 'm', '0', 0,
+  /* 111 */ 'p', '0', 0,
+  /* 114 */ 'q', '0', 0,
+  /* 117 */ 'r', '0', 0,
+  /* 120 */ 'c', 's', '0', 0,
+  /* 124 */ 'v', '0', 0,
+  /* 127 */ 'r', '1', '1', 0,
+  /* 131 */ 'v', '1', '1', 0,
+  /* 135 */ 'r', '2', '1', 0,
+  /* 139 */ 'v', '2', '1', 0,
+  /* 143 */ 'r', '3', '1', 0,
+  /* 147 */ 'v', '3', '1', 0,
+  /* 151 */ 's', 'a', '1', 0,
+  /* 155 */ 'l', 'c', '1', 0,
+  /* 159 */ 'm', '1', 0,
+  /* 162 */ 'p', '1', 0,
+  /* 165 */ 'q', '1', 0,
+  /* 168 */ 'r', '1', 0,
+  /* 171 */ 'c', 's', '1', 0,
+  /* 175 */ 'v', '1', 0,
+  /* 178 */ 'c', '1', '3', ':', '1', '2', 0,
+  /* 185 */ 'r', '1', '3', ':', '1', '2', 0,
+  /* 192 */ 'v', '1', '3', ':', '1', '2', 0,
+  /* 199 */ 'r', '1', '2', 0,
+  /* 203 */ 'v', '1', '2', 0,
+  /* 207 */ 'r', '2', '3', ':', '2', '2', 0,
+  /* 214 */ 'v', '2', '3', ':', '2', '2', 0,
+  /* 221 */ 'r', '2', '2', 0,
+  /* 225 */ 'v', '2', '2', 0,
+  /* 229 */ 'c', '3', ':', '2', 0,
+  /* 234 */ 'r', '3', ':', '2', 0,
+  /* 239 */ 'v', '3', ':', '2', 0,
+  /* 244 */ 'p', '2', 0,
+  /* 247 */ 'q', '2', 0,
+  /* 250 */ 'r', '2', 0,
+  /* 253 */ 'v', '2', 0,
+  /* 256 */ 'r', '1', '3', 0,
+  /* 260 */ 'v', '1', '3', 0,
+  /* 264 */ 'r', '2', '3', 0,
+  /* 268 */ 'v', '2', '3', 0,
+  /* 272 */ 'p', '3', 0,
+  /* 275 */ 'q', '3', 0,
+  /* 278 */ 'r', '3', 0,
+  /* 281 */ 'v', '3', 0,
+  /* 284 */ 'c', '1', '5', ':', '1', '4', 0,
+  /* 291 */ 'r', '1', '5', ':', '1', '4', 0,
+  /* 298 */ 'v', '1', '5', ':', '1', '4', 0,
+  /* 305 */ 'r', '1', '4', 0,
+  /* 309 */ 'v', '1', '4', 0,
+  /* 313 */ 'r', '2', '5', ':', '2', '4', 0,
+  /* 320 */ 'v', '2', '5', ':', '2', '4', 0,
+  /* 327 */ 'r', '2', '4', 0,
+  /* 331 */ 'v', '2', '4', 0,
+  /* 335 */ 'c', '5', ':', '4', 0,
+  /* 340 */ 'r', '5', ':', '4', 0,
+  /* 345 */ 'v', '5', ':', '4', 0,
+  /* 350 */ 'r', '4', 0,
+  /* 353 */ 'v', '4', 0,
+  /* 356 */ 'r', '1', '5', 0,
+  /* 360 */ 'v', '1', '5', 0,
+  /* 364 */ 'r', '2', '5', 0,
+  /* 368 */ 'v', '2', '5', 0,
+  /* 372 */ 'c', '5', 0,
+  /* 375 */ 'r', '5', 0,
+  /* 378 */ 'v', '5', 0,
+  /* 381 */ 'c', '1', '7', ':', '1', '6', 0,
+  /* 388 */ 'r', '1', '7', ':', '1', '6', 0,
+  /* 395 */ 'v', '1', '7', ':', '1', '6', 0,
+  /* 402 */ 'r', '1', '6', 0,
+  /* 406 */ 'v', '1', '6', 0,
+  /* 410 */ 'r', '2', '7', ':', '2', '6', 0,
+  /* 417 */ 'v', '2', '7', ':', '2', '6', 0,
+  /* 424 */ 'r', '2', '6', 0,
+  /* 428 */ 'v', '2', '6', 0,
+  /* 432 */ 'c', '7', ':', '6', 0,
+  /* 437 */ 'r', '7', ':', '6', 0,
+  /* 442 */ 'v', '7', ':', '6', 0,
+  /* 447 */ 'c', '6', 0,
+  /* 450 */ 'r', '6', 0,
+  /* 453 */ 'v', '6', 0,
+  /* 456 */ 'r', '1', '7', 0,
+  /* 460 */ 'v', '1', '7', 0,
+  /* 464 */ 'r', '2', '7', 0,
+  /* 468 */ 'v', '2', '7', 0,
+  /* 472 */ 'c', '7', 0,
+  /* 475 */ 'r', '7', 0,
+  /* 478 */ 'v', '7', 0,
+  /* 481 */ 'c', '1', '9', ':', '1', '8', 0,
+  /* 488 */ 'r', '1', '9', ':', '1', '8', 0,
+  /* 495 */ 'v', '1', '9', ':', '1', '8', 0,
+  /* 502 */ 'r', '1', '8', 0,
+  /* 506 */ 'v', '1', '8', 0,
+  /* 510 */ 'r', '2', '9', ':', '2', '8', 0,
+  /* 517 */ 'v', '2', '9', ':', '2', '8', 0,
+  /* 524 */ 'r', '2', '8', 0,
+  /* 528 */ 'v', '2', '8', 0,
+  /* 532 */ 'c', '9', ':', '8', 0,
+  /* 537 */ 'r', '9', ':', '8', 0,
+  /* 542 */ 'v', '9', ':', '8', 0,
+  /* 547 */ 'c', '8', 0,
+  /* 550 */ 'r', '8', 0,
+  /* 553 */ 'v', '8', 0,
+  /* 556 */ 'r', '1', '9', 0,
+  /* 560 */ 'v', '1', '9', 0,
+  /* 564 */ 'r', '2', '9', 0,
+  /* 568 */ 'v', '2', '9', 0,
+  /* 572 */ 'r', '9', 0,
+  /* 575 */ 'v', '9', 0,
+  /* 578 */ 'p', 'c', 0,
+  /* 581 */ 'u', 's', 'r', '.', 'o', 'v', 'f', 0,
+  /* 589 */ 'u', 'p', 'c', 'y', 'c', 'l', 'e', 'h', 'i', 0,
+  /* 599 */ 'u', 't', 'i', 'm', 'e', 'r', 'h', 'i', 0,
+  /* 608 */ 'p', 'k', 't', 'c', 'o', 'u', 'n', 't', 'h', 'i', 0,
+  /* 619 */ 'u', 'p', 'c', 'y', 'c', 'l', 'e', 'l', 'o', 0,
+  /* 629 */ 'u', 't', 'i', 'm', 'e', 'r', 'l', 'o', 0,
+  /* 638 */ 'p', 'k', 't', 'c', 'o', 'u', 'n', 't', 'l', 'o', 0,
+  /* 649 */ 'u', 'g', 'p', 0,
+  /* 653 */ 'u', 's', 'r', 0,
+  /* 657 */ 'f', 'r', 'a', 'm', 'e', 'l', 'i', 'm', 'i', 't', 0,
+  /* 668 */ 'f', 'r', 'a', 'm', 'e', 'k', 'e', 'y', 0,
   };
 
   static const uint16_t RegAsmOffset[] = {
-    171, 589, 557, 588, 277, 568, 578, 592, 560, 365, 433, 458, 526, 113, 
-    164, 78, 227, 333, 423, 516, 7, 178, 284, 374, 467, 29, 200, 306, 
-    396, 489, 51, 97, 148, 101, 152, 104, 155, 237, 265, 107, 158, 240, 
-    268, 110, 161, 243, 271, 343, 368, 436, 461, 529, 551, 21, 120, 192, 
-    249, 298, 349, 388, 442, 481, 535, 43, 128, 214, 257, 320, 357, 410, 
-    450, 503, 543, 65, 136, 93, 144, 117, 168, 246, 274, 346, 371, 439, 
-    464, 532, 554, 25, 124, 196, 253, 302, 353, 392, 446, 485, 539, 47, 
-    132, 218, 261, 324, 361, 414, 454, 507, 547, 69, 140, 83, 232, 338, 
-    428, 521, 14, 185, 291, 381, 474, 36, 207, 313, 403, 496, 58, 73, 
-    222, 328, 418, 511, 0, 88, 
+    178, 668, 657, 650, 578, 481, 608, 638, 649, 284, 589, 619, 653, 581, 
+    51, 599, 629, 372, 447, 472, 547, 120, 171, 85, 234, 340, 437, 537, 
+    7, 185, 291, 388, 488, 29, 207, 313, 410, 510, 58, 104, 155, 108, 
+    159, 111, 162, 244, 272, 114, 165, 247, 275, 117, 168, 250, 278, 350, 
+    375, 450, 475, 550, 572, 21, 127, 199, 256, 305, 356, 402, 456, 502, 
+    556, 43, 135, 221, 264, 327, 364, 424, 464, 524, 564, 72, 143, 100, 
+    151, 124, 175, 253, 281, 353, 378, 453, 478, 553, 575, 25, 131, 203, 
+    260, 309, 360, 406, 460, 506, 560, 47, 139, 225, 268, 331, 368, 428, 
+    468, 528, 568, 76, 147, 90, 239, 345, 442, 542, 14, 192, 298, 395, 
+    495, 36, 214, 320, 417, 517, 65, 80, 229, 335, 432, 532, 0, 381, 
+    95, 
   };
 
   assert (*(AsmStrs+RegAsmOffset[RegNo-1]) &&
@@ -13831,6 +17823,103 @@ bool HexagonInstPrinter::printAliasInstr(const MCInst *MI, raw_ostream &OS) {
   const char *AsmString;
   switch (MI->getOpcode()) {
   default: return false;
+  case Hexagon::A2_andir:
+    if (MI->getNumOperands() == 3 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(1).getReg()) &&
+        MI->getOperand(2).isImm() &&
+        MI->getOperand(2).getImm() == 255) {
+      // (A2_andir IntRegs:$Rd32, IntRegs:$Rs32, 255)
+      AsmString = "$\x01=zxtb($\x02)";
+      break;
+    }
+    return false;
+  case Hexagon::A2_paddif:
+    if (MI->getNumOperands() == 4 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isReg() &&
+        MRI.getRegClass(Hexagon::PredRegsRegClassID).contains(MI->getOperand(1).getReg()) &&
+        MI->getOperand(2).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(2).getReg()) &&
+        MI->getOperand(3).isImm() &&
+        MI->getOperand(3).getImm() == 0) {
+      // (A2_paddif IntRegs:$Rd32, PredRegs:$Pu4, IntRegs:$Rs32, 0)
+      AsmString = "if (!$\x02) $\x01=$\x03";
+      break;
+    }
+    return false;
+  case Hexagon::A2_paddifnew:
+    if (MI->getNumOperands() == 4 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isReg() &&
+        MRI.getRegClass(Hexagon::PredRegsRegClassID).contains(MI->getOperand(1).getReg()) &&
+        MI->getOperand(2).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(2).getReg()) &&
+        MI->getOperand(3).isImm() &&
+        MI->getOperand(3).getImm() == 0) {
+      // (A2_paddifnew IntRegs:$Rd32, PredRegs:$Pu4, IntRegs:$Rs32, 0)
+      AsmString = "if (!$\x02.new) $\x01=$\x03";
+      break;
+    }
+    return false;
+  case Hexagon::A2_paddit:
+    if (MI->getNumOperands() == 4 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isReg() &&
+        MRI.getRegClass(Hexagon::PredRegsRegClassID).contains(MI->getOperand(1).getReg()) &&
+        MI->getOperand(2).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(2).getReg()) &&
+        MI->getOperand(3).isImm() &&
+        MI->getOperand(3).getImm() == 0) {
+      // (A2_paddit IntRegs:$Rd32, PredRegs:$Pu4, IntRegs:$Rs32, 0)
+      AsmString = "if ($\x02) $\x01=$\x03";
+      break;
+    }
+    return false;
+  case Hexagon::A2_padditnew:
+    if (MI->getNumOperands() == 4 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isReg() &&
+        MRI.getRegClass(Hexagon::PredRegsRegClassID).contains(MI->getOperand(1).getReg()) &&
+        MI->getOperand(2).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(2).getReg()) &&
+        MI->getOperand(3).isImm() &&
+        MI->getOperand(3).getImm() == 0) {
+      // (A2_padditnew IntRegs:$Rd32, PredRegs:$Pu4, IntRegs:$Rs32, 0)
+      AsmString = "if ($\x02.new) $\x01=$\x03";
+      break;
+    }
+    return false;
+  case Hexagon::A2_subri:
+    if (MI->getNumOperands() == 3 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isImm() &&
+        MI->getOperand(1).getImm() == 0 &&
+        MI->getOperand(2).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(2).getReg())) {
+      // (A2_subri IntRegs:$Rd32, 0, IntRegs:$Rs32)
+      AsmString = "$\x01=neg($\x03)";
+      break;
+    }
+    if (MI->getNumOperands() == 3 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isImm() &&
+        MI->getOperand(1).getImm() == -1 &&
+        MI->getOperand(2).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(2).getReg())) {
+      // (A2_subri IntRegs:$Rd32, -1, IntRegs:$Rs32)
+      AsmString = "$\x01=not($\x03)";
+      break;
+    }
+    return false;
   case Hexagon::A2_vaddub:
     if (MI->getNumOperands() == 3 &&
         MI->getOperand(0).isReg() &&
@@ -13839,8 +17928,60 @@ bool HexagonInstPrinter::printAliasInstr(const MCInst *MI, raw_ostream &OS) {
         MRI.getRegClass(Hexagon::DoubleRegsRegClassID).contains(MI->getOperand(1).getReg()) &&
         MI->getOperand(2).isReg() &&
         MRI.getRegClass(Hexagon::DoubleRegsRegClassID).contains(MI->getOperand(2).getReg())) {
-      // (A2_vaddub DoubleRegs:$Rdd, DoubleRegs:$Rss, DoubleRegs:$Rtt)
-      AsmString = "$\x01 = vaddb($\x02, $\x03)";
+      // (A2_vaddub DoubleRegs:$Rdd32, DoubleRegs:$Rss32, DoubleRegs:$Rtt32)
+      AsmString = "$\x01=vaddb($\x02,$\x03)";
+      break;
+    }
+    return false;
+  case Hexagon::A2_vsubub:
+    if (MI->getNumOperands() == 3 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::DoubleRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isReg() &&
+        MRI.getRegClass(Hexagon::DoubleRegsRegClassID).contains(MI->getOperand(1).getReg()) &&
+        MI->getOperand(2).isReg() &&
+        MRI.getRegClass(Hexagon::DoubleRegsRegClassID).contains(MI->getOperand(2).getReg())) {
+      // (A2_vsubub DoubleRegs:$Rdd32, DoubleRegs:$Rss32, DoubleRegs:$Rtt32)
+      AsmString = "$\x01=vsubb($\x02,$\x03)";
+      break;
+    }
+    return false;
+  case Hexagon::C2_cmpgt:
+    if (MI->getNumOperands() == 3 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::PredRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(1).getReg()) &&
+        MI->getOperand(2).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(2).getReg())) {
+      // (C2_cmpgt PredRegs:$Pd4, IntRegs:$Rt32, IntRegs:$Rs32)
+      AsmString = "$\x01=cmp.lt($\x03,$\x02)";
+      break;
+    }
+    return false;
+  case Hexagon::C2_cmpgtu:
+    if (MI->getNumOperands() == 3 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::PredRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(1).getReg()) &&
+        MI->getOperand(2).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(2).getReg())) {
+      // (C2_cmpgtu PredRegs:$Pd4, IntRegs:$Rt32, IntRegs:$Rs32)
+      AsmString = "$\x01=cmp.ltu($\x03,$\x02)";
+      break;
+    }
+    return false;
+  case Hexagon::C2_or:
+    if (MI->getNumOperands() == 3 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::PredRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isReg() &&
+        MRI.getRegClass(Hexagon::PredRegsRegClassID).contains(MI->getOperand(1).getReg()) &&
+        MI->getOperand(2).isReg() &&
+        MI->getOperand(2).getReg() == MI->getOperand(1).getReg()) {
+      // (C2_or PredRegs:$Pd4, PredRegs:$Ps4, PredRegs:$Ps4)
+      AsmString = "$\x01=$\x02";
       break;
     }
     return false;
@@ -13848,7 +17989,7 @@ bool HexagonInstPrinter::printAliasInstr(const MCInst *MI, raw_ostream &OS) {
     if (MI->getNumOperands() == 2 &&
         MI->getOperand(0).isReg() &&
         MRI.getRegClass(Hexagon::PredRegsRegClassID).contains(MI->getOperand(0).getReg())) {
-      // (J2_jumpf PredRegs:$Pu, brtarget:$r15_2)
+      // (J2_jumpf PredRegs:$Pu4, b30_2Imm:$Ii)
       AsmString = "if (!$\x01) jump $\xFF\x02\x01";
       break;
     }
@@ -13859,7 +18000,7 @@ bool HexagonInstPrinter::printAliasInstr(const MCInst *MI, raw_ostream &OS) {
         MRI.getRegClass(Hexagon::PredRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
         MI->getOperand(1).isReg() &&
         MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(1).getReg())) {
-      // (J2_jumprf PredRegs:$Pu, IntRegs:$Rs)
+      // (J2_jumprf PredRegs:$Pu4, IntRegs:$Rs32)
       AsmString = "if (!$\x01) jumpr $\x02";
       break;
     }
@@ -13870,7 +18011,7 @@ bool HexagonInstPrinter::printAliasInstr(const MCInst *MI, raw_ostream &OS) {
         MRI.getRegClass(Hexagon::PredRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
         MI->getOperand(1).isReg() &&
         MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(1).getReg())) {
-      // (J2_jumprt PredRegs:$Pu, IntRegs:$Rs)
+      // (J2_jumprt PredRegs:$Pu4, IntRegs:$Rs32)
       AsmString = "if ($\x01) jumpr $\x02";
       break;
     }
@@ -13879,414 +18020,1695 @@ bool HexagonInstPrinter::printAliasInstr(const MCInst *MI, raw_ostream &OS) {
     if (MI->getNumOperands() == 2 &&
         MI->getOperand(0).isReg() &&
         MRI.getRegClass(Hexagon::PredRegsRegClassID).contains(MI->getOperand(0).getReg())) {
-      // (J2_jumpt PredRegs:$Pu, brtarget:$r15_2)
+      // (J2_jumpt PredRegs:$Pu4, b30_2Imm:$Ii)
       AsmString = "if ($\x01) jump $\xFF\x02\x01";
       break;
     }
     return false;
-  case Hexagon::L2_loadrbgp:
-    if (MI->getNumOperands() == 2 &&
-        MI->getOperand(0).isReg() &&
-        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(0).getReg())) {
-      // (L2_loadrbgp IntRegs:$Nt, u16_0Imm:$addr)
-      AsmString = "$\x01 = memb(GP+#$\x02)";
-      break;
-    }
-    return false;
-  case Hexagon::L2_loadrdgp:
-    if (MI->getNumOperands() == 2 &&
-        MI->getOperand(0).isReg() &&
-        MRI.getRegClass(Hexagon::DoubleRegsRegClassID).contains(MI->getOperand(0).getReg())) {
-      // (L2_loadrdgp DoubleRegs:$Nt, u16_3Imm:$addr)
-      AsmString = "$\x01 = memd(GP+#$\x02)";
-      break;
-    }
-    return false;
-  case Hexagon::L2_loadrhgp:
-    if (MI->getNumOperands() == 2 &&
-        MI->getOperand(0).isReg() &&
-        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(0).getReg())) {
-      // (L2_loadrhgp IntRegs:$Nt, u16_1Imm:$addr)
-      AsmString = "$\x01 = memh(GP+#$\x02)";
-      break;
-    }
-    return false;
-  case Hexagon::L2_loadrigp:
-    if (MI->getNumOperands() == 2 &&
-        MI->getOperand(0).isReg() &&
-        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(0).getReg())) {
-      // (L2_loadrigp IntRegs:$Nt, u16_2Imm:$addr)
-      AsmString = "$\x01 = memw(GP+#$\x02)";
-      break;
-    }
-    return false;
-  case Hexagon::L2_loadrubgp:
-    if (MI->getNumOperands() == 2 &&
-        MI->getOperand(0).isReg() &&
-        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(0).getReg())) {
-      // (L2_loadrubgp IntRegs:$Nt, u16_0Imm:$addr)
-      AsmString = "$\x01 = memub(GP+#$\x02)";
-      break;
-    }
-    return false;
-  case Hexagon::L2_loadruhgp:
-    if (MI->getNumOperands() == 2 &&
-        MI->getOperand(0).isReg() &&
-        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(0).getReg())) {
-      // (L2_loadruhgp IntRegs:$Nt, u16_1Imm:$addr)
-      AsmString = "$\x01 = memuh(GP+#$\x02)";
-      break;
-    }
-    return false;
-  case Hexagon::S2_storerbgp:
-    if (MI->getNumOperands() == 2 &&
-        MI->getOperand(1).isReg() &&
-        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(1).getReg())) {
-      // (S2_storerbgp u16_0Imm:$addr, IntRegs:$Nt)
-      AsmString = "memb(GP+#$\x01) = $\x02";
-      break;
-    }
-    return false;
-  case Hexagon::S2_storerbnewgp:
-    if (MI->getNumOperands() == 2 &&
-        MI->getOperand(1).isReg() &&
-        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(1).getReg())) {
-      // (S2_storerbnewgp u16_0Imm:$addr, IntRegs:$Nt)
-      AsmString = "memb(GP+#$\x01) = $\x02.new";
-      break;
-    }
-    return false;
-  case Hexagon::S2_storerdgp:
-    if (MI->getNumOperands() == 2 &&
-        MI->getOperand(1).isReg() &&
-        MRI.getRegClass(Hexagon::DoubleRegsRegClassID).contains(MI->getOperand(1).getReg())) {
-      // (S2_storerdgp u16_3Imm:$addr, DoubleRegs:$Nt)
-      AsmString = "memd(GP+#$\x01) = $\x02";
-      break;
-    }
-    return false;
-  case Hexagon::S2_storerfgp:
-    if (MI->getNumOperands() == 2 &&
-        MI->getOperand(1).isReg() &&
-        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(1).getReg())) {
-      // (S2_storerfgp u16_1Imm:$addr, IntRegs:$Nt)
-      AsmString = "memh(GP+#$\x01) = $\x02.h";
-      break;
-    }
-    return false;
-  case Hexagon::S2_storerhgp:
-    if (MI->getNumOperands() == 2 &&
-        MI->getOperand(1).isReg() &&
-        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(1).getReg())) {
-      // (S2_storerhgp u16_1Imm:$addr, IntRegs:$Nt)
-      AsmString = "memh(GP+#$\x01) = $\x02";
-      break;
-    }
-    return false;
-  case Hexagon::S2_storerhnewgp:
-    if (MI->getNumOperands() == 2 &&
-        MI->getOperand(1).isReg() &&
-        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(1).getReg())) {
-      // (S2_storerhnewgp u16_1Imm:$addr, IntRegs:$Nt)
-      AsmString = "memh(GP+#$\x01) = $\x02.new";
-      break;
-    }
-    return false;
-  case Hexagon::S2_storerigp:
-    if (MI->getNumOperands() == 2 &&
-        MI->getOperand(1).isReg() &&
-        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(1).getReg())) {
-      // (S2_storerigp u16_2Imm:$addr, IntRegs:$Nt)
-      AsmString = "memw(GP+#$\x01) = $\x02";
-      break;
-    }
-    return false;
-  case Hexagon::S2_storerinewgp:
-    if (MI->getNumOperands() == 2 &&
-        MI->getOperand(1).isReg() &&
-        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(1).getReg())) {
-      // (S2_storerinewgp u16_2Imm:$addr, IntRegs:$Nt)
-      AsmString = "memw(GP+#$\x01) = $\x02.new";
-      break;
-    }
-    return false;
-  case Hexagon::V6_vL32Ub_ai:
+  case Hexagon::L2_loadalignb_io:
     if (MI->getNumOperands() == 3 &&
         MI->getOperand(0).isReg() &&
-        MRI.getRegClass(Hexagon::VectorRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MRI.getRegClass(Hexagon::DoubleRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
         MI->getOperand(1).isReg() &&
         MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(1).getReg()) &&
         MI->getOperand(2).isImm() &&
         MI->getOperand(2).getImm() == 0) {
-      // (V6_vL32Ub_ai VectorRegs:$Vt, IntRegs:$Rs, 0)
-      AsmString = "$\x01=vmemu($\x02)";
+      // (L2_loadalignb_io DoubleRegs:$Ryy32, IntRegs:$Rs32, 0)
+      AsmString = "$\x01=memb_fifo($\x02)";
       break;
     }
     return false;
-  case Hexagon::V6_vL32b_ai:
+  case Hexagon::L2_loadalignh_io:
     if (MI->getNumOperands() == 3 &&
         MI->getOperand(0).isReg() &&
-        MRI.getRegClass(Hexagon::VectorRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MRI.getRegClass(Hexagon::DoubleRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
         MI->getOperand(1).isReg() &&
         MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(1).getReg()) &&
         MI->getOperand(2).isImm() &&
         MI->getOperand(2).getImm() == 0) {
-      // (V6_vL32b_ai VectorRegs:$Vt, IntRegs:$Rs, 0)
-      AsmString = "$\x01=vmem($\x02)";
+      // (L2_loadalignh_io DoubleRegs:$Ryy32, IntRegs:$Rs32, 0)
+      AsmString = "$\x01=memh_fifo($\x02)";
       break;
     }
     return false;
-  case Hexagon::V6_vL32b_nt_ai:
+  case Hexagon::L2_loadbsw2_io:
     if (MI->getNumOperands() == 3 &&
         MI->getOperand(0).isReg() &&
-        MRI.getRegClass(Hexagon::VectorRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
         MI->getOperand(1).isReg() &&
         MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(1).getReg()) &&
         MI->getOperand(2).isImm() &&
         MI->getOperand(2).getImm() == 0) {
-      // (V6_vL32b_nt_ai VectorRegs:$Vt, IntRegs:$Rs, 0)
-      AsmString = "$\x01=vmem($\x02):nt";
+      // (L2_loadbsw2_io IntRegs:$Rd32, IntRegs:$Rs32, 0)
+      AsmString = "$\x01=membh($\x02)";
       break;
     }
     return false;
-  case Hexagon::V6_vS32Ub_ai:
+  case Hexagon::L2_loadbsw4_io:
+    if (MI->getNumOperands() == 3 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::DoubleRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(1).getReg()) &&
+        MI->getOperand(2).isImm() &&
+        MI->getOperand(2).getImm() == 0) {
+      // (L2_loadbsw4_io DoubleRegs:$Rdd32, IntRegs:$Rs32, 0)
+      AsmString = "$\x01=membh($\x02)";
+      break;
+    }
+    return false;
+  case Hexagon::L2_loadbzw2_io:
+    if (MI->getNumOperands() == 3 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(1).getReg()) &&
+        MI->getOperand(2).isImm() &&
+        MI->getOperand(2).getImm() == 0) {
+      // (L2_loadbzw2_io IntRegs:$Rd32, IntRegs:$Rs32, 0)
+      AsmString = "$\x01=memubh($\x02)";
+      break;
+    }
+    return false;
+  case Hexagon::L2_loadbzw4_io:
+    if (MI->getNumOperands() == 3 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::DoubleRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(1).getReg()) &&
+        MI->getOperand(2).isImm() &&
+        MI->getOperand(2).getImm() == 0) {
+      // (L2_loadbzw4_io DoubleRegs:$Rdd32, IntRegs:$Rs32, 0)
+      AsmString = "$\x01=memubh($\x02)";
+      break;
+    }
+    return false;
+  case Hexagon::L2_loadrb_io:
+    if (MI->getNumOperands() == 3 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(1).getReg()) &&
+        MI->getOperand(2).isImm() &&
+        MI->getOperand(2).getImm() == 0) {
+      // (L2_loadrb_io IntRegs:$Rd32, IntRegs:$Rs32, 0)
+      AsmString = "$\x01=memb($\x02)";
+      break;
+    }
+    return false;
+  case Hexagon::L2_loadrd_io:
+    if (MI->getNumOperands() == 3 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::DoubleRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(1).getReg()) &&
+        MI->getOperand(2).isImm() &&
+        MI->getOperand(2).getImm() == 0) {
+      // (L2_loadrd_io DoubleRegs:$Rdd32, IntRegs:$Rs32, 0)
+      AsmString = "$\x01=memd($\x02)";
+      break;
+    }
+    return false;
+  case Hexagon::L2_loadrh_io:
+    if (MI->getNumOperands() == 3 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(1).getReg()) &&
+        MI->getOperand(2).isImm() &&
+        MI->getOperand(2).getImm() == 0) {
+      // (L2_loadrh_io IntRegs:$Rd32, IntRegs:$Rs32, 0)
+      AsmString = "$\x01=memh($\x02)";
+      break;
+    }
+    return false;
+  case Hexagon::L2_loadri_io:
+    if (MI->getNumOperands() == 3 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(1).getReg()) &&
+        MI->getOperand(2).isImm() &&
+        MI->getOperand(2).getImm() == 0) {
+      // (L2_loadri_io IntRegs:$Rd32, IntRegs:$Rs32, 0)
+      AsmString = "$\x01=memw($\x02)";
+      break;
+    }
+    return false;
+  case Hexagon::L2_loadrub_io:
+    if (MI->getNumOperands() == 3 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(1).getReg()) &&
+        MI->getOperand(2).isImm() &&
+        MI->getOperand(2).getImm() == 0) {
+      // (L2_loadrub_io IntRegs:$Rd32, IntRegs:$Rs32, 0)
+      AsmString = "$\x01=memub($\x02)";
+      break;
+    }
+    return false;
+  case Hexagon::L2_loadruh_io:
+    if (MI->getNumOperands() == 3 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(1).getReg()) &&
+        MI->getOperand(2).isImm() &&
+        MI->getOperand(2).getImm() == 0) {
+      // (L2_loadruh_io IntRegs:$Rd32, IntRegs:$Rs32, 0)
+      AsmString = "$\x01=memuh($\x02)";
+      break;
+    }
+    return false;
+  case Hexagon::L2_ploadrbf_io:
+    if (MI->getNumOperands() == 4 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isReg() &&
+        MRI.getRegClass(Hexagon::PredRegsRegClassID).contains(MI->getOperand(1).getReg()) &&
+        MI->getOperand(2).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(2).getReg()) &&
+        MI->getOperand(3).isImm() &&
+        MI->getOperand(3).getImm() == 0) {
+      // (L2_ploadrbf_io IntRegs:$Rd32, PredRegs:$Pt4, IntRegs:$Rs32, 0)
+      AsmString = "if (!$\x02) $\x01=memb($\x03)";
+      break;
+    }
+    return false;
+  case Hexagon::L2_ploadrbfnew_io:
+    if (MI->getNumOperands() == 4 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isReg() &&
+        MRI.getRegClass(Hexagon::PredRegsRegClassID).contains(MI->getOperand(1).getReg()) &&
+        MI->getOperand(2).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(2).getReg()) &&
+        MI->getOperand(3).isImm() &&
+        MI->getOperand(3).getImm() == 0) {
+      // (L2_ploadrbfnew_io IntRegs:$Rd32, PredRegs:$Pt4, IntRegs:$Rs32, 0)
+      AsmString = "if (!$\x02.new) $\x01=memb($\x03)";
+      break;
+    }
+    return false;
+  case Hexagon::L2_ploadrbt_io:
+    if (MI->getNumOperands() == 4 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isReg() &&
+        MRI.getRegClass(Hexagon::PredRegsRegClassID).contains(MI->getOperand(1).getReg()) &&
+        MI->getOperand(2).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(2).getReg()) &&
+        MI->getOperand(3).isImm() &&
+        MI->getOperand(3).getImm() == 0) {
+      // (L2_ploadrbt_io IntRegs:$Rd32, PredRegs:$Pt4, IntRegs:$Rs32, 0)
+      AsmString = "if ($\x02) $\x01=memb($\x03)";
+      break;
+    }
+    return false;
+  case Hexagon::L2_ploadrbtnew_io:
+    if (MI->getNumOperands() == 4 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isReg() &&
+        MRI.getRegClass(Hexagon::PredRegsRegClassID).contains(MI->getOperand(1).getReg()) &&
+        MI->getOperand(2).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(2).getReg()) &&
+        MI->getOperand(3).isImm() &&
+        MI->getOperand(3).getImm() == 0) {
+      // (L2_ploadrbtnew_io IntRegs:$Rd32, PredRegs:$Pt4, IntRegs:$Rs32, 0)
+      AsmString = "if ($\x02.new) $\x01=memb($\x03)";
+      break;
+    }
+    return false;
+  case Hexagon::L2_ploadrdf_io:
+    if (MI->getNumOperands() == 4 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::DoubleRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isReg() &&
+        MRI.getRegClass(Hexagon::PredRegsRegClassID).contains(MI->getOperand(1).getReg()) &&
+        MI->getOperand(2).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(2).getReg()) &&
+        MI->getOperand(3).isImm() &&
+        MI->getOperand(3).getImm() == 0) {
+      // (L2_ploadrdf_io DoubleRegs:$Rdd32, PredRegs:$Pt4, IntRegs:$Rs32, 0)
+      AsmString = "if (!$\x02) $\x01=memd($\x03)";
+      break;
+    }
+    return false;
+  case Hexagon::L2_ploadrdfnew_io:
+    if (MI->getNumOperands() == 4 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::DoubleRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isReg() &&
+        MRI.getRegClass(Hexagon::PredRegsRegClassID).contains(MI->getOperand(1).getReg()) &&
+        MI->getOperand(2).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(2).getReg()) &&
+        MI->getOperand(3).isImm() &&
+        MI->getOperand(3).getImm() == 0) {
+      // (L2_ploadrdfnew_io DoubleRegs:$Rdd32, PredRegs:$Pt4, IntRegs:$Rs32, 0)
+      AsmString = "if (!$\x02.new) $\x01=memd($\x03)";
+      break;
+    }
+    return false;
+  case Hexagon::L2_ploadrdt_io:
+    if (MI->getNumOperands() == 4 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::DoubleRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isReg() &&
+        MRI.getRegClass(Hexagon::PredRegsRegClassID).contains(MI->getOperand(1).getReg()) &&
+        MI->getOperand(2).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(2).getReg()) &&
+        MI->getOperand(3).isImm() &&
+        MI->getOperand(3).getImm() == 0) {
+      // (L2_ploadrdt_io DoubleRegs:$Rdd32, PredRegs:$Pt4, IntRegs:$Rs32, 0)
+      AsmString = "if ($\x02) $\x01=memd($\x03)";
+      break;
+    }
+    return false;
+  case Hexagon::L2_ploadrdtnew_io:
+    if (MI->getNumOperands() == 4 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::DoubleRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isReg() &&
+        MRI.getRegClass(Hexagon::PredRegsRegClassID).contains(MI->getOperand(1).getReg()) &&
+        MI->getOperand(2).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(2).getReg()) &&
+        MI->getOperand(3).isImm() &&
+        MI->getOperand(3).getImm() == 0) {
+      // (L2_ploadrdtnew_io DoubleRegs:$Rdd32, PredRegs:$Pt4, IntRegs:$Rs32, 0)
+      AsmString = "if ($\x02.new) $\x01=memd($\x03)";
+      break;
+    }
+    return false;
+  case Hexagon::L2_ploadrhf_io:
+    if (MI->getNumOperands() == 4 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isReg() &&
+        MRI.getRegClass(Hexagon::PredRegsRegClassID).contains(MI->getOperand(1).getReg()) &&
+        MI->getOperand(2).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(2).getReg()) &&
+        MI->getOperand(3).isImm() &&
+        MI->getOperand(3).getImm() == 0) {
+      // (L2_ploadrhf_io IntRegs:$Rd32, PredRegs:$Pt4, IntRegs:$Rs32, 0)
+      AsmString = "if (!$\x02) $\x01=memh($\x03)";
+      break;
+    }
+    return false;
+  case Hexagon::L2_ploadrhfnew_io:
+    if (MI->getNumOperands() == 4 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isReg() &&
+        MRI.getRegClass(Hexagon::PredRegsRegClassID).contains(MI->getOperand(1).getReg()) &&
+        MI->getOperand(2).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(2).getReg()) &&
+        MI->getOperand(3).isImm() &&
+        MI->getOperand(3).getImm() == 0) {
+      // (L2_ploadrhfnew_io IntRegs:$Rd32, PredRegs:$Pt4, IntRegs:$Rs32, 0)
+      AsmString = "if (!$\x02.new) $\x01=memh($\x03)";
+      break;
+    }
+    return false;
+  case Hexagon::L2_ploadrht_io:
+    if (MI->getNumOperands() == 4 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isReg() &&
+        MRI.getRegClass(Hexagon::PredRegsRegClassID).contains(MI->getOperand(1).getReg()) &&
+        MI->getOperand(2).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(2).getReg()) &&
+        MI->getOperand(3).isImm() &&
+        MI->getOperand(3).getImm() == 0) {
+      // (L2_ploadrht_io IntRegs:$Rd32, PredRegs:$Pt4, IntRegs:$Rs32, 0)
+      AsmString = "if ($\x02) $\x01=memh($\x03)";
+      break;
+    }
+    return false;
+  case Hexagon::L2_ploadrhtnew_io:
+    if (MI->getNumOperands() == 4 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isReg() &&
+        MRI.getRegClass(Hexagon::PredRegsRegClassID).contains(MI->getOperand(1).getReg()) &&
+        MI->getOperand(2).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(2).getReg()) &&
+        MI->getOperand(3).isImm() &&
+        MI->getOperand(3).getImm() == 0) {
+      // (L2_ploadrhtnew_io IntRegs:$Rd32, PredRegs:$Pt4, IntRegs:$Rs32, 0)
+      AsmString = "if ($\x02.new) $\x01=memh($\x03)";
+      break;
+    }
+    return false;
+  case Hexagon::L2_ploadrif_io:
+    if (MI->getNumOperands() == 4 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isReg() &&
+        MRI.getRegClass(Hexagon::PredRegsRegClassID).contains(MI->getOperand(1).getReg()) &&
+        MI->getOperand(2).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(2).getReg()) &&
+        MI->getOperand(3).isImm() &&
+        MI->getOperand(3).getImm() == 0) {
+      // (L2_ploadrif_io IntRegs:$Rd32, PredRegs:$Pt4, IntRegs:$Rs32, 0)
+      AsmString = "if (!$\x02) $\x01=memw($\x03)";
+      break;
+    }
+    return false;
+  case Hexagon::L2_ploadrifnew_io:
+    if (MI->getNumOperands() == 4 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isReg() &&
+        MRI.getRegClass(Hexagon::PredRegsRegClassID).contains(MI->getOperand(1).getReg()) &&
+        MI->getOperand(2).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(2).getReg()) &&
+        MI->getOperand(3).isImm() &&
+        MI->getOperand(3).getImm() == 0) {
+      // (L2_ploadrifnew_io IntRegs:$Rd32, PredRegs:$Pt4, IntRegs:$Rs32, 0)
+      AsmString = "if (!$\x02.new) $\x01=memw($\x03)";
+      break;
+    }
+    return false;
+  case Hexagon::L2_ploadrit_io:
+    if (MI->getNumOperands() == 4 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isReg() &&
+        MRI.getRegClass(Hexagon::PredRegsRegClassID).contains(MI->getOperand(1).getReg()) &&
+        MI->getOperand(2).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(2).getReg()) &&
+        MI->getOperand(3).isImm() &&
+        MI->getOperand(3).getImm() == 0) {
+      // (L2_ploadrit_io IntRegs:$Rd32, PredRegs:$Pt4, IntRegs:$Rs32, 0)
+      AsmString = "if ($\x02) $\x01=memw($\x03)";
+      break;
+    }
+    return false;
+  case Hexagon::L2_ploadritnew_io:
+    if (MI->getNumOperands() == 4 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isReg() &&
+        MRI.getRegClass(Hexagon::PredRegsRegClassID).contains(MI->getOperand(1).getReg()) &&
+        MI->getOperand(2).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(2).getReg()) &&
+        MI->getOperand(3).isImm() &&
+        MI->getOperand(3).getImm() == 0) {
+      // (L2_ploadritnew_io IntRegs:$Rd32, PredRegs:$Pt4, IntRegs:$Rs32, 0)
+      AsmString = "if ($\x02.new) $\x01=memw($\x03)";
+      break;
+    }
+    return false;
+  case Hexagon::L2_ploadrubf_io:
+    if (MI->getNumOperands() == 4 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isReg() &&
+        MRI.getRegClass(Hexagon::PredRegsRegClassID).contains(MI->getOperand(1).getReg()) &&
+        MI->getOperand(2).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(2).getReg()) &&
+        MI->getOperand(3).isImm() &&
+        MI->getOperand(3).getImm() == 0) {
+      // (L2_ploadrubf_io IntRegs:$Rd32, PredRegs:$Pt4, IntRegs:$Rs32, 0)
+      AsmString = "if (!$\x02) $\x01=memub($\x03)";
+      break;
+    }
+    return false;
+  case Hexagon::L2_ploadrubfnew_io:
+    if (MI->getNumOperands() == 4 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isReg() &&
+        MRI.getRegClass(Hexagon::PredRegsRegClassID).contains(MI->getOperand(1).getReg()) &&
+        MI->getOperand(2).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(2).getReg()) &&
+        MI->getOperand(3).isImm() &&
+        MI->getOperand(3).getImm() == 0) {
+      // (L2_ploadrubfnew_io IntRegs:$Rd32, PredRegs:$Pt4, IntRegs:$Rs32, 0)
+      AsmString = "if (!$\x02.new) $\x01=memub($\x03)";
+      break;
+    }
+    return false;
+  case Hexagon::L2_ploadrubt_io:
+    if (MI->getNumOperands() == 4 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isReg() &&
+        MRI.getRegClass(Hexagon::PredRegsRegClassID).contains(MI->getOperand(1).getReg()) &&
+        MI->getOperand(2).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(2).getReg()) &&
+        MI->getOperand(3).isImm() &&
+        MI->getOperand(3).getImm() == 0) {
+      // (L2_ploadrubt_io IntRegs:$Rd32, PredRegs:$Pt4, IntRegs:$Rs32, 0)
+      AsmString = "if ($\x02) $\x01=memub($\x03)";
+      break;
+    }
+    return false;
+  case Hexagon::L2_ploadrubtnew_io:
+    if (MI->getNumOperands() == 4 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isReg() &&
+        MRI.getRegClass(Hexagon::PredRegsRegClassID).contains(MI->getOperand(1).getReg()) &&
+        MI->getOperand(2).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(2).getReg()) &&
+        MI->getOperand(3).isImm() &&
+        MI->getOperand(3).getImm() == 0) {
+      // (L2_ploadrubtnew_io IntRegs:$Rd32, PredRegs:$Pt4, IntRegs:$Rs32, 0)
+      AsmString = "if ($\x02.new) $\x01=memub($\x03)";
+      break;
+    }
+    return false;
+  case Hexagon::L2_ploadruhf_io:
+    if (MI->getNumOperands() == 4 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isReg() &&
+        MRI.getRegClass(Hexagon::PredRegsRegClassID).contains(MI->getOperand(1).getReg()) &&
+        MI->getOperand(2).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(2).getReg()) &&
+        MI->getOperand(3).isImm() &&
+        MI->getOperand(3).getImm() == 0) {
+      // (L2_ploadruhf_io IntRegs:$Rd32, PredRegs:$Pt4, IntRegs:$Rs32, 0)
+      AsmString = "if (!$\x02) $\x01=memuh($\x03)";
+      break;
+    }
+    return false;
+  case Hexagon::L2_ploadruhfnew_io:
+    if (MI->getNumOperands() == 4 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isReg() &&
+        MRI.getRegClass(Hexagon::PredRegsRegClassID).contains(MI->getOperand(1).getReg()) &&
+        MI->getOperand(2).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(2).getReg()) &&
+        MI->getOperand(3).isImm() &&
+        MI->getOperand(3).getImm() == 0) {
+      // (L2_ploadruhfnew_io IntRegs:$Rd32, PredRegs:$Pt4, IntRegs:$Rs32, 0)
+      AsmString = "if (!$\x02.new) $\x01=memuh($\x03)";
+      break;
+    }
+    return false;
+  case Hexagon::L2_ploadruht_io:
+    if (MI->getNumOperands() == 4 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isReg() &&
+        MRI.getRegClass(Hexagon::PredRegsRegClassID).contains(MI->getOperand(1).getReg()) &&
+        MI->getOperand(2).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(2).getReg()) &&
+        MI->getOperand(3).isImm() &&
+        MI->getOperand(3).getImm() == 0) {
+      // (L2_ploadruht_io IntRegs:$Rd32, PredRegs:$Pt4, IntRegs:$Rs32, 0)
+      AsmString = "if ($\x02) $\x01=memuh($\x03)";
+      break;
+    }
+    return false;
+  case Hexagon::L2_ploadruhtnew_io:
+    if (MI->getNumOperands() == 4 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isReg() &&
+        MRI.getRegClass(Hexagon::PredRegsRegClassID).contains(MI->getOperand(1).getReg()) &&
+        MI->getOperand(2).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(2).getReg()) &&
+        MI->getOperand(3).isImm() &&
+        MI->getOperand(3).getImm() == 0) {
+      // (L2_ploadruhtnew_io IntRegs:$Rd32, PredRegs:$Pt4, IntRegs:$Rs32, 0)
+      AsmString = "if ($\x02.new) $\x01=memuh($\x03)";
+      break;
+    }
+    return false;
+  case Hexagon::L4_add_memopb_io:
     if (MI->getNumOperands() == 3 &&
         MI->getOperand(0).isReg() &&
         MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
         MI->getOperand(1).isImm() &&
         MI->getOperand(1).getImm() == 0 &&
         MI->getOperand(2).isReg() &&
-        MRI.getRegClass(Hexagon::VectorRegsRegClassID).contains(MI->getOperand(2).getReg())) {
-      // (V6_vS32Ub_ai IntRegs:$Rs, 0, VectorRegs:$Vt)
-      AsmString = "vmemu($\x01)=$\x03";
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(2).getReg())) {
+      // (L4_add_memopb_io IntRegs:$Rs32, 0, IntRegs:$Rt32)
+      AsmString = "memb($\x01)+=$\x03";
       break;
     }
     return false;
-  case Hexagon::V6_vS32Ub_npred_ai:
-    if (MI->getNumOperands() == 4 &&
-        MI->getOperand(0).isReg() &&
-        MRI.getRegClass(Hexagon::PredRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
-        MI->getOperand(1).isReg() &&
-        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(1).getReg()) &&
-        MI->getOperand(2).isImm() &&
-        MI->getOperand(2).getImm() == 0 &&
-        MI->getOperand(3).isReg() &&
-        MRI.getRegClass(Hexagon::VectorRegsRegClassID).contains(MI->getOperand(3).getReg())) {
-      // (V6_vS32Ub_npred_ai PredRegs:$Pv, IntRegs:$Rs, 0, VectorRegs:$Vt)
-      AsmString = "if (!$\x01) vmemu($\x02)=$\x04";
-      break;
-    }
-    return false;
-  case Hexagon::V6_vS32Ub_pred_ai:
-    if (MI->getNumOperands() == 4 &&
-        MI->getOperand(0).isReg() &&
-        MRI.getRegClass(Hexagon::PredRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
-        MI->getOperand(1).isReg() &&
-        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(1).getReg()) &&
-        MI->getOperand(2).isImm() &&
-        MI->getOperand(2).getImm() == 0 &&
-        MI->getOperand(3).isReg() &&
-        MRI.getRegClass(Hexagon::VectorRegsRegClassID).contains(MI->getOperand(3).getReg())) {
-      // (V6_vS32Ub_pred_ai PredRegs:$Pv, IntRegs:$Rs, 0, VectorRegs:$Vt)
-      AsmString = "if ($\x01) vmemu($\x02)=$\x04";
-      break;
-    }
-    return false;
-  case Hexagon::V6_vS32b_ai:
+  case Hexagon::L4_add_memoph_io:
     if (MI->getNumOperands() == 3 &&
         MI->getOperand(0).isReg() &&
         MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
         MI->getOperand(1).isImm() &&
         MI->getOperand(1).getImm() == 0 &&
         MI->getOperand(2).isReg() &&
-        MRI.getRegClass(Hexagon::VectorRegsRegClassID).contains(MI->getOperand(2).getReg())) {
-      // (V6_vS32b_ai IntRegs:$Rs, 0, VectorRegs:$Vt)
-      AsmString = "vmem($\x01)=$\x03";
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(2).getReg())) {
+      // (L4_add_memoph_io IntRegs:$Rs32, 0, IntRegs:$Rt32)
+      AsmString = "memh($\x01)+=$\x03";
       break;
     }
     return false;
-  case Hexagon::V6_vS32b_new_ai:
+  case Hexagon::L4_add_memopw_io:
     if (MI->getNumOperands() == 3 &&
         MI->getOperand(0).isReg() &&
         MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
         MI->getOperand(1).isImm() &&
         MI->getOperand(1).getImm() == 0 &&
         MI->getOperand(2).isReg() &&
-        MRI.getRegClass(Hexagon::VectorRegsRegClassID).contains(MI->getOperand(2).getReg())) {
-      // (V6_vS32b_new_ai IntRegs:$Rs, 0, VectorRegs:$Vt)
-      AsmString = "vmem($\x01)=$\x03.new";
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(2).getReg())) {
+      // (L4_add_memopw_io IntRegs:$Rs32, 0, IntRegs:$Rt32)
+      AsmString = "memw($\x01)+=$\x03";
       break;
     }
     return false;
-  case Hexagon::V6_vS32b_npred_ai:
-    if (MI->getNumOperands() == 4 &&
-        MI->getOperand(0).isReg() &&
-        MRI.getRegClass(Hexagon::PredRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
-        MI->getOperand(1).isReg() &&
-        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(1).getReg()) &&
-        MI->getOperand(2).isImm() &&
-        MI->getOperand(2).getImm() == 0 &&
-        MI->getOperand(3).isReg() &&
-        MRI.getRegClass(Hexagon::VectorRegsRegClassID).contains(MI->getOperand(3).getReg())) {
-      // (V6_vS32b_npred_ai PredRegs:$Pv, IntRegs:$Rs, 0, VectorRegs:$Vt)
-      AsmString = "if (!$\x01) vmem($\x02)=$\x04";
-      break;
-    }
-    return false;
-  case Hexagon::V6_vS32b_nqpred_ai:
-    if (MI->getNumOperands() == 4 &&
-        MI->getOperand(0).isReg() &&
-        MRI.getRegClass(Hexagon::VecPredRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
-        MI->getOperand(1).isReg() &&
-        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(1).getReg()) &&
-        MI->getOperand(2).isImm() &&
-        MI->getOperand(2).getImm() == 0 &&
-        MI->getOperand(3).isReg() &&
-        MRI.getRegClass(Hexagon::VectorRegsRegClassID).contains(MI->getOperand(3).getReg())) {
-      // (V6_vS32b_nqpred_ai VecPredRegs:$Qv, IntRegs:$Rs, 0, VectorRegs:$Vt)
-      AsmString = "if (!$\x01) vmem($\x02)=$\x04";
-      break;
-    }
-    return false;
-  case Hexagon::V6_vS32b_nt_ai:
+  case Hexagon::L4_and_memopb_io:
     if (MI->getNumOperands() == 3 &&
         MI->getOperand(0).isReg() &&
         MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
         MI->getOperand(1).isImm() &&
         MI->getOperand(1).getImm() == 0 &&
         MI->getOperand(2).isReg() &&
-        MRI.getRegClass(Hexagon::VectorRegsRegClassID).contains(MI->getOperand(2).getReg())) {
-      // (V6_vS32b_nt_ai IntRegs:$Rs, 0, VectorRegs:$Vt)
-      AsmString = "vmem($\x01):nt=$\x03";
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(2).getReg())) {
+      // (L4_and_memopb_io IntRegs:$Rs32, 0, IntRegs:$Rt32)
+      AsmString = "memb($\x01)&=$\x03";
       break;
     }
     return false;
-  case Hexagon::V6_vS32b_nt_new_ai:
+  case Hexagon::L4_and_memoph_io:
     if (MI->getNumOperands() == 3 &&
         MI->getOperand(0).isReg() &&
         MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
         MI->getOperand(1).isImm() &&
         MI->getOperand(1).getImm() == 0 &&
         MI->getOperand(2).isReg() &&
-        MRI.getRegClass(Hexagon::VectorRegsRegClassID).contains(MI->getOperand(2).getReg())) {
-      // (V6_vS32b_nt_new_ai IntRegs:$Rs, 0, VectorRegs:$Vt)
-      AsmString = "vmem($\x01):nt=$\x03.new";
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(2).getReg())) {
+      // (L4_and_memoph_io IntRegs:$Rs32, 0, IntRegs:$Rt32)
+      AsmString = "memh($\x01)&=$\x03";
       break;
     }
     return false;
-  case Hexagon::V6_vS32b_nt_npred_ai:
-    if (MI->getNumOperands() == 4 &&
-        MI->getOperand(0).isReg() &&
-        MRI.getRegClass(Hexagon::PredRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
-        MI->getOperand(1).isReg() &&
-        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(1).getReg()) &&
-        MI->getOperand(2).isImm() &&
-        MI->getOperand(2).getImm() == 0 &&
-        MI->getOperand(3).isReg() &&
-        MRI.getRegClass(Hexagon::VectorRegsRegClassID).contains(MI->getOperand(3).getReg())) {
-      // (V6_vS32b_nt_npred_ai PredRegs:$Pv, IntRegs:$Rs, 0, VectorRegs:$Vt)
-      AsmString = "if (!$\x01) vmem($\x02):nt=$\x04";
-      break;
-    }
-    return false;
-  case Hexagon::V6_vS32b_nt_nqpred_ai:
-    if (MI->getNumOperands() == 4 &&
-        MI->getOperand(0).isReg() &&
-        MRI.getRegClass(Hexagon::VecPredRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
-        MI->getOperand(1).isReg() &&
-        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(1).getReg()) &&
-        MI->getOperand(2).isImm() &&
-        MI->getOperand(2).getImm() == 0 &&
-        MI->getOperand(3).isReg() &&
-        MRI.getRegClass(Hexagon::VectorRegsRegClassID).contains(MI->getOperand(3).getReg())) {
-      // (V6_vS32b_nt_nqpred_ai VecPredRegs:$Qv, IntRegs:$Rs, 0, VectorRegs:$Vt)
-      AsmString = "if (!$\x01) vmem($\x02):nt=$\x04";
-      break;
-    }
-    return false;
-  case Hexagon::V6_vS32b_nt_pred_ai:
-    if (MI->getNumOperands() == 4 &&
-        MI->getOperand(0).isReg() &&
-        MRI.getRegClass(Hexagon::PredRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
-        MI->getOperand(1).isReg() &&
-        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(1).getReg()) &&
-        MI->getOperand(2).isImm() &&
-        MI->getOperand(2).getImm() == 0 &&
-        MI->getOperand(3).isReg() &&
-        MRI.getRegClass(Hexagon::VectorRegsRegClassID).contains(MI->getOperand(3).getReg())) {
-      // (V6_vS32b_nt_pred_ai PredRegs:$Pv, IntRegs:$Rs, 0, VectorRegs:$Vt)
-      AsmString = "if ($\x01) vmem($\x02):nt=$\x04";
-      break;
-    }
-    return false;
-  case Hexagon::V6_vS32b_nt_qpred_ai:
-    if (MI->getNumOperands() == 4 &&
-        MI->getOperand(0).isReg() &&
-        MRI.getRegClass(Hexagon::VecPredRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
-        MI->getOperand(1).isReg() &&
-        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(1).getReg()) &&
-        MI->getOperand(2).isImm() &&
-        MI->getOperand(2).getImm() == 0 &&
-        MI->getOperand(3).isReg() &&
-        MRI.getRegClass(Hexagon::VectorRegsRegClassID).contains(MI->getOperand(3).getReg())) {
-      // (V6_vS32b_nt_qpred_ai VecPredRegs:$Qv, IntRegs:$Rs, 0, VectorRegs:$Vt)
-      AsmString = "if ($\x01) vmem($\x02):nt=$\x04";
-      break;
-    }
-    return false;
-  case Hexagon::V6_vS32b_pred_ai:
-    if (MI->getNumOperands() == 4 &&
-        MI->getOperand(0).isReg() &&
-        MRI.getRegClass(Hexagon::PredRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
-        MI->getOperand(1).isReg() &&
-        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(1).getReg()) &&
-        MI->getOperand(2).isImm() &&
-        MI->getOperand(2).getImm() == 0 &&
-        MI->getOperand(3).isReg() &&
-        MRI.getRegClass(Hexagon::VectorRegsRegClassID).contains(MI->getOperand(3).getReg())) {
-      // (V6_vS32b_pred_ai PredRegs:$Pv, IntRegs:$Rs, 0, VectorRegs:$Vt)
-      AsmString = "if ($\x01) vmem($\x02)=$\x04";
-      break;
-    }
-    return false;
-  case Hexagon::V6_vS32b_qpred_ai:
-    if (MI->getNumOperands() == 4 &&
-        MI->getOperand(0).isReg() &&
-        MRI.getRegClass(Hexagon::VecPredRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
-        MI->getOperand(1).isReg() &&
-        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(1).getReg()) &&
-        MI->getOperand(2).isImm() &&
-        MI->getOperand(2).getImm() == 0 &&
-        MI->getOperand(3).isReg() &&
-        MRI.getRegClass(Hexagon::VectorRegsRegClassID).contains(MI->getOperand(3).getReg())) {
-      // (V6_vS32b_qpred_ai VecPredRegs:$Qv, IntRegs:$Rs, 0, VectorRegs:$Vt)
-      AsmString = "if ($\x01) vmem($\x02)=$\x04";
-      break;
-    }
-    return false;
-  case Hexagon::V6_vsubw_dv:
+  case Hexagon::L4_and_memopw_io:
     if (MI->getNumOperands() == 3 &&
         MI->getOperand(0).isReg() &&
-        MRI.getRegClass(Hexagon::VecDblRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
-        MI->getOperand(1).isReg() &&
-        MI->getOperand(1).getReg() == MI->getOperand(0).getReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isImm() &&
+        MI->getOperand(1).getImm() == 0 &&
         MI->getOperand(2).isReg() &&
-        MI->getOperand(2).getReg() == MI->getOperand(0).getReg()) {
-      // (V6_vsubw_dv VecDblRegs:$Vdd, VecDblRegs:$Vdd, VecDblRegs:$Vdd)
-      AsmString = "$\x01 = #0";
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(2).getReg())) {
+      // (L4_and_memopw_io IntRegs:$Rs32, 0, IntRegs:$Rt32)
+      AsmString = "memw($\x01)&=$\x03";
       break;
     }
     return false;
-  case Hexagon::V6_vxor:
+  case Hexagon::L4_iadd_memopb_io:
     if (MI->getNumOperands() == 3 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isImm() &&
+        MI->getOperand(1).getImm() == 0) {
+      // (L4_iadd_memopb_io IntRegs:$Rs32, 0, u5_0Imm:$II)
+      AsmString = "memb($\x01)+=#$\x03";
+      break;
+    }
+    return false;
+  case Hexagon::L4_iadd_memoph_io:
+    if (MI->getNumOperands() == 3 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isImm() &&
+        MI->getOperand(1).getImm() == 0) {
+      // (L4_iadd_memoph_io IntRegs:$Rs32, 0, u5_0Imm:$II)
+      AsmString = "memh($\x01)+=#$\x03";
+      break;
+    }
+    return false;
+  case Hexagon::L4_iadd_memopw_io:
+    if (MI->getNumOperands() == 3 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isImm() &&
+        MI->getOperand(1).getImm() == 0) {
+      // (L4_iadd_memopw_io IntRegs:$Rs32, 0, u5_0Imm:$II)
+      AsmString = "memw($\x01)+=#$\x03";
+      break;
+    }
+    return false;
+  case Hexagon::L4_iand_memopb_io:
+    if (MI->getNumOperands() == 3 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isImm() &&
+        MI->getOperand(1).getImm() == 0) {
+      // (L4_iand_memopb_io IntRegs:$Rs32, 0, u5_0Imm:$II)
+      AsmString = "memb($\x01)=clrbit(#$\x03)";
+      break;
+    }
+    return false;
+  case Hexagon::L4_iand_memoph_io:
+    if (MI->getNumOperands() == 3 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isImm() &&
+        MI->getOperand(1).getImm() == 0) {
+      // (L4_iand_memoph_io IntRegs:$Rs32, 0, u5_0Imm:$II)
+      AsmString = "memh($\x01)=clrbit(#$\x03)";
+      break;
+    }
+    return false;
+  case Hexagon::L4_iand_memopw_io:
+    if (MI->getNumOperands() == 3 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isImm() &&
+        MI->getOperand(1).getImm() == 0) {
+      // (L4_iand_memopw_io IntRegs:$Rs32, 0, u5_0Imm:$II)
+      AsmString = "memw($\x01)=clrbit(#$\x03)";
+      break;
+    }
+    return false;
+  case Hexagon::L4_ior_memopb_io:
+    if (MI->getNumOperands() == 3 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isImm() &&
+        MI->getOperand(1).getImm() == 0) {
+      // (L4_ior_memopb_io IntRegs:$Rs32, 0, u5_0Imm:$II)
+      AsmString = "memb($\x01)=setbit(#$\x03)";
+      break;
+    }
+    return false;
+  case Hexagon::L4_ior_memoph_io:
+    if (MI->getNumOperands() == 3 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isImm() &&
+        MI->getOperand(1).getImm() == 0) {
+      // (L4_ior_memoph_io IntRegs:$Rs32, 0, u5_0Imm:$II)
+      AsmString = "memh($\x01)=setbit(#$\x03)";
+      break;
+    }
+    return false;
+  case Hexagon::L4_ior_memopw_io:
+    if (MI->getNumOperands() == 3 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isImm() &&
+        MI->getOperand(1).getImm() == 0) {
+      // (L4_ior_memopw_io IntRegs:$Rs32, 0, u5_0Imm:$II)
+      AsmString = "memw($\x01)=setbit(#$\x03)";
+      break;
+    }
+    return false;
+  case Hexagon::L4_isub_memopb_io:
+    if (MI->getNumOperands() == 3 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isImm() &&
+        MI->getOperand(1).getImm() == 0) {
+      // (L4_isub_memopb_io IntRegs:$Rs32, 0, u5_0Imm:$II)
+      AsmString = "memb($\x01)-=#$\x03";
+      break;
+    }
+    return false;
+  case Hexagon::L4_isub_memoph_io:
+    if (MI->getNumOperands() == 3 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isImm() &&
+        MI->getOperand(1).getImm() == 0) {
+      // (L4_isub_memoph_io IntRegs:$Rs32, 0, u5_0Imm:$II)
+      AsmString = "memh($\x01)-=#$\x03";
+      break;
+    }
+    return false;
+  case Hexagon::L4_isub_memopw_io:
+    if (MI->getNumOperands() == 3 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isImm() &&
+        MI->getOperand(1).getImm() == 0) {
+      // (L4_isub_memopw_io IntRegs:$Rs32, 0, u5_0Imm:$II)
+      AsmString = "memw($\x01)-=#$\x03";
+      break;
+    }
+    return false;
+  case Hexagon::L4_or_memopb_io:
+    if (MI->getNumOperands() == 3 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isImm() &&
+        MI->getOperand(1).getImm() == 0 &&
+        MI->getOperand(2).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(2).getReg())) {
+      // (L4_or_memopb_io IntRegs:$Rs32, 0, IntRegs:$Rt32)
+      AsmString = "memb($\x01)|=$\x03";
+      break;
+    }
+    return false;
+  case Hexagon::L4_or_memoph_io:
+    if (MI->getNumOperands() == 3 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isImm() &&
+        MI->getOperand(1).getImm() == 0 &&
+        MI->getOperand(2).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(2).getReg())) {
+      // (L4_or_memoph_io IntRegs:$Rs32, 0, IntRegs:$Rt32)
+      AsmString = "memh($\x01)|=$\x03";
+      break;
+    }
+    return false;
+  case Hexagon::L4_or_memopw_io:
+    if (MI->getNumOperands() == 3 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isImm() &&
+        MI->getOperand(1).getImm() == 0 &&
+        MI->getOperand(2).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(2).getReg())) {
+      // (L4_or_memopw_io IntRegs:$Rs32, 0, IntRegs:$Rt32)
+      AsmString = "memw($\x01)|=$\x03";
+      break;
+    }
+    return false;
+  case Hexagon::L4_sub_memopb_io:
+    if (MI->getNumOperands() == 3 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isImm() &&
+        MI->getOperand(1).getImm() == 0 &&
+        MI->getOperand(2).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(2).getReg())) {
+      // (L4_sub_memopb_io IntRegs:$Rs32, 0, IntRegs:$Rt32)
+      AsmString = "memb($\x01)-=$\x03";
+      break;
+    }
+    return false;
+  case Hexagon::L4_sub_memoph_io:
+    if (MI->getNumOperands() == 3 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isImm() &&
+        MI->getOperand(1).getImm() == 0 &&
+        MI->getOperand(2).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(2).getReg())) {
+      // (L4_sub_memoph_io IntRegs:$Rs32, 0, IntRegs:$Rt32)
+      AsmString = "memh($\x01)-=$\x03";
+      break;
+    }
+    return false;
+  case Hexagon::L4_sub_memopw_io:
+    if (MI->getNumOperands() == 3 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isImm() &&
+        MI->getOperand(1).getImm() == 0 &&
+        MI->getOperand(2).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(2).getReg())) {
+      // (L4_sub_memopw_io IntRegs:$Rs32, 0, IntRegs:$Rt32)
+      AsmString = "memw($\x01)-=$\x03";
+      break;
+    }
+    return false;
+  case Hexagon::M2_mpyi:
+    if (MI->getNumOperands() == 3 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(1).getReg()) &&
+        MI->getOperand(2).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(2).getReg())) {
+      // (M2_mpyi IntRegs:$Rd32, IntRegs:$Rs32, IntRegs:$Rt32)
+      AsmString = "$\x01=mpyui($\x02,$\x03)";
+      break;
+    }
+    return false;
+  case Hexagon::S2_pstorerbf_io:
+    if (MI->getNumOperands() == 4 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::PredRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(1).getReg()) &&
+        MI->getOperand(2).isImm() &&
+        MI->getOperand(2).getImm() == 0 &&
+        MI->getOperand(3).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(3).getReg())) {
+      // (S2_pstorerbf_io PredRegs:$Pv4, IntRegs:$Rs32, 0, IntRegs:$Rt32)
+      AsmString = "if (!$\x01) memb($\x02)=$\x04";
+      break;
+    }
+    return false;
+  case Hexagon::S2_pstorerbnewf_io:
+    if (MI->getNumOperands() == 4 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::PredRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(1).getReg()) &&
+        MI->getOperand(2).isImm() &&
+        MI->getOperand(2).getImm() == 0 &&
+        MI->getOperand(3).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(3).getReg())) {
+      // (S2_pstorerbnewf_io PredRegs:$Pv4, IntRegs:$Rs32, 0, IntRegs:$Nt8)
+      AsmString = "if (!$\x01) memb($\x02)=$\x04.new";
+      break;
+    }
+    return false;
+  case Hexagon::S2_pstorerbnewt_io:
+    if (MI->getNumOperands() == 4 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::PredRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(1).getReg()) &&
+        MI->getOperand(2).isImm() &&
+        MI->getOperand(2).getImm() == 0 &&
+        MI->getOperand(3).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(3).getReg())) {
+      // (S2_pstorerbnewt_io PredRegs:$Pv4, IntRegs:$Rs32, 0, IntRegs:$Nt8)
+      AsmString = "if ($\x01) memb($\x02)=$\x04.new";
+      break;
+    }
+    return false;
+  case Hexagon::S2_pstorerbt_io:
+    if (MI->getNumOperands() == 4 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::PredRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(1).getReg()) &&
+        MI->getOperand(2).isImm() &&
+        MI->getOperand(2).getImm() == 0 &&
+        MI->getOperand(3).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(3).getReg())) {
+      // (S2_pstorerbt_io PredRegs:$Pv4, IntRegs:$Rs32, 0, IntRegs:$Rt32)
+      AsmString = "if ($\x01) memb($\x02)=$\x04";
+      break;
+    }
+    return false;
+  case Hexagon::S2_pstorerdf_io:
+    if (MI->getNumOperands() == 4 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::PredRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(1).getReg()) &&
+        MI->getOperand(2).isImm() &&
+        MI->getOperand(2).getImm() == 0 &&
+        MI->getOperand(3).isReg() &&
+        MRI.getRegClass(Hexagon::DoubleRegsRegClassID).contains(MI->getOperand(3).getReg())) {
+      // (S2_pstorerdf_io PredRegs:$Pv4, IntRegs:$Rs32, 0, DoubleRegs:$Rtt32)
+      AsmString = "if (!$\x01) memd($\x02)=$\x04";
+      break;
+    }
+    return false;
+  case Hexagon::S2_pstorerdt_io:
+    if (MI->getNumOperands() == 4 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::PredRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(1).getReg()) &&
+        MI->getOperand(2).isImm() &&
+        MI->getOperand(2).getImm() == 0 &&
+        MI->getOperand(3).isReg() &&
+        MRI.getRegClass(Hexagon::DoubleRegsRegClassID).contains(MI->getOperand(3).getReg())) {
+      // (S2_pstorerdt_io PredRegs:$Pv4, IntRegs:$Rs32, 0, DoubleRegs:$Rtt32)
+      AsmString = "if ($\x01) memd($\x02)=$\x04";
+      break;
+    }
+    return false;
+  case Hexagon::S2_pstorerff_io:
+    if (MI->getNumOperands() == 4 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::PredRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(1).getReg()) &&
+        MI->getOperand(2).isImm() &&
+        MI->getOperand(2).getImm() == 0 &&
+        MI->getOperand(3).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(3).getReg())) {
+      // (S2_pstorerff_io PredRegs:$Pv4, IntRegs:$Rs32, 0, IntRegs:$Rt32)
+      AsmString = "if (!$\x01) memh($\x02)=$\x04.h";
+      break;
+    }
+    return false;
+  case Hexagon::S2_pstorerft_io:
+    if (MI->getNumOperands() == 4 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::PredRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(1).getReg()) &&
+        MI->getOperand(2).isImm() &&
+        MI->getOperand(2).getImm() == 0 &&
+        MI->getOperand(3).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(3).getReg())) {
+      // (S2_pstorerft_io PredRegs:$Pv4, IntRegs:$Rs32, 0, IntRegs:$Rt32)
+      AsmString = "if ($\x01) memh($\x02)=$\x04.h";
+      break;
+    }
+    return false;
+  case Hexagon::S2_pstorerhf_io:
+    if (MI->getNumOperands() == 4 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::PredRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(1).getReg()) &&
+        MI->getOperand(2).isImm() &&
+        MI->getOperand(2).getImm() == 0 &&
+        MI->getOperand(3).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(3).getReg())) {
+      // (S2_pstorerhf_io PredRegs:$Pv4, IntRegs:$Rs32, 0, IntRegs:$Rt32)
+      AsmString = "if (!$\x01) memh($\x02)=$\x04";
+      break;
+    }
+    return false;
+  case Hexagon::S2_pstorerhnewf_io:
+    if (MI->getNumOperands() == 4 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::PredRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(1).getReg()) &&
+        MI->getOperand(2).isImm() &&
+        MI->getOperand(2).getImm() == 0 &&
+        MI->getOperand(3).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(3).getReg())) {
+      // (S2_pstorerhnewf_io PredRegs:$Pv4, IntRegs:$Rs32, 0, IntRegs:$Nt8)
+      AsmString = "if (!$\x01) memh($\x02)=$\x04.new";
+      break;
+    }
+    return false;
+  case Hexagon::S2_pstorerhnewt_io:
+    if (MI->getNumOperands() == 4 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::PredRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(1).getReg()) &&
+        MI->getOperand(2).isImm() &&
+        MI->getOperand(2).getImm() == 0 &&
+        MI->getOperand(3).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(3).getReg())) {
+      // (S2_pstorerhnewt_io PredRegs:$Pv4, IntRegs:$Rs32, 0, IntRegs:$Nt8)
+      AsmString = "if ($\x01) memh($\x02)=$\x04.new";
+      break;
+    }
+    return false;
+  case Hexagon::S2_pstorerht_io:
+    if (MI->getNumOperands() == 4 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::PredRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(1).getReg()) &&
+        MI->getOperand(2).isImm() &&
+        MI->getOperand(2).getImm() == 0 &&
+        MI->getOperand(3).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(3).getReg())) {
+      // (S2_pstorerht_io PredRegs:$Pv4, IntRegs:$Rs32, 0, IntRegs:$Rt32)
+      AsmString = "if ($\x01) memh($\x02)=$\x04";
+      break;
+    }
+    return false;
+  case Hexagon::S2_pstorerif_io:
+    if (MI->getNumOperands() == 4 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::PredRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(1).getReg()) &&
+        MI->getOperand(2).isImm() &&
+        MI->getOperand(2).getImm() == 0 &&
+        MI->getOperand(3).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(3).getReg())) {
+      // (S2_pstorerif_io PredRegs:$Pv4, IntRegs:$Rs32, 0, IntRegs:$Rt32)
+      AsmString = "if (!$\x01) memw($\x02)=$\x04";
+      break;
+    }
+    return false;
+  case Hexagon::S2_pstorerinewf_io:
+    if (MI->getNumOperands() == 4 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::PredRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(1).getReg()) &&
+        MI->getOperand(2).isImm() &&
+        MI->getOperand(2).getImm() == 0 &&
+        MI->getOperand(3).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(3).getReg())) {
+      // (S2_pstorerinewf_io PredRegs:$Pv4, IntRegs:$Rs32, 0, IntRegs:$Nt8)
+      AsmString = "if (!$\x01) memw($\x02)=$\x04.new";
+      break;
+    }
+    return false;
+  case Hexagon::S2_pstorerinewt_io:
+    if (MI->getNumOperands() == 4 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::PredRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(1).getReg()) &&
+        MI->getOperand(2).isImm() &&
+        MI->getOperand(2).getImm() == 0 &&
+        MI->getOperand(3).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(3).getReg())) {
+      // (S2_pstorerinewt_io PredRegs:$Pv4, IntRegs:$Rs32, 0, IntRegs:$Nt8)
+      AsmString = "if ($\x01) memw($\x02)=$\x04.new";
+      break;
+    }
+    return false;
+  case Hexagon::S2_pstorerit_io:
+    if (MI->getNumOperands() == 4 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::PredRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(1).getReg()) &&
+        MI->getOperand(2).isImm() &&
+        MI->getOperand(2).getImm() == 0 &&
+        MI->getOperand(3).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(3).getReg())) {
+      // (S2_pstorerit_io PredRegs:$Pv4, IntRegs:$Rs32, 0, IntRegs:$Rt32)
+      AsmString = "if ($\x01) memw($\x02)=$\x04";
+      break;
+    }
+    return false;
+  case Hexagon::S2_storerb_io:
+    if (MI->getNumOperands() == 3 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isImm() &&
+        MI->getOperand(1).getImm() == 0 &&
+        MI->getOperand(2).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(2).getReg())) {
+      // (S2_storerb_io IntRegs:$Rs32, 0, IntRegs:$Rt32)
+      AsmString = "memb($\x01)=$\x03";
+      break;
+    }
+    return false;
+  case Hexagon::S2_storerbnew_io:
+    if (MI->getNumOperands() == 3 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isImm() &&
+        MI->getOperand(1).getImm() == 0 &&
+        MI->getOperand(2).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(2).getReg())) {
+      // (S2_storerbnew_io IntRegs:$Rs32, 0, IntRegs:$Nt8)
+      AsmString = "memb($\x01)=$\x03.new";
+      break;
+    }
+    return false;
+  case Hexagon::S2_storerd_io:
+    if (MI->getNumOperands() == 3 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isImm() &&
+        MI->getOperand(1).getImm() == 0 &&
+        MI->getOperand(2).isReg() &&
+        MRI.getRegClass(Hexagon::DoubleRegsRegClassID).contains(MI->getOperand(2).getReg())) {
+      // (S2_storerd_io IntRegs:$Rs32, 0, DoubleRegs:$Rtt32)
+      AsmString = "memd($\x01)=$\x03";
+      break;
+    }
+    return false;
+  case Hexagon::S2_storerf_io:
+    if (MI->getNumOperands() == 3 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isImm() &&
+        MI->getOperand(1).getImm() == 0 &&
+        MI->getOperand(2).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(2).getReg())) {
+      // (S2_storerf_io IntRegs:$Rs32, 0, IntRegs:$Rt32)
+      AsmString = "memh($\x01)=$\x03.h";
+      break;
+    }
+    return false;
+  case Hexagon::S2_storerh_io:
+    if (MI->getNumOperands() == 3 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isImm() &&
+        MI->getOperand(1).getImm() == 0 &&
+        MI->getOperand(2).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(2).getReg())) {
+      // (S2_storerh_io IntRegs:$Rs32, 0, IntRegs:$Rt32)
+      AsmString = "memh($\x01)=$\x03";
+      break;
+    }
+    return false;
+  case Hexagon::S2_storerhnew_io:
+    if (MI->getNumOperands() == 3 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isImm() &&
+        MI->getOperand(1).getImm() == 0 &&
+        MI->getOperand(2).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(2).getReg())) {
+      // (S2_storerhnew_io IntRegs:$Rs32, 0, IntRegs:$Nt8)
+      AsmString = "memh($\x01)=$\x03.new";
+      break;
+    }
+    return false;
+  case Hexagon::S2_storeri_io:
+    if (MI->getNumOperands() == 3 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isImm() &&
+        MI->getOperand(1).getImm() == 0 &&
+        MI->getOperand(2).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(2).getReg())) {
+      // (S2_storeri_io IntRegs:$Rs32, 0, IntRegs:$Rt32)
+      AsmString = "memw($\x01)=$\x03";
+      break;
+    }
+    return false;
+  case Hexagon::S2_storerinew_io:
+    if (MI->getNumOperands() == 3 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isImm() &&
+        MI->getOperand(1).getImm() == 0 &&
+        MI->getOperand(2).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(2).getReg())) {
+      // (S2_storerinew_io IntRegs:$Rs32, 0, IntRegs:$Nt8)
+      AsmString = "memw($\x01)=$\x03.new";
+      break;
+    }
+    return false;
+  case Hexagon::S2_tableidxb:
+    if (MI->getNumOperands() == 4 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(1).getReg())) {
+      // (S2_tableidxb IntRegs:$Rx32, IntRegs:$Rs32, u4_0Imm:$Ii, u5_0Imm:$II)
+      AsmString = "$\x01=tableidxb($\x02,#$\x03,#$\x04)";
+      break;
+    }
+    return false;
+  case Hexagon::S4_pstorerbfnew_io:
+    if (MI->getNumOperands() == 4 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::PredRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(1).getReg()) &&
+        MI->getOperand(2).isImm() &&
+        MI->getOperand(2).getImm() == 0 &&
+        MI->getOperand(3).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(3).getReg())) {
+      // (S4_pstorerbfnew_io PredRegs:$Pv4, IntRegs:$Rs32, 0, IntRegs:$Rt32)
+      AsmString = "if (!$\x01.new) memb($\x02)=$\x04";
+      break;
+    }
+    return false;
+  case Hexagon::S4_pstorerbnewfnew_io:
+    if (MI->getNumOperands() == 4 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::PredRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(1).getReg()) &&
+        MI->getOperand(2).isImm() &&
+        MI->getOperand(2).getImm() == 0 &&
+        MI->getOperand(3).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(3).getReg())) {
+      // (S4_pstorerbnewfnew_io PredRegs:$Pv4, IntRegs:$Rs32, 0, IntRegs:$Nt8)
+      AsmString = "if (!$\x01.new) memb($\x02)=$\x04.new";
+      break;
+    }
+    return false;
+  case Hexagon::S4_pstorerbnewtnew_io:
+    if (MI->getNumOperands() == 4 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::PredRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(1).getReg()) &&
+        MI->getOperand(2).isImm() &&
+        MI->getOperand(2).getImm() == 0 &&
+        MI->getOperand(3).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(3).getReg())) {
+      // (S4_pstorerbnewtnew_io PredRegs:$Pv4, IntRegs:$Rs32, 0, IntRegs:$Nt8)
+      AsmString = "if ($\x01.new) memb($\x02)=$\x04.new";
+      break;
+    }
+    return false;
+  case Hexagon::S4_pstorerbtnew_io:
+    if (MI->getNumOperands() == 4 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::PredRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(1).getReg()) &&
+        MI->getOperand(2).isImm() &&
+        MI->getOperand(2).getImm() == 0 &&
+        MI->getOperand(3).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(3).getReg())) {
+      // (S4_pstorerbtnew_io PredRegs:$Pv4, IntRegs:$Rs32, 0, IntRegs:$Rt32)
+      AsmString = "if ($\x01.new) memb($\x02)=$\x04";
+      break;
+    }
+    return false;
+  case Hexagon::S4_pstorerdfnew_io:
+    if (MI->getNumOperands() == 4 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::PredRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(1).getReg()) &&
+        MI->getOperand(2).isImm() &&
+        MI->getOperand(2).getImm() == 0 &&
+        MI->getOperand(3).isReg() &&
+        MRI.getRegClass(Hexagon::DoubleRegsRegClassID).contains(MI->getOperand(3).getReg())) {
+      // (S4_pstorerdfnew_io PredRegs:$Pv4, IntRegs:$Rs32, 0, DoubleRegs:$Rtt32)
+      AsmString = "if (!$\x01.new) memd($\x02)=$\x04";
+      break;
+    }
+    return false;
+  case Hexagon::S4_pstorerdtnew_io:
+    if (MI->getNumOperands() == 4 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::PredRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(1).getReg()) &&
+        MI->getOperand(2).isImm() &&
+        MI->getOperand(2).getImm() == 0 &&
+        MI->getOperand(3).isReg() &&
+        MRI.getRegClass(Hexagon::DoubleRegsRegClassID).contains(MI->getOperand(3).getReg())) {
+      // (S4_pstorerdtnew_io PredRegs:$Pv4, IntRegs:$Rs32, 0, DoubleRegs:$Rtt32)
+      AsmString = "if ($\x01.new) memd($\x02)=$\x04";
+      break;
+    }
+    return false;
+  case Hexagon::S4_pstorerffnew_io:
+    if (MI->getNumOperands() == 4 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::PredRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(1).getReg()) &&
+        MI->getOperand(2).isImm() &&
+        MI->getOperand(2).getImm() == 0 &&
+        MI->getOperand(3).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(3).getReg())) {
+      // (S4_pstorerffnew_io PredRegs:$Pv4, IntRegs:$Rs32, 0, IntRegs:$Rt32)
+      AsmString = "if (!$\x01.new) memh($\x02)=$\x04.h";
+      break;
+    }
+    return false;
+  case Hexagon::S4_pstorerftnew_io:
+    if (MI->getNumOperands() == 4 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::PredRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(1).getReg()) &&
+        MI->getOperand(2).isImm() &&
+        MI->getOperand(2).getImm() == 0 &&
+        MI->getOperand(3).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(3).getReg())) {
+      // (S4_pstorerftnew_io PredRegs:$Pv4, IntRegs:$Rs32, 0, IntRegs:$Rt32)
+      AsmString = "if ($\x01.new) memh($\x02)=$\x04.h";
+      break;
+    }
+    return false;
+  case Hexagon::S4_pstorerhfnew_io:
+    if (MI->getNumOperands() == 4 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::PredRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(1).getReg()) &&
+        MI->getOperand(2).isImm() &&
+        MI->getOperand(2).getImm() == 0 &&
+        MI->getOperand(3).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(3).getReg())) {
+      // (S4_pstorerhfnew_io PredRegs:$Pv4, IntRegs:$Rs32, 0, IntRegs:$Rt32)
+      AsmString = "if (!$\x01.new) memh($\x02)=$\x04";
+      break;
+    }
+    return false;
+  case Hexagon::S4_pstorerhnewfnew_io:
+    if (MI->getNumOperands() == 4 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::PredRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(1).getReg()) &&
+        MI->getOperand(2).isImm() &&
+        MI->getOperand(2).getImm() == 0 &&
+        MI->getOperand(3).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(3).getReg())) {
+      // (S4_pstorerhnewfnew_io PredRegs:$Pv4, IntRegs:$Rs32, 0, IntRegs:$Nt8)
+      AsmString = "if (!$\x01.new) memh($\x02)=$\x04.new";
+      break;
+    }
+    return false;
+  case Hexagon::S4_pstorerhnewtnew_io:
+    if (MI->getNumOperands() == 4 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::PredRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(1).getReg()) &&
+        MI->getOperand(2).isImm() &&
+        MI->getOperand(2).getImm() == 0 &&
+        MI->getOperand(3).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(3).getReg())) {
+      // (S4_pstorerhnewtnew_io PredRegs:$Pv4, IntRegs:$Rs32, 0, IntRegs:$Nt8)
+      AsmString = "if ($\x01.new) memh($\x02)=$\x04.new";
+      break;
+    }
+    return false;
+  case Hexagon::S4_pstorerhtnew_io:
+    if (MI->getNumOperands() == 4 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::PredRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(1).getReg()) &&
+        MI->getOperand(2).isImm() &&
+        MI->getOperand(2).getImm() == 0 &&
+        MI->getOperand(3).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(3).getReg())) {
+      // (S4_pstorerhtnew_io PredRegs:$Pv4, IntRegs:$Rs32, 0, IntRegs:$Rt32)
+      AsmString = "if ($\x01.new) memh($\x02)=$\x04";
+      break;
+    }
+    return false;
+  case Hexagon::S4_pstorerifnew_io:
+    if (MI->getNumOperands() == 4 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::PredRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(1).getReg()) &&
+        MI->getOperand(2).isImm() &&
+        MI->getOperand(2).getImm() == 0 &&
+        MI->getOperand(3).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(3).getReg())) {
+      // (S4_pstorerifnew_io PredRegs:$Pv4, IntRegs:$Rs32, 0, IntRegs:$Rt32)
+      AsmString = "if (!$\x01.new) memw($\x02)=$\x04";
+      break;
+    }
+    return false;
+  case Hexagon::S4_pstorerinewfnew_io:
+    if (MI->getNumOperands() == 4 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::PredRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(1).getReg()) &&
+        MI->getOperand(2).isImm() &&
+        MI->getOperand(2).getImm() == 0 &&
+        MI->getOperand(3).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(3).getReg())) {
+      // (S4_pstorerinewfnew_io PredRegs:$Pv4, IntRegs:$Rs32, 0, IntRegs:$Nt8)
+      AsmString = "if (!$\x01.new) memw($\x02)=$\x04.new";
+      break;
+    }
+    return false;
+  case Hexagon::S4_pstorerinewtnew_io:
+    if (MI->getNumOperands() == 4 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::PredRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(1).getReg()) &&
+        MI->getOperand(2).isImm() &&
+        MI->getOperand(2).getImm() == 0 &&
+        MI->getOperand(3).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(3).getReg())) {
+      // (S4_pstorerinewtnew_io PredRegs:$Pv4, IntRegs:$Rs32, 0, IntRegs:$Nt8)
+      AsmString = "if ($\x01.new) memw($\x02)=$\x04.new";
+      break;
+    }
+    return false;
+  case Hexagon::S4_pstoreritnew_io:
+    if (MI->getNumOperands() == 4 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::PredRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(1).getReg()) &&
+        MI->getOperand(2).isImm() &&
+        MI->getOperand(2).getImm() == 0 &&
+        MI->getOperand(3).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(3).getReg())) {
+      // (S4_pstoreritnew_io PredRegs:$Pv4, IntRegs:$Rs32, 0, IntRegs:$Rt32)
+      AsmString = "if ($\x01.new) memw($\x02)=$\x04";
+      break;
+    }
+    return false;
+  case Hexagon::S4_storeirb_io:
+    if (MI->getNumOperands() == 3 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isImm() &&
+        MI->getOperand(1).getImm() == 0) {
+      // (S4_storeirb_io IntRegs:$Rs32, 0, s32_0Imm:$II)
+      AsmString = "memb($\x01)=#$\x03";
+      break;
+    }
+    return false;
+  case Hexagon::S4_storeirbf_io:
+    if (MI->getNumOperands() == 4 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::PredRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(1).getReg()) &&
+        MI->getOperand(2).isImm() &&
+        MI->getOperand(2).getImm() == 0) {
+      // (S4_storeirbf_io PredRegs:$Pv4, IntRegs:$Rs32, 0, s32_0Imm:$II)
+      AsmString = "if (!$\x01) memb($\x02)=#$\x04";
+      break;
+    }
+    return false;
+  case Hexagon::S4_storeirbfnew_io:
+    if (MI->getNumOperands() == 4 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::PredRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(1).getReg()) &&
+        MI->getOperand(2).isImm() &&
+        MI->getOperand(2).getImm() == 0) {
+      // (S4_storeirbfnew_io PredRegs:$Pv4, IntRegs:$Rs32, 0, s32_0Imm:$II)
+      AsmString = "if (!$\x01.new) memb($\x02)=#$\x04";
+      break;
+    }
+    return false;
+  case Hexagon::S4_storeirbt_io:
+    if (MI->getNumOperands() == 4 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::PredRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(1).getReg()) &&
+        MI->getOperand(2).isImm() &&
+        MI->getOperand(2).getImm() == 0) {
+      // (S4_storeirbt_io PredRegs:$Pv4, IntRegs:$Rs32, 0, s32_0Imm:$II)
+      AsmString = "if ($\x01) memb($\x02)=#$\x04";
+      break;
+    }
+    return false;
+  case Hexagon::S4_storeirbtnew_io:
+    if (MI->getNumOperands() == 4 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::PredRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(1).getReg()) &&
+        MI->getOperand(2).isImm() &&
+        MI->getOperand(2).getImm() == 0) {
+      // (S4_storeirbtnew_io PredRegs:$Pv4, IntRegs:$Rs32, 0, s32_0Imm:$II)
+      AsmString = "if ($\x01.new) memb($\x02)=#$\x04";
+      break;
+    }
+    return false;
+  case Hexagon::S4_storeirh_io:
+    if (MI->getNumOperands() == 3 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isImm() &&
+        MI->getOperand(1).getImm() == 0) {
+      // (S4_storeirh_io IntRegs:$Rs32, 0, s32_0Imm:$II)
+      AsmString = "memh($\x01)=#$\x03";
+      break;
+    }
+    return false;
+  case Hexagon::S4_storeirhf_io:
+    if (MI->getNumOperands() == 4 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::PredRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(1).getReg()) &&
+        MI->getOperand(2).isImm() &&
+        MI->getOperand(2).getImm() == 0) {
+      // (S4_storeirhf_io PredRegs:$Pv4, IntRegs:$Rs32, 0, s32_0Imm:$II)
+      AsmString = "if (!$\x01) memh($\x02)=#$\x04";
+      break;
+    }
+    return false;
+  case Hexagon::S4_storeirhfnew_io:
+    if (MI->getNumOperands() == 4 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::PredRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(1).getReg()) &&
+        MI->getOperand(2).isImm() &&
+        MI->getOperand(2).getImm() == 0) {
+      // (S4_storeirhfnew_io PredRegs:$Pv4, IntRegs:$Rs32, 0, s32_0Imm:$II)
+      AsmString = "if (!$\x01.new) memh($\x02)=#$\x04";
+      break;
+    }
+    return false;
+  case Hexagon::S4_storeirht_io:
+    if (MI->getNumOperands() == 4 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::PredRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(1).getReg()) &&
+        MI->getOperand(2).isImm() &&
+        MI->getOperand(2).getImm() == 0) {
+      // (S4_storeirht_io PredRegs:$Pv4, IntRegs:$Rs32, 0, s32_0Imm:$II)
+      AsmString = "if ($\x01) memh($\x02)=#$\x04";
+      break;
+    }
+    return false;
+  case Hexagon::S4_storeirhtnew_io:
+    if (MI->getNumOperands() == 4 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::PredRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(1).getReg()) &&
+        MI->getOperand(2).isImm() &&
+        MI->getOperand(2).getImm() == 0) {
+      // (S4_storeirhtnew_io PredRegs:$Pv4, IntRegs:$Rs32, 0, s32_0Imm:$II)
+      AsmString = "if ($\x01.new) memh($\x02)=#$\x04";
+      break;
+    }
+    return false;
+  case Hexagon::S4_storeiri_io:
+    if (MI->getNumOperands() == 3 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isImm() &&
+        MI->getOperand(1).getImm() == 0) {
+      // (S4_storeiri_io IntRegs:$Rs32, 0, s32_0Imm:$II)
+      AsmString = "memw($\x01)=#$\x03";
+      break;
+    }
+    return false;
+  case Hexagon::S4_storeirif_io:
+    if (MI->getNumOperands() == 4 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::PredRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(1).getReg()) &&
+        MI->getOperand(2).isImm() &&
+        MI->getOperand(2).getImm() == 0) {
+      // (S4_storeirif_io PredRegs:$Pv4, IntRegs:$Rs32, 0, s32_0Imm:$II)
+      AsmString = "if (!$\x01) memw($\x02)=#$\x04";
+      break;
+    }
+    return false;
+  case Hexagon::S4_storeirifnew_io:
+    if (MI->getNumOperands() == 4 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::PredRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(1).getReg()) &&
+        MI->getOperand(2).isImm() &&
+        MI->getOperand(2).getImm() == 0) {
+      // (S4_storeirifnew_io PredRegs:$Pv4, IntRegs:$Rs32, 0, s32_0Imm:$II)
+      AsmString = "if (!$\x01.new) memw($\x02)=#$\x04";
+      break;
+    }
+    return false;
+  case Hexagon::S4_storeirit_io:
+    if (MI->getNumOperands() == 4 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::PredRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(1).getReg()) &&
+        MI->getOperand(2).isImm() &&
+        MI->getOperand(2).getImm() == 0) {
+      // (S4_storeirit_io PredRegs:$Pv4, IntRegs:$Rs32, 0, s32_0Imm:$II)
+      AsmString = "if ($\x01) memw($\x02)=#$\x04";
+      break;
+    }
+    return false;
+  case Hexagon::S4_storeiritnew_io:
+    if (MI->getNumOperands() == 4 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::PredRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(1).getReg()) &&
+        MI->getOperand(2).isImm() &&
+        MI->getOperand(2).getImm() == 0) {
+      // (S4_storeiritnew_io PredRegs:$Pv4, IntRegs:$Rs32, 0, s32_0Imm:$II)
+      AsmString = "if ($\x01.new) memw($\x02)=#$\x04";
+      break;
+    }
+    return false;
+  case Hexagon::V6_vasrhbrndsat:
+    if (MI->getNumOperands() == 4 &&
         MI->getOperand(0).isReg() &&
         MRI.getRegClass(Hexagon::VectorRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
         MI->getOperand(1).isReg() &&
-        MI->getOperand(1).getReg() == MI->getOperand(0).getReg() &&
+        MRI.getRegClass(Hexagon::VectorRegsRegClassID).contains(MI->getOperand(1).getReg()) &&
         MI->getOperand(2).isReg() &&
-        MI->getOperand(2).getReg() == MI->getOperand(0).getReg()) {
-      // (V6_vxor VectorRegs:$Vd, VectorRegs:$Vd, VectorRegs:$Vd)
-      AsmString = "$\x01 = #0";
+        MRI.getRegClass(Hexagon::VectorRegsRegClassID).contains(MI->getOperand(2).getReg()) &&
+        MI->getOperand(3).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsLow8RegClassID).contains(MI->getOperand(3).getReg())) {
+      // (V6_vasrhbrndsat VectorRegs:$Vd32, VectorRegs:$Vu32, VectorRegs:$Vv32, IntRegsLow8:$Rt8)
+      AsmString = "$\x01=vasrhb($\x02,$\x03,$\x04):rnd:sat";
+      break;
+    }
+    return false;
+  case Hexagon::V6_vasrhubrndsat:
+    if (MI->getNumOperands() == 4 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::VectorRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isReg() &&
+        MRI.getRegClass(Hexagon::VectorRegsRegClassID).contains(MI->getOperand(1).getReg()) &&
+        MI->getOperand(2).isReg() &&
+        MRI.getRegClass(Hexagon::VectorRegsRegClassID).contains(MI->getOperand(2).getReg()) &&
+        MI->getOperand(3).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsLow8RegClassID).contains(MI->getOperand(3).getReg())) {
+      // (V6_vasrhubrndsat VectorRegs:$Vd32, VectorRegs:$Vu32, VectorRegs:$Vv32, IntRegsLow8:$Rt8)
+      AsmString = "$\x01=vasrhub($\x02,$\x03,$\x04):rnd:sat";
+      break;
+    }
+    return false;
+  case Hexagon::V6_vasrhubsat:
+    if (MI->getNumOperands() == 4 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::VectorRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isReg() &&
+        MRI.getRegClass(Hexagon::VectorRegsRegClassID).contains(MI->getOperand(1).getReg()) &&
+        MI->getOperand(2).isReg() &&
+        MRI.getRegClass(Hexagon::VectorRegsRegClassID).contains(MI->getOperand(2).getReg()) &&
+        MI->getOperand(3).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsLow8RegClassID).contains(MI->getOperand(3).getReg())) {
+      // (V6_vasrhubsat VectorRegs:$Vd32, VectorRegs:$Vu32, VectorRegs:$Vv32, IntRegsLow8:$Rt8)
+      AsmString = "$\x01=vasrhub($\x02,$\x03,$\x04):sat";
+      break;
+    }
+    return false;
+  case Hexagon::V6_vasrwhrndsat:
+    if (MI->getNumOperands() == 4 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::VectorRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isReg() &&
+        MRI.getRegClass(Hexagon::VectorRegsRegClassID).contains(MI->getOperand(1).getReg()) &&
+        MI->getOperand(2).isReg() &&
+        MRI.getRegClass(Hexagon::VectorRegsRegClassID).contains(MI->getOperand(2).getReg()) &&
+        MI->getOperand(3).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsLow8RegClassID).contains(MI->getOperand(3).getReg())) {
+      // (V6_vasrwhrndsat VectorRegs:$Vd32, VectorRegs:$Vu32, VectorRegs:$Vv32, IntRegsLow8:$Rt8)
+      AsmString = "$\x01=vasrwh($\x02,$\x03,$\x04):rnd:sat";
+      break;
+    }
+    return false;
+  case Hexagon::V6_vasrwuhsat:
+    if (MI->getNumOperands() == 4 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::VectorRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isReg() &&
+        MRI.getRegClass(Hexagon::VectorRegsRegClassID).contains(MI->getOperand(1).getReg()) &&
+        MI->getOperand(2).isReg() &&
+        MRI.getRegClass(Hexagon::VectorRegsRegClassID).contains(MI->getOperand(2).getReg()) &&
+        MI->getOperand(3).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsLow8RegClassID).contains(MI->getOperand(3).getReg())) {
+      // (V6_vasrwuhsat VectorRegs:$Vd32, VectorRegs:$Vu32, VectorRegs:$Vv32, IntRegsLow8:$Rt8)
+      AsmString = "$\x01=vasrwuh($\x02,$\x03,$\x04):sat";
+      break;
+    }
+    return false;
+  case Hexagon::Y2_dcfetchbo:
+    if (MI->getNumOperands() == 2 &&
+        MI->getOperand(0).isReg() &&
+        MRI.getRegClass(Hexagon::IntRegsRegClassID).contains(MI->getOperand(0).getReg()) &&
+        MI->getOperand(1).isImm() &&
+        MI->getOperand(1).getImm() == 0) {
+      // (Y2_dcfetchbo IntRegs:$Rs32, 0)
+      AsmString = "dcfetch($\x01)";
       break;
     }
     return false;

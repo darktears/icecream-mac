@@ -15,9 +15,9 @@ namespace llvm {
 // HexagonDFAStateInputTable[][2] = pairs of <Input, NextState> for all valid
 //                           transitions.
 // 1288	states
-// 205	instruction classes
+// 318	instruction classes
 // 14	resources max
-// 3	combo resources
+// 5	combo resources
 // 4	stages max
 const int64_t HexagonDFAStateInputTable[][2] = {
 {0x1, 6},	{0x1000200200040, 22},	{0x1000204000040, 19},	{0x10020, 21},	{0x1002003C0, 20},	{0x3, 5},	{0x30400, 18},	{0x3040003C0, 17},	{0x4, 4},	{0x41000, 13},	{0x8, 3},	{0xC, 2},	{0xC000C, 8},	{0xC0300, 11},	{0xC1000, 12},	{0xF, 1},	{0xF0040, 14},	{0xF0080, 16},	{0xF03C0, 9},	{0xF0800, 15},	{0xF1800, 10},	{0xF2000, 23},	{0x10, 7},	 // state 0: 0-22

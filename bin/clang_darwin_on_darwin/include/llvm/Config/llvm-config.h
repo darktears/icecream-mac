@@ -18,7 +18,7 @@
 /* #undef LINK_POLLY_INTO_TOOLS */
 
 /* Target triple LLVM will generate code for by default */
-#define LLVM_DEFAULT_TARGET_TRIPLE "x86_64-apple-darwin16.3.0"
+#define LLVM_DEFAULT_TARGET_TRIPLE "x86_64-apple-darwin16.5.0"
 
 /* Define if threads enabled */
 #define LLVM_ENABLE_THREADS 0
@@ -27,7 +27,7 @@
 #define LLVM_HAS_ATOMICS 1
 
 /* Host triple LLVM will be executed on */
-#define LLVM_HOST_TRIPLE "x86_64-apple-darwin16.4.0"
+#define LLVM_HOST_TRIPLE "x86_64-apple-darwin16.5.0"
 
 /* LLVM architecture name for the native architecture, if available */
 #define LLVM_NATIVE_ARCH X86
@@ -56,9 +56,6 @@
 /* Define if this is Win32ish platform */
 /* #undef LLVM_ON_WIN32 */
 
-/* Installation prefix directory */
-#define LLVM_PREFIX "/Users/alexisme/Development/chromium/src/third_party/llvm-build/Release+Asserts"
-
 /* Define if we have the Intel JIT API runtime support library */
 #define LLVM_USE_INTEL_JITEVENTS 0
 
@@ -66,7 +63,7 @@
 #define LLVM_USE_OPROFILE 0
 
 /* Major version of the LLVM API */
-#define LLVM_VERSION_MAJOR 4
+#define LLVM_VERSION_MAJOR 5
 
 /* Minor version of the LLVM API */
 #define LLVM_VERSION_MINOR 0
@@ -75,6 +72,6 @@
 #define LLVM_VERSION_PATCH 0
 
 /* LLVM version string */
-#define LLVM_VERSION_STRING "4.0.0svn"
+#define LLVM_VERSION_STRING "5.0.0svn"
 
 #endif

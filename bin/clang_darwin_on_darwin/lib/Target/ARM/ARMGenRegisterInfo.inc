@@ -2597,106 +2597,106 @@ extern const char ARMRegClassStrings[] = {
 };
 
 extern const MCRegisterClass ARMMCRegisterClasses[] = {
-  { SPR, SPRBits, 2228, 32, sizeof(SPRBits), ARM::SPRRegClassID, 4, 4, 1, true },
-  { GPR, GPRBits, 1512, 16, sizeof(GPRBits), ARM::GPRRegClassID, 4, 4, 1, true },
-  { GPRwithAPSR, GPRwithAPSRBits, 2232, 16, sizeof(GPRwithAPSRBits), ARM::GPRwithAPSRRegClassID, 4, 4, 1, true },
-  { SPR_8, SPR_8Bits, 1487, 16, sizeof(SPR_8Bits), ARM::SPR_8RegClassID, 4, 4, 1, true },
-  { GPRnopc, GPRnopcBits, 2273, 15, sizeof(GPRnopcBits), ARM::GPRnopcRegClassID, 4, 4, 1, true },
-  { rGPR, rGPRBits, 1666, 14, sizeof(rGPRBits), ARM::rGPRRegClassID, 4, 4, 1, true },
-  { hGPR, hGPRBits, 1601, 8, sizeof(hGPRBits), ARM::hGPRRegClassID, 4, 4, 1, true },
-  { tGPR, tGPRBits, 1722, 8, sizeof(tGPRBits), ARM::tGPRRegClassID, 4, 4, 1, true },
-  { GPRnopc_and_hGPR, GPRnopc_and_hGPRBits, 1589, 7, sizeof(GPRnopc_and_hGPRBits), ARM::GPRnopc_and_hGPRRegClassID, 4, 4, 1, true },
-  { hGPR_and_rGPR, hGPR_and_rGPRBits, 1657, 6, sizeof(hGPR_and_rGPRBits), ARM::hGPR_and_rGPRRegClassID, 4, 4, 1, true },
-  { tcGPR, tcGPRBits, 1510, 5, sizeof(tcGPRBits), ARM::tcGPRRegClassID, 4, 4, 1, true },
-  { tGPR_and_tcGPR, tGPR_and_tcGPRBits, 1516, 4, sizeof(tGPR_and_tcGPRBits), ARM::tGPR_and_tcGPRRegClassID, 4, 4, 1, true },
-  { CCR, CCRBits, 1493, 1, sizeof(CCRBits), ARM::CCRRegClassID, 4, 4, -1, false },
-  { GPRsp, GPRspBits, 2318, 1, sizeof(GPRspBits), ARM::GPRspRegClassID, 4, 4, 1, true },
-  { hGPR_and_tcGPR, hGPR_and_tcGPRBits, 1501, 1, sizeof(hGPR_and_tcGPRBits), ARM::hGPR_and_tcGPRRegClassID, 4, 4, 1, true },
-  { DPR, DPRBits, 1497, 32, sizeof(DPRBits), ARM::DPRRegClassID, 8, 8, 1, true },
-  { DPR_VFP2, DPR_VFP2Bits, 494, 16, sizeof(DPR_VFP2Bits), ARM::DPR_VFP2RegClassID, 8, 8, 1, true },
-  { DPR_8, DPR_8Bits, 749, 8, sizeof(DPR_8Bits), ARM::DPR_8RegClassID, 8, 8, 1, true },
-  { GPRPair, GPRPairBits, 2330, 7, sizeof(GPRPairBits), ARM::GPRPairRegClassID, 8, 8, 1, true },
-  { GPRPair_with_gsub_1_in_rGPR, GPRPair_with_gsub_1_in_rGPRBits, 1671, 6, sizeof(GPRPair_with_gsub_1_in_rGPRBits), ARM::GPRPair_with_gsub_1_in_rGPRRegClassID, 8, 8, 1, true },
-  { GPRPair_with_gsub_0_in_tGPR, GPRPair_with_gsub_0_in_tGPRBits, 1699, 4, sizeof(GPRPair_with_gsub_0_in_tGPRBits), ARM::GPRPair_with_gsub_0_in_tGPRRegClassID, 8, 8, 1, true },
-  { GPRPair_with_gsub_0_in_hGPR, GPRPair_with_gsub_0_in_hGPRBits, 1606, 3, sizeof(GPRPair_with_gsub_0_in_hGPRBits), ARM::GPRPair_with_gsub_0_in_hGPRRegClassID, 8, 8, 1, true },
-  { GPRPair_with_gsub_0_in_tcGPR, GPRPair_with_gsub_0_in_tcGPRBits, 1531, 3, sizeof(GPRPair_with_gsub_0_in_tcGPRBits), ARM::GPRPair_with_gsub_0_in_tcGPRRegClassID, 8, 8, 1, true },
-  { GPRPair_with_gsub_1_in_hGPR_and_rGPR, GPRPair_with_gsub_1_in_hGPR_and_rGPRBits, 1634, 2, sizeof(GPRPair_with_gsub_1_in_hGPR_and_rGPRBits), ARM::GPRPair_with_gsub_1_in_hGPR_and_rGPRRegClassID, 8, 8, 1, true },
-  { GPRPair_with_gsub_1_in_tcGPR, GPRPair_with_gsub_1_in_tcGPRBits, 1560, 2, sizeof(GPRPair_with_gsub_1_in_tcGPRBits), ARM::GPRPair_with_gsub_1_in_tcGPRRegClassID, 8, 8, 1, true },
-  { GPRPair_with_gsub_1_in_GPRsp, GPRPair_with_gsub_1_in_GPRspBits, 2295, 1, sizeof(GPRPair_with_gsub_1_in_GPRspBits), ARM::GPRPair_with_gsub_1_in_GPRspRegClassID, 8, 8, 1, true },
-  { DPairSpc, DPairSpcBits, 2264, 30, sizeof(DPairSpcBits), ARM::DPairSpcRegClassID, 16, 8, 1, true },
-  { DPairSpc_with_ssub_0, DPairSpc_with_ssub_0Bits, 63, 16, sizeof(DPairSpc_with_ssub_0Bits), ARM::DPairSpc_with_ssub_0RegClassID, 16, 8, 1, true },
-  { DPairSpc_with_dsub_2_then_ssub_0, DPairSpc_with_dsub_2_then_ssub_0Bits, 239, 14, sizeof(DPairSpc_with_dsub_2_then_ssub_0Bits), ARM::DPairSpc_with_dsub_2_then_ssub_0RegClassID, 16, 8, 1, true },
-  { DPairSpc_with_dsub_0_in_DPR_8, DPairSpc_with_dsub_0_in_DPR_8Bits, 817, 8, sizeof(DPairSpc_with_dsub_0_in_DPR_8Bits), ARM::DPairSpc_with_dsub_0_in_DPR_8RegClassID, 16, 8, 1, true },
-  { DPairSpc_with_dsub_2_in_DPR_8, DPairSpc_with_dsub_2_in_DPR_8Bits, 1103, 6, sizeof(DPairSpc_with_dsub_2_in_DPR_8Bits), ARM::DPairSpc_with_dsub_2_in_DPR_8RegClassID, 16, 8, 1, true },
-  { DPair, DPairBits, 2324, 31, sizeof(DPairBits), ARM::DPairRegClassID, 16, 16, 1, true },
-  { DPair_with_ssub_0, DPair_with_ssub_0Bits, 122, 16, sizeof(DPair_with_ssub_0Bits), ARM::DPair_with_ssub_0RegClassID, 16, 16, 1, true },
-  { QPR, QPRBits, 1730, 16, sizeof(QPRBits), ARM::QPRRegClassID, 16, 16, 1, true },
-  { DPair_with_ssub_2, DPair_with_ssub_2Bits, 709, 15, sizeof(DPair_with_ssub_2Bits), ARM::DPair_with_ssub_2RegClassID, 16, 16, 1, true },
-  { DPair_with_dsub_0_in_DPR_8, DPair_with_dsub_0_in_DPR_8Bits, 903, 8, sizeof(DPair_with_dsub_0_in_DPR_8Bits), ARM::DPair_with_dsub_0_in_DPR_8RegClassID, 16, 16, 1, true },
-  { QPR_VFP2, QPR_VFP2Bits, 524, 8, sizeof(QPR_VFP2Bits), ARM::QPR_VFP2RegClassID, 16, 16, 1, true },
-  { DPair_with_dsub_1_in_DPR_8, DPair_with_dsub_1_in_DPR_8Bits, 986, 7, sizeof(DPair_with_dsub_1_in_DPR_8Bits), ARM::DPair_with_dsub_1_in_DPR_8RegClassID, 16, 16, 1, true },
-  { QPR_8, QPR_8Bits, 1355, 4, sizeof(QPR_8Bits), ARM::QPR_8RegClassID, 16, 16, 1, true },
-  { DTriple, DTripleBits, 2287, 30, sizeof(DTripleBits), ARM::DTripleRegClassID, 24, 8, 1, true },
-  { DTripleSpc, DTripleSpcBits, 2253, 28, sizeof(DTripleSpcBits), ARM::DTripleSpcRegClassID, 24, 8, 1, true },
-  { DTripleSpc_with_ssub_0, DTripleSpc_with_ssub_0Bits, 40, 16, sizeof(DTripleSpc_with_ssub_0Bits), ARM::DTripleSpc_with_ssub_0RegClassID, 24, 8, 1, true },
-  { DTriple_with_ssub_0, DTriple_with_ssub_0Bits, 102, 16, sizeof(DTriple_with_ssub_0Bits), ARM::DTriple_with_ssub_0RegClassID, 24, 8, 1, true },
-  { DTriple_with_dsub_1_dsub_2_in_QPR, DTriple_with_dsub_1_dsub_2_in_QPRBits, 2127, 15, sizeof(DTriple_with_dsub_1_dsub_2_in_QPRBits), ARM::DTriple_with_dsub_1_dsub_2_in_QPRRegClassID, 24, 8, 1, true },
-  { DTriple_with_qsub_0_in_QPR, DTriple_with_qsub_0_in_QPRBits, 1770, 15, sizeof(DTriple_with_qsub_0_in_QPRBits), ARM::DTriple_with_qsub_0_in_QPRRegClassID, 24, 8, 1, true },
-  { DTriple_with_ssub_2, DTriple_with_ssub_2Bits, 689, 15, sizeof(DTriple_with_ssub_2Bits), ARM::DTriple_with_ssub_2RegClassID, 24, 8, 1, true },
-  { DTripleSpc_with_dsub_2_then_ssub_0, DTripleSpc_with_dsub_2_then_ssub_0Bits, 204, 14, sizeof(DTripleSpc_with_dsub_2_then_ssub_0Bits), ARM::DTripleSpc_with_dsub_2_then_ssub_0RegClassID, 24, 8, 1, true },
-  { DTriple_with_dsub_2_then_ssub_0, DTriple_with_dsub_2_then_ssub_0Bits, 302, 14, sizeof(DTriple_with_dsub_2_then_ssub_0Bits), ARM::DTriple_with_dsub_2_then_ssub_0RegClassID, 24, 8, 1, true },
-  { DTripleSpc_with_dsub_4_then_ssub_0, DTripleSpc_with_dsub_4_then_ssub_0Bits, 397, 12, sizeof(DTripleSpc_with_dsub_4_then_ssub_0Bits), ARM::DTripleSpc_with_dsub_4_then_ssub_0RegClassID, 24, 8, 1, true },
-  { DTripleSpc_with_dsub_0_in_DPR_8, DTripleSpc_with_dsub_0_in_DPR_8Bits, 785, 8, sizeof(DTripleSpc_with_dsub_0_in_DPR_8Bits), ARM::DTripleSpc_with_dsub_0_in_DPR_8RegClassID, 24, 8, 1, true },
-  { DTriple_with_dsub_0_in_DPR_8, DTriple_with_dsub_0_in_DPR_8Bits, 874, 8, sizeof(DTriple_with_dsub_0_in_DPR_8Bits), ARM::DTriple_with_dsub_0_in_DPR_8RegClassID, 24, 8, 1, true },
-  { DTriple_with_qsub_0_in_QPR_VFP2, DTriple_with_qsub_0_in_QPR_VFP2Bits, 533, 8, sizeof(DTriple_with_qsub_0_in_QPR_VFP2Bits), ARM::DTriple_with_qsub_0_in_QPR_VFP2RegClassID, 24, 8, 1, true },
-  { DTriple_with_ssub_0_and_DTriple_with_dsub_1_dsub_2_in_QPR, DTriple_with_ssub_0_and_DTriple_with_dsub_1_dsub_2_in_QPRBits, 2103, 8, sizeof(DTriple_with_ssub_0_and_DTriple_with_dsub_1_dsub_2_in_QPRBits), ARM::DTriple_with_ssub_0_and_DTriple_with_dsub_1_dsub_2_in_QPRRegClassID, 24, 8, 1, true },
-  { DTriple_with_dsub_1_dsub_2_in_QPR_VFP2, DTriple_with_dsub_1_dsub_2_in_QPR_VFP2Bits, 632, 7, sizeof(DTriple_with_dsub_1_dsub_2_in_QPR_VFP2Bits), ARM::DTriple_with_dsub_1_dsub_2_in_QPR_VFP2RegClassID, 24, 8, 1, true },
-  { DTriple_with_dsub_1_in_DPR_8, DTriple_with_dsub_1_in_DPR_8Bits, 957, 7, sizeof(DTriple_with_dsub_1_in_DPR_8Bits), ARM::DTriple_with_dsub_1_in_DPR_8RegClassID, 24, 8, 1, true },
-  { DTriple_with_dsub_2_then_ssub_0_and_DTriple_with_qsub_0_in_QPR, DTriple_with_dsub_2_then_ssub_0_and_DTriple_with_qsub_0_in_QPRBits, 1734, 7, sizeof(DTriple_with_dsub_2_then_ssub_0_and_DTriple_with_qsub_0_in_QPRBits), ARM::DTriple_with_dsub_2_then_ssub_0_and_DTriple_with_qsub_0_in_QPRRegClassID, 24, 8, 1, true },
-  { DTripleSpc_with_dsub_2_in_DPR_8, DTripleSpc_with_dsub_2_in_DPR_8Bits, 1071, 6, sizeof(DTripleSpc_with_dsub_2_in_DPR_8Bits), ARM::DTripleSpc_with_dsub_2_in_DPR_8RegClassID, 24, 8, 1, true },
-  { DTriple_with_dsub_2_in_DPR_8, DTriple_with_dsub_2_in_DPR_8Bits, 1160, 6, sizeof(DTriple_with_dsub_2_in_DPR_8Bits), ARM::DTriple_with_dsub_2_in_DPR_8RegClassID, 24, 8, 1, true },
-  { DTripleSpc_with_dsub_4_in_DPR_8, DTripleSpc_with_dsub_4_in_DPR_8Bits, 1274, 4, sizeof(DTripleSpc_with_dsub_4_in_DPR_8Bits), ARM::DTripleSpc_with_dsub_4_in_DPR_8RegClassID, 24, 8, 1, true },
-  { DTriple_with_dsub_0_in_DPR_8_and_DTriple_with_dsub_1_dsub_2_in_QPR, DTriple_with_dsub_0_in_DPR_8_and_DTriple_with_dsub_1_dsub_2_in_QPRBits, 2161, 4, sizeof(DTriple_with_dsub_0_in_DPR_8_and_DTriple_with_dsub_1_dsub_2_in_QPRBits), ARM::DTriple_with_dsub_0_in_DPR_8_and_DTriple_with_dsub_1_dsub_2_in_QPRRegClassID, 24, 8, 1, true },
-  { DTriple_with_qsub_0_in_QPR_8, DTriple_with_qsub_0_in_QPR_8Bits, 1361, 4, sizeof(DTriple_with_qsub_0_in_QPR_8Bits), ARM::DTriple_with_qsub_0_in_QPR_8RegClassID, 24, 8, 1, true },
-  { DTriple_with_dsub_1_dsub_2_in_QPR_8, DTriple_with_dsub_1_dsub_2_in_QPR_8Bits, 1451, 3, sizeof(DTriple_with_dsub_1_dsub_2_in_QPR_8Bits), ARM::DTriple_with_dsub_1_dsub_2_in_QPR_8RegClassID, 24, 8, 1, true },
-  { DTriple_with_dsub_2_in_DPR_8_and_DTriple_with_qsub_0_in_QPR, DTriple_with_dsub_2_in_DPR_8_and_DTriple_with_qsub_0_in_QPRBits, 1797, 3, sizeof(DTriple_with_dsub_2_in_DPR_8_and_DTriple_with_qsub_0_in_QPRBits), ARM::DTriple_with_dsub_2_in_DPR_8_and_DTriple_with_qsub_0_in_QPRRegClassID, 24, 8, 1, true },
-  { DQuadSpc, DQuadSpcBits, 2244, 28, sizeof(DQuadSpcBits), ARM::DQuadSpcRegClassID, 32, 8, 1, true },
-  { DQuadSpc_with_ssub_0, DQuadSpc_with_ssub_0Bits, 19, 16, sizeof(DQuadSpc_with_ssub_0Bits), ARM::DQuadSpc_with_ssub_0RegClassID, 32, 8, 1, true },
-  { DQuadSpc_with_dsub_2_then_ssub_0, DQuadSpc_with_dsub_2_then_ssub_0Bits, 171, 14, sizeof(DQuadSpc_with_dsub_2_then_ssub_0Bits), ARM::DQuadSpc_with_dsub_2_then_ssub_0RegClassID, 32, 8, 1, true },
-  { DQuadSpc_with_dsub_4_then_ssub_0, DQuadSpc_with_dsub_4_then_ssub_0Bits, 364, 12, sizeof(DQuadSpc_with_dsub_4_then_ssub_0Bits), ARM::DQuadSpc_with_dsub_4_then_ssub_0RegClassID, 32, 8, 1, true },
-  { DQuadSpc_with_dsub_0_in_DPR_8, DQuadSpc_with_dsub_0_in_DPR_8Bits, 755, 8, sizeof(DQuadSpc_with_dsub_0_in_DPR_8Bits), ARM::DQuadSpc_with_dsub_0_in_DPR_8RegClassID, 32, 8, 1, true },
-  { DQuadSpc_with_dsub_2_in_DPR_8, DQuadSpc_with_dsub_2_in_DPR_8Bits, 1041, 6, sizeof(DQuadSpc_with_dsub_2_in_DPR_8Bits), ARM::DQuadSpc_with_dsub_2_in_DPR_8RegClassID, 32, 8, 1, true },
-  { DQuadSpc_with_dsub_4_in_DPR_8, DQuadSpc_with_dsub_4_in_DPR_8Bits, 1244, 4, sizeof(DQuadSpc_with_dsub_4_in_DPR_8Bits), ARM::DQuadSpc_with_dsub_4_in_DPR_8RegClassID, 32, 8, 1, true },
-  { DQuad, DQuadBits, 2281, 29, sizeof(DQuadBits), ARM::DQuadRegClassID, 32, 32, 1, true },
-  { DQuad_with_ssub_0, DQuad_with_ssub_0Bits, 84, 16, sizeof(DQuad_with_ssub_0Bits), ARM::DQuad_with_ssub_0RegClassID, 32, 32, 1, true },
-  { DQuad_with_ssub_2, DQuad_with_ssub_2Bits, 671, 15, sizeof(DQuad_with_ssub_2Bits), ARM::DQuad_with_ssub_2RegClassID, 32, 32, 1, true },
-  { QQPR, QQPRBits, 1729, 15, sizeof(QQPRBits), ARM::QQPRRegClassID, 32, 32, 1, true },
-  { DQuad_with_dsub_1_dsub_2_in_QPR, DQuad_with_dsub_1_dsub_2_in_QPRBits, 1879, 14, sizeof(DQuad_with_dsub_1_dsub_2_in_QPRBits), ARM::DQuad_with_dsub_1_dsub_2_in_QPRRegClassID, 32, 32, 1, true },
-  { DQuad_with_dsub_2_then_ssub_0, DQuad_with_dsub_2_then_ssub_0Bits, 272, 14, sizeof(DQuad_with_dsub_2_then_ssub_0Bits), ARM::DQuad_with_dsub_2_then_ssub_0RegClassID, 32, 32, 1, true },
-  { DQuad_with_dsub_3_then_ssub_0, DQuad_with_dsub_3_then_ssub_0Bits, 334, 13, sizeof(DQuad_with_dsub_3_then_ssub_0Bits), ARM::DQuad_with_dsub_3_then_ssub_0RegClassID, 32, 32, 1, true },
-  { DQuad_with_dsub_0_in_DPR_8, DQuad_with_dsub_0_in_DPR_8Bits, 847, 8, sizeof(DQuad_with_dsub_0_in_DPR_8Bits), ARM::DQuad_with_dsub_0_in_DPR_8RegClassID, 32, 32, 1, true },
-  { DQuad_with_qsub_0_in_QPR_VFP2, DQuad_with_qsub_0_in_QPR_VFP2Bits, 503, 8, sizeof(DQuad_with_qsub_0_in_QPR_VFP2Bits), ARM::DQuad_with_qsub_0_in_QPR_VFP2RegClassID, 32, 32, 1, true },
-  { DQuad_with_ssub_0_and_DQuad_with_dsub_1_dsub_2_in_QPR, DQuad_with_ssub_0_and_DQuad_with_dsub_1_dsub_2_in_QPRBits, 1857, 8, sizeof(DQuad_with_ssub_0_and_DQuad_with_dsub_1_dsub_2_in_QPRBits), ARM::DQuad_with_ssub_0_and_DQuad_with_dsub_1_dsub_2_in_QPRRegClassID, 32, 32, 1, true },
-  { DQuad_with_dsub_1_dsub_2_in_QPR_VFP2, DQuad_with_dsub_1_dsub_2_in_QPR_VFP2Bits, 595, 7, sizeof(DQuad_with_dsub_1_dsub_2_in_QPR_VFP2Bits), ARM::DQuad_with_dsub_1_dsub_2_in_QPR_VFP2RegClassID, 32, 32, 1, true },
-  { DQuad_with_dsub_1_in_DPR_8, DQuad_with_dsub_1_in_DPR_8Bits, 930, 7, sizeof(DQuad_with_dsub_1_in_DPR_8Bits), ARM::DQuad_with_dsub_1_in_DPR_8RegClassID, 32, 32, 1, true },
-  { DQuad_with_qsub_1_in_QPR_VFP2, DQuad_with_qsub_1_in_QPR_VFP2Bits, 565, 7, sizeof(DQuad_with_qsub_1_in_QPR_VFP2Bits), ARM::DQuad_with_qsub_1_in_QPR_VFP2RegClassID, 32, 32, 1, true },
-  { DQuad_with_dsub_2_in_DPR_8, DQuad_with_dsub_2_in_DPR_8Bits, 1133, 6, sizeof(DQuad_with_dsub_2_in_DPR_8Bits), ARM::DQuad_with_dsub_2_in_DPR_8RegClassID, 32, 32, 1, true },
-  { DQuad_with_dsub_3_then_ssub_0_and_DQuad_with_dsub_1_dsub_2_in_QPR, DQuad_with_dsub_3_then_ssub_0_and_DQuad_with_dsub_1_dsub_2_in_QPRBits, 1911, 6, sizeof(DQuad_with_dsub_3_then_ssub_0_and_DQuad_with_dsub_1_dsub_2_in_QPRBits), ARM::DQuad_with_dsub_3_then_ssub_0_and_DQuad_with_dsub_1_dsub_2_in_QPRRegClassID, 32, 32, 1, true },
-  { DQuad_with_dsub_3_in_DPR_8, DQuad_with_dsub_3_in_DPR_8Bits, 1189, 5, sizeof(DQuad_with_dsub_3_in_DPR_8Bits), ARM::DQuad_with_dsub_3_in_DPR_8RegClassID, 32, 32, 1, true },
-  { DQuad_with_dsub_0_in_DPR_8_and_DQuad_with_dsub_1_dsub_2_in_QPR, DQuad_with_dsub_0_in_DPR_8_and_DQuad_with_dsub_1_dsub_2_in_QPRBits, 1977, 4, sizeof(DQuad_with_dsub_0_in_DPR_8_and_DQuad_with_dsub_1_dsub_2_in_QPRBits), ARM::DQuad_with_dsub_0_in_DPR_8_and_DQuad_with_dsub_1_dsub_2_in_QPRRegClassID, 32, 32, 1, true },
-  { DQuad_with_qsub_0_in_QPR_8, DQuad_with_qsub_0_in_QPR_8Bits, 1334, 4, sizeof(DQuad_with_qsub_0_in_QPR_8Bits), ARM::DQuad_with_qsub_0_in_QPR_8RegClassID, 32, 32, 1, true },
-  { DQuad_with_dsub_1_dsub_2_in_QPR_8, DQuad_with_dsub_1_dsub_2_in_QPR_8Bits, 1417, 3, sizeof(DQuad_with_dsub_1_dsub_2_in_QPR_8Bits), ARM::DQuad_with_dsub_1_dsub_2_in_QPR_8RegClassID, 32, 32, 1, true },
-  { DQuad_with_qsub_1_in_QPR_8, DQuad_with_qsub_1_in_QPR_8Bits, 1390, 3, sizeof(DQuad_with_qsub_1_in_QPR_8Bits), ARM::DQuad_with_qsub_1_in_QPR_8RegClassID, 32, 32, 1, true },
-  { DQuad_with_dsub_3_in_DPR_8_and_DQuad_with_dsub_1_dsub_2_in_QPR, DQuad_with_dsub_3_in_DPR_8_and_DQuad_with_dsub_1_dsub_2_in_QPRBits, 2040, 2, sizeof(DQuad_with_dsub_3_in_DPR_8_and_DQuad_with_dsub_1_dsub_2_in_QPRBits), ARM::DQuad_with_dsub_3_in_DPR_8_and_DQuad_with_dsub_1_dsub_2_in_QPRRegClassID, 32, 32, 1, true },
-  { QQQQPR, QQQQPRBits, 1727, 13, sizeof(QQQQPRBits), ARM::QQQQPRRegClassID, 64, 32, 1, true },
-  { QQQQPR_with_ssub_0, QQQQPR_with_ssub_0Bits, 0, 8, sizeof(QQQQPR_with_ssub_0Bits), ARM::QQQQPR_with_ssub_0RegClassID, 64, 32, 1, true },
-  { QQQQPR_with_dsub_2_then_ssub_0, QQQQPR_with_dsub_2_then_ssub_0Bits, 140, 7, sizeof(QQQQPR_with_dsub_2_then_ssub_0Bits), ARM::QQQQPR_with_dsub_2_then_ssub_0RegClassID, 64, 32, 1, true },
-  { QQQQPR_with_dsub_5_then_ssub_0, QQQQPR_with_dsub_5_then_ssub_0Bits, 432, 6, sizeof(QQQQPR_with_dsub_5_then_ssub_0Bits), ARM::QQQQPR_with_dsub_5_then_ssub_0RegClassID, 64, 32, 1, true },
-  { QQQQPR_with_dsub_7_then_ssub_0, QQQQPR_with_dsub_7_then_ssub_0Bits, 463, 5, sizeof(QQQQPR_with_dsub_7_then_ssub_0Bits), ARM::QQQQPR_with_dsub_7_then_ssub_0RegClassID, 64, 32, 1, true },
-  { QQQQPR_with_dsub_0_in_DPR_8, QQQQPR_with_dsub_0_in_DPR_8Bits, 727, 4, sizeof(QQQQPR_with_dsub_0_in_DPR_8Bits), ARM::QQQQPR_with_dsub_0_in_DPR_8RegClassID, 64, 32, 1, true },
-  { QQQQPR_with_dsub_2_in_DPR_8, QQQQPR_with_dsub_2_in_DPR_8Bits, 1013, 3, sizeof(QQQQPR_with_dsub_2_in_DPR_8Bits), ARM::QQQQPR_with_dsub_2_in_DPR_8RegClassID, 64, 32, 1, true },
-  { QQQQPR_with_dsub_4_in_DPR_8, QQQQPR_with_dsub_4_in_DPR_8Bits, 1216, 2, sizeof(QQQQPR_with_dsub_4_in_DPR_8Bits), ARM::QQQQPR_with_dsub_4_in_DPR_8RegClassID, 64, 32, 1, true },
-  { QQQQPR_with_dsub_6_in_DPR_8, QQQQPR_with_dsub_6_in_DPR_8Bits, 1306, 1, sizeof(QQQQPR_with_dsub_6_in_DPR_8Bits), ARM::QQQQPR_with_dsub_6_in_DPR_8RegClassID, 64, 32, 1, true },
+  { SPR, SPRBits, 2228, 32, sizeof(SPRBits), ARM::SPRRegClassID, 4, 1, true },
+  { GPR, GPRBits, 1512, 16, sizeof(GPRBits), ARM::GPRRegClassID, 4, 1, true },
+  { GPRwithAPSR, GPRwithAPSRBits, 2232, 16, sizeof(GPRwithAPSRBits), ARM::GPRwithAPSRRegClassID, 4, 1, true },
+  { SPR_8, SPR_8Bits, 1487, 16, sizeof(SPR_8Bits), ARM::SPR_8RegClassID, 4, 1, true },
+  { GPRnopc, GPRnopcBits, 2273, 15, sizeof(GPRnopcBits), ARM::GPRnopcRegClassID, 4, 1, true },
+  { rGPR, rGPRBits, 1666, 14, sizeof(rGPRBits), ARM::rGPRRegClassID, 4, 1, true },
+  { hGPR, hGPRBits, 1601, 8, sizeof(hGPRBits), ARM::hGPRRegClassID, 4, 1, true },
+  { tGPR, tGPRBits, 1722, 8, sizeof(tGPRBits), ARM::tGPRRegClassID, 4, 1, true },
+  { GPRnopc_and_hGPR, GPRnopc_and_hGPRBits, 1589, 7, sizeof(GPRnopc_and_hGPRBits), ARM::GPRnopc_and_hGPRRegClassID, 4, 1, true },
+  { hGPR_and_rGPR, hGPR_and_rGPRBits, 1657, 6, sizeof(hGPR_and_rGPRBits), ARM::hGPR_and_rGPRRegClassID, 4, 1, true },
+  { tcGPR, tcGPRBits, 1510, 5, sizeof(tcGPRBits), ARM::tcGPRRegClassID, 4, 1, true },
+  { tGPR_and_tcGPR, tGPR_and_tcGPRBits, 1516, 4, sizeof(tGPR_and_tcGPRBits), ARM::tGPR_and_tcGPRRegClassID, 4, 1, true },
+  { CCR, CCRBits, 1493, 1, sizeof(CCRBits), ARM::CCRRegClassID, 4, -1, false },
+  { GPRsp, GPRspBits, 2318, 1, sizeof(GPRspBits), ARM::GPRspRegClassID, 4, 1, true },
+  { hGPR_and_tcGPR, hGPR_and_tcGPRBits, 1501, 1, sizeof(hGPR_and_tcGPRBits), ARM::hGPR_and_tcGPRRegClassID, 4, 1, true },
+  { DPR, DPRBits, 1497, 32, sizeof(DPRBits), ARM::DPRRegClassID, 8, 1, true },
+  { DPR_VFP2, DPR_VFP2Bits, 494, 16, sizeof(DPR_VFP2Bits), ARM::DPR_VFP2RegClassID, 8, 1, true },
+  { DPR_8, DPR_8Bits, 749, 8, sizeof(DPR_8Bits), ARM::DPR_8RegClassID, 8, 1, true },
+  { GPRPair, GPRPairBits, 2330, 7, sizeof(GPRPairBits), ARM::GPRPairRegClassID, 8, 1, true },
+  { GPRPair_with_gsub_1_in_rGPR, GPRPair_with_gsub_1_in_rGPRBits, 1671, 6, sizeof(GPRPair_with_gsub_1_in_rGPRBits), ARM::GPRPair_with_gsub_1_in_rGPRRegClassID, 8, 1, true },
+  { GPRPair_with_gsub_0_in_tGPR, GPRPair_with_gsub_0_in_tGPRBits, 1699, 4, sizeof(GPRPair_with_gsub_0_in_tGPRBits), ARM::GPRPair_with_gsub_0_in_tGPRRegClassID, 8, 1, true },
+  { GPRPair_with_gsub_0_in_hGPR, GPRPair_with_gsub_0_in_hGPRBits, 1606, 3, sizeof(GPRPair_with_gsub_0_in_hGPRBits), ARM::GPRPair_with_gsub_0_in_hGPRRegClassID, 8, 1, true },
+  { GPRPair_with_gsub_0_in_tcGPR, GPRPair_with_gsub_0_in_tcGPRBits, 1531, 3, sizeof(GPRPair_with_gsub_0_in_tcGPRBits), ARM::GPRPair_with_gsub_0_in_tcGPRRegClassID, 8, 1, true },
+  { GPRPair_with_gsub_1_in_hGPR_and_rGPR, GPRPair_with_gsub_1_in_hGPR_and_rGPRBits, 1634, 2, sizeof(GPRPair_with_gsub_1_in_hGPR_and_rGPRBits), ARM::GPRPair_with_gsub_1_in_hGPR_and_rGPRRegClassID, 8, 1, true },
+  { GPRPair_with_gsub_1_in_tcGPR, GPRPair_with_gsub_1_in_tcGPRBits, 1560, 2, sizeof(GPRPair_with_gsub_1_in_tcGPRBits), ARM::GPRPair_with_gsub_1_in_tcGPRRegClassID, 8, 1, true },
+  { GPRPair_with_gsub_1_in_GPRsp, GPRPair_with_gsub_1_in_GPRspBits, 2295, 1, sizeof(GPRPair_with_gsub_1_in_GPRspBits), ARM::GPRPair_with_gsub_1_in_GPRspRegClassID, 8, 1, true },
+  { DPairSpc, DPairSpcBits, 2264, 30, sizeof(DPairSpcBits), ARM::DPairSpcRegClassID, 16, 1, true },
+  { DPairSpc_with_ssub_0, DPairSpc_with_ssub_0Bits, 63, 16, sizeof(DPairSpc_with_ssub_0Bits), ARM::DPairSpc_with_ssub_0RegClassID, 16, 1, true },
+  { DPairSpc_with_dsub_2_then_ssub_0, DPairSpc_with_dsub_2_then_ssub_0Bits, 239, 14, sizeof(DPairSpc_with_dsub_2_then_ssub_0Bits), ARM::DPairSpc_with_dsub_2_then_ssub_0RegClassID, 16, 1, true },
+  { DPairSpc_with_dsub_0_in_DPR_8, DPairSpc_with_dsub_0_in_DPR_8Bits, 817, 8, sizeof(DPairSpc_with_dsub_0_in_DPR_8Bits), ARM::DPairSpc_with_dsub_0_in_DPR_8RegClassID, 16, 1, true },
+  { DPairSpc_with_dsub_2_in_DPR_8, DPairSpc_with_dsub_2_in_DPR_8Bits, 1103, 6, sizeof(DPairSpc_with_dsub_2_in_DPR_8Bits), ARM::DPairSpc_with_dsub_2_in_DPR_8RegClassID, 16, 1, true },
+  { DPair, DPairBits, 2324, 31, sizeof(DPairBits), ARM::DPairRegClassID, 16, 1, true },
+  { DPair_with_ssub_0, DPair_with_ssub_0Bits, 122, 16, sizeof(DPair_with_ssub_0Bits), ARM::DPair_with_ssub_0RegClassID, 16, 1, true },
+  { QPR, QPRBits, 1730, 16, sizeof(QPRBits), ARM::QPRRegClassID, 16, 1, true },
+  { DPair_with_ssub_2, DPair_with_ssub_2Bits, 709, 15, sizeof(DPair_with_ssub_2Bits), ARM::DPair_with_ssub_2RegClassID, 16, 1, true },
+  { DPair_with_dsub_0_in_DPR_8, DPair_with_dsub_0_in_DPR_8Bits, 903, 8, sizeof(DPair_with_dsub_0_in_DPR_8Bits), ARM::DPair_with_dsub_0_in_DPR_8RegClassID, 16, 1, true },
+  { QPR_VFP2, QPR_VFP2Bits, 524, 8, sizeof(QPR_VFP2Bits), ARM::QPR_VFP2RegClassID, 16, 1, true },
+  { DPair_with_dsub_1_in_DPR_8, DPair_with_dsub_1_in_DPR_8Bits, 986, 7, sizeof(DPair_with_dsub_1_in_DPR_8Bits), ARM::DPair_with_dsub_1_in_DPR_8RegClassID, 16, 1, true },
+  { QPR_8, QPR_8Bits, 1355, 4, sizeof(QPR_8Bits), ARM::QPR_8RegClassID, 16, 1, true },
+  { DTriple, DTripleBits, 2287, 30, sizeof(DTripleBits), ARM::DTripleRegClassID, 24, 1, true },
+  { DTripleSpc, DTripleSpcBits, 2253, 28, sizeof(DTripleSpcBits), ARM::DTripleSpcRegClassID, 24, 1, true },
+  { DTripleSpc_with_ssub_0, DTripleSpc_with_ssub_0Bits, 40, 16, sizeof(DTripleSpc_with_ssub_0Bits), ARM::DTripleSpc_with_ssub_0RegClassID, 24, 1, true },
+  { DTriple_with_ssub_0, DTriple_with_ssub_0Bits, 102, 16, sizeof(DTriple_with_ssub_0Bits), ARM::DTriple_with_ssub_0RegClassID, 24, 1, true },
+  { DTriple_with_dsub_1_dsub_2_in_QPR, DTriple_with_dsub_1_dsub_2_in_QPRBits, 2127, 15, sizeof(DTriple_with_dsub_1_dsub_2_in_QPRBits), ARM::DTriple_with_dsub_1_dsub_2_in_QPRRegClassID, 24, 1, true },
+  { DTriple_with_qsub_0_in_QPR, DTriple_with_qsub_0_in_QPRBits, 1770, 15, sizeof(DTriple_with_qsub_0_in_QPRBits), ARM::DTriple_with_qsub_0_in_QPRRegClassID, 24, 1, true },
+  { DTriple_with_ssub_2, DTriple_with_ssub_2Bits, 689, 15, sizeof(DTriple_with_ssub_2Bits), ARM::DTriple_with_ssub_2RegClassID, 24, 1, true },
+  { DTripleSpc_with_dsub_2_then_ssub_0, DTripleSpc_with_dsub_2_then_ssub_0Bits, 204, 14, sizeof(DTripleSpc_with_dsub_2_then_ssub_0Bits), ARM::DTripleSpc_with_dsub_2_then_ssub_0RegClassID, 24, 1, true },
+  { DTriple_with_dsub_2_then_ssub_0, DTriple_with_dsub_2_then_ssub_0Bits, 302, 14, sizeof(DTriple_with_dsub_2_then_ssub_0Bits), ARM::DTriple_with_dsub_2_then_ssub_0RegClassID, 24, 1, true },
+  { DTripleSpc_with_dsub_4_then_ssub_0, DTripleSpc_with_dsub_4_then_ssub_0Bits, 397, 12, sizeof(DTripleSpc_with_dsub_4_then_ssub_0Bits), ARM::DTripleSpc_with_dsub_4_then_ssub_0RegClassID, 24, 1, true },
+  { DTripleSpc_with_dsub_0_in_DPR_8, DTripleSpc_with_dsub_0_in_DPR_8Bits, 785, 8, sizeof(DTripleSpc_with_dsub_0_in_DPR_8Bits), ARM::DTripleSpc_with_dsub_0_in_DPR_8RegClassID, 24, 1, true },
+  { DTriple_with_dsub_0_in_DPR_8, DTriple_with_dsub_0_in_DPR_8Bits, 874, 8, sizeof(DTriple_with_dsub_0_in_DPR_8Bits), ARM::DTriple_with_dsub_0_in_DPR_8RegClassID, 24, 1, true },
+  { DTriple_with_qsub_0_in_QPR_VFP2, DTriple_with_qsub_0_in_QPR_VFP2Bits, 533, 8, sizeof(DTriple_with_qsub_0_in_QPR_VFP2Bits), ARM::DTriple_with_qsub_0_in_QPR_VFP2RegClassID, 24, 1, true },
+  { DTriple_with_ssub_0_and_DTriple_with_dsub_1_dsub_2_in_QPR, DTriple_with_ssub_0_and_DTriple_with_dsub_1_dsub_2_in_QPRBits, 2103, 8, sizeof(DTriple_with_ssub_0_and_DTriple_with_dsub_1_dsub_2_in_QPRBits), ARM::DTriple_with_ssub_0_and_DTriple_with_dsub_1_dsub_2_in_QPRRegClassID, 24, 1, true },
+  { DTriple_with_dsub_1_dsub_2_in_QPR_VFP2, DTriple_with_dsub_1_dsub_2_in_QPR_VFP2Bits, 632, 7, sizeof(DTriple_with_dsub_1_dsub_2_in_QPR_VFP2Bits), ARM::DTriple_with_dsub_1_dsub_2_in_QPR_VFP2RegClassID, 24, 1, true },
+  { DTriple_with_dsub_1_in_DPR_8, DTriple_with_dsub_1_in_DPR_8Bits, 957, 7, sizeof(DTriple_with_dsub_1_in_DPR_8Bits), ARM::DTriple_with_dsub_1_in_DPR_8RegClassID, 24, 1, true },
+  { DTriple_with_dsub_2_then_ssub_0_and_DTriple_with_qsub_0_in_QPR, DTriple_with_dsub_2_then_ssub_0_and_DTriple_with_qsub_0_in_QPRBits, 1734, 7, sizeof(DTriple_with_dsub_2_then_ssub_0_and_DTriple_with_qsub_0_in_QPRBits), ARM::DTriple_with_dsub_2_then_ssub_0_and_DTriple_with_qsub_0_in_QPRRegClassID, 24, 1, true },
+  { DTripleSpc_with_dsub_2_in_DPR_8, DTripleSpc_with_dsub_2_in_DPR_8Bits, 1071, 6, sizeof(DTripleSpc_with_dsub_2_in_DPR_8Bits), ARM::DTripleSpc_with_dsub_2_in_DPR_8RegClassID, 24, 1, true },
+  { DTriple_with_dsub_2_in_DPR_8, DTriple_with_dsub_2_in_DPR_8Bits, 1160, 6, sizeof(DTriple_with_dsub_2_in_DPR_8Bits), ARM::DTriple_with_dsub_2_in_DPR_8RegClassID, 24, 1, true },
+  { DTripleSpc_with_dsub_4_in_DPR_8, DTripleSpc_with_dsub_4_in_DPR_8Bits, 1274, 4, sizeof(DTripleSpc_with_dsub_4_in_DPR_8Bits), ARM::DTripleSpc_with_dsub_4_in_DPR_8RegClassID, 24, 1, true },
+  { DTriple_with_dsub_0_in_DPR_8_and_DTriple_with_dsub_1_dsub_2_in_QPR, DTriple_with_dsub_0_in_DPR_8_and_DTriple_with_dsub_1_dsub_2_in_QPRBits, 2161, 4, sizeof(DTriple_with_dsub_0_in_DPR_8_and_DTriple_with_dsub_1_dsub_2_in_QPRBits), ARM::DTriple_with_dsub_0_in_DPR_8_and_DTriple_with_dsub_1_dsub_2_in_QPRRegClassID, 24, 1, true },
+  { DTriple_with_qsub_0_in_QPR_8, DTriple_with_qsub_0_in_QPR_8Bits, 1361, 4, sizeof(DTriple_with_qsub_0_in_QPR_8Bits), ARM::DTriple_with_qsub_0_in_QPR_8RegClassID, 24, 1, true },
+  { DTriple_with_dsub_1_dsub_2_in_QPR_8, DTriple_with_dsub_1_dsub_2_in_QPR_8Bits, 1451, 3, sizeof(DTriple_with_dsub_1_dsub_2_in_QPR_8Bits), ARM::DTriple_with_dsub_1_dsub_2_in_QPR_8RegClassID, 24, 1, true },
+  { DTriple_with_dsub_2_in_DPR_8_and_DTriple_with_qsub_0_in_QPR, DTriple_with_dsub_2_in_DPR_8_and_DTriple_with_qsub_0_in_QPRBits, 1797, 3, sizeof(DTriple_with_dsub_2_in_DPR_8_and_DTriple_with_qsub_0_in_QPRBits), ARM::DTriple_with_dsub_2_in_DPR_8_and_DTriple_with_qsub_0_in_QPRRegClassID, 24, 1, true },
+  { DQuadSpc, DQuadSpcBits, 2244, 28, sizeof(DQuadSpcBits), ARM::DQuadSpcRegClassID, 32, 1, true },
+  { DQuadSpc_with_ssub_0, DQuadSpc_with_ssub_0Bits, 19, 16, sizeof(DQuadSpc_with_ssub_0Bits), ARM::DQuadSpc_with_ssub_0RegClassID, 32, 1, true },
+  { DQuadSpc_with_dsub_2_then_ssub_0, DQuadSpc_with_dsub_2_then_ssub_0Bits, 171, 14, sizeof(DQuadSpc_with_dsub_2_then_ssub_0Bits), ARM::DQuadSpc_with_dsub_2_then_ssub_0RegClassID, 32, 1, true },
+  { DQuadSpc_with_dsub_4_then_ssub_0, DQuadSpc_with_dsub_4_then_ssub_0Bits, 364, 12, sizeof(DQuadSpc_with_dsub_4_then_ssub_0Bits), ARM::DQuadSpc_with_dsub_4_then_ssub_0RegClassID, 32, 1, true },
+  { DQuadSpc_with_dsub_0_in_DPR_8, DQuadSpc_with_dsub_0_in_DPR_8Bits, 755, 8, sizeof(DQuadSpc_with_dsub_0_in_DPR_8Bits), ARM::DQuadSpc_with_dsub_0_in_DPR_8RegClassID, 32, 1, true },
+  { DQuadSpc_with_dsub_2_in_DPR_8, DQuadSpc_with_dsub_2_in_DPR_8Bits, 1041, 6, sizeof(DQuadSpc_with_dsub_2_in_DPR_8Bits), ARM::DQuadSpc_with_dsub_2_in_DPR_8RegClassID, 32, 1, true },
+  { DQuadSpc_with_dsub_4_in_DPR_8, DQuadSpc_with_dsub_4_in_DPR_8Bits, 1244, 4, sizeof(DQuadSpc_with_dsub_4_in_DPR_8Bits), ARM::DQuadSpc_with_dsub_4_in_DPR_8RegClassID, 32, 1, true },
+  { DQuad, DQuadBits, 2281, 29, sizeof(DQuadBits), ARM::DQuadRegClassID, 32, 1, true },
+  { DQuad_with_ssub_0, DQuad_with_ssub_0Bits, 84, 16, sizeof(DQuad_with_ssub_0Bits), ARM::DQuad_with_ssub_0RegClassID, 32, 1, true },
+  { DQuad_with_ssub_2, DQuad_with_ssub_2Bits, 671, 15, sizeof(DQuad_with_ssub_2Bits), ARM::DQuad_with_ssub_2RegClassID, 32, 1, true },
+  { QQPR, QQPRBits, 1729, 15, sizeof(QQPRBits), ARM::QQPRRegClassID, 32, 1, true },
+  { DQuad_with_dsub_1_dsub_2_in_QPR, DQuad_with_dsub_1_dsub_2_in_QPRBits, 1879, 14, sizeof(DQuad_with_dsub_1_dsub_2_in_QPRBits), ARM::DQuad_with_dsub_1_dsub_2_in_QPRRegClassID, 32, 1, true },
+  { DQuad_with_dsub_2_then_ssub_0, DQuad_with_dsub_2_then_ssub_0Bits, 272, 14, sizeof(DQuad_with_dsub_2_then_ssub_0Bits), ARM::DQuad_with_dsub_2_then_ssub_0RegClassID, 32, 1, true },
+  { DQuad_with_dsub_3_then_ssub_0, DQuad_with_dsub_3_then_ssub_0Bits, 334, 13, sizeof(DQuad_with_dsub_3_then_ssub_0Bits), ARM::DQuad_with_dsub_3_then_ssub_0RegClassID, 32, 1, true },
+  { DQuad_with_dsub_0_in_DPR_8, DQuad_with_dsub_0_in_DPR_8Bits, 847, 8, sizeof(DQuad_with_dsub_0_in_DPR_8Bits), ARM::DQuad_with_dsub_0_in_DPR_8RegClassID, 32, 1, true },
+  { DQuad_with_qsub_0_in_QPR_VFP2, DQuad_with_qsub_0_in_QPR_VFP2Bits, 503, 8, sizeof(DQuad_with_qsub_0_in_QPR_VFP2Bits), ARM::DQuad_with_qsub_0_in_QPR_VFP2RegClassID, 32, 1, true },
+  { DQuad_with_ssub_0_and_DQuad_with_dsub_1_dsub_2_in_QPR, DQuad_with_ssub_0_and_DQuad_with_dsub_1_dsub_2_in_QPRBits, 1857, 8, sizeof(DQuad_with_ssub_0_and_DQuad_with_dsub_1_dsub_2_in_QPRBits), ARM::DQuad_with_ssub_0_and_DQuad_with_dsub_1_dsub_2_in_QPRRegClassID, 32, 1, true },
+  { DQuad_with_dsub_1_dsub_2_in_QPR_VFP2, DQuad_with_dsub_1_dsub_2_in_QPR_VFP2Bits, 595, 7, sizeof(DQuad_with_dsub_1_dsub_2_in_QPR_VFP2Bits), ARM::DQuad_with_dsub_1_dsub_2_in_QPR_VFP2RegClassID, 32, 1, true },
+  { DQuad_with_dsub_1_in_DPR_8, DQuad_with_dsub_1_in_DPR_8Bits, 930, 7, sizeof(DQuad_with_dsub_1_in_DPR_8Bits), ARM::DQuad_with_dsub_1_in_DPR_8RegClassID, 32, 1, true },
+  { DQuad_with_qsub_1_in_QPR_VFP2, DQuad_with_qsub_1_in_QPR_VFP2Bits, 565, 7, sizeof(DQuad_with_qsub_1_in_QPR_VFP2Bits), ARM::DQuad_with_qsub_1_in_QPR_VFP2RegClassID, 32, 1, true },
+  { DQuad_with_dsub_2_in_DPR_8, DQuad_with_dsub_2_in_DPR_8Bits, 1133, 6, sizeof(DQuad_with_dsub_2_in_DPR_8Bits), ARM::DQuad_with_dsub_2_in_DPR_8RegClassID, 32, 1, true },
+  { DQuad_with_dsub_3_then_ssub_0_and_DQuad_with_dsub_1_dsub_2_in_QPR, DQuad_with_dsub_3_then_ssub_0_and_DQuad_with_dsub_1_dsub_2_in_QPRBits, 1911, 6, sizeof(DQuad_with_dsub_3_then_ssub_0_and_DQuad_with_dsub_1_dsub_2_in_QPRBits), ARM::DQuad_with_dsub_3_then_ssub_0_and_DQuad_with_dsub_1_dsub_2_in_QPRRegClassID, 32, 1, true },
+  { DQuad_with_dsub_3_in_DPR_8, DQuad_with_dsub_3_in_DPR_8Bits, 1189, 5, sizeof(DQuad_with_dsub_3_in_DPR_8Bits), ARM::DQuad_with_dsub_3_in_DPR_8RegClassID, 32, 1, true },
+  { DQuad_with_dsub_0_in_DPR_8_and_DQuad_with_dsub_1_dsub_2_in_QPR, DQuad_with_dsub_0_in_DPR_8_and_DQuad_with_dsub_1_dsub_2_in_QPRBits, 1977, 4, sizeof(DQuad_with_dsub_0_in_DPR_8_and_DQuad_with_dsub_1_dsub_2_in_QPRBits), ARM::DQuad_with_dsub_0_in_DPR_8_and_DQuad_with_dsub_1_dsub_2_in_QPRRegClassID, 32, 1, true },
+  { DQuad_with_qsub_0_in_QPR_8, DQuad_with_qsub_0_in_QPR_8Bits, 1334, 4, sizeof(DQuad_with_qsub_0_in_QPR_8Bits), ARM::DQuad_with_qsub_0_in_QPR_8RegClassID, 32, 1, true },
+  { DQuad_with_dsub_1_dsub_2_in_QPR_8, DQuad_with_dsub_1_dsub_2_in_QPR_8Bits, 1417, 3, sizeof(DQuad_with_dsub_1_dsub_2_in_QPR_8Bits), ARM::DQuad_with_dsub_1_dsub_2_in_QPR_8RegClassID, 32, 1, true },
+  { DQuad_with_qsub_1_in_QPR_8, DQuad_with_qsub_1_in_QPR_8Bits, 1390, 3, sizeof(DQuad_with_qsub_1_in_QPR_8Bits), ARM::DQuad_with_qsub_1_in_QPR_8RegClassID, 32, 1, true },
+  { DQuad_with_dsub_3_in_DPR_8_and_DQuad_with_dsub_1_dsub_2_in_QPR, DQuad_with_dsub_3_in_DPR_8_and_DQuad_with_dsub_1_dsub_2_in_QPRBits, 2040, 2, sizeof(DQuad_with_dsub_3_in_DPR_8_and_DQuad_with_dsub_1_dsub_2_in_QPRBits), ARM::DQuad_with_dsub_3_in_DPR_8_and_DQuad_with_dsub_1_dsub_2_in_QPRRegClassID, 32, 1, true },
+  { QQQQPR, QQQQPRBits, 1727, 13, sizeof(QQQQPRBits), ARM::QQQQPRRegClassID, 64, 1, true },
+  { QQQQPR_with_ssub_0, QQQQPR_with_ssub_0Bits, 0, 8, sizeof(QQQQPR_with_ssub_0Bits), ARM::QQQQPR_with_ssub_0RegClassID, 64, 1, true },
+  { QQQQPR_with_dsub_2_then_ssub_0, QQQQPR_with_dsub_2_then_ssub_0Bits, 140, 7, sizeof(QQQQPR_with_dsub_2_then_ssub_0Bits), ARM::QQQQPR_with_dsub_2_then_ssub_0RegClassID, 64, 1, true },
+  { QQQQPR_with_dsub_5_then_ssub_0, QQQQPR_with_dsub_5_then_ssub_0Bits, 432, 6, sizeof(QQQQPR_with_dsub_5_then_ssub_0Bits), ARM::QQQQPR_with_dsub_5_then_ssub_0RegClassID, 64, 1, true },
+  { QQQQPR_with_dsub_7_then_ssub_0, QQQQPR_with_dsub_7_then_ssub_0Bits, 463, 5, sizeof(QQQQPR_with_dsub_7_then_ssub_0Bits), ARM::QQQQPR_with_dsub_7_then_ssub_0RegClassID, 64, 1, true },
+  { QQQQPR_with_dsub_0_in_DPR_8, QQQQPR_with_dsub_0_in_DPR_8Bits, 727, 4, sizeof(QQQQPR_with_dsub_0_in_DPR_8Bits), ARM::QQQQPR_with_dsub_0_in_DPR_8RegClassID, 64, 1, true },
+  { QQQQPR_with_dsub_2_in_DPR_8, QQQQPR_with_dsub_2_in_DPR_8Bits, 1013, 3, sizeof(QQQQPR_with_dsub_2_in_DPR_8Bits), ARM::QQQQPR_with_dsub_2_in_DPR_8RegClassID, 64, 1, true },
+  { QQQQPR_with_dsub_4_in_DPR_8, QQQQPR_with_dsub_4_in_DPR_8Bits, 1216, 2, sizeof(QQQQPR_with_dsub_4_in_DPR_8Bits), ARM::QQQQPR_with_dsub_4_in_DPR_8RegClassID, 64, 1, true },
+  { QQQQPR_with_dsub_6_in_DPR_8, QQQQPR_with_dsub_6_in_DPR_8Bits, 1306, 1, sizeof(QQQQPR_with_dsub_6_in_DPR_8Bits), ARM::QQQQPR_with_dsub_6_in_DPR_8RegClassID, 64, 1, true },
 };
 
 // ARM Dwarf<->LLVM register mappings.
@@ -5463,6 +5463,8 @@ static ArrayRef<MCPhysReg> QQQQPR_with_dsub_6_in_DPR_8GetRawAllocationOrder(cons
 namespace ARM {   // Register class instances
   extern const TargetRegisterClass SPRRegClass = {
     &ARMMCRegisterClasses[SPRRegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 2,
     SPRSubClassMask,
     SuperRegIdxSeqs + 14,
@@ -5476,6 +5478,8 @@ namespace ARM {   // Register class instances
 
   extern const TargetRegisterClass GPRRegClass = {
     &ARMMCRegisterClasses[GPRRegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 0,
     GPRSubClassMask,
     SuperRegIdxSeqs + 11,
@@ -5489,6 +5493,8 @@ namespace ARM {   // Register class instances
 
   extern const TargetRegisterClass GPRwithAPSRRegClass = {
     &ARMMCRegisterClasses[GPRwithAPSRRegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 0,
     GPRwithAPSRSubClassMask,
     SuperRegIdxSeqs + 11,
@@ -5502,6 +5508,8 @@ namespace ARM {   // Register class instances
 
   extern const TargetRegisterClass SPR_8RegClass = {
     &ARMMCRegisterClasses[SPR_8RegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 2,
     SPR_8SubClassMask,
     SuperRegIdxSeqs + 14,
@@ -5515,6 +5523,8 @@ namespace ARM {   // Register class instances
 
   extern const TargetRegisterClass GPRnopcRegClass = {
     &ARMMCRegisterClasses[GPRnopcRegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 0,
     GPRnopcSubClassMask,
     SuperRegIdxSeqs + 11,
@@ -5528,6 +5538,8 @@ namespace ARM {   // Register class instances
 
   extern const TargetRegisterClass rGPRRegClass = {
     &ARMMCRegisterClasses[rGPRRegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 0,
     rGPRSubClassMask,
     SuperRegIdxSeqs + 11,
@@ -5541,6 +5553,8 @@ namespace ARM {   // Register class instances
 
   extern const TargetRegisterClass hGPRRegClass = {
     &ARMMCRegisterClasses[hGPRRegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 0,
     hGPRSubClassMask,
     SuperRegIdxSeqs + 11,
@@ -5554,6 +5568,8 @@ namespace ARM {   // Register class instances
 
   extern const TargetRegisterClass tGPRRegClass = {
     &ARMMCRegisterClasses[tGPRRegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 0,
     tGPRSubClassMask,
     SuperRegIdxSeqs + 11,
@@ -5567,6 +5583,8 @@ namespace ARM {   // Register class instances
 
   extern const TargetRegisterClass GPRnopc_and_hGPRRegClass = {
     &ARMMCRegisterClasses[GPRnopc_and_hGPRRegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 0,
     GPRnopc_and_hGPRSubClassMask,
     SuperRegIdxSeqs + 11,
@@ -5580,6 +5598,8 @@ namespace ARM {   // Register class instances
 
   extern const TargetRegisterClass hGPR_and_rGPRRegClass = {
     &ARMMCRegisterClasses[hGPR_and_rGPRRegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 0,
     hGPR_and_rGPRSubClassMask,
     SuperRegIdxSeqs + 11,
@@ -5593,6 +5613,8 @@ namespace ARM {   // Register class instances
 
   extern const TargetRegisterClass tcGPRRegClass = {
     &ARMMCRegisterClasses[tcGPRRegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 0,
     tcGPRSubClassMask,
     SuperRegIdxSeqs + 11,
@@ -5606,6 +5628,8 @@ namespace ARM {   // Register class instances
 
   extern const TargetRegisterClass tGPR_and_tcGPRRegClass = {
     &ARMMCRegisterClasses[tGPR_and_tcGPRRegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 0,
     tGPR_and_tcGPRSubClassMask,
     SuperRegIdxSeqs + 11,
@@ -5619,6 +5643,8 @@ namespace ARM {   // Register class instances
 
   extern const TargetRegisterClass CCRRegClass = {
     &ARMMCRegisterClasses[CCRRegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 0,
     CCRSubClassMask,
     SuperRegIdxSeqs + 8,
@@ -5632,6 +5658,8 @@ namespace ARM {   // Register class instances
 
   extern const TargetRegisterClass GPRspRegClass = {
     &ARMMCRegisterClasses[GPRspRegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 0,
     GPRspSubClassMask,
     SuperRegIdxSeqs + 12,
@@ -5645,6 +5673,8 @@ namespace ARM {   // Register class instances
 
   extern const TargetRegisterClass hGPR_and_tcGPRRegClass = {
     &ARMMCRegisterClasses[hGPR_and_tcGPRRegClassID],
+    4, /* SpillSize */
+    4, /* SpillAlignment */
     VTLists + 0,
     hGPR_and_tcGPRSubClassMask,
     SuperRegIdxSeqs + 9,
@@ -5658,6 +5688,8 @@ namespace ARM {   // Register class instances
 
   extern const TargetRegisterClass DPRRegClass = {
     &ARMMCRegisterClasses[DPRRegClassID],
+    8, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 10,
     DPRSubClassMask,
     SuperRegIdxSeqs + 0,
@@ -5671,6 +5703,8 @@ namespace ARM {   // Register class instances
 
   extern const TargetRegisterClass DPR_VFP2RegClass = {
     &ARMMCRegisterClasses[DPR_VFP2RegClassID],
+    8, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 10,
     DPR_VFP2SubClassMask,
     SuperRegIdxSeqs + 0,
@@ -5684,6 +5718,8 @@ namespace ARM {   // Register class instances
 
   extern const TargetRegisterClass DPR_8RegClass = {
     &ARMMCRegisterClasses[DPR_8RegClassID],
+    8, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 10,
     DPR_8SubClassMask,
     SuperRegIdxSeqs + 0,
@@ -5697,6 +5733,8 @@ namespace ARM {   // Register class instances
 
   extern const TargetRegisterClass GPRPairRegClass = {
     &ARMMCRegisterClasses[GPRPairRegClassID],
+    8, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 33,
     GPRPairSubClassMask,
     SuperRegIdxSeqs + 8,
@@ -5710,6 +5748,8 @@ namespace ARM {   // Register class instances
 
   extern const TargetRegisterClass GPRPair_with_gsub_1_in_rGPRRegClass = {
     &ARMMCRegisterClasses[GPRPair_with_gsub_1_in_rGPRRegClassID],
+    8, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 33,
     GPRPair_with_gsub_1_in_rGPRSubClassMask,
     SuperRegIdxSeqs + 8,
@@ -5723,6 +5763,8 @@ namespace ARM {   // Register class instances
 
   extern const TargetRegisterClass GPRPair_with_gsub_0_in_tGPRRegClass = {
     &ARMMCRegisterClasses[GPRPair_with_gsub_0_in_tGPRRegClassID],
+    8, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 33,
     GPRPair_with_gsub_0_in_tGPRSubClassMask,
     SuperRegIdxSeqs + 8,
@@ -5736,6 +5778,8 @@ namespace ARM {   // Register class instances
 
   extern const TargetRegisterClass GPRPair_with_gsub_0_in_hGPRRegClass = {
     &ARMMCRegisterClasses[GPRPair_with_gsub_0_in_hGPRRegClassID],
+    8, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 33,
     GPRPair_with_gsub_0_in_hGPRSubClassMask,
     SuperRegIdxSeqs + 8,
@@ -5749,6 +5793,8 @@ namespace ARM {   // Register class instances
 
   extern const TargetRegisterClass GPRPair_with_gsub_0_in_tcGPRRegClass = {
     &ARMMCRegisterClasses[GPRPair_with_gsub_0_in_tcGPRRegClassID],
+    8, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 33,
     GPRPair_with_gsub_0_in_tcGPRSubClassMask,
     SuperRegIdxSeqs + 8,
@@ -5762,6 +5808,8 @@ namespace ARM {   // Register class instances
 
   extern const TargetRegisterClass GPRPair_with_gsub_1_in_hGPR_and_rGPRRegClass = {
     &ARMMCRegisterClasses[GPRPair_with_gsub_1_in_hGPR_and_rGPRRegClassID],
+    8, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 33,
     GPRPair_with_gsub_1_in_hGPR_and_rGPRSubClassMask,
     SuperRegIdxSeqs + 8,
@@ -5775,6 +5823,8 @@ namespace ARM {   // Register class instances
 
   extern const TargetRegisterClass GPRPair_with_gsub_1_in_tcGPRRegClass = {
     &ARMMCRegisterClasses[GPRPair_with_gsub_1_in_tcGPRRegClassID],
+    8, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 33,
     GPRPair_with_gsub_1_in_tcGPRSubClassMask,
     SuperRegIdxSeqs + 8,
@@ -5788,6 +5838,8 @@ namespace ARM {   // Register class instances
 
   extern const TargetRegisterClass GPRPair_with_gsub_1_in_GPRspRegClass = {
     &ARMMCRegisterClasses[GPRPair_with_gsub_1_in_GPRspRegClassID],
+    8, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 33,
     GPRPair_with_gsub_1_in_GPRspSubClassMask,
     SuperRegIdxSeqs + 8,
@@ -5801,6 +5853,8 @@ namespace ARM {   // Register class instances
 
   extern const TargetRegisterClass DPairSpcRegClass = {
     &ARMMCRegisterClasses[DPairSpcRegClassID],
+    16, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 4,
     DPairSpcSubClassMask,
     SuperRegIdxSeqs + 50,
@@ -5814,6 +5868,8 @@ namespace ARM {   // Register class instances
 
   extern const TargetRegisterClass DPairSpc_with_ssub_0RegClass = {
     &ARMMCRegisterClasses[DPairSpc_with_ssub_0RegClassID],
+    16, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 4,
     DPairSpc_with_ssub_0SubClassMask,
     SuperRegIdxSeqs + 50,
@@ -5827,6 +5883,8 @@ namespace ARM {   // Register class instances
 
   extern const TargetRegisterClass DPairSpc_with_dsub_2_then_ssub_0RegClass = {
     &ARMMCRegisterClasses[DPairSpc_with_dsub_2_then_ssub_0RegClassID],
+    16, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 4,
     DPairSpc_with_dsub_2_then_ssub_0SubClassMask,
     SuperRegIdxSeqs + 50,
@@ -5840,6 +5898,8 @@ namespace ARM {   // Register class instances
 
   extern const TargetRegisterClass DPairSpc_with_dsub_0_in_DPR_8RegClass = {
     &ARMMCRegisterClasses[DPairSpc_with_dsub_0_in_DPR_8RegClassID],
+    16, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 4,
     DPairSpc_with_dsub_0_in_DPR_8SubClassMask,
     SuperRegIdxSeqs + 50,
@@ -5853,6 +5913,8 @@ namespace ARM {   // Register class instances
 
   extern const TargetRegisterClass DPairSpc_with_dsub_2_in_DPR_8RegClass = {
     &ARMMCRegisterClasses[DPairSpc_with_dsub_2_in_DPR_8RegClassID],
+    16, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 4,
     DPairSpc_with_dsub_2_in_DPR_8SubClassMask,
     SuperRegIdxSeqs + 50,
@@ -5866,6 +5928,8 @@ namespace ARM {   // Register class instances
 
   extern const TargetRegisterClass DPairRegClass = {
     &ARMMCRegisterClasses[DPairRegClassID],
+    16, /* SpillSize */
+    16, /* SpillAlignment */
     VTLists + 26,
     DPairSubClassMask,
     SuperRegIdxSeqs + 69,
@@ -5879,6 +5943,8 @@ namespace ARM {   // Register class instances
 
   extern const TargetRegisterClass DPair_with_ssub_0RegClass = {
     &ARMMCRegisterClasses[DPair_with_ssub_0RegClassID],
+    16, /* SpillSize */
+    16, /* SpillAlignment */
     VTLists + 26,
     DPair_with_ssub_0SubClassMask,
     SuperRegIdxSeqs + 69,
@@ -5892,6 +5958,8 @@ namespace ARM {   // Register class instances
 
   extern const TargetRegisterClass QPRRegClass = {
     &ARMMCRegisterClasses[QPRRegClassID],
+    16, /* SpillSize */
+    16, /* SpillAlignment */
     VTLists + 18,
     QPRSubClassMask,
     SuperRegIdxSeqs + 31,
@@ -5905,6 +5973,8 @@ namespace ARM {   // Register class instances
 
   extern const TargetRegisterClass DPair_with_ssub_2RegClass = {
     &ARMMCRegisterClasses[DPair_with_ssub_2RegClassID],
+    16, /* SpillSize */
+    16, /* SpillAlignment */
     VTLists + 26,
     DPair_with_ssub_2SubClassMask,
     SuperRegIdxSeqs + 69,
@@ -5918,6 +5988,8 @@ namespace ARM {   // Register class instances
 
   extern const TargetRegisterClass DPair_with_dsub_0_in_DPR_8RegClass = {
     &ARMMCRegisterClasses[DPair_with_dsub_0_in_DPR_8RegClassID],
+    16, /* SpillSize */
+    16, /* SpillAlignment */
     VTLists + 26,
     DPair_with_dsub_0_in_DPR_8SubClassMask,
     SuperRegIdxSeqs + 69,
@@ -5931,6 +6003,8 @@ namespace ARM {   // Register class instances
 
   extern const TargetRegisterClass QPR_VFP2RegClass = {
     &ARMMCRegisterClasses[QPR_VFP2RegClassID],
+    16, /* SpillSize */
+    16, /* SpillAlignment */
     VTLists + 26,
     QPR_VFP2SubClassMask,
     SuperRegIdxSeqs + 31,
@@ -5944,6 +6018,8 @@ namespace ARM {   // Register class instances
 
   extern const TargetRegisterClass DPair_with_dsub_1_in_DPR_8RegClass = {
     &ARMMCRegisterClasses[DPair_with_dsub_1_in_DPR_8RegClassID],
+    16, /* SpillSize */
+    16, /* SpillAlignment */
     VTLists + 26,
     DPair_with_dsub_1_in_DPR_8SubClassMask,
     SuperRegIdxSeqs + 69,
@@ -5957,6 +6033,8 @@ namespace ARM {   // Register class instances
 
   extern const TargetRegisterClass QPR_8RegClass = {
     &ARMMCRegisterClasses[QPR_8RegClassID],
+    16, /* SpillSize */
+    16, /* SpillAlignment */
     VTLists + 26,
     QPR_8SubClassMask,
     SuperRegIdxSeqs + 31,
@@ -5970,6 +6048,8 @@ namespace ARM {   // Register class instances
 
   extern const TargetRegisterClass DTripleRegClass = {
     &ARMMCRegisterClasses[DTripleRegClassID],
+    24, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 33,
     DTripleSubClassMask,
     SuperRegIdxSeqs + 62,
@@ -5983,6 +6063,8 @@ namespace ARM {   // Register class instances
 
   extern const TargetRegisterClass DTripleSpcRegClass = {
     &ARMMCRegisterClasses[DTripleSpcRegClassID],
+    24, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 33,
     DTripleSpcSubClassMask,
     SuperRegIdxSeqs + 37,
@@ -5996,6 +6078,8 @@ namespace ARM {   // Register class instances
 
   extern const TargetRegisterClass DTripleSpc_with_ssub_0RegClass = {
     &ARMMCRegisterClasses[DTripleSpc_with_ssub_0RegClassID],
+    24, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 33,
     DTripleSpc_with_ssub_0SubClassMask,
     SuperRegIdxSeqs + 37,
@@ -6009,6 +6093,8 @@ namespace ARM {   // Register class instances
 
   extern const TargetRegisterClass DTriple_with_ssub_0RegClass = {
     &ARMMCRegisterClasses[DTriple_with_ssub_0RegClassID],
+    24, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 33,
     DTriple_with_ssub_0SubClassMask,
     SuperRegIdxSeqs + 62,
@@ -6022,6 +6108,8 @@ namespace ARM {   // Register class instances
 
   extern const TargetRegisterClass DTriple_with_dsub_1_dsub_2_in_QPRRegClass = {
     &ARMMCRegisterClasses[DTriple_with_dsub_1_dsub_2_in_QPRRegClassID],
+    24, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 33,
     DTriple_with_dsub_1_dsub_2_in_QPRSubClassMask,
     SuperRegIdxSeqs + 57,
@@ -6035,6 +6123,8 @@ namespace ARM {   // Register class instances
 
   extern const TargetRegisterClass DTriple_with_qsub_0_in_QPRRegClass = {
     &ARMMCRegisterClasses[DTriple_with_qsub_0_in_QPRRegClassID],
+    24, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 33,
     DTriple_with_qsub_0_in_QPRSubClassMask,
     SuperRegIdxSeqs + 45,
@@ -6048,6 +6138,8 @@ namespace ARM {   // Register class instances
 
   extern const TargetRegisterClass DTriple_with_ssub_2RegClass = {
     &ARMMCRegisterClasses[DTriple_with_ssub_2RegClassID],
+    24, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 33,
     DTriple_with_ssub_2SubClassMask,
     SuperRegIdxSeqs + 62,
@@ -6061,6 +6153,8 @@ namespace ARM {   // Register class instances
 
   extern const TargetRegisterClass DTripleSpc_with_dsub_2_then_ssub_0RegClass = {
     &ARMMCRegisterClasses[DTripleSpc_with_dsub_2_then_ssub_0RegClassID],
+    24, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 33,
     DTripleSpc_with_dsub_2_then_ssub_0SubClassMask,
     SuperRegIdxSeqs + 37,
@@ -6074,6 +6168,8 @@ namespace ARM {   // Register class instances
 
   extern const TargetRegisterClass DTriple_with_dsub_2_then_ssub_0RegClass = {
     &ARMMCRegisterClasses[DTriple_with_dsub_2_then_ssub_0RegClassID],
+    24, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 33,
     DTriple_with_dsub_2_then_ssub_0SubClassMask,
     SuperRegIdxSeqs + 62,
@@ -6087,6 +6183,8 @@ namespace ARM {   // Register class instances
 
   extern const TargetRegisterClass DTripleSpc_with_dsub_4_then_ssub_0RegClass = {
     &ARMMCRegisterClasses[DTripleSpc_with_dsub_4_then_ssub_0RegClassID],
+    24, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 33,
     DTripleSpc_with_dsub_4_then_ssub_0SubClassMask,
     SuperRegIdxSeqs + 37,
@@ -6100,6 +6198,8 @@ namespace ARM {   // Register class instances
 
   extern const TargetRegisterClass DTripleSpc_with_dsub_0_in_DPR_8RegClass = {
     &ARMMCRegisterClasses[DTripleSpc_with_dsub_0_in_DPR_8RegClassID],
+    24, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 33,
     DTripleSpc_with_dsub_0_in_DPR_8SubClassMask,
     SuperRegIdxSeqs + 37,
@@ -6113,6 +6213,8 @@ namespace ARM {   // Register class instances
 
   extern const TargetRegisterClass DTriple_with_dsub_0_in_DPR_8RegClass = {
     &ARMMCRegisterClasses[DTriple_with_dsub_0_in_DPR_8RegClassID],
+    24, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 33,
     DTriple_with_dsub_0_in_DPR_8SubClassMask,
     SuperRegIdxSeqs + 62,
@@ -6126,6 +6228,8 @@ namespace ARM {   // Register class instances
 
   extern const TargetRegisterClass DTriple_with_qsub_0_in_QPR_VFP2RegClass = {
     &ARMMCRegisterClasses[DTriple_with_qsub_0_in_QPR_VFP2RegClassID],
+    24, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 33,
     DTriple_with_qsub_0_in_QPR_VFP2SubClassMask,
     SuperRegIdxSeqs + 45,
@@ -6139,6 +6243,8 @@ namespace ARM {   // Register class instances
 
   extern const TargetRegisterClass DTriple_with_ssub_0_and_DTriple_with_dsub_1_dsub_2_in_QPRRegClass = {
     &ARMMCRegisterClasses[DTriple_with_ssub_0_and_DTriple_with_dsub_1_dsub_2_in_QPRRegClassID],
+    24, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 33,
     DTriple_with_ssub_0_and_DTriple_with_dsub_1_dsub_2_in_QPRSubClassMask,
     SuperRegIdxSeqs + 57,
@@ -6152,6 +6258,8 @@ namespace ARM {   // Register class instances
 
   extern const TargetRegisterClass DTriple_with_dsub_1_dsub_2_in_QPR_VFP2RegClass = {
     &ARMMCRegisterClasses[DTriple_with_dsub_1_dsub_2_in_QPR_VFP2RegClassID],
+    24, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 33,
     DTriple_with_dsub_1_dsub_2_in_QPR_VFP2SubClassMask,
     SuperRegIdxSeqs + 57,
@@ -6165,6 +6273,8 @@ namespace ARM {   // Register class instances
 
   extern const TargetRegisterClass DTriple_with_dsub_1_in_DPR_8RegClass = {
     &ARMMCRegisterClasses[DTriple_with_dsub_1_in_DPR_8RegClassID],
+    24, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 33,
     DTriple_with_dsub_1_in_DPR_8SubClassMask,
     SuperRegIdxSeqs + 62,
@@ -6178,6 +6288,8 @@ namespace ARM {   // Register class instances
 
   extern const TargetRegisterClass DTriple_with_dsub_2_then_ssub_0_and_DTriple_with_qsub_0_in_QPRRegClass = {
     &ARMMCRegisterClasses[DTriple_with_dsub_2_then_ssub_0_and_DTriple_with_qsub_0_in_QPRRegClassID],
+    24, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 33,
     DTriple_with_dsub_2_then_ssub_0_and_DTriple_with_qsub_0_in_QPRSubClassMask,
     SuperRegIdxSeqs + 45,
@@ -6191,6 +6303,8 @@ namespace ARM {   // Register class instances
 
   extern const TargetRegisterClass DTripleSpc_with_dsub_2_in_DPR_8RegClass = {
     &ARMMCRegisterClasses[DTripleSpc_with_dsub_2_in_DPR_8RegClassID],
+    24, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 33,
     DTripleSpc_with_dsub_2_in_DPR_8SubClassMask,
     SuperRegIdxSeqs + 37,
@@ -6204,6 +6318,8 @@ namespace ARM {   // Register class instances
 
   extern const TargetRegisterClass DTriple_with_dsub_2_in_DPR_8RegClass = {
     &ARMMCRegisterClasses[DTriple_with_dsub_2_in_DPR_8RegClassID],
+    24, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 33,
     DTriple_with_dsub_2_in_DPR_8SubClassMask,
     SuperRegIdxSeqs + 62,
@@ -6217,6 +6333,8 @@ namespace ARM {   // Register class instances
 
   extern const TargetRegisterClass DTripleSpc_with_dsub_4_in_DPR_8RegClass = {
     &ARMMCRegisterClasses[DTripleSpc_with_dsub_4_in_DPR_8RegClassID],
+    24, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 33,
     DTripleSpc_with_dsub_4_in_DPR_8SubClassMask,
     SuperRegIdxSeqs + 37,
@@ -6230,6 +6348,8 @@ namespace ARM {   // Register class instances
 
   extern const TargetRegisterClass DTriple_with_dsub_0_in_DPR_8_and_DTriple_with_dsub_1_dsub_2_in_QPRRegClass = {
     &ARMMCRegisterClasses[DTriple_with_dsub_0_in_DPR_8_and_DTriple_with_dsub_1_dsub_2_in_QPRRegClassID],
+    24, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 33,
     DTriple_with_dsub_0_in_DPR_8_and_DTriple_with_dsub_1_dsub_2_in_QPRSubClassMask,
     SuperRegIdxSeqs + 57,
@@ -6243,6 +6363,8 @@ namespace ARM {   // Register class instances
 
   extern const TargetRegisterClass DTriple_with_qsub_0_in_QPR_8RegClass = {
     &ARMMCRegisterClasses[DTriple_with_qsub_0_in_QPR_8RegClassID],
+    24, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 33,
     DTriple_with_qsub_0_in_QPR_8SubClassMask,
     SuperRegIdxSeqs + 45,
@@ -6256,6 +6378,8 @@ namespace ARM {   // Register class instances
 
   extern const TargetRegisterClass DTriple_with_dsub_1_dsub_2_in_QPR_8RegClass = {
     &ARMMCRegisterClasses[DTriple_with_dsub_1_dsub_2_in_QPR_8RegClassID],
+    24, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 33,
     DTriple_with_dsub_1_dsub_2_in_QPR_8SubClassMask,
     SuperRegIdxSeqs + 57,
@@ -6269,6 +6393,8 @@ namespace ARM {   // Register class instances
 
   extern const TargetRegisterClass DTriple_with_dsub_2_in_DPR_8_and_DTriple_with_qsub_0_in_QPRRegClass = {
     &ARMMCRegisterClasses[DTriple_with_dsub_2_in_DPR_8_and_DTriple_with_qsub_0_in_QPRRegClassID],
+    24, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 33,
     DTriple_with_dsub_2_in_DPR_8_and_DTriple_with_qsub_0_in_QPRSubClassMask,
     SuperRegIdxSeqs + 45,
@@ -6282,6 +6408,8 @@ namespace ARM {   // Register class instances
 
   extern const TargetRegisterClass DQuadSpcRegClass = {
     &ARMMCRegisterClasses[DQuadSpcRegClassID],
+    32, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 6,
     DQuadSpcSubClassMask,
     SuperRegIdxSeqs + 37,
@@ -6295,6 +6423,8 @@ namespace ARM {   // Register class instances
 
   extern const TargetRegisterClass DQuadSpc_with_ssub_0RegClass = {
     &ARMMCRegisterClasses[DQuadSpc_with_ssub_0RegClassID],
+    32, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 6,
     DQuadSpc_with_ssub_0SubClassMask,
     SuperRegIdxSeqs + 37,
@@ -6308,6 +6438,8 @@ namespace ARM {   // Register class instances
 
   extern const TargetRegisterClass DQuadSpc_with_dsub_2_then_ssub_0RegClass = {
     &ARMMCRegisterClasses[DQuadSpc_with_dsub_2_then_ssub_0RegClassID],
+    32, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 6,
     DQuadSpc_with_dsub_2_then_ssub_0SubClassMask,
     SuperRegIdxSeqs + 37,
@@ -6321,6 +6453,8 @@ namespace ARM {   // Register class instances
 
   extern const TargetRegisterClass DQuadSpc_with_dsub_4_then_ssub_0RegClass = {
     &ARMMCRegisterClasses[DQuadSpc_with_dsub_4_then_ssub_0RegClassID],
+    32, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 6,
     DQuadSpc_with_dsub_4_then_ssub_0SubClassMask,
     SuperRegIdxSeqs + 37,
@@ -6334,6 +6468,8 @@ namespace ARM {   // Register class instances
 
   extern const TargetRegisterClass DQuadSpc_with_dsub_0_in_DPR_8RegClass = {
     &ARMMCRegisterClasses[DQuadSpc_with_dsub_0_in_DPR_8RegClassID],
+    32, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 6,
     DQuadSpc_with_dsub_0_in_DPR_8SubClassMask,
     SuperRegIdxSeqs + 37,
@@ -6347,6 +6483,8 @@ namespace ARM {   // Register class instances
 
   extern const TargetRegisterClass DQuadSpc_with_dsub_2_in_DPR_8RegClass = {
     &ARMMCRegisterClasses[DQuadSpc_with_dsub_2_in_DPR_8RegClassID],
+    32, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 6,
     DQuadSpc_with_dsub_2_in_DPR_8SubClassMask,
     SuperRegIdxSeqs + 37,
@@ -6360,6 +6498,8 @@ namespace ARM {   // Register class instances
 
   extern const TargetRegisterClass DQuadSpc_with_dsub_4_in_DPR_8RegClass = {
     &ARMMCRegisterClasses[DQuadSpc_with_dsub_4_in_DPR_8RegClassID],
+    32, /* SpillSize */
+    8, /* SpillAlignment */
     VTLists + 6,
     DQuadSpc_with_dsub_4_in_DPR_8SubClassMask,
     SuperRegIdxSeqs + 37,
@@ -6373,6 +6513,8 @@ namespace ARM {   // Register class instances
 
   extern const TargetRegisterClass DQuadRegClass = {
     &ARMMCRegisterClasses[DQuadRegClassID],
+    32, /* SpillSize */
+    32, /* SpillAlignment */
     VTLists + 6,
     DQuadSubClassMask,
     SuperRegIdxSeqs + 81,
@@ -6386,6 +6528,8 @@ namespace ARM {   // Register class instances
 
   extern const TargetRegisterClass DQuad_with_ssub_0RegClass = {
     &ARMMCRegisterClasses[DQuad_with_ssub_0RegClassID],
+    32, /* SpillSize */
+    32, /* SpillAlignment */
     VTLists + 6,
     DQuad_with_ssub_0SubClassMask,
     SuperRegIdxSeqs + 81,
@@ -6399,6 +6543,8 @@ namespace ARM {   // Register class instances
 
   extern const TargetRegisterClass DQuad_with_ssub_2RegClass = {
     &ARMMCRegisterClasses[DQuad_with_ssub_2RegClassID],
+    32, /* SpillSize */
+    32, /* SpillAlignment */
     VTLists + 6,
     DQuad_with_ssub_2SubClassMask,
     SuperRegIdxSeqs + 81,
@@ -6412,6 +6558,8 @@ namespace ARM {   // Register class instances
 
   extern const TargetRegisterClass QQPRRegClass = {
     &ARMMCRegisterClasses[QQPRRegClassID],
+    32, /* SpillSize */
+    32, /* SpillAlignment */
     VTLists + 6,
     QQPRSubClassMask,
     SuperRegIdxSeqs + 77,
@@ -6425,6 +6573,8 @@ namespace ARM {   // Register class instances
 
   extern const TargetRegisterClass DQuad_with_dsub_1_dsub_2_in_QPRRegClass = {
     &ARMMCRegisterClasses[DQuad_with_dsub_1_dsub_2_in_QPRRegClassID],
+    32, /* SpillSize */
+    32, /* SpillAlignment */
     VTLists + 6,
     DQuad_with_dsub_1_dsub_2_in_QPRSubClassMask,
     SuperRegIdxSeqs + 42,
@@ -6438,6 +6588,8 @@ namespace ARM {   // Register class instances
 
   extern const TargetRegisterClass DQuad_with_dsub_2_then_ssub_0RegClass = {
     &ARMMCRegisterClasses[DQuad_with_dsub_2_then_ssub_0RegClassID],
+    32, /* SpillSize */
+    32, /* SpillAlignment */
     VTLists + 6,
     DQuad_with_dsub_2_then_ssub_0SubClassMask,
     SuperRegIdxSeqs + 81,
@@ -6451,6 +6603,8 @@ namespace ARM {   // Register class instances
 
   extern const TargetRegisterClass DQuad_with_dsub_3_then_ssub_0RegClass = {
     &ARMMCRegisterClasses[DQuad_with_dsub_3_then_ssub_0RegClassID],
+    32, /* SpillSize */
+    32, /* SpillAlignment */
     VTLists + 6,
     DQuad_with_dsub_3_then_ssub_0SubClassMask,
     SuperRegIdxSeqs + 81,
@@ -6464,6 +6618,8 @@ namespace ARM {   // Register class instances
 
   extern const TargetRegisterClass DQuad_with_dsub_0_in_DPR_8RegClass = {
     &ARMMCRegisterClasses[DQuad_with_dsub_0_in_DPR_8RegClassID],
+    32, /* SpillSize */
+    32, /* SpillAlignment */
     VTLists + 6,
     DQuad_with_dsub_0_in_DPR_8SubClassMask,
     SuperRegIdxSeqs + 81,
@@ -6477,6 +6633,8 @@ namespace ARM {   // Register class instances
 
   extern const TargetRegisterClass DQuad_with_qsub_0_in_QPR_VFP2RegClass = {
     &ARMMCRegisterClasses[DQuad_with_qsub_0_in_QPR_VFP2RegClassID],
+    32, /* SpillSize */
+    32, /* SpillAlignment */
     VTLists + 6,
     DQuad_with_qsub_0_in_QPR_VFP2SubClassMask,
     SuperRegIdxSeqs + 77,
@@ -6490,6 +6648,8 @@ namespace ARM {   // Register class instances
 
   extern const TargetRegisterClass DQuad_with_ssub_0_and_DQuad_with_dsub_1_dsub_2_in_QPRRegClass = {
     &ARMMCRegisterClasses[DQuad_with_ssub_0_and_DQuad_with_dsub_1_dsub_2_in_QPRRegClassID],
+    32, /* SpillSize */
+    32, /* SpillAlignment */
     VTLists + 6,
     DQuad_with_ssub_0_and_DQuad_with_dsub_1_dsub_2_in_QPRSubClassMask,
     SuperRegIdxSeqs + 42,
@@ -6503,6 +6663,8 @@ namespace ARM {   // Register class instances
 
   extern const TargetRegisterClass DQuad_with_dsub_1_dsub_2_in_QPR_VFP2RegClass = {
     &ARMMCRegisterClasses[DQuad_with_dsub_1_dsub_2_in_QPR_VFP2RegClassID],
+    32, /* SpillSize */
+    32, /* SpillAlignment */
     VTLists + 6,
     DQuad_with_dsub_1_dsub_2_in_QPR_VFP2SubClassMask,
     SuperRegIdxSeqs + 42,
@@ -6516,6 +6678,8 @@ namespace ARM {   // Register class instances
 
   extern const TargetRegisterClass DQuad_with_dsub_1_in_DPR_8RegClass = {
     &ARMMCRegisterClasses[DQuad_with_dsub_1_in_DPR_8RegClassID],
+    32, /* SpillSize */
+    32, /* SpillAlignment */
     VTLists + 6,
     DQuad_with_dsub_1_in_DPR_8SubClassMask,
     SuperRegIdxSeqs + 81,
@@ -6529,6 +6693,8 @@ namespace ARM {   // Register class instances
 
   extern const TargetRegisterClass DQuad_with_qsub_1_in_QPR_VFP2RegClass = {
     &ARMMCRegisterClasses[DQuad_with_qsub_1_in_QPR_VFP2RegClassID],
+    32, /* SpillSize */
+    32, /* SpillAlignment */
     VTLists + 6,
     DQuad_with_qsub_1_in_QPR_VFP2SubClassMask,
     SuperRegIdxSeqs + 77,
@@ -6542,6 +6708,8 @@ namespace ARM {   // Register class instances
 
   extern const TargetRegisterClass DQuad_with_dsub_2_in_DPR_8RegClass = {
     &ARMMCRegisterClasses[DQuad_with_dsub_2_in_DPR_8RegClassID],
+    32, /* SpillSize */
+    32, /* SpillAlignment */
     VTLists + 6,
     DQuad_with_dsub_2_in_DPR_8SubClassMask,
     SuperRegIdxSeqs + 81,
@@ -6555,6 +6723,8 @@ namespace ARM {   // Register class instances
 
   extern const TargetRegisterClass DQuad_with_dsub_3_then_ssub_0_and_DQuad_with_dsub_1_dsub_2_in_QPRRegClass = {
     &ARMMCRegisterClasses[DQuad_with_dsub_3_then_ssub_0_and_DQuad_with_dsub_1_dsub_2_in_QPRRegClassID],
+    32, /* SpillSize */
+    32, /* SpillAlignment */
     VTLists + 6,
     DQuad_with_dsub_3_then_ssub_0_and_DQuad_with_dsub_1_dsub_2_in_QPRSubClassMask,
     SuperRegIdxSeqs + 42,
@@ -6568,6 +6738,8 @@ namespace ARM {   // Register class instances
 
   extern const TargetRegisterClass DQuad_with_dsub_3_in_DPR_8RegClass = {
     &ARMMCRegisterClasses[DQuad_with_dsub_3_in_DPR_8RegClassID],
+    32, /* SpillSize */
+    32, /* SpillAlignment */
     VTLists + 6,
     DQuad_with_dsub_3_in_DPR_8SubClassMask,
     SuperRegIdxSeqs + 81,
@@ -6581,6 +6753,8 @@ namespace ARM {   // Register class instances
 
   extern const TargetRegisterClass DQuad_with_dsub_0_in_DPR_8_and_DQuad_with_dsub_1_dsub_2_in_QPRRegClass = {
     &ARMMCRegisterClasses[DQuad_with_dsub_0_in_DPR_8_and_DQuad_with_dsub_1_dsub_2_in_QPRRegClassID],
+    32, /* SpillSize */
+    32, /* SpillAlignment */
     VTLists + 6,
     DQuad_with_dsub_0_in_DPR_8_and_DQuad_with_dsub_1_dsub_2_in_QPRSubClassMask,
     SuperRegIdxSeqs + 42,
@@ -6594,6 +6768,8 @@ namespace ARM {   // Register class instances
 
   extern const TargetRegisterClass DQuad_with_qsub_0_in_QPR_8RegClass = {
     &ARMMCRegisterClasses[DQuad_with_qsub_0_in_QPR_8RegClassID],
+    32, /* SpillSize */
+    32, /* SpillAlignment */
     VTLists + 6,
     DQuad_with_qsub_0_in_QPR_8SubClassMask,
     SuperRegIdxSeqs + 77,
@@ -6607,6 +6783,8 @@ namespace ARM {   // Register class instances
 
   extern const TargetRegisterClass DQuad_with_dsub_1_dsub_2_in_QPR_8RegClass = {
     &ARMMCRegisterClasses[DQuad_with_dsub_1_dsub_2_in_QPR_8RegClassID],
+    32, /* SpillSize */
+    32, /* SpillAlignment */
     VTLists + 6,
     DQuad_with_dsub_1_dsub_2_in_QPR_8SubClassMask,
     SuperRegIdxSeqs + 42,
@@ -6620,6 +6798,8 @@ namespace ARM {   // Register class instances
 
   extern const TargetRegisterClass DQuad_with_qsub_1_in_QPR_8RegClass = {
     &ARMMCRegisterClasses[DQuad_with_qsub_1_in_QPR_8RegClassID],
+    32, /* SpillSize */
+    32, /* SpillAlignment */
     VTLists + 6,
     DQuad_with_qsub_1_in_QPR_8SubClassMask,
     SuperRegIdxSeqs + 77,
@@ -6633,6 +6813,8 @@ namespace ARM {   // Register class instances
 
   extern const TargetRegisterClass DQuad_with_dsub_3_in_DPR_8_and_DQuad_with_dsub_1_dsub_2_in_QPRRegClass = {
     &ARMMCRegisterClasses[DQuad_with_dsub_3_in_DPR_8_and_DQuad_with_dsub_1_dsub_2_in_QPRRegClassID],
+    32, /* SpillSize */
+    32, /* SpillAlignment */
     VTLists + 6,
     DQuad_with_dsub_3_in_DPR_8_and_DQuad_with_dsub_1_dsub_2_in_QPRSubClassMask,
     SuperRegIdxSeqs + 42,
@@ -6646,6 +6828,8 @@ namespace ARM {   // Register class instances
 
   extern const TargetRegisterClass QQQQPRRegClass = {
     &ARMMCRegisterClasses[QQQQPRRegClassID],
+    64, /* SpillSize */
+    32, /* SpillAlignment */
     VTLists + 8,
     QQQQPRSubClassMask,
     SuperRegIdxSeqs + 8,
@@ -6659,6 +6843,8 @@ namespace ARM {   // Register class instances
 
   extern const TargetRegisterClass QQQQPR_with_ssub_0RegClass = {
     &ARMMCRegisterClasses[QQQQPR_with_ssub_0RegClassID],
+    64, /* SpillSize */
+    32, /* SpillAlignment */
     VTLists + 8,
     QQQQPR_with_ssub_0SubClassMask,
     SuperRegIdxSeqs + 8,
@@ -6672,6 +6858,8 @@ namespace ARM {   // Register class instances
 
   extern const TargetRegisterClass QQQQPR_with_dsub_2_then_ssub_0RegClass = {
     &ARMMCRegisterClasses[QQQQPR_with_dsub_2_then_ssub_0RegClassID],
+    64, /* SpillSize */
+    32, /* SpillAlignment */
     VTLists + 8,
     QQQQPR_with_dsub_2_then_ssub_0SubClassMask,
     SuperRegIdxSeqs + 8,
@@ -6685,6 +6873,8 @@ namespace ARM {   // Register class instances
 
   extern const TargetRegisterClass QQQQPR_with_dsub_5_then_ssub_0RegClass = {
     &ARMMCRegisterClasses[QQQQPR_with_dsub_5_then_ssub_0RegClassID],
+    64, /* SpillSize */
+    32, /* SpillAlignment */
     VTLists + 8,
     QQQQPR_with_dsub_5_then_ssub_0SubClassMask,
     SuperRegIdxSeqs + 8,
@@ -6698,6 +6888,8 @@ namespace ARM {   // Register class instances
 
   extern const TargetRegisterClass QQQQPR_with_dsub_7_then_ssub_0RegClass = {
     &ARMMCRegisterClasses[QQQQPR_with_dsub_7_then_ssub_0RegClassID],
+    64, /* SpillSize */
+    32, /* SpillAlignment */
     VTLists + 8,
     QQQQPR_with_dsub_7_then_ssub_0SubClassMask,
     SuperRegIdxSeqs + 8,
@@ -6711,6 +6903,8 @@ namespace ARM {   // Register class instances
 
   extern const TargetRegisterClass QQQQPR_with_dsub_0_in_DPR_8RegClass = {
     &ARMMCRegisterClasses[QQQQPR_with_dsub_0_in_DPR_8RegClassID],
+    64, /* SpillSize */
+    32, /* SpillAlignment */
     VTLists + 8,
     QQQQPR_with_dsub_0_in_DPR_8SubClassMask,
     SuperRegIdxSeqs + 8,
@@ -6724,6 +6918,8 @@ namespace ARM {   // Register class instances
 
   extern const TargetRegisterClass QQQQPR_with_dsub_2_in_DPR_8RegClass = {
     &ARMMCRegisterClasses[QQQQPR_with_dsub_2_in_DPR_8RegClassID],
+    64, /* SpillSize */
+    32, /* SpillAlignment */
     VTLists + 8,
     QQQQPR_with_dsub_2_in_DPR_8SubClassMask,
     SuperRegIdxSeqs + 8,
@@ -6737,6 +6933,8 @@ namespace ARM {   // Register class instances
 
   extern const TargetRegisterClass QQQQPR_with_dsub_4_in_DPR_8RegClass = {
     &ARMMCRegisterClasses[QQQQPR_with_dsub_4_in_DPR_8RegClassID],
+    64, /* SpillSize */
+    32, /* SpillAlignment */
     VTLists + 8,
     QQQQPR_with_dsub_4_in_DPR_8SubClassMask,
     SuperRegIdxSeqs + 8,
@@ -6750,6 +6948,8 @@ namespace ARM {   // Register class instances
 
   extern const TargetRegisterClass QQQQPR_with_dsub_6_in_DPR_8RegClass = {
     &ARMMCRegisterClasses[QQQQPR_with_dsub_6_in_DPR_8RegClassID],
+    64, /* SpillSize */
+    32, /* SpillAlignment */
     VTLists + 8,
     QQQQPR_with_dsub_6_in_DPR_8SubClassMask,
     SuperRegIdxSeqs + 8,
@@ -7285,7 +7485,7 @@ unsigned ARMGenRegisterInfo::composeSubRegIndicesImpl(unsigned IdxA, unsigned Id
 LaneBitmask ARMGenRegisterInfo::composeSubRegIndexLaneMaskImpl(unsigned IdxA, LaneBitmask LaneMask) const {
   --IdxA; assert(IdxA < 56 && "Subregister index out of bounds");
   LaneBitmask Result;
-  for (const MaskRolOp *Ops = CompositeSequences[IdxA]; !Ops->Mask.none(); ++Ops) {
+  for (const MaskRolOp *Ops = CompositeSequences[IdxA]; Ops->Mask.any(); ++Ops) {
     LaneBitmask::Type M = LaneMask.getAsInteger() & Ops->Mask.getAsInteger();
     if (unsigned S = Ops->RotateLeft)
       Result |= LaneBitmask((M << S) | (M >> (LaneBitmask::BitWidth - S)));
@@ -7299,7 +7499,7 @@ LaneBitmask ARMGenRegisterInfo::reverseComposeSubRegIndexLaneMaskImpl(unsigned I
   LaneMask &= getSubRegIndexLaneMask(IdxA);
   --IdxA; assert(IdxA < 56 && "Subregister index out of bounds");
   LaneBitmask Result;
-  for (const MaskRolOp *Ops = CompositeSequences[IdxA]; !Ops->Mask.none(); ++Ops) {
+  for (const MaskRolOp *Ops = CompositeSequences[IdxA]; Ops->Mask.any(); ++Ops) {
     LaneBitmask::Type M = LaneMask.getAsInteger();
     if (unsigned S = Ops->RotateLeft)
       Result |= LaneBitmask((M >> S) | (M << (LaneBitmask::BitWidth - S)));
@@ -13424,8 +13624,8 @@ static const MCPhysReg CSR_iOS_CXX_TLS_PE_SaveList[] = { ARM::LR, ARM::R12, ARM:
 static const uint32_t CSR_iOS_CXX_TLS_PE_RegMask[] = { 0x00000400, 0x00000000, 0x000062c0, 0x00000000, 0x00000000, 0x00001000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, };
 static const MCPhysReg CSR_iOS_CXX_TLS_ViaCopy_SaveList[] = { ARM::R6, ARM::R10, ARM::R8, ARM::D15, ARM::D14, ARM::D13, ARM::D12, ARM::D11, ARM::D10, ARM::D9, ARM::D8, ARM::R9, ARM::R3, ARM::R2, ARM::R1, ARM::D31, ARM::D30, ARM::D29, ARM::D28, ARM::D27, ARM::D26, ARM::D25, ARM::D24, ARM::D23, ARM::D22, ARM::D21, ARM::D20, ARM::D19, ARM::D18, ARM::D17, ARM::D16, ARM::D7, ARM::D6, ARM::D5, ARM::D4, ARM::D3, ARM::D2, ARM::D1, ARM::D0, 0 };
 static const uint32_t CSR_iOS_CXX_TLS_ViaCopy_RegMask[] = { 0xffffc000, 0xfffc3fff, 0xffff9d3b, 0xffffffff, 0xffffffff, 0xffff49ff, 0xffffffff, 0xffffffff, 0xffffffff, 0x00000001, };
-static const MCPhysReg CSR_iOS_SwiftError_SaveList[] = { ARM::LR, ARM::R7, ARM::R5, ARM::R4, ARM::R11, ARM::R10, ARM::R8, ARM::D15, ARM::D14, ARM::D13, ARM::D12, ARM::D11, ARM::D10, ARM::D9, ARM::D8, 0 };
-static const uint32_t CSR_iOS_SwiftError_RegMask[] = { 0x3fc00400, 0x03c00000, 0x800036c0, 0x1f807fff, 0x000e0000, 0x3f009001, 0x03c00000, 0x000c0000, 0x01800700, 0x00000000, };
+static const MCPhysReg CSR_iOS_SwiftError_SaveList[] = { ARM::LR, ARM::R7, ARM::R6, ARM::R5, ARM::R4, ARM::R11, ARM::R10, ARM::D15, ARM::D14, ARM::D13, ARM::D12, ARM::D11, ARM::D10, ARM::D9, ARM::D8, 0 };
+static const uint32_t CSR_iOS_SwiftError_RegMask[] = { 0x3fc00400, 0x03c00000, 0x800033c0, 0x1f807fff, 0x000e0000, 0x3f00b001, 0x03c00000, 0x000c0000, 0x01800700, 0x00000000, };
 static const MCPhysReg CSR_iOS_TLSCall_SaveList[] = { ARM::LR, ARM::SP, ARM::R12, ARM::R11, ARM::R10, ARM::R9, ARM::R8, ARM::R7, ARM::R6, ARM::R5, ARM::R4, ARM::R3, ARM::R2, ARM::R1, ARM::D31, ARM::D30, ARM::D29, ARM::D28, ARM::D27, ARM::D26, ARM::D25, ARM::D24, ARM::D23, ARM::D22, ARM::D21, ARM::D20, ARM::D19, ARM::D18, ARM::D17, ARM::D16, ARM::D15, ARM::D14, ARM::D13, ARM::D12, ARM::D11, ARM::D10, ARM::D9, ARM::D8, ARM::D7, ARM::D6, ARM::D5, ARM::D4, ARM::D3, ARM::D2, ARM::D1, ARM::D0, 0 };
 static const uint32_t CSR_iOS_TLSCall_RegMask[] = { 0xffffd400, 0xfffc3fff, 0xfffffffb, 0xffffffff, 0xffffffff, 0xfffffbff, 0xffffffff, 0xffffffff, 0xffffffff, 0x00000001, };
 static const MCPhysReg CSR_iOS_ThisReturn_SaveList[] = { ARM::LR, ARM::R7, ARM::R6, ARM::R5, ARM::R4, ARM::R11, ARM::R10, ARM::R8, ARM::D15, ARM::D14, ARM::D13, ARM::D12, ARM::D11, ARM::D10, ARM::D9, ARM::D8, ARM::R0, 0 };

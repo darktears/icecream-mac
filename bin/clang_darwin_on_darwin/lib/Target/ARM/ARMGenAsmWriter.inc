@@ -342,164 +342,165 @@ void ARMInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo &S
   /* 2692 */ 'v', 'q', 'r', 's', 'h', 'l', 0,
   /* 2699 */ 'v', 'r', 's', 'h', 'l', 0,
   /* 2705 */ 'v', 's', 'h', 'l', 0,
-  /* 2710 */ 'v', 's', 'h', 'l', 'l', 0,
-  /* 2716 */ 'v', 'q', 'd', 'm', 'u', 'l', 'l', 0,
-  /* 2724 */ 's', 'm', 'u', 'l', 'l', 0,
-  /* 2730 */ 'u', 'm', 'u', 'l', 'l', 0,
-  /* 2736 */ 'v', 'm', 'u', 'l', 'l', 0,
-  /* 2742 */ 'v', 'b', 's', 'l', 0,
-  /* 2747 */ 'v', 'q', 'd', 'm', 'l', 's', 'l', 0,
-  /* 2755 */ 'v', 'm', 'l', 's', 'l', 0,
-  /* 2761 */ 's', 't', 'l', 0,
-  /* 2765 */ 's', 'm', 'm', 'u', 'l', 0,
-  /* 2771 */ 'v', 'n', 'm', 'u', 'l', 0,
-  /* 2777 */ 'v', 'm', 'u', 'l', 0,
-  /* 2782 */ 'v', 'm', 'o', 'v', 'l', 0,
-  /* 2788 */ 'v', 'l', 'l', 'd', 'm', 0,
-  /* 2794 */ 'v', 'l', 's', 't', 'm', 0,
-  /* 2800 */ 'v', 'r', 's', 'u', 'b', 'h', 'n', 0,
-  /* 2808 */ 'v', 's', 'u', 'b', 'h', 'n', 0,
-  /* 2815 */ 'v', 'r', 'a', 'd', 'd', 'h', 'n', 0,
-  /* 2823 */ 'v', 'a', 'd', 'd', 'h', 'n', 0,
-  /* 2830 */ 'v', 'p', 'm', 'i', 'n', 0,
-  /* 2836 */ 'v', 'm', 'i', 'n', 0,
-  /* 2841 */ 'c', 'm', 'n', 0,
-  /* 2845 */ 'v', 'q', 's', 'h', 'r', 'n', 0,
-  /* 2852 */ 'v', 'q', 'r', 's', 'h', 'r', 'n', 0,
-  /* 2860 */ 'v', 'r', 's', 'h', 'r', 'n', 0,
-  /* 2867 */ 'v', 's', 'h', 'r', 'n', 0,
-  /* 2873 */ 'v', 'o', 'r', 'n', 0,
-  /* 2878 */ 'v', 't', 'r', 'n', 0,
-  /* 2883 */ 'v', 'q', 's', 'h', 'r', 'u', 'n', 0,
-  /* 2891 */ 'v', 'q', 'r', 's', 'h', 'r', 'u', 'n', 0,
-  /* 2900 */ 'v', 'q', 'm', 'o', 'v', 'u', 'n', 0,
-  /* 2908 */ 'v', 'm', 'v', 'n', 0,
-  /* 2913 */ 'v', 'q', 'm', 'o', 'v', 'n', 0,
-  /* 2920 */ 'v', 'm', 'o', 'v', 'n', 0,
-  /* 2926 */ 't', 'r', 'a', 'p', 0,
-  /* 2931 */ 'c', 'd', 'p', 0,
-  /* 2935 */ 'v', 'z', 'i', 'p', 0,
-  /* 2940 */ 'v', 'c', 'm', 'p', 0,
-  /* 2945 */ 'p', 'o', 'p', 0,
-  /* 2949 */ 'v', 'd', 'u', 'p', 0,
-  /* 2954 */ 'v', 's', 'w', 'p', 0,
-  /* 2959 */ 'v', 'u', 'z', 'p', 0,
-  /* 2964 */ 'v', 'c', 'e', 'q', 0,
-  /* 2969 */ 't', 'e', 'q', 0,
-  /* 2973 */ 's', 'm', 'm', 'l', 'a', 'r', 0,
-  /* 2980 */ 'm', 'c', 'r', 0,
-  /* 2984 */ 'a', 'd', 'r', 0,
-  /* 2988 */ 'v', 'l', 'd', 'r', 0,
-  /* 2993 */ 'v', 'r', 's', 'h', 'r', 0,
-  /* 2999 */ 'v', 's', 'h', 'r', 0,
-  /* 3004 */ 's', 'm', 'm', 'u', 'l', 'r', 0,
-  /* 3011 */ 'v', 'e', 'o', 'r', 0,
-  /* 3016 */ 'r', 'o', 'r', 0,
-  /* 3020 */ 'm', 'c', 'r', 'r', 0,
-  /* 3025 */ 'v', 'o', 'r', 'r', 0,
-  /* 3030 */ 'a', 's', 'r', 0,
-  /* 3034 */ 's', 'm', 'm', 'l', 's', 'r', 0,
-  /* 3041 */ 'v', 'm', 's', 'r', 0,
-  /* 3046 */ 'v', 'r', 'i', 'n', 't', 'r', 0,
-  /* 3053 */ 'v', 's', 't', 'r', 0,
-  /* 3058 */ 'v', 'c', 'v', 't', 'r', 0,
-  /* 3064 */ 'v', 'q', 'a', 'b', 's', 0,
-  /* 3070 */ 'v', 'a', 'b', 's', 0,
-  /* 3075 */ 's', 'u', 'b', 's', 0,
-  /* 3080 */ 'v', 'c', 'l', 's', 0,
-  /* 3085 */ 's', 'm', 'm', 'l', 's', 0,
-  /* 3091 */ 'v', 'n', 'm', 'l', 's', 0,
-  /* 3097 */ 'v', 'm', 'l', 's', 0,
-  /* 3102 */ 'v', 'f', 'm', 's', 0,
-  /* 3107 */ 'v', 'f', 'n', 'm', 's', 0,
-  /* 3113 */ 'b', 'x', 'n', 's', 0,
-  /* 3118 */ 'b', 'l', 'x', 'n', 's', 0,
-  /* 3124 */ 'v', 'r', 'e', 'c', 'p', 's', 0,
-  /* 3131 */ 'v', 'm', 'r', 's', 0,
-  /* 3136 */ 'a', 's', 'r', 's', 0,
-  /* 3141 */ 'l', 's', 'r', 's', 0,
-  /* 3146 */ 'v', 'r', 's', 'q', 'r', 't', 's', 0,
-  /* 3154 */ 'm', 'o', 'v', 's', 0,
-  /* 3159 */ 's', 's', 'a', 't', 0,
-  /* 3164 */ 'u', 's', 'a', 't', 0,
-  /* 3169 */ 't', 't', 'a', 't', 0,
-  /* 3174 */ 's', 'm', 'l', 'a', 'b', 't', 0,
-  /* 3181 */ 'p', 'k', 'h', 'b', 't', 0,
-  /* 3187 */ 's', 'm', 'l', 'a', 'l', 'b', 't', 0,
-  /* 3195 */ 's', 'm', 'u', 'l', 'b', 't', 0,
-  /* 3202 */ 'l', 'd', 'r', 'b', 't', 0,
-  /* 3208 */ 's', 't', 'r', 'b', 't', 0,
-  /* 3214 */ 'l', 'd', 'r', 's', 'b', 't', 0,
-  /* 3221 */ 'e', 'r', 'e', 't', 0,
-  /* 3226 */ 'v', 'a', 'c', 'g', 't', 0,
-  /* 3232 */ 'v', 'c', 'g', 't', 0,
-  /* 3237 */ 'l', 'd', 'r', 'h', 't', 0,
-  /* 3243 */ 's', 't', 'r', 'h', 't', 0,
-  /* 3249 */ 'l', 'd', 'r', 's', 'h', 't', 0,
-  /* 3256 */ 'r', 'b', 'i', 't', 0,
-  /* 3261 */ 'v', 'b', 'i', 't', 0,
-  /* 3266 */ 'v', 'c', 'l', 't', 0,
-  /* 3271 */ 'v', 'c', 'n', 't', 0,
-  /* 3276 */ 'h', 'i', 'n', 't', 0,
-  /* 3281 */ 'l', 'd', 'r', 't', 0,
-  /* 3286 */ 'v', 's', 'q', 'r', 't', 0,
-  /* 3292 */ 's', 't', 'r', 't', 0,
-  /* 3297 */ 'v', 't', 's', 't', 0,
-  /* 3302 */ 's', 'm', 'l', 'a', 't', 't', 0,
-  /* 3309 */ 's', 'm', 'l', 'a', 'l', 't', 't', 0,
-  /* 3317 */ 's', 'm', 'u', 'l', 't', 't', 0,
-  /* 3324 */ 't', 't', 't', 0,
-  /* 3328 */ 'v', 'c', 'v', 't', 't', 0,
-  /* 3334 */ 'v', 'c', 'v', 't', 0,
-  /* 3339 */ 'm', 'o', 'v', 't', 0,
-  /* 3344 */ 's', 'm', 'l', 'a', 'w', 't', 0,
-  /* 3351 */ 's', 'm', 'u', 'l', 'w', 't', 0,
-  /* 3358 */ 'v', 'e', 'x', 't', 0,
-  /* 3363 */ 'v', 'q', 's', 'h', 'l', 'u', 0,
-  /* 3370 */ 'r', 'e', 'v', 0,
-  /* 3374 */ 's', 'd', 'i', 'v', 0,
-  /* 3379 */ 'u', 'd', 'i', 'v', 0,
-  /* 3384 */ 'v', 'd', 'i', 'v', 0,
-  /* 3389 */ 'v', 'm', 'o', 'v', 0,
-  /* 3394 */ 'v', 's', 'u', 'b', 'w', 0,
-  /* 3400 */ 'v', 'a', 'd', 'd', 'w', 0,
-  /* 3406 */ 'p', 'l', 'd', 'w', 0,
-  /* 3411 */ 'm', 'o', 'v', 'w', 0,
-  /* 3416 */ 'f', 'l', 'd', 'm', 'i', 'a', 'x', 0,
-  /* 3424 */ 'f', 's', 't', 'm', 'i', 'a', 'x', 0,
-  /* 3432 */ 'v', 'p', 'm', 'a', 'x', 0,
-  /* 3438 */ 'v', 'm', 'a', 'x', 0,
-  /* 3443 */ 's', 'h', 's', 'a', 'x', 0,
-  /* 3449 */ 'u', 'h', 's', 'a', 'x', 0,
-  /* 3455 */ 'u', 'q', 's', 'a', 'x', 0,
-  /* 3461 */ 's', 's', 'a', 'x', 0,
-  /* 3466 */ 'u', 's', 'a', 'x', 0,
-  /* 3471 */ 'f', 'l', 'd', 'm', 'd', 'b', 'x', 0,
-  /* 3479 */ 'f', 's', 't', 'm', 'd', 'b', 'x', 0,
-  /* 3487 */ 'v', 't', 'b', 'x', 0,
-  /* 3492 */ 's', 'm', 'l', 'a', 'd', 'x', 0,
-  /* 3499 */ 's', 'm', 'u', 'a', 'd', 'x', 0,
-  /* 3506 */ 's', 'm', 'l', 'a', 'l', 'd', 'x', 0,
-  /* 3514 */ 's', 'm', 'l', 's', 'l', 'd', 'x', 0,
-  /* 3522 */ 's', 'm', 'l', 's', 'd', 'x', 0,
-  /* 3529 */ 's', 'm', 'u', 's', 'd', 'x', 0,
-  /* 3536 */ 'l', 'd', 'a', 'e', 'x', 0,
-  /* 3542 */ 's', 't', 'l', 'e', 'x', 0,
-  /* 3548 */ 'l', 'd', 'r', 'e', 'x', 0,
-  /* 3554 */ 'c', 'l', 'r', 'e', 'x', 0,
-  /* 3560 */ 's', 't', 'r', 'e', 'x', 0,
-  /* 3566 */ 's', 'b', 'f', 'x', 0,
-  /* 3571 */ 'u', 'b', 'f', 'x', 0,
-  /* 3576 */ 'b', 'l', 'x', 0,
-  /* 3580 */ 'r', 'r', 'x', 0,
-  /* 3584 */ 's', 'h', 'a', 's', 'x', 0,
-  /* 3590 */ 'u', 'h', 'a', 's', 'x', 0,
-  /* 3596 */ 'u', 'q', 'a', 's', 'x', 0,
-  /* 3602 */ 's', 'a', 's', 'x', 0,
-  /* 3607 */ 'u', 'a', 's', 'x', 0,
-  /* 3612 */ 'v', 'r', 'i', 'n', 't', 'x', 0,
-  /* 3619 */ 'v', 'c', 'l', 'z', 0,
-  /* 3624 */ 'v', 'r', 'i', 'n', 't', 'z', 0,
+  /* 2710 */ '#', 32, 'F', 'E', 'n', 't', 'r', 'y', 32, 'c', 'a', 'l', 'l', 0,
+  /* 2724 */ 'v', 's', 'h', 'l', 'l', 0,
+  /* 2730 */ 'v', 'q', 'd', 'm', 'u', 'l', 'l', 0,
+  /* 2738 */ 's', 'm', 'u', 'l', 'l', 0,
+  /* 2744 */ 'u', 'm', 'u', 'l', 'l', 0,
+  /* 2750 */ 'v', 'm', 'u', 'l', 'l', 0,
+  /* 2756 */ 'v', 'b', 's', 'l', 0,
+  /* 2761 */ 'v', 'q', 'd', 'm', 'l', 's', 'l', 0,
+  /* 2769 */ 'v', 'm', 'l', 's', 'l', 0,
+  /* 2775 */ 's', 't', 'l', 0,
+  /* 2779 */ 's', 'm', 'm', 'u', 'l', 0,
+  /* 2785 */ 'v', 'n', 'm', 'u', 'l', 0,
+  /* 2791 */ 'v', 'm', 'u', 'l', 0,
+  /* 2796 */ 'v', 'm', 'o', 'v', 'l', 0,
+  /* 2802 */ 'v', 'l', 'l', 'd', 'm', 0,
+  /* 2808 */ 'v', 'l', 's', 't', 'm', 0,
+  /* 2814 */ 'v', 'r', 's', 'u', 'b', 'h', 'n', 0,
+  /* 2822 */ 'v', 's', 'u', 'b', 'h', 'n', 0,
+  /* 2829 */ 'v', 'r', 'a', 'd', 'd', 'h', 'n', 0,
+  /* 2837 */ 'v', 'a', 'd', 'd', 'h', 'n', 0,
+  /* 2844 */ 'v', 'p', 'm', 'i', 'n', 0,
+  /* 2850 */ 'v', 'm', 'i', 'n', 0,
+  /* 2855 */ 'c', 'm', 'n', 0,
+  /* 2859 */ 'v', 'q', 's', 'h', 'r', 'n', 0,
+  /* 2866 */ 'v', 'q', 'r', 's', 'h', 'r', 'n', 0,
+  /* 2874 */ 'v', 'r', 's', 'h', 'r', 'n', 0,
+  /* 2881 */ 'v', 's', 'h', 'r', 'n', 0,
+  /* 2887 */ 'v', 'o', 'r', 'n', 0,
+  /* 2892 */ 'v', 't', 'r', 'n', 0,
+  /* 2897 */ 'v', 'q', 's', 'h', 'r', 'u', 'n', 0,
+  /* 2905 */ 'v', 'q', 'r', 's', 'h', 'r', 'u', 'n', 0,
+  /* 2914 */ 'v', 'q', 'm', 'o', 'v', 'u', 'n', 0,
+  /* 2922 */ 'v', 'm', 'v', 'n', 0,
+  /* 2927 */ 'v', 'q', 'm', 'o', 'v', 'n', 0,
+  /* 2934 */ 'v', 'm', 'o', 'v', 'n', 0,
+  /* 2940 */ 't', 'r', 'a', 'p', 0,
+  /* 2945 */ 'c', 'd', 'p', 0,
+  /* 2949 */ 'v', 'z', 'i', 'p', 0,
+  /* 2954 */ 'v', 'c', 'm', 'p', 0,
+  /* 2959 */ 'p', 'o', 'p', 0,
+  /* 2963 */ 'v', 'd', 'u', 'p', 0,
+  /* 2968 */ 'v', 's', 'w', 'p', 0,
+  /* 2973 */ 'v', 'u', 'z', 'p', 0,
+  /* 2978 */ 'v', 'c', 'e', 'q', 0,
+  /* 2983 */ 't', 'e', 'q', 0,
+  /* 2987 */ 's', 'm', 'm', 'l', 'a', 'r', 0,
+  /* 2994 */ 'm', 'c', 'r', 0,
+  /* 2998 */ 'a', 'd', 'r', 0,
+  /* 3002 */ 'v', 'l', 'd', 'r', 0,
+  /* 3007 */ 'v', 'r', 's', 'h', 'r', 0,
+  /* 3013 */ 'v', 's', 'h', 'r', 0,
+  /* 3018 */ 's', 'm', 'm', 'u', 'l', 'r', 0,
+  /* 3025 */ 'v', 'e', 'o', 'r', 0,
+  /* 3030 */ 'r', 'o', 'r', 0,
+  /* 3034 */ 'm', 'c', 'r', 'r', 0,
+  /* 3039 */ 'v', 'o', 'r', 'r', 0,
+  /* 3044 */ 'a', 's', 'r', 0,
+  /* 3048 */ 's', 'm', 'm', 'l', 's', 'r', 0,
+  /* 3055 */ 'v', 'm', 's', 'r', 0,
+  /* 3060 */ 'v', 'r', 'i', 'n', 't', 'r', 0,
+  /* 3067 */ 'v', 's', 't', 'r', 0,
+  /* 3072 */ 'v', 'c', 'v', 't', 'r', 0,
+  /* 3078 */ 'v', 'q', 'a', 'b', 's', 0,
+  /* 3084 */ 'v', 'a', 'b', 's', 0,
+  /* 3089 */ 's', 'u', 'b', 's', 0,
+  /* 3094 */ 'v', 'c', 'l', 's', 0,
+  /* 3099 */ 's', 'm', 'm', 'l', 's', 0,
+  /* 3105 */ 'v', 'n', 'm', 'l', 's', 0,
+  /* 3111 */ 'v', 'm', 'l', 's', 0,
+  /* 3116 */ 'v', 'f', 'm', 's', 0,
+  /* 3121 */ 'v', 'f', 'n', 'm', 's', 0,
+  /* 3127 */ 'b', 'x', 'n', 's', 0,
+  /* 3132 */ 'b', 'l', 'x', 'n', 's', 0,
+  /* 3138 */ 'v', 'r', 'e', 'c', 'p', 's', 0,
+  /* 3145 */ 'v', 'm', 'r', 's', 0,
+  /* 3150 */ 'a', 's', 'r', 's', 0,
+  /* 3155 */ 'l', 's', 'r', 's', 0,
+  /* 3160 */ 'v', 'r', 's', 'q', 'r', 't', 's', 0,
+  /* 3168 */ 'm', 'o', 'v', 's', 0,
+  /* 3173 */ 's', 's', 'a', 't', 0,
+  /* 3178 */ 'u', 's', 'a', 't', 0,
+  /* 3183 */ 't', 't', 'a', 't', 0,
+  /* 3188 */ 's', 'm', 'l', 'a', 'b', 't', 0,
+  /* 3195 */ 'p', 'k', 'h', 'b', 't', 0,
+  /* 3201 */ 's', 'm', 'l', 'a', 'l', 'b', 't', 0,
+  /* 3209 */ 's', 'm', 'u', 'l', 'b', 't', 0,
+  /* 3216 */ 'l', 'd', 'r', 'b', 't', 0,
+  /* 3222 */ 's', 't', 'r', 'b', 't', 0,
+  /* 3228 */ 'l', 'd', 'r', 's', 'b', 't', 0,
+  /* 3235 */ 'e', 'r', 'e', 't', 0,
+  /* 3240 */ 'v', 'a', 'c', 'g', 't', 0,
+  /* 3246 */ 'v', 'c', 'g', 't', 0,
+  /* 3251 */ 'l', 'd', 'r', 'h', 't', 0,
+  /* 3257 */ 's', 't', 'r', 'h', 't', 0,
+  /* 3263 */ 'l', 'd', 'r', 's', 'h', 't', 0,
+  /* 3270 */ 'r', 'b', 'i', 't', 0,
+  /* 3275 */ 'v', 'b', 'i', 't', 0,
+  /* 3280 */ 'v', 'c', 'l', 't', 0,
+  /* 3285 */ 'v', 'c', 'n', 't', 0,
+  /* 3290 */ 'h', 'i', 'n', 't', 0,
+  /* 3295 */ 'l', 'd', 'r', 't', 0,
+  /* 3300 */ 'v', 's', 'q', 'r', 't', 0,
+  /* 3306 */ 's', 't', 'r', 't', 0,
+  /* 3311 */ 'v', 't', 's', 't', 0,
+  /* 3316 */ 's', 'm', 'l', 'a', 't', 't', 0,
+  /* 3323 */ 's', 'm', 'l', 'a', 'l', 't', 't', 0,
+  /* 3331 */ 's', 'm', 'u', 'l', 't', 't', 0,
+  /* 3338 */ 't', 't', 't', 0,
+  /* 3342 */ 'v', 'c', 'v', 't', 't', 0,
+  /* 3348 */ 'v', 'c', 'v', 't', 0,
+  /* 3353 */ 'm', 'o', 'v', 't', 0,
+  /* 3358 */ 's', 'm', 'l', 'a', 'w', 't', 0,
+  /* 3365 */ 's', 'm', 'u', 'l', 'w', 't', 0,
+  /* 3372 */ 'v', 'e', 'x', 't', 0,
+  /* 3377 */ 'v', 'q', 's', 'h', 'l', 'u', 0,
+  /* 3384 */ 'r', 'e', 'v', 0,
+  /* 3388 */ 's', 'd', 'i', 'v', 0,
+  /* 3393 */ 'u', 'd', 'i', 'v', 0,
+  /* 3398 */ 'v', 'd', 'i', 'v', 0,
+  /* 3403 */ 'v', 'm', 'o', 'v', 0,
+  /* 3408 */ 'v', 's', 'u', 'b', 'w', 0,
+  /* 3414 */ 'v', 'a', 'd', 'd', 'w', 0,
+  /* 3420 */ 'p', 'l', 'd', 'w', 0,
+  /* 3425 */ 'm', 'o', 'v', 'w', 0,
+  /* 3430 */ 'f', 'l', 'd', 'm', 'i', 'a', 'x', 0,
+  /* 3438 */ 'f', 's', 't', 'm', 'i', 'a', 'x', 0,
+  /* 3446 */ 'v', 'p', 'm', 'a', 'x', 0,
+  /* 3452 */ 'v', 'm', 'a', 'x', 0,
+  /* 3457 */ 's', 'h', 's', 'a', 'x', 0,
+  /* 3463 */ 'u', 'h', 's', 'a', 'x', 0,
+  /* 3469 */ 'u', 'q', 's', 'a', 'x', 0,
+  /* 3475 */ 's', 's', 'a', 'x', 0,
+  /* 3480 */ 'u', 's', 'a', 'x', 0,
+  /* 3485 */ 'f', 'l', 'd', 'm', 'd', 'b', 'x', 0,
+  /* 3493 */ 'f', 's', 't', 'm', 'd', 'b', 'x', 0,
+  /* 3501 */ 'v', 't', 'b', 'x', 0,
+  /* 3506 */ 's', 'm', 'l', 'a', 'd', 'x', 0,
+  /* 3513 */ 's', 'm', 'u', 'a', 'd', 'x', 0,
+  /* 3520 */ 's', 'm', 'l', 'a', 'l', 'd', 'x', 0,
+  /* 3528 */ 's', 'm', 'l', 's', 'l', 'd', 'x', 0,
+  /* 3536 */ 's', 'm', 'l', 's', 'd', 'x', 0,
+  /* 3543 */ 's', 'm', 'u', 's', 'd', 'x', 0,
+  /* 3550 */ 'l', 'd', 'a', 'e', 'x', 0,
+  /* 3556 */ 's', 't', 'l', 'e', 'x', 0,
+  /* 3562 */ 'l', 'd', 'r', 'e', 'x', 0,
+  /* 3568 */ 'c', 'l', 'r', 'e', 'x', 0,
+  /* 3574 */ 's', 't', 'r', 'e', 'x', 0,
+  /* 3580 */ 's', 'b', 'f', 'x', 0,
+  /* 3585 */ 'u', 'b', 'f', 'x', 0,
+  /* 3590 */ 'b', 'l', 'x', 0,
+  /* 3594 */ 'r', 'r', 'x', 0,
+  /* 3598 */ 's', 'h', 'a', 's', 'x', 0,
+  /* 3604 */ 'u', 'h', 'a', 's', 'x', 0,
+  /* 3610 */ 'u', 'q', 'a', 's', 'x', 0,
+  /* 3616 */ 's', 'a', 's', 'x', 0,
+  /* 3621 */ 'u', 'a', 's', 'x', 0,
+  /* 3626 */ 'v', 'r', 'i', 'n', 't', 'x', 0,
+  /* 3633 */ 'v', 'c', 'l', 'z', 0,
+  /* 3638 */ 'v', 'r', 'i', 'n', 't', 'z', 0,
   };
 
   static const uint32_t OpInfo0[] = {
@@ -521,11 +522,12 @@ void ARMInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo &S
     1873U,	// LIFETIME_START
     1843U,	// LIFETIME_END
     0U,	// STACKMAP
+    2711U,	// FENTRY_CALL
     0U,	// PATCHPOINT
     0U,	// LOAD_STACK_GUARD
     0U,	// STATEPOINT
     0U,	// LOCAL_ESCAPE
-    0U,	// FAULTING_LOAD_OP
+    0U,	// FAULTING_OP
     0U,	// PATCHABLE_OP
     1450U,	// PATCHABLE_FUNCTION_ENTER
     1419U,	// PATCHABLE_RET
@@ -544,20 +546,25 @@ void ARMInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo &S
     0U,	// G_FRAME_INDEX
     0U,	// G_GLOBAL_VALUE
     0U,	// G_EXTRACT
+    0U,	// G_UNMERGE_VALUES
     0U,	// G_INSERT
     0U,	// G_SEQUENCE
+    0U,	// G_MERGE_VALUES
     0U,	// G_PTRTOINT
     0U,	// G_INTTOPTR
     0U,	// G_BITCAST
     0U,	// G_LOAD
     0U,	// G_STORE
     0U,	// G_BRCOND
+    0U,	// G_BRINDIRECT
     0U,	// G_INTRINSIC
     0U,	// G_INTRINSIC_W_SIDE_EFFECTS
     0U,	// G_ANYEXT
     0U,	// G_TRUNC
     0U,	// G_CONSTANT
     0U,	// G_FCONSTANT
+    0U,	// G_VASTART
+    0U,	// G_VAARG
     0U,	// G_SEXT
     0U,	// G_ZEXT
     0U,	// G_SHL
@@ -572,11 +579,15 @@ void ARMInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo &S
     0U,	// G_SSUBO
     0U,	// G_UMULO
     0U,	// G_SMULO
+    0U,	// G_UMULH
+    0U,	// G_SMULH
     0U,	// G_FADD
     0U,	// G_FSUB
     0U,	// G_FMUL
     0U,	// G_FDIV
     0U,	// G_FREM
+    0U,	// G_FPOW
+    0U,	// G_FNEG
     0U,	// G_FPEXT
     0U,	// G_FPTRUNC
     0U,	// G_FPTOSI
@@ -584,7 +595,11 @@ void ARMInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo &S
     0U,	// G_SITOFP
     0U,	// G_UITOFP
     0U,	// G_GEP
+    0U,	// G_PTR_MASK
     0U,	// G_BR
+    0U,	// G_INSERT_VECTOR_ELT
+    0U,	// G_EXTRACT_VECTOR_ELT
+    0U,	// G_SHUFFLE_VECTOR
     0U,	// ABS
     6306U,	// ADCri
     6306U,	// ADCrr
@@ -600,7 +615,7 @@ void ARMInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo &S
     14559U,	// ADDrsr
     0U,	// ADJCALLSTACKDOWN
     0U,	// ADJCALLSTACKUP
-    19369U,	// ADR
+    19383U,	// ADR
     1090671693U,	// AESD
     1090671701U,	// AESE
     1107448890U,	// AESIMC
@@ -609,8 +624,8 @@ void ARMInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo &S
     6420U,	// ANDrr
     10516U,	// ANDrsi
     14612U,	// ANDrsr
-    269271U,	// ASRi
-    269271U,	// ASRr
+    269285U,	// ASRi
+    269285U,	// ASRr
     0U,	// B
     0U,	// BCCZi64
     0U,	// BCCi64
@@ -623,7 +638,7 @@ void ARMInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo &S
     414960U,	// BKPT
     414932U,	// BL
     415007U,	// BLX
-    1073778169U,	// BLX_pred
+    1073778183U,	// BLX_pred
     415007U,	// BLXi
     1073777237U,	// BL_pred
     0U,	// BMOVPCB_CALL
@@ -634,30 +649,30 @@ void ARMInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo &S
     415003U,	// BX
     1073777174U,	// BXJ
     0U,	// BX_CALL
-    564629U,	// BX_RET
-    1073778069U,	// BX_pred
+    564643U,	// BX_RET
+    1073778083U,	// BX_pred
     1073776573U,	// Bcc
-    2197859188U,	// CDP
+    2197859202U,	// CDP
     67809687U,	// CDP2
-    3555U,	// CLREX
-    20005U,	// CLZ
-    19226U,	// CMNri
-    19226U,	// CMNzrr
-    27418U,	// CMNzrsi
-    31514U,	// CMNzrsr
+    3569U,	// CLREX
+    20019U,	// CLZ
+    19240U,	// CMNri
+    19240U,	// CMNzrr
+    27432U,	// CMNzrsi
+    31528U,	// CMNzrsr
     0U,	// CMP_SWAP_16
     0U,	// CMP_SWAP_32
     0U,	// CMP_SWAP_64
     0U,	// CMP_SWAP_8
-    19326U,	// CMPri
-    19326U,	// CMPrr
-    27518U,	// CMPrsi
-    31614U,	// CMPrsr
+    19340U,	// CMPri
+    19340U,	// CMPrr
+    27532U,	// CMPrsi
+    31628U,	// CMPrsr
     0U,	// CONSTPOOL_ENTRY
     0U,	// COPY_STRUCT_BYVAL_I32
     414944U,	// CPS1p
-    1157680184U,	// CPS2p
-    83938360U,	// CPS3p
+    1157680198U,	// CPS2p
+    83938374U,	// CPS3p
     33707115U,	// CRC32B
     33707123U,	// CRC32CB
     33707192U,	// CRC32CH
@@ -667,26 +682,26 @@ void ARMInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo &S
     1073777012U,	// DBG
     54410U,	// DMB
     54415U,	// DSB
-    7109U,	// EORri
-    7109U,	// EORrr
-    11205U,	// EORrsi
-    15301U,	// EORrsr
-    433302U,	// ERET
-    3322694974U,	// FCONSTD
-    3322826046U,	// FCONSTH
-    3322957118U,	// FCONSTS
-    33574288U,	// FLDMXDB_UPD
-    36185U,	// FLDMXIA
-    33574233U,	// FLDMXIA_UPD
-    1219644U,	// FMSTAT
-    33574296U,	// FSTMXDB_UPD
-    36193U,	// FSTMXIA
-    33574241U,	// FSTMXIA_UPD
-    1073777869U,	// HINT
+    7123U,	// EORri
+    7123U,	// EORrr
+    11219U,	// EORrsi
+    15315U,	// EORrsr
+    433316U,	// ERET
+    3322694988U,	// FCONSTD
+    3322826060U,	// FCONSTH
+    3322957132U,	// FCONSTS
+    33574302U,	// FLDMXDB_UPD
+    36199U,	// FLDMXIA
+    33574247U,	// FLDMXIA_UPD
+    1219658U,	// FMSTAT
+    33574310U,	// FSTMXDB_UPD
+    36207U,	// FSTMXIA
+    33574255U,	// FSTMXIA_UPD
+    1073777883U,	// HINT
     414955U,	// HLT
     414873U,	// HVC
     58516U,	// ISB
-    117767355U,	// ITasm
+    117767369U,	// ITasm
     0U,	// Int_eh_sjlj_dispatchsetup
     0U,	// Int_eh_sjlj_longjmp
     0U,	// Int_eh_sjlj_setjmp
@@ -698,7 +713,7 @@ void ARMInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo &S
     0U,	// JUMPTABLE_TBH
     18277U,	// LDA
     18362U,	// LDAB
-    19921U,	// LDAEX
+    19935U,	// LDAEX
     18562U,	// LDAEXB
     134236462U,	// LDAEXD
     18920U,	// LDAEXH
@@ -723,113 +738,113 @@ void ARMInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo &S
     33572713U,	// LDMDA_UPD
     34796U,	// LDMDB
     33572844U,	// LDMDB_UPD
-    35559U,	// LDMIA
+    35573U,	// LDMIA
     0U,	// LDMIA_RET
-    33573607U,	// LDMIA_UPD
+    33573621U,	// LDMIA_UPD
     34815U,	// LDMIB
     33572863U,	// LDMIB_UPD
-    281731U,	// LDRBT_POST
-    68739U,	// LDRBT_POST_IMM
-    68739U,	// LDRBT_POST_REG
+    281745U,	// LDRBT_POST
+    68753U,	// LDRBT_POST_IMM
+    68753U,	// LDRBT_POST_REG
     67609U,	// LDRB_POST_IMM
     67609U,	// LDRB_POST_REG
     30745U,	// LDRB_PRE_IMM
     67609U,	// LDRB_PRE_REG
     26649U,	// LDRBi12
     30745U,	// LDRBrs
-    281518U,	// LDRConstPool
+    281532U,	// LDRConstPool
     67864U,	// LDRD
     43288U,	// LDRD_POST
     43288U,	// LDRD_PRE
-    19933U,	// LDREX
+    19947U,	// LDREX
     18576U,	// LDREXB
     134236476U,	// LDREXD
     18934U,	// LDREXH
     31162U,	// LDRH
-    31910U,	// LDRHTi
-    68774U,	// LDRHTr
+    31924U,	// LDRHTi
+    68788U,	// LDRHTr
     68026U,	// LDRH_POST
     68026U,	// LDRH_PRE
     0U,	// LDRLIT_ga_abs
     0U,	// LDRLIT_ga_pcrel
     0U,	// LDRLIT_ga_pcrel_ldr
     30763U,	// LDRSB
-    31887U,	// LDRSBTi
-    68751U,	// LDRSBTr
+    31901U,	// LDRSBTi
+    68765U,	// LDRSBTr
     67627U,	// LDRSB_POST
     67627U,	// LDRSB_PRE
     31181U,	// LDRSH
-    31922U,	// LDRSHTi
-    68786U,	// LDRSHTr
+    31936U,	// LDRSHTi
+    68800U,	// LDRSHTr
     68045U,	// LDRSH_POST
     68045U,	// LDRSH_PRE
-    281810U,	// LDRT_POST
-    68818U,	// LDRT_POST_IMM
-    68818U,	// LDRT_POST_REG
-    68526U,	// LDR_POST_IMM
-    68526U,	// LDR_POST_REG
-    31662U,	// LDR_PRE_IMM
-    68526U,	// LDR_PRE_REG
-    27566U,	// LDRcp
-    27566U,	// LDRi12
-    31662U,	// LDRrs
+    281824U,	// LDRT_POST
+    68832U,	// LDRT_POST_IMM
+    68832U,	// LDRT_POST_REG
+    68540U,	// LDR_POST_IMM
+    68540U,	// LDR_POST_REG
+    31676U,	// LDR_PRE_IMM
+    68540U,	// LDR_PRE_REG
+    27580U,	// LDRcp
+    27580U,	// LDRi12
+    31676U,	// LDRrs
     0U,	// LEApcrel
     0U,	// LEApcrelJT
-    268992U,	// LSLi
-    268992U,	// LSLr
-    269278U,	// LSRi
-    269278U,	// LSRr
-    2197859237U,	// MCR
+    269006U,	// LSLi
+    269006U,	// LSLr
+    269292U,	// LSRi
+    269292U,	// LSRr
+    2197859251U,	// MCR
     17478045U,	// MCR2
-    2197883853U,	// MCRR
+    2197883867U,	// MCRR
     17478051U,	// MCRR2
     0U,	// MEMCPY
     10129U,	// MLA
     0U,	// MLAv5
-    31760U,	// MLS
+    31774U,	// MLS
     0U,	// MOVCCi
     0U,	// MOVCCi16
     0U,	// MOVCCi32imm
     0U,	// MOVCCr
     0U,	// MOVCCsi
     0U,	// MOVCCsr
-    1482047U,	// MOVPCLR
+    1482061U,	// MOVPCLR
     0U,	// MOVPCRX
-    27916U,	// MOVTi16
+    27930U,	// MOVTi16
     0U,	// MOVTi16_ga_pcrel
     0U,	// MOV_ga_pcrel
     0U,	// MOV_ga_pcrel_ldr
-    73023U,	// MOVi
-    19796U,	// MOVi16
+    73037U,	// MOVi
+    19810U,	// MOVi16
     0U,	// MOVi16_ga_pcrel
     0U,	// MOVi32imm
-    73023U,	// MOVr
-    73023U,	// MOVr_TC
-    7487U,	// MOVsi
-    11583U,	// MOVsr
+    73037U,	// MOVr
+    73037U,	// MOVr_TC
+    7501U,	// MOVsi
+    11597U,	// MOVsr
     0U,	// MOVsra_flag
     0U,	// MOVsrl_flag
     201369783U,	// MRC
     74116U,	// MRC2
     218171579U,	// MRRC
     78218U,	// MRRC2
-    35901U,	// MRS
-    19517U,	// MRSbanked
-    1073777725U,	// MRSsys
-    2382384099U,	// MSR
-    251677667U,	// MSRbanked
-    2382384099U,	// MSRi
-    6864U,	// MUL
+    35915U,	// MRS
+    19531U,	// MRSbanked
+    1073777739U,	// MRSsys
+    2382384113U,	// MSR
+    251677681U,	// MSRbanked
+    2382384113U,	// MSRi
+    6878U,	// MUL
     0U,	// MULv5
     0U,	// MVNCCi
-    72542U,	// MVNi
-    72542U,	// MVNr
-    7006U,	// MVNsi
-    11102U,	// MVNsr
-    7123U,	// ORRri
-    7123U,	// ORRrr
-    11219U,	// ORRrsi
-    15315U,	// ORRrsr
+    72556U,	// MVNi
+    72556U,	// MVNr
+    7020U,	// MVNsi
+    11116U,	// MVNsr
+    7137U,	// ORRri
+    7137U,	// ORRrr
+    11233U,	// ORRrsi
+    15329U,	// ORRrsr
     0U,	// PICADD
     0U,	// PICLDR
     0U,	// PICLDRB
@@ -839,7 +854,7 @@ void ARMInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo &S
     0U,	// PICSTR
     0U,	// PICSTRB
     0U,	// PICSTRH
-    31854U,	// PKHBT
+    31868U,	// PKHBT
     30776U,	// PKHTB
     83221U,	// PLDWi12
     87317U,	// PLDWrs
@@ -850,15 +865,15 @@ void ARMInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo &S
     26871U,	// QADD
     26298U,	// QADD16
     26401U,	// QADD8
-    28174U,	// QASX
+    28188U,	// QASX
     26845U,	// QDADD
     26717U,	// QDSUB
-    28033U,	// QSAX
+    28047U,	// QSAX
     26730U,	// QSUB
     26260U,	// QSUB16
     26362U,	// QSUB8
-    19641U,	// RBIT
-    19755U,	// REV
+    19655U,	// RBIT
+    19769U,	// REV
     18142U,	// REV16
     18904U,	// REVSH
     414813U,	// RFEDA
@@ -869,10 +884,10 @@ void ARMInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo &S
     1594468U,	// RFEIA_UPD
     414851U,	// RFEIB
     1594499U,	// RFEIB_UPD
-    269257U,	// RORi
-    269257U,	// RORr
+    269271U,	// RORi
+    269271U,	// RORr
     0U,	// RRX
-    335357U,	// RRXi
+    335371U,	// RRXi
     0U,	// RSBSri
     0U,	// RSBSrsi
     0U,	// RSBSrsr
@@ -886,13 +901,13 @@ void ARMInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo &S
     14528U,	// RSCrsr
     26305U,	// SADD16
     26407U,	// SADD8
-    28179U,	// SASX
+    28193U,	// SASX
     6302U,	// SBCri
     6302U,	// SBCrr
     10398U,	// SBCrsi
     14494U,	// SBCrsr
-    32239U,	// SBFX
-    27951U,	// SDIV
+    32253U,	// SBFX
+    27965U,	// SDIV
     27259U,	// SEL
     91299U,	// SETEND
     414936U,	// SETPAN
@@ -908,49 +923,49 @@ void ARMInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo &S
     16928807U,	// SHA256SU1
     26281U,	// SHADD16
     26386U,	// SHADD8
-    28161U,	// SHASX
-    28020U,	// SHSAX
+    28175U,	// SHASX
+    28034U,	// SHSAX
     26243U,	// SHSUB16
     26347U,	// SHSUB8
     1073776819U,	// SMC
     30667U,	// SMLABB
-    31847U,	// SMLABT
+    31861U,	// SMLABT
     30924U,	// SMLAD
-    32165U,	// SMLADX
+    32179U,	// SMLADX
     96833U,	// SMLAL
-    30674U,	// SMLALBB
-    31860U,	// SMLALBT
+    42962U,	// SMLALBB
+    44162U,	// SMLALBT
     30977U,	// SMLALD
-    32179U,	// SMLALDX
-    30782U,	// SMLALTB
-    31982U,	// SMLALTT
+    32193U,	// SMLALDX
+    43070U,	// SMLALTB
+    44284U,	// SMLALTT
     0U,	// SMLALv5
     30769U,	// SMLATB
-    31975U,	// SMLATT
+    31989U,	// SMLATT
     30836U,	// SMLAWB
-    32017U,	// SMLAWT
+    32031U,	// SMLAWT
     31010U,	// SMLSD
-    32195U,	// SMLSDX
+    32209U,	// SMLSDX
     30988U,	// SMLSLD
-    32187U,	// SMLSLDX
+    32201U,	// SMLSLDX
     30607U,	// SMMLA
-    31646U,	// SMMLAR
-    31758U,	// SMMLS
-    31707U,	// SMMLSR
-    27342U,	// SMMUL
-    27581U,	// SMMULR
+    31660U,	// SMMLAR
+    31772U,	// SMMLS
+    31721U,	// SMMLSR
+    27356U,	// SMMUL
+    27595U,	// SMMULR
     26834U,	// SMUAD
-    28076U,	// SMUADX
+    28090U,	// SMUADX
     26586U,	// SMULBB
-    27772U,	// SMULBT
-    10917U,	// SMULL
+    27786U,	// SMULBT
+    10931U,	// SMULL
     0U,	// SMULLv5
     26694U,	// SMULTB
-    27894U,	// SMULTT
+    27908U,	// SMULTT
     26747U,	// SMULWB
-    27928U,	// SMULWT
+    27942U,	// SMULWT
     26920U,	// SMUSD
-    28106U,	// SMUSDX
+    28120U,	// SMUSDX
     0U,	// SPACE
     415071U,	// SRSDA
     415023U,	// SRSDA_UPD
@@ -960,9 +975,9 @@ void ARMInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo &S
     415035U,	// SRSIA_UPD
     415104U,	// SRSIB
     415059U,	// SRSIB_UPD
-    31832U,	// SSAT
+    31846U,	// SSAT
     26319U,	// SSAT16
-    28038U,	// SSAX
+    28052U,	// SSAX
     26267U,	// SSUB16
     26368U,	// SSUB8
     152351949U,	// STC2L_OFFSET
@@ -981,9 +996,9 @@ void ARMInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo &S
     3271588036U,	// STC_OPTION
     3271588036U,	// STC_POST
     3271588036U,	// STC_PRE
-    19146U,	// STL
+    19160U,	// STL
     18443U,	// STLB
-    28119U,	// STLEX
+    28133U,	// STLEX
     26761U,	// STLEXB
     26933U,	// STLEXD
     27119U,	// STLEXH
@@ -992,13 +1007,13 @@ void ARMInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo &S
     33572719U,	// STMDA_UPD
     34803U,	// STMDB
     33572851U,	// STMDB_UPD
-    35565U,	// STMIA
-    33573613U,	// STMIA_UPD
+    35579U,	// STMIA
+    33573627U,	// STMIA_UPD
     34821U,	// STMIB
     33572869U,	// STMIB_UPD
-    281737U,	// STRBT_POST
-    33623177U,	// STRBT_POST_IMM
-    33623177U,	// STRBT_POST_REG
+    281751U,	// STRBT_POST
+    33623191U,	// STRBT_POST_IMM
+    33623191U,	// STRBT_POST_REG
     33622046U,	// STRB_POST_IMM
     33622046U,	// STRB_POST_REG
     33585182U,	// STRB_PRE_IMM
@@ -1010,27 +1025,27 @@ void ARMInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo &S
     67869U,	// STRD
     33597725U,	// STRD_POST
     33597725U,	// STRD_PRE
-    28137U,	// STREX
+    28151U,	// STREX
     26775U,	// STREXB
     26947U,	// STREXD
     27133U,	// STREXH
     31167U,	// STRH
-    33586348U,	// STRHTi
-    33623212U,	// STRHTr
+    33586362U,	// STRHTi
+    33623226U,	// STRHTr
     33622463U,	// STRH_POST
     33622463U,	// STRH_PRE
     0U,	// STRH_preidx
-    281821U,	// STRT_POST
-    33623261U,	// STRT_POST_IMM
-    33623261U,	// STRT_POST_REG
-    33623023U,	// STR_POST_IMM
-    33623023U,	// STR_POST_REG
-    33586159U,	// STR_PRE_IMM
-    33623023U,	// STR_PRE_REG
-    27631U,	// STRi12
+    281835U,	// STRT_POST
+    33623275U,	// STRT_POST_IMM
+    33623275U,	// STRT_POST_REG
+    33623037U,	// STR_POST_IMM
+    33623037U,	// STR_POST_REG
+    33586173U,	// STR_PRE_IMM
+    33623037U,	// STR_PRE_REG
+    27645U,	// STRi12
     0U,	// STRi_preidx
     0U,	// STRr_preidx
-    31727U,	// STRrs
+    31741U,	// STRrs
     0U,	// SUBS_PC_LR
     0U,	// SUBSri
     0U,	// SUBSrr
@@ -1041,7 +1056,7 @@ void ARMInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo &S
     10335U,	// SUBrsi
     14431U,	// SUBrsr
     1073776840U,	// SVC
-    27532U,	// SWP
+    27546U,	// SWP
     26644U,	// SWPB
     30655U,	// SXTAB
     30309U,	// SXTAB16
@@ -1053,45 +1068,45 @@ void ARMInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo &S
     0U,	// TAILJMPr
     0U,	// TCRETURNdi
     0U,	// TCRETURNri
-    19354U,	// TEQri
-    19354U,	// TEQrr
-    27546U,	// TEQrsi
-    31642U,	// TEQrsr
+    19368U,	// TEQri
+    19368U,	// TEQrr
+    27560U,	// TEQrsi
+    31656U,	// TEQrsr
     0U,	// TPsoft
-    2927U,	// TRAP
-    2927U,	// TRAPNaCl
-    19683U,	// TSTri
-    19683U,	// TSTrr
-    27875U,	// TSTrsi
-    31971U,	// TSTrsr
+    2941U,	// TRAP
+    2941U,	// TRAPNaCl
+    19697U,	// TSTri
+    19697U,	// TSTrr
+    27889U,	// TSTrsi
+    31985U,	// TSTrsr
     26312U,	// UADD16
     26413U,	// UADD8
-    28184U,	// UASX
-    32244U,	// UBFX
+    28198U,	// UASX
+    32258U,	// UBFX
     414891U,	// UDF
-    27956U,	// UDIV
+    27970U,	// UDIV
     26289U,	// UHADD16
     26393U,	// UHADD8
-    28167U,	// UHASX
-    28026U,	// UHSAX
+    28181U,	// UHASX
+    28040U,	// UHSAX
     26251U,	// UHSUB16
     26354U,	// UHSUB8
     43558U,	// UMAAL
     96839U,	// UMLAL
     0U,	// UMLALv5
-    10923U,	// UMULL
+    10937U,	// UMULL
     0U,	// UMULLv5
     26297U,	// UQADD16
     26400U,	// UQADD8
-    28173U,	// UQASX
-    28032U,	// UQSAX
+    28187U,	// UQASX
+    28046U,	// UQSAX
     26259U,	// UQSUB16
     26361U,	// UQSUB8
     26380U,	// USAD8
     30436U,	// USADA8
-    31837U,	// USAT
+    31851U,	// USAT
     26326U,	// USAT16
-    28043U,	// USAX
+    28057U,	// USAX
     26274U,	// USUB16
     26374U,	// USUB8
     30661U,	// UXTAB
@@ -1140,32 +1155,32 @@ void ARMInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo &S
     35678424U,	// VABDuv4i32
     35809496U,	// VABDuv8i16
     35940568U,	// VABDuv8i8
-    2248952831U,	// VABSD
-    2249083903U,	// VABSH
-    2249214975U,	// VABSS
-    2249214975U,	// VABSfd
-    2249214975U,	// VABSfq
-    2249083903U,	// VABShd
-    2249083903U,	// VABShq
-    1109281791U,	// VABSv16i8
-    1109019647U,	// VABSv2i32
-    1109150719U,	// VABSv4i16
-    1109019647U,	// VABSv4i32
-    1109150719U,	// VABSv8i16
-    1109281791U,	// VABSv8i8
+    2248952845U,	// VABSD
+    2249083917U,	// VABSH
+    2249214989U,	// VABSS
+    2249214989U,	// VABSfd
+    2249214989U,	// VABSfq
+    2249083917U,	// VABShd
+    2249083917U,	// VABShq
+    1109281805U,	// VABSv16i8
+    1109019661U,	// VABSv2i32
+    1109150733U,	// VABSv4i16
+    1109019661U,	// VABSv4i32
+    1109150733U,	// VABSv8i16
+    1109281805U,	// VABSv8i8
     2249222474U,	// VACGEfd
     2249222474U,	// VACGEfq
     2249091402U,	// VACGEhd
     2249091402U,	// VACGEhq
-    2249223323U,	// VACGTfd
-    2249223323U,	// VACGTfq
-    2249092251U,	// VACGThd
-    2249092251U,	// VACGThq
+    2249223337U,	// VACGTfd
+    2249223337U,	// VACGTfq
+    2249092265U,	// VACGThd
+    2249092265U,	// VACGThq
     2248960252U,	// VADDD
     2249091324U,	// VADDH
-    36072200U,	// VADDHNv2i32
-    36203272U,	// VADDHNv4i16
-    36334344U,	// VADDHNv8i8
+    36072214U,	// VADDHNv2i32
+    36203286U,	// VADDHNv4i16
+    36334358U,	// VADDHNv8i8
     35285621U,	// VADDLsv2i64
     35416693U,	// VADDLsv4i32
     35547765U,	// VADDLsv8i16
@@ -1173,12 +1188,12 @@ void ARMInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo &S
     35809909U,	// VADDLuv4i32
     35940981U,	// VADDLuv8i16
     2249222396U,	// VADDS
-    35286345U,	// VADDWsv2i64
-    35417417U,	// VADDWsv4i32
-    35548489U,	// VADDWsv8i16
-    35679561U,	// VADDWuv2i64
-    35810633U,	// VADDWuv4i32
-    35941705U,	// VADDWuv8i16
+    35286359U,	// VADDWsv2i64
+    35417431U,	// VADDWsv4i32
+    35548503U,	// VADDWsv8i16
+    35679575U,	// VADDWuv2i64
+    35810647U,	// VADDWuv4i32
+    35941719U,	// VADDWuv8i16
     2249222396U,	// VADDfd
     2249222396U,	// VADDfq
     2249091324U,	// VADDhd
@@ -1201,30 +1216,30 @@ void ARMInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo &S
     26798U,	// VBICq
     31087U,	// VBIFd
     31087U,	// VBIFq
-    31934U,	// VBITd
-    31934U,	// VBITq
-    31415U,	// VBSLd
-    31415U,	// VBSLq
-    2249223061U,	// VCEQfd
-    2249223061U,	// VCEQfq
-    2249091989U,	// VCEQhd
-    2249091989U,	// VCEQhq
-    36465557U,	// VCEQv16i8
-    36203413U,	// VCEQv2i32
-    36334485U,	// VCEQv4i16
-    36203413U,	// VCEQv4i32
-    36334485U,	// VCEQv8i16
-    36465557U,	// VCEQv8i8
-    3257682837U,	// VCEQzv16i8
-    2249214869U,	// VCEQzv2f32
-    3257420693U,	// VCEQzv2i32
-    2249083797U,	// VCEQzv4f16
-    2249214869U,	// VCEQzv4f32
-    3257551765U,	// VCEQzv4i16
-    3257420693U,	// VCEQzv4i32
-    2249083797U,	// VCEQzv8f16
-    3257551765U,	// VCEQzv8i16
-    3257682837U,	// VCEQzv8i8
+    31948U,	// VBITd
+    31948U,	// VBITq
+    31429U,	// VBSLd
+    31429U,	// VBSLq
+    2249223075U,	// VCEQfd
+    2249223075U,	// VCEQfq
+    2249092003U,	// VCEQhd
+    2249092003U,	// VCEQhq
+    36465571U,	// VCEQv16i8
+    36203427U,	// VCEQv2i32
+    36334499U,	// VCEQv4i16
+    36203427U,	// VCEQv4i32
+    36334499U,	// VCEQv8i16
+    36465571U,	// VCEQv8i8
+    3257682851U,	// VCEQzv16i8
+    2249214883U,	// VCEQzv2f32
+    3257420707U,	// VCEQzv2i32
+    2249083811U,	// VCEQzv4f16
+    2249214883U,	// VCEQzv4f32
+    3257551779U,	// VCEQzv4i16
+    3257420707U,	// VCEQzv4i32
+    2249083811U,	// VCEQzv8f16
+    3257551779U,	// VCEQzv8i16
+    3257682851U,	// VCEQzv8i8
     2249222480U,	// VCGEfd
     2249222480U,	// VCGEfq
     2249091408U,	// VCGEhd
@@ -1251,32 +1266,32 @@ void ARMInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo &S
     2249083216U,	// VCGEzv8f16
     3256633680U,	// VCGEzv8i16
     3256764752U,	// VCGEzv8i8
-    2249223329U,	// VCGTfd
-    2249223329U,	// VCGTfq
-    2249092257U,	// VCGThd
-    2249092257U,	// VCGThq
-    35548321U,	// VCGTsv16i8
-    35286177U,	// VCGTsv2i32
-    35417249U,	// VCGTsv4i16
-    35286177U,	// VCGTsv4i32
-    35417249U,	// VCGTsv8i16
-    35548321U,	// VCGTsv8i8
-    35941537U,	// VCGTuv16i8
-    35679393U,	// VCGTuv2i32
-    35810465U,	// VCGTuv4i16
-    35679393U,	// VCGTuv4i32
-    35810465U,	// VCGTuv8i16
-    35941537U,	// VCGTuv8i8
-    3256765601U,	// VCGTzv16i8
-    2249215137U,	// VCGTzv2f32
-    3256503457U,	// VCGTzv2i32
-    2249084065U,	// VCGTzv4f16
-    2249215137U,	// VCGTzv4f32
-    3256634529U,	// VCGTzv4i16
-    3256503457U,	// VCGTzv4i32
-    2249084065U,	// VCGTzv8f16
-    3256634529U,	// VCGTzv8i16
-    3256765601U,	// VCGTzv8i8
+    2249223343U,	// VCGTfd
+    2249223343U,	// VCGTfq
+    2249092271U,	// VCGThd
+    2249092271U,	// VCGThq
+    35548335U,	// VCGTsv16i8
+    35286191U,	// VCGTsv2i32
+    35417263U,	// VCGTsv4i16
+    35286191U,	// VCGTsv4i32
+    35417263U,	// VCGTsv8i16
+    35548335U,	// VCGTsv8i8
+    35941551U,	// VCGTuv16i8
+    35679407U,	// VCGTuv2i32
+    35810479U,	// VCGTuv4i16
+    35679407U,	// VCGTuv4i32
+    35810479U,	// VCGTuv8i16
+    35941551U,	// VCGTuv8i8
+    3256765615U,	// VCGTzv16i8
+    2249215151U,	// VCGTzv2f32
+    3256503471U,	// VCGTzv2i32
+    2249084079U,	// VCGTzv4f16
+    2249215151U,	// VCGTzv4f32
+    3256634543U,	// VCGTzv4i16
+    3256503471U,	// VCGTzv4i32
+    2249084079U,	// VCGTzv8f16
+    3256634543U,	// VCGTzv8i16
+    3256765615U,	// VCGTzv8i8
     3256764757U,	// VCLEzv16i8
     2249214293U,	// VCLEzv2f32
     3256502613U,	// VCLEzv2i32
@@ -1287,42 +1302,42 @@ void ARMInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo &S
     2249083221U,	// VCLEzv8f16
     3256633685U,	// VCLEzv8i16
     3256764757U,	// VCLEzv8i8
-    1109281801U,	// VCLSv16i8
-    1109019657U,	// VCLSv2i32
-    1109150729U,	// VCLSv4i16
-    1109019657U,	// VCLSv4i32
-    1109150729U,	// VCLSv8i16
-    1109281801U,	// VCLSv8i8
-    3256765635U,	// VCLTzv16i8
-    2249215171U,	// VCLTzv2f32
-    3256503491U,	// VCLTzv2i32
-    2249084099U,	// VCLTzv4f16
-    2249215171U,	// VCLTzv4f32
-    3256634563U,	// VCLTzv4i16
-    3256503491U,	// VCLTzv4i32
-    2249084099U,	// VCLTzv8f16
-    3256634563U,	// VCLTzv8i16
-    3256765635U,	// VCLTzv8i8
-    1110199844U,	// VCLZv16i8
-    1109937700U,	// VCLZv2i32
-    1110068772U,	// VCLZv4i16
-    1109937700U,	// VCLZv4i32
-    1110068772U,	// VCLZv8i16
-    1110199844U,	// VCLZv8i8
-    2248952701U,	// VCMPD
+    1109281815U,	// VCLSv16i8
+    1109019671U,	// VCLSv2i32
+    1109150743U,	// VCLSv4i16
+    1109019671U,	// VCLSv4i32
+    1109150743U,	// VCLSv8i16
+    1109281815U,	// VCLSv8i8
+    3256765649U,	// VCLTzv16i8
+    2249215185U,	// VCLTzv2f32
+    3256503505U,	// VCLTzv2i32
+    2249084113U,	// VCLTzv4f16
+    2249215185U,	// VCLTzv4f32
+    3256634577U,	// VCLTzv4i16
+    3256503505U,	// VCLTzv4i32
+    2249084113U,	// VCLTzv8f16
+    3256634577U,	// VCLTzv8i16
+    3256765649U,	// VCLTzv8i8
+    1110199858U,	// VCLZv16i8
+    1109937714U,	// VCLZv2i32
+    1110068786U,	// VCLZv4i16
+    1109937714U,	// VCLZv4i32
+    1110068786U,	// VCLZv8i16
+    1110199858U,	// VCLZv8i8
+    2248952715U,	// VCMPD
     2248952161U,	// VCMPED
     2249083233U,	// VCMPEH
     2249214305U,	// VCMPES
     286034273U,	// VCMPEZD
     286165345U,	// VCMPEZH
     286296417U,	// VCMPEZS
-    2249083773U,	// VCMPH
-    2249214845U,	// VCMPS
-    286034813U,	// VCMPZD
-    286165885U,	// VCMPZH
-    286296957U,	// VCMPZS
-    3034312U,	// VCNTd
-    3034312U,	// VCNTq
+    2249083787U,	// VCMPH
+    2249214859U,	// VCMPS
+    286034827U,	// VCMPZD
+    286165899U,	// VCMPZH
+    286296971U,	// VCMPZS
+    3034326U,	// VCNTd
+    3034326U,	// VCNTq
     1107447926U,	// VCVTANSDf
     1107448605U,	// VCVTANSDh
     1107447926U,	// VCVTANSQf
@@ -1341,7 +1356,7 @@ void ARMInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo &S
     3295309U,	// VCVTBHD
     3426381U,	// VCVTBHS
     3557453U,	// VCVTBSH
-    3689735U,	// VCVTDS
+    3689749U,	// VCVTDS
     1107447941U,	// VCVTMNSDf
     1107448620U,	// VCVTMNSDh
     1107447941U,	// VCVTMNSQf
@@ -1384,69 +1399,69 @@ void ARMInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo &S
     1107448339U,	// VCVTPUD
     1107448590U,	// VCVTPUH
     1107448031U,	// VCVTPUS
-    3820807U,	// VCVTSD
-    3165441U,	// VCVTTDH
-    3296513U,	// VCVTTHD
-    3427585U,	// VCVTTHS
-    3558657U,	// VCVTTSH
-    3558663U,	// VCVTf2h
-    305941767U,	// VCVTf2sd
-    305941767U,	// VCVTf2sq
-    306072839U,	// VCVTf2ud
-    306072839U,	// VCVTf2uq
-    104623367U,	// VCVTf2xsd
-    104623367U,	// VCVTf2xsq
-    104754439U,	// VCVTf2xud
-    104754439U,	// VCVTf2xuq
-    3427591U,	// VCVTh2f
-    306203911U,	// VCVTh2sd
-    306203911U,	// VCVTh2sq
-    306334983U,	// VCVTh2ud
-    306334983U,	// VCVTh2uq
-    104885511U,	// VCVTh2xsd
-    104885511U,	// VCVTh2xsq
-    105016583U,	// VCVTh2xud
-    105016583U,	// VCVTh2xuq
-    306466055U,	// VCVTs2fd
-    306466055U,	// VCVTs2fq
-    306597127U,	// VCVTs2hd
-    306597127U,	// VCVTs2hq
-    306728199U,	// VCVTu2fd
-    306728199U,	// VCVTu2fq
-    306859271U,	// VCVTu2hd
-    306859271U,	// VCVTu2hq
-    105147655U,	// VCVTxs2fd
-    105147655U,	// VCVTxs2fq
-    105278727U,	// VCVTxs2hd
-    105278727U,	// VCVTxs2hq
-    105409799U,	// VCVTxu2fd
-    105409799U,	// VCVTxu2fq
-    105540871U,	// VCVTxu2hd
-    105540871U,	// VCVTxu2hq
-    2248961337U,	// VDIVD
-    2249092409U,	// VDIVH
-    2249223481U,	// VDIVS
-    5000070U,	// VDUP16d
-    5000070U,	// VDUP16q
-    5131142U,	// VDUP32d
-    5131142U,	// VDUP32q
-    3033990U,	// VDUP8d
-    3033990U,	// VDUP8q
-    5008262U,	// VDUPLN16d
-    5008262U,	// VDUPLN16q
-    5139334U,	// VDUPLN32d
-    5139334U,	// VDUPLN32q
-    3042182U,	// VDUPLN8d
-    3042182U,	// VDUPLN8q
-    27588U,	// VEORd
-    27588U,	// VEORq
-    5012767U,	// VEXTd16
-    5143839U,	// VEXTd32
-    3046687U,	// VEXTd8
-    5012767U,	// VEXTq16
-    5143839U,	// VEXTq32
-    5274911U,	// VEXTq64
-    3046687U,	// VEXTq8
+    3820821U,	// VCVTSD
+    3165455U,	// VCVTTDH
+    3296527U,	// VCVTTHD
+    3427599U,	// VCVTTHS
+    3558671U,	// VCVTTSH
+    3558677U,	// VCVTf2h
+    305941781U,	// VCVTf2sd
+    305941781U,	// VCVTf2sq
+    306072853U,	// VCVTf2ud
+    306072853U,	// VCVTf2uq
+    104623381U,	// VCVTf2xsd
+    104623381U,	// VCVTf2xsq
+    104754453U,	// VCVTf2xud
+    104754453U,	// VCVTf2xuq
+    3427605U,	// VCVTh2f
+    306203925U,	// VCVTh2sd
+    306203925U,	// VCVTh2sq
+    306334997U,	// VCVTh2ud
+    306334997U,	// VCVTh2uq
+    104885525U,	// VCVTh2xsd
+    104885525U,	// VCVTh2xsq
+    105016597U,	// VCVTh2xud
+    105016597U,	// VCVTh2xuq
+    306466069U,	// VCVTs2fd
+    306466069U,	// VCVTs2fq
+    306597141U,	// VCVTs2hd
+    306597141U,	// VCVTs2hq
+    306728213U,	// VCVTu2fd
+    306728213U,	// VCVTu2fq
+    306859285U,	// VCVTu2hd
+    306859285U,	// VCVTu2hq
+    105147669U,	// VCVTxs2fd
+    105147669U,	// VCVTxs2fq
+    105278741U,	// VCVTxs2hd
+    105278741U,	// VCVTxs2hq
+    105409813U,	// VCVTxu2fd
+    105409813U,	// VCVTxu2fq
+    105540885U,	// VCVTxu2hd
+    105540885U,	// VCVTxu2hq
+    2248961351U,	// VDIVD
+    2249092423U,	// VDIVH
+    2249223495U,	// VDIVS
+    5000084U,	// VDUP16d
+    5000084U,	// VDUP16q
+    5131156U,	// VDUP32d
+    5131156U,	// VDUP32q
+    3034004U,	// VDUP8d
+    3034004U,	// VDUP8q
+    5008276U,	// VDUPLN16d
+    5008276U,	// VDUPLN16q
+    5139348U,	// VDUPLN32d
+    5139348U,	// VDUPLN32q
+    3042196U,	// VDUPLN8d
+    3042196U,	// VDUPLN8q
+    27602U,	// VEORd
+    27602U,	// VEORq
+    5012781U,	// VEXTd16
+    5143853U,	// VEXTd32
+    3046701U,	// VEXTd8
+    5012781U,	// VEXTq16
+    5143853U,	// VEXTq32
+    5274925U,	// VEXTq64
+    3046701U,	// VEXTq8
     101480352U,	// VFMAD
     101611424U,	// VFMAH
     101742496U,	// VFMAS
@@ -1454,24 +1469,24 @@ void ARMInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo &S
     101742496U,	// VFMAfq
     101611424U,	// VFMAhd
     101611424U,	// VFMAhq
-    101481503U,	// VFMSD
-    101612575U,	// VFMSH
-    101743647U,	// VFMSS
-    101743647U,	// VFMSfd
-    101743647U,	// VFMSfq
-    101612575U,	// VFMShd
-    101612575U,	// VFMShq
+    101481517U,	// VFMSD
+    101612589U,	// VFMSH
+    101743661U,	// VFMSS
+    101743661U,	// VFMSfd
+    101743661U,	// VFMSfq
+    101612589U,	// VFMShd
+    101612589U,	// VFMShq
     101480357U,	// VFNMAD
     101611429U,	// VFNMAH
     101742501U,	// VFNMAS
-    101481508U,	// VFNMSD
-    101612580U,	// VFNMSH
-    101743652U,	// VFNMSS
-    5139774U,	// VGETLNi32
-    1109159230U,	// VGETLNs16
-    1109290302U,	// VGETLNs8
-    1109552446U,	// VGETLNu16
-    1109683518U,	// VGETLNu8
+    101481522U,	// VFNMSD
+    101612594U,	// VFNMSH
+    101743666U,	// VFNMSS
+    5139788U,	// VGETLNi32
+    1109159244U,	// VGETLNs16
+    1109290316U,	// VGETLNs8
+    1109552460U,	// VGETLNu16
+    1109683532U,	// VGETLNu8
     35547370U,	// VHADDsv16i8
     35285226U,	// VHADDsv2i32
     35416298U,	// VHADDsv4i16
@@ -1918,11 +1933,11 @@ void ARMInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo &S
     33572843U,	// VLDMSDB_UPD
     34683U,	// VLDMSIA
     33572731U,	// VLDMSIA_UPD
-    27565U,	// VLDRD
-    5008301U,	// VLDRH
-    27565U,	// VLDRS
-    1073777381U,	// VLLDM
-    1073777387U,	// VLSTM
+    27579U,	// VLDRD
+    5008315U,	// VLDRH
+    27579U,	// VLDRS
+    1073777395U,	// VLLDM
+    1073777401U,	// VLSTM
     33706566U,	// VMAXNMD
     33706937U,	// VMAXNMH
     33706258U,	// VMAXNMNDf
@@ -1930,22 +1945,22 @@ void ARMInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo &S
     33706258U,	// VMAXNMNQf
     33706937U,	// VMAXNMNQh
     33706258U,	// VMAXNMS
-    2249223535U,	// VMAXfd
-    2249223535U,	// VMAXfq
-    2249092463U,	// VMAXhd
-    2249092463U,	// VMAXhq
-    35548527U,	// VMAXsv16i8
-    35286383U,	// VMAXsv2i32
-    35417455U,	// VMAXsv4i16
-    35286383U,	// VMAXsv4i32
-    35417455U,	// VMAXsv8i16
-    35548527U,	// VMAXsv8i8
-    35941743U,	// VMAXuv16i8
-    35679599U,	// VMAXuv2i32
-    35810671U,	// VMAXuv4i16
-    35679599U,	// VMAXuv4i32
-    35810671U,	// VMAXuv8i16
-    35941743U,	// VMAXuv8i8
+    2249223549U,	// VMAXfd
+    2249223549U,	// VMAXfq
+    2249092477U,	// VMAXhd
+    2249092477U,	// VMAXhq
+    35548541U,	// VMAXsv16i8
+    35286397U,	// VMAXsv2i32
+    35417469U,	// VMAXsv4i16
+    35286397U,	// VMAXsv4i32
+    35417469U,	// VMAXsv8i16
+    35548541U,	// VMAXsv8i8
+    35941757U,	// VMAXuv16i8
+    35679613U,	// VMAXuv2i32
+    35810685U,	// VMAXuv4i16
+    35679613U,	// VMAXuv4i32
+    35810685U,	// VMAXuv8i16
+    35941757U,	// VMAXuv8i8
     33706554U,	// VMINNMD
     33706925U,	// VMINNMH
     33706246U,	// VMINNMNDf
@@ -1953,22 +1968,22 @@ void ARMInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo &S
     33706246U,	// VMINNMNQf
     33706925U,	// VMINNMNQh
     33706246U,	// VMINNMS
-    2249222933U,	// VMINfd
-    2249222933U,	// VMINfq
-    2249091861U,	// VMINhd
-    2249091861U,	// VMINhq
-    35547925U,	// VMINsv16i8
-    35285781U,	// VMINsv2i32
-    35416853U,	// VMINsv4i16
-    35285781U,	// VMINsv4i32
-    35416853U,	// VMINsv8i16
-    35547925U,	// VMINsv8i8
-    35941141U,	// VMINuv16i8
-    35678997U,	// VMINuv2i32
-    35810069U,	// VMINuv4i16
-    35678997U,	// VMINuv4i32
-    35810069U,	// VMINuv8i16
-    35941141U,	// VMINuv8i8
+    2249222947U,	// VMINfd
+    2249222947U,	// VMINfq
+    2249091875U,	// VMINhd
+    2249091875U,	// VMINhq
+    35547939U,	// VMINsv16i8
+    35285795U,	// VMINsv2i32
+    35416867U,	// VMINsv4i16
+    35285795U,	// VMINsv4i32
+    35416867U,	// VMINsv8i16
+    35547939U,	// VMINsv8i8
+    35941155U,	// VMINuv16i8
+    35679011U,	// VMINuv2i32
+    35810083U,	// VMINuv4i16
+    35679011U,	// VMINuv4i32
+    35810083U,	// VMINuv8i16
+    35941155U,	// VMINuv8i8
     101480347U,	// VMLAD
     101611419U,	// VMLAH
     18549325U,	// VMLALslsv2i32
@@ -2000,125 +2015,125 @@ void ARMInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo &S
     19429275U,	// VMLAv4i32
     19560347U,	// VMLAv8i16
     19691419U,	// VMLAv8i8
-    101481498U,	// VMLSD
-    101612570U,	// VMLSH
-    18549444U,	// VMLSLslsv2i32
-    18680516U,	// VMLSLslsv4i16
-    18942660U,	// VMLSLsluv2i32
-    19073732U,	// VMLSLsluv4i16
-    18512580U,	// VMLSLsv2i64
-    18643652U,	// VMLSLsv4i32
-    18774724U,	// VMLSLsv8i16
-    18905796U,	// VMLSLuv2i64
-    19036868U,	// VMLSLuv4i32
-    19167940U,	// VMLSLuv8i16
-    101743642U,	// VMLSS
-    101743642U,	// VMLSfd
-    101743642U,	// VMLSfq
-    101612570U,	// VMLShd
-    101612570U,	// VMLShq
-    101780506U,	// VMLSslfd
-    101780506U,	// VMLSslfq
-    101649434U,	// VMLSslhd
-    101649434U,	// VMLSslhq
-    19467290U,	// VMLSslv2i32
-    19598362U,	// VMLSslv4i16
-    19467290U,	// VMLSslv4i32
-    19598362U,	// VMLSslv8i16
-    19692570U,	// VMLSv16i8
-    19430426U,	// VMLSv2i32
-    19561498U,	// VMLSv4i16
-    19430426U,	// VMLSv4i32
-    19561498U,	// VMLSv8i16
-    19692570U,	// VMLSv8i8
-    2248953150U,	// VMOVD
+    101481512U,	// VMLSD
+    101612584U,	// VMLSH
+    18549458U,	// VMLSLslsv2i32
+    18680530U,	// VMLSLslsv4i16
+    18942674U,	// VMLSLsluv2i32
+    19073746U,	// VMLSLsluv4i16
+    18512594U,	// VMLSLsv2i64
+    18643666U,	// VMLSLsv4i32
+    18774738U,	// VMLSLsv8i16
+    18905810U,	// VMLSLuv2i64
+    19036882U,	// VMLSLuv4i32
+    19167954U,	// VMLSLuv8i16
+    101743656U,	// VMLSS
+    101743656U,	// VMLSfd
+    101743656U,	// VMLSfq
+    101612584U,	// VMLShd
+    101612584U,	// VMLShq
+    101780520U,	// VMLSslfd
+    101780520U,	// VMLSslfq
+    101649448U,	// VMLSslhd
+    101649448U,	// VMLSslhq
+    19467304U,	// VMLSslv2i32
+    19598376U,	// VMLSslv4i16
+    19467304U,	// VMLSslv4i32
+    19598376U,	// VMLSslv8i16
+    19692584U,	// VMLSv16i8
+    19430440U,	// VMLSv2i32
+    19561512U,	// VMLSv4i16
+    19430440U,	// VMLSv4i32
+    19561512U,	// VMLSv8i16
+    19692584U,	// VMLSv8i8
+    2248953164U,	// VMOVD
     0U,	// VMOVD0
-    27966U,	// VMOVDRR
+    27980U,	// VMOVDRR
     0U,	// VMOVDcc
     1107448867U,	// VMOVH
-    2249084222U,	// VMOVHR
-    1109019359U,	// VMOVLsv2i64
-    1109150431U,	// VMOVLsv4i32
-    1109281503U,	// VMOVLsv8i16
-    1109412575U,	// VMOVLuv2i64
-    1109543647U,	// VMOVLuv4i32
-    1109674719U,	// VMOVLuv8i16
-    1109805929U,	// VMOVNv2i32
-    1109937001U,	// VMOVNv4i16
-    1110068073U,	// VMOVNv8i8
+    2249084236U,	// VMOVHR
+    1109019373U,	// VMOVLsv2i64
+    1109150445U,	// VMOVLsv4i32
+    1109281517U,	// VMOVLsv8i16
+    1109412589U,	// VMOVLuv2i64
+    1109543661U,	// VMOVLuv4i32
+    1109674733U,	// VMOVLuv8i16
+    1109805943U,	// VMOVNv2i32
+    1109937015U,	// VMOVNv4i16
+    1110068087U,	// VMOVNv8i8
     0U,	// VMOVQ0
-    2249084222U,	// VMOVRH
-    27966U,	// VMOVRRD
-    32062U,	// VMOVRRS
-    19774U,	// VMOVRS
-    2249215294U,	// VMOVS
-    19774U,	// VMOVSR
-    32062U,	// VMOVSRR
+    2249084236U,	// VMOVRH
+    27980U,	// VMOVRRD
+    32076U,	// VMOVRRS
+    19788U,	// VMOVRS
+    2249215308U,	// VMOVS
+    19788U,	// VMOVSR
+    32076U,	// VMOVSRR
     0U,	// VMOVScc
-    271338814U,	// VMOVv16i8
-    270945598U,	// VMOVv1i64
-    3322957118U,	// VMOVv2f32
-    271076670U,	// VMOVv2i32
-    270945598U,	// VMOVv2i64
-    3322957118U,	// VMOVv4f32
-    271207742U,	// VMOVv4i16
-    271076670U,	// VMOVv4i32
-    271207742U,	// VMOVv8i16
-    271338814U,	// VMOVv8i8
-    3221261372U,	// VMRS
-    35900U,	// VMRS_FPEXC
-    1073777724U,	// VMRS_FPINST
-    2147519548U,	// VMRS_FPINST2
-    3221261372U,	// VMRS_FPSID
-    35900U,	// VMRS_MVFR0
-    1073777724U,	// VMRS_MVFR1
-    2147519548U,	// VMRS_MVFR2
-    5802978U,	// VMSR
-    5934050U,	// VMSR_FPEXC
-    6065122U,	// VMSR_FPINST
-    6196194U,	// VMSR_FPINST2
-    6327266U,	// VMSR_FPSID
-    2248960730U,	// VMULD
-    2249091802U,	// VMULH
+    271338828U,	// VMOVv16i8
+    270945612U,	// VMOVv1i64
+    3322957132U,	// VMOVv2f32
+    271076684U,	// VMOVv2i32
+    270945612U,	// VMOVv2i64
+    3322957132U,	// VMOVv4f32
+    271207756U,	// VMOVv4i16
+    271076684U,	// VMOVv4i32
+    271207756U,	// VMOVv8i16
+    271338828U,	// VMOVv8i8
+    3221261386U,	// VMRS
+    35914U,	// VMRS_FPEXC
+    1073777738U,	// VMRS_FPINST
+    2147519562U,	// VMRS_FPINST2
+    3221261386U,	// VMRS_FPSID
+    35914U,	// VMRS_MVFR0
+    1073777738U,	// VMRS_MVFR1
+    2147519562U,	// VMRS_MVFR2
+    5802992U,	// VMSR
+    5934064U,	// VMSR_FPEXC
+    6065136U,	// VMSR_FPINST
+    6196208U,	// VMSR_FPINST2
+    6327280U,	// VMSR_FPSID
+    2248960744U,	// VMULD
+    2249091816U,	// VMULH
     33706650U,	// VMULLp64
-    6449841U,	// VMULLp8
-    35289777U,	// VMULLslsv2i32
-    35420849U,	// VMULLslsv4i16
-    35682993U,	// VMULLsluv2i32
-    35814065U,	// VMULLsluv4i16
-    35285681U,	// VMULLsv2i64
-    35416753U,	// VMULLsv4i32
-    35547825U,	// VMULLsv8i16
-    35678897U,	// VMULLuv2i64
-    35809969U,	// VMULLuv4i32
-    35941041U,	// VMULLuv8i16
-    2249222874U,	// VMULS
-    2249222874U,	// VMULfd
-    2249222874U,	// VMULfq
-    2249091802U,	// VMULhd
-    2249091802U,	// VMULhq
-    6449882U,	// VMULpd
-    6449882U,	// VMULpq
-    2249226970U,	// VMULslfd
-    2249226970U,	// VMULslfq
-    2249095898U,	// VMULslhd
-    2249095898U,	// VMULslhq
-    36207322U,	// VMULslv2i32
-    36338394U,	// VMULslv4i16
-    36207322U,	// VMULslv4i32
-    36338394U,	// VMULslv8i16
-    36465370U,	// VMULv16i8
-    36203226U,	// VMULv2i32
-    36334298U,	// VMULv4i16
-    36203226U,	// VMULv4i32
-    36334298U,	// VMULv8i16
-    36465370U,	// VMULv8i8
-    19293U,	// VMVNd
-    19293U,	// VMVNq
-    271076189U,	// VMVNv2i32
-    271207261U,	// VMVNv4i16
-    271076189U,	// VMVNv4i32
-    271207261U,	// VMVNv8i16
+    6449855U,	// VMULLp8
+    35289791U,	// VMULLslsv2i32
+    35420863U,	// VMULLslsv4i16
+    35683007U,	// VMULLsluv2i32
+    35814079U,	// VMULLsluv4i16
+    35285695U,	// VMULLsv2i64
+    35416767U,	// VMULLsv4i32
+    35547839U,	// VMULLsv8i16
+    35678911U,	// VMULLuv2i64
+    35809983U,	// VMULLuv4i32
+    35941055U,	// VMULLuv8i16
+    2249222888U,	// VMULS
+    2249222888U,	// VMULfd
+    2249222888U,	// VMULfq
+    2249091816U,	// VMULhd
+    2249091816U,	// VMULhq
+    6449896U,	// VMULpd
+    6449896U,	// VMULpq
+    2249226984U,	// VMULslfd
+    2249226984U,	// VMULslfq
+    2249095912U,	// VMULslhd
+    2249095912U,	// VMULslhq
+    36207336U,	// VMULslv2i32
+    36338408U,	// VMULslv4i16
+    36207336U,	// VMULslv4i32
+    36338408U,	// VMULslv8i16
+    36465384U,	// VMULv16i8
+    36203240U,	// VMULv2i32
+    36334312U,	// VMULv4i16
+    36203240U,	// VMULv4i32
+    36334312U,	// VMULv8i16
+    36465384U,	// VMULv8i8
+    19307U,	// VMVNd
+    19307U,	// VMVNq
+    271076203U,	// VMVNv2i32
+    271207275U,	// VMVNv4i16
+    271076203U,	// VMVNv4i32
+    271207275U,	// VMVNv8i16
     2248952190U,	// VNEGD
     2249083262U,	// VNEGH
     2249214334U,	// VNEGS
@@ -2135,20 +2150,20 @@ void ARMInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo &S
     101480341U,	// VNMLAD
     101611413U,	// VNMLAH
     101742485U,	// VNMLAS
-    101481492U,	// VNMLSD
-    101612564U,	// VNMLSH
-    101743636U,	// VNMLSS
-    2248960724U,	// VNMULD
-    2249091796U,	// VNMULH
-    2249222868U,	// VNMULS
-    27450U,	// VORNd
-    27450U,	// VORNq
-    27602U,	// VORRd
-    271084498U,	// VORRiv2i32
-    271215570U,	// VORRiv4i16
-    271084498U,	// VORRiv4i32
-    271215570U,	// VORRiv8i16
-    27602U,	// VORRq
+    101481506U,	// VNMLSD
+    101612578U,	// VNMLSH
+    101743650U,	// VNMLSS
+    2248960738U,	// VNMULD
+    2249091810U,	// VNMULH
+    2249222882U,	// VNMULS
+    27464U,	// VORNd
+    27464U,	// VORNq
+    27616U,	// VORRd
+    271084512U,	// VORRiv2i32
+    271215584U,	// VORRiv4i16
+    271084512U,	// VORRiv4i32
+    271215584U,	// VORRiv8i16
+    27616U,	// VORRq
     1092512306U,	// VPADALsv16i8
     1092250162U,	// VPADALsv2i32
     1092381234U,	// VPADALsv4i16
@@ -2178,28 +2193,28 @@ void ARMInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo &S
     36333808U,	// VPADDi16
     36202736U,	// VPADDi32
     36464880U,	// VPADDi8
-    2249223529U,	// VPMAXf
-    2249092457U,	// VPMAXh
-    35417449U,	// VPMAXs16
-    35286377U,	// VPMAXs32
-    35548521U,	// VPMAXs8
-    35810665U,	// VPMAXu16
-    35679593U,	// VPMAXu32
-    35941737U,	// VPMAXu8
-    2249222927U,	// VPMINf
-    2249091855U,	// VPMINh
-    35416847U,	// VPMINs16
-    35285775U,	// VPMINs32
-    35547919U,	// VPMINs8
-    35810063U,	// VPMINu16
-    35678991U,	// VPMINu32
-    35941135U,	// VPMINu8
-    1109281785U,	// VQABSv16i8
-    1109019641U,	// VQABSv2i32
-    1109150713U,	// VQABSv4i16
-    1109019641U,	// VQABSv4i32
-    1109150713U,	// VQABSv8i16
-    1109281785U,	// VQABSv8i8
+    2249223543U,	// VPMAXf
+    2249092471U,	// VPMAXh
+    35417463U,	// VPMAXs16
+    35286391U,	// VPMAXs32
+    35548535U,	// VPMAXs8
+    35810679U,	// VPMAXu16
+    35679607U,	// VPMAXu32
+    35941751U,	// VPMAXu8
+    2249222941U,	// VPMINf
+    2249091869U,	// VPMINh
+    35416861U,	// VPMINs16
+    35285789U,	// VPMINs32
+    35547933U,	// VPMINs8
+    35810077U,	// VPMINu16
+    35679005U,	// VPMINu32
+    35941149U,	// VPMINu8
+    1109281799U,	// VQABSv16i8
+    1109019655U,	// VQABSv2i32
+    1109150727U,	// VQABSv4i16
+    1109019655U,	// VQABSv4i32
+    1109150727U,	// VQABSv8i16
+    1109281799U,	// VQABSv8i8
     35547382U,	// VQADDsv16i8
     40134902U,	// VQADDsv1i64
     35285238U,	// VQADDsv2i32
@@ -2220,10 +2235,10 @@ void ARMInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo &S
     18680377U,	// VQDMLALslv4i16
     18512441U,	// VQDMLALv2i64
     18643513U,	// VQDMLALv4i32
-    18549436U,	// VQDMLSLslv2i32
-    18680508U,	// VQDMLSLslv4i16
-    18512572U,	// VQDMLSLv2i64
-    18643644U,	// VQDMLSLv4i32
+    18549450U,	// VQDMLSLslv2i32
+    18680522U,	// VQDMLSLslv4i16
+    18512586U,	// VQDMLSLv2i64
+    18643658U,	// VQDMLSLv4i32
     35289513U,	// VQDMULHslv2i32
     35420585U,	// VQDMULHslv4i16
     35289513U,	// VQDMULHslv4i32
@@ -2232,19 +2247,19 @@ void ARMInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo &S
     35416489U,	// VQDMULHv4i16
     35285417U,	// VQDMULHv4i32
     35416489U,	// VQDMULHv8i16
-    35289757U,	// VQDMULLslv2i32
-    35420829U,	// VQDMULLslv4i16
-    35285661U,	// VQDMULLv2i64
-    35416733U,	// VQDMULLv4i32
-    1113869141U,	// VQMOVNsuv2i32
-    1109019477U,	// VQMOVNsuv4i16
-    1109150549U,	// VQMOVNsuv8i8
-    1113869154U,	// VQMOVNsv2i32
-    1109019490U,	// VQMOVNsv4i16
-    1109150562U,	// VQMOVNsv8i8
-    1114000226U,	// VQMOVNuv2i32
-    1109412706U,	// VQMOVNuv4i16
-    1109543778U,	// VQMOVNuv8i8
+    35289771U,	// VQDMULLslv2i32
+    35420843U,	// VQDMULLslv4i16
+    35285675U,	// VQDMULLv2i64
+    35416747U,	// VQDMULLv4i32
+    1113869155U,	// VQMOVNsuv2i32
+    1109019491U,	// VQMOVNsuv4i16
+    1109150563U,	// VQMOVNsuv8i8
+    1113869168U,	// VQMOVNsv2i32
+    1109019504U,	// VQMOVNsv4i16
+    1109150576U,	// VQMOVNsv8i8
+    1114000240U,	// VQMOVNuv2i32
+    1109412720U,	// VQMOVNuv4i16
+    1109543792U,	// VQMOVNuv8i8
     1109281144U,	// VQNEGv16i8
     1109019000U,	// VQNEGv2i32
     1109150072U,	// VQNEGv4i16
@@ -2291,15 +2306,15 @@ void ARMInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo &S
     35678853U,	// VQRSHLuv4i32
     35809925U,	// VQRSHLuv8i16
     35940997U,	// VQRSHLuv8i8
-    40135461U,	// VQRSHRNsv2i32
-    35285797U,	// VQRSHRNsv4i16
-    35416869U,	// VQRSHRNsv8i8
-    40266533U,	// VQRSHRNuv2i32
-    35679013U,	// VQRSHRNuv4i16
-    35810085U,	// VQRSHRNuv8i8
-    40135500U,	// VQRSHRUNv2i32
-    35285836U,	// VQRSHRUNv4i16
-    35416908U,	// VQRSHRUNv8i8
+    40135475U,	// VQRSHRNsv2i32
+    35285811U,	// VQRSHRNsv4i16
+    35416883U,	// VQRSHRNsv8i8
+    40266547U,	// VQRSHRNuv2i32
+    35679027U,	// VQRSHRNuv4i16
+    35810099U,	// VQRSHRNuv8i8
+    40135514U,	// VQRSHRUNv2i32
+    35285850U,	// VQRSHRUNv4i16
+    35416922U,	// VQRSHRUNv8i8
     35547775U,	// VQSHLsiv16i8
     40135295U,	// VQSHLsiv1i64
     35285631U,	// VQSHLsiv2i32
@@ -2308,14 +2323,14 @@ void ARMInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo &S
     35285631U,	// VQSHLsiv4i32
     35416703U,	// VQSHLsiv8i16
     35547775U,	// VQSHLsiv8i8
-    35548452U,	// VQSHLsuv16i8
-    40135972U,	// VQSHLsuv1i64
-    35286308U,	// VQSHLsuv2i32
-    40135972U,	// VQSHLsuv2i64
-    35417380U,	// VQSHLsuv4i16
-    35286308U,	// VQSHLsuv4i32
-    35417380U,	// VQSHLsuv8i16
-    35548452U,	// VQSHLsuv8i8
+    35548466U,	// VQSHLsuv16i8
+    40135986U,	// VQSHLsuv1i64
+    35286322U,	// VQSHLsuv2i32
+    40135986U,	// VQSHLsuv2i64
+    35417394U,	// VQSHLsuv4i16
+    35286322U,	// VQSHLsuv4i32
+    35417394U,	// VQSHLsuv8i16
+    35548466U,	// VQSHLsuv8i8
     35547775U,	// VQSHLsv16i8
     40135295U,	// VQSHLsv1i64
     35285631U,	// VQSHLsv2i32
@@ -2340,15 +2355,15 @@ void ARMInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo &S
     35678847U,	// VQSHLuv4i32
     35809919U,	// VQSHLuv8i16
     35940991U,	// VQSHLuv8i8
-    40135454U,	// VQSHRNsv2i32
-    35285790U,	// VQSHRNsv4i16
-    35416862U,	// VQSHRNsv8i8
-    40266526U,	// VQSHRNuv2i32
-    35679006U,	// VQSHRNuv4i16
-    35810078U,	// VQSHRNuv8i8
-    40135492U,	// VQSHRUNv2i32
-    35285828U,	// VQSHRUNv4i16
-    35416900U,	// VQSHRUNv8i8
+    40135468U,	// VQSHRNsv2i32
+    35285804U,	// VQSHRNsv4i16
+    35416876U,	// VQSHRNsv8i8
+    40266540U,	// VQSHRNuv2i32
+    35679020U,	// VQSHRNuv4i16
+    35810092U,	// VQSHRNuv8i8
+    40135506U,	// VQSHRUNv2i32
+    35285842U,	// VQSHRUNv4i16
+    35416914U,	// VQSHRUNv8i8
     35547241U,	// VQSUBsv16i8
     40134761U,	// VQSUBsv1i64
     35285097U,	// VQSUBsv2i32
@@ -2365,19 +2380,19 @@ void ARMInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo &S
     35678313U,	// VQSUBuv4i32
     35809385U,	// VQSUBuv8i16
     35940457U,	// VQSUBuv8i8
-    36072192U,	// VRADDHNv2i32
-    36203264U,	// VRADDHNv4i16
-    36334336U,	// VRADDHNv8i8
+    36072206U,	// VRADDHNv2i32
+    36203278U,	// VRADDHNv4i16
+    36334350U,	// VRADDHNv8i8
     1109412186U,	// VRECPEd
     2249214298U,	// VRECPEfd
     2249214298U,	// VRECPEfq
     2249083226U,	// VRECPEhd
     2249083226U,	// VRECPEhq
     1109412186U,	// VRECPEq
-    2249223221U,	// VRECPSfd
-    2249223221U,	// VRECPSfq
-    2249092149U,	// VRECPShd
-    2249092149U,	// VRECPShq
+    2249223235U,	// VRECPSfd
+    2249223235U,	// VRECPSfq
+    2249092163U,	// VRECPShd
+    2249092163U,	// VRECPShq
     3032797U,	// VREV16d8
     3032797U,	// VREV16q8
     4998664U,	// VREV32d16
@@ -2430,23 +2445,23 @@ void ARMInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo &S
     1107448118U,	// VRINTPNQf
     1107448797U,	// VRINTPNQh
     1107448118U,	// VRINTPS
-    2248952807U,	// VRINTRD
-    2249083879U,	// VRINTRH
-    2249214951U,	// VRINTRS
-    2248953373U,	// VRINTXD
-    2249084445U,	// VRINTXH
+    2248952821U,	// VRINTRD
+    2249083893U,	// VRINTRH
+    2249214965U,	// VRINTRS
+    2248953387U,	// VRINTXD
+    2249084459U,	// VRINTXH
     1107448166U,	// VRINTXNDf
     1107448855U,	// VRINTXNDh
     1107448166U,	// VRINTXNQf
     1107448855U,	// VRINTXNQh
-    2249215517U,	// VRINTXS
-    2248953385U,	// VRINTZD
-    2249084457U,	// VRINTZH
+    2249215531U,	// VRINTXS
+    2248953399U,	// VRINTZD
+    2249084471U,	// VRINTZH
     1107448178U,	// VRINTZNDf
     1107448878U,	// VRINTZNDh
     1107448178U,	// VRINTZNQf
     1107448878U,	// VRINTZNQh
-    2249215529U,	// VRINTZS
+    2249215543U,	// VRINTZS
     35547788U,	// VRSHLsv16i8
     40135308U,	// VRSHLsv1i64
     35285644U,	// VRSHLsv2i32
@@ -2463,35 +2478,35 @@ void ARMInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo &S
     35678860U,	// VRSHLuv4i32
     35809932U,	// VRSHLuv8i16
     35941004U,	// VRSHLuv8i8
-    36072237U,	// VRSHRNv2i32
-    36203309U,	// VRSHRNv4i16
-    36334381U,	// VRSHRNv8i8
-    35548082U,	// VRSHRsv16i8
-    40135602U,	// VRSHRsv1i64
-    35285938U,	// VRSHRsv2i32
-    40135602U,	// VRSHRsv2i64
-    35417010U,	// VRSHRsv4i16
-    35285938U,	// VRSHRsv4i32
-    35417010U,	// VRSHRsv8i16
-    35548082U,	// VRSHRsv8i8
-    35941298U,	// VRSHRuv16i8
-    40266674U,	// VRSHRuv1i64
-    35679154U,	// VRSHRuv2i32
-    40266674U,	// VRSHRuv2i64
-    35810226U,	// VRSHRuv4i16
-    35679154U,	// VRSHRuv4i32
-    35810226U,	// VRSHRuv8i16
-    35941298U,	// VRSHRuv8i8
+    36072251U,	// VRSHRNv2i32
+    36203323U,	// VRSHRNv4i16
+    36334395U,	// VRSHRNv8i8
+    35548096U,	// VRSHRsv16i8
+    40135616U,	// VRSHRsv1i64
+    35285952U,	// VRSHRsv2i32
+    40135616U,	// VRSHRsv2i64
+    35417024U,	// VRSHRsv4i16
+    35285952U,	// VRSHRsv4i32
+    35417024U,	// VRSHRsv8i16
+    35548096U,	// VRSHRsv8i8
+    35941312U,	// VRSHRuv16i8
+    40266688U,	// VRSHRuv1i64
+    35679168U,	// VRSHRuv2i32
+    40266688U,	// VRSHRuv2i64
+    35810240U,	// VRSHRuv4i16
+    35679168U,	// VRSHRuv4i32
+    35810240U,	// VRSHRuv8i16
+    35941312U,	// VRSHRuv8i8
     1109412199U,	// VRSQRTEd
     2249214311U,	// VRSQRTEfd
     2249214311U,	// VRSQRTEfq
     2249083239U,	// VRSQRTEhd
     2249083239U,	// VRSQRTEhq
     1109412199U,	// VRSQRTEq
-    2249223243U,	// VRSQRTSfd
-    2249223243U,	// VRSQRTSfq
-    2249092171U,	// VRSQRTShd
-    2249092171U,	// VRSQRTShq
+    2249223257U,	// VRSQRTSfd
+    2249223257U,	// VRSQRTSfq
+    2249092185U,	// VRSQRTShd
+    2249092185U,	// VRSQRTShq
     18773931U,	// VRSRAsv16i8
     23361451U,	// VRSRAsv1i64
     18511787U,	// VRSRAsv2i32
@@ -2508,9 +2523,9 @@ void ARMInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo &S
     18905003U,	// VRSRAuv4i32
     19036075U,	// VRSRAuv8i16
     19167147U,	// VRSRAuv8i8
-    36072177U,	// VRSUBHNv2i32
-    36203249U,	// VRSUBHNv4i16
-    36334321U,	// VRSUBHNv8i8
+    36072191U,	// VRSUBHNv2i32
+    36203263U,	// VRSUBHNv4i16
+    36334335U,	// VRSUBHNv8i8
     33706614U,	// VSELEQD
     33706985U,	// VSELEQH
     33706306U,	// VSELEQS
@@ -2523,18 +2538,18 @@ void ARMInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo &S
     33706626U,	// VSELVSD
     33707007U,	// VSELVSH
     33706318U,	// VSELVSS
-    3226238270U,	// VSETLNi16
-    3226369342U,	// VSETLNi32
-    3224272190U,	// VSETLNi8
-    36334231U,	// VSHLLi16
-    36203159U,	// VSHLLi32
-    36465303U,	// VSHLLi8
-    35285655U,	// VSHLLsv2i64
-    35416727U,	// VSHLLsv4i32
-    35547799U,	// VSHLLsv8i16
-    35678871U,	// VSHLLuv2i64
-    35809943U,	// VSHLLuv4i32
-    35941015U,	// VSHLLuv8i16
+    3226238284U,	// VSETLNi16
+    3226369356U,	// VSETLNi32
+    3224272204U,	// VSETLNi8
+    36334245U,	// VSHLLi16
+    36203173U,	// VSHLLi32
+    36465317U,	// VSHLLi8
+    35285669U,	// VSHLLsv2i64
+    35416741U,	// VSHLLsv4i32
+    35547813U,	// VSHLLsv8i16
+    35678885U,	// VSHLLuv2i64
+    35809957U,	// VSHLLuv4i32
+    35941029U,	// VSHLLuv8i16
     36465298U,	// VSHLiv16i8
     36072082U,	// VSHLiv1i64
     36203154U,	// VSHLiv2i32
@@ -2559,31 +2574,31 @@ void ARMInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo &S
     35678866U,	// VSHLuv4i32
     35809938U,	// VSHLuv8i16
     35941010U,	// VSHLuv8i8
-    36072244U,	// VSHRNv2i32
-    36203316U,	// VSHRNv4i16
-    36334388U,	// VSHRNv8i8
-    35548088U,	// VSHRsv16i8
-    40135608U,	// VSHRsv1i64
-    35285944U,	// VSHRsv2i32
-    40135608U,	// VSHRsv2i64
-    35417016U,	// VSHRsv4i16
-    35285944U,	// VSHRsv4i32
-    35417016U,	// VSHRsv8i16
-    35548088U,	// VSHRsv8i8
-    35941304U,	// VSHRuv16i8
-    40266680U,	// VSHRuv1i64
-    35679160U,	// VSHRuv2i32
-    40266680U,	// VSHRuv2i64
-    35810232U,	// VSHRuv4i16
-    35679160U,	// VSHRuv4i32
-    35810232U,	// VSHRuv8i16
-    35941304U,	// VSHRuv8i8
-    6843655U,	// VSHTOD
-    105278727U,	// VSHTOH
-    6974727U,	// VSHTOS
-    309087495U,	// VSITOD
-    309218567U,	// VSITOH
-    306466055U,	// VSITOS
+    36072258U,	// VSHRNv2i32
+    36203330U,	// VSHRNv4i16
+    36334402U,	// VSHRNv8i8
+    35548102U,	// VSHRsv16i8
+    40135622U,	// VSHRsv1i64
+    35285958U,	// VSHRsv2i32
+    40135622U,	// VSHRsv2i64
+    35417030U,	// VSHRsv4i16
+    35285958U,	// VSHRsv4i32
+    35417030U,	// VSHRsv8i16
+    35548102U,	// VSHRsv8i8
+    35941318U,	// VSHRuv16i8
+    40266694U,	// VSHRuv1i64
+    35679174U,	// VSHRuv2i32
+    40266694U,	// VSHRuv2i64
+    35810246U,	// VSHRuv4i16
+    35679174U,	// VSHRuv4i32
+    35810246U,	// VSHRuv8i16
+    35941318U,	// VSHRuv8i8
+    6843669U,	// VSHTOD
+    105278741U,	// VSHTOH
+    6974741U,	// VSHTOS
+    309087509U,	// VSITOD
+    309218581U,	// VSITOH
+    306466069U,	// VSITOS
     3045900U,	// VSLIv16i8
     5274124U,	// VSLIv1i64
     5143052U,	// VSLIv2i32
@@ -2592,12 +2607,12 @@ void ARMInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo &S
     5143052U,	// VSLIv4i32
     5011980U,	// VSLIv8i16
     3045900U,	// VSLIv8i8
-    1181510919U,	// VSLTOD
-    1181641991U,	// VSLTOH
-    1178889479U,	// VSLTOS
-    2248953047U,	// VSQRTD
-    2249084119U,	// VSQRTH
-    2249215191U,	// VSQRTS
+    1181510933U,	// VSLTOD
+    1181642005U,	// VSLTOH
+    1178889493U,	// VSLTOS
+    2248953061U,	// VSQRTD
+    2249084133U,	// VSQRTH
+    2249215205U,	// VSQRTS
     18773937U,	// VSRAsv16i8
     23361457U,	// VSRAsv1i64
     18511793U,	// VSRAsv2i32
@@ -2935,14 +2950,14 @@ void ARMInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo &S
     33572850U,	// VSTMSDB_UPD
     34690U,	// VSTMSIA
     33572738U,	// VSTMSIA_UPD
-    27630U,	// VSTRD
-    5008366U,	// VSTRH
-    27630U,	// VSTRS
+    27644U,	// VSTRD
+    5008380U,	// VSTRH
+    27644U,	// VSTRS
     2248960111U,	// VSUBD
     2249091183U,	// VSUBH
-    36072185U,	// VSUBHNv2i32
-    36203257U,	// VSUBHNv4i16
-    36334329U,	// VSUBHNv8i8
+    36072199U,	// VSUBHNv2i32
+    36203271U,	// VSUBHNv4i16
+    36334343U,	// VSUBHNv8i8
     35285592U,	// VSUBLsv2i64
     35416664U,	// VSUBLsv4i32
     35547736U,	// VSUBLsv8i16
@@ -2950,12 +2965,12 @@ void ARMInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo &S
     35809880U,	// VSUBLuv4i32
     35940952U,	// VSUBLuv8i16
     2249222255U,	// VSUBS
-    35286339U,	// VSUBWsv2i64
-    35417411U,	// VSUBWsv4i32
-    35548483U,	// VSUBWsv8i16
-    35679555U,	// VSUBWuv2i64
-    35810627U,	// VSUBWuv4i32
-    35941699U,	// VSUBWuv8i16
+    35286353U,	// VSUBWsv2i64
+    35417425U,	// VSUBWsv4i32
+    35548497U,	// VSUBWsv8i16
+    35679569U,	// VSUBWuv2i64
+    35810641U,	// VSUBWuv4i32
+    35941713U,	// VSUBWuv8i16
     2249222255U,	// VSUBfd
     2249222255U,	// VSUBfq
     2249091183U,	// VSUBhd
@@ -2968,91 +2983,91 @@ void ARMInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo &S
     36202607U,	// VSUBv4i32
     36333679U,	// VSUBv8i16
     36464751U,	// VSUBv8i8
-    31627U,	// VSWPd
-    31627U,	// VSWPq
+    31641U,	// VSWPd
+    31641U,	// VSWPq
     3041875U,	// VTBL1
     3041875U,	// VTBL2
     3041875U,	// VTBL3
     0U,	// VTBL3Pseudo
     3041875U,	// VTBL4
     0U,	// VTBL4Pseudo
-    3046816U,	// VTBX1
-    3046816U,	// VTBX2
-    3046816U,	// VTBX3
+    3046830U,	// VTBX1
+    3046830U,	// VTBX2
+    3046830U,	// VTBX3
     0U,	// VTBX3Pseudo
-    3046816U,	// VTBX4
+    3046830U,	// VTBX4
     0U,	// VTBX4Pseudo
-    7367943U,	// VTOSHD
-    104885511U,	// VTOSHH
-    7499015U,	// VTOSHS
-    309611507U,	// VTOSIRD
-    309742579U,	// VTOSIRH
-    305941491U,	// VTOSIRS
-    309611783U,	// VTOSIZD
-    309742855U,	// VTOSIZH
-    305941767U,	// VTOSIZS
-    1182035207U,	// VTOSLD
-    1182166279U,	// VTOSLH
-    1178365191U,	// VTOSLS
-    7892231U,	// VTOUHD
-    105016583U,	// VTOUHH
-    8023303U,	// VTOUHS
-    310135795U,	// VTOUIRD
-    310266867U,	// VTOUIRH
-    306072563U,	// VTOUIRS
-    310136071U,	// VTOUIZD
-    310267143U,	// VTOUIZH
-    306072839U,	// VTOUIZS
-    1182559495U,	// VTOULD
-    1182690567U,	// VTOULH
-    1178496263U,	// VTOULS
-    5012287U,	// VTRNd16
-    5143359U,	// VTRNd32
-    3046207U,	// VTRNd8
-    5012287U,	// VTRNq16
-    5143359U,	// VTRNq32
-    3046207U,	// VTRNq8
-    3042530U,	// VTSTv16i8
-    5139682U,	// VTSTv2i32
-    5008610U,	// VTSTv4i16
-    5139682U,	// VTSTv4i32
-    5008610U,	// VTSTv8i16
-    3042530U,	// VTSTv8i8
-    8416519U,	// VUHTOD
-    105540871U,	// VUHTOH
-    8547591U,	// VUHTOS
-    310660359U,	// VUITOD
-    310791431U,	// VUITOH
-    306728199U,	// VUITOS
-    1183083783U,	// VULTOD
-    1183214855U,	// VULTOH
-    1179151623U,	// VULTOS
-    5012368U,	// VUZPd16
-    3046288U,	// VUZPd8
-    5012368U,	// VUZPq16
-    5143440U,	// VUZPq32
-    3046288U,	// VUZPq8
-    5012344U,	// VZIPd16
-    3046264U,	// VZIPd8
-    5012344U,	// VZIPq16
-    5143416U,	// VZIPq32
-    3046264U,	// VZIPq8
+    7367957U,	// VTOSHD
+    104885525U,	// VTOSHH
+    7499029U,	// VTOSHS
+    309611521U,	// VTOSIRD
+    309742593U,	// VTOSIRH
+    305941505U,	// VTOSIRS
+    309611797U,	// VTOSIZD
+    309742869U,	// VTOSIZH
+    305941781U,	// VTOSIZS
+    1182035221U,	// VTOSLD
+    1182166293U,	// VTOSLH
+    1178365205U,	// VTOSLS
+    7892245U,	// VTOUHD
+    105016597U,	// VTOUHH
+    8023317U,	// VTOUHS
+    310135809U,	// VTOUIRD
+    310266881U,	// VTOUIRH
+    306072577U,	// VTOUIRS
+    310136085U,	// VTOUIZD
+    310267157U,	// VTOUIZH
+    306072853U,	// VTOUIZS
+    1182559509U,	// VTOULD
+    1182690581U,	// VTOULH
+    1178496277U,	// VTOULS
+    5012301U,	// VTRNd16
+    5143373U,	// VTRNd32
+    3046221U,	// VTRNd8
+    5012301U,	// VTRNq16
+    5143373U,	// VTRNq32
+    3046221U,	// VTRNq8
+    3042544U,	// VTSTv16i8
+    5139696U,	// VTSTv2i32
+    5008624U,	// VTSTv4i16
+    5139696U,	// VTSTv4i32
+    5008624U,	// VTSTv8i16
+    3042544U,	// VTSTv8i8
+    8416533U,	// VUHTOD
+    105540885U,	// VUHTOH
+    8547605U,	// VUHTOS
+    310660373U,	// VUITOD
+    310791445U,	// VUITOH
+    306728213U,	// VUITOS
+    1183083797U,	// VULTOD
+    1183214869U,	// VULTOH
+    1179151637U,	// VULTOS
+    5012382U,	// VUZPd16
+    3046302U,	// VUZPd8
+    5012382U,	// VUZPq16
+    5143454U,	// VUZPq32
+    3046302U,	// VUZPq8
+    5012358U,	// VZIPd16
+    3046278U,	// VZIPd8
+    5012358U,	// VZIPq16
+    5143430U,	// VZIPq32
+    3046278U,	// VZIPq8
     0U,	// WIN__CHKSTK
     0U,	// WIN__DBZCHK
     34665U,	// sysLDMDA
     33572713U,	// sysLDMDA_UPD
     34796U,	// sysLDMDB
     33572844U,	// sysLDMDB_UPD
-    35559U,	// sysLDMIA
-    33573607U,	// sysLDMIA_UPD
+    35573U,	// sysLDMIA
+    33573621U,	// sysLDMIA_UPD
     34815U,	// sysLDMIB
     33572863U,	// sysLDMIB_UPD
     34671U,	// sysSTMDA
     33572719U,	// sysSTMDA_UPD
     34803U,	// sysSTMDB
     33572851U,	// sysSTMDB_UPD
-    35565U,	// sysSTMIA
-    33573613U,	// sysSTMIA_UPD
+    35579U,	// sysSTMIA
+    33573627U,	// sysSTMIA_UPD
     34821U,	// sysSTMIB
     33572869U,	// sysSTMIB_UPD
     0U,	// t2ABS
@@ -3063,15 +3078,15 @@ void ARMInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo &S
     0U,	// t2ADDSrr
     0U,	// t2ADDSrs
     8919263U,	// t2ADDri
-    27978U,	// t2ADDri12
+    27992U,	// t2ADDri12
     8919263U,	// t2ADDrr
     8923359U,	// t2ADDrs
-    8932265U,	// t2ADR
+    8932279U,	// t2ADR
     6420U,	// t2ANDri
     8919316U,	// t2ANDrr
     8923412U,	// t2ANDrs
-    8920023U,	// t2ASRri
-    8920023U,	// t2ASRrr
+    8920037U,	// t2ASRri
+    8920037U,	// t2ASRrr
     1082689469U,	// t2B
     26794U,	// t2BFC
     31236U,	// t2BFI
@@ -3081,19 +3096,19 @@ void ARMInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo &S
     0U,	// t2BR_JT
     1073777174U,	// t2BXJ
     1082689469U,	// t2Bcc
-    2197859188U,	// t2CDP
+    2197859202U,	// t2CDP
     2197857833U,	// t2CDP2
-    433635U,	// t2CLREX
-    20005U,	// t2CLZ
-    8932122U,	// t2CMNri
-    8932122U,	// t2CMNzrr
-    8940314U,	// t2CMNzrs
-    8932222U,	// t2CMPri
-    8932222U,	// t2CMPrr
-    8940414U,	// t2CMPrs
+    433649U,	// t2CLREX
+    20019U,	// t2CLZ
+    8932136U,	// t2CMNri
+    8932136U,	// t2CMNzrr
+    8940328U,	// t2CMNzrs
+    8932236U,	// t2CMPri
+    8932236U,	// t2CMPrr
+    8940428U,	// t2CMPrs
     414944U,	// t2CPS1p
-    1166593080U,	// t2CPS2p
-    83938360U,	// t2CPS3p
+    1166593094U,	// t2CPS2p
+    83938374U,	// t2CPS3p
     33707115U,	// t2CRC32B
     33707123U,	// t2CRC32CB
     33707192U,	// t2CRC32CH
@@ -3106,18 +3121,18 @@ void ARMInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo &S
     431689U,	// t2DCPS3
     822118416U,	// t2DMB
     822118435U,	// t2DSB
-    7109U,	// t2EORri
-    8920005U,	// t2EORrr
-    8924101U,	// t2EORrs
-    1082690765U,	// t2HINT
+    7123U,	// t2EORri
+    8920019U,	// t2EORrr
+    8924115U,	// t2EORrs
+    1082690779U,	// t2HINT
     414966U,	// t2HVC
     838895655U,	// t2ISB
-    117505211U,	// t2IT
+    117505225U,	// t2IT
     0U,	// t2Int_eh_sjlj_setjmp
     0U,	// t2Int_eh_sjlj_setjmp_nofp
     18277U,	// t2LDA
     18362U,	// t2LDAB
-    19921U,	// t2LDAEX
+    19935U,	// t2LDAEX
     18562U,	// t2LDAEXB
     26926U,	// t2LDAEXD
     18920U,	// t2LDAEXH
@@ -3140,10 +3155,10 @@ void ARMInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo &S
     3271588006U,	// t2LDC_PRE
     34796U,	// t2LDMDB
     33572844U,	// t2LDMDB_UPD
-    8948455U,	// t2LDMIA
+    8948469U,	// t2LDMIA
     0U,	// t2LDMIA_RET
-    42486503U,	// t2LDMIA_UPD
-    27779U,	// t2LDRBT
+    42486517U,	// t2LDMIA_UPD
+    27793U,	// t2LDRBT
     30745U,	// t2LDRB_POST
     30745U,	// t2LDRB_PRE
     8939545U,	// t2LDRBi12
@@ -3151,15 +3166,15 @@ void ARMInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo &S
     8931353U,	// t2LDRBpci
     280601U,	// t2LDRBpcrel
     8943641U,	// t2LDRBs
-    281518U,	// t2LDRConstPool
+    281532U,	// t2LDRConstPool
     67864U,	// t2LDRD_POST
     67864U,	// t2LDRD_PRE
     31000U,	// t2LDRDi8
-    28125U,	// t2LDREX
+    28139U,	// t2LDREX
     18576U,	// t2LDREXB
     26940U,	// t2LDREXD
     18934U,	// t2LDREXH
-    27814U,	// t2LDRHT
+    27828U,	// t2LDRHT
     31162U,	// t2LDRH_POST
     31162U,	// t2LDRH_PRE
     8939962U,	// t2LDRHi12
@@ -3167,7 +3182,7 @@ void ARMInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo &S
     8931770U,	// t2LDRHpci
     281018U,	// t2LDRHpcrel
     8944058U,	// t2LDRHs
-    27791U,	// t2LDRSBT
+    27805U,	// t2LDRSBT
     30763U,	// t2LDRSB_POST
     30763U,	// t2LDRSB_PRE
     8939563U,	// t2LDRSBi12
@@ -3175,7 +3190,7 @@ void ARMInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo &S
     8931371U,	// t2LDRSBpci
     280619U,	// t2LDRSBpcrel
     8943659U,	// t2LDRSBs
-    27826U,	// t2LDRSHT
+    27840U,	// t2LDRSHT
     31181U,	// t2LDRSH_POST
     31181U,	// t2LDRSH_PRE
     8939981U,	// t2LDRSHi12
@@ -3183,27 +3198,27 @@ void ARMInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo &S
     8931789U,	// t2LDRSHpci
     281037U,	// t2LDRSHpcrel
     8944077U,	// t2LDRSHs
-    27858U,	// t2LDRT
-    31662U,	// t2LDR_POST
-    31662U,	// t2LDR_PRE
-    8940462U,	// t2LDRi12
-    27566U,	// t2LDRi8
-    8932270U,	// t2LDRpci
+    27872U,	// t2LDRT
+    31676U,	// t2LDR_POST
+    31676U,	// t2LDR_PRE
+    8940476U,	// t2LDRi12
+    27580U,	// t2LDRi8
+    8932284U,	// t2LDRpci
     0U,	// t2LDRpci_pic
-    281518U,	// t2LDRpcrel
-    8944558U,	// t2LDRs
+    281532U,	// t2LDRpcrel
+    8944572U,	// t2LDRs
     0U,	// t2LEApcrel
     0U,	// t2LEApcrelJT
-    8919744U,	// t2LSLri
-    8919744U,	// t2LSLrr
-    8920030U,	// t2LSRri
-    8920030U,	// t2LSRrr
-    2197859237U,	// t2MCR
+    8919758U,	// t2LSLri
+    8919758U,	// t2LSLrr
+    8920044U,	// t2LSRri
+    8920044U,	// t2LSRrr
+    2197859251U,	// t2MCR
     2197857838U,	// t2MCR2
-    2197883853U,	// t2MCRR
+    2197883867U,	// t2MCRR
     2197882419U,	// t2MCRR2
     30609U,	// t2MLA
-    31760U,	// t2MLS
+    31774U,	// t2MLS
     0U,	// t2MOVCCasr
     0U,	// t2MOVCCi
     0U,	// t2MOVCCi16
@@ -3212,47 +3227,47 @@ void ARMInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo &S
     0U,	// t2MOVCClsr
     0U,	// t2MOVCCr
     0U,	// t2MOVCCror
-    289875U,	// t2MOVSsi
-    293971U,	// t2MOVSsr
-    27916U,	// t2MOVTi16
+    289889U,	// t2MOVSsi
+    293985U,	// t2MOVSsr
+    27930U,	// t2MOVTi16
     0U,	// t2MOVTi16_ga_pcrel
     0U,	// t2MOV_ga_pcrel
-    8985919U,	// t2MOVi
-    19796U,	// t2MOVi16
+    8985933U,	// t2MOVi
+    19810U,	// t2MOVi16
     0U,	// t2MOVi16_ga_pcrel
     0U,	// t2MOVi32imm
-    8985919U,	// t2MOVr
-    290111U,	// t2MOVsi
-    294207U,	// t2MOVsr
-    8932417U,	// t2MOVsra_flag
-    8932422U,	// t2MOVsrl_flag
+    8985933U,	// t2MOVr
+    290125U,	// t2MOVsi
+    294221U,	// t2MOVsr
+    8932431U,	// t2MOVsra_flag
+    8932436U,	// t2MOVsrl_flag
     201369783U,	// t2MRC
     201369108U,	// t2MRC2
     218171579U,	// t2MRRC
     218170905U,	// t2MRRC2
-    35901U,	// t2MRS_AR
-    19517U,	// t2MRS_M
-    19517U,	// t2MRSbanked
-    1073777725U,	// t2MRSsys_AR
-    2382384099U,	// t2MSR_AR
-    2382384099U,	// t2MSR_M
-    251677667U,	// t2MSRbanked
-    27344U,	// t2MUL
+    35915U,	// t2MRS_AR
+    19531U,	// t2MRS_M
+    19531U,	// t2MRSbanked
+    1073777739U,	// t2MRSsys_AR
+    2382384113U,	// t2MSR_AR
+    2382384113U,	// t2MSR_M
+    251677681U,	// t2MSRbanked
+    27358U,	// t2MUL
     0U,	// t2MVNCCi
-    72542U,	// t2MVNi
-    8985438U,	// t2MVNr
-    8919902U,	// t2MVNs
-    6971U,	// t2ORNri
-    6971U,	// t2ORNrr
-    11067U,	// t2ORNrs
-    7123U,	// t2ORRri
-    8920019U,	// t2ORRrr
-    8924115U,	// t2ORRrs
-    31854U,	// t2PKHBT
+    72556U,	// t2MVNi
+    8985452U,	// t2MVNr
+    8919916U,	// t2MVNs
+    6985U,	// t2ORNri
+    6985U,	// t2ORNrr
+    11081U,	// t2ORNrs
+    7137U,	// t2ORRri
+    8920033U,	// t2ORRrr
+    8924129U,	// t2ORRrs
+    31868U,	// t2PKHBT
     30776U,	// t2PKHTB
-    855657807U,	// t2PLDWi12
-    872435023U,	// t2PLDWi8
-    889220431U,	// t2PLDWs
+    855657821U,	// t2PLDWi12
+    872435037U,	// t2PLDWi8
+    889220445U,	// t2PLDWs
     855656712U,	// t2PLDi12
     872433928U,	// t2PLDi8
     906004744U,	// t2PLDpci
@@ -3264,24 +3279,24 @@ void ARMInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo &S
     26871U,	// t2QADD
     26298U,	// t2QADD16
     26401U,	// t2QADD8
-    28174U,	// t2QASX
+    28188U,	// t2QASX
     26845U,	// t2QDADD
     26717U,	// t2QDSUB
-    28033U,	// t2QSAX
+    28047U,	// t2QSAX
     26730U,	// t2QSUB
     26260U,	// t2QSUB16
     26362U,	// t2QSUB8
-    19641U,	// t2RBIT
-    8932651U,	// t2REV
+    19655U,	// t2RBIT
+    8932665U,	// t2REV
     8931038U,	// t2REV16
     8931800U,	// t2REVSH
     1073776613U,	// t2RFEDB
     2147518437U,	// t2RFEDBW
     1073776501U,	// t2RFEIA
     2147518325U,	// t2RFEIAW
-    8920009U,	// t2RORri
-    8920009U,	// t2RORrr
-    73213U,	// t2RRX
+    8920023U,	// t2RORri
+    8920023U,	// t2RORrr
+    73227U,	// t2RRX
     0U,	// t2RSBSri
     0U,	// t2RSBSrs
     8919085U,	// t2RSBri
@@ -3289,65 +3304,65 @@ void ARMInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo &S
     10285U,	// t2RSBrs
     26305U,	// t2SADD16
     26407U,	// t2SADD8
-    28179U,	// t2SASX
+    28193U,	// t2SASX
     6302U,	// t2SBCri
     8919198U,	// t2SBCrr
     8923294U,	// t2SBCrs
-    32239U,	// t2SBFX
-    27951U,	// t2SDIV
+    32253U,	// t2SBFX
+    27965U,	// t2SDIV
     27259U,	// t2SEL
     414936U,	// t2SETPAN
     432515U,	// t2SG
     26281U,	// t2SHADD16
     26386U,	// t2SHADD8
-    28161U,	// t2SHASX
-    28020U,	// t2SHSAX
+    28175U,	// t2SHASX
+    28034U,	// t2SHSAX
     26243U,	// t2SHSUB16
     26347U,	// t2SHSUB8
     1073776819U,	// t2SMC
     30667U,	// t2SMLABB
-    31847U,	// t2SMLABT
+    31861U,	// t2SMLABT
     30924U,	// t2SMLAD
-    32165U,	// t2SMLADX
+    32179U,	// t2SMLADX
     43585U,	// t2SMLAL
-    30674U,	// t2SMLALBB
-    31860U,	// t2SMLALBT
+    42962U,	// t2SMLALBB
+    44162U,	// t2SMLALBT
     30977U,	// t2SMLALD
-    32179U,	// t2SMLALDX
-    30782U,	// t2SMLALTB
-    31982U,	// t2SMLALTT
+    32193U,	// t2SMLALDX
+    43070U,	// t2SMLALTB
+    44284U,	// t2SMLALTT
     30769U,	// t2SMLATB
-    31975U,	// t2SMLATT
+    31989U,	// t2SMLATT
     30836U,	// t2SMLAWB
-    32017U,	// t2SMLAWT
+    32031U,	// t2SMLAWT
     31010U,	// t2SMLSD
-    32195U,	// t2SMLSDX
+    32209U,	// t2SMLSDX
     30988U,	// t2SMLSLD
-    32187U,	// t2SMLSLDX
+    32201U,	// t2SMLSLDX
     30607U,	// t2SMMLA
-    31646U,	// t2SMMLAR
-    31758U,	// t2SMMLS
-    31707U,	// t2SMMLSR
-    27342U,	// t2SMMUL
-    27581U,	// t2SMMULR
+    31660U,	// t2SMMLAR
+    31772U,	// t2SMMLS
+    31721U,	// t2SMMLSR
+    27356U,	// t2SMMUL
+    27595U,	// t2SMMULR
     26834U,	// t2SMUAD
-    28076U,	// t2SMUADX
+    28090U,	// t2SMUADX
     26586U,	// t2SMULBB
-    27772U,	// t2SMULBT
-    31397U,	// t2SMULL
+    27786U,	// t2SMULBT
+    31411U,	// t2SMULL
     26694U,	// t2SMULTB
-    27894U,	// t2SMULTT
+    27908U,	// t2SMULTT
     26747U,	// t2SMULWB
-    27928U,	// t2SMULWT
+    27942U,	// t2SMULWT
     26920U,	// t2SMUSD
-    28106U,	// t2SMUSDX
+    28120U,	// t2SMUSDX
     9078777U,	// t2SRSDB
     9209849U,	// t2SRSDB_UPD
     9078665U,	// t2SRSIA
     9209737U,	// t2SRSIA_UPD
-    31832U,	// t2SSAT
+    31846U,	// t2SSAT
     26319U,	// t2SSAT16
-    28038U,	// t2SSAX
+    28052U,	// t2SSAX
     26267U,	// t2SSUB16
     26368U,	// t2SSUB8
     3271588384U,	// t2STC2L_OFFSET
@@ -3366,18 +3381,18 @@ void ARMInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo &S
     3271588036U,	// t2STC_OPTION
     3271588036U,	// t2STC_POST
     3271588036U,	// t2STC_PRE
-    19146U,	// t2STL
+    19160U,	// t2STL
     18443U,	// t2STLB
-    28119U,	// t2STLEX
+    28133U,	// t2STLEX
     26761U,	// t2STLEXB
     31029U,	// t2STLEXD
     27119U,	// t2STLEXH
     18852U,	// t2STLH
     34803U,	// t2STMDB
     33572851U,	// t2STMDB_UPD
-    8948461U,	// t2STMIA
-    42486509U,	// t2STMIA_UPD
-    27785U,	// t2STRBT
+    8948475U,	// t2STMIA
+    42486523U,	// t2STMIA_UPD
+    27799U,	// t2STRBT
     33585182U,	// t2STRB_POST
     33585182U,	// t2STRB_PRE
     0U,	// t2STRB_preidx
@@ -3387,30 +3402,30 @@ void ARMInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo &S
     33622301U,	// t2STRD_POST
     33622301U,	// t2STRD_PRE
     31005U,	// t2STRDi8
-    32233U,	// t2STREX
+    32247U,	// t2STREX
     26775U,	// t2STREXB
     31043U,	// t2STREXD
     27133U,	// t2STREXH
-    27820U,	// t2STRHT
+    27834U,	// t2STRHT
     33585599U,	// t2STRH_POST
     33585599U,	// t2STRH_PRE
     0U,	// t2STRH_preidx
     8939967U,	// t2STRHi12
     27071U,	// t2STRHi8
     8944063U,	// t2STRHs
-    27869U,	// t2STRT
-    33586159U,	// t2STR_POST
-    33586159U,	// t2STR_PRE
+    27883U,	// t2STRT
+    33586173U,	// t2STR_POST
+    33586173U,	// t2STR_PRE
     0U,	// t2STR_preidx
-    8940527U,	// t2STRi12
-    27631U,	// t2STRi8
-    8944623U,	// t2STRs
-    9341956U,	// t2SUBS_PC_LR
+    8940541U,	// t2STRi12
+    27645U,	// t2STRi8
+    8944637U,	// t2STRs
+    9341970U,	// t2SUBS_PC_LR
     0U,	// t2SUBSri
     0U,	// t2SUBSrr
     0U,	// t2SUBSrs
     8919135U,	// t2SUBri
-    27972U,	// t2SUBri12
+    27986U,	// t2SUBri12
     8919135U,	// t2SUBrr
     8923231U,	// t2SUBrs
     30655U,	// t2SXTAB
@@ -3423,42 +3438,42 @@ void ARMInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo &S
     0U,	// t2TBB_JT
     939542944U,	// t2TBH
     0U,	// t2TBH_JT
-    8932250U,	// t2TEQri
-    8932250U,	// t2TEQrr
-    8940442U,	// t2TEQrs
-    8932579U,	// t2TSTri
-    8932579U,	// t2TSTrr
-    8940771U,	// t2TSTrs
-    19691U,	// t2TT
+    8932264U,	// t2TEQri
+    8932264U,	// t2TEQrr
+    8940456U,	// t2TEQrs
+    8932593U,	// t2TSTri
+    8932593U,	// t2TSTrr
+    8940785U,	// t2TSTrs
+    19705U,	// t2TT
     18358U,	// t2TTA
-    19554U,	// t2TTAT
-    19709U,	// t2TTT
+    19568U,	// t2TTAT
+    19723U,	// t2TTT
     26312U,	// t2UADD16
     26413U,	// t2UADD8
-    28184U,	// t2UASX
-    32244U,	// t2UBFX
+    28198U,	// t2UASX
+    32258U,	// t2UBFX
     414973U,	// t2UDF
-    27956U,	// t2UDIV
+    27970U,	// t2UDIV
     26289U,	// t2UHADD16
     26393U,	// t2UHADD8
-    28167U,	// t2UHASX
-    28026U,	// t2UHSAX
+    28181U,	// t2UHASX
+    28040U,	// t2UHSAX
     26251U,	// t2UHSUB16
     26354U,	// t2UHSUB8
     43558U,	// t2UMAAL
     43591U,	// t2UMLAL
-    31403U,	// t2UMULL
+    31417U,	// t2UMULL
     26297U,	// t2UQADD16
     26400U,	// t2UQADD8
-    28173U,	// t2UQASX
-    28032U,	// t2UQSAX
+    28187U,	// t2UQASX
+    28046U,	// t2UQSAX
     26259U,	// t2UQSUB16
     26361U,	// t2UQSUB8
     26380U,	// t2USAD8
     30436U,	// t2USADA8
-    31837U,	// t2USAT
+    31851U,	// t2USAT
     26326U,	// t2USAT16
-    28043U,	// t2USAX
+    28057U,	// t2USAX
     26274U,	// t2USUB16
     26374U,	// t2USUB8
     30661U,	// t2UXTAB
@@ -3468,6 +3483,10 @@ void ARMInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo &S
     26236U,	// t2UXTB16
     8940003U,	// t2UXTH
     965859490U,	// tADC
+    0U,	// tADCS
+    0U,	// tADDSi3
+    0U,	// tADDSi8
+    0U,	// tADDSrr
     0U,	// tADDframe
     26847U,	// tADDhirr
     26335455U,	// tADDi3
@@ -3479,21 +3498,21 @@ void ARMInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo &S
     26847U,	// tADDspr
     0U,	// tADJCALLSTACKDOWN
     0U,	// tADJCALLSTACKUP
-    19369U,	// tADR
+    19383U,	// tADR
     965859604U,	// tAND
-    26336215U,	// tASRri
-    965860311U,	// tASRrr
+    26336229U,	// tASRri
+    965860325U,	// tASRrr
     1073776573U,	// tB
     965859503U,	// tBIC
     414960U,	// tBKPT
     1090558549U,	// tBL
-    1090559023U,	// tBLXNSr
-    1090559481U,	// tBLXi
-    1090559481U,	// tBLXr
+    1090559037U,	// tBLXNSr
+    1090559495U,	// tBLXi
+    1090559495U,	// tBLXr
     0U,	// tBRIND
     0U,	// tBR_JTr
-    1073778069U,	// tBX
-    1073777706U,	// tBXNS
+    1073778083U,	// tBX
+    1073777720U,	// tBXNS
     0U,	// tBX_CALL
     0U,	// tBX_RET
     0U,	// tBX_RET_vararg
@@ -3501,22 +3520,22 @@ void ARMInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo &S
     0U,	// tBfar
     1107449129U,	// tCBNZ
     1107449124U,	// tCBZ
-    19226U,	// tCMNz
-    19326U,	// tCMPhir
-    19326U,	// tCMPi8
-    19326U,	// tCMPr
-    1157942328U,	// tCPS
-    965860293U,	// tEOR
-    1073777869U,	// tHINT
+    19240U,	// tCMNz
+    19340U,	// tCMPhir
+    19340U,	// tCMPi8
+    19340U,	// tCMPr
+    1157942342U,	// tCPS
+    965860307U,	// tEOR
+    1073777883U,	// tHINT
     414955U,	// tHLT
     0U,	// tInt_WIN_eh_sjlj_longjmp
     0U,	// tInt_eh_sjlj_longjmp
     0U,	// tInt_eh_sjlj_setjmp
-    35559U,	// tLDMIA
+    35573U,	// tLDMIA
     0U,	// tLDMIA_UPD
     26649U,	// tLDRBi
     26649U,	// tLDRBr
-    281518U,	// tLDRConstPool
+    281532U,	// tLDRConstPool
     27066U,	// tLDRHi
     27066U,	// tLDRHr
     0U,	// tLDRLIT_ga_abs
@@ -3524,43 +3543,47 @@ void ARMInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo &S
     26667U,	// tLDRSB
     27085U,	// tLDRSH
     0U,	// tLDR_postidx
-    27566U,	// tLDRi
-    19374U,	// tLDRpci
+    27580U,	// tLDRi
+    19388U,	// tLDRpci
     0U,	// tLDRpci_pic
-    27566U,	// tLDRr
-    27566U,	// tLDRspi
+    27580U,	// tLDRr
+    27580U,	// tLDRspi
     0U,	// tLEApcrel
     0U,	// tLEApcrelJT
-    26335936U,	// tLSLri
-    965860032U,	// tLSLrr
-    26336222U,	// tLSRri
-    965860318U,	// tLSRrr
+    26335950U,	// tLSLri
+    965860046U,	// tLSLrr
+    26336236U,	// tLSRri
+    965860332U,	// tLSRrr
     0U,	// tMOVCCr_pseudo
     1107449061U,	// tMOVSr
-    311680319U,	// tMOVi8
-    19775U,	// tMOVr
-    26335952U,	// tMUL
-    311679838U,	// tMVN
-    965860307U,	// tORR
+    311680333U,	// tMOVi8
+    19789U,	// tMOVr
+    26335966U,	// tMUL
+    311679852U,	// tMVN
+    965860321U,	// tORR
     0U,	// tPICADD
-    973118338U,	// tPOP
+    973118352U,	// tPOP
     0U,	// tPOP_RET
     973117907U,	// tPUSH
-    19755U,	// tREV
+    19769U,	// tREV
     18142U,	// tREV16
     18904U,	// tREVSH
-    965860297U,	// tROR
+    965860311U,	// tROR
     294901805U,	// tRSB
     965859486U,	// tSBC
+    0U,	// tSBCS
     91299U,	// tSETEND
-    33573613U,	// tSTMIA_UPD
+    33573627U,	// tSTMIA_UPD
     26654U,	// tSTRBi
     26654U,	// tSTRBr
     27071U,	// tSTRHi
     27071U,	// tSTRHr
-    27631U,	// tSTRi
-    27631U,	// tSTRr
-    27631U,	// tSTRspi
+    27645U,	// tSTRi
+    27645U,	// tSTRr
+    27645U,	// tSTRspi
+    0U,	// tSUBSi3
+    0U,	// tSUBSi8
+    0U,	// tSUBSrr
     26335327U,	// tSUBi3
     965859423U,	// tSUBi8
     26335327U,	// tSUBrr
@@ -3574,8 +3597,8 @@ void ARMInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo &S
     0U,	// tTBB_JT
     0U,	// tTBH_JT
     0U,	// tTPsoft
-    2927U,	// tTRAP
-    19683U,	// tTST
+    2941U,	// tTRAP
+    19697U,	// tTST
     414891U,	// tUDF
     18520U,	// tUXTB
     18915U,	// tUXTH
@@ -3601,11 +3624,12 @@ void ARMInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo &S
     0U,	// LIFETIME_START
     0U,	// LIFETIME_END
     0U,	// STACKMAP
+    0U,	// FENTRY_CALL
     0U,	// PATCHPOINT
     0U,	// LOAD_STACK_GUARD
     0U,	// STATEPOINT
     0U,	// LOCAL_ESCAPE
-    0U,	// FAULTING_LOAD_OP
+    0U,	// FAULTING_OP
     0U,	// PATCHABLE_OP
     0U,	// PATCHABLE_FUNCTION_ENTER
     0U,	// PATCHABLE_RET
@@ -3624,20 +3648,25 @@ void ARMInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo &S
     0U,	// G_FRAME_INDEX
     0U,	// G_GLOBAL_VALUE
     0U,	// G_EXTRACT
+    0U,	// G_UNMERGE_VALUES
     0U,	// G_INSERT
     0U,	// G_SEQUENCE
+    0U,	// G_MERGE_VALUES
     0U,	// G_PTRTOINT
     0U,	// G_INTTOPTR
     0U,	// G_BITCAST
     0U,	// G_LOAD
     0U,	// G_STORE
     0U,	// G_BRCOND
+    0U,	// G_BRINDIRECT
     0U,	// G_INTRINSIC
     0U,	// G_INTRINSIC_W_SIDE_EFFECTS
     0U,	// G_ANYEXT
     0U,	// G_TRUNC
     0U,	// G_CONSTANT
     0U,	// G_FCONSTANT
+    0U,	// G_VASTART
+    0U,	// G_VAARG
     0U,	// G_SEXT
     0U,	// G_ZEXT
     0U,	// G_SHL
@@ -3652,11 +3681,15 @@ void ARMInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo &S
     0U,	// G_SSUBO
     0U,	// G_UMULO
     0U,	// G_SMULO
+    0U,	// G_UMULH
+    0U,	// G_SMULH
     0U,	// G_FADD
     0U,	// G_FSUB
     0U,	// G_FMUL
     0U,	// G_FDIV
     0U,	// G_FREM
+    0U,	// G_FPOW
+    0U,	// G_FNEG
     0U,	// G_FPEXT
     0U,	// G_FPTRUNC
     0U,	// G_FPTOSI
@@ -3664,7 +3697,11 @@ void ARMInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo &S
     0U,	// G_SITOFP
     0U,	// G_UITOFP
     0U,	// G_GEP
+    0U,	// G_PTR_MASK
     0U,	// G_BR
+    0U,	// G_INSERT_VECTOR_ELT
+    0U,	// G_EXTRACT_VECTOR_ELT
+    0U,	// G_SHUFFLE_VECTOR
     0U,	// ABS
     0U,	// ADCri
     32768U,	// ADCrr
@@ -6548,6 +6585,10 @@ void ARMInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo &S
     5120U,	// t2UXTB16
     5120U,	// t2UXTH
     0U,	// tADC
+    0U,	// tADCS
+    0U,	// tADDSi3
+    0U,	// tADDSi8
+    0U,	// tADDSrr
     0U,	// tADDframe
     2072U,	// tADDhirr
     2216U,	// tADDi3
@@ -6632,6 +6673,7 @@ void ARMInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo &S
     0U,	// tROR
     0U,	// tRSB
     0U,	// tSBC
+    0U,	// tSBCS
     0U,	// tSETEND
     65U,	// tSTMIA_UPD
     480U,	// tSTRBi
@@ -6641,6 +6683,9 @@ void ARMInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo &S
     504U,	// tSTRi
     488U,	// tSTRr
     512U,	// tSTRspi
+    0U,	// tSUBSi3
+    0U,	// tSUBSi8
+    0U,	// tSUBSrr
     2216U,	// tSUBi3
     0U,	// tSUBi8
     2216U,	// tSUBrr
@@ -6676,7 +6721,7 @@ void ARMInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo &S
   switch ((Bits >> 12) & 31) {
   default: llvm_unreachable("Invalid command number.");
   case 0:
-    // DBG_VALUE, BUNDLE, LIFETIME_START, LIFETIME_END, PATCHABLE_FUNCTION_EN...
+    // DBG_VALUE, BUNDLE, LIFETIME_START, LIFETIME_END, FENTRY_CALL, PATCHABL...
     return;
     break;
   case 1:
@@ -6726,7 +6771,7 @@ void ARMInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo &S
     printPredicateOperand(MI, 0, STI, O);
     break;
   case 10:
-    // CDP, LDRD_POST, LDRD_PRE, MCR, MRC, STRD_POST, STRD_PRE, UMAAL, VLD4DU...
+    // CDP, LDRD_POST, LDRD_PRE, MCR, MRC, SMLALBB, SMLALBT, SMLALTB, SMLALTT...
     printPredicateOperand(MI, 6, STI, O);
     break;
   case 11:

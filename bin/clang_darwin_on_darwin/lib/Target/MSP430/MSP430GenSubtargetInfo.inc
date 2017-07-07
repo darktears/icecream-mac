@@ -13,7 +13,10 @@
 namespace llvm {
 namespace MSP430 {
 enum {
-  FeatureX = 0
+  FeatureHWMult16 = 0,
+  FeatureHWMult32 = 1,
+  FeatureHWMultF5 = 2,
+  FeatureX = 3
 };
 } // end namespace MSP430
 } // end namespace llvm
@@ -27,12 +30,17 @@ enum {
 namespace llvm {
 // Sorted (by key) array of values for CPU features.
 extern const llvm::SubtargetFeatureKV MSP430FeatureKV[] = {
-  { "ext", "Enable MSP430-X extensions", { MSP430::FeatureX }, { } }
+  { "ext", "Enable MSP430-X extensions", { MSP430::FeatureX }, { } },
+  { "hwmult16", "Enable 16-bit hardware multiplier", { MSP430::FeatureHWMult16 }, { } },
+  { "hwmult32", "Enable 32-bit hardware multiplier", { MSP430::FeatureHWMult32 }, { } },
+  { "hwmultf5", "Enable F5 series hardware multiplier", { MSP430::FeatureHWMultF5 }, { } }
 };
 
 // Sorted (by key) array of values for CPU subtype.
 extern const llvm::SubtargetFeatureKV MSP430SubTypeKV[] = {
-  { "generic", "Select the generic processor", { }, { } }
+  { "generic", "Select the generic processor", { }, { } },
+  { "msp430", "Select the msp430 processor", { }, { } },
+  { "msp430x", "Select the msp430x processor", { MSP430::FeatureX }, { } }
 };
 
 #ifdef DBGFIELD
@@ -77,7 +85,9 @@ static const llvm::MCSchedModel NoSchedModel = {
 
 // Sorted (by key) array of itineraries for CPU subtype.
 extern const llvm::SubtargetInfoKV MSP430ProcSchedKV[] = {
-  { "generic", (const void *)&NoSchedModel }
+  { "generic", (const void *)&NoSchedModel },
+  { "msp430", (const void *)&NoSchedModel },
+  { "msp430x", (const void *)&NoSchedModel }
 };
 #undef DBGFIELD
 static inline MCSubtargetInfo *createMSP430MCSubtargetInfoImpl(const Triple &TT, StringRef CPU, StringRef FS) {
@@ -104,6 +114,9 @@ void llvm::MSP430Subtarget::ParseSubtargetFeatures(StringRef CPU, StringRef FS) 
   DEBUG(dbgs() << "\nCPU:" << CPU << "\n\n");
   InitMCProcessorInfo(CPU, FS);
   const FeatureBitset& Bits = getFeatureBits();
+  if (Bits[MSP430::FeatureHWMult16] && HWMultMode < HWMult16) HWMultMode = HWMult16;
+  if (Bits[MSP430::FeatureHWMult32] && HWMultMode < HWMult32) HWMultMode = HWMult32;
+  if (Bits[MSP430::FeatureHWMultF5] && HWMultMode < HWMultF5) HWMultMode = HWMultF5;
   if (Bits[MSP430::FeatureX]) ExtendedInsts = true;
 }
 #endif // GET_SUBTARGETINFO_TARGET_DESC
@@ -138,7 +151,7 @@ extern const llvm::MCWriteProcResEntry MSP430WriteProcResTable[];
 extern const llvm::MCWriteLatencyEntry MSP430WriteLatencyTable[];
 extern const llvm::MCReadAdvanceEntry MSP430ReadAdvanceTable[];
 MSP430GenSubtargetInfo::MSP430GenSubtargetInfo(const Triple &TT, StringRef CPU, StringRef FS)
-  : TargetSubtargetInfo(TT, CPU, FS, makeArrayRef(MSP430FeatureKV, 1), makeArrayRef(MSP430SubTypeKV, 1), 
+  : TargetSubtargetInfo(TT, CPU, FS, makeArrayRef(MSP430FeatureKV, 4), makeArrayRef(MSP430SubTypeKV, 3), 
                         MSP430ProcSchedKV, MSP430WriteProcResTable, MSP430WriteLatencyTable, MSP430ReadAdvanceTable, 
                         nullptr, nullptr, nullptr) {}
 

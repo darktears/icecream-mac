@@ -1435,16 +1435,17 @@ void AArch64AppleInstPrinter::printInstruction(const MCInst *MI, const MCSubtarg
   /* 13437 */ '.', 't', 'l', 's', 'd', 'e', 's', 'c', 'c', 'a', 'l', 'l', 32, 0,
   /* 13451 */ '#', 32, 'X', 'R', 'a', 'y', 32, 'F', 'u', 'n', 'c', 't', 'i', 'o', 'n', 32, 'P', 'a', 't', 'c', 'h', 'a', 'b', 'l', 'e', 32, 'R', 'E', 'T', '.', 0,
   /* 13482 */ 'b', '.', 0,
-  /* 13485 */ '#', 32, 'X', 'R', 'a', 'y', 32, 'F', 'u', 'n', 'c', 't', 'i', 'o', 'n', 32, 'E', 'n', 't', 'e', 'r', '.', 0,
-  /* 13508 */ '#', 32, 'X', 'R', 'a', 'y', 32, 'T', 'a', 'i', 'l', 32, 'C', 'a', 'l', 'l', 32, 'E', 'x', 'i', 't', '.', 0,
-  /* 13531 */ '#', 32, 'X', 'R', 'a', 'y', 32, 'F', 'u', 'n', 'c', 't', 'i', 'o', 'n', 32, 'E', 'x', 'i', 't', '.', 0,
-  /* 13553 */ 'L', 'I', 'F', 'E', 'T', 'I', 'M', 'E', '_', 'E', 'N', 'D', 0,
-  /* 13566 */ 'B', 'U', 'N', 'D', 'L', 'E', 0,
-  /* 13573 */ 'D', 'B', 'G', '_', 'V', 'A', 'L', 'U', 'E', 0,
-  /* 13583 */ 'L', 'I', 'F', 'E', 'T', 'I', 'M', 'E', '_', 'S', 'T', 'A', 'R', 'T', 0,
-  /* 13598 */ '#', 32, 'F', 'E', 'n', 't', 'r', 'y', 32, 'c', 'a', 'l', 'l', 0,
-  /* 13612 */ 'd', 'r', 'p', 's', 0,
-  /* 13617 */ 'e', 'r', 'e', 't', 0,
+  /* 13485 */ '#', 32, 'X', 'R', 'a', 'y', 32, 'C', 'u', 's', 't', 'o', 'm', 32, 'E', 'v', 'e', 'n', 't', 32, 'L', 'o', 'g', '.', 0,
+  /* 13510 */ '#', 32, 'X', 'R', 'a', 'y', 32, 'F', 'u', 'n', 'c', 't', 'i', 'o', 'n', 32, 'E', 'n', 't', 'e', 'r', '.', 0,
+  /* 13533 */ '#', 32, 'X', 'R', 'a', 'y', 32, 'T', 'a', 'i', 'l', 32, 'C', 'a', 'l', 'l', 32, 'E', 'x', 'i', 't', '.', 0,
+  /* 13556 */ '#', 32, 'X', 'R', 'a', 'y', 32, 'F', 'u', 'n', 'c', 't', 'i', 'o', 'n', 32, 'E', 'x', 'i', 't', '.', 0,
+  /* 13578 */ 'L', 'I', 'F', 'E', 'T', 'I', 'M', 'E', '_', 'E', 'N', 'D', 0,
+  /* 13591 */ 'B', 'U', 'N', 'D', 'L', 'E', 0,
+  /* 13598 */ 'D', 'B', 'G', '_', 'V', 'A', 'L', 'U', 'E', 0,
+  /* 13608 */ 'L', 'I', 'F', 'E', 'T', 'I', 'M', 'E', '_', 'S', 'T', 'A', 'R', 'T', 0,
+  /* 13623 */ '#', 32, 'F', 'E', 'n', 't', 'r', 'y', 32, 'c', 'a', 'l', 'l', 0,
+  /* 13637 */ 'd', 'r', 'p', 's', 0,
+  /* 13642 */ 'e', 'r', 'e', 't', 0,
   };
 
   static const uint32_t OpInfo0[] = {
@@ -1459,24 +1460,25 @@ void AArch64AppleInstPrinter::printInstruction(const MCInst *MI, const MCSubtarg
     0U,	// IMPLICIT_DEF
     0U,	// SUBREG_TO_REG
     0U,	// COPY_TO_REGCLASS
-    13574U,	// DBG_VALUE
+    13599U,	// DBG_VALUE
     0U,	// REG_SEQUENCE
     0U,	// COPY
-    13567U,	// BUNDLE
-    13584U,	// LIFETIME_START
-    13554U,	// LIFETIME_END
+    13592U,	// BUNDLE
+    13609U,	// LIFETIME_START
+    13579U,	// LIFETIME_END
     0U,	// STACKMAP
-    13599U,	// FENTRY_CALL
+    13624U,	// FENTRY_CALL
     0U,	// PATCHPOINT
     0U,	// LOAD_STACK_GUARD
     0U,	// STATEPOINT
     0U,	// LOCAL_ESCAPE
     0U,	// FAULTING_OP
     0U,	// PATCHABLE_OP
-    13486U,	// PATCHABLE_FUNCTION_ENTER
+    13511U,	// PATCHABLE_FUNCTION_ENTER
     13452U,	// PATCHABLE_RET
-    13532U,	// PATCHABLE_FUNCTION_EXIT
-    13509U,	// PATCHABLE_TAIL_CALL
+    13557U,	// PATCHABLE_FUNCTION_EXIT
+    13534U,	// PATCHABLE_TAIL_CALL
+    13486U,	// PATCHABLE_EVENT_CALL
     0U,	// G_ADD
     0U,	// G_SUB
     0U,	// G_MUL
@@ -1821,11 +1823,12 @@ void AArch64AppleInstPrinter::printInstruction(const MCInst *MI, const MCSubtarg
     2214638543U,	// CSINVXr
     2214629762U,	// CSNEGWr
     2214629762U,	// CSNEGXr
+    0U,	// CompilerBarrier
     81926U,	// DCPS1
     81975U,	// DCPS2
     81992U,	// DCPS3
     166395U,	// DMB
-    13613U,	// DRPS
+    13638U,	// DRPS
     166546U,	// DSB
     67126252U,	// DUPv16i8gpr
     17388U,	// DUPv16i8lane
@@ -1853,7 +1856,7 @@ void AArch64AppleInstPrinter::printInstruction(const MCInst *MI, const MCSubtarg
     2214634639U,	// EORXrs
     2147501119U,	// EORv16i8
     2147502070U,	// EORv8i8
-    13618U,	// ERET
+    13643U,	// ERET
     2214634686U,	// EXTRWrri
     2214634686U,	// EXTRXrri
     2147501235U,	// EXTv16i8
@@ -4369,6 +4372,7 @@ void AArch64AppleInstPrinter::printInstruction(const MCInst *MI, const MCSubtarg
     0U,	// PATCHABLE_RET
     0U,	// PATCHABLE_FUNCTION_EXIT
     0U,	// PATCHABLE_TAIL_CALL
+    0U,	// PATCHABLE_EVENT_CALL
     0U,	// G_ADD
     0U,	// G_SUB
     0U,	// G_MUL
@@ -4713,6 +4717,7 @@ void AArch64AppleInstPrinter::printInstruction(const MCInst *MI, const MCSubtarg
     4608U,	// CSINVXr
     4608U,	// CSNEGWr
     4608U,	// CSNEGXr
+    0U,	// CompilerBarrier
     0U,	// DCPS1
     0U,	// DCPS2
     0U,	// DCPS3
@@ -7261,6 +7266,7 @@ void AArch64AppleInstPrinter::printInstruction(const MCInst *MI, const MCSubtarg
     0U,	// PATCHABLE_RET
     0U,	// PATCHABLE_FUNCTION_EXIT
     0U,	// PATCHABLE_TAIL_CALL
+    0U,	// PATCHABLE_EVENT_CALL
     0U,	// G_ADD
     0U,	// G_SUB
     0U,	// G_MUL
@@ -7605,6 +7611,7 @@ void AArch64AppleInstPrinter::printInstruction(const MCInst *MI, const MCSubtarg
     0U,	// CSINVXr
     0U,	// CSNEGWr
     0U,	// CSNEGXr
+    0U,	// CompilerBarrier
     0U,	// DCPS1
     0U,	// DCPS2
     0U,	// DCPS3

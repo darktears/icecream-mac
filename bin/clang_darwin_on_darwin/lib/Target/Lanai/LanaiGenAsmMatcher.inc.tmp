@@ -223,7 +223,6 @@ enum OperatorConversionKind {
 };
 
 enum InstructionConversionKind {
-  Convert__Imm1_0,
   Convert__Imm1_0__Imm1_1,
   Convert__Reg1_0__Reg1_1,
   Convert__Reg1_2__Reg1_0__HiImm161_1,
@@ -261,8 +260,6 @@ enum InstructionConversionKind {
 } // end anonymous namespace
 
 static const uint8_t ConversionTable[CVT_NUM_SIGNATURES][9] = {
-  // Convert__Imm1_0
-  { CVT_95_addImmOperands, 1, CVT_Done },
   // Convert__Imm1_0__Imm1_1
   { CVT_95_addImmOperands, 1, CVT_95_addImmOperands, 2, CVT_Done },
   // Convert__Reg1_0__Reg1_1
@@ -798,7 +795,7 @@ namespace {
 } // end anonymous namespace.
 
 static const MatchEntry MatchTable0[] = {
-  { 0 /* #ADJCALLSTACKDOWN */, Lanai::ADJCALLSTACKDOWN, Convert__Imm1_0, 0, { MCK_Imm }, },
+  { 0 /* #ADJCALLSTACKDOWN */, Lanai::ADJCALLSTACKDOWN, Convert__Imm1_0__Imm1_1, 0, { MCK_Imm, MCK_Imm }, },
   { 18 /* #ADJCALLSTACKUP */, Lanai::ADJCALLSTACKUP, Convert__Imm1_0__Imm1_1, 0, { MCK_Imm, MCK_Imm }, },
   { 34 /* #ADJDYNALLOC */, Lanai::ADJDYNALLOC, Convert__Reg1_0__Reg1_1, 0, { MCK_GPR, MCK_GPR }, },
   { 47 /* add */, Lanai::ADD_I_HI, Convert__Reg1_2__Reg1_0__HiImm161_1, 0, { MCK_GPR, MCK_HiImm16, MCK_GPR }, },

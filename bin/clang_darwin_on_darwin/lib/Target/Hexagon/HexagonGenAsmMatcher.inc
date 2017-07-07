@@ -47,20 +47,16 @@ enum SubtargetFeatureFlag : uint8_t {
 static unsigned MatchRegisterName(StringRef Name) {
   switch (Name.size()) {
   default: break;
-  case 2:	 // 36 strings to match.
+  case 2:	 // 34 strings to match.
     switch (Name[0]) {
     default: break;
-    case 'c':	 // 4 strings to match.
+    case 'c':	 // 2 strings to match.
       switch (Name[1]) {
       default: break;
       case '5':	 // 1 string to match.
         return 18;	 // "c5"
-      case '6':	 // 1 string to match.
-        return 19;	 // "c6"
-      case '7':	 // 1 string to match.
-        return 20;	 // "c7"
       case '8':	 // 1 string to match.
-        return 21;	 // "c8"
+        return 19;	 // "c8"
       }
       break;
     case 'g':	 // 1 string to match.
@@ -71,22 +67,22 @@ static unsigned MatchRegisterName(StringRef Name) {
       switch (Name[1]) {
       default: break;
       case '0':	 // 1 string to match.
-        return 42;	 // "m0"
+        return 40;	 // "m0"
       case '1':	 // 1 string to match.
-        return 43;	 // "m1"
+        return 41;	 // "m1"
       }
       break;
     case 'p':	 // 5 strings to match.
       switch (Name[1]) {
       default: break;
       case '0':	 // 1 string to match.
-        return 44;	 // "p0"
+        return 42;	 // "p0"
       case '1':	 // 1 string to match.
-        return 45;	 // "p1"
+        return 43;	 // "p1"
       case '2':	 // 1 string to match.
-        return 46;	 // "p2"
+        return 44;	 // "p2"
       case '3':	 // 1 string to match.
-        return 47;	 // "p3"
+        return 45;	 // "p3"
       case 'c':	 // 1 string to match.
         return 5;	 // "pc"
       }
@@ -95,63 +91,63 @@ static unsigned MatchRegisterName(StringRef Name) {
       switch (Name[1]) {
       default: break;
       case '0':	 // 1 string to match.
-        return 48;	 // "q0"
+        return 46;	 // "q0"
       case '1':	 // 1 string to match.
-        return 49;	 // "q1"
+        return 47;	 // "q1"
       case '2':	 // 1 string to match.
-        return 50;	 // "q2"
+        return 48;	 // "q2"
       case '3':	 // 1 string to match.
-        return 51;	 // "q3"
+        return 49;	 // "q3"
       }
       break;
     case 'r':	 // 10 strings to match.
       switch (Name[1]) {
       default: break;
       case '0':	 // 1 string to match.
-        return 52;	 // "r0"
+        return 50;	 // "r0"
       case '1':	 // 1 string to match.
-        return 53;	 // "r1"
+        return 51;	 // "r1"
       case '2':	 // 1 string to match.
-        return 54;	 // "r2"
+        return 52;	 // "r2"
       case '3':	 // 1 string to match.
-        return 55;	 // "r3"
+        return 53;	 // "r3"
       case '4':	 // 1 string to match.
-        return 56;	 // "r4"
+        return 54;	 // "r4"
       case '5':	 // 1 string to match.
-        return 57;	 // "r5"
+        return 55;	 // "r5"
       case '6':	 // 1 string to match.
-        return 58;	 // "r6"
+        return 56;	 // "r6"
       case '7':	 // 1 string to match.
-        return 59;	 // "r7"
+        return 57;	 // "r7"
       case '8':	 // 1 string to match.
-        return 60;	 // "r8"
+        return 58;	 // "r8"
       case '9':	 // 1 string to match.
-        return 61;	 // "r9"
+        return 59;	 // "r9"
       }
       break;
     case 'v':	 // 10 strings to match.
       switch (Name[1]) {
       default: break;
       case '0':	 // 1 string to match.
-        return 86;	 // "v0"
+        return 84;	 // "v0"
       case '1':	 // 1 string to match.
-        return 87;	 // "v1"
+        return 85;	 // "v1"
       case '2':	 // 1 string to match.
-        return 88;	 // "v2"
+        return 86;	 // "v2"
       case '3':	 // 1 string to match.
-        return 89;	 // "v3"
+        return 87;	 // "v3"
       case '4':	 // 1 string to match.
-        return 90;	 // "v4"
+        return 88;	 // "v4"
       case '5':	 // 1 string to match.
-        return 91;	 // "v5"
+        return 89;	 // "v5"
       case '6':	 // 1 string to match.
-        return 92;	 // "v6"
+        return 90;	 // "v6"
       case '7':	 // 1 string to match.
-        return 93;	 // "v7"
+        return 91;	 // "v7"
       case '8':	 // 1 string to match.
-        return 94;	 // "v8"
+        return 92;	 // "v8"
       case '9':	 // 1 string to match.
-        return 95;	 // "v9"
+        return 93;	 // "v9"
       }
       break;
     }
@@ -165,9 +161,9 @@ static unsigned MatchRegisterName(StringRef Name) {
       switch (Name[2]) {
       default: break;
       case '0':	 // 1 string to match.
-        return 22;	 // "cs0"
+        return 20;	 // "cs0"
       case '1':	 // 1 string to match.
-        return 23;	 // "cs1"
+        return 21;	 // "cs1"
       }
       break;
     case 'l':	 // 2 strings to match.
@@ -176,9 +172,9 @@ static unsigned MatchRegisterName(StringRef Name) {
       switch (Name[2]) {
       default: break;
       case '0':	 // 1 string to match.
-        return 40;	 // "lc0"
+        return 38;	 // "lc0"
       case '1':	 // 1 string to match.
-        return 41;	 // "lc1"
+        return 39;	 // "lc1"
       }
       break;
     case 'r':	 // 22 strings to match.
@@ -188,59 +184,59 @@ static unsigned MatchRegisterName(StringRef Name) {
         switch (Name[2]) {
         default: break;
         case '0':	 // 1 string to match.
-          return 62;	 // "r10"
+          return 60;	 // "r10"
         case '1':	 // 1 string to match.
-          return 63;	 // "r11"
+          return 61;	 // "r11"
         case '2':	 // 1 string to match.
-          return 64;	 // "r12"
+          return 62;	 // "r12"
         case '3':	 // 1 string to match.
-          return 65;	 // "r13"
+          return 63;	 // "r13"
         case '4':	 // 1 string to match.
-          return 66;	 // "r14"
+          return 64;	 // "r14"
         case '5':	 // 1 string to match.
-          return 67;	 // "r15"
+          return 65;	 // "r15"
         case '6':	 // 1 string to match.
-          return 68;	 // "r16"
+          return 66;	 // "r16"
         case '7':	 // 1 string to match.
-          return 69;	 // "r17"
+          return 67;	 // "r17"
         case '8':	 // 1 string to match.
-          return 70;	 // "r18"
+          return 68;	 // "r18"
         case '9':	 // 1 string to match.
-          return 71;	 // "r19"
+          return 69;	 // "r19"
         }
         break;
       case '2':	 // 10 strings to match.
         switch (Name[2]) {
         default: break;
         case '0':	 // 1 string to match.
-          return 72;	 // "r20"
+          return 70;	 // "r20"
         case '1':	 // 1 string to match.
-          return 73;	 // "r21"
+          return 71;	 // "r21"
         case '2':	 // 1 string to match.
-          return 74;	 // "r22"
+          return 72;	 // "r22"
         case '3':	 // 1 string to match.
-          return 75;	 // "r23"
+          return 73;	 // "r23"
         case '4':	 // 1 string to match.
-          return 76;	 // "r24"
+          return 74;	 // "r24"
         case '5':	 // 1 string to match.
-          return 77;	 // "r25"
+          return 75;	 // "r25"
         case '6':	 // 1 string to match.
-          return 78;	 // "r26"
+          return 76;	 // "r26"
         case '7':	 // 1 string to match.
-          return 79;	 // "r27"
+          return 77;	 // "r27"
         case '8':	 // 1 string to match.
-          return 80;	 // "r28"
+          return 78;	 // "r28"
         case '9':	 // 1 string to match.
-          return 81;	 // "r29"
+          return 79;	 // "r29"
         }
         break;
       case '3':	 // 2 strings to match.
         switch (Name[2]) {
         default: break;
         case '0':	 // 1 string to match.
-          return 82;	 // "r30"
+          return 80;	 // "r30"
         case '1':	 // 1 string to match.
-          return 83;	 // "r31"
+          return 81;	 // "r31"
         }
         break;
       }
@@ -251,9 +247,9 @@ static unsigned MatchRegisterName(StringRef Name) {
       switch (Name[2]) {
       default: break;
       case '0':	 // 1 string to match.
-        return 84;	 // "sa0"
+        return 82;	 // "sa0"
       case '1':	 // 1 string to match.
-        return 85;	 // "sa1"
+        return 83;	 // "sa1"
       }
       break;
     case 'u':	 // 2 strings to match.
@@ -276,59 +272,59 @@ static unsigned MatchRegisterName(StringRef Name) {
         switch (Name[2]) {
         default: break;
         case '0':	 // 1 string to match.
-          return 96;	 // "v10"
+          return 94;	 // "v10"
         case '1':	 // 1 string to match.
-          return 97;	 // "v11"
+          return 95;	 // "v11"
         case '2':	 // 1 string to match.
-          return 98;	 // "v12"
+          return 96;	 // "v12"
         case '3':	 // 1 string to match.
-          return 99;	 // "v13"
+          return 97;	 // "v13"
         case '4':	 // 1 string to match.
-          return 100;	 // "v14"
+          return 98;	 // "v14"
         case '5':	 // 1 string to match.
-          return 101;	 // "v15"
+          return 99;	 // "v15"
         case '6':	 // 1 string to match.
-          return 102;	 // "v16"
+          return 100;	 // "v16"
         case '7':	 // 1 string to match.
-          return 103;	 // "v17"
+          return 101;	 // "v17"
         case '8':	 // 1 string to match.
-          return 104;	 // "v18"
+          return 102;	 // "v18"
         case '9':	 // 1 string to match.
-          return 105;	 // "v19"
+          return 103;	 // "v19"
         }
         break;
       case '2':	 // 10 strings to match.
         switch (Name[2]) {
         default: break;
         case '0':	 // 1 string to match.
-          return 106;	 // "v20"
+          return 104;	 // "v20"
         case '1':	 // 1 string to match.
-          return 107;	 // "v21"
+          return 105;	 // "v21"
         case '2':	 // 1 string to match.
-          return 108;	 // "v22"
+          return 106;	 // "v22"
         case '3':	 // 1 string to match.
-          return 109;	 // "v23"
+          return 107;	 // "v23"
         case '4':	 // 1 string to match.
-          return 110;	 // "v24"
+          return 108;	 // "v24"
         case '5':	 // 1 string to match.
-          return 111;	 // "v25"
+          return 109;	 // "v25"
         case '6':	 // 1 string to match.
-          return 112;	 // "v26"
+          return 110;	 // "v26"
         case '7':	 // 1 string to match.
-          return 113;	 // "v27"
+          return 111;	 // "v27"
         case '8':	 // 1 string to match.
-          return 114;	 // "v28"
+          return 112;	 // "v28"
         case '9':	 // 1 string to match.
-          return 115;	 // "v29"
+          return 113;	 // "v29"
         }
         break;
       case '3':	 // 2 strings to match.
         switch (Name[2]) {
         default: break;
         case '0':	 // 1 string to match.
-          return 116;	 // "v30"
+          return 114;	 // "v30"
         case '1':	 // 1 string to match.
-          return 117;	 // "v31"
+          return 115;	 // "v31"
         }
         break;
       }
@@ -344,52 +340,52 @@ static unsigned MatchRegisterName(StringRef Name) {
       case '1':	 // 1 string to match.
         if (memcmp(Name.data()+2, ":0", 2) != 0)
           break;
-        return 134;	 // "c1:0"
+        return 132;	 // "c1:0"
       case '3':	 // 1 string to match.
         if (memcmp(Name.data()+2, ":2", 2) != 0)
           break;
-        return 135;	 // "c3:2"
+        return 133;	 // "c3:2"
       case '5':	 // 1 string to match.
         if (memcmp(Name.data()+2, ":4", 2) != 0)
           break;
-        return 136;	 // "c5:4"
+        return 134;	 // "c5:4"
       case '7':	 // 1 string to match.
         if (memcmp(Name.data()+2, ":6", 2) != 0)
           break;
-        return 137;	 // "c7:6"
+        return 135;	 // "c7:6"
       case '9':	 // 1 string to match.
         if (memcmp(Name.data()+2, ":8", 2) != 0)
           break;
-        return 138;	 // "c9:8"
+        return 136;	 // "c9:8"
       }
       break;
     case 'p':	 // 1 string to match.
       if (memcmp(Name.data()+1, "3:0", 3) != 0)
         break;
-      return 141;	 // "p3:0"
+      return 139;	 // "p3:0"
     case 'r':	 // 5 strings to match.
       switch (Name[1]) {
       default: break;
       case '1':	 // 1 string to match.
         if (memcmp(Name.data()+2, ":0", 2) != 0)
           break;
-        return 24;	 // "r1:0"
+        return 22;	 // "r1:0"
       case '3':	 // 1 string to match.
         if (memcmp(Name.data()+2, ":2", 2) != 0)
           break;
-        return 25;	 // "r3:2"
+        return 23;	 // "r3:2"
       case '5':	 // 1 string to match.
         if (memcmp(Name.data()+2, ":4", 2) != 0)
           break;
-        return 26;	 // "r5:4"
+        return 24;	 // "r5:4"
       case '7':	 // 1 string to match.
         if (memcmp(Name.data()+2, ":6", 2) != 0)
           break;
-        return 27;	 // "r7:6"
+        return 25;	 // "r7:6"
       case '9':	 // 1 string to match.
         if (memcmp(Name.data()+2, ":8", 2) != 0)
           break;
-        return 28;	 // "r9:8"
+        return 26;	 // "r9:8"
       }
       break;
     case 'v':	 // 5 strings to match.
@@ -398,23 +394,23 @@ static unsigned MatchRegisterName(StringRef Name) {
       case '1':	 // 1 string to match.
         if (memcmp(Name.data()+2, ":0", 2) != 0)
           break;
-        return 118;	 // "v1:0"
+        return 116;	 // "v1:0"
       case '3':	 // 1 string to match.
         if (memcmp(Name.data()+2, ":2", 2) != 0)
           break;
-        return 119;	 // "v3:2"
+        return 117;	 // "v3:2"
       case '5':	 // 1 string to match.
         if (memcmp(Name.data()+2, ":4", 2) != 0)
           break;
-        return 120;	 // "v5:4"
+        return 118;	 // "v5:4"
       case '7':	 // 1 string to match.
         if (memcmp(Name.data()+2, ":6", 2) != 0)
           break;
-        return 121;	 // "v7:6"
+        return 119;	 // "v7:6"
       case '9':	 // 1 string to match.
         if (memcmp(Name.data()+2, ":8", 2) != 0)
           break;
-        return 122;	 // "v9:8"
+        return 120;	 // "v9:8"
       }
       break;
     }
@@ -431,7 +427,7 @@ static unsigned MatchRegisterName(StringRef Name) {
         case '1':	 // 1 string to match.
           if (memcmp(Name.data()+3, ":10", 3) != 0)
             break;
-          return 139;	 // "c11:10"
+          return 137;	 // "c11:10"
         case '3':	 // 1 string to match.
           if (memcmp(Name.data()+3, ":12", 3) != 0)
             break;
@@ -443,7 +439,7 @@ static unsigned MatchRegisterName(StringRef Name) {
         case '7':	 // 1 string to match.
           if (memcmp(Name.data()+3, ":16", 3) != 0)
             break;
-          return 140;	 // "c17:16"
+          return 138;	 // "c17:16"
         case '9':	 // 1 string to match.
           if (memcmp(Name.data()+3, ":18", 3) != 0)
             break;
@@ -465,23 +461,23 @@ static unsigned MatchRegisterName(StringRef Name) {
         case '1':	 // 1 string to match.
           if (memcmp(Name.data()+3, ":10", 3) != 0)
             break;
-          return 29;	 // "r11:10"
+          return 27;	 // "r11:10"
         case '3':	 // 1 string to match.
           if (memcmp(Name.data()+3, ":12", 3) != 0)
             break;
-          return 30;	 // "r13:12"
+          return 28;	 // "r13:12"
         case '5':	 // 1 string to match.
           if (memcmp(Name.data()+3, ":14", 3) != 0)
             break;
-          return 31;	 // "r15:14"
+          return 29;	 // "r15:14"
         case '7':	 // 1 string to match.
           if (memcmp(Name.data()+3, ":16", 3) != 0)
             break;
-          return 32;	 // "r17:16"
+          return 30;	 // "r17:16"
         case '9':	 // 1 string to match.
           if (memcmp(Name.data()+3, ":18", 3) != 0)
             break;
-          return 33;	 // "r19:18"
+          return 31;	 // "r19:18"
         }
         break;
       case '2':	 // 5 strings to match.
@@ -490,29 +486,29 @@ static unsigned MatchRegisterName(StringRef Name) {
         case '1':	 // 1 string to match.
           if (memcmp(Name.data()+3, ":20", 3) != 0)
             break;
-          return 34;	 // "r21:20"
+          return 32;	 // "r21:20"
         case '3':	 // 1 string to match.
           if (memcmp(Name.data()+3, ":22", 3) != 0)
             break;
-          return 35;	 // "r23:22"
+          return 33;	 // "r23:22"
         case '5':	 // 1 string to match.
           if (memcmp(Name.data()+3, ":24", 3) != 0)
             break;
-          return 36;	 // "r25:24"
+          return 34;	 // "r25:24"
         case '7':	 // 1 string to match.
           if (memcmp(Name.data()+3, ":26", 3) != 0)
             break;
-          return 37;	 // "r27:26"
+          return 35;	 // "r27:26"
         case '9':	 // 1 string to match.
           if (memcmp(Name.data()+3, ":28", 3) != 0)
             break;
-          return 38;	 // "r29:28"
+          return 36;	 // "r29:28"
         }
         break;
       case '3':	 // 1 string to match.
         if (memcmp(Name.data()+2, "1:30", 4) != 0)
           break;
-        return 39;	 // "r31:30"
+        return 37;	 // "r31:30"
       }
       break;
     case 'v':	 // 11 strings to match.
@@ -524,23 +520,23 @@ static unsigned MatchRegisterName(StringRef Name) {
         case '1':	 // 1 string to match.
           if (memcmp(Name.data()+3, ":10", 3) != 0)
             break;
-          return 123;	 // "v11:10"
+          return 121;	 // "v11:10"
         case '3':	 // 1 string to match.
           if (memcmp(Name.data()+3, ":12", 3) != 0)
             break;
-          return 124;	 // "v13:12"
+          return 122;	 // "v13:12"
         case '5':	 // 1 string to match.
           if (memcmp(Name.data()+3, ":14", 3) != 0)
             break;
-          return 125;	 // "v15:14"
+          return 123;	 // "v15:14"
         case '7':	 // 1 string to match.
           if (memcmp(Name.data()+3, ":16", 3) != 0)
             break;
-          return 126;	 // "v17:16"
+          return 124;	 // "v17:16"
         case '9':	 // 1 string to match.
           if (memcmp(Name.data()+3, ":18", 3) != 0)
             break;
-          return 127;	 // "v19:18"
+          return 125;	 // "v19:18"
         }
         break;
       case '2':	 // 5 strings to match.
@@ -549,29 +545,29 @@ static unsigned MatchRegisterName(StringRef Name) {
         case '1':	 // 1 string to match.
           if (memcmp(Name.data()+3, ":20", 3) != 0)
             break;
-          return 128;	 // "v21:20"
+          return 126;	 // "v21:20"
         case '3':	 // 1 string to match.
           if (memcmp(Name.data()+3, ":22", 3) != 0)
             break;
-          return 129;	 // "v23:22"
+          return 127;	 // "v23:22"
         case '5':	 // 1 string to match.
           if (memcmp(Name.data()+3, ":24", 3) != 0)
             break;
-          return 130;	 // "v25:24"
+          return 128;	 // "v25:24"
         case '7':	 // 1 string to match.
           if (memcmp(Name.data()+3, ":26", 3) != 0)
             break;
-          return 131;	 // "v27:26"
+          return 129;	 // "v27:26"
         case '9':	 // 1 string to match.
           if (memcmp(Name.data()+3, ":28", 3) != 0)
             break;
-          return 132;	 // "v29:28"
+          return 130;	 // "v29:28"
         }
         break;
       case '3':	 // 1 string to match.
         if (memcmp(Name.data()+2, "1:30", 4) != 0)
           break;
-        return 133;	 // "v31:30"
+        return 131;	 // "v31:30"
       }
       break;
     }
@@ -650,40 +646,46 @@ static unsigned MatchRegisterName(StringRef Name) {
 static unsigned MatchRegisterAltName(StringRef Name) {
   switch (Name.size()) {
   default: break;
-  case 2:	 // 10 strings to match.
+  case 2:	 // 13 strings to match.
     switch (Name[0]) {
     default: break;
-    case 'c':	 // 7 strings to match.
+    case 'c':	 // 10 strings to match.
       switch (Name[1]) {
       default: break;
       case '0':	 // 1 string to match.
-        return 84;	 // "c0"
+        return 82;	 // "c0"
       case '1':	 // 1 string to match.
-        return 40;	 // "c1"
+        return 38;	 // "c1"
       case '2':	 // 1 string to match.
-        return 85;	 // "c2"
+        return 83;	 // "c2"
       case '3':	 // 1 string to match.
-        return 41;	 // "c3"
+        return 39;	 // "c3"
       case '4':	 // 1 string to match.
-        return 141;	 // "c4"
+        return 139;	 // "c4"
       case '5':	 // 1 string to match.
         return 18;	 // "c5"
+      case '6':	 // 1 string to match.
+        return 40;	 // "c6"
+      case '7':	 // 1 string to match.
+        return 41;	 // "c7"
       case '8':	 // 1 string to match.
         return 13;	 // "c8"
+      case '9':	 // 1 string to match.
+        return 5;	 // "c9"
       }
       break;
     case 'f':	 // 1 string to match.
       if (Name[1] != 'p')
         break;
-      return 82;	 // "fp"
+      return 80;	 // "fp"
     case 'l':	 // 1 string to match.
       if (Name[1] != 'r')
         break;
-      return 83;	 // "lr"
+      return 81;	 // "lr"
     case 's':	 // 1 string to match.
       if (Name[1] != 'p')
         break;
-      return 81;	 // "sp"
+      return 79;	 // "sp"
     }
     break;
   case 3:	 // 12 strings to match.
@@ -699,9 +701,9 @@ static unsigned MatchRegisterAltName(StringRef Name) {
       case '1':	 // 1 string to match.
         return 4;	 // "c11"
       case '2':	 // 1 string to match.
-        return 22;	 // "c12"
+        return 20;	 // "c12"
       case '3':	 // 1 string to match.
-        return 23;	 // "c13"
+        return 21;	 // "c13"
       case '4':	 // 1 string to match.
         return 12;	 // "c14"
       case '5':	 // 1 string to match.
@@ -730,7 +732,7 @@ static unsigned MatchRegisterAltName(StringRef Name) {
   case 4:	 // 1 string to match.
     if (memcmp(Name.data()+0, "m1:0", 4) != 0)
       break;
-    return 137;	 // "m1:0"
+    return 135;	 // "m1:0"
   case 5:	 // 2 strings to match.
     switch (Name[0]) {
     default: break;
@@ -741,7 +743,7 @@ static unsigned MatchRegisterAltName(StringRef Name) {
     case 'l':	 // 1 string to match.
       if (memcmp(Name.data()+1, "r:fp", 4) != 0)
         break;
-      return 39;	 // "lr:fp"
+      return 37;	 // "lr:fp"
     }
     break;
   case 6:	 // 1 string to match.
@@ -756,11 +758,11 @@ static unsigned MatchRegisterAltName(StringRef Name) {
     case '0':	 // 1 string to match.
       if (memcmp(Name.data()+3, ":sa0", 4) != 0)
         break;
-      return 134;	 // "lc0:sa0"
+      return 132;	 // "lc0:sa0"
     case '1':	 // 1 string to match.
       if (memcmp(Name.data()+3, ":sa1", 4) != 0)
         break;
-      return 135;	 // "lc1:sa1"
+      return 133;	 // "lc1:sa1"
     }
     break;
   case 8:	 // 1 string to match.
@@ -837,7 +839,7 @@ enum InstructionConversionKind {
   Convert__Reg1_0__u29_3Imm1_5,
   Convert__Reg1_0__u6_0Imm1_3__b30_2Imm1_6,
   Convert__Reg1_0__Tie0__Reg1_5,
-  Convert__Reg1_0__s23_2Imm1_5,
+  Convert__Reg1_0__s27_2Imm1_5,
   Convert__Reg1_0__u32_0Imm1_5,
   Convert__Reg1_0__u31_1Imm1_5,
   Convert__Reg1_0__u30_2Imm1_5,
@@ -1269,7 +1271,7 @@ static const uint8_t ConversionTable[CVT_NUM_SIGNATURES][13] = {
   { CVT_95_Reg, 0, CVT_95_addImmOperands, 3, CVT_95_addSignedImmOperands, 6, CVT_Done },
   // Convert__Reg1_0__Tie0__Reg1_5
   { CVT_95_Reg, 0, CVT_Tied, 0, CVT_95_Reg, 5, CVT_Done },
-  // Convert__Reg1_0__s23_2Imm1_5
+  // Convert__Reg1_0__s27_2Imm1_5
   { CVT_95_Reg, 0, CVT_95_addSignedImmOperands, 5, CVT_Done },
   // Convert__Reg1_0__u32_0Imm1_5
   { CVT_95_Reg, 0, CVT_95_addImmOperands, 5, CVT_Done },
@@ -2624,7 +2626,8 @@ enum MatchClassKind {
   MCK_zxth, // 'zxth'
   MCK__124_, // '|'
   MCK__126_, // '~'
-  MCK_Reg13, // derived register class
+  MCK_Reg19, // derived register class
+  MCK_Reg11, // derived register class
   MCK_GP, // register class 'GP'
   MCK_P0, // register class 'P0'
   MCK_P1, // register class 'P1'
@@ -2632,7 +2635,7 @@ enum MatchClassKind {
   MCK_PC, // register class 'PC'
   MCK_UsrBits, // register class 'UsrBits'
   MCK_ModRegs, // register class 'ModRegs'
-  MCK_Reg19, // derived register class
+  MCK_Reg20, // derived register class
   MCK_Reg3, // derived register class
   MCK_PredRegs, // register class 'PredRegs'
   MCK_VecPredRegs, // register class 'VecPredRegs,VecPredRegs128B'
@@ -2658,7 +2661,7 @@ enum MatchClassKind {
   MCK_n1Const, // user defined class 'n1ConstOperand'
   MCK_s10_0Imm, // user defined class 's10_0ImmOperand'
   MCK_s10_6Imm, // user defined class 's10_6ImmOperand'
-  MCK_s23_2Imm, // user defined class 's23_2ImmOperand'
+  MCK_s27_2Imm, // user defined class 's27_2ImmOperand'
   MCK_s29_3Imm, // user defined class 's29_3ImmOperand'
   MCK_s30_2Imm, // user defined class 's30_2ImmOperand'
   MCK_s31_1Imm, // user defined class 's31_1ImmOperand'
@@ -5510,7 +5513,10 @@ static bool isSubclass(MatchClassKind A, MatchClassKind B) {
   default:
     return false;
 
-  case MCK_Reg13:
+  case MCK_Reg19:
+    return B == MCK_CtrRegs64;
+
+  case MCK_Reg11:
     return B == MCK_CtrRegs;
 
   case MCK_GP:
@@ -5531,7 +5537,7 @@ static bool isSubclass(MatchClassKind A, MatchClassKind B) {
   case MCK_ModRegs:
     return B == MCK_CtrRegs;
 
-  case MCK_Reg19:
+  case MCK_Reg20:
     switch (B) {
     default: return false;
     case MCK_V62Regs: return true;
@@ -5634,9 +5640,9 @@ static unsigned validateOperandClass(MCParsedAsmOperand &GOp, MatchClassKind Kin
     if (Operand.iss10_6Imm())
       return MCTargetAsmParser::Match_Success;
     break;
-  // 's23_2Imm' class
-  case MCK_s23_2Imm:
-    if (Operand.iss23_2Imm())
+  // 's27_2Imm' class
+  case MCK_s27_2Imm:
+    if (Operand.iss27_2Imm())
       return MCTargetAsmParser::Match_Success;
     break;
   // 's29_3Imm' class
@@ -5877,18 +5883,16 @@ static unsigned validateOperandClass(MCParsedAsmOperand &GOp, MatchClassKind Kin
     case Hexagon::P1: OpKind = MCK_P1; break;
     case Hexagon::P2: OpKind = MCK_PredRegs; break;
     case Hexagon::P3: OpKind = MCK_P3; break;
-    case Hexagon::M0: OpKind = MCK_ModRegs; break;
-    case Hexagon::M1: OpKind = MCK_ModRegs; break;
     case Hexagon::USR_OVF: OpKind = MCK_UsrBits; break;
-    case Hexagon::USR: OpKind = MCK_Reg13; break;
+    case Hexagon::USR: OpKind = MCK_Reg11; break;
     case Hexagon::SA0: OpKind = MCK_CtrRegs; break;
     case Hexagon::LC0: OpKind = MCK_CtrRegs; break;
     case Hexagon::SA1: OpKind = MCK_CtrRegs; break;
     case Hexagon::LC1: OpKind = MCK_CtrRegs; break;
     case Hexagon::P3_0: OpKind = MCK_CtrRegs; break;
     case Hexagon::C5: OpKind = MCK_CtrRegs; break;
-    case Hexagon::C6: OpKind = MCK_CtrRegs; break;
-    case Hexagon::C7: OpKind = MCK_CtrRegs; break;
+    case Hexagon::M0: OpKind = MCK_ModRegs; break;
+    case Hexagon::M1: OpKind = MCK_ModRegs; break;
     case Hexagon::C8: OpKind = MCK_CtrRegs; break;
     case Hexagon::PC: OpKind = MCK_PC; break;
     case Hexagon::UGP: OpKind = MCK_CtrRegs; break;
@@ -5906,14 +5910,14 @@ static unsigned validateOperandClass(MCParsedAsmOperand &GOp, MatchClassKind Kin
     case Hexagon::C1_0: OpKind = MCK_CtrRegs64; break;
     case Hexagon::C3_2: OpKind = MCK_CtrRegs64; break;
     case Hexagon::C5_4: OpKind = MCK_CtrRegs64; break;
-    case Hexagon::C7_6: OpKind = MCK_CtrRegs64; break;
+    case Hexagon::C7_6: OpKind = MCK_Reg19; break;
     case Hexagon::C9_8: OpKind = MCK_CtrRegs64; break;
     case Hexagon::C11_10: OpKind = MCK_CtrRegs64; break;
     case Hexagon::CS: OpKind = MCK_CtrRegs64; break;
     case Hexagon::UPCYCLE: OpKind = MCK_CtrRegs64; break;
-    case Hexagon::C17_16: OpKind = MCK_Reg19; break;
-    case Hexagon::PKTCOUNT: OpKind = MCK_Reg19; break;
-    case Hexagon::UTIMER: OpKind = MCK_Reg19; break;
+    case Hexagon::C17_16: OpKind = MCK_Reg20; break;
+    case Hexagon::PKTCOUNT: OpKind = MCK_Reg20; break;
+    case Hexagon::UTIMER: OpKind = MCK_Reg20; break;
     case Hexagon::V0: OpKind = MCK_VectorRegs; break;
     case Hexagon::V1: OpKind = MCK_VectorRegs; break;
     case Hexagon::V2: OpKind = MCK_VectorRegs; break;
@@ -6391,7 +6395,7 @@ static const MatchEntry MatchTable0[] = {
   { 0 /*  */, Hexagon::A4_cround_rr, Convert__Reg1_0__Reg1_4__Reg1_5, 0, { MCK_IntRegs, MCK__61_, MCK_cround, MCK__40_, MCK_IntRegs, MCK_IntRegs, MCK__41_ }, },
   { 0 /*  */, Hexagon::S4_extract_rp, Convert__Reg1_0__Reg1_4__Reg1_5, 0, { MCK_IntRegs, MCK__61_, MCK_extract, MCK__40_, MCK_IntRegs, MCK_DoubleRegs, MCK__41_ }, },
   { 0 /*  */, Hexagon::S2_extractu_rp, Convert__Reg1_0__Reg1_4__Reg1_5, 0, { MCK_IntRegs, MCK__61_, MCK_extractu, MCK__40_, MCK_IntRegs, MCK_DoubleRegs, MCK__41_ }, },
-  { 0 /*  */, Hexagon::A2_iconst, Convert__Reg1_0__s23_2Imm1_5, 0, { MCK_IntRegs, MCK__61_, MCK_iconst, MCK__40_, MCK__35_, MCK_s23_2Imm, MCK__41_ }, },
+  { 0 /*  */, Hexagon::A2_iconst, Convert__Reg1_0__s27_2Imm1_5, 0, { MCK_IntRegs, MCK__61_, MCK_iconst, MCK__40_, MCK__35_, MCK_s27_2Imm, MCK__41_ }, },
   { 0 /*  */, Hexagon::S2_insert_rp, Convert__Reg1_0__Tie0__Reg1_4__Reg1_5, 0, { MCK_IntRegs, MCK__61_, MCK_insert, MCK__40_, MCK_IntRegs, MCK_DoubleRegs, MCK__41_ }, },
   { 0 /*  */, Hexagon::S2_lsl_r_r, Convert__Reg1_0__Reg1_4__Reg1_5, 0, { MCK_IntRegs, MCK__61_, MCK_lsl, MCK__40_, MCK_IntRegs, MCK_IntRegs, MCK__41_ }, },
   { 0 /*  */, Hexagon::S2_lsr_r_r, Convert__Reg1_0__Reg1_4__Reg1_5, 0, { MCK_IntRegs, MCK__61_, MCK_lsr, MCK__40_, MCK_IntRegs, MCK_IntRegs, MCK__41_ }, },

@@ -374,7 +374,8 @@ static bool CC_X86_32_C(unsigned ValNo, MVT ValVT,
 
   if (LocVT == MVT::i1 ||
       LocVT == MVT::i8 ||
-      LocVT == MVT::i16) {
+      LocVT == MVT::i16 ||
+      LocVT == MVT::v1i1) {
     LocVT = MVT::i32;
     if (ArgFlags.isSExt())
         LocInfo = CCValAssign::SExt;
@@ -559,7 +560,8 @@ static bool CC_X86_32_FastCC(unsigned ValNo, MVT ValVT,
 
   if (LocVT == MVT::i1 ||
       LocVT == MVT::i8 ||
-      LocVT == MVT::i16) {
+      LocVT == MVT::i16 ||
+      LocVT == MVT::v1i1) {
     LocVT = MVT::i32;
     if (ArgFlags.isSExt())
         LocInfo = CCValAssign::SExt;
@@ -620,7 +622,8 @@ static bool CC_X86_32_FastCall(unsigned ValNo, MVT ValVT,
 
   if (LocVT == MVT::i1 ||
       LocVT == MVT::i8 ||
-      LocVT == MVT::i16) {
+      LocVT == MVT::i16 ||
+      LocVT == MVT::v1i1) {
     LocVT = MVT::i32;
     if (ArgFlags.isSExt())
         LocInfo = CCValAssign::SExt;
@@ -744,7 +747,8 @@ static bool CC_X86_32_MCU(unsigned ValNo, MVT ValVT,
 
   if (LocVT == MVT::i1 ||
       LocVT == MVT::i8 ||
-      LocVT == MVT::i16) {
+      LocVT == MVT::i16 ||
+      LocVT == MVT::v1i1) {
     LocVT = MVT::i32;
     if (ArgFlags.isSExt())
         LocInfo = CCValAssign::SExt;
@@ -786,7 +790,8 @@ static bool CC_X86_32_RegCall(unsigned ValNo, MVT ValVT,
 
   if (LocVT == MVT::i1 ||
       LocVT == MVT::i8 ||
-      LocVT == MVT::i16) {
+      LocVT == MVT::i16 ||
+      LocVT == MVT::v1i1) {
     LocVT = MVT::i32;
     if (ArgFlags.isSExt())
         LocInfo = CCValAssign::SExt;
@@ -1046,7 +1051,8 @@ static bool CC_X86_32_ThisCall_Mingw(unsigned ValNo, MVT ValVT,
 
   if (LocVT == MVT::i1 ||
       LocVT == MVT::i8 ||
-      LocVT == MVT::i16) {
+      LocVT == MVT::i16 ||
+      LocVT == MVT::v1i1) {
     LocVT = MVT::i32;
     if (ArgFlags.isSExt())
         LocInfo = CCValAssign::SExt;
@@ -1069,7 +1075,8 @@ static bool CC_X86_32_ThisCall_Win(unsigned ValNo, MVT ValVT,
 
   if (LocVT == MVT::i1 ||
       LocVT == MVT::i8 ||
-      LocVT == MVT::i16) {
+      LocVT == MVT::i16 ||
+      LocVT == MVT::v1i1) {
     LocVT = MVT::i32;
     if (ArgFlags.isSExt())
         LocInfo = CCValAssign::SExt;
@@ -1361,7 +1368,8 @@ static bool CC_X86_64_C(unsigned ValNo, MVT ValVT,
 
   if (LocVT == MVT::i1 ||
       LocVT == MVT::i8 ||
-      LocVT == MVT::i16) {
+      LocVT == MVT::i16 ||
+      LocVT == MVT::v1i1) {
     LocVT = MVT::i32;
     if (ArgFlags.isSExt())
         LocInfo = CCValAssign::SExt;
@@ -1822,7 +1830,8 @@ static bool CC_X86_SysV64_RegCall(unsigned ValNo, MVT ValVT,
 
   if (LocVT == MVT::i1 ||
       LocVT == MVT::i8 ||
-      LocVT == MVT::i16) {
+      LocVT == MVT::i16 ||
+      LocVT == MVT::v1i1) {
     LocVT = MVT::i32;
     if (ArgFlags.isSExt())
         LocInfo = CCValAssign::SExt;
@@ -2068,7 +2077,8 @@ static bool CC_X86_Win64_C(unsigned ValNo, MVT ValVT,
 
   if (LocVT == MVT::i1 ||
       LocVT == MVT::i8 ||
-      LocVT == MVT::i16) {
+      LocVT == MVT::i16 ||
+      LocVT == MVT::v1i1) {
     LocVT = MVT::i32;
     if (ArgFlags.isSExt())
         LocInfo = CCValAssign::SExt;
@@ -2220,7 +2230,8 @@ static bool CC_X86_Win64_RegCall(unsigned ValNo, MVT ValVT,
 
   if (LocVT == MVT::i1 ||
       LocVT == MVT::i8 ||
-      LocVT == MVT::i16) {
+      LocVT == MVT::i16 ||
+      LocVT == MVT::v1i1) {
     LocVT = MVT::i32;
     if (ArgFlags.isSExt())
         LocInfo = CCValAssign::SExt;
@@ -2536,6 +2547,16 @@ static bool RetCC_X86(unsigned ValNo, MVT ValVT,
 static bool RetCC_X86Common(unsigned ValNo, MVT ValVT,
                             MVT LocVT, CCValAssign::LocInfo LocInfo,
                             ISD::ArgFlagsTy ArgFlags, CCState &State) {
+
+  if (LocVT == MVT::v1i1) {
+    LocVT = MVT::i8;
+    if (ArgFlags.isSExt())
+        LocInfo = CCValAssign::SExt;
+    else if (ArgFlags.isZExt())
+        LocInfo = CCValAssign::ZExt;
+    else
+        LocInfo = CCValAssign::AExt;
+  }
 
   if (LocVT == MVT::i1) {
     LocVT = MVT::i8;
@@ -2880,6 +2901,7 @@ static bool RetCC_X86_32_RegCall(unsigned ValNo, MVT ValVT,
                                  ISD::ArgFlagsTy ArgFlags, CCState &State) {
 
   if (LocVT == MVT::i1 ||
+      LocVT == MVT::v1i1 ||
       LocVT == MVT::v8i1) {
     LocVT = MVT::i8;
     if (ArgFlags.isSExt())
@@ -3287,6 +3309,16 @@ static bool RetCC_X86_64_Swift(unsigned ValNo, MVT ValVT,
     }
   }
 
+  if (LocVT == MVT::v1i1) {
+    LocVT = MVT::i8;
+    if (ArgFlags.isSExt())
+        LocInfo = CCValAssign::SExt;
+    else if (ArgFlags.isZExt())
+        LocInfo = CCValAssign::ZExt;
+    else
+        LocInfo = CCValAssign::AExt;
+  }
+
   if (LocVT == MVT::i1) {
     LocVT = MVT::i8;
     if (ArgFlags.isSExt())
@@ -3439,6 +3471,7 @@ static bool RetCC_X86_SysV64_RegCall(unsigned ValNo, MVT ValVT,
                                      ISD::ArgFlagsTy ArgFlags, CCState &State) {
 
   if (LocVT == MVT::i1 ||
+      LocVT == MVT::v1i1 ||
       LocVT == MVT::v8i1) {
     LocVT = MVT::i8;
     if (ArgFlags.isSExt())
@@ -3638,6 +3671,7 @@ static bool RetCC_X86_Win64_RegCall(unsigned ValNo, MVT ValVT,
                                     ISD::ArgFlagsTy ArgFlags, CCState &State) {
 
   if (LocVT == MVT::i1 ||
+      LocVT == MVT::v1i1 ||
       LocVT == MVT::v8i1) {
     LocVT = MVT::i8;
     if (ArgFlags.isSExt())

@@ -46,40 +46,42 @@ void MSP430InstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
   /* 239 */ 'b', 'i', 't', '.', 'w', 9, 0,
   /* 246 */ 'm', 'o', 'v', '.', 'w', 9, 0,
   /* 253 */ '#', 32, 'X', 'R', 'a', 'y', 32, 'F', 'u', 'n', 'c', 't', 'i', 'o', 'n', 32, 'P', 'a', 't', 'c', 'h', 'a', 'b', 'l', 'e', 32, 'R', 'E', 'T', '.', 0,
-  /* 284 */ '#', 32, 'X', 'R', 'a', 'y', 32, 'F', 'u', 'n', 'c', 't', 'i', 'o', 'n', 32, 'E', 'n', 't', 'e', 'r', '.', 0,
-  /* 307 */ '#', 32, 'X', 'R', 'a', 'y', 32, 'T', 'a', 'i', 'l', 32, 'C', 'a', 'l', 'l', 32, 'E', 'x', 'i', 't', '.', 0,
-  /* 330 */ '#', 32, 'X', 'R', 'a', 'y', 32, 'F', 'u', 'n', 'c', 't', 'i', 'o', 'n', 32, 'E', 'x', 'i', 't', '.', 0,
-  /* 352 */ 's', 'u', 'b', '.', 'b', 9, '@', 0,
-  /* 360 */ 'a', 'd', 'd', '.', 'b', 9, '@', 0,
-  /* 368 */ 'a', 'n', 'd', '.', 'b', 9, '@', 0,
-  /* 376 */ 'x', 'o', 'r', '.', 'b', 9, '@', 0,
-  /* 384 */ 'b', 'i', 's', '.', 'b', 9, '@', 0,
-  /* 392 */ 'm', 'o', 'v', '.', 'b', 9, '@', 0,
-  /* 400 */ 's', 'u', 'b', '.', 'w', 9, '@', 0,
-  /* 408 */ 'a', 'd', 'd', '.', 'w', 9, '@', 0,
-  /* 416 */ 'a', 'n', 'd', '.', 'w', 9, '@', 0,
-  /* 424 */ 'x', 'o', 'r', '.', 'w', 9, '@', 0,
-  /* 432 */ 'b', 'i', 's', '.', 'w', 9, '@', 0,
-  /* 440 */ 'm', 'o', 'v', '.', 'w', 9, '@', 0,
-  /* 448 */ 'L', 'I', 'F', 'E', 'T', 'I', 'M', 'E', '_', 'E', 'N', 'D', 0,
-  /* 461 */ 'B', 'U', 'N', 'D', 'L', 'E', 0,
-  /* 468 */ 'D', 'B', 'G', '_', 'V', 'A', 'L', 'U', 'E', 0,
-  /* 478 */ '#', 'A', 'D', 'J', 'C', 'A', 'L', 'L', 'S', 'T', 'A', 'C', 'K', 'D', 'O', 'W', 'N', 0,
-  /* 496 */ '#', 32, 'S', 'r', 'a', '1', '6', 32, 'P', 'S', 'E', 'U', 'D', 'O', 0,
-  /* 511 */ '#', 32, 'S', 'h', 'l', '1', '6', 32, 'P', 'S', 'E', 'U', 'D', 'O', 0,
-  /* 526 */ '#', 32, 'S', 'r', 'l', '1', '6', 32, 'P', 'S', 'E', 'U', 'D', 'O', 0,
-  /* 541 */ '#', 32, 'S', 'e', 'l', 'e', 'c', 't', '1', '6', 32, 'P', 'S', 'E', 'U', 'D', 'O', 0,
-  /* 559 */ '#', 32, 'S', 'r', 'a', '8', 32, 'P', 'S', 'E', 'U', 'D', 'O', 0,
-  /* 573 */ '#', 32, 'S', 'h', 'l', '8', 32, 'P', 'S', 'E', 'U', 'D', 'O', 0,
-  /* 587 */ '#', 32, 'S', 'r', 'l', '8', 32, 'P', 'S', 'E', 'U', 'D', 'O', 0,
-  /* 601 */ '#', 32, 'S', 'e', 'l', 'e', 'c', 't', '8', 32, 'P', 'S', 'E', 'U', 'D', 'O', 0,
-  /* 618 */ '#', 'A', 'D', 'J', 'C', 'A', 'L', 'L', 'S', 'T', 'A', 'C', 'K', 'U', 'P', 0,
-  /* 634 */ 'L', 'I', 'F', 'E', 'T', 'I', 'M', 'E', '_', 'S', 'T', 'A', 'R', 'T', 0,
-  /* 649 */ 'r', 'e', 't', 'i', 0,
-  /* 654 */ 'j', 0,
-  /* 656 */ '#', 32, 'F', 'E', 'n', 't', 'r', 'y', 32, 'c', 'a', 'l', 'l', 0,
-  /* 670 */ 'n', 'o', 'p', 0,
-  /* 674 */ 'r', 'e', 't', 0,
+  /* 284 */ '#', 32, 'X', 'R', 'a', 'y', 32, 'C', 'u', 's', 't', 'o', 'm', 32, 'E', 'v', 'e', 'n', 't', 32, 'L', 'o', 'g', '.', 0,
+  /* 309 */ '#', 32, 'X', 'R', 'a', 'y', 32, 'F', 'u', 'n', 'c', 't', 'i', 'o', 'n', 32, 'E', 'n', 't', 'e', 'r', '.', 0,
+  /* 332 */ '#', 32, 'X', 'R', 'a', 'y', 32, 'T', 'a', 'i', 'l', 32, 'C', 'a', 'l', 'l', 32, 'E', 'x', 'i', 't', '.', 0,
+  /* 355 */ '#', 32, 'X', 'R', 'a', 'y', 32, 'F', 'u', 'n', 'c', 't', 'i', 'o', 'n', 32, 'E', 'x', 'i', 't', '.', 0,
+  /* 377 */ 's', 'u', 'b', '.', 'b', 9, '@', 0,
+  /* 385 */ 'a', 'd', 'd', '.', 'b', 9, '@', 0,
+  /* 393 */ 'a', 'n', 'd', '.', 'b', 9, '@', 0,
+  /* 401 */ 'x', 'o', 'r', '.', 'b', 9, '@', 0,
+  /* 409 */ 'b', 'i', 's', '.', 'b', 9, '@', 0,
+  /* 417 */ 'm', 'o', 'v', '.', 'b', 9, '@', 0,
+  /* 425 */ 's', 'u', 'b', '.', 'w', 9, '@', 0,
+  /* 433 */ 'a', 'd', 'd', '.', 'w', 9, '@', 0,
+  /* 441 */ 'a', 'n', 'd', '.', 'w', 9, '@', 0,
+  /* 449 */ 'x', 'o', 'r', '.', 'w', 9, '@', 0,
+  /* 457 */ 'b', 'i', 's', '.', 'w', 9, '@', 0,
+  /* 465 */ 'm', 'o', 'v', '.', 'w', 9, '@', 0,
+  /* 473 */ 'L', 'I', 'F', 'E', 'T', 'I', 'M', 'E', '_', 'E', 'N', 'D', 0,
+  /* 486 */ 'B', 'U', 'N', 'D', 'L', 'E', 0,
+  /* 493 */ 'D', 'B', 'G', '_', 'V', 'A', 'L', 'U', 'E', 0,
+  /* 503 */ '#', 'A', 'D', 'J', 'C', 'A', 'L', 'L', 'S', 'T', 'A', 'C', 'K', 'D', 'O', 'W', 'N', 0,
+  /* 521 */ '#', 32, 'S', 'r', 'a', '1', '6', 32, 'P', 'S', 'E', 'U', 'D', 'O', 0,
+  /* 536 */ '#', 32, 'S', 'h', 'l', '1', '6', 32, 'P', 'S', 'E', 'U', 'D', 'O', 0,
+  /* 551 */ '#', 32, 'S', 'r', 'l', '1', '6', 32, 'P', 'S', 'E', 'U', 'D', 'O', 0,
+  /* 566 */ '#', 32, 'S', 'e', 'l', 'e', 'c', 't', '1', '6', 32, 'P', 'S', 'E', 'U', 'D', 'O', 0,
+  /* 584 */ '#', 32, 'S', 'r', 'a', '8', 32, 'P', 'S', 'E', 'U', 'D', 'O', 0,
+  /* 598 */ '#', 32, 'S', 'h', 'l', '8', 32, 'P', 'S', 'E', 'U', 'D', 'O', 0,
+  /* 612 */ '#', 32, 'S', 'r', 'l', '8', 32, 'P', 'S', 'E', 'U', 'D', 'O', 0,
+  /* 626 */ '#', 32, 'S', 'e', 'l', 'e', 'c', 't', '8', 32, 'P', 'S', 'E', 'U', 'D', 'O', 0,
+  /* 643 */ '#', 32, 'A', 'D', 'D', 'f', 'r', 'a', 'm', 'e', 32, 'P', 'S', 'E', 'U', 'D', 'O', 0,
+  /* 661 */ '#', 'A', 'D', 'J', 'C', 'A', 'L', 'L', 'S', 'T', 'A', 'C', 'K', 'U', 'P', 0,
+  /* 677 */ 'L', 'I', 'F', 'E', 'T', 'I', 'M', 'E', '_', 'S', 'T', 'A', 'R', 'T', 0,
+  /* 692 */ 'r', 'e', 't', 'i', 0,
+  /* 697 */ 'j', 0,
+  /* 699 */ '#', 32, 'F', 'E', 'n', 't', 'r', 'y', 32, 'c', 'a', 'l', 'l', 0,
+  /* 713 */ 'n', 'o', 'p', 0,
+  /* 717 */ 'r', 'e', 't', 0,
   };
 
   static const uint16_t OpInfo0[] = {
@@ -94,24 +96,25 @@ void MSP430InstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// IMPLICIT_DEF
     0U,	// SUBREG_TO_REG
     0U,	// COPY_TO_REGCLASS
-    469U,	// DBG_VALUE
+    494U,	// DBG_VALUE
     0U,	// REG_SEQUENCE
     0U,	// COPY
-    462U,	// BUNDLE
-    635U,	// LIFETIME_START
-    449U,	// LIFETIME_END
+    487U,	// BUNDLE
+    678U,	// LIFETIME_START
+    474U,	// LIFETIME_END
     0U,	// STACKMAP
-    657U,	// FENTRY_CALL
+    700U,	// FENTRY_CALL
     0U,	// PATCHPOINT
     0U,	// LOAD_STACK_GUARD
     0U,	// STATEPOINT
     0U,	// LOCAL_ESCAPE
     0U,	// FAULTING_OP
     0U,	// PATCHABLE_OP
-    285U,	// PATCHABLE_FUNCTION_ENTER
+    310U,	// PATCHABLE_FUNCTION_ENTER
     254U,	// PATCHABLE_RET
-    331U,	// PATCHABLE_FUNCTION_EXIT
-    308U,	// PATCHABLE_TAIL_CALL
+    356U,	// PATCHABLE_FUNCTION_EXIT
+    333U,	// PATCHABLE_TAIL_CALL
+    285U,	// PATCHABLE_EVENT_CALL
     0U,	// G_ADD
     0U,	// G_SUB
     0U,	// G_MUL
@@ -196,30 +199,31 @@ void MSP430InstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     1214U,	// ADD16mr
     1214U,	// ADD16ri
     35006U,	// ADD16rm
-    3481U,	// ADD16rm_POST
+    3506U,	// ADD16rm_POST
     1214U,	// ADD16rr
     1082U,	// ADD8mi
     18490U,	// ADD8mm
     1082U,	// ADD8mr
     1082U,	// ADD8ri
     34874U,	// ADD8rm
-    3433U,	// ADD8rm_POST
+    3458U,	// ADD8rm_POST
     1082U,	// ADD8rr
-    479U,	// ADJCALLSTACKDOWN
-    619U,	// ADJCALLSTACKUP
+    644U,	// ADDframe
+    504U,	// ADJCALLSTACKDOWN
+    662U,	// ADJCALLSTACKUP
     1221U,	// AND16mi
     18629U,	// AND16mm
     1221U,	// AND16mr
     1221U,	// AND16ri
     35013U,	// AND16rm
-    3489U,	// AND16rm_POST
+    3514U,	// AND16rm_POST
     1221U,	// AND16rr
     1089U,	// AND8mi
     18497U,	// AND8mm
     1089U,	// AND8mr
     1089U,	// AND8ri
     34881U,	// AND8rm
-    3441U,	// AND8rm_POST
+    3466U,	// AND8rm_POST
     1089U,	// AND8rr
     18602U,	// BIC16mm
     1194U,	// BIC16mr
@@ -257,43 +261,43 @@ void MSP430InstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     4168U,	// CMP8ri
     5192U,	// CMP8rm
     4168U,	// CMP8rr
-    9871U,	// JCC
+    9914U,	// JCC
     10359U,	// JMP
     1271U,	// MOV16mi
     18679U,	// MOV16mm
     1271U,	// MOV16mr
     4343U,	// MOV16ri
     5367U,	// MOV16rm
-    50617U,	// MOV16rm_POST
+    50642U,	// MOV16rm_POST
     4343U,	// MOV16rr
     1124U,	// MOV8mi
     18532U,	// MOV8mm
     1124U,	// MOV8mr
     4196U,	// MOV8ri
     5220U,	// MOV8rm
-    50569U,	// MOV8rm_POST
+    50594U,	// MOV8rm_POST
     4196U,	// MOV8rr
     5220U,	// MOVZX16rm8
     4196U,	// MOVZX16rr8
-    671U,	// NOP
+    714U,	// NOP
     1257U,	// OR16mi
     18665U,	// OR16mm
     1257U,	// OR16mr
     1257U,	// OR16ri
     35049U,	// OR16rm
-    3505U,	// OR16rm_POST
+    3530U,	// OR16rm_POST
     1257U,	// OR16rr
     1110U,	// OR8mi
     18518U,	// OR8mm
     1110U,	// OR8mr
     1110U,	// OR8ri
     34902U,	// OR8rm
-    3457U,	// OR8rm_POST
+    3482U,	// OR8rm_POST
     1110U,	// OR8rr
     6363U,	// POP16r
     6348U,	// PUSH16r
-    675U,	// RET
-    650U,	// RETI
+    718U,	// RET
+    693U,	// RETI
     6284U,	// SAR16r1
     6321U,	// SAR16r1c
     6152U,	// SAR8r1
@@ -318,37 +322,37 @@ void MSP430InstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     1171U,	// SUB16mr
     1171U,	// SUB16ri
     34963U,	// SUB16rm
-    3473U,	// SUB16rm_POST
+    3498U,	// SUB16rm_POST
     1171U,	// SUB16rr
     1039U,	// SUB8mi
     18447U,	// SUB8mm
     1039U,	// SUB8mr
     1039U,	// SUB8ri
     34831U,	// SUB8rm
-    3425U,	// SUB8rm_POST
+    3450U,	// SUB8rm_POST
     1039U,	// SUB8rr
     6251U,	// SWPB16r
-    542U,	// Select16
-    602U,	// Select8
-    512U,	// Shl16
-    574U,	// Shl8
-    497U,	// Sra16
-    560U,	// Sra8
-    527U,	// Srl16
-    588U,	// Srl8
+    567U,	// Select16
+    627U,	// Select8
+    537U,	// Shl16
+    599U,	// Shl8
+    522U,	// Sra16
+    585U,	// Sra8
+    552U,	// Srl16
+    613U,	// Srl8
     1250U,	// XOR16mi
     18658U,	// XOR16mm
     1250U,	// XOR16mr
     1250U,	// XOR16ri
     35042U,	// XOR16rm
-    3497U,	// XOR16rm_POST
+    3522U,	// XOR16rm_POST
     1250U,	// XOR16rr
     1103U,	// XOR8mi
     18511U,	// XOR8mm
     1103U,	// XOR8mr
     1103U,	// XOR8ri
     34895U,	// XOR8rm
-    3449U,	// XOR8rm_POST
+    3474U,	// XOR8rm_POST
     1103U,	// XOR8rr
     4196U,	// ZEXT16r
   };
@@ -383,6 +387,7 @@ void MSP430InstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// PATCHABLE_RET
     0U,	// PATCHABLE_FUNCTION_EXIT
     0U,	// PATCHABLE_TAIL_CALL
+    0U,	// PATCHABLE_EVENT_CALL
     0U,	// G_ADD
     0U,	// G_SUB
     0U,	// G_MUL
@@ -476,6 +481,7 @@ void MSP430InstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// ADD8rm
     0U,	// ADD8rm_POST
     1U,	// ADD8rr
+    0U,	// ADDframe
     0U,	// ADJCALLSTACKDOWN
     0U,	// ADJCALLSTACKUP
     0U,	// AND16mi

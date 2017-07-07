@@ -351,8 +351,8 @@ enum {
   GR64_TC_and_GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_NOREXRegClassID = 77,
   GR64_with_sub_32bit_in_GR32_ABCD_and_GR32_NOAXRegClassID = 78,
   GR64_with_sub_32bit_in_GR32_TCRegClassID = 79,
-  GR64_and_LOW32_ADDR_ACCESS_RBPRegClassID = 80,
-  GR64_with_sub_32bit_in_GR32_ADRegClassID = 81,
+  GR64_ADRegClassID = 80,
+  GR64_and_LOW32_ADDR_ACCESS_RBPRegClassID = 81,
   GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_TCRegClassID = 82,
   GR64_NOREX_NOSP_and_LOW32_ADDR_ACCESS_RBPRegClassID = 83,
   GR64_and_LOW32_ADDR_ACCESSRegClassID = 84,
@@ -1892,6 +1892,16 @@ namespace {     // Register classes...
     0x00, 0x00, 0x00, 0x00, 0x48, 0x01, 
   };
 
+  // GR64_AD Register Class...
+  const MCPhysReg GR64_AD[] = {
+    X86::RAX, X86::RDX, 
+  };
+
+  // GR64_AD Bit set.
+  const uint8_t GR64_ADBits[] = {
+    0x00, 0x00, 0x00, 0x00, 0x08, 0x01, 
+  };
+
   // GR64_and_LOW32_ADDR_ACCESS_RBP Register Class...
   const MCPhysReg GR64_and_LOW32_ADDR_ACCESS_RBP[] = {
     X86::RBP, X86::RIP, 
@@ -1900,16 +1910,6 @@ namespace {     // Register classes...
   // GR64_and_LOW32_ADDR_ACCESS_RBP Bit set.
   const uint8_t GR64_and_LOW32_ADDR_ACCESS_RBPBits[] = {
     0x00, 0x00, 0x00, 0x00, 0x10, 0x02, 
-  };
-
-  // GR64_with_sub_32bit_in_GR32_AD Register Class...
-  const MCPhysReg GR64_with_sub_32bit_in_GR32_AD[] = {
-    X86::RAX, X86::RDX, 
-  };
-
-  // GR64_with_sub_32bit_in_GR32_AD Bit set.
-  const uint8_t GR64_with_sub_32bit_in_GR32_ADBits[] = {
-    0x00, 0x00, 0x00, 0x00, 0x08, 0x01, 
   };
 
   // GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_TC Register Class...
@@ -2144,159 +2144,160 @@ extern const char X86RegClassStrings[] = {
   /* 291 */ 'G', 'R', '6', '4', '_', 'N', 'O', 'S', 'P', '_', 'a', 'n', 'd', '_', 'G', 'R', '6', '4', '_', 'T', 'C', 0,
   /* 313 */ 'G', 'R', '6', '4', '_', 'N', 'O', 'R', 'E', 'X', '_', 'N', 'O', 'S', 'P', '_', 'a', 'n', 'd', '_', 'G', 'R', '6', '4', '_', 'T', 'C', 0,
   /* 341 */ 'G', 'R', '6', '4', '_', 'N', 'O', 'R', 'E', 'X', '_', 'a', 'n', 'd', '_', 'G', 'R', '6', '4', '_', 'T', 'C', 0,
-  /* 364 */ 'G', 'R', '6', '4', '_', 'w', 'i', 't', 'h', '_', 's', 'u', 'b', '_', '3', '2', 'b', 'i', 't', '_', 'i', 'n', '_', 'G', 'R', '3', '2', '_', 'A', 'D', 0,
-  /* 395 */ 'G', 'R', '3', '2', '_', 'A', 'B', 'C', 'D', 0,
-  /* 405 */ 'G', 'R', '6', '4', '_', 'A', 'B', 'C', 'D', 0,
-  /* 415 */ 'G', 'R', '1', '6', '_', 'A', 'B', 'C', 'D', 0,
-  /* 425 */ 'D', 'E', 'B', 'U', 'G', '_', 'R', 'E', 'G', 0,
-  /* 435 */ 'C', 'O', 'N', 'T', 'R', 'O', 'L', '_', 'R', 'E', 'G', 0,
-  /* 447 */ 'S', 'E', 'G', 'M', 'E', 'N', 'T', '_', 'R', 'E', 'G', 0,
-  /* 459 */ 'V', 'R', '2', '5', '6', 'H', 0,
-  /* 466 */ 'V', 'R', '5', '1', '2', '_', 'w', 'i', 't', 'h', '_', 's', 'u', 'b', '_', 'x', 'm', 'm', '_', 'i', 'n', '_', 'V', 'R', '1', '2', '8', 'H', 0,
-  /* 495 */ 'G', 'R', '8', '_', 'A', 'B', 'C', 'D', '_', 'H', 0,
-  /* 506 */ 'V', 'R', '2', '5', '6', 'L', 0,
-  /* 513 */ 'V', 'R', '5', '1', '2', '_', 'w', 'i', 't', 'h', '_', 's', 'u', 'b', '_', 'x', 'm', 'm', '_', 'i', 'n', '_', 'V', 'R', '1', '2', '8', 'L', 0,
-  /* 542 */ 'G', 'R', '8', '_', 'A', 'B', 'C', 'D', '_', 'L', 0,
-  /* 553 */ 'V', 'K', '1', 'W', 'M', 0,
-  /* 559 */ 'V', 'K', '3', '2', 'W', 'M', 0,
-  /* 566 */ 'V', 'K', '2', 'W', 'M', 0,
-  /* 572 */ 'V', 'K', '6', '4', 'W', 'M', 0,
-  /* 579 */ 'V', 'K', '4', 'W', 'M', 0,
-  /* 585 */ 'V', 'K', '1', '6', 'W', 'M', 0,
-  /* 592 */ 'V', 'K', '8', 'W', 'M', 0,
-  /* 598 */ 'G', 'R', '6', '4', '_', 'a', 'n', 'd', '_', 'L', 'O', 'W', '3', '2', '_', 'A', 'D', 'D', 'R', '_', 'A', 'C', 'C', 'E', 'S', 'S', '_', 'R', 'B', 'P', 0,
-  /* 629 */ 'G', 'R', '6', '4', '_', 'N', 'O', 'R', 'E', 'X', '_', 'N', 'O', 'S', 'P', '_', 'a', 'n', 'd', '_', 'L', 'O', 'W', '3', '2', '_', 'A', 'D', 'D', 'R', '_', 'A', 'C', 'C', 'E', 'S', 'S', '_', 'R', 'B', 'P', 0,
-  /* 671 */ 'G', 'R', '6', '4', '_', 'w', 'i', 't', 'h', '_', 's', 'u', 'b', '_', '3', '2', 'b', 'i', 't', '_', 'i', 'n', '_', 'G', 'R', '3', '2', '_', 'N', 'O', 'A', 'X', '_', 'a', 'n', 'd', '_', 'G', 'R', '3', '2', '_', 'N', 'O', 'S', 'P', 0,
-  /* 718 */ 'G', 'R', '6', '4', '_', 'N', 'O', 'S', 'P', 0,
-  /* 728 */ 'G', 'R', '6', '4', '_', 'w', 'i', 't', 'h', '_', 's', 'u', 'b', '_', '3', '2', 'b', 'i', 't', '_', 'i', 'n', '_', 'G', 'R', '3', '2', '_', 'N', 'O', 'A', 'X', '_', 'a', 'n', 'd', '_', 'G', 'R', '3', '2', '_', 'N', 'O', 'R', 'E', 'X', '_', 'N', 'O', 'S', 'P', 0,
-  /* 781 */ 'G', 'R', '6', '4', '_', 'N', 'O', 'R', 'E', 'X', '_', 'N', 'O', 'S', 'P', 0,
-  /* 797 */ 'F', 'P', 'C', 'C', 'R', 0,
-  /* 803 */ 'B', 'N', 'D', 'R', 0,
-  /* 808 */ 'G', 'R', '6', '4', '_', 'a', 'n', 'd', '_', 'L', 'O', 'W', '3', '2', '_', 'A', 'D', 'D', 'R', '_', 'A', 'C', 'C', 'E', 'S', 'S', 0,
-  /* 835 */ 'R', 'S', 'T', 0,
-  /* 839 */ 'F', 'R', '3', '2', 'X', 0,
-  /* 845 */ 'F', 'R', '6', '4', 'X', 0,
-  /* 851 */ 'V', 'R', '2', '5', '6', 'X', 0,
-  /* 858 */ 'V', 'R', '1', '2', '8', 'X', 0,
-  /* 865 */ 'G', 'R', '6', '4', '_', 'w', 'i', 't', 'h', '_', 's', 'u', 'b', '_', '3', '2', 'b', 'i', 't', '_', 'i', 'n', '_', 'G', 'R', '3', '2', '_', 'A', 'D', '_', 'a', 'n', 'd', '_', 'G', 'R', '3', '2', '_', 'N', 'O', 'A', 'X', 0,
-  /* 910 */ 'G', 'R', '6', '4', '_', 'w', 'i', 't', 'h', '_', 's', 'u', 'b', '_', '3', '2', 'b', 'i', 't', '_', 'i', 'n', '_', 'G', 'R', '3', '2', '_', 'A', 'B', 'C', 'D', '_', 'a', 'n', 'd', '_', 'G', 'R', '3', '2', '_', 'N', 'O', 'A', 'X', 0,
-  /* 957 */ 'G', 'R', '6', '4', '_', 'T', 'C', 'W', '6', '4', '_', 'a', 'n', 'd', '_', 'G', 'R', '6', '4', '_', 'w', 'i', 't', 'h', '_', 's', 'u', 'b', '_', '3', '2', 'b', 'i', 't', '_', 'i', 'n', '_', 'G', 'R', '3', '2', '_', 'N', 'O', 'A', 'X', 0,
-  /* 1005 */ 'G', 'R', '6', '4', '_', 'T', 'C', 'W', '6', '4', '_', 'a', 'n', 'd', '_', 'G', 'R', '6', '4', '_', 'T', 'C', '_', 'a', 'n', 'd', '_', 'G', 'R', '6', '4', '_', 'w', 'i', 't', 'h', '_', 's', 'u', 'b', '_', '3', '2', 'b', 'i', 't', '_', 'i', 'n', '_', 'G', 'R', '3', '2', '_', 'N', 'O', 'A', 'X', 0,
-  /* 1065 */ 'G', 'R', '6', '4', '_', 'T', 'C', '_', 'a', 'n', 'd', '_', 'G', 'R', '6', '4', '_', 'w', 'i', 't', 'h', '_', 's', 'u', 'b', '_', '3', '2', 'b', 'i', 't', '_', 'i', 'n', '_', 'G', 'R', '3', '2', '_', 'N', 'O', 'A', 'X', '_', 'a', 'n', 'd', '_', 'G', 'R', '3', '2', '_', 'N', 'O', 'R', 'E', 'X', 0,
-  /* 1125 */ 'G', 'R', '6', '4', '_', 'N', 'O', 'R', 'E', 'X', 0,
-  /* 1136 */ 'G', 'R', '6', '4', '_', 'w', 'i', 't', 'h', '_', 's', 'u', 'b', '_', '1', '6', 'b', 'i', 't', '_', 'i', 'n', '_', 'G', 'R', '1', '6', '_', 'N', 'O', 'R', 'E', 'X', 0,
-  /* 1170 */ 'L', 'O', 'W', '3', '2', '_', 'A', 'D', 'D', 'R', '_', 'A', 'C', 'C', 'E', 'S', 'S', '_', 'R', 'B', 'P', '_', 'w', 'i', 't', 'h', '_', 's', 'u', 'b', '_', '1', '6', 'b', 'i', 't', '_', 'i', 'n', '_', 'G', 'R', '1', '6', '_', 'N', 'O', 'R', 'E', 'X', 0,
-  /* 1221 */ 'G', 'R', '8', '_', 'N', 'O', 'R', 'E', 'X', 0,
-  /* 1231 */ 'L', 'O', 'W', '3', '2', '_', 'A', 'D', 'D', 'R', '_', 'A', 'C', 'C', 'E', 'S', 'S', '_', 'R', 'B', 'P', '_', 'w', 'i', 't', 'h', '_', 's', 'u', 'b', '_', '3', '2', 'b', 'i', 't', 0,
-  /* 1268 */ 'L', 'O', 'W', '3', '2', '_', 'A', 'D', 'D', 'R', '_', 'A', 'C', 'C', 'E', 'S', 'S', '_', 'w', 'i', 't', 'h', '_', 's', 'u', 'b', '_', '3', '2', 'b', 'i', 't', 0,
-  /* 1301 */ 'L', 'O', 'W', '3', '2', '_', 'A', 'D', 'D', 'R', '_', 'A', 'C', 'C', 'E', 'S', 'S', '_', 'R', 'B', 'P', '_', 'w', 'i', 't', 'h', '_', 's', 'u', 'b', '_', '8', 'b', 'i', 't', '_', 'w', 'i', 't', 'h', '_', 's', 'u', 'b', '_', '3', '2', 'b', 'i', 't', 0,
-  /* 1352 */ 'G', 'R', '6', '4', '_', 'w', 'i', 't', 'h', '_', 's', 'u', 'b', '_', '8', 'b', 'i', 't', 0,
-  /* 1371 */ 'L', 'O', 'W', '3', '2', '_', 'A', 'D', 'D', 'R', '_', 'A', 'C', 'C', 'E', 'S', 'S', '_', 'R', 'B', 'P', '_', 'w', 'i', 't', 'h', '_', 's', 'u', 'b', '_', '8', 'b', 'i', 't', 0,
+  /* 364 */ 'G', 'R', '3', '2', '_', 'A', 'D', 0,
+  /* 372 */ 'G', 'R', '6', '4', '_', 'A', 'D', 0,
+  /* 380 */ 'G', 'R', '3', '2', '_', 'A', 'B', 'C', 'D', 0,
+  /* 390 */ 'G', 'R', '6', '4', '_', 'A', 'B', 'C', 'D', 0,
+  /* 400 */ 'G', 'R', '1', '6', '_', 'A', 'B', 'C', 'D', 0,
+  /* 410 */ 'D', 'E', 'B', 'U', 'G', '_', 'R', 'E', 'G', 0,
+  /* 420 */ 'C', 'O', 'N', 'T', 'R', 'O', 'L', '_', 'R', 'E', 'G', 0,
+  /* 432 */ 'S', 'E', 'G', 'M', 'E', 'N', 'T', '_', 'R', 'E', 'G', 0,
+  /* 444 */ 'V', 'R', '2', '5', '6', 'H', 0,
+  /* 451 */ 'V', 'R', '5', '1', '2', '_', 'w', 'i', 't', 'h', '_', 's', 'u', 'b', '_', 'x', 'm', 'm', '_', 'i', 'n', '_', 'V', 'R', '1', '2', '8', 'H', 0,
+  /* 480 */ 'G', 'R', '8', '_', 'A', 'B', 'C', 'D', '_', 'H', 0,
+  /* 491 */ 'V', 'R', '2', '5', '6', 'L', 0,
+  /* 498 */ 'V', 'R', '5', '1', '2', '_', 'w', 'i', 't', 'h', '_', 's', 'u', 'b', '_', 'x', 'm', 'm', '_', 'i', 'n', '_', 'V', 'R', '1', '2', '8', 'L', 0,
+  /* 527 */ 'G', 'R', '8', '_', 'A', 'B', 'C', 'D', '_', 'L', 0,
+  /* 538 */ 'V', 'K', '1', 'W', 'M', 0,
+  /* 544 */ 'V', 'K', '3', '2', 'W', 'M', 0,
+  /* 551 */ 'V', 'K', '2', 'W', 'M', 0,
+  /* 557 */ 'V', 'K', '6', '4', 'W', 'M', 0,
+  /* 564 */ 'V', 'K', '4', 'W', 'M', 0,
+  /* 570 */ 'V', 'K', '1', '6', 'W', 'M', 0,
+  /* 577 */ 'V', 'K', '8', 'W', 'M', 0,
+  /* 583 */ 'G', 'R', '6', '4', '_', 'a', 'n', 'd', '_', 'L', 'O', 'W', '3', '2', '_', 'A', 'D', 'D', 'R', '_', 'A', 'C', 'C', 'E', 'S', 'S', '_', 'R', 'B', 'P', 0,
+  /* 614 */ 'G', 'R', '6', '4', '_', 'N', 'O', 'R', 'E', 'X', '_', 'N', 'O', 'S', 'P', '_', 'a', 'n', 'd', '_', 'L', 'O', 'W', '3', '2', '_', 'A', 'D', 'D', 'R', '_', 'A', 'C', 'C', 'E', 'S', 'S', '_', 'R', 'B', 'P', 0,
+  /* 656 */ 'G', 'R', '6', '4', '_', 'w', 'i', 't', 'h', '_', 's', 'u', 'b', '_', '3', '2', 'b', 'i', 't', '_', 'i', 'n', '_', 'G', 'R', '3', '2', '_', 'N', 'O', 'A', 'X', '_', 'a', 'n', 'd', '_', 'G', 'R', '3', '2', '_', 'N', 'O', 'S', 'P', 0,
+  /* 703 */ 'G', 'R', '6', '4', '_', 'N', 'O', 'S', 'P', 0,
+  /* 713 */ 'G', 'R', '6', '4', '_', 'w', 'i', 't', 'h', '_', 's', 'u', 'b', '_', '3', '2', 'b', 'i', 't', '_', 'i', 'n', '_', 'G', 'R', '3', '2', '_', 'N', 'O', 'A', 'X', '_', 'a', 'n', 'd', '_', 'G', 'R', '3', '2', '_', 'N', 'O', 'R', 'E', 'X', '_', 'N', 'O', 'S', 'P', 0,
+  /* 766 */ 'G', 'R', '6', '4', '_', 'N', 'O', 'R', 'E', 'X', '_', 'N', 'O', 'S', 'P', 0,
+  /* 782 */ 'F', 'P', 'C', 'C', 'R', 0,
+  /* 788 */ 'B', 'N', 'D', 'R', 0,
+  /* 793 */ 'G', 'R', '6', '4', '_', 'a', 'n', 'd', '_', 'L', 'O', 'W', '3', '2', '_', 'A', 'D', 'D', 'R', '_', 'A', 'C', 'C', 'E', 'S', 'S', 0,
+  /* 820 */ 'R', 'S', 'T', 0,
+  /* 824 */ 'F', 'R', '3', '2', 'X', 0,
+  /* 830 */ 'F', 'R', '6', '4', 'X', 0,
+  /* 836 */ 'V', 'R', '2', '5', '6', 'X', 0,
+  /* 843 */ 'V', 'R', '1', '2', '8', 'X', 0,
+  /* 850 */ 'G', 'R', '6', '4', '_', 'w', 'i', 't', 'h', '_', 's', 'u', 'b', '_', '3', '2', 'b', 'i', 't', '_', 'i', 'n', '_', 'G', 'R', '3', '2', '_', 'A', 'D', '_', 'a', 'n', 'd', '_', 'G', 'R', '3', '2', '_', 'N', 'O', 'A', 'X', 0,
+  /* 895 */ 'G', 'R', '6', '4', '_', 'w', 'i', 't', 'h', '_', 's', 'u', 'b', '_', '3', '2', 'b', 'i', 't', '_', 'i', 'n', '_', 'G', 'R', '3', '2', '_', 'A', 'B', 'C', 'D', '_', 'a', 'n', 'd', '_', 'G', 'R', '3', '2', '_', 'N', 'O', 'A', 'X', 0,
+  /* 942 */ 'G', 'R', '6', '4', '_', 'T', 'C', 'W', '6', '4', '_', 'a', 'n', 'd', '_', 'G', 'R', '6', '4', '_', 'w', 'i', 't', 'h', '_', 's', 'u', 'b', '_', '3', '2', 'b', 'i', 't', '_', 'i', 'n', '_', 'G', 'R', '3', '2', '_', 'N', 'O', 'A', 'X', 0,
+  /* 990 */ 'G', 'R', '6', '4', '_', 'T', 'C', 'W', '6', '4', '_', 'a', 'n', 'd', '_', 'G', 'R', '6', '4', '_', 'T', 'C', '_', 'a', 'n', 'd', '_', 'G', 'R', '6', '4', '_', 'w', 'i', 't', 'h', '_', 's', 'u', 'b', '_', '3', '2', 'b', 'i', 't', '_', 'i', 'n', '_', 'G', 'R', '3', '2', '_', 'N', 'O', 'A', 'X', 0,
+  /* 1050 */ 'G', 'R', '6', '4', '_', 'T', 'C', '_', 'a', 'n', 'd', '_', 'G', 'R', '6', '4', '_', 'w', 'i', 't', 'h', '_', 's', 'u', 'b', '_', '3', '2', 'b', 'i', 't', '_', 'i', 'n', '_', 'G', 'R', '3', '2', '_', 'N', 'O', 'A', 'X', '_', 'a', 'n', 'd', '_', 'G', 'R', '3', '2', '_', 'N', 'O', 'R', 'E', 'X', 0,
+  /* 1110 */ 'G', 'R', '6', '4', '_', 'N', 'O', 'R', 'E', 'X', 0,
+  /* 1121 */ 'G', 'R', '6', '4', '_', 'w', 'i', 't', 'h', '_', 's', 'u', 'b', '_', '1', '6', 'b', 'i', 't', '_', 'i', 'n', '_', 'G', 'R', '1', '6', '_', 'N', 'O', 'R', 'E', 'X', 0,
+  /* 1155 */ 'L', 'O', 'W', '3', '2', '_', 'A', 'D', 'D', 'R', '_', 'A', 'C', 'C', 'E', 'S', 'S', '_', 'R', 'B', 'P', '_', 'w', 'i', 't', 'h', '_', 's', 'u', 'b', '_', '1', '6', 'b', 'i', 't', '_', 'i', 'n', '_', 'G', 'R', '1', '6', '_', 'N', 'O', 'R', 'E', 'X', 0,
+  /* 1206 */ 'G', 'R', '8', '_', 'N', 'O', 'R', 'E', 'X', 0,
+  /* 1216 */ 'L', 'O', 'W', '3', '2', '_', 'A', 'D', 'D', 'R', '_', 'A', 'C', 'C', 'E', 'S', 'S', '_', 'R', 'B', 'P', '_', 'w', 'i', 't', 'h', '_', 's', 'u', 'b', '_', '3', '2', 'b', 'i', 't', 0,
+  /* 1253 */ 'L', 'O', 'W', '3', '2', '_', 'A', 'D', 'D', 'R', '_', 'A', 'C', 'C', 'E', 'S', 'S', '_', 'w', 'i', 't', 'h', '_', 's', 'u', 'b', '_', '3', '2', 'b', 'i', 't', 0,
+  /* 1286 */ 'L', 'O', 'W', '3', '2', '_', 'A', 'D', 'D', 'R', '_', 'A', 'C', 'C', 'E', 'S', 'S', '_', 'R', 'B', 'P', '_', 'w', 'i', 't', 'h', '_', 's', 'u', 'b', '_', '8', 'b', 'i', 't', '_', 'w', 'i', 't', 'h', '_', 's', 'u', 'b', '_', '3', '2', 'b', 'i', 't', 0,
+  /* 1337 */ 'G', 'R', '6', '4', '_', 'w', 'i', 't', 'h', '_', 's', 'u', 'b', '_', '8', 'b', 'i', 't', 0,
+  /* 1356 */ 'L', 'O', 'W', '3', '2', '_', 'A', 'D', 'D', 'R', '_', 'A', 'C', 'C', 'E', 'S', 'S', '_', 'R', 'B', 'P', '_', 'w', 'i', 't', 'h', '_', 's', 'u', 'b', '_', '8', 'b', 'i', 't', 0,
 };
 
 extern const MCRegisterClass X86MCRegisterClasses[] = {
   { GR8, GR8Bits, 211, 20, sizeof(GR8Bits), X86::GR8RegClassID, 1, 1, true },
-  { GR8_NOREX, GR8_NOREXBits, 1221, 8, sizeof(GR8_NOREXBits), X86::GR8_NOREXRegClassID, 1, 1, true },
-  { GR8_ABCD_H, GR8_ABCD_HBits, 495, 4, sizeof(GR8_ABCD_HBits), X86::GR8_ABCD_HRegClassID, 1, 1, true },
-  { GR8_ABCD_L, GR8_ABCD_LBits, 542, 4, sizeof(GR8_ABCD_LBits), X86::GR8_ABCD_LRegClassID, 1, 1, true },
+  { GR8_NOREX, GR8_NOREXBits, 1206, 8, sizeof(GR8_NOREXBits), X86::GR8_NOREXRegClassID, 1, 1, true },
+  { GR8_ABCD_H, GR8_ABCD_HBits, 480, 4, sizeof(GR8_ABCD_HBits), X86::GR8_ABCD_HRegClassID, 1, 1, true },
+  { GR8_ABCD_L, GR8_ABCD_LBits, 527, 4, sizeof(GR8_ABCD_LBits), X86::GR8_ABCD_LRegClassID, 1, 1, true },
   { GR16, GR16Bits, 162, 16, sizeof(GR16Bits), X86::GR16RegClassID, 2, 1, true },
-  { GR16_NOREX, GR16_NOREXBits, 1159, 8, sizeof(GR16_NOREXBits), X86::GR16_NOREXRegClassID, 2, 1, true },
+  { GR16_NOREX, GR16_NOREXBits, 1144, 8, sizeof(GR16_NOREXBits), X86::GR16_NOREXRegClassID, 2, 1, true },
   { VK1, VK1Bits, 6, 8, sizeof(VK1Bits), X86::VK1RegClassID, 2, 1, true },
   { VK16, VK16Bits, 157, 8, sizeof(VK16Bits), X86::VK16RegClassID, 2, 1, true },
   { VK2, VK2Bits, 37, 8, sizeof(VK2Bits), X86::VK2RegClassID, 2, 1, true },
   { VK4, VK4Bits, 153, 8, sizeof(VK4Bits), X86::VK4RegClassID, 2, 1, true },
   { VK8, VK8Bits, 207, 8, sizeof(VK8Bits), X86::VK8RegClassID, 2, 1, true },
-  { VK16WM, VK16WMBits, 585, 7, sizeof(VK16WMBits), X86::VK16WMRegClassID, 2, 1, true },
-  { VK1WM, VK1WMBits, 553, 7, sizeof(VK1WMBits), X86::VK1WMRegClassID, 2, 1, true },
-  { VK2WM, VK2WMBits, 566, 7, sizeof(VK2WMBits), X86::VK2WMRegClassID, 2, 1, true },
-  { VK4WM, VK4WMBits, 579, 7, sizeof(VK4WMBits), X86::VK4WMRegClassID, 2, 1, true },
-  { VK8WM, VK8WMBits, 592, 7, sizeof(VK8WMBits), X86::VK8WMRegClassID, 2, 1, true },
-  { SEGMENT_REG, SEGMENT_REGBits, 447, 6, sizeof(SEGMENT_REGBits), X86::SEGMENT_REGRegClassID, 2, 1, true },
-  { GR16_ABCD, GR16_ABCDBits, 415, 4, sizeof(GR16_ABCDBits), X86::GR16_ABCDRegClassID, 2, 1, true },
-  { FPCCR, FPCCRBits, 797, 1, sizeof(FPCCRBits), X86::FPCCRRegClassID, 2, -1, false },
-  { FR32X, FR32XBits, 839, 32, sizeof(FR32XBits), X86::FR32XRegClassID, 4, 1, true },
-  { LOW32_ADDR_ACCESS_RBP, LOW32_ADDR_ACCESS_RBPBits, 607, 18, sizeof(LOW32_ADDR_ACCESS_RBPBits), X86::LOW32_ADDR_ACCESS_RBPRegClassID, 4, 1, true },
-  { LOW32_ADDR_ACCESS, LOW32_ADDR_ACCESSBits, 817, 17, sizeof(LOW32_ADDR_ACCESSBits), X86::LOW32_ADDR_ACCESSRegClassID, 4, 1, true },
-  { LOW32_ADDR_ACCESS_RBP_with_sub_8bit, LOW32_ADDR_ACCESS_RBP_with_sub_8bitBits, 1371, 17, sizeof(LOW32_ADDR_ACCESS_RBP_with_sub_8bitBits), X86::LOW32_ADDR_ACCESS_RBP_with_sub_8bitRegClassID, 4, 1, true },
+  { VK16WM, VK16WMBits, 570, 7, sizeof(VK16WMBits), X86::VK16WMRegClassID, 2, 1, true },
+  { VK1WM, VK1WMBits, 538, 7, sizeof(VK1WMBits), X86::VK1WMRegClassID, 2, 1, true },
+  { VK2WM, VK2WMBits, 551, 7, sizeof(VK2WMBits), X86::VK2WMRegClassID, 2, 1, true },
+  { VK4WM, VK4WMBits, 564, 7, sizeof(VK4WMBits), X86::VK4WMRegClassID, 2, 1, true },
+  { VK8WM, VK8WMBits, 577, 7, sizeof(VK8WMBits), X86::VK8WMRegClassID, 2, 1, true },
+  { SEGMENT_REG, SEGMENT_REGBits, 432, 6, sizeof(SEGMENT_REGBits), X86::SEGMENT_REGRegClassID, 2, 1, true },
+  { GR16_ABCD, GR16_ABCDBits, 400, 4, sizeof(GR16_ABCDBits), X86::GR16_ABCDRegClassID, 2, 1, true },
+  { FPCCR, FPCCRBits, 782, 1, sizeof(FPCCRBits), X86::FPCCRRegClassID, 2, -1, false },
+  { FR32X, FR32XBits, 824, 32, sizeof(FR32XBits), X86::FR32XRegClassID, 4, 1, true },
+  { LOW32_ADDR_ACCESS_RBP, LOW32_ADDR_ACCESS_RBPBits, 592, 18, sizeof(LOW32_ADDR_ACCESS_RBPBits), X86::LOW32_ADDR_ACCESS_RBPRegClassID, 4, 1, true },
+  { LOW32_ADDR_ACCESS, LOW32_ADDR_ACCESSBits, 802, 17, sizeof(LOW32_ADDR_ACCESSBits), X86::LOW32_ADDR_ACCESSRegClassID, 4, 1, true },
+  { LOW32_ADDR_ACCESS_RBP_with_sub_8bit, LOW32_ADDR_ACCESS_RBP_with_sub_8bitBits, 1356, 17, sizeof(LOW32_ADDR_ACCESS_RBP_with_sub_8bitBits), X86::LOW32_ADDR_ACCESS_RBP_with_sub_8bitRegClassID, 4, 1, true },
   { FR32, FR32Bits, 27, 16, sizeof(FR32Bits), X86::FR32RegClassID, 4, 1, true },
   { GR32, GR32Bits, 32, 16, sizeof(GR32Bits), X86::GR32RegClassID, 4, 1, true },
-  { GR32_NOAX, GR32_NOAXBits, 900, 15, sizeof(GR32_NOAXBits), X86::GR32_NOAXRegClassID, 4, 1, true },
-  { GR32_NOSP, GR32_NOSPBits, 708, 15, sizeof(GR32_NOSPBits), X86::GR32_NOSPRegClassID, 4, 1, true },
-  { GR32_NOAX_and_GR32_NOSP, GR32_NOAX_and_GR32_NOSPBits, 694, 14, sizeof(GR32_NOAX_and_GR32_NOSPBits), X86::GR32_NOAX_and_GR32_NOSPRegClassID, 4, 1, true },
-  { LOW32_ADDR_ACCESS_RBP_with_sub_16bit_in_GR16_NOREX, LOW32_ADDR_ACCESS_RBP_with_sub_16bit_in_GR16_NOREXBits, 1170, 9, sizeof(LOW32_ADDR_ACCESS_RBP_with_sub_16bit_in_GR16_NOREXBits), X86::LOW32_ADDR_ACCESS_RBP_with_sub_16bit_in_GR16_NOREXRegClassID, 4, 1, true },
-  { DEBUG_REG, DEBUG_REGBits, 425, 8, sizeof(DEBUG_REGBits), X86::DEBUG_REGRegClassID, 4, 1, true },
-  { GR32_NOREX, GR32_NOREXBits, 1114, 8, sizeof(GR32_NOREXBits), X86::GR32_NOREXRegClassID, 4, 1, true },
+  { GR32_NOAX, GR32_NOAXBits, 885, 15, sizeof(GR32_NOAXBits), X86::GR32_NOAXRegClassID, 4, 1, true },
+  { GR32_NOSP, GR32_NOSPBits, 693, 15, sizeof(GR32_NOSPBits), X86::GR32_NOSPRegClassID, 4, 1, true },
+  { GR32_NOAX_and_GR32_NOSP, GR32_NOAX_and_GR32_NOSPBits, 679, 14, sizeof(GR32_NOAX_and_GR32_NOSPBits), X86::GR32_NOAX_and_GR32_NOSPRegClassID, 4, 1, true },
+  { LOW32_ADDR_ACCESS_RBP_with_sub_16bit_in_GR16_NOREX, LOW32_ADDR_ACCESS_RBP_with_sub_16bit_in_GR16_NOREXBits, 1155, 9, sizeof(LOW32_ADDR_ACCESS_RBP_with_sub_16bit_in_GR16_NOREXBits), X86::LOW32_ADDR_ACCESS_RBP_with_sub_16bit_in_GR16_NOREXRegClassID, 4, 1, true },
+  { DEBUG_REG, DEBUG_REGBits, 410, 8, sizeof(DEBUG_REGBits), X86::DEBUG_REGRegClassID, 4, 1, true },
+  { GR32_NOREX, GR32_NOREXBits, 1099, 8, sizeof(GR32_NOREXBits), X86::GR32_NOREXRegClassID, 4, 1, true },
   { VK32, VK32Bits, 16, 8, sizeof(VK32Bits), X86::VK32RegClassID, 4, 1, true },
-  { GR32_NOAX_and_GR32_NOREX, GR32_NOAX_and_GR32_NOREXBits, 1100, 7, sizeof(GR32_NOAX_and_GR32_NOREXBits), X86::GR32_NOAX_and_GR32_NOREXRegClassID, 4, 1, true },
-  { GR32_NOREX_NOSP, GR32_NOREX_NOSPBits, 765, 7, sizeof(GR32_NOREX_NOSPBits), X86::GR32_NOREX_NOSPRegClassID, 4, 1, true },
+  { GR32_NOAX_and_GR32_NOREX, GR32_NOAX_and_GR32_NOREXBits, 1085, 7, sizeof(GR32_NOAX_and_GR32_NOREXBits), X86::GR32_NOAX_and_GR32_NOREXRegClassID, 4, 1, true },
+  { GR32_NOREX_NOSP, GR32_NOREX_NOSPBits, 750, 7, sizeof(GR32_NOREX_NOSPBits), X86::GR32_NOREX_NOSPRegClassID, 4, 1, true },
   { RFP32, RFP32Bits, 21, 7, sizeof(RFP32Bits), X86::RFP32RegClassID, 4, 1, true },
-  { VK32WM, VK32WMBits, 559, 7, sizeof(VK32WMBits), X86::VK32WMRegClassID, 4, 1, true },
-  { GR32_NOAX_and_GR32_NOREX_NOSP, GR32_NOAX_and_GR32_NOREX_NOSPBits, 751, 6, sizeof(GR32_NOAX_and_GR32_NOREX_NOSPBits), X86::GR32_NOAX_and_GR32_NOREX_NOSPRegClassID, 4, 1, true },
-  { GR32_ABCD, GR32_ABCDBits, 395, 4, sizeof(GR32_ABCDBits), X86::GR32_ABCDRegClassID, 4, 1, true },
-  { GR32_ABCD_and_GR32_NOAX, GR32_ABCD_and_GR32_NOAXBits, 933, 3, sizeof(GR32_ABCD_and_GR32_NOAXBits), X86::GR32_ABCD_and_GR32_NOAXRegClassID, 4, 1, true },
+  { VK32WM, VK32WMBits, 544, 7, sizeof(VK32WMBits), X86::VK32WMRegClassID, 4, 1, true },
+  { GR32_NOAX_and_GR32_NOREX_NOSP, GR32_NOAX_and_GR32_NOREX_NOSPBits, 736, 6, sizeof(GR32_NOAX_and_GR32_NOREX_NOSPBits), X86::GR32_NOAX_and_GR32_NOREX_NOSPRegClassID, 4, 1, true },
+  { GR32_ABCD, GR32_ABCDBits, 380, 4, sizeof(GR32_ABCDBits), X86::GR32_ABCDRegClassID, 4, 1, true },
+  { GR32_ABCD_and_GR32_NOAX, GR32_ABCD_and_GR32_NOAXBits, 918, 3, sizeof(GR32_ABCD_and_GR32_NOAXBits), X86::GR32_ABCD_and_GR32_NOAXRegClassID, 4, 1, true },
   { GR32_TC, GR32_TCBits, 252, 3, sizeof(GR32_TCBits), X86::GR32_TCRegClassID, 4, 1, true },
-  { GR32_AD, GR32_ADBits, 387, 2, sizeof(GR32_ADBits), X86::GR32_ADRegClassID, 4, 1, true },
+  { GR32_AD, GR32_ADBits, 364, 2, sizeof(GR32_ADBits), X86::GR32_ADRegClassID, 4, 1, true },
   { GR32_NOAX_and_GR32_TC, GR32_NOAX_and_GR32_TCBits, 238, 2, sizeof(GR32_NOAX_and_GR32_TCBits), X86::GR32_NOAX_and_GR32_TCRegClassID, 4, 1, true },
-  { LOW32_ADDR_ACCESS_RBP_with_sub_32bit, LOW32_ADDR_ACCESS_RBP_with_sub_32bitBits, 1231, 2, sizeof(LOW32_ADDR_ACCESS_RBP_with_sub_32bitBits), X86::LOW32_ADDR_ACCESS_RBP_with_sub_32bitRegClassID, 4, 1, true },
-  { CCR, CCRBits, 799, 1, sizeof(CCRBits), X86::CCRRegClassID, 4, -1, false },
-  { GR32_AD_and_GR32_NOAX, GR32_AD_and_GR32_NOAXBits, 888, 1, sizeof(GR32_AD_and_GR32_NOAXBits), X86::GR32_AD_and_GR32_NOAXRegClassID, 4, 1, true },
-  { LOW32_ADDR_ACCESS_RBP_with_sub_8bit_with_sub_32bit, LOW32_ADDR_ACCESS_RBP_with_sub_8bit_with_sub_32bitBits, 1301, 1, sizeof(LOW32_ADDR_ACCESS_RBP_with_sub_8bit_with_sub_32bitBits), X86::LOW32_ADDR_ACCESS_RBP_with_sub_8bit_with_sub_32bitRegClassID, 4, 1, true },
-  { LOW32_ADDR_ACCESS_with_sub_32bit, LOW32_ADDR_ACCESS_with_sub_32bitBits, 1268, 1, sizeof(LOW32_ADDR_ACCESS_with_sub_32bitBits), X86::LOW32_ADDR_ACCESS_with_sub_32bitRegClassID, 4, 1, true },
+  { LOW32_ADDR_ACCESS_RBP_with_sub_32bit, LOW32_ADDR_ACCESS_RBP_with_sub_32bitBits, 1216, 2, sizeof(LOW32_ADDR_ACCESS_RBP_with_sub_32bitBits), X86::LOW32_ADDR_ACCESS_RBP_with_sub_32bitRegClassID, 4, 1, true },
+  { CCR, CCRBits, 784, 1, sizeof(CCRBits), X86::CCRRegClassID, 4, -1, false },
+  { GR32_AD_and_GR32_NOAX, GR32_AD_and_GR32_NOAXBits, 873, 1, sizeof(GR32_AD_and_GR32_NOAXBits), X86::GR32_AD_and_GR32_NOAXRegClassID, 4, 1, true },
+  { LOW32_ADDR_ACCESS_RBP_with_sub_8bit_with_sub_32bit, LOW32_ADDR_ACCESS_RBP_with_sub_8bit_with_sub_32bitBits, 1286, 1, sizeof(LOW32_ADDR_ACCESS_RBP_with_sub_8bit_with_sub_32bitBits), X86::LOW32_ADDR_ACCESS_RBP_with_sub_8bit_with_sub_32bitRegClassID, 4, 1, true },
+  { LOW32_ADDR_ACCESS_with_sub_32bit, LOW32_ADDR_ACCESS_with_sub_32bitBits, 1253, 1, sizeof(LOW32_ADDR_ACCESS_with_sub_32bitBits), X86::LOW32_ADDR_ACCESS_with_sub_32bitRegClassID, 4, 1, true },
   { RFP64, RFP64Bits, 46, 7, sizeof(RFP64Bits), X86::RFP64RegClassID, 8, 1, true },
-  { FR64X, FR64XBits, 845, 32, sizeof(FR64XBits), X86::FR64XRegClassID, 8, 1, true },
+  { FR64X, FR64XBits, 830, 32, sizeof(FR64XBits), X86::FR64XRegClassID, 8, 1, true },
   { GR64, GR64Bits, 57, 17, sizeof(GR64Bits), X86::GR64RegClassID, 8, 1, true },
-  { CONTROL_REG, CONTROL_REGBits, 435, 16, sizeof(CONTROL_REGBits), X86::CONTROL_REGRegClassID, 8, 1, true },
+  { CONTROL_REG, CONTROL_REGBits, 420, 16, sizeof(CONTROL_REGBits), X86::CONTROL_REGRegClassID, 8, 1, true },
   { FR64, FR64Bits, 52, 16, sizeof(FR64Bits), X86::FR64RegClassID, 8, 1, true },
-  { GR64_with_sub_8bit, GR64_with_sub_8bitBits, 1352, 16, sizeof(GR64_with_sub_8bitBits), X86::GR64_with_sub_8bitRegClassID, 8, 1, true },
-  { GR64_NOSP, GR64_NOSPBits, 718, 15, sizeof(GR64_NOSPBits), X86::GR64_NOSPRegClassID, 8, 1, true },
-  { GR64_with_sub_32bit_in_GR32_NOAX, GR64_with_sub_32bit_in_GR32_NOAXBits, 972, 15, sizeof(GR64_with_sub_32bit_in_GR32_NOAXBits), X86::GR64_with_sub_32bit_in_GR32_NOAXRegClassID, 8, 1, true },
-  { GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_NOSP, GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_NOSPBits, 671, 14, sizeof(GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_NOSPBits), X86::GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_NOSPRegClassID, 8, 1, true },
-  { GR64_NOREX, GR64_NOREXBits, 1125, 9, sizeof(GR64_NOREXBits), X86::GR64_NOREXRegClassID, 8, 1, true },
+  { GR64_with_sub_8bit, GR64_with_sub_8bitBits, 1337, 16, sizeof(GR64_with_sub_8bitBits), X86::GR64_with_sub_8bitRegClassID, 8, 1, true },
+  { GR64_NOSP, GR64_NOSPBits, 703, 15, sizeof(GR64_NOSPBits), X86::GR64_NOSPRegClassID, 8, 1, true },
+  { GR64_with_sub_32bit_in_GR32_NOAX, GR64_with_sub_32bit_in_GR32_NOAXBits, 957, 15, sizeof(GR64_with_sub_32bit_in_GR32_NOAXBits), X86::GR64_with_sub_32bit_in_GR32_NOAXRegClassID, 8, 1, true },
+  { GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_NOSP, GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_NOSPBits, 656, 14, sizeof(GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_NOSPBits), X86::GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_NOSPRegClassID, 8, 1, true },
+  { GR64_NOREX, GR64_NOREXBits, 1110, 9, sizeof(GR64_NOREXBits), X86::GR64_NOREXRegClassID, 8, 1, true },
   { GR64_TC, GR64_TCBits, 305, 9, sizeof(GR64_TCBits), X86::GR64_TCRegClassID, 8, 1, true },
   { GR64_NOSP_and_GR64_TC, GR64_NOSP_and_GR64_TCBits, 291, 8, sizeof(GR64_NOSP_and_GR64_TCBits), X86::GR64_NOSP_and_GR64_TCRegClassID, 8, 1, true },
   { GR64_TCW64, GR64_TCW64Bits, 79, 8, sizeof(GR64_TCW64Bits), X86::GR64_TCW64RegClassID, 8, 1, true },
-  { GR64_with_sub_16bit_in_GR16_NOREX, GR64_with_sub_16bit_in_GR16_NOREXBits, 1136, 8, sizeof(GR64_with_sub_16bit_in_GR16_NOREXBits), X86::GR64_with_sub_16bit_in_GR16_NOREXRegClassID, 8, 1, true },
+  { GR64_with_sub_16bit_in_GR16_NOREX, GR64_with_sub_16bit_in_GR16_NOREXBits, 1121, 8, sizeof(GR64_with_sub_16bit_in_GR16_NOREXBits), X86::GR64_with_sub_16bit_in_GR16_NOREXRegClassID, 8, 1, true },
   { VK64, VK64Bits, 41, 8, sizeof(VK64Bits), X86::VK64RegClassID, 8, 1, true },
   { VR64, VR64Bits, 62, 8, sizeof(VR64Bits), X86::VR64RegClassID, 8, 1, true },
-  { GR64_NOREX_NOSP, GR64_NOREX_NOSPBits, 781, 7, sizeof(GR64_NOREX_NOSPBits), X86::GR64_NOREX_NOSPRegClassID, 8, 1, true },
+  { GR64_NOREX_NOSP, GR64_NOREX_NOSPBits, 766, 7, sizeof(GR64_NOREX_NOSPBits), X86::GR64_NOREX_NOSPRegClassID, 8, 1, true },
   { GR64_NOSP_and_GR64_TCW64, GR64_NOSP_and_GR64_TCW64Bits, 102, 7, sizeof(GR64_NOSP_and_GR64_TCW64Bits), X86::GR64_NOSP_and_GR64_TCW64RegClassID, 8, 1, true },
   { GR64_TC_and_GR64_TCW64, GR64_TC_and_GR64_TCW64Bits, 67, 7, sizeof(GR64_TC_and_GR64_TCW64Bits), X86::GR64_TC_and_GR64_TCW64RegClassID, 8, 1, true },
-  { GR64_TC_and_GR64_with_sub_32bit_in_GR32_NOAX, GR64_TC_and_GR64_with_sub_32bit_in_GR32_NOAXBits, 1020, 7, sizeof(GR64_TC_and_GR64_with_sub_32bit_in_GR32_NOAXBits), X86::GR64_TC_and_GR64_with_sub_32bit_in_GR32_NOAXRegClassID, 8, 1, true },
-  { GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_NOREX, GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_NOREXBits, 1077, 7, sizeof(GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_NOREXBits), X86::GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_NOREXRegClassID, 8, 1, true },
-  { VK64WM, VK64WMBits, 572, 7, sizeof(VK64WMBits), X86::VK64WMRegClassID, 8, 1, true },
+  { GR64_TC_and_GR64_with_sub_32bit_in_GR32_NOAX, GR64_TC_and_GR64_with_sub_32bit_in_GR32_NOAXBits, 1005, 7, sizeof(GR64_TC_and_GR64_with_sub_32bit_in_GR32_NOAXBits), X86::GR64_TC_and_GR64_with_sub_32bit_in_GR32_NOAXRegClassID, 8, 1, true },
+  { GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_NOREX, GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_NOREXBits, 1062, 7, sizeof(GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_NOREXBits), X86::GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_NOREXRegClassID, 8, 1, true },
+  { VK64WM, VK64WMBits, 557, 7, sizeof(VK64WMBits), X86::VK64WMRegClassID, 8, 1, true },
   { GR64_NOREX_and_GR64_TC, GR64_NOREX_and_GR64_TCBits, 341, 6, sizeof(GR64_NOREX_and_GR64_TCBits), X86::GR64_NOREX_and_GR64_TCRegClassID, 8, 1, true },
-  { GR64_TCW64_and_GR64_with_sub_32bit_in_GR32_NOAX, GR64_TCW64_and_GR64_with_sub_32bit_in_GR32_NOAXBits, 957, 6, sizeof(GR64_TCW64_and_GR64_with_sub_32bit_in_GR32_NOAXBits), X86::GR64_TCW64_and_GR64_with_sub_32bit_in_GR32_NOAXRegClassID, 8, 1, true },
+  { GR64_TCW64_and_GR64_with_sub_32bit_in_GR32_NOAX, GR64_TCW64_and_GR64_with_sub_32bit_in_GR32_NOAXBits, 942, 6, sizeof(GR64_TCW64_and_GR64_with_sub_32bit_in_GR32_NOAXBits), X86::GR64_TCW64_and_GR64_with_sub_32bit_in_GR32_NOAXRegClassID, 8, 1, true },
   { GR64_TC_and_GR64_NOSP_and_GR64_TCW64, GR64_TC_and_GR64_NOSP_and_GR64_TCW64Bits, 90, 6, sizeof(GR64_TC_and_GR64_NOSP_and_GR64_TCW64Bits), X86::GR64_TC_and_GR64_NOSP_and_GR64_TCW64RegClassID, 8, 1, true },
-  { GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_NOREX_NOSP, GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_NOREX_NOSPBits, 728, 6, sizeof(GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_NOREX_NOSPBits), X86::GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_NOREX_NOSPRegClassID, 8, 1, true },
+  { GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_NOREX_NOSP, GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_NOREX_NOSPBits, 713, 6, sizeof(GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_NOREX_NOSPBits), X86::GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_NOREX_NOSPRegClassID, 8, 1, true },
   { GR64_NOREX_NOSP_and_GR64_TC, GR64_NOREX_NOSP_and_GR64_TCBits, 313, 5, sizeof(GR64_NOREX_NOSP_and_GR64_TCBits), X86::GR64_NOREX_NOSP_and_GR64_TCRegClassID, 8, 1, true },
-  { GR64_TCW64_and_GR64_TC_and_GR64_with_sub_32bit_in_GR32_NOAX, GR64_TCW64_and_GR64_TC_and_GR64_with_sub_32bit_in_GR32_NOAXBits, 1005, 5, sizeof(GR64_TCW64_and_GR64_TC_and_GR64_with_sub_32bit_in_GR32_NOAXBits), X86::GR64_TCW64_and_GR64_TC_and_GR64_with_sub_32bit_in_GR32_NOAXRegClassID, 8, 1, true },
-  { GR64_ABCD, GR64_ABCDBits, 405, 4, sizeof(GR64_ABCDBits), X86::GR64_ABCDRegClassID, 8, 1, true },
+  { GR64_TCW64_and_GR64_TC_and_GR64_with_sub_32bit_in_GR32_NOAX, GR64_TCW64_and_GR64_TC_and_GR64_with_sub_32bit_in_GR32_NOAXBits, 990, 5, sizeof(GR64_TCW64_and_GR64_TC_and_GR64_with_sub_32bit_in_GR32_NOAXBits), X86::GR64_TCW64_and_GR64_TC_and_GR64_with_sub_32bit_in_GR32_NOAXRegClassID, 8, 1, true },
+  { GR64_ABCD, GR64_ABCDBits, 390, 4, sizeof(GR64_ABCDBits), X86::GR64_ABCDRegClassID, 8, 1, true },
   { GR64_NOREX_and_GR64_TCW64, GR64_NOREX_and_GR64_TCW64Bits, 127, 4, sizeof(GR64_NOREX_and_GR64_TCW64Bits), X86::GR64_NOREX_and_GR64_TCW64RegClassID, 8, 1, true },
-  { GR64_TC_and_GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_NOREX, GR64_TC_and_GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_NOREXBits, 1065, 4, sizeof(GR64_TC_and_GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_NOREXBits), X86::GR64_TC_and_GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_NOREXRegClassID, 8, 1, true },
-  { GR64_with_sub_32bit_in_GR32_ABCD_and_GR32_NOAX, GR64_with_sub_32bit_in_GR32_ABCD_and_GR32_NOAXBits, 910, 3, sizeof(GR64_with_sub_32bit_in_GR32_ABCD_and_GR32_NOAXBits), X86::GR64_with_sub_32bit_in_GR32_ABCD_and_GR32_NOAXRegClassID, 8, 1, true },
+  { GR64_TC_and_GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_NOREX, GR64_TC_and_GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_NOREXBits, 1050, 4, sizeof(GR64_TC_and_GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_NOREXBits), X86::GR64_TC_and_GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_NOREXRegClassID, 8, 1, true },
+  { GR64_with_sub_32bit_in_GR32_ABCD_and_GR32_NOAX, GR64_with_sub_32bit_in_GR32_ABCD_and_GR32_NOAXBits, 895, 3, sizeof(GR64_with_sub_32bit_in_GR32_ABCD_and_GR32_NOAXBits), X86::GR64_with_sub_32bit_in_GR32_ABCD_and_GR32_NOAXRegClassID, 8, 1, true },
   { GR64_with_sub_32bit_in_GR32_TC, GR64_with_sub_32bit_in_GR32_TCBits, 260, 3, sizeof(GR64_with_sub_32bit_in_GR32_TCBits), X86::GR64_with_sub_32bit_in_GR32_TCRegClassID, 8, 1, true },
-  { GR64_and_LOW32_ADDR_ACCESS_RBP, GR64_and_LOW32_ADDR_ACCESS_RBPBits, 598, 2, sizeof(GR64_and_LOW32_ADDR_ACCESS_RBPBits), X86::GR64_and_LOW32_ADDR_ACCESS_RBPRegClassID, 8, 1, true },
-  { GR64_with_sub_32bit_in_GR32_AD, GR64_with_sub_32bit_in_GR32_ADBits, 364, 2, sizeof(GR64_with_sub_32bit_in_GR32_ADBits), X86::GR64_with_sub_32bit_in_GR32_ADRegClassID, 8, 1, true },
+  { GR64_AD, GR64_ADBits, 372, 2, sizeof(GR64_ADBits), X86::GR64_ADRegClassID, 8, 1, true },
+  { GR64_and_LOW32_ADDR_ACCESS_RBP, GR64_and_LOW32_ADDR_ACCESS_RBPBits, 583, 2, sizeof(GR64_and_LOW32_ADDR_ACCESS_RBPBits), X86::GR64_and_LOW32_ADDR_ACCESS_RBPRegClassID, 8, 1, true },
   { GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_TC, GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_TCBits, 215, 2, sizeof(GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_TCBits), X86::GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_TCRegClassID, 8, 1, true },
-  { GR64_NOREX_NOSP_and_LOW32_ADDR_ACCESS_RBP, GR64_NOREX_NOSP_and_LOW32_ADDR_ACCESS_RBPBits, 629, 1, sizeof(GR64_NOREX_NOSP_and_LOW32_ADDR_ACCESS_RBPBits), X86::GR64_NOREX_NOSP_and_LOW32_ADDR_ACCESS_RBPRegClassID, 8, 1, true },
-  { GR64_and_LOW32_ADDR_ACCESS, GR64_and_LOW32_ADDR_ACCESSBits, 808, 1, sizeof(GR64_and_LOW32_ADDR_ACCESSBits), X86::GR64_and_LOW32_ADDR_ACCESSRegClassID, 8, 1, true },
-  { GR64_with_sub_32bit_in_GR32_AD_and_GR32_NOAX, GR64_with_sub_32bit_in_GR32_AD_and_GR32_NOAXBits, 865, 1, sizeof(GR64_with_sub_32bit_in_GR32_AD_and_GR32_NOAXBits), X86::GR64_with_sub_32bit_in_GR32_AD_and_GR32_NOAXRegClassID, 8, 1, true },
-  { RST, RSTBits, 835, 8, sizeof(RSTBits), X86::RSTRegClassID, 10, 1, false },
+  { GR64_NOREX_NOSP_and_LOW32_ADDR_ACCESS_RBP, GR64_NOREX_NOSP_and_LOW32_ADDR_ACCESS_RBPBits, 614, 1, sizeof(GR64_NOREX_NOSP_and_LOW32_ADDR_ACCESS_RBPBits), X86::GR64_NOREX_NOSP_and_LOW32_ADDR_ACCESS_RBPRegClassID, 8, 1, true },
+  { GR64_and_LOW32_ADDR_ACCESS, GR64_and_LOW32_ADDR_ACCESSBits, 793, 1, sizeof(GR64_and_LOW32_ADDR_ACCESSBits), X86::GR64_and_LOW32_ADDR_ACCESSRegClassID, 8, 1, true },
+  { GR64_with_sub_32bit_in_GR32_AD_and_GR32_NOAX, GR64_with_sub_32bit_in_GR32_AD_and_GR32_NOAXBits, 850, 1, sizeof(GR64_with_sub_32bit_in_GR32_AD_and_GR32_NOAXBits), X86::GR64_with_sub_32bit_in_GR32_AD_and_GR32_NOAXRegClassID, 8, 1, true },
+  { RST, RSTBits, 820, 8, sizeof(RSTBits), X86::RSTRegClassID, 10, 1, false },
   { RFP80, RFP80Bits, 0, 7, sizeof(RFP80Bits), X86::RFP80RegClassID, 10, 1, true },
-  { VR128X, VR128XBits, 858, 32, sizeof(VR128XBits), X86::VR128XRegClassID, 16, 1, true },
+  { VR128X, VR128XBits, 843, 32, sizeof(VR128XBits), X86::VR128XRegClassID, 16, 1, true },
   { FR128, FR128Bits, 195, 16, sizeof(FR128Bits), X86::FR128RegClassID, 16, 1, true },
   { VR128, VR128Bits, 201, 16, sizeof(VR128Bits), X86::VR128RegClassID, 16, 1, true },
-  { VR128H, VR128HBits, 488, 8, sizeof(VR128HBits), X86::VR128HRegClassID, 16, 1, true },
-  { VR128L, VR128LBits, 535, 8, sizeof(VR128LBits), X86::VR128LRegClassID, 16, 1, true },
-  { BNDR, BNDRBits, 803, 4, sizeof(BNDRBits), X86::BNDRRegClassID, 16, 1, true },
-  { VR256X, VR256XBits, 851, 32, sizeof(VR256XBits), X86::VR256XRegClassID, 32, 1, true },
+  { VR128H, VR128HBits, 473, 8, sizeof(VR128HBits), X86::VR128HRegClassID, 16, 1, true },
+  { VR128L, VR128LBits, 520, 8, sizeof(VR128LBits), X86::VR128LRegClassID, 16, 1, true },
+  { BNDR, BNDRBits, 788, 4, sizeof(BNDRBits), X86::BNDRRegClassID, 16, 1, true },
+  { VR256X, VR256XBits, 836, 32, sizeof(VR256XBits), X86::VR256XRegClassID, 32, 1, true },
   { VR256, VR256Bits, 167, 16, sizeof(VR256Bits), X86::VR256RegClassID, 32, 1, true },
-  { VR256H, VR256HBits, 459, 8, sizeof(VR256HBits), X86::VR256HRegClassID, 32, 1, true },
-  { VR256L, VR256LBits, 506, 8, sizeof(VR256LBits), X86::VR256LRegClassID, 32, 1, true },
+  { VR256H, VR256HBits, 444, 8, sizeof(VR256HBits), X86::VR256HRegClassID, 32, 1, true },
+  { VR256L, VR256LBits, 491, 8, sizeof(VR256LBits), X86::VR256LRegClassID, 32, 1, true },
   { VR512, VR512Bits, 10, 32, sizeof(VR512Bits), X86::VR512RegClassID, 64, 1, true },
   { VR512_with_sub_xmm_in_FR128, VR512_with_sub_xmm_in_FR128Bits, 173, 16, sizeof(VR512_with_sub_xmm_in_FR128Bits), X86::VR512_with_sub_xmm_in_FR128RegClassID, 64, 1, true },
-  { VR512_with_sub_xmm_in_VR128H, VR512_with_sub_xmm_in_VR128HBits, 466, 8, sizeof(VR512_with_sub_xmm_in_VR128HBits), X86::VR512_with_sub_xmm_in_VR128HRegClassID, 64, 1, true },
-  { VR512_with_sub_xmm_in_VR128L, VR512_with_sub_xmm_in_VR128LBits, 513, 8, sizeof(VR512_with_sub_xmm_in_VR128LBits), X86::VR512_with_sub_xmm_in_VR128LRegClassID, 64, 1, true },
+  { VR512_with_sub_xmm_in_VR128H, VR512_with_sub_xmm_in_VR128HBits, 451, 8, sizeof(VR512_with_sub_xmm_in_VR128HBits), X86::VR512_with_sub_xmm_in_VR128HRegClassID, 64, 1, true },
+  { VR512_with_sub_xmm_in_VR128L, VR512_with_sub_xmm_in_VR128LBits, 498, 8, sizeof(VR512_with_sub_xmm_in_VR128LBits), X86::VR512_with_sub_xmm_in_VR128LRegClassID, 64, 1, true },
 };
 
 // X86 Dwarf<->LLVM register mappings.
@@ -3963,8 +3964,8 @@ namespace X86 { // Register classes
   extern const TargetRegisterClass GR64_TC_and_GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_NOREXRegClass;
   extern const TargetRegisterClass GR64_with_sub_32bit_in_GR32_ABCD_and_GR32_NOAXRegClass;
   extern const TargetRegisterClass GR64_with_sub_32bit_in_GR32_TCRegClass;
+  extern const TargetRegisterClass GR64_ADRegClass;
   extern const TargetRegisterClass GR64_and_LOW32_ADDR_ACCESS_RBPRegClass;
-  extern const TargetRegisterClass GR64_with_sub_32bit_in_GR32_ADRegClass;
   extern const TargetRegisterClass GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_TCRegClass;
   extern const TargetRegisterClass GR64_NOREX_NOSP_and_LOW32_ADDR_ACCESS_RBPRegClass;
   extern const TargetRegisterClass GR64_and_LOW32_ADDR_ACCESSRegClass;
@@ -4008,15 +4009,15 @@ namespace llvm {
 extern const MCRegisterClass X86MCRegisterClasses[];
 
 static const MVT::SimpleValueType VTLists[] = {
-  /* 0 */ MVT::i1, MVT::Other,
-  /* 2 */ MVT::i8, MVT::Other,
-  /* 4 */ MVT::i16, MVT::Other,
-  /* 6 */ MVT::i32, MVT::Other,
-  /* 8 */ MVT::i64, MVT::Other,
-  /* 10 */ MVT::f80, MVT::f64, MVT::f32, MVT::Other,
-  /* 14 */ MVT::f64, MVT::Other,
-  /* 16 */ MVT::f80, MVT::Other,
-  /* 18 */ MVT::i128, MVT::f128, MVT::Other,
+  /* 0 */ MVT::i8, MVT::Other,
+  /* 2 */ MVT::i16, MVT::Other,
+  /* 4 */ MVT::i32, MVT::Other,
+  /* 6 */ MVT::i64, MVT::Other,
+  /* 8 */ MVT::f80, MVT::f64, MVT::f32, MVT::Other,
+  /* 12 */ MVT::f64, MVT::Other,
+  /* 14 */ MVT::f80, MVT::Other,
+  /* 16 */ MVT::i128, MVT::f128, MVT::Other,
+  /* 19 */ MVT::v1i1, MVT::Other,
   /* 21 */ MVT::v2i1, MVT::Other,
   /* 23 */ MVT::v4i1, MVT::Other,
   /* 25 */ MVT::v8i1, MVT::Other,
@@ -4048,34 +4049,34 @@ static const TargetRegisterClass *const NullRegClasses[] = { nullptr };
 
 static const uint32_t GR8SubClassMask[] = {
   0x0000000f, 0x00000000, 0x00000000, 0x00000000, 
-  0x5f420030, 0x94f033f3, 0x002eefcd, 0x00000000, // sub_8bit
-  0x00020000, 0x000013e0, 0x0026c800, 0x00000000, // sub_8bit_hi
+  0x5f420030, 0x94f033f3, 0x002defcd, 0x00000000, // sub_8bit
+  0x00020000, 0x000013e0, 0x0025c800, 0x00000000, // sub_8bit_hi
 };
 
 static const uint32_t GR8_NOREXSubClassMask[] = {
   0x0000000e, 0x00000000, 0x00000000, 0x00000000, 
-  0x00020000, 0x000013e0, 0x0026c800, 0x00000000, // sub_8bit
-  0x00020000, 0x000013e0, 0x0026c800, 0x00000000, // sub_8bit_hi
+  0x00020000, 0x000013e0, 0x0025c800, 0x00000000, // sub_8bit
+  0x00020000, 0x000013e0, 0x0025c800, 0x00000000, // sub_8bit_hi
 };
 
 static const uint32_t GR8_ABCD_HSubClassMask[] = {
   0x00000004, 0x00000000, 0x00000000, 0x00000000, 
-  0x00020000, 0x000013e0, 0x0026c800, 0x00000000, // sub_8bit_hi
+  0x00020000, 0x000013e0, 0x0025c800, 0x00000000, // sub_8bit_hi
 };
 
 static const uint32_t GR8_ABCD_LSubClassMask[] = {
   0x00000008, 0x00000000, 0x00000000, 0x00000000, 
-  0x00020000, 0x000013e0, 0x0026c800, 0x00000000, // sub_8bit
+  0x00020000, 0x000013e0, 0x0025c800, 0x00000000, // sub_8bit
 };
 
 static const uint32_t GR16SubClassMask[] = {
   0x00020030, 0x00000000, 0x00000000, 0x00000000, 
-  0x5f400000, 0x94f033f3, 0x002eefcd, 0x00000000, // sub_16bit
+  0x5f400000, 0x94f033f3, 0x002defcd, 0x00000000, // sub_16bit
 };
 
 static const uint32_t GR16_NOREXSubClassMask[] = {
   0x00020020, 0x00000000, 0x00000000, 0x00000000, 
-  0x50000000, 0x900033f3, 0x002eeb08, 0x00000000, // sub_16bit
+  0x50000000, 0x900033f3, 0x002deb08, 0x00000000, // sub_16bit
 };
 
 static const uint32_t VK1SubClassMask[] = {
@@ -4124,7 +4125,7 @@ static const uint32_t SEGMENT_REGSubClassMask[] = {
 
 static const uint32_t GR16_ABCDSubClassMask[] = {
   0x00020000, 0x00000000, 0x00000000, 0x00000000, 
-  0x00000000, 0x000013e0, 0x0026c800, 0x00000000, // sub_16bit
+  0x00000000, 0x000013e0, 0x0025c800, 0x00000000, // sub_16bit
 };
 
 static const uint32_t FPCCRSubClassMask[] = {
@@ -4137,18 +4138,18 @@ static const uint32_t FR32XSubClassMask[] = {
 };
 
 static const uint32_t LOW32_ADDR_ACCESS_RBPSubClassMask[] = {
-  0x5f700000, 0x000077f3, 0x00190000, 0x00000000, 
-  0x00000000, 0x94f02000, 0x002eefcd, 0x00000000, // sub_32bit
+  0x5f700000, 0x000077f3, 0x001a0000, 0x00000000, 
+  0x00000000, 0x94f02000, 0x002defcd, 0x00000000, // sub_32bit
 };
 
 static const uint32_t LOW32_ADDR_ACCESSSubClassMask[] = {
   0x4f200000, 0x000053f3, 0x00100000, 0x00000000, 
-  0x00000000, 0x94f02000, 0x002eefcd, 0x00000000, // sub_32bit
+  0x00000000, 0x94f02000, 0x002defcd, 0x00000000, // sub_32bit
 };
 
 static const uint32_t LOW32_ADDR_ACCESS_RBP_with_sub_8bitSubClassMask[] = {
   0x5f400000, 0x000033f3, 0x00080000, 0x00000000, 
-  0x00000000, 0x94f02000, 0x002eefcd, 0x00000000, // sub_32bit
+  0x00000000, 0x94f02000, 0x002defcd, 0x00000000, // sub_32bit
 };
 
 static const uint32_t FR32SubClassMask[] = {
@@ -4158,7 +4159,7 @@ static const uint32_t FR32SubClassMask[] = {
 
 static const uint32_t GR32SubClassMask[] = {
   0x4f000000, 0x000013f3, 0x00000000, 0x00000000, 
-  0x00000000, 0x94f02000, 0x002eefcd, 0x00000000, // sub_32bit
+  0x00000000, 0x94f02000, 0x002defcd, 0x00000000, // sub_32bit
 };
 
 static const uint32_t GR32_NOAXSubClassMask[] = {
@@ -4168,7 +4169,7 @@ static const uint32_t GR32_NOAXSubClassMask[] = {
 
 static const uint32_t GR32_NOSPSubClassMask[] = {
   0x0c000000, 0x000013f2, 0x00000000, 0x00000000, 
-  0x00000000, 0x84a02000, 0x002eefc5, 0x00000000, // sub_32bit
+  0x00000000, 0x84a02000, 0x002defc5, 0x00000000, // sub_32bit
 };
 
 static const uint32_t GR32_NOAX_and_GR32_NOSPSubClassMask[] = {
@@ -4178,7 +4179,7 @@ static const uint32_t GR32_NOAX_and_GR32_NOSPSubClassMask[] = {
 
 static const uint32_t LOW32_ADDR_ACCESS_RBP_with_sub_16bit_in_GR16_NOREXSubClassMask[] = {
   0x50000000, 0x000033f3, 0x00080000, 0x00000000, 
-  0x00000000, 0x90002000, 0x002eeb08, 0x00000000, // sub_32bit
+  0x00000000, 0x90002000, 0x002deb08, 0x00000000, // sub_32bit
 };
 
 static const uint32_t DEBUG_REGSubClassMask[] = {
@@ -4187,7 +4188,7 @@ static const uint32_t DEBUG_REGSubClassMask[] = {
 
 static const uint32_t GR32_NOREXSubClassMask[] = {
   0x40000000, 0x000013f3, 0x00000000, 0x00000000, 
-  0x00000000, 0x90002000, 0x002eeb08, 0x00000000, // sub_32bit
+  0x00000000, 0x90002000, 0x002deb08, 0x00000000, // sub_32bit
 };
 
 static const uint32_t VK32SubClassMask[] = {
@@ -4201,7 +4202,7 @@ static const uint32_t GR32_NOAX_and_GR32_NOREXSubClassMask[] = {
 
 static const uint32_t GR32_NOREX_NOSPSubClassMask[] = {
   0x00000000, 0x000013f2, 0x00000000, 0x00000000, 
-  0x00000000, 0x80002000, 0x002eeb00, 0x00000000, // sub_32bit
+  0x00000000, 0x80002000, 0x002deb00, 0x00000000, // sub_32bit
 };
 
 static const uint32_t RFP32SubClassMask[] = {
@@ -4219,7 +4220,7 @@ static const uint32_t GR32_NOAX_and_GR32_NOREX_NOSPSubClassMask[] = {
 
 static const uint32_t GR32_ABCDSubClassMask[] = {
   0x00000000, 0x000013e0, 0x00000000, 0x00000000, 
-  0x00000000, 0x00000000, 0x0026c800, 0x00000000, // sub_32bit
+  0x00000000, 0x00000000, 0x0025c800, 0x00000000, // sub_32bit
 };
 
 static const uint32_t GR32_ABCD_and_GR32_NOAXSubClassMask[] = {
@@ -4229,12 +4230,12 @@ static const uint32_t GR32_ABCD_and_GR32_NOAXSubClassMask[] = {
 
 static const uint32_t GR32_TCSubClassMask[] = {
   0x00000000, 0x00001380, 0x00000000, 0x00000000, 
-  0x00000000, 0x00000000, 0x00268000, 0x00000000, // sub_32bit
+  0x00000000, 0x00000000, 0x00258000, 0x00000000, // sub_32bit
 };
 
 static const uint32_t GR32_ADSubClassMask[] = {
   0x00000000, 0x00001100, 0x00000000, 0x00000000, 
-  0x00000000, 0x00000000, 0x00220000, 0x00000000, // sub_32bit
+  0x00000000, 0x00000000, 0x00210000, 0x00000000, // sub_32bit
 };
 
 static const uint32_t GR32_NOAX_and_GR32_TCSubClassMask[] = {
@@ -4243,7 +4244,7 @@ static const uint32_t GR32_NOAX_and_GR32_TCSubClassMask[] = {
 };
 
 static const uint32_t LOW32_ADDR_ACCESS_RBP_with_sub_32bitSubClassMask[] = {
-  0x00000000, 0x00006400, 0x00190000, 0x00000000, 
+  0x00000000, 0x00006400, 0x001a0000, 0x00000000, 
 };
 
 static const uint32_t CCRSubClassMask[] = {
@@ -4286,11 +4287,11 @@ static const uint32_t FR64SubClassMask[] = {
 };
 
 static const uint32_t GR64_with_sub_8bitSubClassMask[] = {
-  0x00000000, 0x94f00000, 0x002eefcd, 0x00000000, 
+  0x00000000, 0x94f00000, 0x002defcd, 0x00000000, 
 };
 
 static const uint32_t GR64_NOSPSubClassMask[] = {
-  0x00000000, 0x84a00000, 0x002eefc5, 0x00000000, 
+  0x00000000, 0x84a00000, 0x002defc5, 0x00000000, 
 };
 
 static const uint32_t GR64_with_sub_32bit_in_GR32_NOAXSubClassMask[] = {
@@ -4306,19 +4307,19 @@ static const uint32_t GR64_NOREXSubClassMask[] = {
 };
 
 static const uint32_t GR64_TCSubClassMask[] = {
-  0x00000000, 0x06000000, 0x0036b6a6, 0x00000000, 
+  0x00000000, 0x06000000, 0x0035b6a6, 0x00000000, 
 };
 
 static const uint32_t GR64_NOSP_and_GR64_TCSubClassMask[] = {
-  0x00000000, 0x04000000, 0x0026a684, 0x00000000, 
+  0x00000000, 0x04000000, 0x0025a684, 0x00000000, 
 };
 
 static const uint32_t GR64_TCW64SubClassMask[] = {
-  0x00000000, 0x08000000, 0x003694c3, 0x00000000, 
+  0x00000000, 0x08000000, 0x003594c3, 0x00000000, 
 };
 
 static const uint32_t GR64_with_sub_16bit_in_GR16_NOREXSubClassMask[] = {
-  0x00000000, 0x90000000, 0x002eeb08, 0x00000000, 
+  0x00000000, 0x90000000, 0x002deb08, 0x00000000, 
 };
 
 static const uint32_t VK64SubClassMask[] = {
@@ -4330,15 +4331,15 @@ static const uint32_t VR64SubClassMask[] = {
 };
 
 static const uint32_t GR64_NOREX_NOSPSubClassMask[] = {
-  0x00000000, 0x80000000, 0x002eeb00, 0x00000000, 
+  0x00000000, 0x80000000, 0x002deb00, 0x00000000, 
 };
 
 static const uint32_t GR64_NOSP_and_GR64_TCW64SubClassMask[] = {
-  0x00000000, 0x00000000, 0x002684c1, 0x00000000, 
+  0x00000000, 0x00000000, 0x002584c1, 0x00000000, 
 };
 
 static const uint32_t GR64_TC_and_GR64_TCW64SubClassMask[] = {
-  0x00000000, 0x00000000, 0x00369482, 0x00000000, 
+  0x00000000, 0x00000000, 0x00359482, 0x00000000, 
 };
 
 static const uint32_t GR64_TC_and_GR64_with_sub_32bit_in_GR32_NOAXSubClassMask[] = {
@@ -4354,7 +4355,7 @@ static const uint32_t VK64WMSubClassMask[] = {
 };
 
 static const uint32_t GR64_NOREX_and_GR64_TCSubClassMask[] = {
-  0x00000000, 0x00000000, 0x0036b220, 0x00000000, 
+  0x00000000, 0x00000000, 0x0035b220, 0x00000000, 
 };
 
 static const uint32_t GR64_TCW64_and_GR64_with_sub_32bit_in_GR32_NOAXSubClassMask[] = {
@@ -4362,7 +4363,7 @@ static const uint32_t GR64_TCW64_and_GR64_with_sub_32bit_in_GR32_NOAXSubClassMas
 };
 
 static const uint32_t GR64_TC_and_GR64_NOSP_and_GR64_TCW64SubClassMask[] = {
-  0x00000000, 0x00000000, 0x00268480, 0x00000000, 
+  0x00000000, 0x00000000, 0x00258480, 0x00000000, 
 };
 
 static const uint32_t GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_NOREX_NOSPSubClassMask[] = {
@@ -4370,7 +4371,7 @@ static const uint32_t GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_NOREX_NOSPSubCla
 };
 
 static const uint32_t GR64_NOREX_NOSP_and_GR64_TCSubClassMask[] = {
-  0x00000000, 0x00000000, 0x0026a200, 0x00000000, 
+  0x00000000, 0x00000000, 0x0025a200, 0x00000000, 
 };
 
 static const uint32_t GR64_TCW64_and_GR64_TC_and_GR64_with_sub_32bit_in_GR32_NOAXSubClassMask[] = {
@@ -4378,11 +4379,11 @@ static const uint32_t GR64_TCW64_and_GR64_TC_and_GR64_with_sub_32bit_in_GR32_NOA
 };
 
 static const uint32_t GR64_ABCDSubClassMask[] = {
-  0x00000000, 0x00000000, 0x0026c800, 0x00000000, 
+  0x00000000, 0x00000000, 0x0025c800, 0x00000000, 
 };
 
 static const uint32_t GR64_NOREX_and_GR64_TCW64SubClassMask[] = {
-  0x00000000, 0x00000000, 0x00369000, 0x00000000, 
+  0x00000000, 0x00000000, 0x00359000, 0x00000000, 
 };
 
 static const uint32_t GR64_TC_and_GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_NOREXSubClassMask[] = {
@@ -4394,15 +4395,15 @@ static const uint32_t GR64_with_sub_32bit_in_GR32_ABCD_and_GR32_NOAXSubClassMask
 };
 
 static const uint32_t GR64_with_sub_32bit_in_GR32_TCSubClassMask[] = {
-  0x00000000, 0x00000000, 0x00268000, 0x00000000, 
+  0x00000000, 0x00000000, 0x00258000, 0x00000000, 
+};
+
+static const uint32_t GR64_ADSubClassMask[] = {
+  0x00000000, 0x00000000, 0x00210000, 0x00000000, 
 };
 
 static const uint32_t GR64_and_LOW32_ADDR_ACCESS_RBPSubClassMask[] = {
-  0x00000000, 0x00000000, 0x00190000, 0x00000000, 
-};
-
-static const uint32_t GR64_with_sub_32bit_in_GR32_ADSubClassMask[] = {
-  0x00000000, 0x00000000, 0x00220000, 0x00000000, 
+  0x00000000, 0x00000000, 0x001a0000, 0x00000000, 
 };
 
 static const uint32_t GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_TCSubClassMask[] = {
@@ -5166,15 +5167,7 @@ static const TargetRegisterClass *const GR64_with_sub_32bit_in_GR32_TCSuperclass
   nullptr
 };
 
-static const TargetRegisterClass *const GR64_and_LOW32_ADDR_ACCESS_RBPSuperclasses[] = {
-  &X86::LOW32_ADDR_ACCESS_RBPRegClass,
-  &X86::LOW32_ADDR_ACCESS_RBP_with_sub_32bitRegClass,
-  &X86::GR64RegClass,
-  &X86::GR64_NOREXRegClass,
-  nullptr
-};
-
-static const TargetRegisterClass *const GR64_with_sub_32bit_in_GR32_ADSuperclasses[] = {
+static const TargetRegisterClass *const GR64_ADSuperclasses[] = {
   &X86::GR64RegClass,
   &X86::GR64_with_sub_8bitRegClass,
   &X86::GR64_NOSPRegClass,
@@ -5192,6 +5185,14 @@ static const TargetRegisterClass *const GR64_with_sub_32bit_in_GR32_ADSuperclass
   &X86::GR64_ABCDRegClass,
   &X86::GR64_NOREX_and_GR64_TCW64RegClass,
   &X86::GR64_with_sub_32bit_in_GR32_TCRegClass,
+  nullptr
+};
+
+static const TargetRegisterClass *const GR64_and_LOW32_ADDR_ACCESS_RBPSuperclasses[] = {
+  &X86::LOW32_ADDR_ACCESS_RBPRegClass,
+  &X86::LOW32_ADDR_ACCESS_RBP_with_sub_32bitRegClass,
+  &X86::GR64RegClass,
+  &X86::GR64_NOREXRegClass,
   nullptr
 };
 
@@ -5288,7 +5289,7 @@ static const TargetRegisterClass *const GR64_with_sub_32bit_in_GR32_AD_and_GR32_
   &X86::GR64_TC_and_GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_NOREXRegClass,
   &X86::GR64_with_sub_32bit_in_GR32_ABCD_and_GR32_NOAXRegClass,
   &X86::GR64_with_sub_32bit_in_GR32_TCRegClass,
-  &X86::GR64_with_sub_32bit_in_GR32_ADRegClass,
+  &X86::GR64_ADRegClass,
   &X86::GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_TCRegClass,
   nullptr
 };
@@ -5419,7 +5420,7 @@ namespace X86 {   // Register class instances
     &X86MCRegisterClasses[GR8RegClassID],
     1, /* SpillSize */
     1, /* SpillAlignment */
-    VTLists + 2,
+    VTLists + 0,
     GR8SubClassMask,
     SuperRegIdxSeqs + 2,
     LaneBitmask(0x00000001),
@@ -5434,7 +5435,7 @@ namespace X86 {   // Register class instances
     &X86MCRegisterClasses[GR8_NOREXRegClassID],
     1, /* SpillSize */
     1, /* SpillAlignment */
-    VTLists + 2,
+    VTLists + 0,
     GR8_NOREXSubClassMask,
     SuperRegIdxSeqs + 2,
     LaneBitmask(0x00000001),
@@ -5449,7 +5450,7 @@ namespace X86 {   // Register class instances
     &X86MCRegisterClasses[GR8_ABCD_HRegClassID],
     1, /* SpillSize */
     1, /* SpillAlignment */
-    VTLists + 2,
+    VTLists + 0,
     GR8_ABCD_HSubClassMask,
     SuperRegIdxSeqs + 3,
     LaneBitmask(0x00000001),
@@ -5464,7 +5465,7 @@ namespace X86 {   // Register class instances
     &X86MCRegisterClasses[GR8_ABCD_LRegClassID],
     1, /* SpillSize */
     1, /* SpillAlignment */
-    VTLists + 2,
+    VTLists + 0,
     GR8_ABCD_LSubClassMask,
     SuperRegIdxSeqs + 0,
     LaneBitmask(0x00000001),
@@ -5479,7 +5480,7 @@ namespace X86 {   // Register class instances
     &X86MCRegisterClasses[GR16RegClassID],
     2, /* SpillSize */
     2, /* SpillAlignment */
-    VTLists + 4,
+    VTLists + 2,
     GR16SubClassMask,
     SuperRegIdxSeqs + 5,
     LaneBitmask(0x00000003),
@@ -5494,7 +5495,7 @@ namespace X86 {   // Register class instances
     &X86MCRegisterClasses[GR16_NOREXRegClassID],
     2, /* SpillSize */
     2, /* SpillAlignment */
-    VTLists + 4,
+    VTLists + 2,
     GR16_NOREXSubClassMask,
     SuperRegIdxSeqs + 5,
     LaneBitmask(0x00000003),
@@ -5509,7 +5510,7 @@ namespace X86 {   // Register class instances
     &X86MCRegisterClasses[VK1RegClassID],
     2, /* SpillSize */
     2, /* SpillAlignment */
-    VTLists + 0,
+    VTLists + 19,
     VK1SubClassMask,
     SuperRegIdxSeqs + 1,
     LaneBitmask(0x00000001),
@@ -5599,7 +5600,7 @@ namespace X86 {   // Register class instances
     &X86MCRegisterClasses[VK1WMRegClassID],
     2, /* SpillSize */
     2, /* SpillAlignment */
-    VTLists + 0,
+    VTLists + 19,
     VK1WMSubClassMask,
     SuperRegIdxSeqs + 1,
     LaneBitmask(0x00000001),
@@ -5659,7 +5660,7 @@ namespace X86 {   // Register class instances
     &X86MCRegisterClasses[SEGMENT_REGRegClassID],
     2, /* SpillSize */
     2, /* SpillAlignment */
-    VTLists + 4,
+    VTLists + 2,
     SEGMENT_REGSubClassMask,
     SuperRegIdxSeqs + 1,
     LaneBitmask(0x00000001),
@@ -5674,7 +5675,7 @@ namespace X86 {   // Register class instances
     &X86MCRegisterClasses[GR16_ABCDRegClassID],
     2, /* SpillSize */
     2, /* SpillAlignment */
-    VTLists + 4,
+    VTLists + 2,
     GR16_ABCDSubClassMask,
     SuperRegIdxSeqs + 5,
     LaneBitmask(0x00000003),
@@ -5689,7 +5690,7 @@ namespace X86 {   // Register class instances
     &X86MCRegisterClasses[FPCCRRegClassID],
     2, /* SpillSize */
     2, /* SpillAlignment */
-    VTLists + 4,
+    VTLists + 2,
     FPCCRSubClassMask,
     SuperRegIdxSeqs + 1,
     LaneBitmask(0x00000001),
@@ -5704,7 +5705,7 @@ namespace X86 {   // Register class instances
     &X86MCRegisterClasses[FR32XRegClassID],
     4, /* SpillSize */
     4, /* SpillAlignment */
-    VTLists + 12,
+    VTLists + 10,
     FR32XSubClassMask,
     SuperRegIdxSeqs + 9,
     LaneBitmask(0x00000001),
@@ -5719,7 +5720,7 @@ namespace X86 {   // Register class instances
     &X86MCRegisterClasses[LOW32_ADDR_ACCESS_RBPRegClassID],
     4, /* SpillSize */
     4, /* SpillAlignment */
-    VTLists + 6,
+    VTLists + 4,
     LOW32_ADDR_ACCESS_RBPSubClassMask,
     SuperRegIdxSeqs + 7,
     LaneBitmask(0x00000003),
@@ -5734,7 +5735,7 @@ namespace X86 {   // Register class instances
     &X86MCRegisterClasses[LOW32_ADDR_ACCESSRegClassID],
     4, /* SpillSize */
     4, /* SpillAlignment */
-    VTLists + 6,
+    VTLists + 4,
     LOW32_ADDR_ACCESSSubClassMask,
     SuperRegIdxSeqs + 7,
     LaneBitmask(0x00000003),
@@ -5749,7 +5750,7 @@ namespace X86 {   // Register class instances
     &X86MCRegisterClasses[LOW32_ADDR_ACCESS_RBP_with_sub_8bitRegClassID],
     4, /* SpillSize */
     4, /* SpillAlignment */
-    VTLists + 6,
+    VTLists + 4,
     LOW32_ADDR_ACCESS_RBP_with_sub_8bitSubClassMask,
     SuperRegIdxSeqs + 7,
     LaneBitmask(0x00000003),
@@ -5764,7 +5765,7 @@ namespace X86 {   // Register class instances
     &X86MCRegisterClasses[FR32RegClassID],
     4, /* SpillSize */
     4, /* SpillAlignment */
-    VTLists + 12,
+    VTLists + 10,
     FR32SubClassMask,
     SuperRegIdxSeqs + 9,
     LaneBitmask(0x00000001),
@@ -5779,7 +5780,7 @@ namespace X86 {   // Register class instances
     &X86MCRegisterClasses[GR32RegClassID],
     4, /* SpillSize */
     4, /* SpillAlignment */
-    VTLists + 6,
+    VTLists + 4,
     GR32SubClassMask,
     SuperRegIdxSeqs + 7,
     LaneBitmask(0x00000003),
@@ -5794,7 +5795,7 @@ namespace X86 {   // Register class instances
     &X86MCRegisterClasses[GR32_NOAXRegClassID],
     4, /* SpillSize */
     4, /* SpillAlignment */
-    VTLists + 6,
+    VTLists + 4,
     GR32_NOAXSubClassMask,
     SuperRegIdxSeqs + 7,
     LaneBitmask(0x00000003),
@@ -5809,7 +5810,7 @@ namespace X86 {   // Register class instances
     &X86MCRegisterClasses[GR32_NOSPRegClassID],
     4, /* SpillSize */
     4, /* SpillAlignment */
-    VTLists + 6,
+    VTLists + 4,
     GR32_NOSPSubClassMask,
     SuperRegIdxSeqs + 7,
     LaneBitmask(0x00000003),
@@ -5824,7 +5825,7 @@ namespace X86 {   // Register class instances
     &X86MCRegisterClasses[GR32_NOAX_and_GR32_NOSPRegClassID],
     4, /* SpillSize */
     4, /* SpillAlignment */
-    VTLists + 6,
+    VTLists + 4,
     GR32_NOAX_and_GR32_NOSPSubClassMask,
     SuperRegIdxSeqs + 7,
     LaneBitmask(0x00000003),
@@ -5839,7 +5840,7 @@ namespace X86 {   // Register class instances
     &X86MCRegisterClasses[LOW32_ADDR_ACCESS_RBP_with_sub_16bit_in_GR16_NOREXRegClassID],
     4, /* SpillSize */
     4, /* SpillAlignment */
-    VTLists + 6,
+    VTLists + 4,
     LOW32_ADDR_ACCESS_RBP_with_sub_16bit_in_GR16_NOREXSubClassMask,
     SuperRegIdxSeqs + 7,
     LaneBitmask(0x00000003),
@@ -5854,7 +5855,7 @@ namespace X86 {   // Register class instances
     &X86MCRegisterClasses[DEBUG_REGRegClassID],
     4, /* SpillSize */
     4, /* SpillAlignment */
-    VTLists + 6,
+    VTLists + 4,
     DEBUG_REGSubClassMask,
     SuperRegIdxSeqs + 1,
     LaneBitmask(0x00000001),
@@ -5869,7 +5870,7 @@ namespace X86 {   // Register class instances
     &X86MCRegisterClasses[GR32_NOREXRegClassID],
     4, /* SpillSize */
     4, /* SpillAlignment */
-    VTLists + 6,
+    VTLists + 4,
     GR32_NOREXSubClassMask,
     SuperRegIdxSeqs + 7,
     LaneBitmask(0x00000003),
@@ -5899,7 +5900,7 @@ namespace X86 {   // Register class instances
     &X86MCRegisterClasses[GR32_NOAX_and_GR32_NOREXRegClassID],
     4, /* SpillSize */
     4, /* SpillAlignment */
-    VTLists + 6,
+    VTLists + 4,
     GR32_NOAX_and_GR32_NOREXSubClassMask,
     SuperRegIdxSeqs + 7,
     LaneBitmask(0x00000003),
@@ -5914,7 +5915,7 @@ namespace X86 {   // Register class instances
     &X86MCRegisterClasses[GR32_NOREX_NOSPRegClassID],
     4, /* SpillSize */
     4, /* SpillAlignment */
-    VTLists + 6,
+    VTLists + 4,
     GR32_NOREX_NOSPSubClassMask,
     SuperRegIdxSeqs + 7,
     LaneBitmask(0x00000003),
@@ -5929,7 +5930,7 @@ namespace X86 {   // Register class instances
     &X86MCRegisterClasses[RFP32RegClassID],
     4, /* SpillSize */
     4, /* SpillAlignment */
-    VTLists + 12,
+    VTLists + 10,
     RFP32SubClassMask,
     SuperRegIdxSeqs + 1,
     LaneBitmask(0x00000001),
@@ -5959,7 +5960,7 @@ namespace X86 {   // Register class instances
     &X86MCRegisterClasses[GR32_NOAX_and_GR32_NOREX_NOSPRegClassID],
     4, /* SpillSize */
     4, /* SpillAlignment */
-    VTLists + 6,
+    VTLists + 4,
     GR32_NOAX_and_GR32_NOREX_NOSPSubClassMask,
     SuperRegIdxSeqs + 7,
     LaneBitmask(0x00000003),
@@ -5974,7 +5975,7 @@ namespace X86 {   // Register class instances
     &X86MCRegisterClasses[GR32_ABCDRegClassID],
     4, /* SpillSize */
     4, /* SpillAlignment */
-    VTLists + 6,
+    VTLists + 4,
     GR32_ABCDSubClassMask,
     SuperRegIdxSeqs + 7,
     LaneBitmask(0x00000003),
@@ -5989,7 +5990,7 @@ namespace X86 {   // Register class instances
     &X86MCRegisterClasses[GR32_ABCD_and_GR32_NOAXRegClassID],
     4, /* SpillSize */
     4, /* SpillAlignment */
-    VTLists + 6,
+    VTLists + 4,
     GR32_ABCD_and_GR32_NOAXSubClassMask,
     SuperRegIdxSeqs + 7,
     LaneBitmask(0x00000003),
@@ -6004,7 +6005,7 @@ namespace X86 {   // Register class instances
     &X86MCRegisterClasses[GR32_TCRegClassID],
     4, /* SpillSize */
     4, /* SpillAlignment */
-    VTLists + 6,
+    VTLists + 4,
     GR32_TCSubClassMask,
     SuperRegIdxSeqs + 7,
     LaneBitmask(0x00000003),
@@ -6019,7 +6020,7 @@ namespace X86 {   // Register class instances
     &X86MCRegisterClasses[GR32_ADRegClassID],
     4, /* SpillSize */
     4, /* SpillAlignment */
-    VTLists + 6,
+    VTLists + 4,
     GR32_ADSubClassMask,
     SuperRegIdxSeqs + 7,
     LaneBitmask(0x00000003),
@@ -6034,7 +6035,7 @@ namespace X86 {   // Register class instances
     &X86MCRegisterClasses[GR32_NOAX_and_GR32_TCRegClassID],
     4, /* SpillSize */
     4, /* SpillAlignment */
-    VTLists + 6,
+    VTLists + 4,
     GR32_NOAX_and_GR32_TCSubClassMask,
     SuperRegIdxSeqs + 7,
     LaneBitmask(0x00000003),
@@ -6049,7 +6050,7 @@ namespace X86 {   // Register class instances
     &X86MCRegisterClasses[LOW32_ADDR_ACCESS_RBP_with_sub_32bitRegClassID],
     4, /* SpillSize */
     4, /* SpillAlignment */
-    VTLists + 6,
+    VTLists + 4,
     LOW32_ADDR_ACCESS_RBP_with_sub_32bitSubClassMask,
     SuperRegIdxSeqs + 1,
     LaneBitmask(0x00000003),
@@ -6064,7 +6065,7 @@ namespace X86 {   // Register class instances
     &X86MCRegisterClasses[CCRRegClassID],
     4, /* SpillSize */
     4, /* SpillAlignment */
-    VTLists + 6,
+    VTLists + 4,
     CCRSubClassMask,
     SuperRegIdxSeqs + 1,
     LaneBitmask(0x00000001),
@@ -6079,7 +6080,7 @@ namespace X86 {   // Register class instances
     &X86MCRegisterClasses[GR32_AD_and_GR32_NOAXRegClassID],
     4, /* SpillSize */
     4, /* SpillAlignment */
-    VTLists + 6,
+    VTLists + 4,
     GR32_AD_and_GR32_NOAXSubClassMask,
     SuperRegIdxSeqs + 7,
     LaneBitmask(0x00000003),
@@ -6094,7 +6095,7 @@ namespace X86 {   // Register class instances
     &X86MCRegisterClasses[LOW32_ADDR_ACCESS_RBP_with_sub_8bit_with_sub_32bitRegClassID],
     4, /* SpillSize */
     4, /* SpillAlignment */
-    VTLists + 6,
+    VTLists + 4,
     LOW32_ADDR_ACCESS_RBP_with_sub_8bit_with_sub_32bitSubClassMask,
     SuperRegIdxSeqs + 1,
     LaneBitmask(0x00000003),
@@ -6109,7 +6110,7 @@ namespace X86 {   // Register class instances
     &X86MCRegisterClasses[LOW32_ADDR_ACCESS_with_sub_32bitRegClassID],
     4, /* SpillSize */
     4, /* SpillAlignment */
-    VTLists + 6,
+    VTLists + 4,
     LOW32_ADDR_ACCESS_with_sub_32bitSubClassMask,
     SuperRegIdxSeqs + 1,
     LaneBitmask(0x00000003),
@@ -6124,7 +6125,7 @@ namespace X86 {   // Register class instances
     &X86MCRegisterClasses[RFP64RegClassID],
     8, /* SpillSize */
     4, /* SpillAlignment */
-    VTLists + 14,
+    VTLists + 12,
     RFP64SubClassMask,
     SuperRegIdxSeqs + 1,
     LaneBitmask(0x00000001),
@@ -6139,7 +6140,7 @@ namespace X86 {   // Register class instances
     &X86MCRegisterClasses[FR64XRegClassID],
     8, /* SpillSize */
     8, /* SpillAlignment */
-    VTLists + 14,
+    VTLists + 12,
     FR64XSubClassMask,
     SuperRegIdxSeqs + 9,
     LaneBitmask(0x00000001),
@@ -6154,7 +6155,7 @@ namespace X86 {   // Register class instances
     &X86MCRegisterClasses[GR64RegClassID],
     8, /* SpillSize */
     8, /* SpillAlignment */
-    VTLists + 8,
+    VTLists + 6,
     GR64SubClassMask,
     SuperRegIdxSeqs + 1,
     LaneBitmask(0x00000003),
@@ -6169,7 +6170,7 @@ namespace X86 {   // Register class instances
     &X86MCRegisterClasses[CONTROL_REGRegClassID],
     8, /* SpillSize */
     8, /* SpillAlignment */
-    VTLists + 8,
+    VTLists + 6,
     CONTROL_REGSubClassMask,
     SuperRegIdxSeqs + 1,
     LaneBitmask(0x00000001),
@@ -6184,7 +6185,7 @@ namespace X86 {   // Register class instances
     &X86MCRegisterClasses[FR64RegClassID],
     8, /* SpillSize */
     8, /* SpillAlignment */
-    VTLists + 14,
+    VTLists + 12,
     FR64SubClassMask,
     SuperRegIdxSeqs + 9,
     LaneBitmask(0x00000001),
@@ -6199,7 +6200,7 @@ namespace X86 {   // Register class instances
     &X86MCRegisterClasses[GR64_with_sub_8bitRegClassID],
     8, /* SpillSize */
     8, /* SpillAlignment */
-    VTLists + 8,
+    VTLists + 6,
     GR64_with_sub_8bitSubClassMask,
     SuperRegIdxSeqs + 1,
     LaneBitmask(0x00000003),
@@ -6214,7 +6215,7 @@ namespace X86 {   // Register class instances
     &X86MCRegisterClasses[GR64_NOSPRegClassID],
     8, /* SpillSize */
     8, /* SpillAlignment */
-    VTLists + 8,
+    VTLists + 6,
     GR64_NOSPSubClassMask,
     SuperRegIdxSeqs + 1,
     LaneBitmask(0x00000003),
@@ -6229,7 +6230,7 @@ namespace X86 {   // Register class instances
     &X86MCRegisterClasses[GR64_with_sub_32bit_in_GR32_NOAXRegClassID],
     8, /* SpillSize */
     8, /* SpillAlignment */
-    VTLists + 8,
+    VTLists + 6,
     GR64_with_sub_32bit_in_GR32_NOAXSubClassMask,
     SuperRegIdxSeqs + 1,
     LaneBitmask(0x00000003),
@@ -6244,7 +6245,7 @@ namespace X86 {   // Register class instances
     &X86MCRegisterClasses[GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_NOSPRegClassID],
     8, /* SpillSize */
     8, /* SpillAlignment */
-    VTLists + 8,
+    VTLists + 6,
     GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_NOSPSubClassMask,
     SuperRegIdxSeqs + 1,
     LaneBitmask(0x00000003),
@@ -6259,7 +6260,7 @@ namespace X86 {   // Register class instances
     &X86MCRegisterClasses[GR64_NOREXRegClassID],
     8, /* SpillSize */
     8, /* SpillAlignment */
-    VTLists + 8,
+    VTLists + 6,
     GR64_NOREXSubClassMask,
     SuperRegIdxSeqs + 1,
     LaneBitmask(0x00000003),
@@ -6274,7 +6275,7 @@ namespace X86 {   // Register class instances
     &X86MCRegisterClasses[GR64_TCRegClassID],
     8, /* SpillSize */
     8, /* SpillAlignment */
-    VTLists + 8,
+    VTLists + 6,
     GR64_TCSubClassMask,
     SuperRegIdxSeqs + 1,
     LaneBitmask(0x00000003),
@@ -6289,7 +6290,7 @@ namespace X86 {   // Register class instances
     &X86MCRegisterClasses[GR64_NOSP_and_GR64_TCRegClassID],
     8, /* SpillSize */
     8, /* SpillAlignment */
-    VTLists + 8,
+    VTLists + 6,
     GR64_NOSP_and_GR64_TCSubClassMask,
     SuperRegIdxSeqs + 1,
     LaneBitmask(0x00000003),
@@ -6304,7 +6305,7 @@ namespace X86 {   // Register class instances
     &X86MCRegisterClasses[GR64_TCW64RegClassID],
     8, /* SpillSize */
     8, /* SpillAlignment */
-    VTLists + 8,
+    VTLists + 6,
     GR64_TCW64SubClassMask,
     SuperRegIdxSeqs + 1,
     LaneBitmask(0x00000003),
@@ -6319,7 +6320,7 @@ namespace X86 {   // Register class instances
     &X86MCRegisterClasses[GR64_with_sub_16bit_in_GR16_NOREXRegClassID],
     8, /* SpillSize */
     8, /* SpillAlignment */
-    VTLists + 8,
+    VTLists + 6,
     GR64_with_sub_16bit_in_GR16_NOREXSubClassMask,
     SuperRegIdxSeqs + 1,
     LaneBitmask(0x00000003),
@@ -6364,7 +6365,7 @@ namespace X86 {   // Register class instances
     &X86MCRegisterClasses[GR64_NOREX_NOSPRegClassID],
     8, /* SpillSize */
     8, /* SpillAlignment */
-    VTLists + 8,
+    VTLists + 6,
     GR64_NOREX_NOSPSubClassMask,
     SuperRegIdxSeqs + 1,
     LaneBitmask(0x00000003),
@@ -6379,7 +6380,7 @@ namespace X86 {   // Register class instances
     &X86MCRegisterClasses[GR64_NOSP_and_GR64_TCW64RegClassID],
     8, /* SpillSize */
     8, /* SpillAlignment */
-    VTLists + 8,
+    VTLists + 6,
     GR64_NOSP_and_GR64_TCW64SubClassMask,
     SuperRegIdxSeqs + 1,
     LaneBitmask(0x00000003),
@@ -6394,7 +6395,7 @@ namespace X86 {   // Register class instances
     &X86MCRegisterClasses[GR64_TC_and_GR64_TCW64RegClassID],
     8, /* SpillSize */
     8, /* SpillAlignment */
-    VTLists + 8,
+    VTLists + 6,
     GR64_TC_and_GR64_TCW64SubClassMask,
     SuperRegIdxSeqs + 1,
     LaneBitmask(0x00000003),
@@ -6409,7 +6410,7 @@ namespace X86 {   // Register class instances
     &X86MCRegisterClasses[GR64_TC_and_GR64_with_sub_32bit_in_GR32_NOAXRegClassID],
     8, /* SpillSize */
     8, /* SpillAlignment */
-    VTLists + 8,
+    VTLists + 6,
     GR64_TC_and_GR64_with_sub_32bit_in_GR32_NOAXSubClassMask,
     SuperRegIdxSeqs + 1,
     LaneBitmask(0x00000003),
@@ -6424,7 +6425,7 @@ namespace X86 {   // Register class instances
     &X86MCRegisterClasses[GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_NOREXRegClassID],
     8, /* SpillSize */
     8, /* SpillAlignment */
-    VTLists + 8,
+    VTLists + 6,
     GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_NOREXSubClassMask,
     SuperRegIdxSeqs + 1,
     LaneBitmask(0x00000003),
@@ -6454,7 +6455,7 @@ namespace X86 {   // Register class instances
     &X86MCRegisterClasses[GR64_NOREX_and_GR64_TCRegClassID],
     8, /* SpillSize */
     8, /* SpillAlignment */
-    VTLists + 8,
+    VTLists + 6,
     GR64_NOREX_and_GR64_TCSubClassMask,
     SuperRegIdxSeqs + 1,
     LaneBitmask(0x00000003),
@@ -6469,7 +6470,7 @@ namespace X86 {   // Register class instances
     &X86MCRegisterClasses[GR64_TCW64_and_GR64_with_sub_32bit_in_GR32_NOAXRegClassID],
     8, /* SpillSize */
     8, /* SpillAlignment */
-    VTLists + 8,
+    VTLists + 6,
     GR64_TCW64_and_GR64_with_sub_32bit_in_GR32_NOAXSubClassMask,
     SuperRegIdxSeqs + 1,
     LaneBitmask(0x00000003),
@@ -6484,7 +6485,7 @@ namespace X86 {   // Register class instances
     &X86MCRegisterClasses[GR64_TC_and_GR64_NOSP_and_GR64_TCW64RegClassID],
     8, /* SpillSize */
     8, /* SpillAlignment */
-    VTLists + 8,
+    VTLists + 6,
     GR64_TC_and_GR64_NOSP_and_GR64_TCW64SubClassMask,
     SuperRegIdxSeqs + 1,
     LaneBitmask(0x00000003),
@@ -6499,7 +6500,7 @@ namespace X86 {   // Register class instances
     &X86MCRegisterClasses[GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_NOREX_NOSPRegClassID],
     8, /* SpillSize */
     8, /* SpillAlignment */
-    VTLists + 8,
+    VTLists + 6,
     GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_NOREX_NOSPSubClassMask,
     SuperRegIdxSeqs + 1,
     LaneBitmask(0x00000003),
@@ -6514,7 +6515,7 @@ namespace X86 {   // Register class instances
     &X86MCRegisterClasses[GR64_NOREX_NOSP_and_GR64_TCRegClassID],
     8, /* SpillSize */
     8, /* SpillAlignment */
-    VTLists + 8,
+    VTLists + 6,
     GR64_NOREX_NOSP_and_GR64_TCSubClassMask,
     SuperRegIdxSeqs + 1,
     LaneBitmask(0x00000003),
@@ -6529,7 +6530,7 @@ namespace X86 {   // Register class instances
     &X86MCRegisterClasses[GR64_TCW64_and_GR64_TC_and_GR64_with_sub_32bit_in_GR32_NOAXRegClassID],
     8, /* SpillSize */
     8, /* SpillAlignment */
-    VTLists + 8,
+    VTLists + 6,
     GR64_TCW64_and_GR64_TC_and_GR64_with_sub_32bit_in_GR32_NOAXSubClassMask,
     SuperRegIdxSeqs + 1,
     LaneBitmask(0x00000003),
@@ -6544,7 +6545,7 @@ namespace X86 {   // Register class instances
     &X86MCRegisterClasses[GR64_ABCDRegClassID],
     8, /* SpillSize */
     8, /* SpillAlignment */
-    VTLists + 8,
+    VTLists + 6,
     GR64_ABCDSubClassMask,
     SuperRegIdxSeqs + 1,
     LaneBitmask(0x00000003),
@@ -6559,7 +6560,7 @@ namespace X86 {   // Register class instances
     &X86MCRegisterClasses[GR64_NOREX_and_GR64_TCW64RegClassID],
     8, /* SpillSize */
     8, /* SpillAlignment */
-    VTLists + 8,
+    VTLists + 6,
     GR64_NOREX_and_GR64_TCW64SubClassMask,
     SuperRegIdxSeqs + 1,
     LaneBitmask(0x00000003),
@@ -6574,7 +6575,7 @@ namespace X86 {   // Register class instances
     &X86MCRegisterClasses[GR64_TC_and_GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_NOREXRegClassID],
     8, /* SpillSize */
     8, /* SpillAlignment */
-    VTLists + 8,
+    VTLists + 6,
     GR64_TC_and_GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_NOREXSubClassMask,
     SuperRegIdxSeqs + 1,
     LaneBitmask(0x00000003),
@@ -6589,7 +6590,7 @@ namespace X86 {   // Register class instances
     &X86MCRegisterClasses[GR64_with_sub_32bit_in_GR32_ABCD_and_GR32_NOAXRegClassID],
     8, /* SpillSize */
     8, /* SpillAlignment */
-    VTLists + 8,
+    VTLists + 6,
     GR64_with_sub_32bit_in_GR32_ABCD_and_GR32_NOAXSubClassMask,
     SuperRegIdxSeqs + 1,
     LaneBitmask(0x00000003),
@@ -6604,7 +6605,7 @@ namespace X86 {   // Register class instances
     &X86MCRegisterClasses[GR64_with_sub_32bit_in_GR32_TCRegClassID],
     8, /* SpillSize */
     8, /* SpillAlignment */
-    VTLists + 8,
+    VTLists + 6,
     GR64_with_sub_32bit_in_GR32_TCSubClassMask,
     SuperRegIdxSeqs + 1,
     LaneBitmask(0x00000003),
@@ -6615,11 +6616,26 @@ namespace X86 {   // Register class instances
     nullptr
   };
 
+  extern const TargetRegisterClass GR64_ADRegClass = {
+    &X86MCRegisterClasses[GR64_ADRegClassID],
+    8, /* SpillSize */
+    8, /* SpillAlignment */
+    VTLists + 6,
+    GR64_ADSubClassMask,
+    SuperRegIdxSeqs + 1,
+    LaneBitmask(0x00000003),
+    0,
+    true, /* HasDisjunctSubRegs */
+    false, /* CoveredBySubRegs */
+    GR64_ADSuperclasses,
+    nullptr
+  };
+
   extern const TargetRegisterClass GR64_and_LOW32_ADDR_ACCESS_RBPRegClass = {
     &X86MCRegisterClasses[GR64_and_LOW32_ADDR_ACCESS_RBPRegClassID],
     8, /* SpillSize */
     8, /* SpillAlignment */
-    VTLists + 8,
+    VTLists + 6,
     GR64_and_LOW32_ADDR_ACCESS_RBPSubClassMask,
     SuperRegIdxSeqs + 1,
     LaneBitmask(0x00000003),
@@ -6630,26 +6646,11 @@ namespace X86 {   // Register class instances
     nullptr
   };
 
-  extern const TargetRegisterClass GR64_with_sub_32bit_in_GR32_ADRegClass = {
-    &X86MCRegisterClasses[GR64_with_sub_32bit_in_GR32_ADRegClassID],
-    8, /* SpillSize */
-    8, /* SpillAlignment */
-    VTLists + 8,
-    GR64_with_sub_32bit_in_GR32_ADSubClassMask,
-    SuperRegIdxSeqs + 1,
-    LaneBitmask(0x00000003),
-    0,
-    true, /* HasDisjunctSubRegs */
-    false, /* CoveredBySubRegs */
-    GR64_with_sub_32bit_in_GR32_ADSuperclasses,
-    nullptr
-  };
-
   extern const TargetRegisterClass GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_TCRegClass = {
     &X86MCRegisterClasses[GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_TCRegClassID],
     8, /* SpillSize */
     8, /* SpillAlignment */
-    VTLists + 8,
+    VTLists + 6,
     GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_TCSubClassMask,
     SuperRegIdxSeqs + 1,
     LaneBitmask(0x00000003),
@@ -6664,7 +6665,7 @@ namespace X86 {   // Register class instances
     &X86MCRegisterClasses[GR64_NOREX_NOSP_and_LOW32_ADDR_ACCESS_RBPRegClassID],
     8, /* SpillSize */
     8, /* SpillAlignment */
-    VTLists + 8,
+    VTLists + 6,
     GR64_NOREX_NOSP_and_LOW32_ADDR_ACCESS_RBPSubClassMask,
     SuperRegIdxSeqs + 1,
     LaneBitmask(0x00000003),
@@ -6679,7 +6680,7 @@ namespace X86 {   // Register class instances
     &X86MCRegisterClasses[GR64_and_LOW32_ADDR_ACCESSRegClassID],
     8, /* SpillSize */
     8, /* SpillAlignment */
-    VTLists + 8,
+    VTLists + 6,
     GR64_and_LOW32_ADDR_ACCESSSubClassMask,
     SuperRegIdxSeqs + 1,
     LaneBitmask(0x00000003),
@@ -6694,7 +6695,7 @@ namespace X86 {   // Register class instances
     &X86MCRegisterClasses[GR64_with_sub_32bit_in_GR32_AD_and_GR32_NOAXRegClassID],
     8, /* SpillSize */
     8, /* SpillAlignment */
-    VTLists + 8,
+    VTLists + 6,
     GR64_with_sub_32bit_in_GR32_AD_and_GR32_NOAXSubClassMask,
     SuperRegIdxSeqs + 1,
     LaneBitmask(0x00000003),
@@ -6709,7 +6710,7 @@ namespace X86 {   // Register class instances
     &X86MCRegisterClasses[RSTRegClassID],
     10, /* SpillSize */
     4, /* SpillAlignment */
-    VTLists + 10,
+    VTLists + 8,
     RSTSubClassMask,
     SuperRegIdxSeqs + 1,
     LaneBitmask(0x00000001),
@@ -6724,7 +6725,7 @@ namespace X86 {   // Register class instances
     &X86MCRegisterClasses[RFP80RegClassID],
     10, /* SpillSize */
     4, /* SpillAlignment */
-    VTLists + 16,
+    VTLists + 14,
     RFP80SubClassMask,
     SuperRegIdxSeqs + 1,
     LaneBitmask(0x00000001),
@@ -6754,7 +6755,7 @@ namespace X86 {   // Register class instances
     &X86MCRegisterClasses[FR128RegClassID],
     16, /* SpillSize */
     16, /* SpillAlignment */
-    VTLists + 18,
+    VTLists + 16,
     FR128SubClassMask,
     SuperRegIdxSeqs + 9,
     LaneBitmask(0x00000001),
@@ -7029,8 +7030,8 @@ namespace {
     &X86::GR64_TC_and_GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_NOREXRegClass,
     &X86::GR64_with_sub_32bit_in_GR32_ABCD_and_GR32_NOAXRegClass,
     &X86::GR64_with_sub_32bit_in_GR32_TCRegClass,
+    &X86::GR64_ADRegClass,
     &X86::GR64_and_LOW32_ADDR_ACCESS_RBPRegClass,
-    &X86::GR64_with_sub_32bit_in_GR32_ADRegClass,
     &X86::GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_TCRegClass,
     &X86::GR64_NOREX_NOSP_and_LOW32_ADDR_ACCESS_RBPRegClass,
     &X86::GR64_and_LOW32_ADDR_ACCESSRegClass,
@@ -7999,19 +8000,19 @@ const TargetRegisterClass *X86GenRegisterInfo::getSubClassWithSubReg(const Targe
       0,	// sub_xmm
       0,	// sub_ymm
     },
-    {	// GR64_and_LOW32_ADDR_ACCESS_RBP
-      84,	// sub_8bit -> GR64_NOREX_NOSP_and_LOW32_ADDR_ACCESS_RBP
-      0,	// sub_8bit_hi
-      81,	// sub_16bit -> GR64_and_LOW32_ADDR_ACCESS_RBP
-      81,	// sub_32bit -> GR64_and_LOW32_ADDR_ACCESS_RBP
+    {	// GR64_AD
+      81,	// sub_8bit -> GR64_AD
+      81,	// sub_8bit_hi -> GR64_AD
+      81,	// sub_16bit -> GR64_AD
+      81,	// sub_32bit -> GR64_AD
       0,	// sub_xmm
       0,	// sub_ymm
     },
-    {	// GR64_with_sub_32bit_in_GR32_AD
-      82,	// sub_8bit -> GR64_with_sub_32bit_in_GR32_AD
-      82,	// sub_8bit_hi -> GR64_with_sub_32bit_in_GR32_AD
-      82,	// sub_16bit -> GR64_with_sub_32bit_in_GR32_AD
-      82,	// sub_32bit -> GR64_with_sub_32bit_in_GR32_AD
+    {	// GR64_and_LOW32_ADDR_ACCESS_RBP
+      84,	// sub_8bit -> GR64_NOREX_NOSP_and_LOW32_ADDR_ACCESS_RBP
+      0,	// sub_8bit_hi
+      82,	// sub_16bit -> GR64_and_LOW32_ADDR_ACCESS_RBP
+      82,	// sub_32bit -> GR64_and_LOW32_ADDR_ACCESS_RBP
       0,	// sub_xmm
       0,	// sub_ymm
     },
@@ -8268,8 +8269,8 @@ getRegClassWeight(const TargetRegisterClass *RC) const {
     {2, 8},  	// GR64_TC_and_GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_NOREX
     {2, 6},  	// GR64_with_sub_32bit_in_GR32_ABCD_and_GR32_NOAX
     {2, 6},  	// GR64_with_sub_32bit_in_GR32_TC
+    {2, 4},  	// GR64_AD
     {2, 4},  	// GR64_and_LOW32_ADDR_ACCESS_RBP
-    {2, 4},  	// GR64_with_sub_32bit_in_GR32_AD
     {2, 4},  	// GR64_with_sub_32bit_in_GR32_NOAX_and_GR32_TC
     {2, 2},  	// GR64_NOREX_NOSP_and_LOW32_ADDR_ACCESS_RBP
     {2, 2},  	// GR64_and_LOW32_ADDR_ACCESS
@@ -8419,7 +8420,7 @@ static const int RCSetsTable[] = {
 const int* X86GenRegisterInfo::
 getRegClassPressureSets(const TargetRegisterClass *RC) const {
   static const uint8_t RCSetStartTable[] = {
-    45,88,87,100,25,22,6,6,6,6,6,6,6,6,6,6,2,88,1,16,25,25,25,15,25,25,25,25,22,8,22,6,22,22,4,6,22,88,88,150,150,150,27,1,150,27,185,4,16,25,12,15,25,25,25,25,22,51,51,38,22,6,10,22,38,69,51,22,6,58,38,69,22,58,69,88,150,58,88,150,27,150,150,27,185,150,1,4,16,15,15,14,18,0,16,15,14,18,16,15,14,18,};
+    45,88,87,100,25,22,6,6,6,6,6,6,6,6,6,6,2,88,1,16,25,25,25,15,25,25,25,25,22,8,22,6,22,22,4,6,22,88,88,150,150,150,27,1,150,27,185,4,16,25,12,15,25,25,25,25,22,51,51,38,22,6,10,22,38,69,51,22,6,58,38,69,22,58,69,88,150,58,88,150,150,27,150,27,185,150,1,4,16,15,15,14,18,0,16,15,14,18,16,15,14,18,};
   return &RCSetsTable[RCSetStartTable[RC->getID()]];
 }
 

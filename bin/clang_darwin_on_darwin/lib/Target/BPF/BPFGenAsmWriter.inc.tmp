@@ -27,18 +27,19 @@ void BPFInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
   /* 147 */ '*', '(', 'u', '1', '6', 32, '*', ')', '(', 0,
   /* 157 */ '*', '(', 'u', '8', 32, '*', ')', '(', 0,
   /* 166 */ '#', 32, 'X', 'R', 'a', 'y', 32, 'F', 'u', 'n', 'c', 't', 'i', 'o', 'n', 32, 'P', 'a', 't', 'c', 'h', 'a', 'b', 'l', 'e', 32, 'R', 'E', 'T', '.', 0,
-  /* 197 */ '#', 32, 'X', 'R', 'a', 'y', 32, 'F', 'u', 'n', 'c', 't', 'i', 'o', 'n', 32, 'E', 'n', 't', 'e', 'r', '.', 0,
-  /* 220 */ '#', 32, 'X', 'R', 'a', 'y', 32, 'T', 'a', 'i', 'l', 32, 'C', 'a', 'l', 'l', 32, 'E', 'x', 'i', 't', '.', 0,
-  /* 243 */ '#', 32, 'X', 'R', 'a', 'y', 32, 'F', 'u', 'n', 'c', 't', 'i', 'o', 'n', 32, 'E', 'x', 'i', 't', '.', 0,
-  /* 265 */ 'L', 'I', 'F', 'E', 'T', 'I', 'M', 'E', '_', 'E', 'N', 'D', 0,
-  /* 278 */ 'B', 'U', 'N', 'D', 'L', 'E', 0,
-  /* 285 */ 'D', 'B', 'G', '_', 'V', 'A', 'L', 'U', 'E', 0,
-  /* 295 */ 'L', 'I', 'F', 'E', 'T', 'I', 'M', 'E', '_', 'S', 'T', 'A', 'R', 'T', 0,
-  /* 310 */ 'r', '0', 32, '=', 32, '*', '(', 'u', '3', '2', 32, '*', ')', 's', 'k', 'b', '[', 0,
-  /* 328 */ 'r', '0', 32, '=', 32, '*', '(', 'u', '1', '6', 32, '*', ')', 's', 'k', 'b', '[', 0,
-  /* 346 */ 'r', '0', 32, '=', 32, '*', '(', 'u', '8', 32, '*', ')', 's', 'k', 'b', '[', 0,
-  /* 363 */ '#', 32, 'F', 'E', 'n', 't', 'r', 'y', 32, 'c', 'a', 'l', 'l', 0,
-  /* 377 */ 'e', 'x', 'i', 't', 0,
+  /* 197 */ '#', 32, 'X', 'R', 'a', 'y', 32, 'C', 'u', 's', 't', 'o', 'm', 32, 'E', 'v', 'e', 'n', 't', 32, 'L', 'o', 'g', '.', 0,
+  /* 222 */ '#', 32, 'X', 'R', 'a', 'y', 32, 'F', 'u', 'n', 'c', 't', 'i', 'o', 'n', 32, 'E', 'n', 't', 'e', 'r', '.', 0,
+  /* 245 */ '#', 32, 'X', 'R', 'a', 'y', 32, 'T', 'a', 'i', 'l', 32, 'C', 'a', 'l', 'l', 32, 'E', 'x', 'i', 't', '.', 0,
+  /* 268 */ '#', 32, 'X', 'R', 'a', 'y', 32, 'F', 'u', 'n', 'c', 't', 'i', 'o', 'n', 32, 'E', 'x', 'i', 't', '.', 0,
+  /* 290 */ 'L', 'I', 'F', 'E', 'T', 'I', 'M', 'E', '_', 'E', 'N', 'D', 0,
+  /* 303 */ 'B', 'U', 'N', 'D', 'L', 'E', 0,
+  /* 310 */ 'D', 'B', 'G', '_', 'V', 'A', 'L', 'U', 'E', 0,
+  /* 320 */ 'L', 'I', 'F', 'E', 'T', 'I', 'M', 'E', '_', 'S', 'T', 'A', 'R', 'T', 0,
+  /* 335 */ 'r', '0', 32, '=', 32, '*', '(', 'u', '3', '2', 32, '*', ')', 's', 'k', 'b', '[', 0,
+  /* 353 */ 'r', '0', 32, '=', 32, '*', '(', 'u', '1', '6', 32, '*', ')', 's', 'k', 'b', '[', 0,
+  /* 371 */ 'r', '0', 32, '=', 32, '*', '(', 'u', '8', 32, '*', ')', 's', 'k', 'b', '[', 0,
+  /* 388 */ '#', 32, 'F', 'E', 'n', 't', 'r', 'y', 32, 'c', 'a', 'l', 'l', 0,
+  /* 402 */ 'e', 'x', 'i', 't', 0,
   };
 
   static const uint16_t OpInfo0[] = {
@@ -53,24 +54,25 @@ void BPFInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// IMPLICIT_DEF
     0U,	// SUBREG_TO_REG
     0U,	// COPY_TO_REGCLASS
-    286U,	// DBG_VALUE
+    311U,	// DBG_VALUE
     0U,	// REG_SEQUENCE
     0U,	// COPY
-    279U,	// BUNDLE
-    296U,	// LIFETIME_START
-    266U,	// LIFETIME_END
+    304U,	// BUNDLE
+    321U,	// LIFETIME_START
+    291U,	// LIFETIME_END
     0U,	// STACKMAP
-    364U,	// FENTRY_CALL
+    389U,	// FENTRY_CALL
     0U,	// PATCHPOINT
     0U,	// LOAD_STACK_GUARD
     0U,	// STATEPOINT
     0U,	// LOCAL_ESCAPE
     0U,	// FAULTING_OP
     0U,	// PATCHABLE_OP
-    198U,	// PATCHABLE_FUNCTION_ENTER
+    223U,	// PATCHABLE_FUNCTION_ENTER
     167U,	// PATCHABLE_RET
-    244U,	// PATCHABLE_FUNCTION_EXIT
-    221U,	// PATCHABLE_TAIL_CALL
+    269U,	// PATCHABLE_FUNCTION_EXIT
+    246U,	// PATCHABLE_TAIL_CALL
+    198U,	// PATCHABLE_EVENT_CALL
     0U,	// G_ADD
     0U,	// G_SUB
     0U,	// G_MUL
@@ -141,19 +143,19 @@ void BPFInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     521U,	// ADD_ri
     521U,	// ADD_rr
     2609U,	// ADJCALLSTACKDOWN
-    4693U,	// ADJCALLSTACKUP
-    6665U,	// AND_ri
-    6665U,	// AND_rr
-    2579U,	// BSWAP16
-    2561U,	// BSWAP32
-    2570U,	// BSWAP64
+    2645U,	// ADJCALLSTACKUP
+    4617U,	// AND_ri
+    4617U,	// AND_rr
+    6675U,	// BSWAP16
+    6657U,	// BSWAP32
+    6666U,	// BSWAP64
     8713U,	// DIV_ri
     8713U,	// DIV_rr
     10780U,	// FI_ri
-    2666U,	// JAL
+    6762U,	// JAL
     12902U,	// JEQ_ri
     12902U,	// JEQ_rr
-    2672U,	// JMP
+    6768U,	// JMP
     14950U,	// JNE_ri
     14950U,	// JNE_rr
     16998U,	// JSGE_ri
@@ -168,22 +170,22 @@ void BPFInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     27145U,	// LDD
     29193U,	// LDH
     31241U,	// LDW
-    1371U,	// LD_ABS_B
-    1353U,	// LD_ABS_H
-    1335U,	// LD_ABS_W
-    1371U,	// LD_IND_B
-    1353U,	// LD_IND_H
-    1335U,	// LD_IND_W
+    1396U,	// LD_ABS_B
+    1378U,	// LD_ABS_H
+    1360U,	// LD_ABS_W
+    1396U,	// LD_IND_B
+    1378U,	// LD_IND_H
+    1360U,	// LD_IND_W
     33289U,	// LD_imm64
     10785U,	// LD_pseudo
     33289U,	// MOV_ri
     33289U,	// MOV_rr
     35337U,	// MUL_ri
     35337U,	// MUL_rr
-    2604U,	// NOP
+    6700U,	// NOP
     37385U,	// OR_ri
     37385U,	// OR_rr
-    378U,	// RET
+    403U,	// RET
     39433U,	// SLL_ri
     39433U,	// SLL_rr
     41481U,	// SRA_ri
@@ -233,6 +235,7 @@ void BPFInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// PATCHABLE_RET
     0U,	// PATCHABLE_FUNCTION_EXIT
     0U,	// PATCHABLE_TAIL_CALL
+    0U,	// PATCHABLE_EVENT_CALL
     0U,	// G_ADD
     0U,	// G_SUB
     0U,	// G_MUL
@@ -409,19 +412,19 @@ void BPFInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     return;
     break;
   case 1:
-    // ADJCALLSTACKDOWN, BSWAP16, BSWAP32, BSWAP64, JAL, JMP, NOP
-    return;
-    break;
-  case 2:
-    // ADJCALLSTACKUP
+    // ADJCALLSTACKDOWN, ADJCALLSTACKUP
     O << ' ';
     printOperand(MI, 1, O);
     return;
     break;
-  case 3:
+  case 2:
     // AND_ri, AND_rr
     O << " &= ";
     printOperand(MI, 2, O);
+    return;
+    break;
+  case 3:
+    // BSWAP16, BSWAP32, BSWAP64, JAL, JMP, NOP
     return;
     break;
   case 4:

@@ -18,7 +18,7 @@
 /* #undef LINK_POLLY_INTO_TOOLS */
 
 /* Target triple LLVM will generate code for by default */
-#define LLVM_DEFAULT_TARGET_TRIPLE "x86_64-apple-darwin16.5.0"
+#define LLVM_DEFAULT_TARGET_TRIPLE "x86_64-apple-darwin16.6.0"
 
 /* Define if threads enabled */
 #define LLVM_ENABLE_THREADS 0
@@ -27,7 +27,7 @@
 #define LLVM_HAS_ATOMICS 1
 
 /* Host triple LLVM will be executed on */
-#define LLVM_HOST_TRIPLE "x86_64-apple-darwin16.5.0"
+#define LLVM_HOST_TRIPLE "x86_64-apple-darwin16.6.0"
 
 /* LLVM architecture name for the native architecture, if available */
 #define LLVM_NATIVE_ARCH X86

@@ -218,1024 +218,1011 @@ void SelectCode(SDNode *N) {
                 // Src: (st GPR:i32:$Rd, ADDRsls:i32:$dst)<<P:Predicate_unindexedstore>><<P:Predicate_store>> - Complexity = 10
                 // Dst: (STADDR GPR:i32:$Rd, ADDRsls:i32:$dst)
 /*393*/       0, /*End of Scope*/
-/*394*/     /*SwitchOpcode*/ 7|128,1/*135*/, TARGET_VAL(ISD::AND),// ->533
-/*398*/       OPC_Scope, 23, /*->423*/ // 2 children in Scope
-/*400*/         OPC_MoveChild0,
-/*401*/         OPC_CheckOpcode, TARGET_VAL(LanaiISD::SETCC),
-/*404*/         OPC_CaptureGlueInput,
-/*405*/         OPC_RecordChild0, // #0 = $DDDI
-/*406*/         OPC_MoveChild0,
-/*407*/         OPC_CheckOpcode, TARGET_VAL(ISD::Constant),
-/*410*/         OPC_MoveParent,
-/*411*/         OPC_MoveParent,
-/*412*/         OPC_CheckChild1Integer, 1, 
-/*414*/         OPC_EmitConvertToTarget, 0,
-/*416*/         OPC_MorphNodeTo1, TARGET_VAL(Lanai::SCC), 0|OPFL_GlueInput,
-                    MVT::i32, 1/*#Ops*/, 1, 
-                // Src: (and:i32 (LanaiSetCC:i32 (imm:i32):$DDDI), 1:i32) - Complexity = 14
-                // Dst: (SCC:i32 (imm:i32):$DDDI)
-/*423*/       /*Scope*/ 108, /*->532*/
-/*424*/         OPC_RecordChild0, // #0 = $Rs1
-/*425*/         OPC_RecordChild1, // #1 = $imm16
-/*426*/         OPC_Scope, 76, /*->504*/ // 2 children in Scope
-/*428*/           OPC_MoveChild1,
-/*429*/           OPC_CheckOpcode, TARGET_VAL(ISD::Constant),
-/*432*/           OPC_Scope, 16, /*->450*/ // 4 children in Scope
-/*434*/             OPC_CheckPredicate, 13, // Predicate_i32lo16and
-/*436*/             OPC_MoveParent,
-/*437*/             OPC_EmitConvertToTarget, 1,
-/*439*/             OPC_EmitNodeXForm, 0, 2, // LO16
-/*442*/             OPC_MorphNodeTo1, TARGET_VAL(Lanai::AND_I_LO), 0,
-                        MVT::i32, 2/*#Ops*/, 0, 3, 
-                    // Src: (and:i32 GPR:i32:$Rs1, (imm:i32)<<P:Predicate_i32lo16and>><<X:LO16>>:$imm16) - Complexity = 7
-                    // Dst: (AND_I_LO:i32 GPR:i32:$Rs1, (LO16:i32 (imm:i32):$imm16))
-/*450*/           /*Scope*/ 16, /*->467*/
-/*451*/             OPC_CheckPredicate, 14, // Predicate_i32hi16and
-/*453*/             OPC_MoveParent,
-/*454*/             OPC_EmitConvertToTarget, 1,
-/*456*/             OPC_EmitNodeXForm, 1, 2, // HI16
-/*459*/             OPC_MorphNodeTo1, TARGET_VAL(Lanai::AND_I_HI), 0,
-                        MVT::i32, 2/*#Ops*/, 0, 3, 
-                    // Src: (and:i32 GPR:i32:$Rs1, (imm:i32)<<P:Predicate_i32hi16and>><<X:HI16>>:$imm16) - Complexity = 7
-                    // Dst: (AND_I_HI:i32 GPR:i32:$Rs1, (HI16:i32 (imm:i32):$imm16))
-/*467*/           /*Scope*/ 17, /*->485*/
-/*468*/             OPC_CheckPredicate, 13, // Predicate_i32lo16and
-/*470*/             OPC_MoveParent,
-/*471*/             OPC_EmitConvertToTarget, 1,
-/*473*/             OPC_EmitNodeXForm, 0, 2, // LO16
-/*476*/             OPC_MorphNodeTo2, TARGET_VAL(Lanai::AND_F_I_LO), 0,
-                        MVT::i32, MVT::i32, 2/*#Ops*/, 0, 3, 
-                    // Src: (and:i32 GPR:i32:$Rs1, (imm:i32)<<P:Predicate_i32lo16and>><<X:LO16>>:$imm16) - Complexity = 7
-                    // Dst: (AND_F_I_LO:i32:i32 GPR:i32:$Rs1, (LO16:i32 (imm:i32):$imm16))
-/*485*/           /*Scope*/ 17, /*->503*/
-/*486*/             OPC_CheckPredicate, 14, // Predicate_i32hi16and
-/*488*/             OPC_MoveParent,
-/*489*/             OPC_EmitConvertToTarget, 1,
-/*491*/             OPC_EmitNodeXForm, 1, 2, // HI16
-/*494*/             OPC_MorphNodeTo2, TARGET_VAL(Lanai::AND_F_I_HI), 0,
-                        MVT::i32, MVT::i32, 2/*#Ops*/, 0, 3, 
-                    // Src: (and:i32 GPR:i32:$Rs1, (imm:i32)<<P:Predicate_i32hi16and>><<X:HI16>>:$imm16) - Complexity = 7
-                    // Dst: (AND_F_I_HI:i32:i32 GPR:i32:$Rs1, (HI16:i32 (imm:i32):$imm16))
-/*503*/           0, /*End of Scope*/
-/*504*/         /*Scope*/ 26, /*->531*/
-/*505*/           OPC_EmitInteger, MVT::i32, 0, 
-/*508*/           OPC_Scope, 9, /*->519*/ // 2 children in Scope
-/*510*/             OPC_MorphNodeTo1, TARGET_VAL(Lanai::AND_R), 0,
-                        MVT::i32, 3/*#Ops*/, 0, 1, 2, 
-                    // Src: (and:i32 GPR:i32:$Rs1, GPR:i32:$Rs2) - Complexity = 3
-                    // Dst: (AND_R:i32 GPR:i32:$Rs1, GPR:i32:$Rs2)
-/*519*/           /*Scope*/ 10, /*->530*/
-/*520*/             OPC_MorphNodeTo2, TARGET_VAL(Lanai::AND_F_R), 0,
-                        MVT::i32, MVT::i32, 3/*#Ops*/, 0, 1, 2, 
-                    // Src: (and:i32 GPR:i32:$Rs1, GPR:i32:$Rs2) - Complexity = 3
-                    // Dst: (AND_F_R:i32:i32 GPR:i32:$Rs1, GPR:i32:$Rs2)
-/*530*/           0, /*End of Scope*/
-/*531*/         0, /*End of Scope*/
-/*532*/       0, /*End of Scope*/
-/*533*/     /*SwitchOpcode*/ 23, TARGET_VAL(ISD::CALLSEQ_END),// ->559
-/*536*/       OPC_RecordNode, // #0 = 'CallSeqEnd' chained node
-/*537*/       OPC_CaptureGlueInput,
-/*538*/       OPC_RecordChild1, // #1 = $amt1
-/*539*/       OPC_MoveChild1,
-/*540*/       OPC_CheckOpcode, TARGET_VAL(ISD::TargetConstant),
-/*543*/       OPC_MoveParent,
-/*544*/       OPC_RecordChild2, // #2 = $amt2
-/*545*/       OPC_MoveChild2,
-/*546*/       OPC_CheckOpcode, TARGET_VAL(ISD::TargetConstant),
-/*549*/       OPC_MoveParent,
-/*550*/       OPC_EmitMergeInputChains1_0,
-/*551*/       OPC_MorphNodeTo1, TARGET_VAL(Lanai::ADJCALLSTACKUP), 0|OPFL_Chain|OPFL_GlueInput|OPFL_GlueOutput,
+/*394*/     /*SwitchOpcode*/ 22, TARGET_VAL(ISD::CALLSEQ_START),// ->419
+/*397*/       OPC_RecordNode, // #0 = 'CallSeqStart' chained node
+/*398*/       OPC_RecordChild1, // #1 = $amt1
+/*399*/       OPC_MoveChild1,
+/*400*/       OPC_CheckOpcode, TARGET_VAL(ISD::TargetConstant),
+/*403*/       OPC_MoveParent,
+/*404*/       OPC_RecordChild2, // #2 = $amt2
+/*405*/       OPC_MoveChild2,
+/*406*/       OPC_CheckOpcode, TARGET_VAL(ISD::TargetConstant),
+/*409*/       OPC_MoveParent,
+/*410*/       OPC_EmitMergeInputChains1_0,
+/*411*/       OPC_MorphNodeTo1, TARGET_VAL(Lanai::ADJCALLSTACKDOWN), 0|OPFL_Chain|OPFL_GlueOutput,
+                  MVT::i32, 2/*#Ops*/, 1, 2, 
+              // Src: (CallSeqStart (timm:i32):$amt1, (timm:i32):$amt2) - Complexity = 9
+              // Dst: (ADJCALLSTACKDOWN:i32 (timm:i32):$amt1, (timm:i32):$amt2)
+/*419*/     /*SwitchOpcode*/ 23, TARGET_VAL(ISD::CALLSEQ_END),// ->445
+/*422*/       OPC_RecordNode, // #0 = 'CallSeqEnd' chained node
+/*423*/       OPC_CaptureGlueInput,
+/*424*/       OPC_RecordChild1, // #1 = $amt1
+/*425*/       OPC_MoveChild1,
+/*426*/       OPC_CheckOpcode, TARGET_VAL(ISD::TargetConstant),
+/*429*/       OPC_MoveParent,
+/*430*/       OPC_RecordChild2, // #2 = $amt2
+/*431*/       OPC_MoveChild2,
+/*432*/       OPC_CheckOpcode, TARGET_VAL(ISD::TargetConstant),
+/*435*/       OPC_MoveParent,
+/*436*/       OPC_EmitMergeInputChains1_0,
+/*437*/       OPC_MorphNodeTo1, TARGET_VAL(Lanai::ADJCALLSTACKUP), 0|OPFL_Chain|OPFL_GlueInput|OPFL_GlueOutput,
                   MVT::i32, 2/*#Ops*/, 1, 2, 
               // Src: (CallSeqEnd (timm:i32):$amt1, (timm:i32):$amt2) - Complexity = 9
               // Dst: (ADJCALLSTACKUP:i32 (timm:i32):$amt1, (timm:i32):$amt2)
-/*559*/     /*SwitchOpcode*/ 94|128,2/*350*/, TARGET_VAL(ISD::OR),// ->913
-/*563*/       OPC_Scope, 30|128,1/*158*/, /*->724*/ // 3 children in Scope
-/*566*/         OPC_RecordChild0, // #0 = $hi
-/*567*/         OPC_MoveChild1,
-/*568*/         OPC_SwitchOpcode /*2 cases */, 69, TARGET_VAL(LanaiISD::LO),// ->641
-/*572*/           OPC_RecordChild0, // #1 = $lo
-/*573*/           OPC_MoveChild0,
-/*574*/           OPC_SwitchOpcode /*5 cases */, 10, TARGET_VAL(ISD::TargetGlobalAddress),// ->588
-/*578*/             OPC_MoveParent,
-/*579*/             OPC_MoveParent,
-/*580*/             OPC_MorphNodeTo1, TARGET_VAL(Lanai::OR_I_LO), 0,
+/*445*/     /*SwitchOpcode*/ 94|128,2/*350*/, TARGET_VAL(ISD::OR),// ->799
+/*449*/       OPC_Scope, 30|128,1/*158*/, /*->610*/ // 3 children in Scope
+/*452*/         OPC_RecordChild0, // #0 = $hi
+/*453*/         OPC_MoveChild1,
+/*454*/         OPC_SwitchOpcode /*2 cases */, 69, TARGET_VAL(LanaiISD::LO),// ->527
+/*458*/           OPC_RecordChild0, // #1 = $lo
+/*459*/           OPC_MoveChild0,
+/*460*/           OPC_SwitchOpcode /*5 cases */, 10, TARGET_VAL(ISD::TargetGlobalAddress),// ->474
+/*464*/             OPC_MoveParent,
+/*465*/             OPC_MoveParent,
+/*466*/             OPC_MorphNodeTo1, TARGET_VAL(Lanai::OR_I_LO), 0,
                         MVT::i32, 2/*#Ops*/, 0, 1, 
                     // Src: (or:i32 GPR:i32:$hi, (LanaiLo:i32 (tglobaladdr:i32):$lo)) - Complexity = 9
                     // Dst: (OR_I_LO:i32 GPR:i32:$hi, (tglobaladdr:i32):$lo)
-/*588*/           /*SwitchOpcode*/ 10, TARGET_VAL(ISD::TargetExternalSymbol),// ->601
-/*591*/             OPC_MoveParent,
-/*592*/             OPC_MoveParent,
-/*593*/             OPC_MorphNodeTo1, TARGET_VAL(Lanai::OR_I_LO), 0,
+/*474*/           /*SwitchOpcode*/ 10, TARGET_VAL(ISD::TargetExternalSymbol),// ->487
+/*477*/             OPC_MoveParent,
+/*478*/             OPC_MoveParent,
+/*479*/             OPC_MorphNodeTo1, TARGET_VAL(Lanai::OR_I_LO), 0,
                         MVT::i32, 2/*#Ops*/, 0, 1, 
                     // Src: (or:i32 GPR:i32:$hi, (LanaiLo:i32 (texternalsym:i32):$lo)) - Complexity = 9
                     // Dst: (OR_I_LO:i32 GPR:i32:$hi, (texternalsym:i32):$lo)
-/*601*/           /*SwitchOpcode*/ 10, TARGET_VAL(ISD::TargetBlockAddress),// ->614
-/*604*/             OPC_MoveParent,
-/*605*/             OPC_MoveParent,
-/*606*/             OPC_MorphNodeTo1, TARGET_VAL(Lanai::OR_I_LO), 0,
+/*487*/           /*SwitchOpcode*/ 10, TARGET_VAL(ISD::TargetBlockAddress),// ->500
+/*490*/             OPC_MoveParent,
+/*491*/             OPC_MoveParent,
+/*492*/             OPC_MorphNodeTo1, TARGET_VAL(Lanai::OR_I_LO), 0,
                         MVT::i32, 2/*#Ops*/, 0, 1, 
                     // Src: (or:i32 GPR:i32:$hi, (LanaiLo:i32 (tblockaddress:i32):$lo)) - Complexity = 9
                     // Dst: (OR_I_LO:i32 GPR:i32:$hi, (tblockaddress:i32):$lo)
-/*614*/           /*SwitchOpcode*/ 10, TARGET_VAL(ISD::TargetJumpTable),// ->627
-/*617*/             OPC_MoveParent,
-/*618*/             OPC_MoveParent,
-/*619*/             OPC_MorphNodeTo1, TARGET_VAL(Lanai::OR_I_LO), 0,
+/*500*/           /*SwitchOpcode*/ 10, TARGET_VAL(ISD::TargetJumpTable),// ->513
+/*503*/             OPC_MoveParent,
+/*504*/             OPC_MoveParent,
+/*505*/             OPC_MorphNodeTo1, TARGET_VAL(Lanai::OR_I_LO), 0,
                         MVT::i32, 2/*#Ops*/, 0, 1, 
                     // Src: (or:i32 GPR:i32:$hi, (LanaiLo:i32 (tjumptable:i32):$lo)) - Complexity = 9
                     // Dst: (OR_I_LO:i32 GPR:i32:$hi, (tjumptable:i32):$lo)
-/*627*/           /*SwitchOpcode*/ 10, TARGET_VAL(ISD::TargetConstantPool),// ->640
-/*630*/             OPC_MoveParent,
-/*631*/             OPC_MoveParent,
-/*632*/             OPC_MorphNodeTo1, TARGET_VAL(Lanai::OR_I_LO), 0,
+/*513*/           /*SwitchOpcode*/ 10, TARGET_VAL(ISD::TargetConstantPool),// ->526
+/*516*/             OPC_MoveParent,
+/*517*/             OPC_MoveParent,
+/*518*/             OPC_MorphNodeTo1, TARGET_VAL(Lanai::OR_I_LO), 0,
                         MVT::i32, 2/*#Ops*/, 0, 1, 
                     // Src: (or:i32 GPR:i32:$hi, (LanaiLo:i32 (tconstpool:i32):$lo)) - Complexity = 9
                     // Dst: (OR_I_LO:i32 GPR:i32:$hi, (tconstpool:i32):$lo)
-/*640*/           0, // EndSwitchOpcode
-/*641*/         /*SwitchOpcode*/ 79, TARGET_VAL(LanaiISD::SMALL),// ->723
-/*644*/           OPC_RecordChild0, // #1 = $small
-/*645*/           OPC_MoveChild0,
-/*646*/           OPC_SwitchOpcode /*5 cases */, 12, TARGET_VAL(ISD::TargetGlobalAddress),// ->662
-/*650*/             OPC_MoveParent,
-/*651*/             OPC_MoveParent,
-/*652*/             OPC_EmitCopyToReg, 0, Lanai::R0,
-/*655*/             OPC_MorphNodeTo1, TARGET_VAL(Lanai::SLI), 0|OPFL_GlueInput,
+/*526*/           0, // EndSwitchOpcode
+/*527*/         /*SwitchOpcode*/ 79, TARGET_VAL(LanaiISD::SMALL),// ->609
+/*530*/           OPC_RecordChild0, // #1 = $small
+/*531*/           OPC_MoveChild0,
+/*532*/           OPC_SwitchOpcode /*5 cases */, 12, TARGET_VAL(ISD::TargetGlobalAddress),// ->548
+/*536*/             OPC_MoveParent,
+/*537*/             OPC_MoveParent,
+/*538*/             OPC_EmitCopyToReg, 0, Lanai::R0,
+/*541*/             OPC_MorphNodeTo1, TARGET_VAL(Lanai::SLI), 0|OPFL_GlueInput,
                         MVT::i32, 1/*#Ops*/, 1, 
                     // Src: (or:i32 R0:i32, (LanaiSmall:i32 (tglobaladdr:i32):$small)) - Complexity = 9
                     // Dst: (SLI:i32 (tglobaladdr:i32):$small)
-/*662*/           /*SwitchOpcode*/ 12, TARGET_VAL(ISD::TargetExternalSymbol),// ->677
-/*665*/             OPC_MoveParent,
-/*666*/             OPC_MoveParent,
-/*667*/             OPC_EmitCopyToReg, 0, Lanai::R0,
-/*670*/             OPC_MorphNodeTo1, TARGET_VAL(Lanai::SLI), 0|OPFL_GlueInput,
+/*548*/           /*SwitchOpcode*/ 12, TARGET_VAL(ISD::TargetExternalSymbol),// ->563
+/*551*/             OPC_MoveParent,
+/*552*/             OPC_MoveParent,
+/*553*/             OPC_EmitCopyToReg, 0, Lanai::R0,
+/*556*/             OPC_MorphNodeTo1, TARGET_VAL(Lanai::SLI), 0|OPFL_GlueInput,
                         MVT::i32, 1/*#Ops*/, 1, 
                     // Src: (or:i32 R0:i32, (LanaiSmall:i32 (texternalsym:i32):$small)) - Complexity = 9
                     // Dst: (SLI:i32 (texternalsym:i32):$small)
-/*677*/           /*SwitchOpcode*/ 12, TARGET_VAL(ISD::TargetBlockAddress),// ->692
-/*680*/             OPC_MoveParent,
-/*681*/             OPC_MoveParent,
-/*682*/             OPC_EmitCopyToReg, 0, Lanai::R0,
-/*685*/             OPC_MorphNodeTo1, TARGET_VAL(Lanai::SLI), 0|OPFL_GlueInput,
+/*563*/           /*SwitchOpcode*/ 12, TARGET_VAL(ISD::TargetBlockAddress),// ->578
+/*566*/             OPC_MoveParent,
+/*567*/             OPC_MoveParent,
+/*568*/             OPC_EmitCopyToReg, 0, Lanai::R0,
+/*571*/             OPC_MorphNodeTo1, TARGET_VAL(Lanai::SLI), 0|OPFL_GlueInput,
                         MVT::i32, 1/*#Ops*/, 1, 
                     // Src: (or:i32 R0:i32, (LanaiSmall:i32 (tblockaddress:i32):$small)) - Complexity = 9
                     // Dst: (SLI:i32 (tblockaddress:i32):$small)
-/*692*/           /*SwitchOpcode*/ 12, TARGET_VAL(ISD::TargetJumpTable),// ->707
-/*695*/             OPC_MoveParent,
-/*696*/             OPC_MoveParent,
-/*697*/             OPC_EmitCopyToReg, 0, Lanai::R0,
-/*700*/             OPC_MorphNodeTo1, TARGET_VAL(Lanai::SLI), 0|OPFL_GlueInput,
+/*578*/           /*SwitchOpcode*/ 12, TARGET_VAL(ISD::TargetJumpTable),// ->593
+/*581*/             OPC_MoveParent,
+/*582*/             OPC_MoveParent,
+/*583*/             OPC_EmitCopyToReg, 0, Lanai::R0,
+/*586*/             OPC_MorphNodeTo1, TARGET_VAL(Lanai::SLI), 0|OPFL_GlueInput,
                         MVT::i32, 1/*#Ops*/, 1, 
                     // Src: (or:i32 R0:i32, (LanaiSmall:i32 (tjumptable:i32):$small)) - Complexity = 9
                     // Dst: (SLI:i32 (tjumptable:i32):$small)
-/*707*/           /*SwitchOpcode*/ 12, TARGET_VAL(ISD::TargetConstantPool),// ->722
-/*710*/             OPC_MoveParent,
-/*711*/             OPC_MoveParent,
-/*712*/             OPC_EmitCopyToReg, 0, Lanai::R0,
-/*715*/             OPC_MorphNodeTo1, TARGET_VAL(Lanai::SLI), 0|OPFL_GlueInput,
+/*593*/           /*SwitchOpcode*/ 12, TARGET_VAL(ISD::TargetConstantPool),// ->608
+/*596*/             OPC_MoveParent,
+/*597*/             OPC_MoveParent,
+/*598*/             OPC_EmitCopyToReg, 0, Lanai::R0,
+/*601*/             OPC_MorphNodeTo1, TARGET_VAL(Lanai::SLI), 0|OPFL_GlueInput,
                         MVT::i32, 1/*#Ops*/, 1, 
                     // Src: (or:i32 R0:i32, (LanaiSmall:i32 (tconstpool:i32):$small)) - Complexity = 9
                     // Dst: (SLI:i32 (tconstpool:i32):$small)
-/*722*/           0, // EndSwitchOpcode
-/*723*/         0, // EndSwitchOpcode
-/*724*/       /*Scope*/ 78, /*->803*/
-/*725*/         OPC_MoveChild0,
-/*726*/         OPC_CheckOpcode, TARGET_VAL(LanaiISD::LO),
-/*729*/         OPC_RecordChild0, // #0 = $lo
-/*730*/         OPC_MoveChild0,
-/*731*/         OPC_SwitchOpcode /*5 cases */, 11, TARGET_VAL(ISD::TargetGlobalAddress),// ->746
-/*735*/           OPC_MoveParent,
-/*736*/           OPC_MoveParent,
-/*737*/           OPC_RecordChild1, // #1 = $hi
-/*738*/           OPC_MorphNodeTo1, TARGET_VAL(Lanai::OR_I_LO), 0,
+/*608*/           0, // EndSwitchOpcode
+/*609*/         0, // EndSwitchOpcode
+/*610*/       /*Scope*/ 78, /*->689*/
+/*611*/         OPC_MoveChild0,
+/*612*/         OPC_CheckOpcode, TARGET_VAL(LanaiISD::LO),
+/*615*/         OPC_RecordChild0, // #0 = $lo
+/*616*/         OPC_MoveChild0,
+/*617*/         OPC_SwitchOpcode /*5 cases */, 11, TARGET_VAL(ISD::TargetGlobalAddress),// ->632
+/*621*/           OPC_MoveParent,
+/*622*/           OPC_MoveParent,
+/*623*/           OPC_RecordChild1, // #1 = $hi
+/*624*/           OPC_MorphNodeTo1, TARGET_VAL(Lanai::OR_I_LO), 0,
                       MVT::i32, 2/*#Ops*/, 1, 0, 
                   // Src: (or:i32 (LanaiLo:i32 (tglobaladdr:i32):$lo), GPR:i32:$hi) - Complexity = 9
                   // Dst: (OR_I_LO:i32 GPR:i32:$hi, (tglobaladdr:i32):$lo)
-/*746*/         /*SwitchOpcode*/ 11, TARGET_VAL(ISD::TargetExternalSymbol),// ->760
-/*749*/           OPC_MoveParent,
-/*750*/           OPC_MoveParent,
-/*751*/           OPC_RecordChild1, // #1 = $hi
-/*752*/           OPC_MorphNodeTo1, TARGET_VAL(Lanai::OR_I_LO), 0,
+/*632*/         /*SwitchOpcode*/ 11, TARGET_VAL(ISD::TargetExternalSymbol),// ->646
+/*635*/           OPC_MoveParent,
+/*636*/           OPC_MoveParent,
+/*637*/           OPC_RecordChild1, // #1 = $hi
+/*638*/           OPC_MorphNodeTo1, TARGET_VAL(Lanai::OR_I_LO), 0,
                       MVT::i32, 2/*#Ops*/, 1, 0, 
                   // Src: (or:i32 (LanaiLo:i32 (texternalsym:i32):$lo), GPR:i32:$hi) - Complexity = 9
                   // Dst: (OR_I_LO:i32 GPR:i32:$hi, (texternalsym:i32):$lo)
-/*760*/         /*SwitchOpcode*/ 11, TARGET_VAL(ISD::TargetBlockAddress),// ->774
-/*763*/           OPC_MoveParent,
-/*764*/           OPC_MoveParent,
-/*765*/           OPC_RecordChild1, // #1 = $hi
-/*766*/           OPC_MorphNodeTo1, TARGET_VAL(Lanai::OR_I_LO), 0,
+/*646*/         /*SwitchOpcode*/ 11, TARGET_VAL(ISD::TargetBlockAddress),// ->660
+/*649*/           OPC_MoveParent,
+/*650*/           OPC_MoveParent,
+/*651*/           OPC_RecordChild1, // #1 = $hi
+/*652*/           OPC_MorphNodeTo1, TARGET_VAL(Lanai::OR_I_LO), 0,
                       MVT::i32, 2/*#Ops*/, 1, 0, 
                   // Src: (or:i32 (LanaiLo:i32 (tblockaddress:i32):$lo), GPR:i32:$hi) - Complexity = 9
                   // Dst: (OR_I_LO:i32 GPR:i32:$hi, (tblockaddress:i32):$lo)
-/*774*/         /*SwitchOpcode*/ 11, TARGET_VAL(ISD::TargetJumpTable),// ->788
-/*777*/           OPC_MoveParent,
-/*778*/           OPC_MoveParent,
-/*779*/           OPC_RecordChild1, // #1 = $hi
-/*780*/           OPC_MorphNodeTo1, TARGET_VAL(Lanai::OR_I_LO), 0,
+/*660*/         /*SwitchOpcode*/ 11, TARGET_VAL(ISD::TargetJumpTable),// ->674
+/*663*/           OPC_MoveParent,
+/*664*/           OPC_MoveParent,
+/*665*/           OPC_RecordChild1, // #1 = $hi
+/*666*/           OPC_MorphNodeTo1, TARGET_VAL(Lanai::OR_I_LO), 0,
                       MVT::i32, 2/*#Ops*/, 1, 0, 
                   // Src: (or:i32 (LanaiLo:i32 (tjumptable:i32):$lo), GPR:i32:$hi) - Complexity = 9
                   // Dst: (OR_I_LO:i32 GPR:i32:$hi, (tjumptable:i32):$lo)
-/*788*/         /*SwitchOpcode*/ 11, TARGET_VAL(ISD::TargetConstantPool),// ->802
-/*791*/           OPC_MoveParent,
-/*792*/           OPC_MoveParent,
-/*793*/           OPC_RecordChild1, // #1 = $hi
-/*794*/           OPC_MorphNodeTo1, TARGET_VAL(Lanai::OR_I_LO), 0,
+/*674*/         /*SwitchOpcode*/ 11, TARGET_VAL(ISD::TargetConstantPool),// ->688
+/*677*/           OPC_MoveParent,
+/*678*/           OPC_MoveParent,
+/*679*/           OPC_RecordChild1, // #1 = $hi
+/*680*/           OPC_MorphNodeTo1, TARGET_VAL(Lanai::OR_I_LO), 0,
                       MVT::i32, 2/*#Ops*/, 1, 0, 
                   // Src: (or:i32 (LanaiLo:i32 (tconstpool:i32):$lo), GPR:i32:$hi) - Complexity = 9
                   // Dst: (OR_I_LO:i32 GPR:i32:$hi, (tconstpool:i32):$lo)
-/*802*/         0, // EndSwitchOpcode
-/*803*/       /*Scope*/ 108, /*->912*/
-/*804*/         OPC_RecordChild0, // #0 = $Rs1
-/*805*/         OPC_RecordChild1, // #1 = $imm16
-/*806*/         OPC_Scope, 76, /*->884*/ // 2 children in Scope
-/*808*/           OPC_MoveChild1,
-/*809*/           OPC_CheckOpcode, TARGET_VAL(ISD::Constant),
-/*812*/           OPC_Scope, 16, /*->830*/ // 4 children in Scope
-/*814*/             OPC_CheckPredicate, 15, // Predicate_i32lo16z
-/*816*/             OPC_MoveParent,
-/*817*/             OPC_EmitConvertToTarget, 1,
-/*819*/             OPC_EmitNodeXForm, 0, 2, // LO16
-/*822*/             OPC_MorphNodeTo1, TARGET_VAL(Lanai::OR_I_LO), 0,
+/*688*/         0, // EndSwitchOpcode
+/*689*/       /*Scope*/ 108, /*->798*/
+/*690*/         OPC_RecordChild0, // #0 = $Rs1
+/*691*/         OPC_RecordChild1, // #1 = $imm16
+/*692*/         OPC_Scope, 76, /*->770*/ // 2 children in Scope
+/*694*/           OPC_MoveChild1,
+/*695*/           OPC_CheckOpcode, TARGET_VAL(ISD::Constant),
+/*698*/           OPC_Scope, 16, /*->716*/ // 4 children in Scope
+/*700*/             OPC_CheckPredicate, 13, // Predicate_i32lo16z
+/*702*/             OPC_MoveParent,
+/*703*/             OPC_EmitConvertToTarget, 1,
+/*705*/             OPC_EmitNodeXForm, 0, 2, // LO16
+/*708*/             OPC_MorphNodeTo1, TARGET_VAL(Lanai::OR_I_LO), 0,
                         MVT::i32, 2/*#Ops*/, 0, 3, 
                     // Src: (or:i32 GPR:i32:$Rs1, (imm:i32)<<P:Predicate_i32lo16z>><<X:LO16>>:$imm16) - Complexity = 7
                     // Dst: (OR_I_LO:i32 GPR:i32:$Rs1, (LO16:i32 (imm:i32):$imm16))
-/*830*/           /*Scope*/ 16, /*->847*/
-/*831*/             OPC_CheckPredicate, 16, // Predicate_i32hi16
-/*833*/             OPC_MoveParent,
-/*834*/             OPC_EmitConvertToTarget, 1,
-/*836*/             OPC_EmitNodeXForm, 1, 2, // HI16
-/*839*/             OPC_MorphNodeTo1, TARGET_VAL(Lanai::OR_I_HI), 0,
+/*716*/           /*Scope*/ 16, /*->733*/
+/*717*/             OPC_CheckPredicate, 14, // Predicate_i32hi16
+/*719*/             OPC_MoveParent,
+/*720*/             OPC_EmitConvertToTarget, 1,
+/*722*/             OPC_EmitNodeXForm, 1, 2, // HI16
+/*725*/             OPC_MorphNodeTo1, TARGET_VAL(Lanai::OR_I_HI), 0,
                         MVT::i32, 2/*#Ops*/, 0, 3, 
                     // Src: (or:i32 GPR:i32:$Rs1, (imm:i32)<<P:Predicate_i32hi16>><<X:HI16>>:$imm16) - Complexity = 7
                     // Dst: (OR_I_HI:i32 GPR:i32:$Rs1, (HI16:i32 (imm:i32):$imm16))
-/*847*/           /*Scope*/ 17, /*->865*/
-/*848*/             OPC_CheckPredicate, 15, // Predicate_i32lo16z
-/*850*/             OPC_MoveParent,
-/*851*/             OPC_EmitConvertToTarget, 1,
-/*853*/             OPC_EmitNodeXForm, 0, 2, // LO16
-/*856*/             OPC_MorphNodeTo2, TARGET_VAL(Lanai::OR_F_I_LO), 0,
+/*733*/           /*Scope*/ 17, /*->751*/
+/*734*/             OPC_CheckPredicate, 13, // Predicate_i32lo16z
+/*736*/             OPC_MoveParent,
+/*737*/             OPC_EmitConvertToTarget, 1,
+/*739*/             OPC_EmitNodeXForm, 0, 2, // LO16
+/*742*/             OPC_MorphNodeTo2, TARGET_VAL(Lanai::OR_F_I_LO), 0,
                         MVT::i32, MVT::i32, 2/*#Ops*/, 0, 3, 
                     // Src: (or:i32 GPR:i32:$Rs1, (imm:i32)<<P:Predicate_i32lo16z>><<X:LO16>>:$imm16) - Complexity = 7
                     // Dst: (OR_F_I_LO:i32:i32 GPR:i32:$Rs1, (LO16:i32 (imm:i32):$imm16))
-/*865*/           /*Scope*/ 17, /*->883*/
-/*866*/             OPC_CheckPredicate, 16, // Predicate_i32hi16
-/*868*/             OPC_MoveParent,
-/*869*/             OPC_EmitConvertToTarget, 1,
-/*871*/             OPC_EmitNodeXForm, 1, 2, // HI16
-/*874*/             OPC_MorphNodeTo2, TARGET_VAL(Lanai::OR_F_I_HI), 0,
+/*751*/           /*Scope*/ 17, /*->769*/
+/*752*/             OPC_CheckPredicate, 14, // Predicate_i32hi16
+/*754*/             OPC_MoveParent,
+/*755*/             OPC_EmitConvertToTarget, 1,
+/*757*/             OPC_EmitNodeXForm, 1, 2, // HI16
+/*760*/             OPC_MorphNodeTo2, TARGET_VAL(Lanai::OR_F_I_HI), 0,
                         MVT::i32, MVT::i32, 2/*#Ops*/, 0, 3, 
                     // Src: (or:i32 GPR:i32:$Rs1, (imm:i32)<<P:Predicate_i32hi16>><<X:HI16>>:$imm16) - Complexity = 7
                     // Dst: (OR_F_I_HI:i32:i32 GPR:i32:$Rs1, (HI16:i32 (imm:i32):$imm16))
-/*883*/           0, /*End of Scope*/
-/*884*/         /*Scope*/ 26, /*->911*/
-/*885*/           OPC_EmitInteger, MVT::i32, 0, 
-/*888*/           OPC_Scope, 9, /*->899*/ // 2 children in Scope
-/*890*/             OPC_MorphNodeTo1, TARGET_VAL(Lanai::OR_R), 0,
+/*769*/           0, /*End of Scope*/
+/*770*/         /*Scope*/ 26, /*->797*/
+/*771*/           OPC_EmitInteger, MVT::i32, 0, 
+/*774*/           OPC_Scope, 9, /*->785*/ // 2 children in Scope
+/*776*/             OPC_MorphNodeTo1, TARGET_VAL(Lanai::OR_R), 0,
                         MVT::i32, 3/*#Ops*/, 0, 1, 2, 
                     // Src: (or:i32 GPR:i32:$Rs1, GPR:i32:$Rs2) - Complexity = 3
                     // Dst: (OR_R:i32 GPR:i32:$Rs1, GPR:i32:$Rs2)
-/*899*/           /*Scope*/ 10, /*->910*/
-/*900*/             OPC_MorphNodeTo2, TARGET_VAL(Lanai::OR_F_R), 0,
+/*785*/           /*Scope*/ 10, /*->796*/
+/*786*/             OPC_MorphNodeTo2, TARGET_VAL(Lanai::OR_F_R), 0,
                         MVT::i32, MVT::i32, 3/*#Ops*/, 0, 1, 2, 
                     // Src: (or:i32 GPR:i32:$Rs1, GPR:i32:$Rs2) - Complexity = 3
                     // Dst: (OR_F_R:i32:i32 GPR:i32:$Rs1, GPR:i32:$Rs2)
-/*910*/           0, /*End of Scope*/
-/*911*/         0, /*End of Scope*/
-/*912*/       0, /*End of Scope*/
-/*913*/     /*SwitchOpcode*/ 108, TARGET_VAL(ISD::XOR),// ->1024
-/*916*/       OPC_RecordChild0, // #0 = $Rs1
-/*917*/       OPC_RecordChild1, // #1 = $imm16
-/*918*/       OPC_Scope, 76, /*->996*/ // 2 children in Scope
-/*920*/         OPC_MoveChild1,
-/*921*/         OPC_CheckOpcode, TARGET_VAL(ISD::Constant),
-/*924*/         OPC_Scope, 16, /*->942*/ // 4 children in Scope
-/*926*/           OPC_CheckPredicate, 15, // Predicate_i32lo16z
-/*928*/           OPC_MoveParent,
-/*929*/           OPC_EmitConvertToTarget, 1,
-/*931*/           OPC_EmitNodeXForm, 0, 2, // LO16
-/*934*/           OPC_MorphNodeTo1, TARGET_VAL(Lanai::XOR_I_LO), 0,
+/*796*/           0, /*End of Scope*/
+/*797*/         0, /*End of Scope*/
+/*798*/       0, /*End of Scope*/
+/*799*/     /*SwitchOpcode*/ 108, TARGET_VAL(ISD::AND),// ->910
+/*802*/       OPC_RecordChild0, // #0 = $Rs1
+/*803*/       OPC_RecordChild1, // #1 = $imm16
+/*804*/       OPC_Scope, 76, /*->882*/ // 2 children in Scope
+/*806*/         OPC_MoveChild1,
+/*807*/         OPC_CheckOpcode, TARGET_VAL(ISD::Constant),
+/*810*/         OPC_Scope, 16, /*->828*/ // 4 children in Scope
+/*812*/           OPC_CheckPredicate, 15, // Predicate_i32lo16and
+/*814*/           OPC_MoveParent,
+/*815*/           OPC_EmitConvertToTarget, 1,
+/*817*/           OPC_EmitNodeXForm, 0, 2, // LO16
+/*820*/           OPC_MorphNodeTo1, TARGET_VAL(Lanai::AND_I_LO), 0,
+                      MVT::i32, 2/*#Ops*/, 0, 3, 
+                  // Src: (and:i32 GPR:i32:$Rs1, (imm:i32)<<P:Predicate_i32lo16and>><<X:LO16>>:$imm16) - Complexity = 7
+                  // Dst: (AND_I_LO:i32 GPR:i32:$Rs1, (LO16:i32 (imm:i32):$imm16))
+/*828*/         /*Scope*/ 16, /*->845*/
+/*829*/           OPC_CheckPredicate, 16, // Predicate_i32hi16and
+/*831*/           OPC_MoveParent,
+/*832*/           OPC_EmitConvertToTarget, 1,
+/*834*/           OPC_EmitNodeXForm, 1, 2, // HI16
+/*837*/           OPC_MorphNodeTo1, TARGET_VAL(Lanai::AND_I_HI), 0,
+                      MVT::i32, 2/*#Ops*/, 0, 3, 
+                  // Src: (and:i32 GPR:i32:$Rs1, (imm:i32)<<P:Predicate_i32hi16and>><<X:HI16>>:$imm16) - Complexity = 7
+                  // Dst: (AND_I_HI:i32 GPR:i32:$Rs1, (HI16:i32 (imm:i32):$imm16))
+/*845*/         /*Scope*/ 17, /*->863*/
+/*846*/           OPC_CheckPredicate, 15, // Predicate_i32lo16and
+/*848*/           OPC_MoveParent,
+/*849*/           OPC_EmitConvertToTarget, 1,
+/*851*/           OPC_EmitNodeXForm, 0, 2, // LO16
+/*854*/           OPC_MorphNodeTo2, TARGET_VAL(Lanai::AND_F_I_LO), 0,
+                      MVT::i32, MVT::i32, 2/*#Ops*/, 0, 3, 
+                  // Src: (and:i32 GPR:i32:$Rs1, (imm:i32)<<P:Predicate_i32lo16and>><<X:LO16>>:$imm16) - Complexity = 7
+                  // Dst: (AND_F_I_LO:i32:i32 GPR:i32:$Rs1, (LO16:i32 (imm:i32):$imm16))
+/*863*/         /*Scope*/ 17, /*->881*/
+/*864*/           OPC_CheckPredicate, 16, // Predicate_i32hi16and
+/*866*/           OPC_MoveParent,
+/*867*/           OPC_EmitConvertToTarget, 1,
+/*869*/           OPC_EmitNodeXForm, 1, 2, // HI16
+/*872*/           OPC_MorphNodeTo2, TARGET_VAL(Lanai::AND_F_I_HI), 0,
+                      MVT::i32, MVT::i32, 2/*#Ops*/, 0, 3, 
+                  // Src: (and:i32 GPR:i32:$Rs1, (imm:i32)<<P:Predicate_i32hi16and>><<X:HI16>>:$imm16) - Complexity = 7
+                  // Dst: (AND_F_I_HI:i32:i32 GPR:i32:$Rs1, (HI16:i32 (imm:i32):$imm16))
+/*881*/         0, /*End of Scope*/
+/*882*/       /*Scope*/ 26, /*->909*/
+/*883*/         OPC_EmitInteger, MVT::i32, 0, 
+/*886*/         OPC_Scope, 9, /*->897*/ // 2 children in Scope
+/*888*/           OPC_MorphNodeTo1, TARGET_VAL(Lanai::AND_R), 0,
+                      MVT::i32, 3/*#Ops*/, 0, 1, 2, 
+                  // Src: (and:i32 GPR:i32:$Rs1, GPR:i32:$Rs2) - Complexity = 3
+                  // Dst: (AND_R:i32 GPR:i32:$Rs1, GPR:i32:$Rs2)
+/*897*/         /*Scope*/ 10, /*->908*/
+/*898*/           OPC_MorphNodeTo2, TARGET_VAL(Lanai::AND_F_R), 0,
+                      MVT::i32, MVT::i32, 3/*#Ops*/, 0, 1, 2, 
+                  // Src: (and:i32 GPR:i32:$Rs1, GPR:i32:$Rs2) - Complexity = 3
+                  // Dst: (AND_F_R:i32:i32 GPR:i32:$Rs1, GPR:i32:$Rs2)
+/*908*/         0, /*End of Scope*/
+/*909*/       0, /*End of Scope*/
+/*910*/     /*SwitchOpcode*/ 108, TARGET_VAL(ISD::XOR),// ->1021
+/*913*/       OPC_RecordChild0, // #0 = $Rs1
+/*914*/       OPC_RecordChild1, // #1 = $imm16
+/*915*/       OPC_Scope, 76, /*->993*/ // 2 children in Scope
+/*917*/         OPC_MoveChild1,
+/*918*/         OPC_CheckOpcode, TARGET_VAL(ISD::Constant),
+/*921*/         OPC_Scope, 16, /*->939*/ // 4 children in Scope
+/*923*/           OPC_CheckPredicate, 13, // Predicate_i32lo16z
+/*925*/           OPC_MoveParent,
+/*926*/           OPC_EmitConvertToTarget, 1,
+/*928*/           OPC_EmitNodeXForm, 0, 2, // LO16
+/*931*/           OPC_MorphNodeTo1, TARGET_VAL(Lanai::XOR_I_LO), 0,
                       MVT::i32, 2/*#Ops*/, 0, 3, 
                   // Src: (xor:i32 GPR:i32:$Rs1, (imm:i32)<<P:Predicate_i32lo16z>><<X:LO16>>:$imm16) - Complexity = 7
                   // Dst: (XOR_I_LO:i32 GPR:i32:$Rs1, (LO16:i32 (imm:i32):$imm16))
-/*942*/         /*Scope*/ 16, /*->959*/
-/*943*/           OPC_CheckPredicate, 16, // Predicate_i32hi16
-/*945*/           OPC_MoveParent,
-/*946*/           OPC_EmitConvertToTarget, 1,
-/*948*/           OPC_EmitNodeXForm, 1, 2, // HI16
-/*951*/           OPC_MorphNodeTo1, TARGET_VAL(Lanai::XOR_I_HI), 0,
+/*939*/         /*Scope*/ 16, /*->956*/
+/*940*/           OPC_CheckPredicate, 14, // Predicate_i32hi16
+/*942*/           OPC_MoveParent,
+/*943*/           OPC_EmitConvertToTarget, 1,
+/*945*/           OPC_EmitNodeXForm, 1, 2, // HI16
+/*948*/           OPC_MorphNodeTo1, TARGET_VAL(Lanai::XOR_I_HI), 0,
                       MVT::i32, 2/*#Ops*/, 0, 3, 
                   // Src: (xor:i32 GPR:i32:$Rs1, (imm:i32)<<P:Predicate_i32hi16>><<X:HI16>>:$imm16) - Complexity = 7
                   // Dst: (XOR_I_HI:i32 GPR:i32:$Rs1, (HI16:i32 (imm:i32):$imm16))
-/*959*/         /*Scope*/ 17, /*->977*/
-/*960*/           OPC_CheckPredicate, 15, // Predicate_i32lo16z
-/*962*/           OPC_MoveParent,
-/*963*/           OPC_EmitConvertToTarget, 1,
-/*965*/           OPC_EmitNodeXForm, 0, 2, // LO16
-/*968*/           OPC_MorphNodeTo2, TARGET_VAL(Lanai::XOR_F_I_LO), 0,
+/*956*/         /*Scope*/ 17, /*->974*/
+/*957*/           OPC_CheckPredicate, 13, // Predicate_i32lo16z
+/*959*/           OPC_MoveParent,
+/*960*/           OPC_EmitConvertToTarget, 1,
+/*962*/           OPC_EmitNodeXForm, 0, 2, // LO16
+/*965*/           OPC_MorphNodeTo2, TARGET_VAL(Lanai::XOR_F_I_LO), 0,
                       MVT::i32, MVT::i32, 2/*#Ops*/, 0, 3, 
                   // Src: (xor:i32 GPR:i32:$Rs1, (imm:i32)<<P:Predicate_i32lo16z>><<X:LO16>>:$imm16) - Complexity = 7
                   // Dst: (XOR_F_I_LO:i32:i32 GPR:i32:$Rs1, (LO16:i32 (imm:i32):$imm16))
-/*977*/         /*Scope*/ 17, /*->995*/
-/*978*/           OPC_CheckPredicate, 16, // Predicate_i32hi16
-/*980*/           OPC_MoveParent,
-/*981*/           OPC_EmitConvertToTarget, 1,
-/*983*/           OPC_EmitNodeXForm, 1, 2, // HI16
-/*986*/           OPC_MorphNodeTo2, TARGET_VAL(Lanai::XOR_F_I_HI), 0,
+/*974*/         /*Scope*/ 17, /*->992*/
+/*975*/           OPC_CheckPredicate, 14, // Predicate_i32hi16
+/*977*/           OPC_MoveParent,
+/*978*/           OPC_EmitConvertToTarget, 1,
+/*980*/           OPC_EmitNodeXForm, 1, 2, // HI16
+/*983*/           OPC_MorphNodeTo2, TARGET_VAL(Lanai::XOR_F_I_HI), 0,
                       MVT::i32, MVT::i32, 2/*#Ops*/, 0, 3, 
                   // Src: (xor:i32 GPR:i32:$Rs1, (imm:i32)<<P:Predicate_i32hi16>><<X:HI16>>:$imm16) - Complexity = 7
                   // Dst: (XOR_F_I_HI:i32:i32 GPR:i32:$Rs1, (HI16:i32 (imm:i32):$imm16))
-/*995*/         0, /*End of Scope*/
-/*996*/       /*Scope*/ 26, /*->1023*/
-/*997*/         OPC_EmitInteger, MVT::i32, 0, 
-/*1000*/        OPC_Scope, 9, /*->1011*/ // 2 children in Scope
-/*1002*/          OPC_MorphNodeTo1, TARGET_VAL(Lanai::XOR_R), 0,
+/*992*/         0, /*End of Scope*/
+/*993*/       /*Scope*/ 26, /*->1020*/
+/*994*/         OPC_EmitInteger, MVT::i32, 0, 
+/*997*/         OPC_Scope, 9, /*->1008*/ // 2 children in Scope
+/*999*/           OPC_MorphNodeTo1, TARGET_VAL(Lanai::XOR_R), 0,
                       MVT::i32, 3/*#Ops*/, 0, 1, 2, 
                   // Src: (xor:i32 GPR:i32:$Rs1, GPR:i32:$Rs2) - Complexity = 3
                   // Dst: (XOR_R:i32 GPR:i32:$Rs1, GPR:i32:$Rs2)
-/*1011*/        /*Scope*/ 10, /*->1022*/
-/*1012*/          OPC_MorphNodeTo2, TARGET_VAL(Lanai::XOR_F_R), 0,
+/*1008*/        /*Scope*/ 10, /*->1019*/
+/*1009*/          OPC_MorphNodeTo2, TARGET_VAL(Lanai::XOR_F_R), 0,
                       MVT::i32, MVT::i32, 3/*#Ops*/, 0, 1, 2, 
                   // Src: (xor:i32 GPR:i32:$Rs1, GPR:i32:$Rs2) - Complexity = 3
                   // Dst: (XOR_F_R:i32:i32 GPR:i32:$Rs1, GPR:i32:$Rs2)
-/*1022*/        0, /*End of Scope*/
-/*1023*/      0, /*End of Scope*/
-/*1024*/    /*SwitchOpcode*/ 73, TARGET_VAL(ISD::ADD),// ->1100
-/*1027*/      OPC_RecordChild0, // #0 = $Rs1
-/*1028*/      OPC_RecordChild1, // #1 = $imm
-/*1029*/      OPC_Scope, 55, /*->1086*/ // 2 children in Scope
-/*1031*/        OPC_MoveChild1,
-/*1032*/        OPC_CheckOpcode, TARGET_VAL(ISD::Constant),
-/*1035*/        OPC_Scope, 16, /*->1053*/ // 3 children in Scope
-/*1037*/          OPC_CheckPredicate, 15, // Predicate_i32lo16z
-/*1039*/          OPC_MoveParent,
-/*1040*/          OPC_EmitConvertToTarget, 1,
-/*1042*/          OPC_EmitNodeXForm, 0, 2, // LO16
-/*1045*/          OPC_MorphNodeTo1, TARGET_VAL(Lanai::ADD_I_LO), 0,
+/*1019*/        0, /*End of Scope*/
+/*1020*/      0, /*End of Scope*/
+/*1021*/    /*SwitchOpcode*/ 73, TARGET_VAL(ISD::ADD),// ->1097
+/*1024*/      OPC_RecordChild0, // #0 = $Rs1
+/*1025*/      OPC_RecordChild1, // #1 = $imm
+/*1026*/      OPC_Scope, 55, /*->1083*/ // 2 children in Scope
+/*1028*/        OPC_MoveChild1,
+/*1029*/        OPC_CheckOpcode, TARGET_VAL(ISD::Constant),
+/*1032*/        OPC_Scope, 16, /*->1050*/ // 3 children in Scope
+/*1034*/          OPC_CheckPredicate, 13, // Predicate_i32lo16z
+/*1036*/          OPC_MoveParent,
+/*1037*/          OPC_EmitConvertToTarget, 1,
+/*1039*/          OPC_EmitNodeXForm, 0, 2, // LO16
+/*1042*/          OPC_MorphNodeTo1, TARGET_VAL(Lanai::ADD_I_LO), 0,
                       MVT::i32, 2/*#Ops*/, 0, 3, 
                   // Src: (add:i32 GPR:i32:$Rs1, (imm:i32)<<P:Predicate_i32lo16z>><<X:LO16>>:$imm) - Complexity = 7
                   // Dst: (ADD_I_LO:i32 GPR:i32:$Rs1, (LO16:i32 (imm:i32)<<P:Predicate_i32lo16z>>:$imm))
-/*1053*/        /*Scope*/ 16, /*->1070*/
-/*1054*/          OPC_CheckPredicate, 16, // Predicate_i32hi16
-/*1056*/          OPC_MoveParent,
-/*1057*/          OPC_EmitConvertToTarget, 1,
-/*1059*/          OPC_EmitNodeXForm, 1, 2, // HI16
-/*1062*/          OPC_MorphNodeTo1, TARGET_VAL(Lanai::ADD_I_HI), 0,
+/*1050*/        /*Scope*/ 16, /*->1067*/
+/*1051*/          OPC_CheckPredicate, 14, // Predicate_i32hi16
+/*1053*/          OPC_MoveParent,
+/*1054*/          OPC_EmitConvertToTarget, 1,
+/*1056*/          OPC_EmitNodeXForm, 1, 2, // HI16
+/*1059*/          OPC_MorphNodeTo1, TARGET_VAL(Lanai::ADD_I_HI), 0,
                       MVT::i32, 2/*#Ops*/, 0, 3, 
                   // Src: (add:i32 GPR:i32:$Rs1, (imm:i32)<<P:Predicate_i32hi16>><<X:HI16>>:$imm) - Complexity = 7
                   // Dst: (ADD_I_HI:i32 GPR:i32:$Rs1, (HI16:i32 (imm:i32)<<P:Predicate_i32hi16>>:$imm))
-/*1070*/        /*Scope*/ 14, /*->1085*/
-/*1071*/          OPC_CheckPredicate, 17, // Predicate_i32neg16
-/*1073*/          OPC_MoveParent,
-/*1074*/          OPC_EmitNodeXForm, 2, 1, // NEG
-/*1077*/          OPC_MorphNodeTo1, TARGET_VAL(Lanai::SUB_I_LO), 0,
+/*1067*/        /*Scope*/ 14, /*->1082*/
+/*1068*/          OPC_CheckPredicate, 17, // Predicate_i32neg16
+/*1070*/          OPC_MoveParent,
+/*1071*/          OPC_EmitNodeXForm, 2, 1, // NEG
+/*1074*/          OPC_MorphNodeTo1, TARGET_VAL(Lanai::SUB_I_LO), 0,
                       MVT::i32, 2/*#Ops*/, 0, 2, 
                   // Src: (add:i32 GPR:i32:$Rs1, (imm:i32)<<P:Predicate_i32neg16>><<X:LO16>>:$imm) - Complexity = 7
                   // Dst: (SUB_I_LO:i32 GPR:i32:$Rs1, (NEG:i32 ?:i32:$imm))
-/*1085*/        0, /*End of Scope*/
-/*1086*/      /*Scope*/ 12, /*->1099*/
-/*1087*/        OPC_EmitInteger, MVT::i32, 0, 
-/*1090*/        OPC_MorphNodeTo1, TARGET_VAL(Lanai::ADD_R), 0,
+/*1082*/        0, /*End of Scope*/
+/*1083*/      /*Scope*/ 12, /*->1096*/
+/*1084*/        OPC_EmitInteger, MVT::i32, 0, 
+/*1087*/        OPC_MorphNodeTo1, TARGET_VAL(Lanai::ADD_R), 0,
                     MVT::i32, 3/*#Ops*/, 0, 1, 2, 
                 // Src: (add:i32 GPR:i32:$Rs1, GPR:i32:$Rs2) - Complexity = 3
                 // Dst: (ADD_R:i32 GPR:i32:$Rs1, GPR:i32:$Rs2)
-/*1099*/      0, /*End of Scope*/
-/*1100*/    /*SwitchOpcode*/ 73, TARGET_VAL(ISD::SUB),// ->1176
-/*1103*/      OPC_RecordChild0, // #0 = $Rs1
-/*1104*/      OPC_RecordChild1, // #1 = $imm
-/*1105*/      OPC_Scope, 55, /*->1162*/ // 2 children in Scope
-/*1107*/        OPC_MoveChild1,
-/*1108*/        OPC_CheckOpcode, TARGET_VAL(ISD::Constant),
-/*1111*/        OPC_Scope, 16, /*->1129*/ // 3 children in Scope
-/*1113*/          OPC_CheckPredicate, 15, // Predicate_i32lo16z
-/*1115*/          OPC_MoveParent,
-/*1116*/          OPC_EmitConvertToTarget, 1,
-/*1118*/          OPC_EmitNodeXForm, 0, 2, // LO16
-/*1121*/          OPC_MorphNodeTo1, TARGET_VAL(Lanai::SUB_I_LO), 0,
+/*1096*/      0, /*End of Scope*/
+/*1097*/    /*SwitchOpcode*/ 73, TARGET_VAL(ISD::SUB),// ->1173
+/*1100*/      OPC_RecordChild0, // #0 = $Rs1
+/*1101*/      OPC_RecordChild1, // #1 = $imm
+/*1102*/      OPC_Scope, 55, /*->1159*/ // 2 children in Scope
+/*1104*/        OPC_MoveChild1,
+/*1105*/        OPC_CheckOpcode, TARGET_VAL(ISD::Constant),
+/*1108*/        OPC_Scope, 16, /*->1126*/ // 3 children in Scope
+/*1110*/          OPC_CheckPredicate, 13, // Predicate_i32lo16z
+/*1112*/          OPC_MoveParent,
+/*1113*/          OPC_EmitConvertToTarget, 1,
+/*1115*/          OPC_EmitNodeXForm, 0, 2, // LO16
+/*1118*/          OPC_MorphNodeTo1, TARGET_VAL(Lanai::SUB_I_LO), 0,
                       MVT::i32, 2/*#Ops*/, 0, 3, 
                   // Src: (sub:i32 GPR:i32:$Rs1, (imm:i32)<<P:Predicate_i32lo16z>><<X:LO16>>:$imm) - Complexity = 7
                   // Dst: (SUB_I_LO:i32 GPR:i32:$Rs1, (LO16:i32 (imm:i32)<<P:Predicate_i32lo16z>>:$imm))
-/*1129*/        /*Scope*/ 16, /*->1146*/
-/*1130*/          OPC_CheckPredicate, 16, // Predicate_i32hi16
-/*1132*/          OPC_MoveParent,
-/*1133*/          OPC_EmitConvertToTarget, 1,
-/*1135*/          OPC_EmitNodeXForm, 1, 2, // HI16
-/*1138*/          OPC_MorphNodeTo1, TARGET_VAL(Lanai::SUB_I_HI), 0,
+/*1126*/        /*Scope*/ 16, /*->1143*/
+/*1127*/          OPC_CheckPredicate, 14, // Predicate_i32hi16
+/*1129*/          OPC_MoveParent,
+/*1130*/          OPC_EmitConvertToTarget, 1,
+/*1132*/          OPC_EmitNodeXForm, 1, 2, // HI16
+/*1135*/          OPC_MorphNodeTo1, TARGET_VAL(Lanai::SUB_I_HI), 0,
                       MVT::i32, 2/*#Ops*/, 0, 3, 
                   // Src: (sub:i32 GPR:i32:$Rs1, (imm:i32)<<P:Predicate_i32hi16>><<X:HI16>>:$imm) - Complexity = 7
                   // Dst: (SUB_I_HI:i32 GPR:i32:$Rs1, (HI16:i32 (imm:i32)<<P:Predicate_i32hi16>>:$imm))
-/*1146*/        /*Scope*/ 14, /*->1161*/
-/*1147*/          OPC_CheckPredicate, 17, // Predicate_i32neg16
-/*1149*/          OPC_MoveParent,
-/*1150*/          OPC_EmitNodeXForm, 2, 1, // NEG
-/*1153*/          OPC_MorphNodeTo1, TARGET_VAL(Lanai::ADD_I_LO), 0,
+/*1143*/        /*Scope*/ 14, /*->1158*/
+/*1144*/          OPC_CheckPredicate, 17, // Predicate_i32neg16
+/*1146*/          OPC_MoveParent,
+/*1147*/          OPC_EmitNodeXForm, 2, 1, // NEG
+/*1150*/          OPC_MorphNodeTo1, TARGET_VAL(Lanai::ADD_I_LO), 0,
                       MVT::i32, 2/*#Ops*/, 0, 2, 
                   // Src: (sub:i32 GPR:i32:$Rs1, (imm:i32)<<P:Predicate_i32neg16>><<X:LO16>>:$imm) - Complexity = 7
                   // Dst: (ADD_I_LO:i32 GPR:i32:$Rs1, (NEG:i32 ?:i32:$imm))
-/*1161*/        0, /*End of Scope*/
-/*1162*/      /*Scope*/ 12, /*->1175*/
-/*1163*/        OPC_EmitInteger, MVT::i32, 0, 
-/*1166*/        OPC_MorphNodeTo1, TARGET_VAL(Lanai::SUB_R), 0,
+/*1158*/        0, /*End of Scope*/
+/*1159*/      /*Scope*/ 12, /*->1172*/
+/*1160*/        OPC_EmitInteger, MVT::i32, 0, 
+/*1163*/        OPC_MorphNodeTo1, TARGET_VAL(Lanai::SUB_R), 0,
                     MVT::i32, 3/*#Ops*/, 0, 1, 2, 
                 // Src: (sub:i32 GPR:i32:$Rs1, GPR:i32:$Rs2) - Complexity = 3
                 // Dst: (SUB_R:i32 GPR:i32:$Rs1, GPR:i32:$Rs2)
-/*1175*/      0, /*End of Scope*/
-/*1176*/    /*SwitchOpcode*/ 61, TARGET_VAL(ISD::ADDC),// ->1240
-/*1179*/      OPC_RecordChild0, // #0 = $Rs1
-/*1180*/      OPC_RecordChild1, // #1 = $imm
-/*1181*/      OPC_Scope, 42, /*->1225*/ // 2 children in Scope
-/*1183*/        OPC_MoveChild1,
-/*1184*/        OPC_CheckOpcode, TARGET_VAL(ISD::Constant),
-/*1187*/        OPC_Scope, 17, /*->1206*/ // 2 children in Scope
-/*1189*/          OPC_CheckPredicate, 15, // Predicate_i32lo16z
-/*1191*/          OPC_MoveParent,
-/*1192*/          OPC_EmitConvertToTarget, 1,
-/*1194*/          OPC_EmitNodeXForm, 0, 2, // LO16
-/*1197*/          OPC_MorphNodeTo2, TARGET_VAL(Lanai::ADD_F_I_LO), 0|OPFL_GlueOutput,
+/*1172*/      0, /*End of Scope*/
+/*1173*/    /*SwitchOpcode*/ 61, TARGET_VAL(ISD::ADDC),// ->1237
+/*1176*/      OPC_RecordChild0, // #0 = $Rs1
+/*1177*/      OPC_RecordChild1, // #1 = $imm
+/*1178*/      OPC_Scope, 42, /*->1222*/ // 2 children in Scope
+/*1180*/        OPC_MoveChild1,
+/*1181*/        OPC_CheckOpcode, TARGET_VAL(ISD::Constant),
+/*1184*/        OPC_Scope, 17, /*->1203*/ // 2 children in Scope
+/*1186*/          OPC_CheckPredicate, 13, // Predicate_i32lo16z
+/*1188*/          OPC_MoveParent,
+/*1189*/          OPC_EmitConvertToTarget, 1,
+/*1191*/          OPC_EmitNodeXForm, 0, 2, // LO16
+/*1194*/          OPC_MorphNodeTo2, TARGET_VAL(Lanai::ADD_F_I_LO), 0|OPFL_GlueOutput,
                       MVT::i32, MVT::i32, 2/*#Ops*/, 0, 3, 
                   // Src: (addc:i32 GPR:i32:$Rs1, (imm:i32)<<P:Predicate_i32lo16z>><<X:LO16>>:$imm) - Complexity = 7
                   // Dst: (ADD_F_I_LO:i32:i32 GPR:i32:$Rs1, (LO16:i32 (imm:i32)<<P:Predicate_i32lo16z>>:$imm))
-/*1206*/        /*Scope*/ 17, /*->1224*/
-/*1207*/          OPC_CheckPredicate, 16, // Predicate_i32hi16
-/*1209*/          OPC_MoveParent,
-/*1210*/          OPC_EmitConvertToTarget, 1,
-/*1212*/          OPC_EmitNodeXForm, 1, 2, // HI16
-/*1215*/          OPC_MorphNodeTo2, TARGET_VAL(Lanai::ADD_F_I_HI), 0|OPFL_GlueOutput,
+/*1203*/        /*Scope*/ 17, /*->1221*/
+/*1204*/          OPC_CheckPredicate, 14, // Predicate_i32hi16
+/*1206*/          OPC_MoveParent,
+/*1207*/          OPC_EmitConvertToTarget, 1,
+/*1209*/          OPC_EmitNodeXForm, 1, 2, // HI16
+/*1212*/          OPC_MorphNodeTo2, TARGET_VAL(Lanai::ADD_F_I_HI), 0|OPFL_GlueOutput,
                       MVT::i32, MVT::i32, 2/*#Ops*/, 0, 3, 
                   // Src: (addc:i32 GPR:i32:$Rs1, (imm:i32)<<P:Predicate_i32hi16>><<X:HI16>>:$imm) - Complexity = 7
                   // Dst: (ADD_F_I_HI:i32:i32 GPR:i32:$Rs1, (HI16:i32 (imm:i32)<<P:Predicate_i32hi16>>:$imm))
-/*1224*/        0, /*End of Scope*/
-/*1225*/      /*Scope*/ 13, /*->1239*/
-/*1226*/        OPC_EmitInteger, MVT::i32, 0, 
-/*1229*/        OPC_MorphNodeTo2, TARGET_VAL(Lanai::ADD_F_R), 0|OPFL_GlueOutput,
+/*1221*/        0, /*End of Scope*/
+/*1222*/      /*Scope*/ 13, /*->1236*/
+/*1223*/        OPC_EmitInteger, MVT::i32, 0, 
+/*1226*/        OPC_MorphNodeTo2, TARGET_VAL(Lanai::ADD_F_R), 0|OPFL_GlueOutput,
                     MVT::i32, MVT::i32, 3/*#Ops*/, 0, 1, 2, 
                 // Src: (addc:i32 GPR:i32:$Rs1, GPR:i32:$Rs2) - Complexity = 3
                 // Dst: (ADD_F_R:i32:i32 GPR:i32:$Rs1, GPR:i32:$Rs2)
-/*1239*/      0, /*End of Scope*/
-/*1240*/    /*SwitchOpcode*/ 61, TARGET_VAL(ISD::SUBC),// ->1304
-/*1243*/      OPC_RecordChild0, // #0 = $Rs1
-/*1244*/      OPC_RecordChild1, // #1 = $imm
-/*1245*/      OPC_Scope, 42, /*->1289*/ // 2 children in Scope
-/*1247*/        OPC_MoveChild1,
-/*1248*/        OPC_CheckOpcode, TARGET_VAL(ISD::Constant),
-/*1251*/        OPC_Scope, 17, /*->1270*/ // 2 children in Scope
-/*1253*/          OPC_CheckPredicate, 15, // Predicate_i32lo16z
-/*1255*/          OPC_MoveParent,
-/*1256*/          OPC_EmitConvertToTarget, 1,
-/*1258*/          OPC_EmitNodeXForm, 0, 2, // LO16
-/*1261*/          OPC_MorphNodeTo2, TARGET_VAL(Lanai::SUB_F_I_LO), 0|OPFL_GlueOutput,
+/*1236*/      0, /*End of Scope*/
+/*1237*/    /*SwitchOpcode*/ 61, TARGET_VAL(ISD::SUBC),// ->1301
+/*1240*/      OPC_RecordChild0, // #0 = $Rs1
+/*1241*/      OPC_RecordChild1, // #1 = $imm
+/*1242*/      OPC_Scope, 42, /*->1286*/ // 2 children in Scope
+/*1244*/        OPC_MoveChild1,
+/*1245*/        OPC_CheckOpcode, TARGET_VAL(ISD::Constant),
+/*1248*/        OPC_Scope, 17, /*->1267*/ // 2 children in Scope
+/*1250*/          OPC_CheckPredicate, 13, // Predicate_i32lo16z
+/*1252*/          OPC_MoveParent,
+/*1253*/          OPC_EmitConvertToTarget, 1,
+/*1255*/          OPC_EmitNodeXForm, 0, 2, // LO16
+/*1258*/          OPC_MorphNodeTo2, TARGET_VAL(Lanai::SUB_F_I_LO), 0|OPFL_GlueOutput,
                       MVT::i32, MVT::i32, 2/*#Ops*/, 0, 3, 
                   // Src: (subc:i32 GPR:i32:$Rs1, (imm:i32)<<P:Predicate_i32lo16z>><<X:LO16>>:$imm) - Complexity = 7
                   // Dst: (SUB_F_I_LO:i32:i32 GPR:i32:$Rs1, (LO16:i32 (imm:i32)<<P:Predicate_i32lo16z>>:$imm))
-/*1270*/        /*Scope*/ 17, /*->1288*/
-/*1271*/          OPC_CheckPredicate, 16, // Predicate_i32hi16
-/*1273*/          OPC_MoveParent,
-/*1274*/          OPC_EmitConvertToTarget, 1,
-/*1276*/          OPC_EmitNodeXForm, 1, 2, // HI16
-/*1279*/          OPC_MorphNodeTo2, TARGET_VAL(Lanai::SUB_F_I_HI), 0|OPFL_GlueOutput,
+/*1267*/        /*Scope*/ 17, /*->1285*/
+/*1268*/          OPC_CheckPredicate, 14, // Predicate_i32hi16
+/*1270*/          OPC_MoveParent,
+/*1271*/          OPC_EmitConvertToTarget, 1,
+/*1273*/          OPC_EmitNodeXForm, 1, 2, // HI16
+/*1276*/          OPC_MorphNodeTo2, TARGET_VAL(Lanai::SUB_F_I_HI), 0|OPFL_GlueOutput,
                       MVT::i32, MVT::i32, 2/*#Ops*/, 0, 3, 
                   // Src: (subc:i32 GPR:i32:$Rs1, (imm:i32)<<P:Predicate_i32hi16>><<X:HI16>>:$imm) - Complexity = 7
                   // Dst: (SUB_F_I_HI:i32:i32 GPR:i32:$Rs1, (HI16:i32 (imm:i32)<<P:Predicate_i32hi16>>:$imm))
-/*1288*/        0, /*End of Scope*/
-/*1289*/      /*Scope*/ 13, /*->1303*/
-/*1290*/        OPC_EmitInteger, MVT::i32, 0, 
-/*1293*/        OPC_MorphNodeTo2, TARGET_VAL(Lanai::SUB_F_R), 0|OPFL_GlueOutput,
+/*1285*/        0, /*End of Scope*/
+/*1286*/      /*Scope*/ 13, /*->1300*/
+/*1287*/        OPC_EmitInteger, MVT::i32, 0, 
+/*1290*/        OPC_MorphNodeTo2, TARGET_VAL(Lanai::SUB_F_R), 0|OPFL_GlueOutput,
                     MVT::i32, MVT::i32, 3/*#Ops*/, 0, 1, 2, 
                 // Src: (subc:i32 GPR:i32:$Rs1, GPR:i32:$Rs2) - Complexity = 3
                 // Dst: (SUB_F_R:i32:i32 GPR:i32:$Rs1, GPR:i32:$Rs2)
-/*1303*/      0, /*End of Scope*/
-/*1304*/    /*SwitchOpcode*/ 73, TARGET_VAL(ISD::ADDE),// ->1380
-/*1307*/      OPC_CaptureGlueInput,
-/*1308*/      OPC_RecordChild0, // #0 = $Rs1
-/*1309*/      OPC_RecordChild1, // #1 = $imm
-/*1310*/      OPC_Scope, 40, /*->1352*/ // 2 children in Scope
-/*1312*/        OPC_MoveChild1,
-/*1313*/        OPC_CheckOpcode, TARGET_VAL(ISD::Constant),
-/*1316*/        OPC_Scope, 16, /*->1334*/ // 2 children in Scope
-/*1318*/          OPC_CheckPredicate, 15, // Predicate_i32lo16z
-/*1320*/          OPC_MoveParent,
-/*1321*/          OPC_EmitConvertToTarget, 1,
-/*1323*/          OPC_EmitNodeXForm, 0, 2, // LO16
-/*1326*/          OPC_MorphNodeTo1, TARGET_VAL(Lanai::ADDC_I_LO), 0|OPFL_GlueInput|OPFL_GlueOutput,
+/*1300*/      0, /*End of Scope*/
+/*1301*/    /*SwitchOpcode*/ 73, TARGET_VAL(ISD::ADDE),// ->1377
+/*1304*/      OPC_CaptureGlueInput,
+/*1305*/      OPC_RecordChild0, // #0 = $Rs1
+/*1306*/      OPC_RecordChild1, // #1 = $imm
+/*1307*/      OPC_Scope, 40, /*->1349*/ // 2 children in Scope
+/*1309*/        OPC_MoveChild1,
+/*1310*/        OPC_CheckOpcode, TARGET_VAL(ISD::Constant),
+/*1313*/        OPC_Scope, 16, /*->1331*/ // 2 children in Scope
+/*1315*/          OPC_CheckPredicate, 13, // Predicate_i32lo16z
+/*1317*/          OPC_MoveParent,
+/*1318*/          OPC_EmitConvertToTarget, 1,
+/*1320*/          OPC_EmitNodeXForm, 0, 2, // LO16
+/*1323*/          OPC_MorphNodeTo1, TARGET_VAL(Lanai::ADDC_I_LO), 0|OPFL_GlueInput|OPFL_GlueOutput,
                       MVT::i32, 2/*#Ops*/, 0, 3, 
                   // Src: (adde:i32 GPR:i32:$Rs1, (imm:i32)<<P:Predicate_i32lo16z>><<X:LO16>>:$imm) - Complexity = 7
                   // Dst: (ADDC_I_LO:i32 GPR:i32:$Rs1, (LO16:i32 (imm:i32)<<P:Predicate_i32lo16z>>:$imm))
-/*1334*/        /*Scope*/ 16, /*->1351*/
-/*1335*/          OPC_CheckPredicate, 16, // Predicate_i32hi16
-/*1337*/          OPC_MoveParent,
-/*1338*/          OPC_EmitConvertToTarget, 1,
-/*1340*/          OPC_EmitNodeXForm, 1, 2, // HI16
-/*1343*/          OPC_MorphNodeTo1, TARGET_VAL(Lanai::ADDC_I_HI), 0|OPFL_GlueInput|OPFL_GlueOutput,
+/*1331*/        /*Scope*/ 16, /*->1348*/
+/*1332*/          OPC_CheckPredicate, 14, // Predicate_i32hi16
+/*1334*/          OPC_MoveParent,
+/*1335*/          OPC_EmitConvertToTarget, 1,
+/*1337*/          OPC_EmitNodeXForm, 1, 2, // HI16
+/*1340*/          OPC_MorphNodeTo1, TARGET_VAL(Lanai::ADDC_I_HI), 0|OPFL_GlueInput|OPFL_GlueOutput,
                       MVT::i32, 2/*#Ops*/, 0, 3, 
                   // Src: (adde:i32 GPR:i32:$Rs1, (imm:i32)<<P:Predicate_i32hi16>><<X:HI16>>:$imm) - Complexity = 7
                   // Dst: (ADDC_I_HI:i32 GPR:i32:$Rs1, (HI16:i32 (imm:i32)<<P:Predicate_i32hi16>>:$imm))
-/*1351*/        0, /*End of Scope*/
-/*1352*/      /*Scope*/ 26, /*->1379*/
-/*1353*/        OPC_EmitInteger, MVT::i32, 0, 
-/*1356*/        OPC_Scope, 9, /*->1367*/ // 2 children in Scope
-/*1358*/          OPC_MorphNodeTo1, TARGET_VAL(Lanai::ADDC_R), 0|OPFL_GlueInput|OPFL_GlueOutput,
+/*1348*/        0, /*End of Scope*/
+/*1349*/      /*Scope*/ 26, /*->1376*/
+/*1350*/        OPC_EmitInteger, MVT::i32, 0, 
+/*1353*/        OPC_Scope, 9, /*->1364*/ // 2 children in Scope
+/*1355*/          OPC_MorphNodeTo1, TARGET_VAL(Lanai::ADDC_R), 0|OPFL_GlueInput|OPFL_GlueOutput,
                       MVT::i32, 3/*#Ops*/, 0, 1, 2, 
                   // Src: (adde:i32 GPR:i32:$Rs1, GPR:i32:$Rs2) - Complexity = 3
                   // Dst: (ADDC_R:i32 GPR:i32:$Rs1, GPR:i32:$Rs2)
-/*1367*/        /*Scope*/ 10, /*->1378*/
-/*1368*/          OPC_MorphNodeTo2, TARGET_VAL(Lanai::ADDC_F_R), 0|OPFL_GlueInput|OPFL_GlueOutput,
+/*1364*/        /*Scope*/ 10, /*->1375*/
+/*1365*/          OPC_MorphNodeTo2, TARGET_VAL(Lanai::ADDC_F_R), 0|OPFL_GlueInput|OPFL_GlueOutput,
                       MVT::i32, MVT::i32, 3/*#Ops*/, 0, 1, 2, 
                   // Src: (adde:i32 GPR:i32:$Rs1, GPR:i32:$Rs2) - Complexity = 3
                   // Dst: (ADDC_F_R:i32:i32 GPR:i32:$Rs1, GPR:i32:$Rs2)
-/*1378*/        0, /*End of Scope*/
-/*1379*/      0, /*End of Scope*/
-/*1380*/    /*SwitchOpcode*/ 73, TARGET_VAL(ISD::SUBE),// ->1456
-/*1383*/      OPC_CaptureGlueInput,
-/*1384*/      OPC_RecordChild0, // #0 = $Rs1
-/*1385*/      OPC_RecordChild1, // #1 = $imm
-/*1386*/      OPC_Scope, 40, /*->1428*/ // 2 children in Scope
-/*1388*/        OPC_MoveChild1,
-/*1389*/        OPC_CheckOpcode, TARGET_VAL(ISD::Constant),
-/*1392*/        OPC_Scope, 16, /*->1410*/ // 2 children in Scope
-/*1394*/          OPC_CheckPredicate, 15, // Predicate_i32lo16z
-/*1396*/          OPC_MoveParent,
-/*1397*/          OPC_EmitConvertToTarget, 1,
-/*1399*/          OPC_EmitNodeXForm, 0, 2, // LO16
-/*1402*/          OPC_MorphNodeTo1, TARGET_VAL(Lanai::SUBB_I_LO), 0|OPFL_GlueInput|OPFL_GlueOutput,
+/*1375*/        0, /*End of Scope*/
+/*1376*/      0, /*End of Scope*/
+/*1377*/    /*SwitchOpcode*/ 73, TARGET_VAL(ISD::SUBE),// ->1453
+/*1380*/      OPC_CaptureGlueInput,
+/*1381*/      OPC_RecordChild0, // #0 = $Rs1
+/*1382*/      OPC_RecordChild1, // #1 = $imm
+/*1383*/      OPC_Scope, 40, /*->1425*/ // 2 children in Scope
+/*1385*/        OPC_MoveChild1,
+/*1386*/        OPC_CheckOpcode, TARGET_VAL(ISD::Constant),
+/*1389*/        OPC_Scope, 16, /*->1407*/ // 2 children in Scope
+/*1391*/          OPC_CheckPredicate, 13, // Predicate_i32lo16z
+/*1393*/          OPC_MoveParent,
+/*1394*/          OPC_EmitConvertToTarget, 1,
+/*1396*/          OPC_EmitNodeXForm, 0, 2, // LO16
+/*1399*/          OPC_MorphNodeTo1, TARGET_VAL(Lanai::SUBB_I_LO), 0|OPFL_GlueInput|OPFL_GlueOutput,
                       MVT::i32, 2/*#Ops*/, 0, 3, 
                   // Src: (sube:i32 GPR:i32:$Rs1, (imm:i32)<<P:Predicate_i32lo16z>><<X:LO16>>:$imm) - Complexity = 7
                   // Dst: (SUBB_I_LO:i32 GPR:i32:$Rs1, (LO16:i32 (imm:i32)<<P:Predicate_i32lo16z>>:$imm))
-/*1410*/        /*Scope*/ 16, /*->1427*/
-/*1411*/          OPC_CheckPredicate, 16, // Predicate_i32hi16
-/*1413*/          OPC_MoveParent,
-/*1414*/          OPC_EmitConvertToTarget, 1,
-/*1416*/          OPC_EmitNodeXForm, 1, 2, // HI16
-/*1419*/          OPC_MorphNodeTo1, TARGET_VAL(Lanai::SUBB_I_HI), 0|OPFL_GlueInput|OPFL_GlueOutput,
+/*1407*/        /*Scope*/ 16, /*->1424*/
+/*1408*/          OPC_CheckPredicate, 14, // Predicate_i32hi16
+/*1410*/          OPC_MoveParent,
+/*1411*/          OPC_EmitConvertToTarget, 1,
+/*1413*/          OPC_EmitNodeXForm, 1, 2, // HI16
+/*1416*/          OPC_MorphNodeTo1, TARGET_VAL(Lanai::SUBB_I_HI), 0|OPFL_GlueInput|OPFL_GlueOutput,
                       MVT::i32, 2/*#Ops*/, 0, 3, 
                   // Src: (sube:i32 GPR:i32:$Rs1, (imm:i32)<<P:Predicate_i32hi16>><<X:HI16>>:$imm) - Complexity = 7
                   // Dst: (SUBB_I_HI:i32 GPR:i32:$Rs1, (HI16:i32 (imm:i32)<<P:Predicate_i32hi16>>:$imm))
-/*1427*/        0, /*End of Scope*/
-/*1428*/      /*Scope*/ 26, /*->1455*/
-/*1429*/        OPC_EmitInteger, MVT::i32, 0, 
-/*1432*/        OPC_Scope, 9, /*->1443*/ // 2 children in Scope
-/*1434*/          OPC_MorphNodeTo1, TARGET_VAL(Lanai::SUBB_R), 0|OPFL_GlueInput|OPFL_GlueOutput,
+/*1424*/        0, /*End of Scope*/
+/*1425*/      /*Scope*/ 26, /*->1452*/
+/*1426*/        OPC_EmitInteger, MVT::i32, 0, 
+/*1429*/        OPC_Scope, 9, /*->1440*/ // 2 children in Scope
+/*1431*/          OPC_MorphNodeTo1, TARGET_VAL(Lanai::SUBB_R), 0|OPFL_GlueInput|OPFL_GlueOutput,
                       MVT::i32, 3/*#Ops*/, 0, 1, 2, 
                   // Src: (sube:i32 GPR:i32:$Rs1, GPR:i32:$Rs2) - Complexity = 3
                   // Dst: (SUBB_R:i32 GPR:i32:$Rs1, GPR:i32:$Rs2)
-/*1443*/        /*Scope*/ 10, /*->1454*/
-/*1444*/          OPC_MorphNodeTo2, TARGET_VAL(Lanai::SUBB_F_R), 0|OPFL_GlueInput|OPFL_GlueOutput,
+/*1440*/        /*Scope*/ 10, /*->1451*/
+/*1441*/          OPC_MorphNodeTo2, TARGET_VAL(Lanai::SUBB_F_R), 0|OPFL_GlueInput|OPFL_GlueOutput,
                       MVT::i32, MVT::i32, 3/*#Ops*/, 0, 1, 2, 
                   // Src: (sube:i32 GPR:i32:$Rs1, GPR:i32:$Rs2) - Complexity = 3
                   // Dst: (SUBB_F_R:i32:i32 GPR:i32:$Rs1, GPR:i32:$Rs2)
-/*1454*/        0, /*End of Scope*/
-/*1455*/      0, /*End of Scope*/
-/*1456*/    /*SwitchOpcode*/ 65, TARGET_VAL(LanaiISD::SUBBF),// ->1524
-/*1459*/      OPC_CaptureGlueInput,
-/*1460*/      OPC_RecordChild0, // #0 = $Rs1
-/*1461*/      OPC_Scope, 43, /*->1506*/ // 2 children in Scope
-/*1463*/        OPC_RecordChild1, // #1 = $imm
-/*1464*/        OPC_MoveChild1,
-/*1465*/        OPC_CheckOpcode, TARGET_VAL(ISD::Constant),
-/*1468*/        OPC_Scope, 17, /*->1487*/ // 2 children in Scope
-/*1470*/          OPC_CheckPredicate, 15, // Predicate_i32lo16z
-/*1472*/          OPC_MoveParent,
-/*1473*/          OPC_EmitConvertToTarget, 1,
-/*1475*/          OPC_EmitNodeXForm, 0, 2, // LO16
-/*1478*/          OPC_MorphNodeTo2, TARGET_VAL(Lanai::SUBB_F_I_LO), 0|OPFL_GlueInput|OPFL_GlueOutput,
+/*1451*/        0, /*End of Scope*/
+/*1452*/      0, /*End of Scope*/
+/*1453*/    /*SwitchOpcode*/ 65, TARGET_VAL(LanaiISD::SUBBF),// ->1521
+/*1456*/      OPC_CaptureGlueInput,
+/*1457*/      OPC_RecordChild0, // #0 = $Rs1
+/*1458*/      OPC_Scope, 43, /*->1503*/ // 2 children in Scope
+/*1460*/        OPC_RecordChild1, // #1 = $imm
+/*1461*/        OPC_MoveChild1,
+/*1462*/        OPC_CheckOpcode, TARGET_VAL(ISD::Constant),
+/*1465*/        OPC_Scope, 17, /*->1484*/ // 2 children in Scope
+/*1467*/          OPC_CheckPredicate, 13, // Predicate_i32lo16z
+/*1469*/          OPC_MoveParent,
+/*1470*/          OPC_EmitConvertToTarget, 1,
+/*1472*/          OPC_EmitNodeXForm, 0, 2, // LO16
+/*1475*/          OPC_MorphNodeTo2, TARGET_VAL(Lanai::SUBB_F_I_LO), 0|OPFL_GlueInput|OPFL_GlueOutput,
                       MVT::i32, MVT::i32, 2/*#Ops*/, 0, 3, 
                   // Src: (LanaiSubbF GPR:i32:$Rs1, (imm:i32)<<P:Predicate_i32lo16z>><<X:LO16>>:$imm) - Complexity = 7
                   // Dst: (SUBB_F_I_LO:i32:i32 GPR:i32:$Rs1, (LO16:i32 (imm:i32)<<P:Predicate_i32lo16z>>:$imm))
-/*1487*/        /*Scope*/ 17, /*->1505*/
-/*1488*/          OPC_CheckPredicate, 16, // Predicate_i32hi16
-/*1490*/          OPC_MoveParent,
-/*1491*/          OPC_EmitConvertToTarget, 1,
-/*1493*/          OPC_EmitNodeXForm, 1, 2, // HI16
-/*1496*/          OPC_MorphNodeTo2, TARGET_VAL(Lanai::SUBB_F_I_HI), 0|OPFL_GlueInput|OPFL_GlueOutput,
+/*1484*/        /*Scope*/ 17, /*->1502*/
+/*1485*/          OPC_CheckPredicate, 14, // Predicate_i32hi16
+/*1487*/          OPC_MoveParent,
+/*1488*/          OPC_EmitConvertToTarget, 1,
+/*1490*/          OPC_EmitNodeXForm, 1, 2, // HI16
+/*1493*/          OPC_MorphNodeTo2, TARGET_VAL(Lanai::SUBB_F_I_HI), 0|OPFL_GlueInput|OPFL_GlueOutput,
                       MVT::i32, MVT::i32, 2/*#Ops*/, 0, 3, 
                   // Src: (LanaiSubbF GPR:i32:$Rs1, (imm:i32)<<P:Predicate_i32hi16>><<X:HI16>>:$imm) - Complexity = 7
                   // Dst: (SUBB_F_I_HI:i32:i32 GPR:i32:$Rs1, (HI16:i32 (imm:i32)<<P:Predicate_i32hi16>>:$imm))
-/*1505*/        0, /*End of Scope*/
-/*1506*/      /*Scope*/ 16, /*->1523*/
-/*1507*/        OPC_CheckChild0Type, MVT::i32,
-/*1509*/        OPC_RecordChild1, // #1 = $Rs2
-/*1510*/        OPC_EmitInteger, MVT::i32, 0, 
-/*1513*/        OPC_MorphNodeTo2, TARGET_VAL(Lanai::SUBB_F_R), 0|OPFL_GlueInput|OPFL_GlueOutput,
+/*1502*/        0, /*End of Scope*/
+/*1503*/      /*Scope*/ 16, /*->1520*/
+/*1504*/        OPC_CheckChild0Type, MVT::i32,
+/*1506*/        OPC_RecordChild1, // #1 = $Rs2
+/*1507*/        OPC_EmitInteger, MVT::i32, 0, 
+/*1510*/        OPC_MorphNodeTo2, TARGET_VAL(Lanai::SUBB_F_R), 0|OPFL_GlueInput|OPFL_GlueOutput,
                     MVT::i32, MVT::i32, 3/*#Ops*/, 0, 1, 2, 
                 // Src: (LanaiSubbF GPR:i32:$Rs1, GPR:i32:$Rs2) - Complexity = 3
                 // Dst: (SUBB_F_R:i32:i32 GPR:i32:$Rs1, GPR:i32:$Rs2)
-/*1523*/      0, /*End of Scope*/
-/*1524*/    /*SwitchOpcode*/ 35, TARGET_VAL(ISD::SHL),// ->1562
-/*1527*/      OPC_RecordChild0, // #0 = $Rs1
-/*1528*/      OPC_RecordChild1, // #1 = $imm16
-/*1529*/      OPC_Scope, 17, /*->1548*/ // 2 children in Scope
-/*1531*/        OPC_MoveChild1,
-/*1532*/        OPC_CheckOpcode, TARGET_VAL(ISD::Constant),
-/*1535*/        OPC_CheckPredicate, 18, // Predicate_immShift
-/*1537*/        OPC_MoveParent,
-/*1538*/        OPC_EmitConvertToTarget, 1,
-/*1540*/        OPC_MorphNodeTo1, TARGET_VAL(Lanai::SL_I), 0,
+/*1520*/      0, /*End of Scope*/
+/*1521*/    /*SwitchOpcode*/ 35, TARGET_VAL(ISD::SHL),// ->1559
+/*1524*/      OPC_RecordChild0, // #0 = $Rs1
+/*1525*/      OPC_RecordChild1, // #1 = $imm16
+/*1526*/      OPC_Scope, 17, /*->1545*/ // 2 children in Scope
+/*1528*/        OPC_MoveChild1,
+/*1529*/        OPC_CheckOpcode, TARGET_VAL(ISD::Constant),
+/*1532*/        OPC_CheckPredicate, 18, // Predicate_immShift
+/*1534*/        OPC_MoveParent,
+/*1535*/        OPC_EmitConvertToTarget, 1,
+/*1537*/        OPC_MorphNodeTo1, TARGET_VAL(Lanai::SL_I), 0,
                     MVT::i32, 2/*#Ops*/, 0, 2, 
                 // Src: (shl:i32 GPR:i32:$Rs1, (imm:i32)<<P:Predicate_immShift>>:$imm16) - Complexity = 7
                 // Dst: (SL_I:i32 GPR:i32:$Rs1, (imm:i32):$imm16)
-/*1548*/      /*Scope*/ 12, /*->1561*/
-/*1549*/        OPC_EmitInteger, MVT::i32, 0, 
-/*1552*/        OPC_MorphNodeTo1, TARGET_VAL(Lanai::SHL_R), 0,
+/*1545*/      /*Scope*/ 12, /*->1558*/
+/*1546*/        OPC_EmitInteger, MVT::i32, 0, 
+/*1549*/        OPC_MorphNodeTo1, TARGET_VAL(Lanai::SHL_R), 0,
                     MVT::i32, 3/*#Ops*/, 0, 1, 2, 
                 // Src: (shl:i32 GPR:i32:$Rs1, GPR:i32:$Rs2) - Complexity = 3
                 // Dst: (SHL_R:i32 GPR:i32:$Rs1, GPR:i32:$Rs2)
-/*1561*/      0, /*End of Scope*/
-/*1562*/    /*SwitchOpcode*/ 51, TARGET_VAL(ISD::SRL),// ->1616
-/*1565*/      OPC_RecordChild0, // #0 = $Rs1
-/*1566*/      OPC_RecordChild1, // #1 = $imm
-/*1567*/      OPC_Scope, 18, /*->1587*/ // 2 children in Scope
-/*1569*/        OPC_MoveChild1,
-/*1570*/        OPC_CheckOpcode, TARGET_VAL(ISD::Constant),
-/*1573*/        OPC_CheckPredicate, 18, // Predicate_immShift
-/*1575*/        OPC_MoveParent,
-/*1576*/        OPC_EmitNodeXForm, 2, 1, // NEG
-/*1579*/        OPC_MorphNodeTo1, TARGET_VAL(Lanai::SL_I), 0,
+/*1558*/      0, /*End of Scope*/
+/*1559*/    /*SwitchOpcode*/ 51, TARGET_VAL(ISD::SRL),// ->1613
+/*1562*/      OPC_RecordChild0, // #0 = $Rs1
+/*1563*/      OPC_RecordChild1, // #1 = $imm
+/*1564*/      OPC_Scope, 18, /*->1584*/ // 2 children in Scope
+/*1566*/        OPC_MoveChild1,
+/*1567*/        OPC_CheckOpcode, TARGET_VAL(ISD::Constant),
+/*1570*/        OPC_CheckPredicate, 18, // Predicate_immShift
+/*1572*/        OPC_MoveParent,
+/*1573*/        OPC_EmitNodeXForm, 2, 1, // NEG
+/*1576*/        OPC_MorphNodeTo1, TARGET_VAL(Lanai::SL_I), 0,
                     MVT::i32, 2/*#Ops*/, 0, 2, 
                 // Src: (srl:i32 GPR:i32:$Rs1, (imm:i32)<<P:Predicate_immShift>>:$imm) - Complexity = 7
                 // Dst: (SL_I:i32 GPR:i32:$Rs1, (NEG:i32 ?:i32:$imm))
-/*1587*/      /*Scope*/ 27, /*->1615*/
-/*1588*/        OPC_EmitRegister, MVT::i32, Lanai::R0,
-/*1591*/        OPC_EmitInteger, MVT::i32, 0, 
-/*1594*/        OPC_EmitNode1, TARGET_VAL(Lanai::SUB_R), 0,
+/*1584*/      /*Scope*/ 27, /*->1612*/
+/*1585*/        OPC_EmitRegister, MVT::i32, Lanai::R0,
+/*1588*/        OPC_EmitInteger, MVT::i32, 0, 
+/*1591*/        OPC_EmitNode1, TARGET_VAL(Lanai::SUB_R), 0,
                     MVT::i32, 3/*#Ops*/, 2, 1, 3,  // Results = #4
-/*1603*/        OPC_EmitInteger, MVT::i32, 0, 
-/*1606*/        OPC_MorphNodeTo1, TARGET_VAL(Lanai::SRL_R), 0,
+/*1600*/        OPC_EmitInteger, MVT::i32, 0, 
+/*1603*/        OPC_MorphNodeTo1, TARGET_VAL(Lanai::SRL_R), 0,
                     MVT::i32, 3/*#Ops*/, 0, 4, 5, 
                 // Src: (srl:i32 GPR:i32:$Rs1, GPR:i32:$Rs2) - Complexity = 3
                 // Dst: (SRL_R:i32 GPR:i32:$Rs1, (SUB_R:i32 R0:i32, GPR:i32:$Rs2))
-/*1615*/      0, /*End of Scope*/
-/*1616*/    /*SwitchOpcode*/ 51, TARGET_VAL(ISD::SRA),// ->1670
-/*1619*/      OPC_RecordChild0, // #0 = $Rs1
-/*1620*/      OPC_RecordChild1, // #1 = $imm
-/*1621*/      OPC_Scope, 18, /*->1641*/ // 2 children in Scope
-/*1623*/        OPC_MoveChild1,
-/*1624*/        OPC_CheckOpcode, TARGET_VAL(ISD::Constant),
-/*1627*/        OPC_CheckPredicate, 18, // Predicate_immShift
-/*1629*/        OPC_MoveParent,
-/*1630*/        OPC_EmitNodeXForm, 2, 1, // NEG
-/*1633*/        OPC_MorphNodeTo1, TARGET_VAL(Lanai::SA_I), 0,
+/*1612*/      0, /*End of Scope*/
+/*1613*/    /*SwitchOpcode*/ 51, TARGET_VAL(ISD::SRA),// ->1667
+/*1616*/      OPC_RecordChild0, // #0 = $Rs1
+/*1617*/      OPC_RecordChild1, // #1 = $imm
+/*1618*/      OPC_Scope, 18, /*->1638*/ // 2 children in Scope
+/*1620*/        OPC_MoveChild1,
+/*1621*/        OPC_CheckOpcode, TARGET_VAL(ISD::Constant),
+/*1624*/        OPC_CheckPredicate, 18, // Predicate_immShift
+/*1626*/        OPC_MoveParent,
+/*1627*/        OPC_EmitNodeXForm, 2, 1, // NEG
+/*1630*/        OPC_MorphNodeTo1, TARGET_VAL(Lanai::SA_I), 0,
                     MVT::i32, 2/*#Ops*/, 0, 2, 
                 // Src: (sra:i32 GPR:i32:$Rs1, (imm:i32)<<P:Predicate_immShift>>:$imm) - Complexity = 7
                 // Dst: (SA_I:i32 GPR:i32:$Rs1, (NEG:i32 ?:i32:$imm))
-/*1641*/      /*Scope*/ 27, /*->1669*/
-/*1642*/        OPC_EmitRegister, MVT::i32, Lanai::R0,
-/*1645*/        OPC_EmitInteger, MVT::i32, 0, 
-/*1648*/        OPC_EmitNode1, TARGET_VAL(Lanai::SUB_R), 0,
+/*1638*/      /*Scope*/ 27, /*->1666*/
+/*1639*/        OPC_EmitRegister, MVT::i32, Lanai::R0,
+/*1642*/        OPC_EmitInteger, MVT::i32, 0, 
+/*1645*/        OPC_EmitNode1, TARGET_VAL(Lanai::SUB_R), 0,
                     MVT::i32, 3/*#Ops*/, 2, 1, 3,  // Results = #4
-/*1657*/        OPC_EmitInteger, MVT::i32, 0, 
-/*1660*/        OPC_MorphNodeTo1, TARGET_VAL(Lanai::SRA_R), 0,
+/*1654*/        OPC_EmitInteger, MVT::i32, 0, 
+/*1657*/        OPC_MorphNodeTo1, TARGET_VAL(Lanai::SRA_R), 0,
                     MVT::i32, 3/*#Ops*/, 0, 4, 5, 
                 // Src: (sra:i32 GPR:i32:$Rs1, GPR:i32:$Rs2) - Complexity = 3
                 // Dst: (SRA_R:i32 GPR:i32:$Rs1, (SUB_R:i32 R0:i32, GPR:i32:$Rs2))
-/*1669*/      0, /*End of Scope*/
-/*1670*/    /*SwitchOpcode*/ 57, TARGET_VAL(LanaiISD::SET_FLAG),// ->1730
-/*1673*/      OPC_RecordChild0, // #0 = $Rs1
-/*1674*/      OPC_Scope, 41, /*->1717*/ // 2 children in Scope
-/*1676*/        OPC_RecordChild1, // #1 = $imm16
-/*1677*/        OPC_MoveChild1,
-/*1678*/        OPC_CheckOpcode, TARGET_VAL(ISD::Constant),
-/*1681*/        OPC_Scope, 16, /*->1699*/ // 2 children in Scope
-/*1683*/          OPC_CheckPredicate, 15, // Predicate_i32lo16z
-/*1685*/          OPC_MoveParent,
-/*1686*/          OPC_EmitConvertToTarget, 1,
-/*1688*/          OPC_EmitNodeXForm, 0, 2, // LO16
-/*1691*/          OPC_MorphNodeTo1, TARGET_VAL(Lanai::SFSUB_F_RI_LO), 0|OPFL_GlueOutput,
+/*1666*/      0, /*End of Scope*/
+/*1667*/    /*SwitchOpcode*/ 57, TARGET_VAL(LanaiISD::SET_FLAG),// ->1727
+/*1670*/      OPC_RecordChild0, // #0 = $Rs1
+/*1671*/      OPC_Scope, 41, /*->1714*/ // 2 children in Scope
+/*1673*/        OPC_RecordChild1, // #1 = $imm16
+/*1674*/        OPC_MoveChild1,
+/*1675*/        OPC_CheckOpcode, TARGET_VAL(ISD::Constant),
+/*1678*/        OPC_Scope, 16, /*->1696*/ // 2 children in Scope
+/*1680*/          OPC_CheckPredicate, 13, // Predicate_i32lo16z
+/*1682*/          OPC_MoveParent,
+/*1683*/          OPC_EmitConvertToTarget, 1,
+/*1685*/          OPC_EmitNodeXForm, 0, 2, // LO16
+/*1688*/          OPC_MorphNodeTo1, TARGET_VAL(Lanai::SFSUB_F_RI_LO), 0|OPFL_GlueOutput,
                       MVT::i32, 2/*#Ops*/, 0, 3, 
                   // Src: (LanaiSetFlag GPR:i32:$Rs1, (imm:i32)<<P:Predicate_i32lo16z>><<X:LO16>>:$imm16) - Complexity = 7
                   // Dst: (SFSUB_F_RI_LO:i32 GPR:i32:$Rs1, (LO16:i32 (imm:i32):$imm16))
-/*1699*/        /*Scope*/ 16, /*->1716*/
-/*1700*/          OPC_CheckPredicate, 16, // Predicate_i32hi16
-/*1702*/          OPC_MoveParent,
-/*1703*/          OPC_EmitConvertToTarget, 1,
-/*1705*/          OPC_EmitNodeXForm, 1, 2, // HI16
-/*1708*/          OPC_MorphNodeTo1, TARGET_VAL(Lanai::SFSUB_F_RI_HI), 0|OPFL_GlueOutput,
+/*1696*/        /*Scope*/ 16, /*->1713*/
+/*1697*/          OPC_CheckPredicate, 14, // Predicate_i32hi16
+/*1699*/          OPC_MoveParent,
+/*1700*/          OPC_EmitConvertToTarget, 1,
+/*1702*/          OPC_EmitNodeXForm, 1, 2, // HI16
+/*1705*/          OPC_MorphNodeTo1, TARGET_VAL(Lanai::SFSUB_F_RI_HI), 0|OPFL_GlueOutput,
                       MVT::i32, 2/*#Ops*/, 0, 3, 
                   // Src: (LanaiSetFlag GPR:i32:$Rs1, (imm:i32)<<P:Predicate_i32hi16>><<X:HI16>>:$imm16) - Complexity = 7
                   // Dst: (SFSUB_F_RI_HI:i32 GPR:i32:$Rs1, (HI16:i32 (imm:i32):$imm16))
-/*1716*/        0, /*End of Scope*/
-/*1717*/      /*Scope*/ 11, /*->1729*/
-/*1718*/        OPC_CheckChild0Type, MVT::i32,
-/*1720*/        OPC_RecordChild1, // #1 = $Rs2
-/*1721*/        OPC_MorphNodeTo1, TARGET_VAL(Lanai::SFSUB_F_RR), 0|OPFL_GlueOutput,
+/*1713*/        0, /*End of Scope*/
+/*1714*/      /*Scope*/ 11, /*->1726*/
+/*1715*/        OPC_CheckChild0Type, MVT::i32,
+/*1717*/        OPC_RecordChild1, // #1 = $Rs2
+/*1718*/        OPC_MorphNodeTo1, TARGET_VAL(Lanai::SFSUB_F_RR), 0|OPFL_GlueOutput,
                     MVT::i32, 2/*#Ops*/, 0, 1, 
                 // Src: (LanaiSetFlag GPR:i32:$Rs1, GPR:i32:$Rs2) - Complexity = 3
                 // Dst: (SFSUB_F_RR:i32 GPR:i32:$Rs1, GPR:i32:$Rs2)
-/*1729*/      0, /*End of Scope*/
-/*1730*/    /*SwitchOpcode*/ 24, TARGET_VAL(LanaiISD::BR_CC),// ->1757
-/*1733*/      OPC_RecordNode, // #0 = 'LanaiBrCC' chained node
-/*1734*/      OPC_CaptureGlueInput,
-/*1735*/      OPC_RecordChild1, // #1 = $addr
-/*1736*/      OPC_MoveChild1,
-/*1737*/      OPC_CheckOpcode, TARGET_VAL(ISD::BasicBlock),
-/*1740*/      OPC_MoveParent,
-/*1741*/      OPC_RecordChild2, // #2 = $DDDI
-/*1742*/      OPC_MoveChild2,
-/*1743*/      OPC_CheckOpcode, TARGET_VAL(ISD::Constant),
-/*1746*/      OPC_MoveParent,
-/*1747*/      OPC_EmitMergeInputChains1_0,
-/*1748*/      OPC_EmitConvertToTarget, 2,
-/*1750*/      OPC_MorphNodeTo0, TARGET_VAL(Lanai::BRCC), 0|OPFL_Chain|OPFL_GlueInput,
+/*1726*/      0, /*End of Scope*/
+/*1727*/    /*SwitchOpcode*/ 24, TARGET_VAL(LanaiISD::BR_CC),// ->1754
+/*1730*/      OPC_RecordNode, // #0 = 'LanaiBrCC' chained node
+/*1731*/      OPC_CaptureGlueInput,
+/*1732*/      OPC_RecordChild1, // #1 = $addr
+/*1733*/      OPC_MoveChild1,
+/*1734*/      OPC_CheckOpcode, TARGET_VAL(ISD::BasicBlock),
+/*1737*/      OPC_MoveParent,
+/*1738*/      OPC_RecordChild2, // #2 = $DDDI
+/*1739*/      OPC_MoveChild2,
+/*1740*/      OPC_CheckOpcode, TARGET_VAL(ISD::Constant),
+/*1743*/      OPC_MoveParent,
+/*1744*/      OPC_EmitMergeInputChains1_0,
+/*1745*/      OPC_EmitConvertToTarget, 2,
+/*1747*/      OPC_MorphNodeTo0, TARGET_VAL(Lanai::BRCC), 0|OPFL_Chain|OPFL_GlueInput,
                   2/*#Ops*/, 1, 3, 
               // Src: (LanaiBrCC (bb:Other):$addr, (imm:i32):$DDDI) - Complexity = 6
               // Dst: (BRCC (bb:Other):$addr, (imm:i32):$DDDI)
-/*1757*/    /*SwitchOpcode*/ 15, TARGET_VAL(ISD::CALLSEQ_START),// ->1775
-/*1760*/      OPC_RecordNode, // #0 = 'CallSeqStart' chained node
-/*1761*/      OPC_RecordChild1, // #1 = $amt
-/*1762*/      OPC_MoveChild1,
-/*1763*/      OPC_CheckOpcode, TARGET_VAL(ISD::TargetConstant),
-/*1766*/      OPC_MoveParent,
-/*1767*/      OPC_EmitMergeInputChains1_0,
-/*1768*/      OPC_MorphNodeTo1, TARGET_VAL(Lanai::ADJCALLSTACKDOWN), 0|OPFL_Chain|OPFL_GlueOutput,
-                  MVT::i32, 1/*#Ops*/, 1, 
-              // Src: (CallSeqStart (timm:i32):$amt) - Complexity = 6
-              // Dst: (ADJCALLSTACKDOWN:i32 (timm:i32):$amt)
-/*1775*/    /*SwitchOpcode*/ 16, TARGET_VAL(LanaiISD::SETCC),// ->1794
-/*1778*/      OPC_CaptureGlueInput,
-/*1779*/      OPC_RecordChild0, // #0 = $DDDI
-/*1780*/      OPC_MoveChild0,
-/*1781*/      OPC_CheckOpcode, TARGET_VAL(ISD::Constant),
-/*1784*/      OPC_MoveParent,
-/*1785*/      OPC_EmitConvertToTarget, 0,
-/*1787*/      OPC_MorphNodeTo1, TARGET_VAL(Lanai::SCC), 0|OPFL_GlueInput,
+/*1754*/    /*SwitchOpcode*/ 16, TARGET_VAL(LanaiISD::SETCC),// ->1773
+/*1757*/      OPC_CaptureGlueInput,
+/*1758*/      OPC_RecordChild0, // #0 = $DDDI
+/*1759*/      OPC_MoveChild0,
+/*1760*/      OPC_CheckOpcode, TARGET_VAL(ISD::Constant),
+/*1763*/      OPC_MoveParent,
+/*1764*/      OPC_EmitConvertToTarget, 0,
+/*1766*/      OPC_MorphNodeTo1, TARGET_VAL(Lanai::SCC), 0|OPFL_GlueInput,
                   MVT::i32, 1/*#Ops*/, 1, 
               // Src: (LanaiSetCC:i32 (imm:i32):$DDDI) - Complexity = 6
               // Dst: (SCC:i32 (imm:i32):$DDDI)
-/*1794*/    /*SwitchOpcode*/ 22, TARGET_VAL(LanaiISD::SELECT_CC),// ->1819
-/*1797*/      OPC_CaptureGlueInput,
-/*1798*/      OPC_RecordChild0, // #0 = $Rs1
-/*1799*/      OPC_RecordChild1, // #1 = $Rs2
-/*1800*/      OPC_RecordChild2, // #2 = $DDDI
-/*1801*/      OPC_MoveChild2,
-/*1802*/      OPC_CheckOpcode, TARGET_VAL(ISD::Constant),
-/*1805*/      OPC_MoveParent,
-/*1806*/      OPC_CheckType, MVT::i32,
-/*1808*/      OPC_EmitConvertToTarget, 2,
-/*1810*/      OPC_MorphNodeTo1, TARGET_VAL(Lanai::SELECT), 0|OPFL_GlueInput,
+/*1773*/    /*SwitchOpcode*/ 22, TARGET_VAL(LanaiISD::SELECT_CC),// ->1798
+/*1776*/      OPC_CaptureGlueInput,
+/*1777*/      OPC_RecordChild0, // #0 = $Rs1
+/*1778*/      OPC_RecordChild1, // #1 = $Rs2
+/*1779*/      OPC_RecordChild2, // #2 = $DDDI
+/*1780*/      OPC_MoveChild2,
+/*1781*/      OPC_CheckOpcode, TARGET_VAL(ISD::Constant),
+/*1784*/      OPC_MoveParent,
+/*1785*/      OPC_CheckType, MVT::i32,
+/*1787*/      OPC_EmitConvertToTarget, 2,
+/*1789*/      OPC_MorphNodeTo1, TARGET_VAL(Lanai::SELECT), 0|OPFL_GlueInput,
                   MVT::i32, 3/*#Ops*/, 0, 1, 3, 
               // Src: (LanaiSelectCC:i32 GPR:i32:$Rs1, GPR:i32:$Rs2, (imm:i32):$DDDI) - Complexity = 6
               // Dst: (SELECT:i32 GPR:i32:$Rs1, GPR:i32:$Rs2, (imm:i32):$DDDI)
-/*1819*/    /*SwitchOpcode*/ 42, TARGET_VAL(LanaiISD::CALL),// ->1864
-/*1822*/      OPC_RecordNode, // #0 = 'Call' chained node
-/*1823*/      OPC_CaptureGlueInput,
-/*1824*/      OPC_RecordChild1, // #1 = $dst
-/*1825*/      OPC_Scope, 27, /*->1854*/ // 2 children in Scope
-/*1827*/        OPC_MoveChild1,
-/*1828*/        OPC_SwitchOpcode /*2 cases */, 9, TARGET_VAL(ISD::TargetGlobalAddress),// ->1841
-/*1832*/          OPC_MoveParent,
-/*1833*/          OPC_EmitMergeInputChains1_0,
-/*1834*/          OPC_MorphNodeTo1, TARGET_VAL(Lanai::CALL), 0|OPFL_Chain|OPFL_GlueInput|OPFL_GlueOutput|OPFL_Variadic1,
+/*1798*/    /*SwitchOpcode*/ 42, TARGET_VAL(LanaiISD::CALL),// ->1843
+/*1801*/      OPC_RecordNode, // #0 = 'Call' chained node
+/*1802*/      OPC_CaptureGlueInput,
+/*1803*/      OPC_RecordChild1, // #1 = $dst
+/*1804*/      OPC_Scope, 27, /*->1833*/ // 2 children in Scope
+/*1806*/        OPC_MoveChild1,
+/*1807*/        OPC_SwitchOpcode /*2 cases */, 9, TARGET_VAL(ISD::TargetGlobalAddress),// ->1820
+/*1811*/          OPC_MoveParent,
+/*1812*/          OPC_EmitMergeInputChains1_0,
+/*1813*/          OPC_MorphNodeTo1, TARGET_VAL(Lanai::CALL), 0|OPFL_Chain|OPFL_GlueInput|OPFL_GlueOutput|OPFL_Variadic1,
                       MVT::i32, 1/*#Ops*/, 1, 
                   // Src: (Call (tglobaladdr:i32):$dst) - Complexity = 6
                   // Dst: (CALL:i32 (tglobaladdr:i32):$dst)
-/*1841*/        /*SwitchOpcode*/ 9, TARGET_VAL(ISD::TargetExternalSymbol),// ->1853
-/*1844*/          OPC_MoveParent,
-/*1845*/          OPC_EmitMergeInputChains1_0,
-/*1846*/          OPC_MorphNodeTo1, TARGET_VAL(Lanai::CALL), 0|OPFL_Chain|OPFL_GlueInput|OPFL_GlueOutput|OPFL_Variadic1,
+/*1820*/        /*SwitchOpcode*/ 9, TARGET_VAL(ISD::TargetExternalSymbol),// ->1832
+/*1823*/          OPC_MoveParent,
+/*1824*/          OPC_EmitMergeInputChains1_0,
+/*1825*/          OPC_MorphNodeTo1, TARGET_VAL(Lanai::CALL), 0|OPFL_Chain|OPFL_GlueInput|OPFL_GlueOutput|OPFL_Variadic1,
                       MVT::i32, 1/*#Ops*/, 1, 
                   // Src: (Call (texternalsym:i32):$dst) - Complexity = 6
                   // Dst: (CALL:i32 (texternalsym:i32):$dst)
-/*1853*/        0, // EndSwitchOpcode
-/*1854*/      /*Scope*/ 8, /*->1863*/
-/*1855*/        OPC_EmitMergeInputChains1_0,
-/*1856*/        OPC_MorphNodeTo1, TARGET_VAL(Lanai::CALLR), 0|OPFL_Chain|OPFL_GlueInput|OPFL_GlueOutput|OPFL_Variadic1,
+/*1832*/        0, // EndSwitchOpcode
+/*1833*/      /*Scope*/ 8, /*->1842*/
+/*1834*/        OPC_EmitMergeInputChains1_0,
+/*1835*/        OPC_MorphNodeTo1, TARGET_VAL(Lanai::CALLR), 0|OPFL_Chain|OPFL_GlueInput|OPFL_GlueOutput|OPFL_Variadic1,
                     MVT::i32, 1/*#Ops*/, 1, 
                 // Src: (Call GPR:i32:$Rs1) - Complexity = 3
                 // Dst: (CALLR:i32 GPR:i32:$Rs1)
-/*1863*/      0, /*End of Scope*/
-/*1864*/    /*SwitchOpcode*/ 59, TARGET_VAL(LanaiISD::HI),// ->1926
-/*1867*/      OPC_RecordChild0, // #0 = $dst
-/*1868*/      OPC_MoveChild0,
-/*1869*/      OPC_SwitchOpcode /*5 cases */, 8, TARGET_VAL(ISD::TargetGlobalAddress),// ->1881
-/*1873*/        OPC_MoveParent,
-/*1874*/        OPC_MorphNodeTo1, TARGET_VAL(Lanai::MOVHI), 0,
+/*1842*/      0, /*End of Scope*/
+/*1843*/    /*SwitchOpcode*/ 59, TARGET_VAL(LanaiISD::HI),// ->1905
+/*1846*/      OPC_RecordChild0, // #0 = $dst
+/*1847*/      OPC_MoveChild0,
+/*1848*/      OPC_SwitchOpcode /*5 cases */, 8, TARGET_VAL(ISD::TargetGlobalAddress),// ->1860
+/*1852*/        OPC_MoveParent,
+/*1853*/        OPC_MorphNodeTo1, TARGET_VAL(Lanai::MOVHI), 0,
                     MVT::i32, 1/*#Ops*/, 0, 
                 // Src: (LanaiHi:i32 (tglobaladdr:i32):$dst) - Complexity = 6
                 // Dst: (MOVHI:i32 (tglobaladdr:i32):$dst)
-/*1881*/      /*SwitchOpcode*/ 8, TARGET_VAL(ISD::TargetExternalSymbol),// ->1892
-/*1884*/        OPC_MoveParent,
-/*1885*/        OPC_MorphNodeTo1, TARGET_VAL(Lanai::MOVHI), 0,
+/*1860*/      /*SwitchOpcode*/ 8, TARGET_VAL(ISD::TargetExternalSymbol),// ->1871
+/*1863*/        OPC_MoveParent,
+/*1864*/        OPC_MorphNodeTo1, TARGET_VAL(Lanai::MOVHI), 0,
                     MVT::i32, 1/*#Ops*/, 0, 
                 // Src: (LanaiHi:i32 (texternalsym:i32):$dst) - Complexity = 6
                 // Dst: (MOVHI:i32 (texternalsym:i32):$dst)
-/*1892*/      /*SwitchOpcode*/ 8, TARGET_VAL(ISD::TargetBlockAddress),// ->1903
-/*1895*/        OPC_MoveParent,
-/*1896*/        OPC_MorphNodeTo1, TARGET_VAL(Lanai::MOVHI), 0,
+/*1871*/      /*SwitchOpcode*/ 8, TARGET_VAL(ISD::TargetBlockAddress),// ->1882
+/*1874*/        OPC_MoveParent,
+/*1875*/        OPC_MorphNodeTo1, TARGET_VAL(Lanai::MOVHI), 0,
                     MVT::i32, 1/*#Ops*/, 0, 
                 // Src: (LanaiHi:i32 (tblockaddress:i32):$dst) - Complexity = 6
                 // Dst: (MOVHI:i32 (tblockaddress:i32):$dst)
-/*1903*/      /*SwitchOpcode*/ 8, TARGET_VAL(ISD::TargetJumpTable),// ->1914
-/*1906*/        OPC_MoveParent,
-/*1907*/        OPC_MorphNodeTo1, TARGET_VAL(Lanai::MOVHI), 0,
+/*1882*/      /*SwitchOpcode*/ 8, TARGET_VAL(ISD::TargetJumpTable),// ->1893
+/*1885*/        OPC_MoveParent,
+/*1886*/        OPC_MorphNodeTo1, TARGET_VAL(Lanai::MOVHI), 0,
                     MVT::i32, 1/*#Ops*/, 0, 
                 // Src: (LanaiHi:i32 (tjumptable:i32):$dst) - Complexity = 6
                 // Dst: (MOVHI:i32 (tjumptable:i32):$dst)
-/*1914*/      /*SwitchOpcode*/ 8, TARGET_VAL(ISD::TargetConstantPool),// ->1925
-/*1917*/        OPC_MoveParent,
-/*1918*/        OPC_MorphNodeTo1, TARGET_VAL(Lanai::MOVHI), 0,
+/*1893*/      /*SwitchOpcode*/ 8, TARGET_VAL(ISD::TargetConstantPool),// ->1904
+/*1896*/        OPC_MoveParent,
+/*1897*/        OPC_MorphNodeTo1, TARGET_VAL(Lanai::MOVHI), 0,
                     MVT::i32, 1/*#Ops*/, 0, 
                 // Src: (LanaiHi:i32 (tconstpool:i32):$dst) - Complexity = 6
                 // Dst: (MOVHI:i32 (tconstpool:i32):$dst)
-/*1925*/      0, // EndSwitchOpcode
-/*1926*/    /*SwitchOpcode*/ 79, TARGET_VAL(LanaiISD::LO),// ->2008
-/*1929*/      OPC_RecordChild0, // #0 = $dst
-/*1930*/      OPC_MoveChild0,
-/*1931*/      OPC_SwitchOpcode /*5 cases */, 12, TARGET_VAL(ISD::TargetGlobalAddress),// ->1947
-/*1935*/        OPC_MoveParent,
-/*1936*/        OPC_EmitRegister, MVT::i32, Lanai::R0,
-/*1939*/        OPC_MorphNodeTo1, TARGET_VAL(Lanai::OR_I_LO), 0,
+/*1904*/      0, // EndSwitchOpcode
+/*1905*/    /*SwitchOpcode*/ 79, TARGET_VAL(LanaiISD::LO),// ->1987
+/*1908*/      OPC_RecordChild0, // #0 = $dst
+/*1909*/      OPC_MoveChild0,
+/*1910*/      OPC_SwitchOpcode /*5 cases */, 12, TARGET_VAL(ISD::TargetGlobalAddress),// ->1926
+/*1914*/        OPC_MoveParent,
+/*1915*/        OPC_EmitRegister, MVT::i32, Lanai::R0,
+/*1918*/        OPC_MorphNodeTo1, TARGET_VAL(Lanai::OR_I_LO), 0,
                     MVT::i32, 2/*#Ops*/, 1, 0, 
                 // Src: (LanaiLo:i32 (tglobaladdr:i32):$dst) - Complexity = 6
                 // Dst: (OR_I_LO:i32 R0:i32, (tglobaladdr:i32):$dst)
-/*1947*/      /*SwitchOpcode*/ 12, TARGET_VAL(ISD::TargetExternalSymbol),// ->1962
-/*1950*/        OPC_MoveParent,
-/*1951*/        OPC_EmitRegister, MVT::i32, Lanai::R0,
-/*1954*/        OPC_MorphNodeTo1, TARGET_VAL(Lanai::OR_I_LO), 0,
+/*1926*/      /*SwitchOpcode*/ 12, TARGET_VAL(ISD::TargetExternalSymbol),// ->1941
+/*1929*/        OPC_MoveParent,
+/*1930*/        OPC_EmitRegister, MVT::i32, Lanai::R0,
+/*1933*/        OPC_MorphNodeTo1, TARGET_VAL(Lanai::OR_I_LO), 0,
                     MVT::i32, 2/*#Ops*/, 1, 0, 
                 // Src: (LanaiLo:i32 (texternalsym:i32):$dst) - Complexity = 6
                 // Dst: (OR_I_LO:i32 R0:i32, (texternalsym:i32):$dst)
-/*1962*/      /*SwitchOpcode*/ 12, TARGET_VAL(ISD::TargetBlockAddress),// ->1977
-/*1965*/        OPC_MoveParent,
-/*1966*/        OPC_EmitRegister, MVT::i32, Lanai::R0,
-/*1969*/        OPC_MorphNodeTo1, TARGET_VAL(Lanai::OR_I_LO), 0,
+/*1941*/      /*SwitchOpcode*/ 12, TARGET_VAL(ISD::TargetBlockAddress),// ->1956
+/*1944*/        OPC_MoveParent,
+/*1945*/        OPC_EmitRegister, MVT::i32, Lanai::R0,
+/*1948*/        OPC_MorphNodeTo1, TARGET_VAL(Lanai::OR_I_LO), 0,
                     MVT::i32, 2/*#Ops*/, 1, 0, 
                 // Src: (LanaiLo:i32 (tblockaddress:i32):$dst) - Complexity = 6
                 // Dst: (OR_I_LO:i32 R0:i32, (tblockaddress:i32):$dst)
-/*1977*/      /*SwitchOpcode*/ 12, TARGET_VAL(ISD::TargetJumpTable),// ->1992
-/*1980*/        OPC_MoveParent,
-/*1981*/        OPC_EmitRegister, MVT::i32, Lanai::R0,
-/*1984*/        OPC_MorphNodeTo1, TARGET_VAL(Lanai::OR_I_LO), 0,
+/*1956*/      /*SwitchOpcode*/ 12, TARGET_VAL(ISD::TargetJumpTable),// ->1971
+/*1959*/        OPC_MoveParent,
+/*1960*/        OPC_EmitRegister, MVT::i32, Lanai::R0,
+/*1963*/        OPC_MorphNodeTo1, TARGET_VAL(Lanai::OR_I_LO), 0,
                     MVT::i32, 2/*#Ops*/, 1, 0, 
                 // Src: (LanaiLo:i32 (tjumptable:i32):$dst) - Complexity = 6
                 // Dst: (OR_I_LO:i32 R0:i32, (tjumptable:i32):$dst)
-/*1992*/      /*SwitchOpcode*/ 12, TARGET_VAL(ISD::TargetConstantPool),// ->2007
-/*1995*/        OPC_MoveParent,
-/*1996*/        OPC_EmitRegister, MVT::i32, Lanai::R0,
-/*1999*/        OPC_MorphNodeTo1, TARGET_VAL(Lanai::OR_I_LO), 0,
+/*1971*/      /*SwitchOpcode*/ 12, TARGET_VAL(ISD::TargetConstantPool),// ->1986
+/*1974*/        OPC_MoveParent,
+/*1975*/        OPC_EmitRegister, MVT::i32, Lanai::R0,
+/*1978*/        OPC_MorphNodeTo1, TARGET_VAL(Lanai::OR_I_LO), 0,
                     MVT::i32, 2/*#Ops*/, 1, 0, 
                 // Src: (LanaiLo:i32 (tconstpool:i32):$dst) - Complexity = 6
                 // Dst: (OR_I_LO:i32 R0:i32, (tconstpool:i32):$dst)
-/*2007*/      0, // EndSwitchOpcode
-/*2008*/    /*SwitchOpcode*/ 59, TARGET_VAL(LanaiISD::SMALL),// ->2070
-/*2011*/      OPC_RecordChild0, // #0 = $dst
-/*2012*/      OPC_MoveChild0,
-/*2013*/      OPC_SwitchOpcode /*5 cases */, 8, TARGET_VAL(ISD::TargetGlobalAddress),// ->2025
-/*2017*/        OPC_MoveParent,
-/*2018*/        OPC_MorphNodeTo1, TARGET_VAL(Lanai::SLI), 0,
+/*1986*/      0, // EndSwitchOpcode
+/*1987*/    /*SwitchOpcode*/ 59, TARGET_VAL(LanaiISD::SMALL),// ->2049
+/*1990*/      OPC_RecordChild0, // #0 = $dst
+/*1991*/      OPC_MoveChild0,
+/*1992*/      OPC_SwitchOpcode /*5 cases */, 8, TARGET_VAL(ISD::TargetGlobalAddress),// ->2004
+/*1996*/        OPC_MoveParent,
+/*1997*/        OPC_MorphNodeTo1, TARGET_VAL(Lanai::SLI), 0,
                     MVT::i32, 1/*#Ops*/, 0, 
                 // Src: (LanaiSmall:i32 (tglobaladdr:i32):$dst) - Complexity = 6
                 // Dst: (SLI:i32 (tglobaladdr:i32):$dst)
-/*2025*/      /*SwitchOpcode*/ 8, TARGET_VAL(ISD::TargetExternalSymbol),// ->2036
-/*2028*/        OPC_MoveParent,
-/*2029*/        OPC_MorphNodeTo1, TARGET_VAL(Lanai::SLI), 0,
+/*2004*/      /*SwitchOpcode*/ 8, TARGET_VAL(ISD::TargetExternalSymbol),// ->2015
+/*2007*/        OPC_MoveParent,
+/*2008*/        OPC_MorphNodeTo1, TARGET_VAL(Lanai::SLI), 0,
                     MVT::i32, 1/*#Ops*/, 0, 
                 // Src: (LanaiSmall:i32 (texternalsym:i32):$dst) - Complexity = 6
                 // Dst: (SLI:i32 (texternalsym:i32):$dst)
-/*2036*/      /*SwitchOpcode*/ 8, TARGET_VAL(ISD::TargetBlockAddress),// ->2047
-/*2039*/        OPC_MoveParent,
-/*2040*/        OPC_MorphNodeTo1, TARGET_VAL(Lanai::SLI), 0,
+/*2015*/      /*SwitchOpcode*/ 8, TARGET_VAL(ISD::TargetBlockAddress),// ->2026
+/*2018*/        OPC_MoveParent,
+/*2019*/        OPC_MorphNodeTo1, TARGET_VAL(Lanai::SLI), 0,
                     MVT::i32, 1/*#Ops*/, 0, 
                 // Src: (LanaiSmall:i32 (tblockaddress:i32):$dst) - Complexity = 6
                 // Dst: (SLI:i32 (tblockaddress:i32):$dst)
-/*2047*/      /*SwitchOpcode*/ 8, TARGET_VAL(ISD::TargetJumpTable),// ->2058
-/*2050*/        OPC_MoveParent,
-/*2051*/        OPC_MorphNodeTo1, TARGET_VAL(Lanai::SLI), 0,
+/*2026*/      /*SwitchOpcode*/ 8, TARGET_VAL(ISD::TargetJumpTable),// ->2037
+/*2029*/        OPC_MoveParent,
+/*2030*/        OPC_MorphNodeTo1, TARGET_VAL(Lanai::SLI), 0,
                     MVT::i32, 1/*#Ops*/, 0, 
                 // Src: (LanaiSmall:i32 (tjumptable:i32):$dst) - Complexity = 6
                 // Dst: (SLI:i32 (tjumptable:i32):$dst)
-/*2058*/      /*SwitchOpcode*/ 8, TARGET_VAL(ISD::TargetConstantPool),// ->2069
-/*2061*/        OPC_MoveParent,
-/*2062*/        OPC_MorphNodeTo1, TARGET_VAL(Lanai::SLI), 0,
+/*2037*/      /*SwitchOpcode*/ 8, TARGET_VAL(ISD::TargetConstantPool),// ->2048
+/*2040*/        OPC_MoveParent,
+/*2041*/        OPC_MorphNodeTo1, TARGET_VAL(Lanai::SLI), 0,
                     MVT::i32, 1/*#Ops*/, 0, 
                 // Src: (LanaiSmall:i32 (tconstpool:i32):$dst) - Complexity = 6
                 // Dst: (SLI:i32 (tconstpool:i32):$dst)
-/*2069*/      0, // EndSwitchOpcode
-/*2070*/    /*SwitchOpcode*/ 113, TARGET_VAL(ISD::Constant),// ->2186
-/*2073*/      OPC_RecordNode, // #0 = $imm
-/*2074*/      OPC_Scope, 18, /*->2094*/ // 6 children in Scope
-/*2076*/        OPC_CheckPredicate, 13, // Predicate_i32lo16and
-/*2078*/        OPC_EmitRegister, MVT::i32, Lanai::R1,
-/*2081*/        OPC_EmitConvertToTarget, 0,
-/*2083*/        OPC_EmitNodeXForm, 0, 2, // LO16
-/*2086*/        OPC_MorphNodeTo1, TARGET_VAL(Lanai::AND_I_LO), 0,
+/*2048*/      0, // EndSwitchOpcode
+/*2049*/    /*SwitchOpcode*/ 113, TARGET_VAL(ISD::Constant),// ->2165
+/*2052*/      OPC_RecordNode, // #0 = $imm
+/*2053*/      OPC_Scope, 18, /*->2073*/ // 6 children in Scope
+/*2055*/        OPC_CheckPredicate, 15, // Predicate_i32lo16and
+/*2057*/        OPC_EmitRegister, MVT::i32, Lanai::R1,
+/*2060*/        OPC_EmitConvertToTarget, 0,
+/*2062*/        OPC_EmitNodeXForm, 0, 2, // LO16
+/*2065*/        OPC_MorphNodeTo1, TARGET_VAL(Lanai::AND_I_LO), 0,
                     MVT::i32, 2/*#Ops*/, 1, 3, 
                 // Src: (imm:i32)<<P:Predicate_i32lo16and>><<X:LO16>>:$imm - Complexity = 4
                 // Dst: (AND_I_LO:i32 R1:i32, (LO16:i32 (imm:i32)<<P:Predicate_i32lo16and>>:$imm))
-/*2094*/      /*Scope*/ 18, /*->2113*/
-/*2095*/        OPC_CheckPredicate, 14, // Predicate_i32hi16and
-/*2097*/        OPC_EmitRegister, MVT::i32, Lanai::R1,
-/*2100*/        OPC_EmitConvertToTarget, 0,
-/*2102*/        OPC_EmitNodeXForm, 1, 2, // HI16
-/*2105*/        OPC_MorphNodeTo1, TARGET_VAL(Lanai::AND_I_HI), 0,
+/*2073*/      /*Scope*/ 18, /*->2092*/
+/*2074*/        OPC_CheckPredicate, 16, // Predicate_i32hi16and
+/*2076*/        OPC_EmitRegister, MVT::i32, Lanai::R1,
+/*2079*/        OPC_EmitConvertToTarget, 0,
+/*2081*/        OPC_EmitNodeXForm, 1, 2, // HI16
+/*2084*/        OPC_MorphNodeTo1, TARGET_VAL(Lanai::AND_I_HI), 0,
                     MVT::i32, 2/*#Ops*/, 1, 3, 
                 // Src: (imm:i32)<<P:Predicate_i32hi16and>><<X:HI16>>:$imm - Complexity = 4
                 // Dst: (AND_I_HI:i32 R1:i32, (HI16:i32 (imm:i32)<<P:Predicate_i32hi16and>>:$imm))
-/*2113*/      /*Scope*/ 14, /*->2128*/
-/*2114*/        OPC_CheckPredicate, 16, // Predicate_i32hi16
-/*2116*/        OPC_EmitConvertToTarget, 0,
-/*2118*/        OPC_EmitNodeXForm, 1, 1, // HI16
-/*2121*/        OPC_MorphNodeTo1, TARGET_VAL(Lanai::MOVHI), 0,
+/*2092*/      /*Scope*/ 14, /*->2107*/
+/*2093*/        OPC_CheckPredicate, 14, // Predicate_i32hi16
+/*2095*/        OPC_EmitConvertToTarget, 0,
+/*2097*/        OPC_EmitNodeXForm, 1, 1, // HI16
+/*2100*/        OPC_MorphNodeTo1, TARGET_VAL(Lanai::MOVHI), 0,
                     MVT::i32, 1/*#Ops*/, 2, 
                 // Src: (imm:i32)<<P:Predicate_i32hi16>><<X:HI16>>:$imm16 - Complexity = 4
                 // Dst: (MOVHI:i32 (HI16:i32 (imm:i32):$imm16))
-/*2128*/      /*Scope*/ 14, /*->2143*/
-/*2129*/        OPC_CheckPredicate, 19, // Predicate_i32lo21
-/*2131*/        OPC_EmitConvertToTarget, 0,
-/*2133*/        OPC_EmitNodeXForm, 3, 1, // LO21
-/*2136*/        OPC_MorphNodeTo1, TARGET_VAL(Lanai::SLI), 0,
+/*2107*/      /*Scope*/ 14, /*->2122*/
+/*2108*/        OPC_CheckPredicate, 19, // Predicate_i32lo21
+/*2110*/        OPC_EmitConvertToTarget, 0,
+/*2112*/        OPC_EmitNodeXForm, 3, 1, // LO21
+/*2115*/        OPC_MorphNodeTo1, TARGET_VAL(Lanai::SLI), 0,
                     MVT::i32, 1/*#Ops*/, 2, 
                 // Src: (imm:i32)<<P:Predicate_i32lo21>><<X:LO21>>:$imm - Complexity = 4
                 // Dst: (SLI:i32 (LO21:i32 (imm:i32):$imm))
-/*2143*/      /*Scope*/ 15, /*->2159*/
-/*2144*/        OPC_CheckPredicate, 15, // Predicate_i32lo16z
-/*2146*/        OPC_EmitRegister, MVT::i32, Lanai::R0,
-/*2149*/        OPC_EmitConvertToTarget, 0,
-/*2151*/        OPC_MorphNodeTo1, TARGET_VAL(Lanai::OR_I_LO), 0,
+/*2122*/      /*Scope*/ 15, /*->2138*/
+/*2123*/        OPC_CheckPredicate, 13, // Predicate_i32lo16z
+/*2125*/        OPC_EmitRegister, MVT::i32, Lanai::R0,
+/*2128*/        OPC_EmitConvertToTarget, 0,
+/*2130*/        OPC_MorphNodeTo1, TARGET_VAL(Lanai::OR_I_LO), 0,
                     MVT::i32, 2/*#Ops*/, 1, 2, 
                 // Src: (imm:i32)<<P:Predicate_i32lo16z>><<X:LO16>>:$imm - Complexity = 4
                 // Dst: (OR_I_LO:i32 R0:i32, (imm:i32):$imm)
-/*2159*/      /*Scope*/ 25, /*->2185*/
-/*2160*/        OPC_EmitConvertToTarget, 0,
-/*2162*/        OPC_EmitNodeXForm, 1, 1, // HI16
-/*2165*/        OPC_EmitNode1, TARGET_VAL(Lanai::MOVHI), 0,
+/*2138*/      /*Scope*/ 25, /*->2164*/
+/*2139*/        OPC_EmitConvertToTarget, 0,
+/*2141*/        OPC_EmitNodeXForm, 1, 1, // HI16
+/*2144*/        OPC_EmitNode1, TARGET_VAL(Lanai::MOVHI), 0,
                     MVT::i32, 1/*#Ops*/, 2,  // Results = #3
-/*2172*/        OPC_EmitConvertToTarget, 0,
-/*2174*/        OPC_EmitNodeXForm, 0, 4, // LO16
-/*2177*/        OPC_MorphNodeTo1, TARGET_VAL(Lanai::OR_I_LO), 0,
+/*2151*/        OPC_EmitConvertToTarget, 0,
+/*2153*/        OPC_EmitNodeXForm, 0, 4, // LO16
+/*2156*/        OPC_MorphNodeTo1, TARGET_VAL(Lanai::OR_I_LO), 0,
                     MVT::i32, 2/*#Ops*/, 3, 5, 
                 // Src: (imm:i32):$imm - Complexity = 3
                 // Dst: (OR_I_LO:i32 (MOVHI:i32 (HI16:i32 (imm:i32):$imm)), (LO16:i32 (imm:i32):$imm))
-/*2185*/      0, /*End of Scope*/
-/*2186*/    /*SwitchOpcode*/ 14, TARGET_VAL(ISD::BR),// ->2203
-/*2189*/      OPC_RecordNode, // #0 = 'br' chained node
-/*2190*/      OPC_RecordChild1, // #1 = $addr
-/*2191*/      OPC_MoveChild1,
-/*2192*/      OPC_CheckOpcode, TARGET_VAL(ISD::BasicBlock),
-/*2195*/      OPC_MoveParent,
-/*2196*/      OPC_EmitMergeInputChains1_0,
-/*2197*/      OPC_MorphNodeTo0, TARGET_VAL(Lanai::BT), 0|OPFL_Chain,
+/*2164*/      0, /*End of Scope*/
+/*2165*/    /*SwitchOpcode*/ 14, TARGET_VAL(ISD::BR),// ->2182
+/*2168*/      OPC_RecordNode, // #0 = 'br' chained node
+/*2169*/      OPC_RecordChild1, // #1 = $addr
+/*2170*/      OPC_MoveChild1,
+/*2171*/      OPC_CheckOpcode, TARGET_VAL(ISD::BasicBlock),
+/*2174*/      OPC_MoveParent,
+/*2175*/      OPC_EmitMergeInputChains1_0,
+/*2176*/      OPC_MorphNodeTo0, TARGET_VAL(Lanai::BT), 0|OPFL_Chain,
                   1/*#Ops*/, 1, 
               // Src: (br (bb:Other):$addr) - Complexity = 3
               // Dst: (BT (bb:Other):$addr)
-/*2203*/    /*SwitchOpcode*/ 11, TARGET_VAL(ISD::BRIND),// ->2217
-/*2206*/      OPC_RecordNode, // #0 = 'brind' chained node
-/*2207*/      OPC_RecordChild1, // #1 = $Rs2
-/*2208*/      OPC_CheckChild1Type, MVT::i32,
-/*2210*/      OPC_EmitMergeInputChains1_0,
-/*2211*/      OPC_MorphNodeTo0, TARGET_VAL(Lanai::JR), 0|OPFL_Chain,
+/*2182*/    /*SwitchOpcode*/ 11, TARGET_VAL(ISD::BRIND),// ->2196
+/*2185*/      OPC_RecordNode, // #0 = 'brind' chained node
+/*2186*/      OPC_RecordChild1, // #1 = $Rs2
+/*2187*/      OPC_CheckChild1Type, MVT::i32,
+/*2189*/      OPC_EmitMergeInputChains1_0,
+/*2190*/      OPC_MorphNodeTo0, TARGET_VAL(Lanai::JR), 0|OPFL_Chain,
                   1/*#Ops*/, 1, 
               // Src: (brind GPR:i32:$Rs2) - Complexity = 3
               // Dst: (JR GPR:i32:$Rs2)
-/*2217*/    /*SwitchOpcode*/ 8, TARGET_VAL(LanaiISD::RET_FLAG),// ->2228
-/*2220*/      OPC_RecordNode, // #0 = 'RetFlag' chained node
-/*2221*/      OPC_CaptureGlueInput,
-/*2222*/      OPC_EmitMergeInputChains1_0,
-/*2223*/      OPC_MorphNodeTo0, TARGET_VAL(Lanai::RET), 0|OPFL_Chain|OPFL_GlueInput|OPFL_Variadic0,
+/*2196*/    /*SwitchOpcode*/ 8, TARGET_VAL(LanaiISD::RET_FLAG),// ->2207
+/*2199*/      OPC_RecordNode, // #0 = 'RetFlag' chained node
+/*2200*/      OPC_CaptureGlueInput,
+/*2201*/      OPC_EmitMergeInputChains1_0,
+/*2202*/      OPC_MorphNodeTo0, TARGET_VAL(Lanai::RET), 0|OPFL_Chain|OPFL_GlueInput|OPFL_Variadic0,
                   0/*#Ops*/, 
               // Src: (RetFlag) - Complexity = 3
               // Dst: (RET)
-/*2228*/    /*SwitchOpcode*/ 9, TARGET_VAL(LanaiISD::ADJDYNALLOC),// ->2240
-/*2231*/      OPC_RecordChild0, // #0 = $src
-/*2232*/      OPC_MorphNodeTo2, TARGET_VAL(Lanai::ADJDYNALLOC), 0,
+/*2207*/    /*SwitchOpcode*/ 9, TARGET_VAL(LanaiISD::ADJDYNALLOC),// ->2219
+/*2210*/      OPC_RecordChild0, // #0 = $src
+/*2211*/      OPC_MorphNodeTo2, TARGET_VAL(Lanai::ADJDYNALLOC), 0,
                   MVT::i32, MVT::i32, 1/*#Ops*/, 0, 
               // Src: (LanaiAdjDynAlloc:i32 GPR:i32:$src) - Complexity = 3
               // Dst: (ADJDYNALLOC:i32:i32 GPR:i32:$src)
-/*2240*/    /*SwitchOpcode*/ 8, TARGET_VAL(ISD::CTPOP),// ->2251
-/*2243*/      OPC_RecordChild0, // #0 = $Rs1
-/*2244*/      OPC_MorphNodeTo1, TARGET_VAL(Lanai::POPC), 0,
+/*2219*/    /*SwitchOpcode*/ 8, TARGET_VAL(ISD::CTPOP),// ->2230
+/*2222*/      OPC_RecordChild0, // #0 = $Rs1
+/*2223*/      OPC_MorphNodeTo1, TARGET_VAL(Lanai::POPC), 0,
                   MVT::i32, 1/*#Ops*/, 0, 
               // Src: (ctpop:i32 GPR:i32:$Rs1) - Complexity = 3
               // Dst: (POPC:i32 GPR:i32:$Rs1)
-/*2251*/    /*SwitchOpcode*/ 8, TARGET_VAL(ISD::CTLZ),// ->2262
-/*2254*/      OPC_RecordChild0, // #0 = $Rs1
-/*2255*/      OPC_MorphNodeTo1, TARGET_VAL(Lanai::LEADZ), 0,
+/*2230*/    /*SwitchOpcode*/ 8, TARGET_VAL(ISD::CTLZ),// ->2241
+/*2233*/      OPC_RecordChild0, // #0 = $Rs1
+/*2234*/      OPC_MorphNodeTo1, TARGET_VAL(Lanai::LEADZ), 0,
                   MVT::i32, 1/*#Ops*/, 0, 
               // Src: (ctlz:i32 GPR:i32:$Rs1) - Complexity = 3
               // Dst: (LEADZ:i32 GPR:i32:$Rs1)
-/*2262*/    /*SwitchOpcode*/ 8, TARGET_VAL(ISD::CTTZ),// ->2273
-/*2265*/      OPC_RecordChild0, // #0 = $Rs1
-/*2266*/      OPC_MorphNodeTo1, TARGET_VAL(Lanai::TRAILZ), 0,
+/*2241*/    /*SwitchOpcode*/ 8, TARGET_VAL(ISD::CTTZ),// ->2252
+/*2244*/      OPC_RecordChild0, // #0 = $Rs1
+/*2245*/      OPC_MorphNodeTo1, TARGET_VAL(Lanai::TRAILZ), 0,
                   MVT::i32, 1/*#Ops*/, 0, 
               // Src: (cttz:i32 GPR:i32:$Rs1) - Complexity = 3
               // Dst: (TRAILZ:i32 GPR:i32:$Rs1)
-/*2273*/    0, // EndSwitchOpcode
+/*2252*/    0, // EndSwitchOpcode
     0
-  }; // Total Array size is 2275 bytes
+  }; // Total Array size is 2254 bytes
 
   // Opcode Histogram:
-  // #OPC_Scope                          = 42
+  // #OPC_Scope                          = 41
   // #OPC_RecordNode                     = 10
   // #OPC_RecordChild                    = 62
   // #OPC_RecordMemRef                   = 2
-  // #OPC_CaptureGlueInput               = 10
-  // #OPC_MoveChild                      = 33
-  // #OPC_MoveParent                     = 90
+  // #OPC_CaptureGlueInput               = 9
+  // #OPC_MoveChild                      = 32
+  // #OPC_MoveParent                     = 89
   // #OPC_CheckSame                      = 0
   // #OPC_CheckChildSame                 = 0
   // #OPC_CheckPatternPredicate          = 0
   // #OPC_CheckPredicate                 = 67
-  // #OPC_CheckOpcode                    = 25
+  // #OPC_CheckOpcode                    = 24
   // #OPC_SwitchOpcode                   = 9
   // #OPC_CheckType                      = 2
   // #OPC_SwitchType                     = 0
   // #OPC_CheckChildType                 = 6
   // #OPC_CheckInteger                   = 0
-  // #OPC_CheckChildInteger              = 1
+  // #OPC_CheckChildInteger              = 0
   // #OPC_CheckCondCode                  = 0
   // #OPC_CheckValueType                 = 0
   // #OPC_CheckComplexPat                = 21
@@ -1245,13 +1232,13 @@ void SelectCode(SDNode *N) {
   // #OPC_EmitInteger                    = 15
   // #OPC_EmitStringInteger              = 0
   // #OPC_EmitRegister                   = 10
-  // #OPC_EmitConvertToTarget            = 40
+  // #OPC_EmitConvertToTarget            = 39
   // #OPC_EmitMergeInputChains           = 30
   // #OPC_EmitCopyToReg                  = 5
   // #OPC_EmitNode                       = 3
   // #OPC_EmitNodeXForm                  = 38
   // #OPC_CompleteMatch                  = 0
-  // #OPC_MorphNodeTo                    = 125
+  // #OPC_MorphNodeTo                    = 124
 
   #undef TARGET_VAL
   SelectCodeCommon(N, MatcherTable,sizeof(MatcherTable));
@@ -1356,22 +1343,6 @@ bool CheckNodePredicate(SDNode *Node,
 
   }
   case 13: { 
-    // Predicate_i32lo16and
-    auto *N = cast<ConstantSDNode>(Node);
-
-    // i32lo16 predicate - true if the 32-bit immediate has the rightmost 16
-    // bits set and the leftmost 16 bits 1's.
-    return (N->getZExtValue() >= 0xFFFF0000UL);
-  }
-  case 14: { 
-    // Predicate_i32hi16and
-    auto *N = cast<ConstantSDNode>(Node);
-
-    // i32lo16 predicate - true if the 32-bit immediate has the leftmost 16
-    // bits set and the rightmost 16 bits 1's.
-    return ((N->getZExtValue() & 0xFFFFUL) == 0xFFFFUL);
-  }
-  case 15: { 
     // Predicate_i32lo16z
     auto *N = cast<ConstantSDNode>(Node);
 
@@ -1379,13 +1350,29 @@ bool CheckNodePredicate(SDNode *Node,
     // bits set.
     return ((N->getZExtValue() & 0xFFFFUL) == N->getZExtValue());
   }
-  case 16: { 
+  case 14: { 
     // Predicate_i32hi16
     auto *N = cast<ConstantSDNode>(Node);
 
     // i32hi16 predicate - true if the 32-bit immediate has only leftmost 16
     // bits set.
     return ((N->getZExtValue() & 0xFFFF0000UL) == N->getZExtValue());
+  }
+  case 15: { 
+    // Predicate_i32lo16and
+    auto *N = cast<ConstantSDNode>(Node);
+
+    // i32lo16 predicate - true if the 32-bit immediate has the rightmost 16
+    // bits set and the leftmost 16 bits 1's.
+    return (N->getZExtValue() >= 0xFFFF0000UL);
+  }
+  case 16: { 
+    // Predicate_i32hi16and
+    auto *N = cast<ConstantSDNode>(Node);
+
+    // i32lo16 predicate - true if the 32-bit immediate has the leftmost 16
+    // bits set and the rightmost 16 bits 1's.
+    return ((N->getZExtValue() & 0xFFFFUL) == 0xFFFFUL);
   }
   case 17: { 
     // Predicate_i32neg16

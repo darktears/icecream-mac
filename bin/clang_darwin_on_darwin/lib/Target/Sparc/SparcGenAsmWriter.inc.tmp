@@ -302,59 +302,60 @@ void SparcInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo 
   /* 2498 */ 'j', 'm', 'p', 32, '%', 'i', '7', '+', 0,
   /* 2507 */ 'j', 'm', 'p', 32, '%', 'o', '7', '+', 0,
   /* 2516 */ '#', 32, 'X', 'R', 'a', 'y', 32, 'F', 'u', 'n', 'c', 't', 'i', 'o', 'n', 32, 'P', 'a', 't', 'c', 'h', 'a', 'b', 'l', 'e', 32, 'R', 'E', 'T', '.', 0,
-  /* 2547 */ '#', 32, 'X', 'R', 'a', 'y', 32, 'F', 'u', 'n', 'c', 't', 'i', 'o', 'n', 32, 'E', 'n', 't', 'e', 'r', '.', 0,
-  /* 2570 */ '#', 32, 'X', 'R', 'a', 'y', 32, 'T', 'a', 'i', 'l', 32, 'C', 'a', 'l', 'l', 32, 'E', 'x', 'i', 't', '.', 0,
-  /* 2593 */ '#', 32, 'X', 'R', 'a', 'y', 32, 'F', 'u', 'n', 'c', 't', 'i', 'o', 'n', 32, 'E', 'x', 'i', 't', '.', 0,
-  /* 2615 */ 'f', 'l', 'u', 's', 'h', 32, '%', 'g', '0', 0,
-  /* 2625 */ '#', 'E', 'H', '_', 'S', 'J', 'L', 'J', '_', 'L', 'O', 'N', 'G', 'J', 'M', 'P', '3', '2', 0,
-  /* 2644 */ '#', 'E', 'H', '_', 'S', 'J', 'L', 'J', '_', 'S', 'E', 'T', 'J', 'M', 'P', '3', '2', 0,
-  /* 2662 */ 't', 'a', 32, '3', 0,
-  /* 2667 */ 't', 'a', 32, '5', 0,
-  /* 2672 */ 'L', 'I', 'F', 'E', 'T', 'I', 'M', 'E', '_', 'E', 'N', 'D', 0,
-  /* 2685 */ 'B', 'U', 'N', 'D', 'L', 'E', 0,
-  /* 2692 */ 'D', 'B', 'G', '_', 'V', 'A', 'L', 'U', 'E', 0,
-  /* 2702 */ 'L', 'I', 'F', 'E', 'T', 'I', 'M', 'E', '_', 'S', 'T', 'A', 'R', 'T', 0,
-  /* 2717 */ 's', 't', 'd', 32, '%', 'c', 'q', ',', 32, '[', 0,
-  /* 2728 */ 's', 't', 'd', 32, '%', 'f', 'q', ',', 32, '[', 0,
-  /* 2739 */ 's', 't', 32, '%', 'c', 's', 'r', ',', 32, '[', 0,
-  /* 2750 */ 's', 't', 32, '%', 'f', 's', 'r', ',', 32, '[', 0,
-  /* 2761 */ 's', 't', 'x', 32, '%', 'f', 's', 'r', ',', 32, '[', 0,
-  /* 2773 */ 'l', 'd', 's', 'b', 'a', 32, '[', 0,
-  /* 2781 */ 'l', 'd', 'u', 'b', 'a', 32, '[', 0,
-  /* 2789 */ 'l', 'd', 's', 't', 'u', 'b', 'a', 32, '[', 0,
-  /* 2799 */ 'l', 'd', 'd', 'a', 32, '[', 0,
-  /* 2806 */ 'l', 'd', 'a', 32, '[', 0,
-  /* 2812 */ 'l', 'd', 's', 'h', 'a', 32, '[', 0,
-  /* 2820 */ 'l', 'd', 'u', 'h', 'a', 32, '[', 0,
-  /* 2828 */ 's', 'w', 'a', 'p', 'a', 32, '[', 0,
-  /* 2836 */ 'l', 'd', 'q', 'a', 32, '[', 0,
-  /* 2843 */ 'c', 'a', 's', 'a', 32, '[', 0,
-  /* 2850 */ 'l', 'd', 's', 'b', 32, '[', 0,
-  /* 2857 */ 'l', 'd', 'u', 'b', 32, '[', 0,
-  /* 2864 */ 'l', 'd', 's', 't', 'u', 'b', 32, '[', 0,
-  /* 2873 */ 'l', 'd', 'd', 32, '[', 0,
-  /* 2879 */ 'l', 'd', 32, '[', 0,
-  /* 2884 */ 'l', 'd', 's', 'h', 32, '[', 0,
-  /* 2891 */ 'l', 'd', 'u', 'h', 32, '[', 0,
-  /* 2898 */ 's', 'w', 'a', 'p', 32, '[', 0,
-  /* 2905 */ 'l', 'd', 'q', 32, '[', 0,
-  /* 2911 */ 'c', 'a', 's', 32, '[', 0,
-  /* 2917 */ 'l', 'd', 's', 'w', 32, '[', 0,
-  /* 2924 */ 'l', 'd', 'x', 32, '[', 0,
-  /* 2930 */ 'c', 'a', 's', 'x', 32, '[', 0,
-  /* 2937 */ 'c', 'b', 0,
-  /* 2940 */ 'f', 'b', 0,
-  /* 2943 */ 'f', 'm', 'o', 'v', 'd', 0,
-  /* 2949 */ '#', 32, 'F', 'E', 'n', 't', 'r', 'y', 32, 'c', 'a', 'l', 'l', 0,
-  /* 2963 */ 's', 'i', 'a', 'm', 0,
-  /* 2968 */ 's', 'h', 'u', 't', 'd', 'o', 'w', 'n', 0,
-  /* 2977 */ 'n', 'o', 'p', 0,
-  /* 2981 */ 'f', 'm', 'o', 'v', 'q', 0,
-  /* 2987 */ 's', 't', 'b', 'a', 'r', 0,
-  /* 2993 */ 'f', 'm', 'o', 'v', 's', 0,
-  /* 2999 */ 't', 0,
-  /* 3001 */ 'm', 'o', 'v', 0,
-  /* 3005 */ 'f', 'l', 'u', 's', 'h', 'w', 0,
+  /* 2547 */ '#', 32, 'X', 'R', 'a', 'y', 32, 'C', 'u', 's', 't', 'o', 'm', 32, 'E', 'v', 'e', 'n', 't', 32, 'L', 'o', 'g', '.', 0,
+  /* 2572 */ '#', 32, 'X', 'R', 'a', 'y', 32, 'F', 'u', 'n', 'c', 't', 'i', 'o', 'n', 32, 'E', 'n', 't', 'e', 'r', '.', 0,
+  /* 2595 */ '#', 32, 'X', 'R', 'a', 'y', 32, 'T', 'a', 'i', 'l', 32, 'C', 'a', 'l', 'l', 32, 'E', 'x', 'i', 't', '.', 0,
+  /* 2618 */ '#', 32, 'X', 'R', 'a', 'y', 32, 'F', 'u', 'n', 'c', 't', 'i', 'o', 'n', 32, 'E', 'x', 'i', 't', '.', 0,
+  /* 2640 */ 'f', 'l', 'u', 's', 'h', 32, '%', 'g', '0', 0,
+  /* 2650 */ '#', 'E', 'H', '_', 'S', 'J', 'L', 'J', '_', 'L', 'O', 'N', 'G', 'J', 'M', 'P', '3', '2', 0,
+  /* 2669 */ '#', 'E', 'H', '_', 'S', 'J', 'L', 'J', '_', 'S', 'E', 'T', 'J', 'M', 'P', '3', '2', 0,
+  /* 2687 */ 't', 'a', 32, '3', 0,
+  /* 2692 */ 't', 'a', 32, '5', 0,
+  /* 2697 */ 'L', 'I', 'F', 'E', 'T', 'I', 'M', 'E', '_', 'E', 'N', 'D', 0,
+  /* 2710 */ 'B', 'U', 'N', 'D', 'L', 'E', 0,
+  /* 2717 */ 'D', 'B', 'G', '_', 'V', 'A', 'L', 'U', 'E', 0,
+  /* 2727 */ 'L', 'I', 'F', 'E', 'T', 'I', 'M', 'E', '_', 'S', 'T', 'A', 'R', 'T', 0,
+  /* 2742 */ 's', 't', 'd', 32, '%', 'c', 'q', ',', 32, '[', 0,
+  /* 2753 */ 's', 't', 'd', 32, '%', 'f', 'q', ',', 32, '[', 0,
+  /* 2764 */ 's', 't', 32, '%', 'c', 's', 'r', ',', 32, '[', 0,
+  /* 2775 */ 's', 't', 32, '%', 'f', 's', 'r', ',', 32, '[', 0,
+  /* 2786 */ 's', 't', 'x', 32, '%', 'f', 's', 'r', ',', 32, '[', 0,
+  /* 2798 */ 'l', 'd', 's', 'b', 'a', 32, '[', 0,
+  /* 2806 */ 'l', 'd', 'u', 'b', 'a', 32, '[', 0,
+  /* 2814 */ 'l', 'd', 's', 't', 'u', 'b', 'a', 32, '[', 0,
+  /* 2824 */ 'l', 'd', 'd', 'a', 32, '[', 0,
+  /* 2831 */ 'l', 'd', 'a', 32, '[', 0,
+  /* 2837 */ 'l', 'd', 's', 'h', 'a', 32, '[', 0,
+  /* 2845 */ 'l', 'd', 'u', 'h', 'a', 32, '[', 0,
+  /* 2853 */ 's', 'w', 'a', 'p', 'a', 32, '[', 0,
+  /* 2861 */ 'l', 'd', 'q', 'a', 32, '[', 0,
+  /* 2868 */ 'c', 'a', 's', 'a', 32, '[', 0,
+  /* 2875 */ 'l', 'd', 's', 'b', 32, '[', 0,
+  /* 2882 */ 'l', 'd', 'u', 'b', 32, '[', 0,
+  /* 2889 */ 'l', 'd', 's', 't', 'u', 'b', 32, '[', 0,
+  /* 2898 */ 'l', 'd', 'd', 32, '[', 0,
+  /* 2904 */ 'l', 'd', 32, '[', 0,
+  /* 2909 */ 'l', 'd', 's', 'h', 32, '[', 0,
+  /* 2916 */ 'l', 'd', 'u', 'h', 32, '[', 0,
+  /* 2923 */ 's', 'w', 'a', 'p', 32, '[', 0,
+  /* 2930 */ 'l', 'd', 'q', 32, '[', 0,
+  /* 2936 */ 'c', 'a', 's', 32, '[', 0,
+  /* 2942 */ 'l', 'd', 's', 'w', 32, '[', 0,
+  /* 2949 */ 'l', 'd', 'x', 32, '[', 0,
+  /* 2955 */ 'c', 'a', 's', 'x', 32, '[', 0,
+  /* 2962 */ 'c', 'b', 0,
+  /* 2965 */ 'f', 'b', 0,
+  /* 2968 */ 'f', 'm', 'o', 'v', 'd', 0,
+  /* 2974 */ '#', 32, 'F', 'E', 'n', 't', 'r', 'y', 32, 'c', 'a', 'l', 'l', 0,
+  /* 2988 */ 's', 'i', 'a', 'm', 0,
+  /* 2993 */ 's', 'h', 'u', 't', 'd', 'o', 'w', 'n', 0,
+  /* 3002 */ 'n', 'o', 'p', 0,
+  /* 3006 */ 'f', 'm', 'o', 'v', 'q', 0,
+  /* 3012 */ 's', 't', 'b', 'a', 'r', 0,
+  /* 3018 */ 'f', 'm', 'o', 'v', 's', 0,
+  /* 3024 */ 't', 0,
+  /* 3026 */ 'm', 'o', 'v', 0,
+  /* 3030 */ 'f', 'l', 'u', 's', 'h', 'w', 0,
   };
 
   static const uint32_t OpInfo0[] = {
@@ -369,24 +370,25 @@ void SparcInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo 
     0U,	// IMPLICIT_DEF
     0U,	// SUBREG_TO_REG
     0U,	// COPY_TO_REGCLASS
-    2693U,	// DBG_VALUE
+    2718U,	// DBG_VALUE
     0U,	// REG_SEQUENCE
     0U,	// COPY
-    2686U,	// BUNDLE
-    2703U,	// LIFETIME_START
-    2673U,	// LIFETIME_END
+    2711U,	// BUNDLE
+    2728U,	// LIFETIME_START
+    2698U,	// LIFETIME_END
     0U,	// STACKMAP
-    2950U,	// FENTRY_CALL
+    2975U,	// FENTRY_CALL
     0U,	// PATCHPOINT
     0U,	// LOAD_STACK_GUARD
     0U,	// STATEPOINT
     0U,	// LOCAL_ESCAPE
     0U,	// FAULTING_OP
     0U,	// PATCHABLE_OP
-    2548U,	// PATCHABLE_FUNCTION_ENTER
+    2573U,	// PATCHABLE_FUNCTION_ENTER
     2517U,	// PATCHABLE_RET
-    2594U,	// PATCHABLE_FUNCTION_EXIT
-    2571U,	// PATCHABLE_TAIL_CALL
+    2619U,	// PATCHABLE_FUNCTION_EXIT
+    2596U,	// PATCHABLE_TAIL_CALL
+    2548U,	// PATCHABLE_EVENT_CALL
     0U,	// G_ADD
     0U,	// G_SUB
     0U,	// G_MUL
@@ -466,7 +468,7 @@ void SparcInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo 
     4875U,	// ADDXrr
     4875U,	// ADDri
     4875U,	// ADDrr
-    74188U,	// ADJCALLSTACKDOWN
+    2105804U,	// ADJCALLSTACKDOWN
     74207U,	// ADJCALLSTACKUP
     5575U,	// ALIGNADDR
     5205U,	// ALIGNADDRL
@@ -485,62 +487,62 @@ void SparcInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo 
     4277U,	// ARRAY32
     4548U,	// ARRAY8
     74295U,	// BA
-    2243451U,	// BCOND
-    2308987U,	// BCONDA
+    4340628U,	// BCOND
+    4406164U,	// BCONDA
     83273U,	// BINDri
     83273U,	// BINDrr
     5143U,	// BMASK
-    146301U,	// BPFCC
-    211837U,	// BPFCCA
-    277373U,	// BPFCCANT
-    342909U,	// BPFCCNT
-    4203695U,	// BPGEZapn
-    4203012U,	// BPGEZapt
-    4203762U,	// BPGEZnapn
-    4204535U,	// BPGEZnapt
-    4203719U,	// BPGZapn
-    4203030U,	// BPGZapt
-    4203782U,	// BPGZnapn
-    4204631U,	// BPGZnapt
-    2505595U,	// BPICC
-    473979U,	// BPICCA
-    539515U,	// BPICCANT
-    605051U,	// BPICCNT
-    4203707U,	// BPLEZapn
-    4203021U,	// BPLEZapt
-    4203772U,	// BPLEZnapn
-    4204584U,	// BPLEZnapt
-    4203730U,	// BPLZapn
-    4203038U,	// BPLZapt
-    4203791U,	// BPLZnapn
-    4204675U,	// BPLZnapt
-    4203741U,	// BPNZapn
-    4203046U,	// BPNZapt
-    4203800U,	// BPNZnapn
-    4204719U,	// BPNZnapt
-    2767739U,	// BPXCC
-    736123U,	// BPXCCA
-    801659U,	// BPXCCANT
-    867195U,	// BPXCCNT
-    4203752U,	// BPZapn
-    4203054U,	// BPZapt
-    4203809U,	// BPZnapn
-    4204752U,	// BPZnapt
+    146326U,	// BPFCC
+    211862U,	// BPFCCA
+    277398U,	// BPFCCANT
+    342934U,	// BPFCCNT
+    2106543U,	// BPGEZapn
+    2105860U,	// BPGEZapt
+    2106610U,	// BPGEZnapn
+    2107383U,	// BPGEZnapt
+    2106567U,	// BPGZapn
+    2105878U,	// BPGZapt
+    2106630U,	// BPGZnapn
+    2107479U,	// BPGZnapt
+    4602772U,	// BPICC
+    474004U,	// BPICCA
+    539540U,	// BPICCANT
+    605076U,	// BPICCNT
+    2106555U,	// BPLEZapn
+    2105869U,	// BPLEZapt
+    2106620U,	// BPLEZnapn
+    2107432U,	// BPLEZnapt
+    2106578U,	// BPLZapn
+    2105886U,	// BPLZapt
+    2106639U,	// BPLZnapn
+    2107523U,	// BPLZnapt
+    2106589U,	// BPNZapn
+    2105894U,	// BPNZapt
+    2106648U,	// BPNZnapn
+    2107567U,	// BPNZnapt
+    4864916U,	// BPXCC
+    736148U,	// BPXCCA
+    801684U,	// BPXCCANT
+    867220U,	// BPXCCNT
+    2106600U,	// BPZapn
+    2105902U,	// BPZapt
+    2106657U,	// BPZnapn
+    2107600U,	// BPZnapt
     5054U,	// BSHUFFLE
     74820U,	// CALL
     83012U,	// CALLri
     83012U,	// CALLrr
-    924444U,	// CASAasi10
-    7281436U,	// CASArr
-    1055603U,	// CASXrr
-    1055584U,	// CASrr
-    2243450U,	// CBCOND
-    2308986U,	// CBCONDA
+    924469U,	// CASAasi10
+    7281461U,	// CASArr
+    1055628U,	// CASXrr
+    1055609U,	// CASrr
+    4340627U,	// CBCOND
+    4406163U,	// CBCONDA
     74023U,	// CMASK16
     73855U,	// CMASK32
     74172U,	// CMASK8
-    4203837U,	// CMPri
-    4203837U,	// CMPrr
+    2106685U,	// CMPri
+    2106685U,	// CMPrr
     4354U,	// EDGE16
     5159U,	// EDGE16L
     5276U,	// EDGE16LN
@@ -553,13 +555,13 @@ void SparcInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo 
     5168U,	// EDGE8L
     5286U,	// EDGE8LN
     5252U,	// EDGE8N
-    2626U,	// EH_SJLJ_LONGJMP32ri
-    2626U,	// EH_SJLJ_LONGJMP32rr
-    2645U,	// EH_SJLJ_SETJMP32ri
-    2645U,	// EH_SJLJ_SETJMP32rr
-    2102163U,	// FABSD
-    2102685U,	// FABSQ
-    2103042U,	// FABSS
+    2651U,	// EH_SJLJ_LONGJMP32ri
+    2651U,	// EH_SJLJ_LONGJMP32rr
+    2670U,	// EH_SJLJ_SETJMP32ri
+    2670U,	// EH_SJLJ_SETJMP32rr
+    4199315U,	// FABSD
+    4199837U,	// FABSQ
+    4200194U,	// FABSS
     4880U,	// FADDD
     5461U,	// FADDQ
     5735U,	// FADDS
@@ -570,10 +572,10 @@ void SparcInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo 
     4293U,	// FANDNOT2
     5681U,	// FANDNOT2S
     5767U,	// FANDS
-    2243453U,	// FBCOND
-    2308989U,	// FBCONDA
+    4340630U,	// FBCOND
+    4406166U,	// FBCONDA
     4416U,	// FCHKSM16
-    4203392U,	// FCMPD
+    2106240U,	// FCMPD
     4435U,	// FCMPEQ16
     4248U,	// FCMPEQ32
     4454U,	// FCMPGT16
@@ -582,39 +584,39 @@ void SparcInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo 
     4194U,	// FCMPLE32
     4372U,	// FCMPNE16
     4204U,	// FCMPNE32
-    4203926U,	// FCMPQ
-    4204247U,	// FCMPS
+    2106774U,	// FCMPQ
+    2107095U,	// FCMPS
     5031U,	// FDIVD
     5553U,	// FDIVQ
     5905U,	// FDIVS
     5483U,	// FDMULQ
-    2102274U,	// FDTOI
-    2102650U,	// FDTOQ
-    2102971U,	// FDTOS
-    2103207U,	// FDTOX
-    2102107U,	// FEXPAND
+    4199426U,	// FDTOI
+    4199802U,	// FDTOQ
+    4200123U,	// FDTOS
+    4200359U,	// FDTOX
+    4199259U,	// FEXPAND
     4887U,	// FHADDD
     5742U,	// FHADDS
     4867U,	// FHSUBD
     5727U,	// FHSUBS
-    2102116U,	// FITOD
-    2102657U,	// FITOQ
-    2102978U,	// FITOS
-    20980615U,	// FLCMPD
-    20981470U,	// FLCMPS
-    2616U,	// FLUSH
-    3006U,	// FLUSHW
+    4199268U,	// FITOD
+    4199809U,	// FITOQ
+    4200130U,	// FITOS
+    18883463U,	// FLCMPD
+    18884318U,	// FLCMPS
+    2641U,	// FLUSH
+    3031U,	// FLUSHW
     82909U,	// FLUSHri
     82909U,	// FLUSHrr
     4426U,	// FMEAN16
-    2102190U,	// FMOVD
-    1137536U,	// FMOVD_FCC
-    155605888U,	// FMOVD_ICC
-    155868032U,	// FMOVD_XCC
-    2102712U,	// FMOVQ
-    1137574U,	// FMOVQ_FCC
-    155605926U,	// FMOVQ_ICC
-    155868070U,	// FMOVQ_XCC
+    4199342U,	// FMOVD
+    1137561U,	// FMOVD_FCC
+    153508761U,	// FMOVD_ICC
+    153770905U,	// FMOVD_XCC
+    4199864U,	// FMOVQ
+    1137599U,	// FMOVQ_FCC
+    153508799U,	// FMOVQ_ICC
+    153770943U,	// FMOVQ_XCC
     6113U,	// FMOVRGEZD
     6124U,	// FMOVRGEZQ
     6151U,	// FMOVRGEZS
@@ -633,10 +635,10 @@ void SparcInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo 
     6104U,	// FMOVRZD
     6343U,	// FMOVRZQ
     6364U,	// FMOVRZS
-    2103064U,	// FMOVS
-    1137586U,	// FMOVS_FCC
-    155605938U,	// FMOVS_ICC
-    155868082U,	// FMOVS_XCC
+    4200216U,	// FMOVS
+    1137611U,	// FMOVS_FCC
+    153508811U,	// FMOVS_ICC
+    153770955U,	// FMOVS_XCC
     4512U,	// FMUL8SUX16
     4487U,	// FMUL8ULX16
     4464U,	// FMUL8X16
@@ -651,19 +653,19 @@ void SparcInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo 
     5759U,	// FNADDS
     4948U,	// FNAND
     5774U,	// FNANDS
-    2102072U,	// FNEGD
-    2102628U,	// FNEGQ
-    2102949U,	// FNEGS
+    4199224U,	// FNEGD
+    4199780U,	// FNEGQ
+    4200101U,	// FNEGS
     4895U,	// FNHADDD
     5750U,	// FNHADDS
     4895U,	// FNMULD
     5750U,	// FNMULS
     5591U,	// FNOR
     5868U,	// FNORS
-    2101296U,	// FNOT1
-    2102797U,	// FNOT1S
-    2101455U,	// FNOT2
-    2102844U,	// FNOT2S
+    4198448U,	// FNOT1
+    4199949U,	// FNOT1S
+    4198607U,	// FNOT2
+    4199996U,	// FNOT2S
     5750U,	// FNSMULD
     74696U,	// FONE
     75414U,	// FONES
@@ -673,9 +675,9 @@ void SparcInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo 
     4310U,	// FORNOT2
     5700U,	// FORNOT2S
     5862U,	// FORS
-    2101534U,	// FPACK16
+    4198686U,	// FPACK16
     4214U,	// FPACK32
-    2103178U,	// FPACKFIX
+    4200330U,	// FPACKFIX
     4345U,	// FPADD16
     5710U,	// FPADD16S
     4177U,	// FPADD32
@@ -686,30 +688,30 @@ void SparcInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo 
     4602U,	// FPSUB16S
     4168U,	// FPSUB32
     4592U,	// FPSUB32S
-    2102123U,	// FQTOD
-    2102281U,	// FQTOI
-    2102985U,	// FQTOS
-    2103223U,	// FQTOX
+    4199275U,	// FQTOD
+    4199433U,	// FQTOI
+    4200137U,	// FQTOS
+    4200375U,	// FQTOX
     4445U,	// FSLAS16
     4258U,	// FSLAS32
     4400U,	// FSLL16
     4232U,	// FSLL32
     4934U,	// FSMULD
-    2102170U,	// FSQRTD
-    2102692U,	// FSQRTQ
-    2103049U,	// FSQRTS
+    4199322U,	// FSQRTD
+    4199844U,	// FSQRTQ
+    4200201U,	// FSQRTS
     4328U,	// FSRA16
     4160U,	// FSRA32
-    2101279U,	// FSRC1
-    2102778U,	// FSRC1S
-    2101438U,	// FSRC2
-    2102825U,	// FSRC2S
+    4198431U,	// FSRC1
+    4199930U,	// FSRC1S
+    4198590U,	// FSRC2
+    4199977U,	// FSRC2S
     4408U,	// FSRL16
     4240U,	// FSRL32
-    2102130U,	// FSTOD
-    2102288U,	// FSTOI
-    2102664U,	// FSTOQ
-    2103230U,	// FSTOX
+    4199282U,	// FSTOD
+    4199440U,	// FSTOI
+    4199816U,	// FSTOQ
+    4200382U,	// FSTOX
     4860U,	// FSUBD
     5454U,	// FSUBQ
     5720U,	// FSUBS
@@ -717,67 +719,67 @@ void SparcInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo 
     5875U,	// FXNORS
     5604U,	// FXOR
     5883U,	// FXORS
-    2102137U,	// FXTOD
-    2102671U,	// FXTOQ
-    2102992U,	// FXTOS
+    4199289U,	// FXTOD
+    4199823U,	// FXTOQ
+    4200144U,	// FXTOS
     75062U,	// FZERO
     75443U,	// FZEROS
     24586U,	// GETPCX
-    2126927U,	// JMPLri
-    2126927U,	// JMPLrr
-    160398071U,	// LDArr
-    1198912U,	// LDCSRri
-    1198912U,	// LDCSRrr
-    3177280U,	// LDCri
-    3177280U,	// LDCrr
-    160398064U,	// LDDArr
-    3177274U,	// LDDCri
-    3177274U,	// LDDCrr
-    160398064U,	// LDDFArr
-    3177274U,	// LDDFri
-    3177274U,	// LDDFrr
-    3177274U,	// LDDri
-    3177274U,	// LDDrr
-    160398071U,	// LDFArr
-    1264448U,	// LDFSRri
-    1264448U,	// LDFSRrr
-    3177280U,	// LDFri
-    3177280U,	// LDFrr
-    160398101U,	// LDQFArr
-    3177306U,	// LDQFri
-    3177306U,	// LDQFrr
-    160398038U,	// LDSBArr
-    3177251U,	// LDSBri
-    3177251U,	// LDSBrr
-    160398077U,	// LDSHArr
-    3177285U,	// LDSHri
-    3177285U,	// LDSHrr
-    160398054U,	// LDSTUBArr
-    3177265U,	// LDSTUBri
-    3177265U,	// LDSTUBrr
-    3177318U,	// LDSWri
-    3177318U,	// LDSWrr
-    160398046U,	// LDUBArr
-    3177258U,	// LDUBri
-    3177258U,	// LDUBrr
-    160398085U,	// LDUHArr
-    3177292U,	// LDUHri
-    3177292U,	// LDUHrr
-    1264493U,	// LDXFSRri
-    1264493U,	// LDXFSRrr
-    3177325U,	// LDXri
-    3177325U,	// LDXrr
-    3177280U,	// LDri
-    3177280U,	// LDrr
+    4224079U,	// JMPLri
+    4224079U,	// JMPLrr
+    160398096U,	// LDArr
+    1198937U,	// LDCSRri
+    1198937U,	// LDCSRrr
+    5274457U,	// LDCri
+    5274457U,	// LDCrr
+    160398089U,	// LDDArr
+    5274451U,	// LDDCri
+    5274451U,	// LDDCrr
+    160398089U,	// LDDFArr
+    5274451U,	// LDDFri
+    5274451U,	// LDDFrr
+    5274451U,	// LDDri
+    5274451U,	// LDDrr
+    160398096U,	// LDFArr
+    1264473U,	// LDFSRri
+    1264473U,	// LDFSRrr
+    5274457U,	// LDFri
+    5274457U,	// LDFrr
+    160398126U,	// LDQFArr
+    5274483U,	// LDQFri
+    5274483U,	// LDQFrr
+    160398063U,	// LDSBArr
+    5274428U,	// LDSBri
+    5274428U,	// LDSBrr
+    160398102U,	// LDSHArr
+    5274462U,	// LDSHri
+    5274462U,	// LDSHrr
+    160398079U,	// LDSTUBArr
+    5274442U,	// LDSTUBri
+    5274442U,	// LDSTUBrr
+    5274495U,	// LDSWri
+    5274495U,	// LDSWrr
+    160398071U,	// LDUBArr
+    5274435U,	// LDUBri
+    5274435U,	// LDUBrr
+    160398110U,	// LDUHArr
+    5274469U,	// LDUHri
+    5274469U,	// LDUHrr
+    1264518U,	// LDXFSRri
+    1264518U,	// LDXFSRrr
+    5274502U,	// LDXri
+    5274502U,	// LDXrr
+    5274457U,	// LDri
+    5274457U,	// LDrr
     33547U,	// LEAX_ADDri
     33547U,	// LEA_ADDri
-    2103076U,	// LZCNT
+    4200228U,	// LZCNT
     75199U,	// MEMBARi
-    2103214U,	// MOVDTOX
-    1137594U,	// MOVFCCri
-    1137594U,	// MOVFCCrr
-    155605946U,	// MOVICCri
-    155605946U,	// MOVICCrr
+    4200366U,	// MOVDTOX
+    1137619U,	// MOVFCCri
+    1137619U,	// MOVFCCrr
+    153508819U,	// MOVICCri
+    153508819U,	// MOVICCrr
     6142U,	// MOVRGEZri
     6142U,	// MOVRGEZrr
     6237U,	// MOVRGZri
@@ -790,17 +792,17 @@ void SparcInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo 
     6325U,	// MOVRNZrr
     6357U,	// MOVRRZri
     6357U,	// MOVRRZrr
-    2103140U,	// MOVSTOSW
-    2103150U,	// MOVSTOUW
-    2103214U,	// MOVWTOS
-    155868090U,	// MOVXCCri
-    155868090U,	// MOVXCCrr
-    2103214U,	// MOVXTOD
+    4200292U,	// MOVSTOSW
+    4200302U,	// MOVSTOUW
+    4200366U,	// MOVWTOS
+    153770963U,	// MOVXCCri
+    153770963U,	// MOVXCCrr
+    4200366U,	// MOVXTOD
     4807U,	// MULSCCri
     4807U,	// MULSCCrr
     6049U,	// MULXri
     6049U,	// MULXrr
-    2978U,	// NOP
+    3003U,	// NOP
     4794U,	// ORCCri
     4794U,	// ORCCrr
     4785U,	// ORNCCri
@@ -814,9 +816,9 @@ void SparcInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo 
     5587U,	// ORrr
     5931U,	// PDIST
     5422U,	// PDISTN
-    2101999U,	// POPCrr
-    2102159U,	// RDASR
-    2102762U,	// RDPR
+    4199151U,	// POPCrr
+    4199311U,	// RDASR
+    4199914U,	// RDPR
     73749U,	// RDPSR
     73739U,	// RDTBR
     73729U,	// RDWIM
@@ -842,11 +844,11 @@ void SparcInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo 
     2471U,	// SELECT_CC_Int_ICC
     2305U,	// SELECT_CC_QFP_FCC
     2416U,	// SELECT_CC_QFP_ICC
-    2103071U,	// SET
-    2102249U,	// SETHIXi
-    2102249U,	// SETHIi
-    2969U,	// SHUTDOWN
-    2964U,	// SIAM
+    4200223U,	// SET
+    4199401U,	// SETHIXi
+    4199401U,	// SETHIi
+    2994U,	// SHUTDOWN
+    2989U,	// SIAM
     6036U,	// SLLXri
     6036U,	// SLLXrr
     5194U,	// SLLri
@@ -866,29 +868,29 @@ void SparcInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo 
     5217U,	// SRLri
     5217U,	// SRLrr
     9409118U,	// STArr
-    2988U,	// STBAR
+    3013U,	// STBAR
     9409077U,	// STBArr
     1348195U,	// STBri
     1348195U,	// STBrr
-    1329844U,	// STCSRri
-    1329844U,	// STCSRrr
+    1329869U,	// STCSRri
+    1329869U,	// STCSRrr
     1349422U,	// STCri
     1349422U,	// STCrr
     9409083U,	// STDArr
-    1329822U,	// STDCQri
-    1329822U,	// STDCQrr
+    1329847U,	// STDCQri
+    1329847U,	// STDCQrr
     1348514U,	// STDCri
     1348514U,	// STDCrr
     9409083U,	// STDFArr
-    1329833U,	// STDFQri
-    1329833U,	// STDFQrr
+    1329858U,	// STDFQri
+    1329858U,	// STDFQrr
     1348514U,	// STDFri
     1348514U,	// STDFrr
     1348514U,	// STDri
     1348514U,	// STDrr
     9409118U,	// STFArr
-    1329855U,	// STFSRri
-    1329855U,	// STFSRrr
+    1329880U,	// STFSRri
+    1329880U,	// STFSRrr
     1349422U,	// STFri
     1349422U,	// STFrr
     9409089U,	// STHArr
@@ -897,8 +899,8 @@ void SparcInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo 
     9409095U,	// STQFArr
     1349036U,	// STQFri
     1349036U,	// STQFrr
-    1329866U,	// STXFSRri
-    1329866U,	// STXFSRrr
+    1329891U,	// STXFSRri
+    1329891U,	// STXFSRrr
     1349573U,	// STXri
     1349573U,	// STXrr
     1349422U,	// STri
@@ -913,30 +915,30 @@ void SparcInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo 
     4712U,	// SUBXrr
     4712U,	// SUBri
     4712U,	// SUBrr
-    160398093U,	// SWAPArr
-    3177299U,	// SWAPri
-    3177299U,	// SWAPrr
-    2663U,	// TA3
-    2668U,	// TA5
+    160398118U,	// SWAPArr
+    5274476U,	// SWAPri
+    5274476U,	// SWAPrr
+    2688U,	// TA3
+    2693U,	// TA5
     5978U,	// TADDCCTVri
     5978U,	// TADDCCTVrr
     4746U,	// TADDCCri
     4746U,	// TADDCCrr
-    36088760U,	// TICCri
-    36088760U,	// TICCrr
+    38185937U,	// TICCri
+    38185937U,	// TICCrr
     285217547U,	// TLS_ADDXrr
     285217547U,	// TLS_ADDrr
-    4203588U,	// TLS_CALL
-    288389997U,	// TLS_LDXrr
-    288389952U,	// TLS_LDrr
-    35826616U,	// TRAPri
-    35826616U,	// TRAPrr
+    2106436U,	// TLS_CALL
+    290487174U,	// TLS_LDXrr
+    290487129U,	// TLS_LDrr
+    37923793U,	// TRAPri
+    37923793U,	// TRAPrr
     5968U,	// TSUBCCTVri
     5968U,	// TSUBCCTVrr
     4729U,	// TSUBCCri
     4729U,	// TSUBCCrr
-    36350904U,	// TXCCri
-    36350904U,	// TXCCrr
+    38448081U,	// TXCCri
+    38448081U,	// TXCCrr
     4823U,	// UDIVCCri
     4823U,	// UDIVCCrr
     6097U,	// UDIVXri
@@ -951,27 +953,27 @@ void SparcInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo 
     5228U,	// UMULri
     5228U,	// UMULrr
     75074U,	// UNIMP
-    20980608U,	// V9FCMPD
-    20980528U,	// V9FCMPED
-    20981084U,	// V9FCMPEQ
-    20981405U,	// V9FCMPES
-    20981142U,	// V9FCMPQ
-    20981463U,	// V9FCMPS
-    48000U,	// V9FMOVD_FCC
-    48038U,	// V9FMOVQ_FCC
-    48050U,	// V9FMOVS_FCC
-    48058U,	// V9MOVFCCri
-    48058U,	// V9MOVFCCrr
+    18883456U,	// V9FCMPD
+    18883376U,	// V9FCMPED
+    18883932U,	// V9FCMPEQ
+    18884253U,	// V9FCMPES
+    18883990U,	// V9FCMPQ
+    18884311U,	// V9FCMPS
+    48025U,	// V9FMOVD_FCC
+    48063U,	// V9FMOVQ_FCC
+    48075U,	// V9FMOVS_FCC
+    48083U,	// V9MOVFCCri
+    48083U,	// V9MOVFCCrr
     5622U,	// WRASRri
     5622U,	// WRASRrr
     5616U,	// WRPRri
     5616U,	// WRPRrr
-    54535670U,	// WRPSRri
-    54535670U,	// WRPSRrr
-    71312886U,	// WRTBRri
-    71312886U,	// WRTBRrr
-    88090102U,	// WRWIMri
-    88090102U,	// WRWIMrr
+    52438518U,	// WRPSRri
+    52438518U,	// WRPSRrr
+    69215734U,	// WRTBRri
+    69215734U,	// WRTBRrr
+    85992950U,	// WRWIMri
+    85992950U,	// WRWIMrr
     6048U,	// XMULX
     5113U,	// XMULXHI
     4792U,	// XNORCCri
@@ -1071,7 +1073,7 @@ void SparcInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo 
     O << ", ";
     break;
   case 1:
-    // ADJCALLSTACKDOWN, ADJCALLSTACKUP, BA, BINDri, BINDrr, CALL, CALLri, CA...
+    // ADJCALLSTACKUP, BA, BINDri, BINDrr, CALL, CALLri, CALLrr, CMASK16, CMA...
     return;
     break;
   case 2:
@@ -1194,12 +1196,12 @@ void SparcInstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInfo 
     printOperand(MI, 0, STI, O);
     break;
   case 1:
-    // BCOND, BCONDA, BPICC, BPXCC, CBCOND, CBCONDA, FABSD, FABSQ, FABSS, FBC...
-    printOperand(MI, 0, STI, O);
+    // ADJCALLSTACKDOWN, BPGEZapn, BPGEZapt, BPGEZnapn, BPGEZnapt, BPGZapn, B...
+    printOperand(MI, 1, STI, O);
     break;
   case 2:
-    // BPGEZapn, BPGEZapt, BPGEZnapn, BPGEZnapt, BPGZapn, BPGZapt, BPGZnapn, ...
-    printOperand(MI, 1, STI, O);
+    // BCOND, BCONDA, BPICC, BPXCC, CBCOND, CBCONDA, FABSD, FABSQ, FABSS, FBC...
+    printOperand(MI, 0, STI, O);
     break;
   case 3:
     // CASArr

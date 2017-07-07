@@ -15,82 +15,91 @@ namespace AMDGPU {
 enum {
   Feature16BitInsts = 0,
   FeatureApertureRegs = 1,
-  FeatureCFALUBug = 2,
-  FeatureCIInsts = 3,
-  FeatureCaymanISA = 4,
-  FeatureDPP = 5,
-  FeatureDX10Clamp = 6,
-  FeatureDebuggerEmitPrologue = 7,
-  FeatureDebuggerInsertNops = 8,
-  FeatureDebuggerReserveRegs = 9,
-  FeatureDisable = 10,
-  FeatureDumpCode = 11,
-  FeatureDumpCodeLower = 12,
-  FeatureEnableLoadStoreOpt = 13,
-  FeatureEnableSIScheduler = 14,
-  FeatureEnableUnsafeDSOffsetFolding = 15,
-  FeatureEvergreen = 16,
-  FeatureFP16Denormals = 17,
-  FeatureFP32Denormals = 18,
-  FeatureFP64 = 19,
-  FeatureFP64Denormals = 20,
-  FeatureFP64FP16Denormals = 21,
-  FeatureFPExceptions = 22,
-  FeatureFastFMAF32 = 23,
-  FeatureFetchLimit8 = 24,
-  FeatureFetchLimit16 = 25,
-  FeatureFlatAddressSpace = 26,
-  FeatureFlatForGlobal = 27,
-  FeatureGCN = 28,
-  FeatureGCN1Encoding = 29,
-  FeatureGCN3Encoding = 30,
-  FeatureGFX9 = 31,
-  FeatureGFX9Insts = 32,
-  FeatureISAVersion7_0_0 = 33,
-  FeatureISAVersion7_0_1 = 34,
-  FeatureISAVersion7_0_2 = 35,
-  FeatureISAVersion8_0_0 = 36,
-  FeatureISAVersion8_0_1 = 37,
-  FeatureISAVersion8_0_2 = 38,
-  FeatureISAVersion8_0_3 = 39,
-  FeatureISAVersion8_0_4 = 40,
-  FeatureISAVersion8_1_0 = 41,
-  FeatureISAVersion9_0_0 = 42,
-  FeatureISAVersion9_0_1 = 43,
-  FeatureInv2PiInlineImm = 44,
-  FeatureLDSBankCount16 = 45,
-  FeatureLDSBankCount32 = 46,
-  FeatureLocalMemorySize0 = 47,
-  FeatureLocalMemorySize32768 = 48,
-  FeatureLocalMemorySize65536 = 49,
-  FeatureMaxPrivateElementSize4 = 50,
-  FeatureMaxPrivateElementSize8 = 51,
-  FeatureMaxPrivateElementSize16 = 52,
-  FeatureMovrel = 53,
-  FeatureNorthernIslands = 54,
-  FeaturePromoteAlloca = 55,
-  FeatureR600 = 56,
-  FeatureR600ALUInst = 57,
-  FeatureR700 = 58,
-  FeatureSDWA = 59,
-  FeatureSGPRInitBug = 60,
-  FeatureSMemRealTime = 61,
-  FeatureScalarStores = 62,
-  FeatureSeaIslands = 63,
-  FeatureSouthernIslands = 64,
-  FeatureTrapHandler = 65,
-  FeatureUnalignedBufferAccess = 66,
-  FeatureUnalignedScratchAccess = 67,
-  FeatureVGPRIndexMode = 68,
-  FeatureVGPRSpilling = 69,
-  FeatureVOP3P = 70,
-  FeatureVertexCache = 71,
-  FeatureVolcanicIslands = 72,
-  FeatureWavefrontSize16 = 73,
-  FeatureWavefrontSize32 = 74,
-  FeatureWavefrontSize64 = 75,
-  FeatureXNACK = 76,
-  HalfRate64Ops = 77
+  FeatureAutoWaitcntBeforeBarrier = 2,
+  FeatureCFALUBug = 3,
+  FeatureCIInsts = 4,
+  FeatureCaymanISA = 5,
+  FeatureDPP = 6,
+  FeatureDX10Clamp = 7,
+  FeatureDebuggerEmitPrologue = 8,
+  FeatureDebuggerInsertNops = 9,
+  FeatureDebuggerReserveRegs = 10,
+  FeatureDisable = 11,
+  FeatureDumpCode = 12,
+  FeatureDumpCodeLower = 13,
+  FeatureEnableLoadStoreOpt = 14,
+  FeatureEnableSIScheduler = 15,
+  FeatureEnableUnsafeDSOffsetFolding = 16,
+  FeatureEvergreen = 17,
+  FeatureFP16Denormals = 18,
+  FeatureFP32Denormals = 19,
+  FeatureFP64 = 20,
+  FeatureFP64Denormals = 21,
+  FeatureFP64FP16Denormals = 22,
+  FeatureFPExceptions = 23,
+  FeatureFastFMAF32 = 24,
+  FeatureFetchLimit8 = 25,
+  FeatureFetchLimit16 = 26,
+  FeatureFlatAddressSpace = 27,
+  FeatureFlatForGlobal = 28,
+  FeatureFlatGlobalInsts = 29,
+  FeatureFlatInstOffsets = 30,
+  FeatureFlatScratchInsts = 31,
+  FeatureGCN = 32,
+  FeatureGCN1Encoding = 33,
+  FeatureGCN3Encoding = 34,
+  FeatureGFX9 = 35,
+  FeatureGFX9Insts = 36,
+  FeatureISAVersion6_0_0 = 37,
+  FeatureISAVersion6_0_1 = 38,
+  FeatureISAVersion7_0_0 = 39,
+  FeatureISAVersion7_0_1 = 40,
+  FeatureISAVersion7_0_2 = 41,
+  FeatureISAVersion7_0_3 = 42,
+  FeatureISAVersion8_0_0 = 43,
+  FeatureISAVersion8_0_1 = 44,
+  FeatureISAVersion8_0_2 = 45,
+  FeatureISAVersion8_0_3 = 46,
+  FeatureISAVersion8_0_4 = 47,
+  FeatureISAVersion8_1_0 = 48,
+  FeatureISAVersion9_0_0 = 49,
+  FeatureISAVersion9_0_1 = 50,
+  FeatureISAVersion9_0_2 = 51,
+  FeatureISAVersion9_0_3 = 52,
+  FeatureInv2PiInlineImm = 53,
+  FeatureLDSBankCount16 = 54,
+  FeatureLDSBankCount32 = 55,
+  FeatureLocalMemorySize0 = 56,
+  FeatureLocalMemorySize32768 = 57,
+  FeatureLocalMemorySize65536 = 58,
+  FeatureMaxPrivateElementSize4 = 59,
+  FeatureMaxPrivateElementSize8 = 60,
+  FeatureMaxPrivateElementSize16 = 61,
+  FeatureMovrel = 62,
+  FeatureNorthernIslands = 63,
+  FeaturePromoteAlloca = 64,
+  FeatureR600 = 65,
+  FeatureR600ALUInst = 66,
+  FeatureR700 = 67,
+  FeatureSDWA = 68,
+  FeatureSGPRInitBug = 69,
+  FeatureSMemRealTime = 70,
+  FeatureScalarStores = 71,
+  FeatureSeaIslands = 72,
+  FeatureSouthernIslands = 73,
+  FeatureTrapHandler = 74,
+  FeatureUnalignedBufferAccess = 75,
+  FeatureUnalignedScratchAccess = 76,
+  FeatureVGPRIndexMode = 77,
+  FeatureVGPRSpilling = 78,
+  FeatureVOP3P = 79,
+  FeatureVertexCache = 80,
+  FeatureVolcanicIslands = 81,
+  FeatureWavefrontSize16 = 82,
+  FeatureWavefrontSize32 = 83,
+  FeatureWavefrontSize64 = 84,
+  FeatureXNACK = 85,
+  HalfRate64Ops = 86
 };
 } // end namespace AMDGPU
 } // end namespace llvm
@@ -107,7 +116,7 @@ extern const llvm::SubtargetFeatureKV AMDGPUFeatureKV[] = {
   { "16-bit-insts", "Has i16/f16 instructions", { AMDGPU::Feature16BitInsts }, { } },
   { "DumpCode", "Dump MachineInstrs in the CodeEmitter", { AMDGPU::FeatureDumpCode }, { } },
   { "EVERGREEN", "EVERGREEN GPU generation", { AMDGPU::FeatureEvergreen }, { AMDGPU::FeatureFetchLimit16, AMDGPU::FeatureLocalMemorySize32768 } },
-  { "GFX9", "GFX9 GPU generation", { AMDGPU::FeatureGFX9 }, { AMDGPU::FeatureFP64, AMDGPU::FeatureLocalMemorySize65536, AMDGPU::FeatureWavefrontSize64, AMDGPU::FeatureFlatAddressSpace, AMDGPU::FeatureGCN, AMDGPU::FeatureGCN3Encoding, AMDGPU::FeatureCIInsts, AMDGPU::Feature16BitInsts, AMDGPU::FeatureSMemRealTime, AMDGPU::FeatureScalarStores, AMDGPU::FeatureInv2PiInlineImm, AMDGPU::FeatureApertureRegs, AMDGPU::FeatureGFX9Insts, AMDGPU::FeatureVOP3P, AMDGPU::FeatureVGPRIndexMode } },
+  { "GFX9", "GFX9 GPU generation", { AMDGPU::FeatureGFX9 }, { AMDGPU::FeatureFP64, AMDGPU::FeatureLocalMemorySize65536, AMDGPU::FeatureWavefrontSize64, AMDGPU::FeatureFlatAddressSpace, AMDGPU::FeatureGCN, AMDGPU::FeatureGCN3Encoding, AMDGPU::FeatureCIInsts, AMDGPU::Feature16BitInsts, AMDGPU::FeatureSMemRealTime, AMDGPU::FeatureScalarStores, AMDGPU::FeatureInv2PiInlineImm, AMDGPU::FeatureApertureRegs, AMDGPU::FeatureGFX9Insts, AMDGPU::FeatureVOP3P, AMDGPU::FeatureVGPRIndexMode, AMDGPU::FeatureFastFMAF32, AMDGPU::FeatureSDWA, AMDGPU::FeatureDPP, AMDGPU::FeatureFlatInstOffsets, AMDGPU::FeatureFlatGlobalInsts, AMDGPU::FeatureFlatScratchInsts } },
   { "HasVertexCache", "Specify use of dedicated vertex cache", { AMDGPU::FeatureVertexCache }, { } },
   { "NORTHERN_ISLANDS", "NORTHERN_ISLANDS GPU generation", { AMDGPU::FeatureNorthernIslands }, { AMDGPU::FeatureFetchLimit16, AMDGPU::FeatureWavefrontSize64, AMDGPU::FeatureLocalMemorySize32768 } },
   { "R600", "R600 GPU generation", { AMDGPU::FeatureR600 }, { AMDGPU::FeatureR600ALUInst, AMDGPU::FeatureFetchLimit8, AMDGPU::FeatureLocalMemorySize0 } },
@@ -120,6 +129,7 @@ extern const llvm::SubtargetFeatureKV AMDGPUFeatureKV[] = {
   { "amdgpu-debugger-insert-nops", "Insert one nop instruction for each high level source statement", { AMDGPU::FeatureDebuggerInsertNops }, { } },
   { "amdgpu-debugger-reserve-regs", "Reserve registers for debugger usage", { AMDGPU::FeatureDebuggerReserveRegs }, { } },
   { "aperture-regs", "Has Memory Aperture Base and Size Registers", { AMDGPU::FeatureApertureRegs }, { } },
+  { "auto-waitcnt-before-barrier", "Hardware automatically inserts waitcnt before barrier", { AMDGPU::FeatureAutoWaitcntBeforeBarrier }, { } },
   { "caymanISA", "Use Cayman ISA", { AMDGPU::FeatureCaymanISA }, { } },
   { "cfalubug", "GPU has CF_ALU bug", { AMDGPU::FeatureCFALUBug }, { } },
   { "ci-insts", "Additional intstructions for CI+", { AMDGPU::FeatureCIInsts }, { } },
@@ -131,6 +141,9 @@ extern const llvm::SubtargetFeatureKV AMDGPUFeatureKV[] = {
   { "fetch8", "Limit the maximum number of fetches in a clause to 8", { AMDGPU::FeatureFetchLimit8 }, { } },
   { "flat-address-space", "Support flat address space", { AMDGPU::FeatureFlatAddressSpace }, { } },
   { "flat-for-global", "Force to generate flat instruction for global", { AMDGPU::FeatureFlatForGlobal }, { } },
+  { "flat-global-insts", "Have global_* flat memory instructions", { AMDGPU::FeatureFlatGlobalInsts }, { } },
+  { "flat-inst-offsets", "Flat instructions have immediate offset addressing mode", { AMDGPU::FeatureFlatInstOffsets }, { } },
+  { "flat-scratch-insts", "Have scratch_* flat memory instructions", { AMDGPU::FeatureFlatScratchInsts }, { } },
   { "fp-exceptions", "Enable floating point exceptions", { AMDGPU::FeatureFPExceptions }, { } },
   { "fp16-denormals", "Enable half precision denormal handling", { AMDGPU::FeatureFP16Denormals }, { AMDGPU::FeatureFP64FP16Denormals } },
   { "fp32-denormals", "Enable single precision denormal handling", { AMDGPU::FeatureFP32Denormals }, { } },
@@ -143,17 +156,22 @@ extern const llvm::SubtargetFeatureKV AMDGPUFeatureKV[] = {
   { "gfx9-insts", "Additional intstructions for GFX9+", { AMDGPU::FeatureGFX9Insts }, { } },
   { "half-rate-64-ops", "Most fp64 instructions are half rate instead of quarter", { AMDGPU::HalfRate64Ops }, { } },
   { "inv-2pi-inline-imm", "Has 1 / (2 * pi) as inline immediate", { AMDGPU::FeatureInv2PiInlineImm }, { } },
+  { "isaver6.0.0", "Instruction set version number", { AMDGPU::FeatureISAVersion6_0_0 }, { AMDGPU::FeatureSouthernIslands, AMDGPU::FeatureFastFMAF32, AMDGPU::HalfRate64Ops, AMDGPU::FeatureLDSBankCount32 } },
+  { "isaver6.0.1", "Instruction set version number", { AMDGPU::FeatureISAVersion6_0_1 }, { AMDGPU::FeatureSouthernIslands, AMDGPU::FeatureLDSBankCount32 } },
   { "isaver7.0.0", "Instruction set version number", { AMDGPU::FeatureISAVersion7_0_0 }, { AMDGPU::FeatureSeaIslands, AMDGPU::FeatureLDSBankCount32 } },
   { "isaver7.0.1", "Instruction set version number", { AMDGPU::FeatureISAVersion7_0_1 }, { AMDGPU::FeatureSeaIslands, AMDGPU::HalfRate64Ops, AMDGPU::FeatureLDSBankCount32, AMDGPU::FeatureFastFMAF32 } },
   { "isaver7.0.2", "Instruction set version number", { AMDGPU::FeatureISAVersion7_0_2 }, { AMDGPU::FeatureSeaIslands, AMDGPU::FeatureLDSBankCount16 } },
+  { "isaver7.0.3", "Instruction set version number", { AMDGPU::FeatureISAVersion7_0_3 }, { AMDGPU::FeatureSeaIslands, AMDGPU::FeatureLDSBankCount16 } },
   { "isaver8.0.0", "Instruction set version number", { AMDGPU::FeatureISAVersion8_0_0 }, { AMDGPU::FeatureVolcanicIslands, AMDGPU::FeatureLDSBankCount32, AMDGPU::FeatureSGPRInitBug } },
   { "isaver8.0.1", "Instruction set version number", { AMDGPU::FeatureISAVersion8_0_1 }, { AMDGPU::FeatureVolcanicIslands, AMDGPU::FeatureLDSBankCount32, AMDGPU::FeatureXNACK } },
   { "isaver8.0.2", "Instruction set version number", { AMDGPU::FeatureISAVersion8_0_2 }, { AMDGPU::FeatureVolcanicIslands, AMDGPU::FeatureLDSBankCount32, AMDGPU::FeatureSGPRInitBug } },
   { "isaver8.0.3", "Instruction set version number", { AMDGPU::FeatureISAVersion8_0_3 }, { AMDGPU::FeatureVolcanicIslands, AMDGPU::FeatureLDSBankCount32 } },
   { "isaver8.0.4", "Instruction set version number", { AMDGPU::FeatureISAVersion8_0_4 }, { AMDGPU::FeatureVolcanicIslands, AMDGPU::FeatureLDSBankCount32 } },
   { "isaver8.1.0", "Instruction set version number", { AMDGPU::FeatureISAVersion8_1_0 }, { AMDGPU::FeatureVolcanicIslands, AMDGPU::FeatureLDSBankCount16, AMDGPU::FeatureXNACK } },
-  { "isaver9.0.0", "Instruction set version number", { AMDGPU::FeatureISAVersion9_0_0 }, { } },
-  { "isaver9.0.1", "Instruction set version number", { AMDGPU::FeatureISAVersion9_0_1 }, { } },
+  { "isaver9.0.0", "Instruction set version number", { AMDGPU::FeatureISAVersion9_0_0 }, { AMDGPU::FeatureGFX9, AMDGPU::FeatureLDSBankCount32 } },
+  { "isaver9.0.1", "Instruction set version number", { AMDGPU::FeatureISAVersion9_0_1 }, { AMDGPU::FeatureGFX9, AMDGPU::FeatureLDSBankCount32, AMDGPU::FeatureXNACK } },
+  { "isaver9.0.2", "Instruction set version number", { AMDGPU::FeatureISAVersion9_0_2 }, { AMDGPU::FeatureGFX9, AMDGPU::FeatureLDSBankCount32 } },
+  { "isaver9.0.3", "Instruction set version number", { AMDGPU::FeatureISAVersion9_0_3 }, { AMDGPU::FeatureGFX9, AMDGPU::FeatureLDSBankCount32, AMDGPU::FeatureXNACK } },
   { "ldsbankcount16", "The number of LDS banks per compute unit.", { AMDGPU::FeatureLDSBankCount16 }, { } },
   { "ldsbankcount32", "The number of LDS banks per compute unit.", { AMDGPU::FeatureLDSBankCount32 }, { } },
   { "load-store-opt", "Enable SI load/store optimizer pass", { AMDGPU::FeatureEnableLoadStoreOpt }, { } },
@@ -185,7 +203,7 @@ extern const llvm::SubtargetFeatureKV AMDGPUFeatureKV[] = {
 
 // Sorted (by key) array of values for CPU subtype.
 extern const llvm::SubtargetFeatureKV AMDGPUSubTypeKV[] = {
-  { "SI", "Select the SI processor", { AMDGPU::FeatureSouthernIslands, AMDGPU::FeatureFastFMAF32, AMDGPU::HalfRate64Ops }, { } },
+  { "SI", "Select the SI processor", { AMDGPU::FeatureISAVersion6_0_0 }, { } },
   { "barts", "Select the barts processor", { AMDGPU::FeatureNorthernIslands, AMDGPU::FeatureVertexCache, AMDGPU::FeatureCFALUBug }, { } },
   { "bonaire", "Select the bonaire processor", { AMDGPU::FeatureISAVersion7_0_0 }, { } },
   { "caicos", "Select the caicos processor", { AMDGPU::FeatureNorthernIslands, AMDGPU::FeatureCFALUBug }, { } },
@@ -194,26 +212,31 @@ extern const llvm::SubtargetFeatureKV AMDGPUSubTypeKV[] = {
   { "cedar", "Select the cedar processor", { AMDGPU::FeatureEvergreen, AMDGPU::FeatureVertexCache, AMDGPU::FeatureWavefrontSize32, AMDGPU::FeatureCFALUBug }, { } },
   { "cypress", "Select the cypress processor", { AMDGPU::FeatureEvergreen, AMDGPU::FeatureFP64, AMDGPU::FeatureVertexCache, AMDGPU::FeatureWavefrontSize64 }, { } },
   { "fiji", "Select the fiji processor", { AMDGPU::FeatureISAVersion8_0_3 }, { } },
+  { "gfx600", "Select the gfx600 processor", { AMDGPU::FeatureISAVersion6_0_0 }, { } },
+  { "gfx601", "Select the gfx601 processor", { AMDGPU::FeatureISAVersion6_0_1 }, { } },
   { "gfx700", "Select the gfx700 processor", { AMDGPU::FeatureISAVersion7_0_0 }, { } },
   { "gfx701", "Select the gfx701 processor", { AMDGPU::FeatureISAVersion7_0_1 }, { } },
   { "gfx702", "Select the gfx702 processor", { AMDGPU::FeatureISAVersion7_0_2 }, { } },
+  { "gfx703", "Select the gfx703 processor", { AMDGPU::FeatureISAVersion7_0_3 }, { } },
   { "gfx800", "Select the gfx800 processor", { AMDGPU::FeatureISAVersion8_0_0 }, { } },
   { "gfx801", "Select the gfx801 processor", { AMDGPU::FeatureISAVersion8_0_1 }, { } },
   { "gfx802", "Select the gfx802 processor", { AMDGPU::FeatureISAVersion8_0_2 }, { } },
   { "gfx803", "Select the gfx803 processor", { AMDGPU::FeatureISAVersion8_0_3 }, { } },
   { "gfx804", "Select the gfx804 processor", { AMDGPU::FeatureISAVersion8_0_4 }, { } },
   { "gfx810", "Select the gfx810 processor", { AMDGPU::FeatureISAVersion8_1_0 }, { } },
-  { "gfx900", "Select the gfx900 processor", { AMDGPU::FeatureGFX9, AMDGPU::FeatureISAVersion9_0_0, AMDGPU::FeatureLDSBankCount32 }, { } },
-  { "gfx901", "Select the gfx901 processor", { AMDGPU::FeatureGFX9, AMDGPU::FeatureXNACK, AMDGPU::FeatureISAVersion9_0_1, AMDGPU::FeatureLDSBankCount32 }, { } },
-  { "hainan", "Select the hainan processor", { AMDGPU::FeatureSouthernIslands }, { } },
+  { "gfx900", "Select the gfx900 processor", { AMDGPU::FeatureISAVersion9_0_0 }, { } },
+  { "gfx901", "Select the gfx901 processor", { AMDGPU::FeatureISAVersion9_0_1 }, { } },
+  { "gfx902", "Select the gfx902 processor", { AMDGPU::FeatureISAVersion9_0_2 }, { } },
+  { "gfx903", "Select the gfx903 processor", { AMDGPU::FeatureISAVersion9_0_3 }, { } },
+  { "hainan", "Select the hainan processor", { AMDGPU::FeatureISAVersion6_0_1 }, { } },
   { "hawaii", "Select the hawaii processor", { AMDGPU::FeatureISAVersion7_0_1 }, { } },
   { "iceland", "Select the iceland processor", { AMDGPU::FeatureISAVersion8_0_0 }, { } },
   { "juniper", "Select the juniper processor", { AMDGPU::FeatureEvergreen, AMDGPU::FeatureVertexCache, AMDGPU::FeatureWavefrontSize64 }, { } },
-  { "kabini", "Select the kabini processor", { AMDGPU::FeatureISAVersion7_0_2 }, { } },
+  { "kabini", "Select the kabini processor", { AMDGPU::FeatureISAVersion7_0_3 }, { } },
   { "kaveri", "Select the kaveri processor", { AMDGPU::FeatureISAVersion7_0_0 }, { } },
-  { "mullins", "Select the mullins processor", { AMDGPU::FeatureISAVersion7_0_2 }, { } },
-  { "oland", "Select the oland processor", { AMDGPU::FeatureSouthernIslands }, { } },
-  { "pitcairn", "Select the pitcairn processor", { AMDGPU::FeatureSouthernIslands }, { } },
+  { "mullins", "Select the mullins processor", { AMDGPU::FeatureISAVersion7_0_3 }, { } },
+  { "oland", "Select the oland processor", { AMDGPU::FeatureISAVersion6_0_1 }, { } },
+  { "pitcairn", "Select the pitcairn processor", { AMDGPU::FeatureISAVersion6_0_1 }, { } },
   { "polaris10", "Select the polaris10 processor", { AMDGPU::FeatureISAVersion8_0_3 }, { } },
   { "polaris11", "Select the polaris11 processor", { AMDGPU::FeatureISAVersion8_0_3 }, { } },
   { "r600", "Select the r600 processor", { AMDGPU::FeatureR600, AMDGPU::FeatureVertexCache, AMDGPU::FeatureWavefrontSize64 }, { } },
@@ -226,10 +249,10 @@ extern const llvm::SubtargetFeatureKV AMDGPUSubTypeKV[] = {
   { "rv770", "Select the rv770 processor", { AMDGPU::FeatureR700, AMDGPU::FeatureFP64, AMDGPU::FeatureVertexCache, AMDGPU::FeatureWavefrontSize64 }, { } },
   { "stoney", "Select the stoney processor", { AMDGPU::FeatureISAVersion8_1_0 }, { } },
   { "sumo", "Select the sumo processor", { AMDGPU::FeatureEvergreen, AMDGPU::FeatureWavefrontSize64, AMDGPU::FeatureCFALUBug }, { } },
-  { "tahiti", "Select the tahiti processor", { AMDGPU::FeatureSouthernIslands, AMDGPU::FeatureFastFMAF32, AMDGPU::HalfRate64Ops }, { } },
+  { "tahiti", "Select the tahiti processor", { AMDGPU::FeatureISAVersion6_0_0 }, { } },
   { "tonga", "Select the tonga processor", { AMDGPU::FeatureISAVersion8_0_2 }, { } },
   { "turks", "Select the turks processor", { AMDGPU::FeatureNorthernIslands, AMDGPU::FeatureVertexCache, AMDGPU::FeatureCFALUBug }, { } },
-  { "verde", "Select the verde processor", { AMDGPU::FeatureSouthernIslands }, { } }
+  { "verde", "Select the verde processor", { AMDGPU::FeatureISAVersion6_0_1 }, { } }
 };
 
 #ifdef DBGFIELD
@@ -284,9 +307,9 @@ static const llvm::InstrItinerary R600_VLIW5_Itin[] = {
   { 0, 0, 0, 0, 0 }, // 0 NoInstrModel
   { 1, 1, 2, 0, 0 }, // 1 AnyALU
   { 1, 2, 3, 0, 0 }, // 2 NullALU
-  { 1, 3, 4, 0, 0 }, // 3 VecALU
-  { 1, 2, 3, 0, 0 }, // 4 NullALU_WriteVMEM
-  { 1, 2, 3, 0, 0 }, // 5 NullALU_Write32Bit
+  { 1, 2, 3, 0, 0 }, // 3 NullALU_Write32Bit
+  { 1, 3, 4, 0, 0 }, // 4 VecALU
+  { 1, 2, 3, 0, 0 }, // 5 NullALU_WriteVMEM
   { 1, 4, 5, 0, 0 }, // 6 TransALU
   { 1, 2, 3, 0, 0 }, // 7 NullALU_WriteLDS
   { 1, 2, 3, 0, 0 }, // 8 NullALU_WriteExport
@@ -312,9 +335,9 @@ static const llvm::InstrItinerary R600_VLIW4_Itin[] = {
   { 0, 0, 0, 0, 0 }, // 0 NoInstrModel
   { 1, 6, 7, 0, 0 }, // 1 AnyALU
   { 1, 7, 8, 0, 0 }, // 2 NullALU
-  { 1, 6, 7, 0, 0 }, // 3 VecALU
-  { 1, 7, 8, 0, 0 }, // 4 NullALU_WriteVMEM
-  { 1, 7, 8, 0, 0 }, // 5 NullALU_Write32Bit
+  { 1, 7, 8, 0, 0 }, // 3 NullALU_Write32Bit
+  { 1, 6, 7, 0, 0 }, // 4 VecALU
+  { 1, 7, 8, 0, 0 }, // 5 NullALU_WriteVMEM
   { 1, 7, 8, 0, 0 }, // 6 TransALU
   { 1, 7, 8, 0, 0 }, // 7 NullALU_WriteLDS
   { 1, 7, 8, 0, 0 }, // 8 NullALU_WriteExport
@@ -342,8 +365,8 @@ static const llvm::InstrItinerary R600_VLIW4_Itin[] = {
 // {ProcResourceIdx, Cycles}
 extern const llvm::MCWriteProcResEntry AMDGPUWriteProcResTable[] = {
   { 0,  0}, // Invalid
-  { 6,  1}, // #1
-  { 5,  1}, // #2
+  { 5,  1}, // #1
+  { 6,  1}, // #2
   { 3,  1}, // #3
   { 2,  1}, // #4
   { 4,  1}, // #5
@@ -356,8 +379,8 @@ extern const llvm::MCWriteProcResEntry AMDGPUWriteProcResTable[] = {
 // {Cycles, WriteResourceID}
 extern const llvm::MCWriteLatencyEntry AMDGPUWriteLatencyTable[] = {
   { 0,  0}, // Invalid
-  {80,  0}, // #1 WriteVMEM
-  { 1,  0}, // #2 Write32Bit_WriteSALU_WriteFloatFMA
+  { 1,  0}, // #1 Write32Bit_WriteSALU_WriteFloatFMA
+  {80,  0}, // #2 WriteVMEM
   { 5,  0}, // #3 WriteLDS_WriteSMEM
   { 4,  0}, // #4 WriteExport_WriteQuarterRate32_WriteDouble
   {500,  0}, // #5 WriteBarrier
@@ -384,30 +407,30 @@ static const llvm::MCSchedClassDesc SIFullSpeedModelSchedClasses[] = {
   {DBGFIELD("InvalidSchedClass")  65535, false, false,  0, 0,  0, 0,  0, 0},
   {DBGFIELD("AnyALU")             0, false, false,  0, 0,  0, 0,  0, 0}, // #1
   {DBGFIELD("NullALU")            0, false, false,  0, 0,  0, 0,  0, 0}, // #2
-  {DBGFIELD("VecALU")             0, false, false,  0, 0,  0, 0,  0, 0}, // #3
-  {DBGFIELD("NullALU_WriteVMEM")  1, false, false,  1, 1,  1, 1,  0, 0}, // #4
-  {DBGFIELD("NullALU_Write32Bit") 1, false, false,  2, 1,  2, 1,  0, 0}, // #5
+  {DBGFIELD("NullALU_Write32Bit") 1, false, false,  1, 1,  1, 1,  0, 0}, // #3
+  {DBGFIELD("VecALU")             0, false, false,  0, 0,  0, 0,  0, 0}, // #4
+  {DBGFIELD("NullALU_WriteVMEM")  1, false, false,  2, 1,  2, 1,  0, 0}, // #5
   {DBGFIELD("TransALU")           0, false, false,  0, 0,  0, 0,  0, 0}, // #6
   {DBGFIELD("NullALU_WriteLDS")   1, false, false,  3, 1,  3, 1,  0, 0}, // #7
   {DBGFIELD("NullALU_WriteExport") 1, false, false,  4, 1,  4, 1,  0, 0}, // #8
   {DBGFIELD("XALU")               0, false, false,  0, 0,  0, 0,  0, 0}, // #9
-  {DBGFIELD("NullALU_WriteSALU")  1, false, false,  5, 1,  2, 1,  0, 0}, // #10
+  {DBGFIELD("NullALU_WriteSALU")  1, false, false,  5, 1,  1, 1,  0, 0}, // #10
   {DBGFIELD("NullALU_WriteBarrier") 1, false, false,  6, 1,  5, 1,  0, 0}, // #11
   {DBGFIELD("NullALU_WriteBranch") 1, false, false,  6, 1,  6, 1,  0, 0}, // #12
   {DBGFIELD("NullALU_WriteSMEM")  1, false, false,  3, 1,  3, 1,  0, 0}, // #13
   {DBGFIELD("NullALU_Write32Bit_WriteSALU") 2, false, false,  7, 2,  7, 2,  0, 0}, // #14
-  {DBGFIELD("NullALU_WriteDoubleAdd") 1, false, false,  2, 1,  9, 1,  0, 0}, // #15
-  {DBGFIELD("NullALU_Write64Bit") 1, false, false,  2, 1,  9, 1,  0, 0}, // #16
-  {DBGFIELD("NullALU_WriteQuarterRate32") 1, false, false,  2, 1,  4, 1,  0, 0}, // #17
-  {DBGFIELD("NullALU_WriteFloatFMA") 1, false, false,  2, 1,  2, 1,  0, 0}, // #18
-  {DBGFIELD("NullALU_WriteDouble") 1, false, false,  2, 1,  4, 1,  0, 0}, // #19
+  {DBGFIELD("NullALU_WriteDoubleAdd") 1, false, false,  1, 1,  9, 1,  0, 0}, // #15
+  {DBGFIELD("NullALU_Write64Bit") 1, false, false,  1, 1,  9, 1,  0, 0}, // #16
+  {DBGFIELD("NullALU_WriteQuarterRate32") 1, false, false,  1, 1,  4, 1,  0, 0}, // #17
+  {DBGFIELD("NullALU_WriteFloatFMA") 1, false, false,  1, 1,  1, 1,  0, 0}, // #18
+  {DBGFIELD("NullALU_WriteDouble") 1, false, false,  1, 1,  4, 1,  0, 0}, // #19
   {DBGFIELD("NullALU_WriteFloatFMA_WriteSALU") 2, false, false,  7, 2,  7, 2,  0, 0}, // #20
   {DBGFIELD("NullALU_WriteDouble_WriteSALU") 2, false, false,  7, 2, 10, 2,  0, 0}, // #21
   {DBGFIELD("NullALU_Write64Bit_Write64Bit") 2, false, false,  9, 1, 12, 2,  0, 0}, // #22
   {DBGFIELD("COPY")               65534, false, false,  0, 0,  0, 0,  0, 0}, // #23
-  {DBGFIELD("Write32Bit")         1, false, false,  2, 1,  2, 1,  0, 0}, // #24
-  {DBGFIELD("Write64Bit")         1, false, false,  2, 1,  9, 1,  0, 0}, // #25
-  {DBGFIELD("WriteSALU")          1, false, false,  5, 1,  2, 1,  0, 0} // #26
+  {DBGFIELD("Write32Bit")         1, false, false,  1, 1,  1, 1,  0, 0}, // #24
+  {DBGFIELD("Write64Bit")         1, false, false,  1, 1,  9, 1,  0, 0}, // #25
+  {DBGFIELD("WriteSALU")          1, false, false,  5, 1,  1, 1,  0, 0} // #26
 }; // SIFullSpeedModelSchedClasses
 
 // {Name, NumMicroOps, BeginGroup, EndGroup, WriteProcResIdx,#, WriteLatencyIdx,#, ReadAdvanceIdx,#}
@@ -415,30 +438,30 @@ static const llvm::MCSchedClassDesc SIQuarterSpeedModelSchedClasses[] = {
   {DBGFIELD("InvalidSchedClass")  65535, false, false,  0, 0,  0, 0,  0, 0},
   {DBGFIELD("AnyALU")             0, false, false,  0, 0,  0, 0,  0, 0}, // #1
   {DBGFIELD("NullALU")            0, false, false,  0, 0,  0, 0,  0, 0}, // #2
-  {DBGFIELD("VecALU")             0, false, false,  0, 0,  0, 0,  0, 0}, // #3
-  {DBGFIELD("NullALU_WriteVMEM")  1, false, false,  1, 1,  1, 1,  0, 0}, // #4
-  {DBGFIELD("NullALU_Write32Bit") 1, false, false,  2, 1,  2, 1,  0, 0}, // #5
+  {DBGFIELD("NullALU_Write32Bit") 1, false, false,  1, 1,  1, 1,  0, 0}, // #3
+  {DBGFIELD("VecALU")             0, false, false,  0, 0,  0, 0,  0, 0}, // #4
+  {DBGFIELD("NullALU_WriteVMEM")  1, false, false,  2, 1,  2, 1,  0, 0}, // #5
   {DBGFIELD("TransALU")           0, false, false,  0, 0,  0, 0,  0, 0}, // #6
   {DBGFIELD("NullALU_WriteLDS")   1, false, false,  3, 1,  3, 1,  0, 0}, // #7
   {DBGFIELD("NullALU_WriteExport") 1, false, false,  4, 1,  4, 1,  0, 0}, // #8
   {DBGFIELD("XALU")               0, false, false,  0, 0,  0, 0,  0, 0}, // #9
-  {DBGFIELD("NullALU_WriteSALU")  1, false, false,  5, 1,  2, 1,  0, 0}, // #10
+  {DBGFIELD("NullALU_WriteSALU")  1, false, false,  5, 1,  1, 1,  0, 0}, // #10
   {DBGFIELD("NullALU_WriteBarrier") 1, false, false,  6, 1,  5, 1,  0, 0}, // #11
   {DBGFIELD("NullALU_WriteBranch") 1, false, false,  6, 1,  6, 1,  0, 0}, // #12
   {DBGFIELD("NullALU_WriteSMEM")  1, false, false,  3, 1,  3, 1,  0, 0}, // #13
   {DBGFIELD("NullALU_Write32Bit_WriteSALU") 2, false, false,  7, 2,  7, 2,  0, 0}, // #14
-  {DBGFIELD("NullALU_WriteDoubleAdd") 1, false, false,  2, 1,  6, 1,  0, 0}, // #15
-  {DBGFIELD("NullALU_Write64Bit") 1, false, false,  2, 1,  9, 1,  0, 0}, // #16
-  {DBGFIELD("NullALU_WriteQuarterRate32") 1, false, false,  2, 1,  4, 1,  0, 0}, // #17
-  {DBGFIELD("NullALU_WriteFloatFMA") 1, false, false,  2, 1, 14, 1,  0, 0}, // #18
-  {DBGFIELD("NullALU_WriteDouble") 1, false, false,  2, 1, 14, 1,  0, 0}, // #19
+  {DBGFIELD("NullALU_WriteDoubleAdd") 1, false, false,  1, 1,  6, 1,  0, 0}, // #15
+  {DBGFIELD("NullALU_Write64Bit") 1, false, false,  1, 1,  9, 1,  0, 0}, // #16
+  {DBGFIELD("NullALU_WriteQuarterRate32") 1, false, false,  1, 1,  4, 1,  0, 0}, // #17
+  {DBGFIELD("NullALU_WriteFloatFMA") 1, false, false,  1, 1, 14, 1,  0, 0}, // #18
+  {DBGFIELD("NullALU_WriteDouble") 1, false, false,  1, 1, 14, 1,  0, 0}, // #19
   {DBGFIELD("NullALU_WriteFloatFMA_WriteSALU") 2, false, false,  7, 2, 15, 2,  0, 0}, // #20
   {DBGFIELD("NullALU_WriteDouble_WriteSALU") 2, false, false,  7, 2, 15, 2,  0, 0}, // #21
   {DBGFIELD("NullALU_Write64Bit_Write64Bit") 2, false, false,  9, 1, 12, 2,  0, 0}, // #22
   {DBGFIELD("COPY")               65534, false, false,  0, 0,  0, 0,  0, 0}, // #23
-  {DBGFIELD("Write32Bit")         1, false, false,  2, 1,  2, 1,  0, 0}, // #24
-  {DBGFIELD("Write64Bit")         1, false, false,  2, 1,  9, 1,  0, 0}, // #25
-  {DBGFIELD("WriteSALU")          1, false, false,  5, 1,  2, 1,  0, 0} // #26
+  {DBGFIELD("Write32Bit")         1, false, false,  1, 1,  1, 1,  0, 0}, // #24
+  {DBGFIELD("Write64Bit")         1, false, false,  1, 1,  9, 1,  0, 0}, // #25
+  {DBGFIELD("WriteSALU")          1, false, false,  5, 1,  1, 1,  0, 0} // #26
 }; // SIQuarterSpeedModelSchedClasses
 
 static const llvm::MCSchedModel NoSchedModel = {
@@ -545,9 +568,12 @@ extern const llvm::SubtargetInfoKV AMDGPUProcSchedKV[] = {
   { "cedar", (const void *)&R600_VLIW5_ItinModel },
   { "cypress", (const void *)&R600_VLIW5_ItinModel },
   { "fiji", (const void *)&SIQuarterSpeedModel },
+  { "gfx600", (const void *)&SIFullSpeedModel },
+  { "gfx601", (const void *)&SIQuarterSpeedModel },
   { "gfx700", (const void *)&SIQuarterSpeedModel },
   { "gfx701", (const void *)&SIFullSpeedModel },
   { "gfx702", (const void *)&SIQuarterSpeedModel },
+  { "gfx703", (const void *)&SIQuarterSpeedModel },
   { "gfx800", (const void *)&SIQuarterSpeedModel },
   { "gfx801", (const void *)&SIQuarterSpeedModel },
   { "gfx802", (const void *)&SIQuarterSpeedModel },
@@ -556,6 +582,8 @@ extern const llvm::SubtargetInfoKV AMDGPUProcSchedKV[] = {
   { "gfx810", (const void *)&SIQuarterSpeedModel },
   { "gfx900", (const void *)&SIQuarterSpeedModel },
   { "gfx901", (const void *)&SIQuarterSpeedModel },
+  { "gfx902", (const void *)&SIQuarterSpeedModel },
+  { "gfx903", (const void *)&SIQuarterSpeedModel },
   { "hainan", (const void *)&SIQuarterSpeedModel },
   { "hawaii", (const void *)&SIFullSpeedModel },
   { "iceland", (const void *)&SIQuarterSpeedModel },
@@ -609,6 +637,7 @@ void llvm::AMDGPUSubtarget::ParseSubtargetFeatures(StringRef CPU, StringRef FS) 
   const FeatureBitset& Bits = getFeatureBits();
   if (Bits[AMDGPU::Feature16BitInsts]) Has16BitInsts = true;
   if (Bits[AMDGPU::FeatureApertureRegs]) HasApertureRegs = true;
+  if (Bits[AMDGPU::FeatureAutoWaitcntBeforeBarrier]) AutoWaitcntBeforeBarrier = true;
   if (Bits[AMDGPU::FeatureCFALUBug]) CFALUBug = true;
   if (Bits[AMDGPU::FeatureCIInsts]) CIInsts = true;
   if (Bits[AMDGPU::FeatureCaymanISA]) CaymanISA = true;
@@ -635,14 +664,20 @@ void llvm::AMDGPUSubtarget::ParseSubtargetFeatures(StringRef CPU, StringRef FS) 
   if (Bits[AMDGPU::FeatureFetchLimit16] && TexVTXClauseSize < 16) TexVTXClauseSize = 16;
   if (Bits[AMDGPU::FeatureFlatAddressSpace]) FlatAddressSpace = true;
   if (Bits[AMDGPU::FeatureFlatForGlobal]) FlatForGlobal = true;
+  if (Bits[AMDGPU::FeatureFlatGlobalInsts]) FlatGlobalInsts = true;
+  if (Bits[AMDGPU::FeatureFlatInstOffsets]) FlatInstOffsets = true;
+  if (Bits[AMDGPU::FeatureFlatScratchInsts]) FlatScratchInsts = true;
   if (Bits[AMDGPU::FeatureGCN]) IsGCN = true;
   if (Bits[AMDGPU::FeatureGCN1Encoding]) GCN1Encoding = true;
   if (Bits[AMDGPU::FeatureGCN3Encoding]) GCN3Encoding = true;
   if (Bits[AMDGPU::FeatureGFX9] && Gen < AMDGPUSubtarget::GFX9) Gen = AMDGPUSubtarget::GFX9;
   if (Bits[AMDGPU::FeatureGFX9Insts]) GFX9Insts = true;
+  if (Bits[AMDGPU::FeatureISAVersion6_0_0] && IsaVersion < ISAVersion6_0_0) IsaVersion = ISAVersion6_0_0;
+  if (Bits[AMDGPU::FeatureISAVersion6_0_1] && IsaVersion < ISAVersion6_0_1) IsaVersion = ISAVersion6_0_1;
   if (Bits[AMDGPU::FeatureISAVersion7_0_0] && IsaVersion < ISAVersion7_0_0) IsaVersion = ISAVersion7_0_0;
   if (Bits[AMDGPU::FeatureISAVersion7_0_1] && IsaVersion < ISAVersion7_0_1) IsaVersion = ISAVersion7_0_1;
   if (Bits[AMDGPU::FeatureISAVersion7_0_2] && IsaVersion < ISAVersion7_0_2) IsaVersion = ISAVersion7_0_2;
+  if (Bits[AMDGPU::FeatureISAVersion7_0_3] && IsaVersion < ISAVersion7_0_3) IsaVersion = ISAVersion7_0_3;
   if (Bits[AMDGPU::FeatureISAVersion8_0_0] && IsaVersion < ISAVersion8_0_0) IsaVersion = ISAVersion8_0_0;
   if (Bits[AMDGPU::FeatureISAVersion8_0_1] && IsaVersion < ISAVersion8_0_1) IsaVersion = ISAVersion8_0_1;
   if (Bits[AMDGPU::FeatureISAVersion8_0_2] && IsaVersion < ISAVersion8_0_2) IsaVersion = ISAVersion8_0_2;
@@ -651,6 +686,8 @@ void llvm::AMDGPUSubtarget::ParseSubtargetFeatures(StringRef CPU, StringRef FS) 
   if (Bits[AMDGPU::FeatureISAVersion8_1_0] && IsaVersion < ISAVersion8_1_0) IsaVersion = ISAVersion8_1_0;
   if (Bits[AMDGPU::FeatureISAVersion9_0_0] && IsaVersion < ISAVersion9_0_0) IsaVersion = ISAVersion9_0_0;
   if (Bits[AMDGPU::FeatureISAVersion9_0_1] && IsaVersion < ISAVersion9_0_1) IsaVersion = ISAVersion9_0_1;
+  if (Bits[AMDGPU::FeatureISAVersion9_0_2] && IsaVersion < ISAVersion9_0_2) IsaVersion = ISAVersion9_0_2;
+  if (Bits[AMDGPU::FeatureISAVersion9_0_3] && IsaVersion < ISAVersion9_0_3) IsaVersion = ISAVersion9_0_3;
   if (Bits[AMDGPU::FeatureInv2PiInlineImm]) HasInv2PiInlineImm = true;
   if (Bits[AMDGPU::FeatureLDSBankCount16] && LDSBankCount < 16) LDSBankCount = 16;
   if (Bits[AMDGPU::FeatureLDSBankCount32] && LDSBankCount < 32) LDSBankCount = 32;
@@ -721,7 +758,7 @@ extern const llvm::InstrStage AMDGPUStages[];
 extern const unsigned AMDGPUOperandCycles[];
 extern const unsigned AMDGPUForwardingPaths[];
 AMDGPUGenSubtargetInfo::AMDGPUGenSubtargetInfo(const Triple &TT, StringRef CPU, StringRef FS)
-  : TargetSubtargetInfo(TT, CPU, FS, makeArrayRef(AMDGPUFeatureKV, 77), makeArrayRef(AMDGPUSubTypeKV, 45), 
+  : TargetSubtargetInfo(TT, CPU, FS, makeArrayRef(AMDGPUFeatureKV, 86), makeArrayRef(AMDGPUSubTypeKV, 50), 
                         AMDGPUProcSchedKV, AMDGPUWriteProcResTable, AMDGPUWriteLatencyTable, AMDGPUReadAdvanceTable, 
                         AMDGPUStages, AMDGPUOperandCycles, AMDGPUForwardingPaths) {}
 

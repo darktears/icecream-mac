@@ -1050,6 +1050,8 @@ enum InstructionConversionKind {
   Convert__Reg1_0__FPImm1_1,
   Convert__VectorReg1281_1__FPImm1_2,
   Convert__VectorReg641_1__FPImm1_2,
+  Convert__Reg1_0__regWZR,
+  Convert__Reg1_0__regXZR,
   Convert__VectorReg1281_0__FPImm1_2,
   Convert__VectorReg641_0__FPImm1_2,
   Convert__Reg1_1__VectorReg1281_2__VectorIndex11_3,
@@ -1998,6 +2000,10 @@ static const uint8_t ConversionTable[CVT_NUM_SIGNATURES][13] = {
   { CVT_95_addVectorReg128Operands, 2, CVT_95_addFPImmOperands, 3, CVT_Done },
   // Convert__VectorReg641_1__FPImm1_2
   { CVT_95_addVectorReg64Operands, 2, CVT_95_addFPImmOperands, 3, CVT_Done },
+  // Convert__Reg1_0__regWZR
+  { CVT_95_Reg, 1, CVT_regWZR, 0, CVT_Done },
+  // Convert__Reg1_0__regXZR
+  { CVT_95_Reg, 1, CVT_regXZR, 0, CVT_Done },
   // Convert__VectorReg1281_0__FPImm1_2
   { CVT_95_addVectorReg128Operands, 1, CVT_95_addFPImmOperands, 3, CVT_Done },
   // Convert__VectorReg641_0__FPImm1_2
@@ -4293,18 +4299,18 @@ enum MatchClassKind {
   MCK_VectorRegLo, // user defined class 'VectorRegLoAsmOperand'
   MCK_WSeqPair, // user defined class 'WSeqPairsAsmOperandClass'
   MCK_XSeqPair, // user defined class 'XSeqPairsAsmOperandClass'
-  MCK_MOVZ32_lsl0MovAlias, // user defined class 'anonymous_1154_asmoperand'
-  MCK_MOVZ32_lsl16MovAlias, // user defined class 'anonymous_1155_asmoperand'
-  MCK_MOVZ64_lsl0MovAlias, // user defined class 'anonymous_1156_asmoperand'
-  MCK_MOVZ64_lsl16MovAlias, // user defined class 'anonymous_1157_asmoperand'
-  MCK_MOVZ64_lsl32MovAlias, // user defined class 'anonymous_1158_asmoperand'
-  MCK_MOVZ64_lsl48MovAlias, // user defined class 'anonymous_1159_asmoperand'
-  MCK_MOVN32_lsl0MovAlias, // user defined class 'anonymous_1160_asmoperand'
-  MCK_MOVN32_lsl16MovAlias, // user defined class 'anonymous_1161_asmoperand'
-  MCK_MOVN64_lsl0MovAlias, // user defined class 'anonymous_1162_asmoperand'
-  MCK_MOVN64_lsl16MovAlias, // user defined class 'anonymous_1163_asmoperand'
-  MCK_MOVN64_lsl32MovAlias, // user defined class 'anonymous_1164_asmoperand'
-  MCK_MOVN64_lsl48MovAlias, // user defined class 'anonymous_1165_asmoperand'
+  MCK_MOVZ32_lsl0MovAlias, // user defined class 'anonymous_1187_asmoperand'
+  MCK_MOVZ32_lsl16MovAlias, // user defined class 'anonymous_1188_asmoperand'
+  MCK_MOVZ64_lsl0MovAlias, // user defined class 'anonymous_1189_asmoperand'
+  MCK_MOVZ64_lsl16MovAlias, // user defined class 'anonymous_1190_asmoperand'
+  MCK_MOVZ64_lsl32MovAlias, // user defined class 'anonymous_1191_asmoperand'
+  MCK_MOVZ64_lsl48MovAlias, // user defined class 'anonymous_1192_asmoperand'
+  MCK_MOVN32_lsl0MovAlias, // user defined class 'anonymous_1193_asmoperand'
+  MCK_MOVN32_lsl16MovAlias, // user defined class 'anonymous_1194_asmoperand'
+  MCK_MOVN64_lsl0MovAlias, // user defined class 'anonymous_1195_asmoperand'
+  MCK_MOVN64_lsl16MovAlias, // user defined class 'anonymous_1196_asmoperand'
+  MCK_MOVN64_lsl32MovAlias, // user defined class 'anonymous_1197_asmoperand'
+  MCK_MOVN64_lsl48MovAlias, // user defined class 'anonymous_1198_asmoperand'
   NumMatchClassKinds
 };
 
@@ -7222,6 +7228,9 @@ static const MatchEntry MatchTable0[] = {
   { 816 /* fmov */, AArch64::FMOVSWr, Convert__Reg1_0__Reg1_1, Feature_HasFPARMv8, { MCK_GPR32, MCK_FPR32 }, },
   { 816 /* fmov */, AArch64::FMOVHXr, Convert__Reg1_0__Reg1_1, Feature_HasFullFP16, { MCK_GPR64, MCK_FPR16 }, },
   { 816 /* fmov */, AArch64::FMOVDXr, Convert__Reg1_0__Reg1_1, Feature_HasFPARMv8, { MCK_GPR64, MCK_FPR64 }, },
+  { 816 /* fmov */, AArch64::FMOVWHr, Convert__Reg1_0__regWZR, Feature_HasFullFP16, { MCK_FPR16, MCK__35_0, MCK__DOT_0 }, },
+  { 816 /* fmov */, AArch64::FMOVWSr, Convert__Reg1_0__regWZR, 0, { MCK_FPR32, MCK__35_0, MCK__DOT_0 }, },
+  { 816 /* fmov */, AArch64::FMOVXDr, Convert__Reg1_0__regXZR, 0, { MCK_FPR64, MCK__35_0, MCK__DOT_0 }, },
   { 816 /* fmov */, AArch64::FMOVv2f64_ns, Convert__VectorReg1281_0__FPImm1_2, Feature_HasNEON, { MCK_VectorReg128, MCK__DOT_2d, MCK_FPImm }, },
   { 816 /* fmov */, AArch64::FMOVv4f32_ns, Convert__VectorReg1281_0__FPImm1_2, Feature_HasNEON, { MCK_VectorReg128, MCK__DOT_4s, MCK_FPImm }, },
   { 816 /* fmov */, AArch64::FMOVv8f16_ns, Convert__VectorReg1281_0__FPImm1_2, Feature_HasNEON|Feature_HasFullFP16, { MCK_VectorReg128, MCK__DOT_8h, MCK_FPImm }, },
@@ -11272,6 +11281,9 @@ static const MatchEntry MatchTable1[] = {
   { 816 /* fmov */, AArch64::FMOVv4f16_ns, Convert__VectorReg641_1__FPImm1_2, Feature_HasNEON|Feature_HasFullFP16, { MCK__DOT_4h, MCK_VectorReg64, MCK_FPImm }, },
   { 816 /* fmov */, AArch64::FMOVv4f32_ns, Convert__VectorReg1281_1__FPImm1_2, Feature_HasNEON, { MCK__DOT_4s, MCK_VectorReg128, MCK_FPImm }, },
   { 816 /* fmov */, AArch64::FMOVv8f16_ns, Convert__VectorReg1281_1__FPImm1_2, Feature_HasNEON|Feature_HasFullFP16, { MCK__DOT_8h, MCK_VectorReg128, MCK_FPImm }, },
+  { 816 /* fmov */, AArch64::FMOVWHr, Convert__Reg1_0__regWZR, Feature_HasFullFP16, { MCK_FPR16, MCK__35_0, MCK__DOT_0 }, },
+  { 816 /* fmov */, AArch64::FMOVWSr, Convert__Reg1_0__regWZR, 0, { MCK_FPR32, MCK__35_0, MCK__DOT_0 }, },
+  { 816 /* fmov */, AArch64::FMOVXDr, Convert__Reg1_0__regXZR, 0, { MCK_FPR64, MCK__35_0, MCK__DOT_0 }, },
   { 816 /* fmov */, AArch64::FMOVDXHighr, Convert__Reg1_1__VectorReg1281_2__VectorIndex11_3, Feature_HasFPARMv8, { MCK__DOT_d, MCK_GPR64, MCK_VectorReg128, MCK_VectorIndex1 }, },
   { 816 /* fmov */, AArch64::FMOVXDHighr, Convert__VectorReg1281_1__Reg1_3__VectorIndex11_2, Feature_HasFPARMv8, { MCK__DOT_d, MCK_VectorReg128, MCK_VectorIndex1, MCK_GPR64 }, },
   { 821 /* fmsub */, AArch64::FMSUBHrrr, Convert__Reg1_0__Reg1_1__Reg1_2__Reg1_3, Feature_HasFullFP16, { MCK_FPR16, MCK_FPR16, MCK_FPR16, MCK_FPR16 }, },

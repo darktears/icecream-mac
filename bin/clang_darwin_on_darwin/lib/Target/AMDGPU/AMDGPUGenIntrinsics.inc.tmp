@@ -114,7 +114,7 @@ static AttributeList getAttributes(LLVMContext &C, AMDGPUIntrinsic::ID id) {
     1, // llvm.SI.tbuffer.store
     3, // llvm.r600.ddx
     3, // llvm.r600.ddy
-    3, // llvm.r600.dot4
+    4, // llvm.r600.dot4
     1, // llvm.r600.store.stream.output
     1, // llvm.r600.store.swizzle
     3, // llvm.r600.tex
@@ -150,11 +150,37 @@ static AttributeList getAttributes(LLVMContext &C, AMDGPUIntrinsic::ID id) {
       NumAttrs = 1;
       break;
       }
+    case 4: {
+      const Attribute::AttrKind Atts[] = {Attribute::NoUnwind,Attribute::Speculatable,Attribute::ReadNone};
+      AS[0] = AttributeList::get(C, AttributeList::FunctionIndex, Atts);
+      NumAttrs = 1;
+      break;
+      }
     }
   }
   return AttributeList::get(C, makeArrayRef(AS, NumAttrs));
 }
 #endif // GET_INTRINSIC_ATTRIBUTES
+
+// Get the LLVM intrinsic that corresponds to a builtin.
+// This is used by the C front-end.  The builtin name is passed
+// in as BuiltinName, and a target prefix (e.g. 'ppc') is passed
+// in as TargetPrefix.  The result is assigned to 'IntrinsicID'.
+#ifdef GET_LLVM_INTRINSIC_FOR_GCC_BUILTIN
+static AMDGPUIntrinsic::ID getIntrinsicForGCCBuiltin(const char *TargetPrefixStr, StringRef BuiltinNameStr) {
+  return (AMDGPUIntrinsic::ID)Intrinsic::not_intrinsic;
+}
+#endif
+
+// Get the LLVM intrinsic that corresponds to a builtin.
+// This is used by the C front-end.  The builtin name is passed
+// in as BuiltinName, and a target prefix (e.g. 'ppc') is passed
+// in as TargetPrefix.  The result is assigned to 'IntrinsicID'.
+#ifdef GET_LLVM_INTRINSIC_FOR_MS_BUILTIN
+static AMDGPUIntrinsic::ID getIntrinsicForMSBuiltin(const char *TargetPrefixStr, StringRef BuiltinNameStr) {
+  return (AMDGPUIntrinsic::ID)Intrinsic::not_intrinsic;
+}
+#endif
 
 #if defined(_MSC_VER) && defined(setjmp_undefined_for_msvc)
 // let's return it to _setjmp state

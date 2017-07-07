@@ -373,20 +373,20 @@ extern const llvm::InstrStage PPCStages[] = {
   { 0, 0, 0, llvm::InstrStage::Required }, // No itinerary
   { 1, PPC440ItinerariesFU::P440_DISS1 | PPC440ItinerariesFU::P440_DISS2, -1, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_IRACC | PPC440ItinerariesFU::P440_LRACC, -1, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_IEXE1 | PPC440ItinerariesFU::P440_JEXE1, -1, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_IEXE2 | PPC440ItinerariesFU::P440_JEXE2, -1, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_IWB | PPC440ItinerariesFU::P440_JWB, -1, (llvm::InstrStage::ReservationKinds)0 }, // 1-5
   { 1, PPC440ItinerariesFU::P440_DISS1 | PPC440ItinerariesFU::P440_DISS2, -1, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_IRACC, -1, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_IEXE1, -1, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_IEXE2, -1, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_IWB, -1, (llvm::InstrStage::ReservationKinds)0 }, // 6-10
-  { 1, PPC440ItinerariesFU::P440_DISS1 | PPC440ItinerariesFU::P440_DISS2, -1, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_LRACC, -1, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_AGEN, -1, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_CRD, -1, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_LWB, -1, (llvm::InstrStage::ReservationKinds)0 }, // 11-15
-  { 1, PPC440ItinerariesFU::P440_DISS1 | PPC440ItinerariesFU::P440_DISS2, -1, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_LRACC, -1, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_AGEN, -1, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_CRD, -1, (llvm::InstrStage::ReservationKinds)0 },   { 2, PPC440ItinerariesFU::P440_LWB, -1, (llvm::InstrStage::ReservationKinds)0 }, // 16-20
-  { 1, PPC440ItinerariesFU::P440_DISS1 | PPC440ItinerariesFU::P440_DISS2, -1, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_IRACC, -1, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_IEXE1, -1, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_IEXE2, -1, (llvm::InstrStage::ReservationKinds)0 },   { 33, PPC440ItinerariesFU::P440_IWB, -1, (llvm::InstrStage::ReservationKinds)0 }, // 21-25
-  { 1, PPC440ItinerariesFU::P440_DISS1 | PPC440ItinerariesFU::P440_DISS2, -1, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_FRACC, -1, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_FEXE1, -1, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_FEXE2, -1, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_FEXE3, -1, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_FEXE4, -1, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_FEXE5, -1, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_FEXE6, -1, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_FWB, -1, (llvm::InstrStage::ReservationKinds)0 }, // 26-34
-  { 1, PPC440ItinerariesFU::P440_DISS1 | PPC440ItinerariesFU::P440_DISS2, -1, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_FRACC, -1, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_FEXE1, -1, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_FEXE2, -1, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_FEXE3, -1, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_FEXE4, -1, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_FEXE5, -1, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_FEXE6, -1, (llvm::InstrStage::ReservationKinds)0 },   { 25, PPC440ItinerariesFU::P440_FWB, -1, (llvm::InstrStage::ReservationKinds)0 }, // 35-43
-  { 1, PPC440ItinerariesFU::P440_DISS1 | PPC440ItinerariesFU::P440_DISS2, -1, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_FRACC, -1, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_FEXE1, -1, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_FEXE2, -1, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_FEXE3, -1, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_FEXE4, -1, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_FEXE5, -1, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_FEXE6, -1, (llvm::InstrStage::ReservationKinds)0 },   { 13, PPC440ItinerariesFU::P440_FWB, -1, (llvm::InstrStage::ReservationKinds)0 }, // 44-52
-  { 1, PPC440ItinerariesFU::P440_DISS1 | PPC440ItinerariesFU::P440_DISS2, -1, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_FRACC, 0, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_LRACC, 0, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_IRACC, -1, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_FEXE1, 0, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_AGEN, 0, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_JEXE1, 0, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_IEXE1, -1, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_FEXE2, 0, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_CRD, 0, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_JEXE2, 0, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_IEXE2, -1, (llvm::InstrStage::ReservationKinds)0 },   { 6, PPC440ItinerariesFU::P440_FEXE3, 0, (llvm::InstrStage::ReservationKinds)0 },   { 6, PPC440ItinerariesFU::P440_LWB, 0, (llvm::InstrStage::ReservationKinds)0 },   { 6, PPC440ItinerariesFU::P440_JWB, 0, (llvm::InstrStage::ReservationKinds)0 },   { 6, PPC440ItinerariesFU::P440_IWB, -1, (llvm::InstrStage::ReservationKinds)0 }, // 53-68
-  { 1, PPC440ItinerariesFU::P440_DISS1, -1, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_IRACC, 0, (llvm::InstrStage::ReservationKinds)0 },   { 4, PPC440ItinerariesFU::P440_LWARX_Hold, 0, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_LRACC, -1, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_AGEN, -1, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_CRD, -1, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_LWB, -1, (llvm::InstrStage::ReservationKinds)0 }, // 69-75
-  { 1, PPC440ItinerariesFU::P440_DISS1 | PPC440ItinerariesFU::P440_DISS2, -1, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_IRACC, -1, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_IEXE1, -1, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_IEXE2, -1, (llvm::InstrStage::ReservationKinds)0 },   { 3, PPC440ItinerariesFU::P440_IWB, -1, (llvm::InstrStage::ReservationKinds)0 }, // 76-80
-  { 1, PPC440ItinerariesFU::P440_DISS1 | PPC440ItinerariesFU::P440_DISS2, -1, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_LRACC, -1, (llvm::InstrStage::ReservationKinds)0 },   { 3, PPC440ItinerariesFU::P440_AGEN, 1, (llvm::InstrStage::ReservationKinds)0 },   { 2, PPC440ItinerariesFU::P440_CRD, 1, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_LWB, -1, (llvm::InstrStage::ReservationKinds)0 }, // 81-85
+  { 1, PPC440ItinerariesFU::P440_DISS1 | PPC440ItinerariesFU::P440_DISS2, -1, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_LRACC, -1, (llvm::InstrStage::ReservationKinds)0 },   { 3, PPC440ItinerariesFU::P440_AGEN, 1, (llvm::InstrStage::ReservationKinds)0 },   { 2, PPC440ItinerariesFU::P440_CRD, 1, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_LWB, -1, (llvm::InstrStage::ReservationKinds)0 }, // 11-15
+  { 1, PPC440ItinerariesFU::P440_DISS1 | PPC440ItinerariesFU::P440_DISS2, -1, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_LRACC, -1, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_AGEN, -1, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_CRD, -1, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_LWB, -1, (llvm::InstrStage::ReservationKinds)0 }, // 16-20
+  { 1, PPC440ItinerariesFU::P440_DISS1 | PPC440ItinerariesFU::P440_DISS2, -1, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_LRACC, -1, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_AGEN, -1, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_CRD, -1, (llvm::InstrStage::ReservationKinds)0 },   { 2, PPC440ItinerariesFU::P440_LWB, -1, (llvm::InstrStage::ReservationKinds)0 }, // 21-25
+  { 1, PPC440ItinerariesFU::P440_DISS1 | PPC440ItinerariesFU::P440_DISS2, -1, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_IRACC, -1, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_IEXE1, -1, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_IEXE2, -1, (llvm::InstrStage::ReservationKinds)0 },   { 33, PPC440ItinerariesFU::P440_IWB, -1, (llvm::InstrStage::ReservationKinds)0 }, // 26-30
+  { 1, PPC440ItinerariesFU::P440_DISS1 | PPC440ItinerariesFU::P440_DISS2, -1, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_FRACC, -1, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_FEXE1, -1, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_FEXE2, -1, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_FEXE3, -1, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_FEXE4, -1, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_FEXE5, -1, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_FEXE6, -1, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_FWB, -1, (llvm::InstrStage::ReservationKinds)0 }, // 31-39
+  { 1, PPC440ItinerariesFU::P440_DISS1 | PPC440ItinerariesFU::P440_DISS2, -1, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_FRACC, -1, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_FEXE1, -1, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_FEXE2, -1, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_FEXE3, -1, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_FEXE4, -1, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_FEXE5, -1, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_FEXE6, -1, (llvm::InstrStage::ReservationKinds)0 },   { 25, PPC440ItinerariesFU::P440_FWB, -1, (llvm::InstrStage::ReservationKinds)0 }, // 40-48
+  { 1, PPC440ItinerariesFU::P440_DISS1 | PPC440ItinerariesFU::P440_DISS2, -1, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_FRACC, -1, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_FEXE1, -1, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_FEXE2, -1, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_FEXE3, -1, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_FEXE4, -1, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_FEXE5, -1, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_FEXE6, -1, (llvm::InstrStage::ReservationKinds)0 },   { 13, PPC440ItinerariesFU::P440_FWB, -1, (llvm::InstrStage::ReservationKinds)0 }, // 49-57
+  { 1, PPC440ItinerariesFU::P440_DISS1 | PPC440ItinerariesFU::P440_DISS2, -1, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_FRACC, 0, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_LRACC, 0, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_IRACC, -1, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_FEXE1, 0, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_AGEN, 0, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_JEXE1, 0, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_IEXE1, -1, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_FEXE2, 0, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_CRD, 0, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_JEXE2, 0, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_IEXE2, -1, (llvm::InstrStage::ReservationKinds)0 },   { 6, PPC440ItinerariesFU::P440_FEXE3, 0, (llvm::InstrStage::ReservationKinds)0 },   { 6, PPC440ItinerariesFU::P440_LWB, 0, (llvm::InstrStage::ReservationKinds)0 },   { 6, PPC440ItinerariesFU::P440_JWB, 0, (llvm::InstrStage::ReservationKinds)0 },   { 6, PPC440ItinerariesFU::P440_IWB, -1, (llvm::InstrStage::ReservationKinds)0 }, // 58-73
+  { 1, PPC440ItinerariesFU::P440_DISS1, -1, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_IRACC, 0, (llvm::InstrStage::ReservationKinds)0 },   { 4, PPC440ItinerariesFU::P440_LWARX_Hold, 0, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_LRACC, -1, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_AGEN, -1, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_CRD, -1, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_LWB, -1, (llvm::InstrStage::ReservationKinds)0 }, // 74-80
+  { 1, PPC440ItinerariesFU::P440_DISS1 | PPC440ItinerariesFU::P440_DISS2, -1, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_IRACC, -1, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_IEXE1, -1, (llvm::InstrStage::ReservationKinds)0 },   { 1, PPC440ItinerariesFU::P440_IEXE2, -1, (llvm::InstrStage::ReservationKinds)0 },   { 3, PPC440ItinerariesFU::P440_IWB, -1, (llvm::InstrStage::ReservationKinds)0 }, // 81-85
   { 1, G3ItinerariesFU::G3_IU1 | G3ItinerariesFU::G3_IU2, -1, (llvm::InstrStage::ReservationKinds)0 }, // 86
   { 1, G3ItinerariesFU::G3_BPU, -1, (llvm::InstrStage::ReservationKinds)0 }, // 87
-  { 1, G3ItinerariesFU::G3_SRU, -1, (llvm::InstrStage::ReservationKinds)0 }, // 88
-  { 3, G3ItinerariesFU::G3_SLU, -1, (llvm::InstrStage::ReservationKinds)0 }, // 89
+  { 3, G3ItinerariesFU::G3_SLU, -1, (llvm::InstrStage::ReservationKinds)0 }, // 88
+  { 1, G3ItinerariesFU::G3_SRU, -1, (llvm::InstrStage::ReservationKinds)0 }, // 89
   { 2, G3ItinerariesFU::G3_SLU, -1, (llvm::InstrStage::ReservationKinds)0 }, // 90
   { 19, G3ItinerariesFU::G3_IU1, -1, (llvm::InstrStage::ReservationKinds)0 }, // 91
   { 1, G3ItinerariesFU::G3_FPU1, -1, (llvm::InstrStage::ReservationKinds)0 }, // 92
@@ -405,19 +405,19 @@ extern const llvm::InstrStage PPCStages[] = {
   { 1, G4ItinerariesFU::G4_IU1 | G4ItinerariesFU::G4_IU2, -1, (llvm::InstrStage::ReservationKinds)0 }, // 105
   { 1, G4ItinerariesFU::G4_BPU, -1, (llvm::InstrStage::ReservationKinds)0 }, // 106
   { 4, G4ItinerariesFU::G4_VFPU, -1, (llvm::InstrStage::ReservationKinds)0 }, // 107
-  { 1, G4ItinerariesFU::G4_SRU, -1, (llvm::InstrStage::ReservationKinds)0 }, // 108
-  { 2, G4ItinerariesFU::G4_SLU, -1, (llvm::InstrStage::ReservationKinds)0 }, // 109
-  { 19, G4ItinerariesFU::G4_IU1, -1, (llvm::InstrStage::ReservationKinds)0 }, // 110
-  { 1, G4ItinerariesFU::G4_FPU1, -1, (llvm::InstrStage::ReservationKinds)0 }, // 111
-  { 31, G4ItinerariesFU::G4_FPU1, -1, (llvm::InstrStage::ReservationKinds)0 }, // 112
-  { 17, G4ItinerariesFU::G4_FPU1, -1, (llvm::InstrStage::ReservationKinds)0 }, // 113
-  { 2, G4ItinerariesFU::G4_SRU, -1, (llvm::InstrStage::ReservationKinds)0 }, // 114
-  { 3, G4ItinerariesFU::G4_SLU, -1, (llvm::InstrStage::ReservationKinds)0 }, // 115
-  { 34, G4ItinerariesFU::G4_SLU, -1, (llvm::InstrStage::ReservationKinds)0 }, // 116
-  { 3, G4ItinerariesFU::G4_SRU, -1, (llvm::InstrStage::ReservationKinds)0 }, // 117
-  { 3, G4ItinerariesFU::G4_FPU1, -1, (llvm::InstrStage::ReservationKinds)0 }, // 118
-  { 1, G4ItinerariesFU::G4_VIU1, -1, (llvm::InstrStage::ReservationKinds)0 }, // 119
-  { 8, G4ItinerariesFU::G4_SLU, -1, (llvm::InstrStage::ReservationKinds)0 }, // 120
+  { 8, G4ItinerariesFU::G4_SLU, -1, (llvm::InstrStage::ReservationKinds)0 }, // 108
+  { 1, G4ItinerariesFU::G4_SRU, -1, (llvm::InstrStage::ReservationKinds)0 }, // 109
+  { 2, G4ItinerariesFU::G4_SLU, -1, (llvm::InstrStage::ReservationKinds)0 }, // 110
+  { 19, G4ItinerariesFU::G4_IU1, -1, (llvm::InstrStage::ReservationKinds)0 }, // 111
+  { 1, G4ItinerariesFU::G4_FPU1, -1, (llvm::InstrStage::ReservationKinds)0 }, // 112
+  { 31, G4ItinerariesFU::G4_FPU1, -1, (llvm::InstrStage::ReservationKinds)0 }, // 113
+  { 17, G4ItinerariesFU::G4_FPU1, -1, (llvm::InstrStage::ReservationKinds)0 }, // 114
+  { 2, G4ItinerariesFU::G4_SRU, -1, (llvm::InstrStage::ReservationKinds)0 }, // 115
+  { 3, G4ItinerariesFU::G4_SLU, -1, (llvm::InstrStage::ReservationKinds)0 }, // 116
+  { 34, G4ItinerariesFU::G4_SLU, -1, (llvm::InstrStage::ReservationKinds)0 }, // 117
+  { 3, G4ItinerariesFU::G4_SRU, -1, (llvm::InstrStage::ReservationKinds)0 }, // 118
+  { 3, G4ItinerariesFU::G4_FPU1, -1, (llvm::InstrStage::ReservationKinds)0 }, // 119
+  { 1, G4ItinerariesFU::G4_VIU1, -1, (llvm::InstrStage::ReservationKinds)0 }, // 120
   { 5, G4ItinerariesFU::G4_IU1, -1, (llvm::InstrStage::ReservationKinds)0 }, // 121
   { 6, G4ItinerariesFU::G4_IU1, -1, (llvm::InstrStage::ReservationKinds)0 }, // 122
   { 3, G4ItinerariesFU::G4_IU1, -1, (llvm::InstrStage::ReservationKinds)0 }, // 123
@@ -428,47 +428,47 @@ extern const llvm::InstrStage PPCStages[] = {
   { 1, G4PlusItinerariesFU::G4P_IU1 | G4PlusItinerariesFU::G4P_IU2 | G4PlusItinerariesFU::G4P_IU3 | G4PlusItinerariesFU::G4P_IU4, -1, (llvm::InstrStage::ReservationKinds)0 }, // 128
   { 1, G4PlusItinerariesFU::G4P_BPU, -1, (llvm::InstrStage::ReservationKinds)0 }, // 129
   { 4, G4PlusItinerariesFU::G4P_VFPU, -1, (llvm::InstrStage::ReservationKinds)0 }, // 130
-  { 2, G4PlusItinerariesFU::G4P_IU2, -1, (llvm::InstrStage::ReservationKinds)0 }, // 131
-  { 3, G4PlusItinerariesFU::G4P_SLU, -1, (llvm::InstrStage::ReservationKinds)0 }, // 132
-  { 23, G4PlusItinerariesFU::G4P_IU2, -1, (llvm::InstrStage::ReservationKinds)0 }, // 133
-  { 5, G4PlusItinerariesFU::G4P_FPU1, -1, (llvm::InstrStage::ReservationKinds)0 }, // 134
-  { 35, G4PlusItinerariesFU::G4P_FPU1, -1, (llvm::InstrStage::ReservationKinds)0 }, // 135
-  { 21, G4PlusItinerariesFU::G4P_FPU1, -1, (llvm::InstrStage::ReservationKinds)0 }, // 136
-  { 3, G4PlusItinerariesFU::G4P_IU2, -1, (llvm::InstrStage::ReservationKinds)0 }, // 137
-  { 0, G4PlusItinerariesFU::G4P_IU1 | G4PlusItinerariesFU::G4P_IU2 | G4PlusItinerariesFU::G4P_IU3 | G4PlusItinerariesFU::G4P_IU4, -1, (llvm::InstrStage::ReservationKinds)0 }, // 138
-  { 4, G4PlusItinerariesFU::G4P_SLU, -1, (llvm::InstrStage::ReservationKinds)0 }, // 139
-  { 37, G4PlusItinerariesFU::G4P_SLU, -1, (llvm::InstrStage::ReservationKinds)0 }, // 140
-  { 4, G4PlusItinerariesFU::G4P_IU2, -1, (llvm::InstrStage::ReservationKinds)0 }, // 141
-  { 5, G4PlusItinerariesFU::G4P_IU2, -1, (llvm::InstrStage::ReservationKinds)0 }, // 142
-  { 1, G4PlusItinerariesFU::G4P_VIU1, -1, (llvm::InstrStage::ReservationKinds)0 }, // 143
-  { 35, G4PlusItinerariesFU::G4P_SLU, -1, (llvm::InstrStage::ReservationKinds)0 }, // 144
+  { 35, G4PlusItinerariesFU::G4P_SLU, -1, (llvm::InstrStage::ReservationKinds)0 }, // 131
+  { 2, G4PlusItinerariesFU::G4P_IU2, -1, (llvm::InstrStage::ReservationKinds)0 }, // 132
+  { 3, G4PlusItinerariesFU::G4P_SLU, -1, (llvm::InstrStage::ReservationKinds)0 }, // 133
+  { 23, G4PlusItinerariesFU::G4P_IU2, -1, (llvm::InstrStage::ReservationKinds)0 }, // 134
+  { 5, G4PlusItinerariesFU::G4P_FPU1, -1, (llvm::InstrStage::ReservationKinds)0 }, // 135
+  { 35, G4PlusItinerariesFU::G4P_FPU1, -1, (llvm::InstrStage::ReservationKinds)0 }, // 136
+  { 21, G4PlusItinerariesFU::G4P_FPU1, -1, (llvm::InstrStage::ReservationKinds)0 }, // 137
+  { 3, G4PlusItinerariesFU::G4P_IU2, -1, (llvm::InstrStage::ReservationKinds)0 }, // 138
+  { 0, G4PlusItinerariesFU::G4P_IU1 | G4PlusItinerariesFU::G4P_IU2 | G4PlusItinerariesFU::G4P_IU3 | G4PlusItinerariesFU::G4P_IU4, -1, (llvm::InstrStage::ReservationKinds)0 }, // 139
+  { 4, G4PlusItinerariesFU::G4P_SLU, -1, (llvm::InstrStage::ReservationKinds)0 }, // 140
+  { 37, G4PlusItinerariesFU::G4P_SLU, -1, (llvm::InstrStage::ReservationKinds)0 }, // 141
+  { 4, G4PlusItinerariesFU::G4P_IU2, -1, (llvm::InstrStage::ReservationKinds)0 }, // 142
+  { 5, G4PlusItinerariesFU::G4P_IU2, -1, (llvm::InstrStage::ReservationKinds)0 }, // 143
+  { 1, G4PlusItinerariesFU::G4P_VIU1, -1, (llvm::InstrStage::ReservationKinds)0 }, // 144
   { 2, G4PlusItinerariesFU::G4P_VPU, -1, (llvm::InstrStage::ReservationKinds)0 }, // 145
   { 2, G4PlusItinerariesFU::G4P_IU1 | G4PlusItinerariesFU::G4P_IU2 | G4PlusItinerariesFU::G4P_IU3 | G4PlusItinerariesFU::G4P_IU4, -1, (llvm::InstrStage::ReservationKinds)0 }, // 146
   { 2, G4PlusItinerariesFU::G4P_VFPU, -1, (llvm::InstrStage::ReservationKinds)0 }, // 147
   { 2, G5ItinerariesFU::G5_IU1 | G5ItinerariesFU::G5_IU2, -1, (llvm::InstrStage::ReservationKinds)0 }, // 148
   { 1, G5ItinerariesFU::G5_BPU, -1, (llvm::InstrStage::ReservationKinds)0 }, // 149
   { 8, G5ItinerariesFU::G5_VFPU, -1, (llvm::InstrStage::ReservationKinds)0 }, // 150
-  { 3, G5ItinerariesFU::G5_IU1 | G5ItinerariesFU::G5_IU2, -1, (llvm::InstrStage::ReservationKinds)0 }, // 151
-  { 4, G5ItinerariesFU::G5_BPU, -1, (llvm::InstrStage::ReservationKinds)0 }, // 152
-  { 3, G5ItinerariesFU::G5_SLU, -1, (llvm::InstrStage::ReservationKinds)0 }, // 153
-  { 68, G5ItinerariesFU::G5_IU1, -1, (llvm::InstrStage::ReservationKinds)0 }, // 154
-  { 36, G5ItinerariesFU::G5_IU1, -1, (llvm::InstrStage::ReservationKinds)0 }, // 155
-  { 6, G5ItinerariesFU::G5_FPU1 | G5ItinerariesFU::G5_FPU2, -1, (llvm::InstrStage::ReservationKinds)0 }, // 156
-  { 8, G5ItinerariesFU::G5_FPU1 | G5ItinerariesFU::G5_FPU2, -1, (llvm::InstrStage::ReservationKinds)0 }, // 157
-  { 33, G5ItinerariesFU::G5_FPU1 | G5ItinerariesFU::G5_FPU2, -1, (llvm::InstrStage::ReservationKinds)0 }, // 158
-  { 40, G5ItinerariesFU::G5_FPU1 | G5ItinerariesFU::G5_FPU2, -1, (llvm::InstrStage::ReservationKinds)0 }, // 159
-  { 40, G5ItinerariesFU::G5_SLU, -1, (llvm::InstrStage::ReservationKinds)0 }, // 160
-  { 11, G5ItinerariesFU::G5_SLU, -1, (llvm::InstrStage::ReservationKinds)0 }, // 161
-  { 5, G5ItinerariesFU::G5_SLU, -1, (llvm::InstrStage::ReservationKinds)0 }, // 162
-  { 64, G5ItinerariesFU::G5_SLU, -1, (llvm::InstrStage::ReservationKinds)0 }, // 163
-  { 2, G5ItinerariesFU::G5_BPU, -1, (llvm::InstrStage::ReservationKinds)0 }, // 164
-  { 3, G5ItinerariesFU::G5_BPU, -1, (llvm::InstrStage::ReservationKinds)0 }, // 165
-  { 2, G5ItinerariesFU::G5_IU2, -1, (llvm::InstrStage::ReservationKinds)0 }, // 166
-  { 3, G5ItinerariesFU::G5_IU2, -1, (llvm::InstrStage::ReservationKinds)0 }, // 167
-  { 6, G5ItinerariesFU::G5_IU2, -1, (llvm::InstrStage::ReservationKinds)0 }, // 168
-  { 10, G5ItinerariesFU::G5_IU2, -1, (llvm::InstrStage::ReservationKinds)0 }, // 169
-  { 2, G5ItinerariesFU::G5_VIU1, -1, (llvm::InstrStage::ReservationKinds)0 }, // 170
-  { 35, G5ItinerariesFU::G5_SLU, -1, (llvm::InstrStage::ReservationKinds)0 }, // 171
+  { 35, G5ItinerariesFU::G5_SLU, -1, (llvm::InstrStage::ReservationKinds)0 }, // 151
+  { 3, G5ItinerariesFU::G5_IU1 | G5ItinerariesFU::G5_IU2, -1, (llvm::InstrStage::ReservationKinds)0 }, // 152
+  { 4, G5ItinerariesFU::G5_BPU, -1, (llvm::InstrStage::ReservationKinds)0 }, // 153
+  { 3, G5ItinerariesFU::G5_SLU, -1, (llvm::InstrStage::ReservationKinds)0 }, // 154
+  { 68, G5ItinerariesFU::G5_IU1, -1, (llvm::InstrStage::ReservationKinds)0 }, // 155
+  { 36, G5ItinerariesFU::G5_IU1, -1, (llvm::InstrStage::ReservationKinds)0 }, // 156
+  { 6, G5ItinerariesFU::G5_FPU1 | G5ItinerariesFU::G5_FPU2, -1, (llvm::InstrStage::ReservationKinds)0 }, // 157
+  { 8, G5ItinerariesFU::G5_FPU1 | G5ItinerariesFU::G5_FPU2, -1, (llvm::InstrStage::ReservationKinds)0 }, // 158
+  { 33, G5ItinerariesFU::G5_FPU1 | G5ItinerariesFU::G5_FPU2, -1, (llvm::InstrStage::ReservationKinds)0 }, // 159
+  { 40, G5ItinerariesFU::G5_FPU1 | G5ItinerariesFU::G5_FPU2, -1, (llvm::InstrStage::ReservationKinds)0 }, // 160
+  { 40, G5ItinerariesFU::G5_SLU, -1, (llvm::InstrStage::ReservationKinds)0 }, // 161
+  { 11, G5ItinerariesFU::G5_SLU, -1, (llvm::InstrStage::ReservationKinds)0 }, // 162
+  { 5, G5ItinerariesFU::G5_SLU, -1, (llvm::InstrStage::ReservationKinds)0 }, // 163
+  { 64, G5ItinerariesFU::G5_SLU, -1, (llvm::InstrStage::ReservationKinds)0 }, // 164
+  { 2, G5ItinerariesFU::G5_BPU, -1, (llvm::InstrStage::ReservationKinds)0 }, // 165
+  { 3, G5ItinerariesFU::G5_BPU, -1, (llvm::InstrStage::ReservationKinds)0 }, // 166
+  { 2, G5ItinerariesFU::G5_IU2, -1, (llvm::InstrStage::ReservationKinds)0 }, // 167
+  { 3, G5ItinerariesFU::G5_IU2, -1, (llvm::InstrStage::ReservationKinds)0 }, // 168
+  { 6, G5ItinerariesFU::G5_IU2, -1, (llvm::InstrStage::ReservationKinds)0 }, // 169
+  { 10, G5ItinerariesFU::G5_IU2, -1, (llvm::InstrStage::ReservationKinds)0 }, // 170
+  { 2, G5ItinerariesFU::G5_VIU1, -1, (llvm::InstrStage::ReservationKinds)0 }, // 171
   { 8, G5ItinerariesFU::G5_IU2, -1, (llvm::InstrStage::ReservationKinds)0 }, // 172
   { 5, G5ItinerariesFU::G5_IU1 | G5ItinerariesFU::G5_IU2, -1, (llvm::InstrStage::ReservationKinds)0 }, // 173
   { 7, G5ItinerariesFU::G5_IU1 | G5ItinerariesFU::G5_IU2, -1, (llvm::InstrStage::ReservationKinds)0 }, // 174
@@ -661,43 +661,43 @@ extern const unsigned PPCOperandCycles[] = {
   1,   0,   0, // 250-252
   2,   0,   0, // 253-255
   6,   0,   0, // 256-258
-  2,   0,   0, // 259-261
-  1,   0,   0, // 262-264
-  1,   0,   0, // 265-267
-  6,   0,   0, // 268-270
-  71,   0,   0, // 271-273
-  39,   0,   0, // 274-276
-  6,   0,   0, // 277-279
-  6,   0,   0, // 280-282
-  5,   0,   0, // 283-285
-  72,   0,   0, // 286-288
-  59,   0,   0, // 289-291
-  6,   0,   0,   0, // 292-295
-  69,   0,   0, // 296-298
-  65,   0,   0, // 299-301
-  16,   0,   0, // 302-304
-  0,   0,   0, // 305-307
-  2,   0,   0,   0, // 308-311
-  16, // 312
-  82,   0,   0, // 313-315
-  6,   8,   0,   0, // 316-319
-  6,   8,   0,   0, // 320-323
-  6,   0,   0, // 324-326
-  6,   0,   0, // 327-329
-  7,   0,   0, // 330-332
-  7,   9,   0,   0, // 333-336
-  7,   9,   0,   0, // 337-340
-  6,   0,   0, // 341-343
-  6,   8,   0,   0, // 344-347
-  6,   8,   0,   0, // 348-351
-  5,   0,   0, // 352-354
-  1,   0,   0, // 355-357
-  6,   0, // 358-359
-  6,   0, // 360-361
-  4,   0, // 362-363
-  1,   0, // 364-365
-  4,   0, // 366-367
-  6, // 368
+  6, // 259
+  2,   0,   0, // 260-262
+  1,   0,   0, // 263-265
+  1,   0,   0, // 266-268
+  6,   0,   0, // 269-271
+  71,   0,   0, // 272-274
+  39,   0,   0, // 275-277
+  6,   0,   0, // 278-280
+  6,   0,   0, // 281-283
+  5,   0,   0, // 284-286
+  72,   0,   0, // 287-289
+  59,   0,   0, // 290-292
+  6,   0,   0,   0, // 293-296
+  69,   0,   0, // 297-299
+  65,   0,   0, // 300-302
+  16,   0,   0, // 303-305
+  0,   0,   0, // 306-308
+  2,   0,   0,   0, // 309-312
+  16, // 313
+  82,   0,   0, // 314-316
+  6,   8,   0,   0, // 317-320
+  6,   8,   0,   0, // 321-324
+  6,   0,   0, // 325-327
+  6,   0,   0, // 328-330
+  7,   0,   0, // 331-333
+  7,   9,   0,   0, // 334-337
+  7,   9,   0,   0, // 338-341
+  6,   0,   0, // 342-344
+  6,   8,   0,   0, // 345-348
+  6,   8,   0,   0, // 349-352
+  5,   0,   0, // 353-355
+  1,   0,   0, // 356-358
+  6,   0, // 359-360
+  6,   0, // 361-362
+  4,   0, // 363-364
+  1,   0, // 365-366
+  4,   0, // 367-368
   6,   0, // 369-370
   16,   0, // 371-372
   5,   0,   0, // 373-375
@@ -1241,43 +1241,43 @@ PPC440ItinerariesBypass::NoBypass, PPC440ItinerariesBypass::P440_GPR_Bypass, PPC
  0,  0,  0, // 250-252
  0,  0,  0, // 253-255
  0,  0,  0, // 256-258
- 0,  0,  0, // 259-261
- 0,  0,  0, // 262-264
- 0,  0,  0, // 265-267
- 0,  0,  0, // 268-270
- 0,  0,  0, // 271-273
- 0,  0,  0, // 274-276
- 0,  0,  0, // 277-279
- 0,  0,  0, // 280-282
- 0,  0,  0, // 283-285
- 0,  0,  0, // 286-288
- 0,  0,  0, // 289-291
- 0,  0,  0,  0, // 292-295
- 0,  0,  0, // 296-298
- 0,  0,  0, // 299-301
- 0,  0,  0, // 302-304
- 0,  0,  0, // 305-307
- 0,  0,  0,  0, // 308-311
- 0, // 312
- 0,  0,  0, // 313-315
- 0,  0,  0,  0, // 316-319
- 0,  0,  0,  0, // 320-323
- 0,  0,  0, // 324-326
- 0,  0,  0, // 327-329
- 0,  0,  0, // 330-332
- 0,  0,  0,  0, // 333-336
- 0,  0,  0,  0, // 337-340
- 0,  0,  0, // 341-343
- 0,  0,  0,  0, // 344-347
- 0,  0,  0,  0, // 348-351
- 0,  0,  0, // 352-354
- 0,  0,  0, // 355-357
- 0,  0, // 358-359
- 0,  0, // 360-361
- 0,  0, // 362-363
- 0,  0, // 364-365
- 0,  0, // 366-367
- 0, // 368
+ 0, // 259
+ 0,  0,  0, // 260-262
+ 0,  0,  0, // 263-265
+ 0,  0,  0, // 266-268
+ 0,  0,  0, // 269-271
+ 0,  0,  0, // 272-274
+ 0,  0,  0, // 275-277
+ 0,  0,  0, // 278-280
+ 0,  0,  0, // 281-283
+ 0,  0,  0, // 284-286
+ 0,  0,  0, // 287-289
+ 0,  0,  0, // 290-292
+ 0,  0,  0,  0, // 293-296
+ 0,  0,  0, // 297-299
+ 0,  0,  0, // 300-302
+ 0,  0,  0, // 303-305
+ 0,  0,  0, // 306-308
+ 0,  0,  0,  0, // 309-312
+ 0, // 313
+ 0,  0,  0, // 314-316
+ 0,  0,  0,  0, // 317-320
+ 0,  0,  0,  0, // 321-324
+ 0,  0,  0, // 325-327
+ 0,  0,  0, // 328-330
+ 0,  0,  0, // 331-333
+ 0,  0,  0,  0, // 334-337
+ 0,  0,  0,  0, // 338-341
+ 0,  0,  0, // 342-344
+ 0,  0,  0,  0, // 345-348
+ 0,  0,  0,  0, // 349-352
+ 0,  0,  0, // 353-355
+ 0,  0,  0, // 356-358
+ 0,  0, // 359-360
+ 0,  0, // 361-362
+ 0,  0, // 363-364
+ 0,  0, // 365-366
+ 0,  0, // 367-368
  0,  0, // 369-370
  0,  0, // 371-372
  0,  0,  0, // 373-375
@@ -1741,68 +1741,68 @@ static const llvm::InstrItinerary PPC440Itineraries[] = {
   { 1, 1, 6, 4, 7 }, // 2 IIC_IntGeneral
   { 1, 6, 11, 7, 9 }, // 3 IIC_BrB
   { 0, 0, 0, 0, 0 }, // 4 IIC_VecFP
-  { 1, 1, 6, 9, 12 }, // 5 IIC_IntCompare
-  { 0, 0, 0, 0, 0 }, // 6 IIC_SprABORT
-  { 0, 0, 0, 0, 0 }, // 7 IIC_LdStCOPY
-  { 0, 0, 0, 0, 0 }, // 8 IIC_LdStPASTE
-  { 1, 6, 11, 12, 15 }, // 9 IIC_BrCR
-  { 1, 11, 16, 15, 17 }, // 10 IIC_LdStDCBF
-  { 1, 16, 21, 17, 20 }, // 11 IIC_LdStLoad
-  { 0, 0, 0, 0, 0 }, // 12 IIC_IntDivD
-  { 1, 21, 26, 20, 23 }, // 13 IIC_IntDivW
-  { 1, 26, 35, 23, 26 }, // 14 IIC_FPGeneral
-  { 1, 26, 35, 26, 29 }, // 15 IIC_FPAddSub
-  { 1, 26, 35, 29, 32 }, // 16 IIC_FPCompare
-  { 1, 35, 44, 32, 35 }, // 17 IIC_FPDivD
-  { 1, 44, 53, 35, 38 }, // 18 IIC_FPDivS
-  { 1, 26, 35, 38, 42 }, // 19 IIC_FPFused
-  { 0, 0, 0, 0, 0 }, // 20 IIC_FPSqrtD
-  { 0, 0, 0, 0, 0 }, // 21 IIC_FPSqrtS
-  { 1, 11, 16, 42, 45 }, // 22 IIC_LdStICBI
-  { 1, 16, 21, 45, 48 }, // 23 IIC_LdStStore
-  { 1, 1, 6, 48, 52 }, // 24 IIC_IntISEL
-  { 1, 53, 69, 0, 0 }, // 25 IIC_SprISYNC
-  { 1, 69, 76, 52, 55 }, // 26 IIC_LdStLWARX
-  { 1, 16, 21, 55, 59 }, // 27 IIC_LdStLoadUpd
-  { 1, 16, 21, 59, 63 }, // 28 IIC_LdStLoadUpdX
-  { 0, 0, 0, 0, 0 }, // 29 IIC_LdStLD
-  { 0, 0, 0, 0, 0 }, // 30 IIC_LdStLDARX
-  { 0, 0, 0, 0, 0 }, // 31 IIC_LdStLDU
-  { 0, 0, 0, 0, 0 }, // 32 IIC_LdStLDUX
-  { 1, 16, 21, 63, 66 }, // 33 IIC_LdStLFD
-  { 1, 11, 16, 66, 70 }, // 34 IIC_LdStLFDU
-  { 1, 11, 16, 70, 74 }, // 35 IIC_LdStLFDUX
-  { 1, 11, 16, 74, 77 }, // 36 IIC_LdStLHA
-  { 1, 11, 16, 77, 80 }, // 37 IIC_LdStLHAU
-  { 1, 11, 16, 80, 83 }, // 38 IIC_LdStLHAUX
-  { 1, 11, 16, 83, 86 }, // 39 IIC_LdStLMW
-  { 0, 0, 0, 0, 0 }, // 40 IIC_LdStLWA
-  { 1, 6, 11, 86, 89 }, // 41 IIC_BrMCR
-  { 1, 6, 11, 89, 92 }, // 42 IIC_BrMCRX
-  { 1, 6, 11, 92, 94 }, // 43 IIC_SprMFCR
-  { 1, 76, 81, 94, 96 }, // 44 IIC_SprMFSPR
-  { 1, 6, 11, 96, 99 }, // 45 IIC_IntMFFS
-  { 1, 6, 11, 99, 101 }, // 46 IIC_SprMFMSR
-  { 0, 0, 0, 0, 0 }, // 47 IIC_SprMFCRF
-  { 0, 0, 0, 0, 0 }, // 48 IIC_SprMFPMR
-  { 1, 6, 11, 101, 103 }, // 49 IIC_SprMFSR
-  { 1, 76, 81, 103, 105 }, // 50 IIC_SprMFTB
-  { 0, 0, 0, 0, 0 }, // 51 IIC_VecGeneral
-  { 0, 0, 0, 0, 0 }, // 52 IIC_SprMSGSYNC
-  { 1, 81, 86, 0, 0 }, // 53 IIC_LdStSync
-  { 1, 76, 81, 105, 107 }, // 54 IIC_SprMTSPR
+  { 1, 11, 16, 0, 0 }, // 5 IIC_LdStSync
+  { 1, 1, 6, 9, 12 }, // 6 IIC_IntCompare
+  { 0, 0, 0, 0, 0 }, // 7 IIC_SprABORT
+  { 0, 0, 0, 0, 0 }, // 8 IIC_LdStCOPY
+  { 0, 0, 0, 0, 0 }, // 9 IIC_LdStPASTE
+  { 1, 6, 11, 12, 15 }, // 10 IIC_BrCR
+  { 1, 16, 21, 15, 17 }, // 11 IIC_LdStDCBF
+  { 1, 21, 26, 17, 20 }, // 12 IIC_LdStLoad
+  { 0, 0, 0, 0, 0 }, // 13 IIC_IntDivD
+  { 1, 26, 31, 20, 23 }, // 14 IIC_IntDivW
+  { 1, 31, 40, 23, 26 }, // 15 IIC_FPGeneral
+  { 1, 31, 40, 26, 29 }, // 16 IIC_FPAddSub
+  { 1, 31, 40, 29, 32 }, // 17 IIC_FPCompare
+  { 1, 40, 49, 32, 35 }, // 18 IIC_FPDivD
+  { 1, 49, 58, 35, 38 }, // 19 IIC_FPDivS
+  { 1, 31, 40, 38, 42 }, // 20 IIC_FPFused
+  { 0, 0, 0, 0, 0 }, // 21 IIC_FPSqrtD
+  { 0, 0, 0, 0, 0 }, // 22 IIC_FPSqrtS
+  { 1, 16, 21, 42, 45 }, // 23 IIC_LdStICBI
+  { 1, 21, 26, 45, 48 }, // 24 IIC_LdStStore
+  { 1, 1, 6, 48, 52 }, // 25 IIC_IntISEL
+  { 1, 58, 74, 0, 0 }, // 26 IIC_SprISYNC
+  { 1, 74, 81, 52, 55 }, // 27 IIC_LdStLWARX
+  { 1, 21, 26, 55, 59 }, // 28 IIC_LdStLoadUpd
+  { 1, 21, 26, 59, 63 }, // 29 IIC_LdStLoadUpdX
+  { 0, 0, 0, 0, 0 }, // 30 IIC_LdStLD
+  { 0, 0, 0, 0, 0 }, // 31 IIC_LdStLDARX
+  { 0, 0, 0, 0, 0 }, // 32 IIC_LdStLDU
+  { 0, 0, 0, 0, 0 }, // 33 IIC_LdStLDUX
+  { 1, 21, 26, 63, 66 }, // 34 IIC_LdStLFD
+  { 1, 16, 21, 66, 70 }, // 35 IIC_LdStLFDU
+  { 1, 16, 21, 70, 74 }, // 36 IIC_LdStLFDUX
+  { 1, 16, 21, 74, 77 }, // 37 IIC_LdStLHA
+  { 1, 16, 21, 77, 80 }, // 38 IIC_LdStLHAU
+  { 1, 16, 21, 80, 83 }, // 39 IIC_LdStLHAUX
+  { 1, 16, 21, 83, 86 }, // 40 IIC_LdStLMW
+  { 0, 0, 0, 0, 0 }, // 41 IIC_LdStLWA
+  { 1, 6, 11, 86, 89 }, // 42 IIC_BrMCR
+  { 1, 6, 11, 89, 92 }, // 43 IIC_BrMCRX
+  { 1, 6, 11, 92, 94 }, // 44 IIC_SprMFCR
+  { 1, 81, 86, 94, 96 }, // 45 IIC_SprMFSPR
+  { 1, 6, 11, 96, 99 }, // 46 IIC_IntMFFS
+  { 1, 6, 11, 99, 101 }, // 47 IIC_SprMFMSR
+  { 0, 0, 0, 0, 0 }, // 48 IIC_SprMFCRF
+  { 0, 0, 0, 0, 0 }, // 49 IIC_SprMFPMR
+  { 1, 6, 11, 101, 103 }, // 50 IIC_SprMFSR
+  { 1, 81, 86, 103, 105 }, // 51 IIC_SprMFTB
+  { 0, 0, 0, 0, 0 }, // 52 IIC_VecGeneral
+  { 0, 0, 0, 0, 0 }, // 53 IIC_SprMSGSYNC
+  { 1, 81, 86, 105, 107 }, // 54 IIC_SprMTSPR
   { 1, 6, 11, 107, 110 }, // 55 IIC_IntMTFSB0
   { 1, 6, 11, 110, 112 }, // 56 IIC_SprMTMSR
   { 0, 0, 0, 0, 0 }, // 57 IIC_SprMTMSRD
   { 0, 0, 0, 0, 0 }, // 58 IIC_SprMTPMR
-  { 1, 76, 81, 112, 114 }, // 59 IIC_SprMTSR
+  { 1, 81, 86, 112, 114 }, // 59 IIC_SprMTSR
   { 1, 6, 11, 114, 117 }, // 60 IIC_IntMulHW
   { 1, 6, 11, 117, 120 }, // 61 IIC_IntMulHWU
   { 0, 0, 0, 0, 0 }, // 62 IIC_IntMulHD
   { 1, 6, 11, 120, 123 }, // 63 IIC_IntMulLI
   { 0, 0, 0, 0, 0 }, // 64 IIC_VecPerm
-  { 1, 11, 16, 123, 126 }, // 65 IIC_LdStSTFD
-  { 1, 11, 16, 126, 130 }, // 66 IIC_LdStSTFDU
+  { 1, 16, 21, 123, 126 }, // 65 IIC_LdStSTFD
+  { 1, 16, 21, 126, 130 }, // 66 IIC_LdStSTFDU
   { 1, 6, 11, 130, 132 }, // 67 IIC_SprRFI
   { 0, 0, 0, 0, 0 }, // 68 IIC_IntRFID
   { 0, 0, 0, 0, 0 }, // 69 IIC_IntRotateD
@@ -1816,12 +1816,12 @@ static const llvm::InstrItinerary PPC440Itineraries[] = {
   { 0, 0, 0, 0, 0 }, // 77 IIC_SprSLBMTE
   { 0, 0, 0, 0, 0 }, // 78 IIC_SprSLBSYNC
   { 1, 1, 6, 135, 138 }, // 79 IIC_IntShift
-  { 1, 69, 76, 138, 141 }, // 80 IIC_LdStSTWCX
-  { 1, 16, 21, 141, 145 }, // 81 IIC_LdStStoreUpd
-  { 1, 16, 21, 145, 148 }, // 82 IIC_LdStSTD
-  { 1, 69, 76, 148, 151 }, // 83 IIC_LdStSTDCX
-  { 1, 16, 21, 151, 155 }, // 84 IIC_LdStSTDU
-  { 1, 16, 21, 155, 159 }, // 85 IIC_LdStSTDUX
+  { 1, 74, 81, 138, 141 }, // 80 IIC_LdStSTWCX
+  { 1, 21, 26, 141, 145 }, // 81 IIC_LdStStoreUpd
+  { 1, 21, 26, 145, 148 }, // 82 IIC_LdStSTD
+  { 1, 74, 81, 148, 151 }, // 83 IIC_LdStSTDCX
+  { 1, 21, 26, 151, 155 }, // 84 IIC_LdStSTDU
+  { 1, 21, 26, 155, 159 }, // 85 IIC_LdStSTDUX
   { 0, 0, 0, 0, 0 }, // 86 IIC_SprSTOP
   { 0, 0, 0, 0, 0 }, // 87 IIC_IntTrapD
   { 0, 0, 0, 0, 0 }, // 88 IIC_SprTLBIA
@@ -1837,7 +1837,7 @@ static const llvm::InstrItinerary PPC440Itineraries[] = {
   { 0, 0, 0, 0, 0 }, // 98 XSABSQP_XSCPSGNQP_XSIEXPQP_XSNABSQP_XSNEGQP_XSXEXPQP_XSABSDP_XSCPSGNDP_XSIEXPDP_XSNABSDP_XSNEGDP_XSXEXPDP
   { 0, 0, 0, 0, 0 }, // 99 VMINSB_VMINSD_VMINSH_VMINSW_VMINUB_VMINUD_VMINUH_VMINUW_VRLB_VRLD_VRLDMI_VRLDNM_VRLH_VRLW_VRLWMI_VRLWNM_VSHASIGMAD_VSHASIGMAW_VSLB_VSLH_VSLW_VSRAB_VSRAH_VSRAW_VSRB_VSRH_VSRW_VSUBSBS_VSUBSHS_VSUBSWS_VSUBUBS_VSUBUHS_VSUBUWS_XSCVSPDPN_XSMAXCDP_XSMAXDP_XSMAXJDP_XSMINCDP_XSMINDP_XSMINJDP_XSTSTDCDP_XSTSTDCSP_XSXSIGDP_XVIEXPSP_XVMAXDP_XVMAXSP_XVMINDP_XVMINSP_XVTSTDCDP_XVTSTDCSP_XVXEXPSP_XVXSIGDP_XVXSIGSP
   { 0, 0, 0, 0, 0 }, // 100 VPOPCNTD_VPRTYBD_VPRTYBW_VSLD_VSRAD_VSRD
-  { 1, 26, 35, 161, 164 }, // 101 XSCMPEQDP_XSCMPEXPDP_XSCMPGEDP_XSCMPGTDP_XSCMPODP_XSCMPUDP_XSTDIVDP_XSTSQRTDP_XVTDIVDP_XVTDIVSP_XVTSQRTDP_XVTSQRTSP
+  { 1, 31, 40, 161, 164 }, // 101 XSCMPEQDP_XSCMPEXPDP_XSCMPGEDP_XSCMPGTDP_XSCMPODP_XSCMPUDP_XSTDIVDP_XSTSQRTDP_XVTDIVDP_XVTDIVSP_XVTSQRTDP_XVTSQRTSP
   { 0, 0, 0, 0, 0 }, // 102 XVCMPEQDP_XVCMPEQDPo_XVCMPEQSP_XVCMPEQSPo_XVCMPGEDP_XVCMPGEDPo_XVCMPGESP_XVCMPGESPo_XVCMPGTDP_XVCMPGTDPo_XVCMPGTSP_XVCMPGTSPo
   { 0, 0, 0, 0, 0 }, // 103 VABSDUB_VABSDUH_VABSDUW_VCLZB_VCLZD_VCLZH_VCLZW_VCTZB_VCTZD_VCTZH_VCTZW
   { 0, 0, 0, 0, 0 }, // 104 VADDSBS_VADDSHS_VADDSWS_VADDUBS_VADDUHS_VADDUWS_VAVGSB_VAVGSH_VAVGSW_VAVGUB_VAVGUH_VAVGUW_VBPERMD_VMAXFP_VMAXSB_VMAXSD_VMAXSH_VMAXSW_VMAXUB_VMAXUD_VMAXUH_VMAXUW_VMINFP
@@ -1849,23 +1849,23 @@ static const llvm::InstrItinerary PPC440Itineraries[] = {
   { 0, 0, 0, 0, 0 }, // 110 VBPERMQ_VGBBD_VMRGHB_VMRGHH_VMRGHW_VMRGLB_VMRGLH_VMRGLW_VPERM_VPERMR_VPERMXOR_VPKPX_VPKSDSS_VPKSDUS_VPKSHSS_VPKSHUS_VPKSWSS_VPKSWUS_VPKUDUM_VPKUDUS_VPKUHUM_VPKUHUS_VPKUWUM_VPKUWUS_VSL_VSLDOI_VSLO_VSLV_VSR_VSRO_VSRV_VUPKHPX_VUPKHSB_VUPKHSH_VUPKHSW_VUPKLPX_VUPKLSB_VUPKLSH_VUPKLSW_XXBRD_XXBRH_XXBRQ_XXBRW_XXEXTRACTUW_XXINSERTW_VADDCUQ_VADDECUQ_VADDEUQM_VMUL10CUQ_VMUL10ECUQ_VMUL10EUQ_VMUL10UQ_VSUBCUQ_VSUBECUQ_VSUBEUQM_XSTSTDCQP_XSXSIGQP
   { 0, 0, 0, 0, 0 }, // 111 VCLZLSBB_VCTZLSBB_VEXTRACTD_VEXTRACTUB_VEXTRACTUH_VEXTRACTUW_VEXTUBLX_VEXTUBRX_VEXTUHLX_VEXTUHRX_VEXTUWLX_VEXTUWRX_VINSERTB_VINSERTD_VINSERTH_VINSERTW_VPRTYBQ_VADDUQM_VSUBUQM
   { 0, 0, 0, 0, 0 }, // 112 VSPLTB_VSPLTH_VSPLTISB_VSPLTISH_VSPLTISW_VSPLTW_XXMRGHW_XXMRGLW_XXPERM_XXPERMR_XXSLDWI_XXSPLTIB_XXSPLTW
-  { 1, 26, 35, 164, 167 }, // 113 XSCMPEXPQP_XSCMPOQP_XSCMPUQP
+  { 1, 31, 40, 164, 167 }, // 113 XSCMPEXPQP_XSCMPOQP_XSCMPUQP
   { 0, 0, 0, 0, 0 }, // 114 XSADDQP_XSADDQPO_XSCVDPQP_XSCVQPDP_XSCVQPDPO_XSCVQPSDZ_XSCVQPSWZ_XSCVQPUDZ_XSCVQPUWZ_XSCVSDQP_XSCVUDQP_XSRQPI_XSRQPXP_XSSUBQP_XSSUBQPO
   { 0, 0, 0, 0, 0 }, // 115 XSMADDQP_XSMADDQPO_XSMSUBQP_XSMSUBQPO_XSMULQP_XSMULQPO_XSNMADDQP_XSNMADDQPO_XSNMSUBQP_XSNMSUBQPO
   { 0, 0, 0, 0, 0 }, // 116 XSDIVQP_XSDIVQPO
   { 0, 0, 0, 0, 0 }, // 117 XSSQRTQP_XSSQRTQPO
-  { 1, 16, 21, 167, 170 }, // 118 LXSDX_LXVD2X_LXSIWZX_LXV_LXSD
-  { 1, 16, 21, 170, 173 }, // 119 LFIWZX_LFDX_LFD
-  { 1, 16, 21, 173, 176 }, // 120 LXSSPX_LXSIWAX_LXSSP
-  { 1, 16, 21, 176, 179 }, // 121 LFIWAX_LFSX_LFS
-  { 1, 16, 21, 179, 182 }, // 122 LXVDSX_LXVW4X
-  { 1, 11, 16, 182, 185 }, // 123 STFS_STFD_STFIWX_STFSX_STFDX_STXSDX_STXSSPX_STXSIWX
-  { 1, 11, 16, 185, 188 }, // 124 STXVD2X_STXVW4X
-  { 1, 21, 26, 188, 191 }, // 125 DIVW_DIVWU
-  { 1, 21, 26, 191, 194 }, // 126 DIVWE_DIVWEU
+  { 1, 21, 26, 167, 170 }, // 118 LXSDX_LXVD2X_LXSIWZX_LXV_LXSD
+  { 1, 21, 26, 170, 173 }, // 119 LFIWZX_LFDX_LFD
+  { 1, 21, 26, 173, 176 }, // 120 LXSSPX_LXSIWAX_LXSSP
+  { 1, 21, 26, 176, 179 }, // 121 LFIWAX_LFSX_LFS
+  { 1, 21, 26, 179, 182 }, // 122 LXVDSX_LXVW4X
+  { 1, 16, 21, 182, 185 }, // 123 STFS_STFD_STFIWX_STFSX_STFDX_STXSDX_STXSSPX_STXSIWX
+  { 1, 16, 21, 185, 188 }, // 124 STXVD2X_STXVW4X
+  { 1, 26, 31, 188, 191 }, // 125 DIVW_DIVWU
+  { 1, 26, 31, 191, 194 }, // 126 DIVWE_DIVWEU
   { 0, 0, 0, 0, 0 }, // 127 DIVD_DIVDU
   { 0, 0, 0, 0, 0 }, // 128 DIVDE_DIVDEU
-  { 1, 21, 26, 194, 197 }, // 129 DIVWEo_DIVWEUo
+  { 1, 26, 31, 194, 197 }, // 129 DIVWEo_DIVWEUo
   { 0, 0, 0, 0, 0 }, // 130 DIVDEo_DIVDEUo
   { 0, 0, 0, 0, 0 }, // 131 SLD_SRD_SRAD
   { 0, 0, 0, 0, 0 }, // 132 SRADI_RLDIC
@@ -1875,18 +1875,18 @@ static const llvm::InstrItinerary PPC440Itineraries[] = {
   { 1, 6, 11, 200, 203 }, // 136 MCRF
   { 1, 6, 11, 203, 206 }, // 137 MCRXRX
   { 1, 6, 11, 206, 209 }, // 138 MCRFS
-  { 1, 35, 44, 209, 212 }, // 139 FDIV_XSDIVDP
-  { 1, 44, 53, 212, 215 }, // 140 FDIVS_XSDIVSP
-  { 1, 44, 53, 215, 218 }, // 141 XVDIVSP
-  { 1, 35, 44, 218, 221 }, // 142 XVDIVDP
-  { 1, 26, 35, 221, 224 }, // 143 FRSP_FRIND_FRINS_FRIPD_FRIPS_FRIZD_FRIZS_FRIMD_FRIMS_FRE_FRES_FRSQRTE_FRSQRTES_FMADDS_FMSUBS_FNMADDS_FNMSUBS_FSELD_FSELS_FADDS_FMULS_FSUBS_FCFID_FCTID_FCTIDZ_FCFIDU_FCFIDS_FCFIDUS_FCTIDUZ_FCTIWUZ_FCTIW_FCTIWZ
-  { 1, 26, 35, 224, 228 }, // 144 FMADD_FMSUB_FNMADD_FNMSUB_FMUL
-  { 1, 26, 35, 228, 231 }, // 145 FMR_FABSD_FABSS_FNABSD_FNABSS_FNEGD_FNEGS_FCPSGND_FCPSGNS
-  { 1, 26, 35, 231, 234 }, // 146 FCMPUS_FCMPUD
-  { 1, 11, 16, 234, 238 }, // 147 LFSU
-  { 1, 11, 16, 238, 242 }, // 148 LFSUX
-  { 1, 11, 16, 242, 246 }, // 149 LFDU
-  { 1, 11, 16, 246, 250 }, // 150 LFDUX
+  { 1, 40, 49, 209, 212 }, // 139 FDIV_XSDIVDP
+  { 1, 49, 58, 212, 215 }, // 140 FDIVS_XSDIVSP
+  { 1, 49, 58, 215, 218 }, // 141 XVDIVSP
+  { 1, 40, 49, 218, 221 }, // 142 XVDIVDP
+  { 1, 31, 40, 221, 224 }, // 143 FRSP_FRIND_FRINS_FRIPD_FRIPS_FRIZD_FRIZS_FRIMD_FRIMS_FRE_FRES_FRSQRTE_FRSQRTES_FMADDS_FMSUBS_FNMADDS_FNMSUBS_FSELD_FSELS_FADDS_FMULS_FSUBS_FCFID_FCTID_FCTIDZ_FCFIDU_FCFIDS_FCFIDUS_FCTIDUZ_FCTIWUZ_FCTIW_FCTIWZ
+  { 1, 31, 40, 224, 228 }, // 144 FMADD_FMSUB_FNMADD_FNMSUB_FMUL
+  { 1, 31, 40, 228, 231 }, // 145 FMR_FABSD_FABSS_FNABSD_FNABSS_FNEGD_FNEGS_FCPSGND_FCPSGNS
+  { 1, 31, 40, 231, 234 }, // 146 FCMPUS_FCMPUD
+  { 1, 16, 21, 234, 238 }, // 147 LFSU
+  { 1, 16, 21, 238, 242 }, // 148 LFSUX
+  { 1, 16, 21, 242, 246 }, // 149 LFDU
+  { 1, 16, 21, 246, 250 }, // 150 LFDUX
   { 0, ~0U, ~0U, ~0U, ~0U } // end marker
 };
 
@@ -1896,58 +1896,58 @@ static const llvm::InstrItinerary G3Itineraries[] = {
   { 1, 86, 87, 0, 0 }, // 2 IIC_IntGeneral
   { 1, 87, 88, 0, 0 }, // 3 IIC_BrB
   { 0, 0, 0, 0, 0 }, // 4 IIC_VecFP
-  { 1, 86, 87, 0, 0 }, // 5 IIC_IntCompare
-  { 0, 0, 0, 0, 0 }, // 6 IIC_SprABORT
-  { 0, 0, 0, 0, 0 }, // 7 IIC_LdStCOPY
-  { 0, 0, 0, 0, 0 }, // 8 IIC_LdStPASTE
-  { 1, 88, 89, 0, 0 }, // 9 IIC_BrCR
-  { 1, 89, 90, 0, 0 }, // 10 IIC_LdStDCBF
-  { 1, 90, 91, 0, 0 }, // 11 IIC_LdStLoad
-  { 0, 0, 0, 0, 0 }, // 12 IIC_IntDivD
-  { 1, 91, 92, 0, 0 }, // 13 IIC_IntDivW
-  { 1, 92, 93, 0, 0 }, // 14 IIC_FPGeneral
-  { 1, 92, 93, 0, 0 }, // 15 IIC_FPAddSub
-  { 1, 92, 93, 0, 0 }, // 16 IIC_FPCompare
-  { 1, 93, 94, 0, 0 }, // 17 IIC_FPDivD
-  { 1, 94, 95, 0, 0 }, // 18 IIC_FPDivS
-  { 1, 95, 96, 0, 0 }, // 19 IIC_FPFused
-  { 0, 0, 0, 0, 0 }, // 20 IIC_FPSqrtD
-  { 0, 0, 0, 0, 0 }, // 21 IIC_FPSqrtS
-  { 1, 89, 90, 0, 0 }, // 22 IIC_LdStICBI
-  { 1, 90, 91, 0, 0 }, // 23 IIC_LdStStore
-  { 0, 0, 0, 0, 0 }, // 24 IIC_IntISEL
-  { 1, 96, 97, 0, 0 }, // 25 IIC_SprISYNC
-  { 1, 89, 90, 0, 0 }, // 26 IIC_LdStLWARX
-  { 1, 90, 91, 0, 0 }, // 27 IIC_LdStLoadUpd
-  { 1, 90, 91, 0, 0 }, // 28 IIC_LdStLoadUpdX
-  { 0, 0, 0, 0, 0 }, // 29 IIC_LdStLD
-  { 0, 0, 0, 0, 0 }, // 30 IIC_LdStLDARX
-  { 0, 0, 0, 0, 0 }, // 31 IIC_LdStLDU
-  { 0, 0, 0, 0, 0 }, // 32 IIC_LdStLDUX
-  { 1, 90, 91, 0, 0 }, // 33 IIC_LdStLFD
-  { 1, 90, 91, 0, 0 }, // 34 IIC_LdStLFDU
-  { 1, 90, 91, 0, 0 }, // 35 IIC_LdStLFDUX
-  { 1, 90, 91, 0, 0 }, // 36 IIC_LdStLHA
-  { 1, 90, 91, 0, 0 }, // 37 IIC_LdStLHAU
-  { 1, 90, 91, 0, 0 }, // 38 IIC_LdStLHAUX
-  { 1, 97, 98, 0, 0 }, // 39 IIC_LdStLMW
-  { 0, 0, 0, 0, 0 }, // 40 IIC_LdStLWA
-  { 1, 88, 89, 0, 0 }, // 41 IIC_BrMCR
-  { 1, 88, 89, 0, 0 }, // 42 IIC_BrMCRX
-  { 1, 88, 89, 0, 0 }, // 43 IIC_SprMFCR
-  { 1, 98, 99, 0, 0 }, // 44 IIC_SprMFSPR
-  { 1, 92, 93, 0, 0 }, // 45 IIC_IntMFFS
-  { 1, 88, 89, 0, 0 }, // 46 IIC_SprMFMSR
-  { 0, 0, 0, 0, 0 }, // 47 IIC_SprMFCRF
-  { 0, 0, 0, 0, 0 }, // 48 IIC_SprMFPMR
-  { 1, 98, 99, 0, 0 }, // 49 IIC_SprMFSR
-  { 1, 98, 99, 0, 0 }, // 50 IIC_SprMFTB
-  { 0, 0, 0, 0, 0 }, // 51 IIC_VecGeneral
-  { 0, 0, 0, 0, 0 }, // 52 IIC_SprMSGSYNC
-  { 1, 89, 90, 0, 0 }, // 53 IIC_LdStSync
+  { 1, 88, 89, 0, 0 }, // 5 IIC_LdStSync
+  { 1, 86, 87, 0, 0 }, // 6 IIC_IntCompare
+  { 0, 0, 0, 0, 0 }, // 7 IIC_SprABORT
+  { 0, 0, 0, 0, 0 }, // 8 IIC_LdStCOPY
+  { 0, 0, 0, 0, 0 }, // 9 IIC_LdStPASTE
+  { 1, 89, 90, 0, 0 }, // 10 IIC_BrCR
+  { 1, 88, 89, 0, 0 }, // 11 IIC_LdStDCBF
+  { 1, 90, 91, 0, 0 }, // 12 IIC_LdStLoad
+  { 0, 0, 0, 0, 0 }, // 13 IIC_IntDivD
+  { 1, 91, 92, 0, 0 }, // 14 IIC_IntDivW
+  { 1, 92, 93, 0, 0 }, // 15 IIC_FPGeneral
+  { 1, 92, 93, 0, 0 }, // 16 IIC_FPAddSub
+  { 1, 92, 93, 0, 0 }, // 17 IIC_FPCompare
+  { 1, 93, 94, 0, 0 }, // 18 IIC_FPDivD
+  { 1, 94, 95, 0, 0 }, // 19 IIC_FPDivS
+  { 1, 95, 96, 0, 0 }, // 20 IIC_FPFused
+  { 0, 0, 0, 0, 0 }, // 21 IIC_FPSqrtD
+  { 0, 0, 0, 0, 0 }, // 22 IIC_FPSqrtS
+  { 1, 88, 89, 0, 0 }, // 23 IIC_LdStICBI
+  { 1, 90, 91, 0, 0 }, // 24 IIC_LdStStore
+  { 0, 0, 0, 0, 0 }, // 25 IIC_IntISEL
+  { 1, 96, 97, 0, 0 }, // 26 IIC_SprISYNC
+  { 1, 88, 89, 0, 0 }, // 27 IIC_LdStLWARX
+  { 1, 90, 91, 0, 0 }, // 28 IIC_LdStLoadUpd
+  { 1, 90, 91, 0, 0 }, // 29 IIC_LdStLoadUpdX
+  { 0, 0, 0, 0, 0 }, // 30 IIC_LdStLD
+  { 0, 0, 0, 0, 0 }, // 31 IIC_LdStLDARX
+  { 0, 0, 0, 0, 0 }, // 32 IIC_LdStLDU
+  { 0, 0, 0, 0, 0 }, // 33 IIC_LdStLDUX
+  { 1, 90, 91, 0, 0 }, // 34 IIC_LdStLFD
+  { 1, 90, 91, 0, 0 }, // 35 IIC_LdStLFDU
+  { 1, 90, 91, 0, 0 }, // 36 IIC_LdStLFDUX
+  { 1, 90, 91, 0, 0 }, // 37 IIC_LdStLHA
+  { 1, 90, 91, 0, 0 }, // 38 IIC_LdStLHAU
+  { 1, 90, 91, 0, 0 }, // 39 IIC_LdStLHAUX
+  { 1, 97, 98, 0, 0 }, // 40 IIC_LdStLMW
+  { 0, 0, 0, 0, 0 }, // 41 IIC_LdStLWA
+  { 1, 89, 90, 0, 0 }, // 42 IIC_BrMCR
+  { 1, 89, 90, 0, 0 }, // 43 IIC_BrMCRX
+  { 1, 89, 90, 0, 0 }, // 44 IIC_SprMFCR
+  { 1, 98, 99, 0, 0 }, // 45 IIC_SprMFSPR
+  { 1, 92, 93, 0, 0 }, // 46 IIC_IntMFFS
+  { 1, 89, 90, 0, 0 }, // 47 IIC_SprMFMSR
+  { 0, 0, 0, 0, 0 }, // 48 IIC_SprMFCRF
+  { 0, 0, 0, 0, 0 }, // 49 IIC_SprMFPMR
+  { 1, 98, 99, 0, 0 }, // 50 IIC_SprMFSR
+  { 1, 98, 99, 0, 0 }, // 51 IIC_SprMFTB
+  { 0, 0, 0, 0, 0 }, // 52 IIC_VecGeneral
+  { 0, 0, 0, 0, 0 }, // 53 IIC_SprMSGSYNC
   { 1, 96, 97, 0, 0 }, // 54 IIC_SprMTSPR
   { 1, 99, 100, 0, 0 }, // 55 IIC_IntMTFSB0
-  { 1, 88, 89, 0, 0 }, // 56 IIC_SprMTMSR
+  { 1, 89, 90, 0, 0 }, // 56 IIC_SprMTMSR
   { 0, 0, 0, 0, 0 }, // 57 IIC_SprMTMSRD
   { 0, 0, 0, 0, 0 }, // 58 IIC_SprMTPMR
   { 1, 96, 97, 0, 0 }, // 59 IIC_SprMTSR
@@ -2026,10 +2026,10 @@ static const llvm::InstrItinerary G3Itineraries[] = {
   { 0, 0, 0, 0, 0 }, // 132 SRADI_RLDIC
   { 0, 0, 0, 0, 0 }, // 133 RLDCL_RLDCR
   { 0, 0, 0, 0, 0 }, // 134 RLDIMI_RLDICL_RLDICR_RLDICL_32_64
-  { 1, 88, 89, 0, 0 }, // 135 MTOCRF_MTOCRF8_MTCRF_MTCRF8
-  { 1, 88, 89, 0, 0 }, // 136 MCRF
-  { 1, 88, 89, 0, 0 }, // 137 MCRXRX
-  { 1, 88, 89, 0, 0 }, // 138 MCRFS
+  { 1, 89, 90, 0, 0 }, // 135 MTOCRF_MTOCRF8_MTCRF_MTCRF8
+  { 1, 89, 90, 0, 0 }, // 136 MCRF
+  { 1, 89, 90, 0, 0 }, // 137 MCRXRX
+  { 1, 89, 90, 0, 0 }, // 138 MCRFS
   { 1, 93, 94, 0, 0 }, // 139 FDIV_XSDIVDP
   { 1, 94, 95, 0, 0 }, // 140 FDIVS_XSDIVSP
   { 1, 94, 95, 0, 0 }, // 141 XVDIVSP
@@ -2051,69 +2051,69 @@ static const llvm::InstrItinerary G4Itineraries[] = {
   { 1, 105, 106, 0, 0 }, // 2 IIC_IntGeneral
   { 1, 106, 107, 0, 0 }, // 3 IIC_BrB
   { 1, 107, 108, 0, 0 }, // 4 IIC_VecFP
-  { 1, 105, 106, 0, 0 }, // 5 IIC_IntCompare
-  { 0, 0, 0, 0, 0 }, // 6 IIC_SprABORT
-  { 0, 0, 0, 0, 0 }, // 7 IIC_LdStCOPY
-  { 0, 0, 0, 0, 0 }, // 8 IIC_LdStPASTE
-  { 1, 108, 109, 0, 0 }, // 9 IIC_BrCR
-  { 1, 109, 110, 0, 0 }, // 10 IIC_LdStDCBF
-  { 1, 109, 110, 0, 0 }, // 11 IIC_LdStLoad
-  { 0, 0, 0, 0, 0 }, // 12 IIC_IntDivD
-  { 1, 110, 111, 0, 0 }, // 13 IIC_IntDivW
-  { 1, 111, 112, 0, 0 }, // 14 IIC_FPGeneral
-  { 1, 111, 112, 0, 0 }, // 15 IIC_FPAddSub
-  { 1, 111, 112, 0, 0 }, // 16 IIC_FPCompare
-  { 1, 112, 113, 0, 0 }, // 17 IIC_FPDivD
-  { 1, 113, 114, 0, 0 }, // 18 IIC_FPDivS
-  { 1, 111, 112, 0, 0 }, // 19 IIC_FPFused
-  { 0, 0, 0, 0, 0 }, // 20 IIC_FPSqrtD
-  { 0, 0, 0, 0, 0 }, // 21 IIC_FPSqrtS
-  { 1, 109, 110, 0, 0 }, // 22 IIC_LdStICBI
-  { 1, 109, 110, 0, 0 }, // 23 IIC_LdStStore
-  { 0, 0, 0, 0, 0 }, // 24 IIC_IntISEL
-  { 1, 114, 115, 0, 0 }, // 25 IIC_SprISYNC
-  { 1, 115, 116, 0, 0 }, // 26 IIC_LdStLWARX
-  { 1, 109, 110, 0, 0 }, // 27 IIC_LdStLoadUpd
-  { 1, 109, 110, 0, 0 }, // 28 IIC_LdStLoadUpdX
-  { 0, 0, 0, 0, 0 }, // 29 IIC_LdStLD
-  { 0, 0, 0, 0, 0 }, // 30 IIC_LdStLDARX
-  { 0, 0, 0, 0, 0 }, // 31 IIC_LdStLDU
-  { 0, 0, 0, 0, 0 }, // 32 IIC_LdStLDUX
-  { 1, 109, 110, 0, 0 }, // 33 IIC_LdStLFD
-  { 1, 109, 110, 0, 0 }, // 34 IIC_LdStLFDU
-  { 1, 109, 110, 0, 0 }, // 35 IIC_LdStLFDUX
-  { 1, 109, 110, 0, 0 }, // 36 IIC_LdStLHA
-  { 1, 109, 110, 0, 0 }, // 37 IIC_LdStLHAU
-  { 1, 109, 110, 0, 0 }, // 38 IIC_LdStLHAUX
-  { 1, 116, 117, 0, 0 }, // 39 IIC_LdStLMW
-  { 0, 0, 0, 0, 0 }, // 40 IIC_LdStLWA
-  { 1, 108, 109, 0, 0 }, // 41 IIC_BrMCR
-  { 1, 108, 109, 0, 0 }, // 42 IIC_BrMCRX
-  { 1, 108, 109, 0, 0 }, // 43 IIC_SprMFCR
-  { 1, 117, 118, 0, 0 }, // 44 IIC_SprMFSPR
-  { 1, 118, 119, 0, 0 }, // 45 IIC_IntMFFS
-  { 1, 108, 109, 0, 0 }, // 46 IIC_SprMFMSR
-  { 0, 0, 0, 0, 0 }, // 47 IIC_SprMFCRF
-  { 0, 0, 0, 0, 0 }, // 48 IIC_SprMFPMR
-  { 1, 117, 118, 0, 0 }, // 49 IIC_SprMFSR
-  { 1, 108, 109, 0, 0 }, // 50 IIC_SprMFTB
-  { 1, 119, 120, 0, 0 }, // 51 IIC_VecGeneral
-  { 0, 0, 0, 0, 0 }, // 52 IIC_SprMSGSYNC
-  { 1, 120, 121, 0, 0 }, // 53 IIC_LdStSync
-  { 1, 114, 115, 0, 0 }, // 54 IIC_SprMTSPR
-  { 1, 118, 119, 0, 0 }, // 55 IIC_IntMTFSB0
-  { 1, 108, 109, 0, 0 }, // 56 IIC_SprMTMSR
+  { 1, 108, 109, 0, 0 }, // 5 IIC_LdStSync
+  { 1, 105, 106, 0, 0 }, // 6 IIC_IntCompare
+  { 0, 0, 0, 0, 0 }, // 7 IIC_SprABORT
+  { 0, 0, 0, 0, 0 }, // 8 IIC_LdStCOPY
+  { 0, 0, 0, 0, 0 }, // 9 IIC_LdStPASTE
+  { 1, 109, 110, 0, 0 }, // 10 IIC_BrCR
+  { 1, 110, 111, 0, 0 }, // 11 IIC_LdStDCBF
+  { 1, 110, 111, 0, 0 }, // 12 IIC_LdStLoad
+  { 0, 0, 0, 0, 0 }, // 13 IIC_IntDivD
+  { 1, 111, 112, 0, 0 }, // 14 IIC_IntDivW
+  { 1, 112, 113, 0, 0 }, // 15 IIC_FPGeneral
+  { 1, 112, 113, 0, 0 }, // 16 IIC_FPAddSub
+  { 1, 112, 113, 0, 0 }, // 17 IIC_FPCompare
+  { 1, 113, 114, 0, 0 }, // 18 IIC_FPDivD
+  { 1, 114, 115, 0, 0 }, // 19 IIC_FPDivS
+  { 1, 112, 113, 0, 0 }, // 20 IIC_FPFused
+  { 0, 0, 0, 0, 0 }, // 21 IIC_FPSqrtD
+  { 0, 0, 0, 0, 0 }, // 22 IIC_FPSqrtS
+  { 1, 110, 111, 0, 0 }, // 23 IIC_LdStICBI
+  { 1, 110, 111, 0, 0 }, // 24 IIC_LdStStore
+  { 0, 0, 0, 0, 0 }, // 25 IIC_IntISEL
+  { 1, 115, 116, 0, 0 }, // 26 IIC_SprISYNC
+  { 1, 116, 117, 0, 0 }, // 27 IIC_LdStLWARX
+  { 1, 110, 111, 0, 0 }, // 28 IIC_LdStLoadUpd
+  { 1, 110, 111, 0, 0 }, // 29 IIC_LdStLoadUpdX
+  { 0, 0, 0, 0, 0 }, // 30 IIC_LdStLD
+  { 0, 0, 0, 0, 0 }, // 31 IIC_LdStLDARX
+  { 0, 0, 0, 0, 0 }, // 32 IIC_LdStLDU
+  { 0, 0, 0, 0, 0 }, // 33 IIC_LdStLDUX
+  { 1, 110, 111, 0, 0 }, // 34 IIC_LdStLFD
+  { 1, 110, 111, 0, 0 }, // 35 IIC_LdStLFDU
+  { 1, 110, 111, 0, 0 }, // 36 IIC_LdStLFDUX
+  { 1, 110, 111, 0, 0 }, // 37 IIC_LdStLHA
+  { 1, 110, 111, 0, 0 }, // 38 IIC_LdStLHAU
+  { 1, 110, 111, 0, 0 }, // 39 IIC_LdStLHAUX
+  { 1, 117, 118, 0, 0 }, // 40 IIC_LdStLMW
+  { 0, 0, 0, 0, 0 }, // 41 IIC_LdStLWA
+  { 1, 109, 110, 0, 0 }, // 42 IIC_BrMCR
+  { 1, 109, 110, 0, 0 }, // 43 IIC_BrMCRX
+  { 1, 109, 110, 0, 0 }, // 44 IIC_SprMFCR
+  { 1, 118, 119, 0, 0 }, // 45 IIC_SprMFSPR
+  { 1, 119, 120, 0, 0 }, // 46 IIC_IntMFFS
+  { 1, 109, 110, 0, 0 }, // 47 IIC_SprMFMSR
+  { 0, 0, 0, 0, 0 }, // 48 IIC_SprMFCRF
+  { 0, 0, 0, 0, 0 }, // 49 IIC_SprMFPMR
+  { 1, 118, 119, 0, 0 }, // 50 IIC_SprMFSR
+  { 1, 109, 110, 0, 0 }, // 51 IIC_SprMFTB
+  { 1, 120, 121, 0, 0 }, // 52 IIC_VecGeneral
+  { 0, 0, 0, 0, 0 }, // 53 IIC_SprMSGSYNC
+  { 1, 115, 116, 0, 0 }, // 54 IIC_SprMTSPR
+  { 1, 119, 120, 0, 0 }, // 55 IIC_IntMTFSB0
+  { 1, 109, 110, 0, 0 }, // 56 IIC_SprMTMSR
   { 0, 0, 0, 0, 0 }, // 57 IIC_SprMTMSRD
   { 0, 0, 0, 0, 0 }, // 58 IIC_SprMTPMR
-  { 1, 114, 115, 0, 0 }, // 59 IIC_SprMTSR
+  { 1, 115, 116, 0, 0 }, // 59 IIC_SprMTSR
   { 1, 121, 122, 0, 0 }, // 60 IIC_IntMulHW
   { 1, 122, 123, 0, 0 }, // 61 IIC_IntMulHWU
   { 0, 0, 0, 0, 0 }, // 62 IIC_IntMulHD
   { 1, 123, 124, 0, 0 }, // 63 IIC_IntMulLI
   { 1, 124, 125, 0, 0 }, // 64 IIC_VecPerm
-  { 1, 109, 110, 0, 0 }, // 65 IIC_LdStSTFD
-  { 1, 109, 110, 0, 0 }, // 66 IIC_LdStSTFDU
-  { 1, 114, 115, 0, 0 }, // 67 IIC_SprRFI
+  { 1, 110, 111, 0, 0 }, // 65 IIC_LdStSTFD
+  { 1, 110, 111, 0, 0 }, // 66 IIC_LdStSTFDU
+  { 1, 115, 116, 0, 0 }, // 67 IIC_SprRFI
   { 0, 0, 0, 0, 0 }, // 68 IIC_IntRFID
   { 0, 0, 0, 0, 0 }, // 69 IIC_IntRotateD
   { 0, 0, 0, 0, 0 }, // 70 IIC_IntRotateDI
@@ -2127,7 +2127,7 @@ static const llvm::InstrItinerary G4Itineraries[] = {
   { 0, 0, 0, 0, 0 }, // 78 IIC_SprSLBSYNC
   { 1, 105, 106, 0, 0 }, // 79 IIC_IntShift
   { 1, 125, 126, 0, 0 }, // 80 IIC_LdStSTWCX
-  { 1, 109, 110, 0, 0 }, // 81 IIC_LdStStoreUpd
+  { 1, 110, 111, 0, 0 }, // 81 IIC_LdStStoreUpd
   { 0, 0, 0, 0, 0 }, // 82 IIC_LdStSTD
   { 0, 0, 0, 0, 0 }, // 83 IIC_LdStSTDCX
   { 0, 0, 0, 0, 0 }, // 84 IIC_LdStSTDU
@@ -2139,64 +2139,64 @@ static const llvm::InstrItinerary G4Itineraries[] = {
   { 0, 0, 0, 0, 0 }, // 90 IIC_SprTLBIEL
   { 1, 126, 127, 0, 0 }, // 91 IIC_SprTLBSYNC
   { 1, 127, 128, 0, 0 }, // 92 IIC_IntTrapW
-  { 1, 119, 120, 0, 0 }, // 93 IIC_VecFPCompare
+  { 1, 120, 121, 0, 0 }, // 93 IIC_VecFPCompare
   { 1, 107, 108, 0, 0 }, // 94 VADDCUW_VAND_VANDC_VMRGEW_VMRGOW_VNOR_VOR_VSEL_VSUBCUW_VXOR_V_SET0B_V_SET0H_V_SET0_XVABSDP_XVABSSP_XVCPSGNDP_XVCPSGNSP_XVIEXPDP_XVNABSDP_XVNABSSP_XVNEGDP_XVNEGSP_XVXEXPDP
-  { 1, 119, 120, 0, 0 }, // 95 VADDUBM_VADDUDM_VADDUHM_VADDUWM_VEQV_VEXTSB2D_VEXTSB2W_VEXTSH2D_VEXTSH2W_VEXTSW2D_VNAND_VNEGD_VNEGW_VORC_VPOPCNTB_VPOPCNTH_VPOPCNTW_VSUBUBM_VSUBUDM_VSUBUHM_VSUBUWM_XXLAND_XXLANDC_XXLEQV_XXLNAND_XXLNOR_XXLOR_XXLORf_XXLORC_XXLXOR
-  { 1, 119, 120, 0, 0 }, // 96 VCMPEQUB_VCMPEQUBo_VCMPEQUD_VCMPEQUDo_VCMPEQUH_VCMPEQUHo_VCMPEQUW_VCMPEQUWo_VCMPGTSB_VCMPGTSBo_VCMPGTSD_VCMPGTSDo_VCMPGTSH_VCMPGTSHo_VCMPGTSW_VCMPGTSWo_VCMPGTUB_VCMPGTUBo_VCMPGTUD_VCMPGTUDo_VCMPGTUH_VCMPGTUHo_VCMPGTUW_VCMPGTUWo_VCMPNEB_VCMPNEBo_VCMPNEH_VCMPNEHo_VCMPNEW_VCMPNEWo_VCMPNEZB_VCMPNEZBo_VCMPNEZH_VCMPNEZHo_VCMPNEZW_VCMPNEZWo
+  { 1, 120, 121, 0, 0 }, // 95 VADDUBM_VADDUDM_VADDUHM_VADDUWM_VEQV_VEXTSB2D_VEXTSB2W_VEXTSH2D_VEXTSH2W_VEXTSW2D_VNAND_VNEGD_VNEGW_VORC_VPOPCNTB_VPOPCNTH_VPOPCNTW_VSUBUBM_VSUBUDM_VSUBUHM_VSUBUWM_XXLAND_XXLANDC_XXLEQV_XXLNAND_XXLNOR_XXLOR_XXLORf_XXLORC_XXLXOR
+  { 1, 120, 121, 0, 0 }, // 96 VCMPEQUB_VCMPEQUBo_VCMPEQUD_VCMPEQUDo_VCMPEQUH_VCMPEQUHo_VCMPEQUW_VCMPEQUWo_VCMPGTSB_VCMPGTSBo_VCMPGTSD_VCMPGTSDo_VCMPGTSH_VCMPGTSHo_VCMPGTSW_VCMPGTSWo_VCMPGTUB_VCMPGTUBo_VCMPGTUD_VCMPGTUDo_VCMPGTUH_VCMPGTUHo_VCMPGTUW_VCMPGTUWo_VCMPNEB_VCMPNEBo_VCMPNEH_VCMPNEHo_VCMPNEW_VCMPNEWo_VCMPNEZB_VCMPNEZBo_VCMPNEZH_VCMPNEZHo_VCMPNEZW_VCMPNEZWo
   { 1, 124, 125, 0, 0 }, // 97 XXSEL
   { 1, 107, 108, 0, 0 }, // 98 XSABSQP_XSCPSGNQP_XSIEXPQP_XSNABSQP_XSNEGQP_XSXEXPQP_XSABSDP_XSCPSGNDP_XSIEXPDP_XSNABSDP_XSNEGDP_XSXEXPDP
   { 1, 107, 108, 0, 0 }, // 99 VMINSB_VMINSD_VMINSH_VMINSW_VMINUB_VMINUD_VMINUH_VMINUW_VRLB_VRLD_VRLDMI_VRLDNM_VRLH_VRLW_VRLWMI_VRLWNM_VSHASIGMAD_VSHASIGMAW_VSLB_VSLH_VSLW_VSRAB_VSRAH_VSRAW_VSRB_VSRH_VSRW_VSUBSBS_VSUBSHS_VSUBSWS_VSUBUBS_VSUBUHS_VSUBUWS_XSCVSPDPN_XSMAXCDP_XSMAXDP_XSMAXJDP_XSMINCDP_XSMINDP_XSMINJDP_XSTSTDCDP_XSTSTDCSP_XSXSIGDP_XVIEXPSP_XVMAXDP_XVMAXSP_XVMINDP_XVMINSP_XVTSTDCDP_XVTSTDCSP_XVXEXPSP_XVXSIGDP_XVXSIGSP
-  { 1, 119, 120, 0, 0 }, // 100 VPOPCNTD_VPRTYBD_VPRTYBW_VSLD_VSRAD_VSRD
-  { 1, 111, 112, 0, 0 }, // 101 XSCMPEQDP_XSCMPEXPDP_XSCMPGEDP_XSCMPGTDP_XSCMPODP_XSCMPUDP_XSTDIVDP_XSTSQRTDP_XVTDIVDP_XVTDIVSP_XVTSQRTDP_XVTSQRTSP
-  { 1, 119, 120, 0, 0 }, // 102 XVCMPEQDP_XVCMPEQDPo_XVCMPEQSP_XVCMPEQSPo_XVCMPGEDP_XVCMPGEDPo_XVCMPGESP_XVCMPGESPo_XVCMPGTDP_XVCMPGTDPo_XVCMPGTSP_XVCMPGTSPo
-  { 1, 119, 120, 0, 0 }, // 103 VABSDUB_VABSDUH_VABSDUW_VCLZB_VCLZD_VCLZH_VCLZW_VCTZB_VCTZD_VCTZH_VCTZW
+  { 1, 120, 121, 0, 0 }, // 100 VPOPCNTD_VPRTYBD_VPRTYBW_VSLD_VSRAD_VSRD
+  { 1, 112, 113, 0, 0 }, // 101 XSCMPEQDP_XSCMPEXPDP_XSCMPGEDP_XSCMPGTDP_XSCMPODP_XSCMPUDP_XSTDIVDP_XSTSQRTDP_XVTDIVDP_XVTDIVSP_XVTSQRTDP_XVTSQRTSP
+  { 1, 120, 121, 0, 0 }, // 102 XVCMPEQDP_XVCMPEQDPo_XVCMPEQSP_XVCMPEQSPo_XVCMPGEDP_XVCMPGEDPo_XVCMPGESP_XVCMPGESPo_XVCMPGTDP_XVCMPGTDPo_XVCMPGTSP_XVCMPGTSPo
+  { 1, 120, 121, 0, 0 }, // 103 VABSDUB_VABSDUH_VABSDUW_VCLZB_VCLZD_VCLZH_VCLZW_VCTZB_VCTZD_VCTZH_VCTZW
   { 1, 107, 108, 0, 0 }, // 104 VADDSBS_VADDSHS_VADDSWS_VADDUBS_VADDUHS_VADDUWS_VAVGSB_VAVGSH_VAVGSW_VAVGUB_VAVGUH_VAVGUW_VBPERMD_VMAXFP_VMAXSB_VMAXSD_VMAXSH_VMAXSW_VMAXUB_VMAXUD_VMAXUH_VMAXUW_VMINFP
-  { 1, 119, 120, 0, 0 }, // 105 VCMPBFP_VCMPBFPo_VCMPGTFP_VCMPGTFPo_VCMPEQFP_VCMPEQFPo_VCMPGEFP_VCMPGEFPo
+  { 1, 120, 121, 0, 0 }, // 105 VCMPBFP_VCMPBFPo_VCMPGTFP_VCMPGTFPo_VCMPEQFP_VCMPEQFPo_VCMPGEFP_VCMPGEFPo
   { 1, 107, 108, 0, 0 }, // 106 VADDFP_VCTSXS_VCTSXS_0_VCTUXS_VCTUXS_0_VEXPTEFP_VLOGEFP_VMADDFP_VMHADDSHS_VNMSUBFP_VREFP_VRFIM_VRFIN_VRFIP_VRFIZ_VRSQRTEFP_XVADDDP_XVADDSP_XVCVDPSP_XVCVDPSXDS_XVCVDPSXWS_XVCVDPUXDS_XVCVDPUXWS_XVCVHPSP_XVCVSPDP_XVCVSPHP_XVCVSPSXDS_XVCVSPSXWS_XVCVSPUXDS_XVCVSPUXWS_XVCVSXDDP_XVCVSXDSP_XVCVSXWDP_XVCVSXWSP_XVCVUXDDP_XVCVUXDSP_XVCVUXWDP_XVCVUXWSP_XVMADDADP_XVMADDASP_XVMADDMDP_XVMADDMSP_XVMSUBADP_XVMSUBASP_XVMSUBMDP_XVMSUBMSP_XVMULDP_XVMULSP_XVNMADDADP_XVNMADDASP_XVNMADDMDP_XVNMADDMSP_XVNMSUBADP_XVNMSUBASP_XVNMSUBMDP_XVNMSUBMSP_XVRDPI_XVRDPIC_XVRDPIM_XVRDPIP_XVRDPIZ_XVREDP_XVRESP_XVRSPI_XVRSPIC_XVRSPIM_XVRSPIP_XVRSPIZ_XVRSQRTEDP_XVRSQRTESP_XVSUBDP_XVSUBSP_VCFSX_VCFSX_0_VCFUX_VCFUX_0_VMHRADDSHS_VMLADDUHM_VMSUMMBM_VMSUMSHM_VMSUMSHS_VMSUMUBM_VMSUMUHM_VMSUMUHS_VMULESB_VMULESH_VMULESW_VMULEUB_VMULEUH_VMULEUW_VMULOSB_VMULOSH_VMULOSW_VMULOUB_VMULOUH_VMULOUW_VSUM2SWS_VSUM4SBS_VSUM4SHS_VSUM4UBS_VSUMSWS
-  { 1, 119, 120, 0, 0 }, // 107 VSUBFP_VMULUWM
+  { 1, 120, 121, 0, 0 }, // 107 VSUBFP_VMULUWM
   { 1, 107, 108, 0, 0 }, // 108 XSMADDADP_XSMADDASP_XSMADDMDP_XSMADDMSP_XSMSUBADP_XSMSUBASP_XSMSUBMDP_XSMSUBMSP_XSMULDP_XSMULSP_XSNMADDADP_XSNMADDASP_XSNMADDMDP_XSNMADDMSP_XSNMSUBADP_XSNMSUBASP_XSNMSUBMDP_XSNMSUBMSP
   { 1, 107, 108, 0, 0 }, // 109 XSADDDP_XSADDSP_XSCVDPHP_XSCVDPSP_XSCVDPSXDS_XSCVDPSXWS_XSCVDPUXDS_XSCVDPUXWS_XSCVHPDP_XSCVSPDP_XSCVSXDDP_XSCVSXDSP_XSCVUXDDP_XSCVUXDSP_XSRDPI_XSRDPIC_XSRDPIM_XSRDPIP_XSRDPIZ_XSREDP_XSRESP_XSRSQRTEDP_XSRSQRTESP_XSSUBDP_XSSUBSP_XSCVDPSPN
   { 1, 107, 108, 0, 0 }, // 110 VBPERMQ_VGBBD_VMRGHB_VMRGHH_VMRGHW_VMRGLB_VMRGLH_VMRGLW_VPERM_VPERMR_VPERMXOR_VPKPX_VPKSDSS_VPKSDUS_VPKSHSS_VPKSHUS_VPKSWSS_VPKSWUS_VPKUDUM_VPKUDUS_VPKUHUM_VPKUHUS_VPKUWUM_VPKUWUS_VSL_VSLDOI_VSLO_VSLV_VSR_VSRO_VSRV_VUPKHPX_VUPKHSB_VUPKHSH_VUPKHSW_VUPKLPX_VUPKLSB_VUPKLSH_VUPKLSW_XXBRD_XXBRH_XXBRQ_XXBRW_XXEXTRACTUW_XXINSERTW_VADDCUQ_VADDECUQ_VADDEUQM_VMUL10CUQ_VMUL10ECUQ_VMUL10EUQ_VMUL10UQ_VSUBCUQ_VSUBECUQ_VSUBEUQM_XSTSTDCQP_XSXSIGQP
-  { 1, 119, 120, 0, 0 }, // 111 VCLZLSBB_VCTZLSBB_VEXTRACTD_VEXTRACTUB_VEXTRACTUH_VEXTRACTUW_VEXTUBLX_VEXTUBRX_VEXTUHLX_VEXTUHRX_VEXTUWLX_VEXTUWRX_VINSERTB_VINSERTD_VINSERTH_VINSERTW_VPRTYBQ_VADDUQM_VSUBUQM
+  { 1, 120, 121, 0, 0 }, // 111 VCLZLSBB_VCTZLSBB_VEXTRACTD_VEXTRACTUB_VEXTRACTUH_VEXTRACTUW_VEXTUBLX_VEXTUBRX_VEXTUHLX_VEXTUHRX_VEXTUWLX_VEXTUWRX_VINSERTB_VINSERTD_VINSERTH_VINSERTW_VPRTYBQ_VADDUQM_VSUBUQM
   { 1, 124, 125, 0, 0 }, // 112 VSPLTB_VSPLTH_VSPLTISB_VSPLTISH_VSPLTISW_VSPLTW_XXMRGHW_XXMRGLW_XXPERM_XXPERMR_XXSLDWI_XXSPLTIB_XXSPLTW
-  { 1, 111, 112, 0, 0 }, // 113 XSCMPEXPQP_XSCMPOQP_XSCMPUQP
+  { 1, 112, 113, 0, 0 }, // 113 XSCMPEXPQP_XSCMPOQP_XSCMPUQP
   { 1, 107, 108, 0, 0 }, // 114 XSADDQP_XSADDQPO_XSCVDPQP_XSCVQPDP_XSCVQPDPO_XSCVQPSDZ_XSCVQPSWZ_XSCVQPUDZ_XSCVQPUWZ_XSCVSDQP_XSCVUDQP_XSRQPI_XSRQPXP_XSSUBQP_XSSUBQPO
   { 1, 107, 108, 0, 0 }, // 115 XSMADDQP_XSMADDQPO_XSMSUBQP_XSMSUBQPO_XSMULQP_XSMULQPO_XSNMADDQP_XSNMADDQPO_XSNMSUBQP_XSNMSUBQPO
   { 1, 107, 108, 0, 0 }, // 116 XSDIVQP_XSDIVQPO
   { 1, 107, 108, 0, 0 }, // 117 XSSQRTQP_XSSQRTQPO
-  { 1, 109, 110, 0, 0 }, // 118 LXSDX_LXVD2X_LXSIWZX_LXV_LXSD
-  { 1, 109, 110, 0, 0 }, // 119 LFIWZX_LFDX_LFD
-  { 1, 109, 110, 0, 0 }, // 120 LXSSPX_LXSIWAX_LXSSP
-  { 1, 109, 110, 0, 0 }, // 121 LFIWAX_LFSX_LFS
-  { 1, 109, 110, 0, 0 }, // 122 LXVDSX_LXVW4X
-  { 1, 109, 110, 0, 0 }, // 123 STFS_STFD_STFIWX_STFSX_STFDX_STXSDX_STXSSPX_STXSIWX
-  { 1, 109, 110, 0, 0 }, // 124 STXVD2X_STXVW4X
-  { 1, 110, 111, 0, 0 }, // 125 DIVW_DIVWU
-  { 1, 110, 111, 0, 0 }, // 126 DIVWE_DIVWEU
+  { 1, 110, 111, 0, 0 }, // 118 LXSDX_LXVD2X_LXSIWZX_LXV_LXSD
+  { 1, 110, 111, 0, 0 }, // 119 LFIWZX_LFDX_LFD
+  { 1, 110, 111, 0, 0 }, // 120 LXSSPX_LXSIWAX_LXSSP
+  { 1, 110, 111, 0, 0 }, // 121 LFIWAX_LFSX_LFS
+  { 1, 110, 111, 0, 0 }, // 122 LXVDSX_LXVW4X
+  { 1, 110, 111, 0, 0 }, // 123 STFS_STFD_STFIWX_STFSX_STFDX_STXSDX_STXSSPX_STXSIWX
+  { 1, 110, 111, 0, 0 }, // 124 STXVD2X_STXVW4X
+  { 1, 111, 112, 0, 0 }, // 125 DIVW_DIVWU
+  { 1, 111, 112, 0, 0 }, // 126 DIVWE_DIVWEU
   { 0, 0, 0, 0, 0 }, // 127 DIVD_DIVDU
   { 0, 0, 0, 0, 0 }, // 128 DIVDE_DIVDEU
-  { 1, 110, 111, 0, 0 }, // 129 DIVWEo_DIVWEUo
+  { 1, 111, 112, 0, 0 }, // 129 DIVWEo_DIVWEUo
   { 0, 0, 0, 0, 0 }, // 130 DIVDEo_DIVDEUo
   { 0, 0, 0, 0, 0 }, // 131 SLD_SRD_SRAD
   { 0, 0, 0, 0, 0 }, // 132 SRADI_RLDIC
   { 0, 0, 0, 0, 0 }, // 133 RLDCL_RLDCR
   { 0, 0, 0, 0, 0 }, // 134 RLDIMI_RLDICL_RLDICR_RLDICL_32_64
-  { 1, 108, 109, 0, 0 }, // 135 MTOCRF_MTOCRF8_MTCRF_MTCRF8
-  { 1, 108, 109, 0, 0 }, // 136 MCRF
-  { 1, 108, 109, 0, 0 }, // 137 MCRXRX
-  { 1, 108, 109, 0, 0 }, // 138 MCRFS
-  { 1, 112, 113, 0, 0 }, // 139 FDIV_XSDIVDP
-  { 1, 113, 114, 0, 0 }, // 140 FDIVS_XSDIVSP
-  { 1, 113, 114, 0, 0 }, // 141 XVDIVSP
-  { 1, 112, 113, 0, 0 }, // 142 XVDIVDP
-  { 1, 111, 112, 0, 0 }, // 143 FRSP_FRIND_FRINS_FRIPD_FRIPS_FRIZD_FRIZS_FRIMD_FRIMS_FRE_FRES_FRSQRTE_FRSQRTES_FMADDS_FMSUBS_FNMADDS_FNMSUBS_FSELD_FSELS_FADDS_FMULS_FSUBS_FCFID_FCTID_FCTIDZ_FCFIDU_FCFIDS_FCFIDUS_FCTIDUZ_FCTIWUZ_FCTIW_FCTIWZ
-  { 1, 111, 112, 0, 0 }, // 144 FMADD_FMSUB_FNMADD_FNMSUB_FMUL
-  { 1, 111, 112, 0, 0 }, // 145 FMR_FABSD_FABSS_FNABSD_FNABSS_FNEGD_FNEGS_FCPSGND_FCPSGNS
-  { 1, 111, 112, 0, 0 }, // 146 FCMPUS_FCMPUD
-  { 1, 109, 110, 0, 0 }, // 147 LFSU
-  { 1, 109, 110, 0, 0 }, // 148 LFSUX
-  { 1, 109, 110, 0, 0 }, // 149 LFDU
-  { 1, 109, 110, 0, 0 }, // 150 LFDUX
+  { 1, 109, 110, 0, 0 }, // 135 MTOCRF_MTOCRF8_MTCRF_MTCRF8
+  { 1, 109, 110, 0, 0 }, // 136 MCRF
+  { 1, 109, 110, 0, 0 }, // 137 MCRXRX
+  { 1, 109, 110, 0, 0 }, // 138 MCRFS
+  { 1, 113, 114, 0, 0 }, // 139 FDIV_XSDIVDP
+  { 1, 114, 115, 0, 0 }, // 140 FDIVS_XSDIVSP
+  { 1, 114, 115, 0, 0 }, // 141 XVDIVSP
+  { 1, 113, 114, 0, 0 }, // 142 XVDIVDP
+  { 1, 112, 113, 0, 0 }, // 143 FRSP_FRIND_FRINS_FRIPD_FRIPS_FRIZD_FRIZS_FRIMD_FRIMS_FRE_FRES_FRSQRTE_FRSQRTES_FMADDS_FMSUBS_FNMADDS_FNMSUBS_FSELD_FSELS_FADDS_FMULS_FSUBS_FCFID_FCTID_FCTIDZ_FCFIDU_FCFIDS_FCFIDUS_FCTIDUZ_FCTIWUZ_FCTIW_FCTIWZ
+  { 1, 112, 113, 0, 0 }, // 144 FMADD_FMSUB_FNMADD_FNMSUB_FMUL
+  { 1, 112, 113, 0, 0 }, // 145 FMR_FABSD_FABSS_FNABSD_FNABSS_FNEGD_FNEGS_FCPSGND_FCPSGNS
+  { 1, 112, 113, 0, 0 }, // 146 FCMPUS_FCMPUD
+  { 1, 110, 111, 0, 0 }, // 147 LFSU
+  { 1, 110, 111, 0, 0 }, // 148 LFSUX
+  { 1, 110, 111, 0, 0 }, // 149 LFDU
+  { 1, 110, 111, 0, 0 }, // 150 LFDUX
   { 0, ~0U, ~0U, ~0U, ~0U } // end marker
 };
 
@@ -2206,68 +2206,68 @@ static const llvm::InstrItinerary G4PlusItineraries[] = {
   { 1, 128, 129, 0, 0 }, // 2 IIC_IntGeneral
   { 1, 129, 130, 0, 0 }, // 3 IIC_BrB
   { 1, 130, 131, 0, 0 }, // 4 IIC_VecFP
-  { 1, 128, 129, 0, 0 }, // 5 IIC_IntCompare
-  { 0, 0, 0, 0, 0 }, // 6 IIC_SprABORT
-  { 0, 0, 0, 0, 0 }, // 7 IIC_LdStCOPY
-  { 0, 0, 0, 0, 0 }, // 8 IIC_LdStPASTE
-  { 1, 131, 132, 0, 0 }, // 9 IIC_BrCR
-  { 1, 132, 133, 0, 0 }, // 10 IIC_LdStDCBF
-  { 1, 132, 133, 0, 0 }, // 11 IIC_LdStLoad
-  { 0, 0, 0, 0, 0 }, // 12 IIC_IntDivD
-  { 1, 133, 134, 0, 0 }, // 13 IIC_IntDivW
-  { 1, 134, 135, 0, 0 }, // 14 IIC_FPGeneral
-  { 1, 134, 135, 0, 0 }, // 15 IIC_FPAddSub
-  { 1, 134, 135, 0, 0 }, // 16 IIC_FPCompare
-  { 1, 135, 136, 0, 0 }, // 17 IIC_FPDivD
-  { 1, 136, 137, 0, 0 }, // 18 IIC_FPDivS
-  { 1, 134, 135, 0, 0 }, // 19 IIC_FPFused
-  { 0, 0, 0, 0, 0 }, // 20 IIC_FPSqrtD
-  { 0, 0, 0, 0, 0 }, // 21 IIC_FPSqrtS
-  { 1, 137, 138, 0, 0 }, // 22 IIC_LdStICBI
-  { 1, 132, 133, 0, 0 }, // 23 IIC_LdStStore
-  { 0, 0, 0, 0, 0 }, // 24 IIC_IntISEL
-  { 1, 138, 139, 0, 0 }, // 25 IIC_SprISYNC
-  { 1, 132, 133, 0, 0 }, // 26 IIC_LdStLWARX
-  { 1, 132, 133, 0, 0 }, // 27 IIC_LdStLoadUpd
-  { 1, 132, 133, 0, 0 }, // 28 IIC_LdStLoadUpdX
-  { 0, 0, 0, 0, 0 }, // 29 IIC_LdStLD
-  { 0, 0, 0, 0, 0 }, // 30 IIC_LdStLDARX
-  { 0, 0, 0, 0, 0 }, // 31 IIC_LdStLDU
-  { 0, 0, 0, 0, 0 }, // 32 IIC_LdStLDUX
-  { 1, 139, 140, 0, 0 }, // 33 IIC_LdStLFD
-  { 1, 139, 140, 0, 0 }, // 34 IIC_LdStLFDU
-  { 1, 139, 140, 0, 0 }, // 35 IIC_LdStLFDUX
-  { 1, 132, 133, 0, 0 }, // 36 IIC_LdStLHA
-  { 1, 132, 133, 0, 0 }, // 37 IIC_LdStLHAU
-  { 1, 132, 133, 0, 0 }, // 38 IIC_LdStLHAUX
-  { 1, 140, 141, 0, 0 }, // 39 IIC_LdStLMW
-  { 1, 132, 133, 0, 0 }, // 40 IIC_LdStLWA
-  { 1, 131, 132, 0, 0 }, // 41 IIC_BrMCR
-  { 1, 131, 132, 0, 0 }, // 42 IIC_BrMCRX
-  { 1, 131, 132, 0, 0 }, // 43 IIC_SprMFCR
-  { 1, 141, 142, 0, 0 }, // 44 IIC_SprMFSPR
-  { 1, 134, 135, 0, 0 }, // 45 IIC_IntMFFS
-  { 1, 137, 138, 0, 0 }, // 46 IIC_SprMFMSR
-  { 0, 0, 0, 0, 0 }, // 47 IIC_SprMFCRF
-  { 0, 0, 0, 0, 0 }, // 48 IIC_SprMFPMR
-  { 1, 141, 142, 0, 0 }, // 49 IIC_SprMFSR
-  { 1, 142, 143, 0, 0 }, // 50 IIC_SprMFTB
-  { 1, 143, 144, 0, 0 }, // 51 IIC_VecGeneral
-  { 0, 0, 0, 0, 0 }, // 52 IIC_SprMSGSYNC
-  { 1, 144, 145, 0, 0 }, // 53 IIC_LdStSync
-  { 1, 131, 132, 0, 0 }, // 54 IIC_SprMTSPR
-  { 1, 134, 135, 0, 0 }, // 55 IIC_IntMTFSB0
-  { 1, 131, 132, 0, 0 }, // 56 IIC_SprMTMSR
+  { 1, 131, 132, 0, 0 }, // 5 IIC_LdStSync
+  { 1, 128, 129, 0, 0 }, // 6 IIC_IntCompare
+  { 0, 0, 0, 0, 0 }, // 7 IIC_SprABORT
+  { 0, 0, 0, 0, 0 }, // 8 IIC_LdStCOPY
+  { 0, 0, 0, 0, 0 }, // 9 IIC_LdStPASTE
+  { 1, 132, 133, 0, 0 }, // 10 IIC_BrCR
+  { 1, 133, 134, 0, 0 }, // 11 IIC_LdStDCBF
+  { 1, 133, 134, 0, 0 }, // 12 IIC_LdStLoad
+  { 0, 0, 0, 0, 0 }, // 13 IIC_IntDivD
+  { 1, 134, 135, 0, 0 }, // 14 IIC_IntDivW
+  { 1, 135, 136, 0, 0 }, // 15 IIC_FPGeneral
+  { 1, 135, 136, 0, 0 }, // 16 IIC_FPAddSub
+  { 1, 135, 136, 0, 0 }, // 17 IIC_FPCompare
+  { 1, 136, 137, 0, 0 }, // 18 IIC_FPDivD
+  { 1, 137, 138, 0, 0 }, // 19 IIC_FPDivS
+  { 1, 135, 136, 0, 0 }, // 20 IIC_FPFused
+  { 0, 0, 0, 0, 0 }, // 21 IIC_FPSqrtD
+  { 0, 0, 0, 0, 0 }, // 22 IIC_FPSqrtS
+  { 1, 138, 139, 0, 0 }, // 23 IIC_LdStICBI
+  { 1, 133, 134, 0, 0 }, // 24 IIC_LdStStore
+  { 0, 0, 0, 0, 0 }, // 25 IIC_IntISEL
+  { 1, 139, 140, 0, 0 }, // 26 IIC_SprISYNC
+  { 1, 133, 134, 0, 0 }, // 27 IIC_LdStLWARX
+  { 1, 133, 134, 0, 0 }, // 28 IIC_LdStLoadUpd
+  { 1, 133, 134, 0, 0 }, // 29 IIC_LdStLoadUpdX
+  { 0, 0, 0, 0, 0 }, // 30 IIC_LdStLD
+  { 0, 0, 0, 0, 0 }, // 31 IIC_LdStLDARX
+  { 0, 0, 0, 0, 0 }, // 32 IIC_LdStLDU
+  { 0, 0, 0, 0, 0 }, // 33 IIC_LdStLDUX
+  { 1, 140, 141, 0, 0 }, // 34 IIC_LdStLFD
+  { 1, 140, 141, 0, 0 }, // 35 IIC_LdStLFDU
+  { 1, 140, 141, 0, 0 }, // 36 IIC_LdStLFDUX
+  { 1, 133, 134, 0, 0 }, // 37 IIC_LdStLHA
+  { 1, 133, 134, 0, 0 }, // 38 IIC_LdStLHAU
+  { 1, 133, 134, 0, 0 }, // 39 IIC_LdStLHAUX
+  { 1, 141, 142, 0, 0 }, // 40 IIC_LdStLMW
+  { 1, 133, 134, 0, 0 }, // 41 IIC_LdStLWA
+  { 1, 132, 133, 0, 0 }, // 42 IIC_BrMCR
+  { 1, 132, 133, 0, 0 }, // 43 IIC_BrMCRX
+  { 1, 132, 133, 0, 0 }, // 44 IIC_SprMFCR
+  { 1, 142, 143, 0, 0 }, // 45 IIC_SprMFSPR
+  { 1, 135, 136, 0, 0 }, // 46 IIC_IntMFFS
+  { 1, 138, 139, 0, 0 }, // 47 IIC_SprMFMSR
+  { 0, 0, 0, 0, 0 }, // 48 IIC_SprMFCRF
+  { 0, 0, 0, 0, 0 }, // 49 IIC_SprMFPMR
+  { 1, 142, 143, 0, 0 }, // 50 IIC_SprMFSR
+  { 1, 143, 144, 0, 0 }, // 51 IIC_SprMFTB
+  { 1, 144, 145, 0, 0 }, // 52 IIC_VecGeneral
+  { 0, 0, 0, 0, 0 }, // 53 IIC_SprMSGSYNC
+  { 1, 132, 133, 0, 0 }, // 54 IIC_SprMTSPR
+  { 1, 135, 136, 0, 0 }, // 55 IIC_IntMTFSB0
+  { 1, 132, 133, 0, 0 }, // 56 IIC_SprMTMSR
   { 0, 0, 0, 0, 0 }, // 57 IIC_SprMTMSRD
   { 0, 0, 0, 0, 0 }, // 58 IIC_SprMTPMR
-  { 1, 131, 132, 0, 0 }, // 59 IIC_SprMTSR
-  { 1, 141, 142, 0, 0 }, // 60 IIC_IntMulHW
-  { 1, 141, 142, 0, 0 }, // 61 IIC_IntMulHWU
+  { 1, 132, 133, 0, 0 }, // 59 IIC_SprMTSR
+  { 1, 142, 143, 0, 0 }, // 60 IIC_IntMulHW
+  { 1, 142, 143, 0, 0 }, // 61 IIC_IntMulHWU
   { 0, 0, 0, 0, 0 }, // 62 IIC_IntMulHD
-  { 1, 137, 138, 0, 0 }, // 63 IIC_IntMulLI
+  { 1, 138, 139, 0, 0 }, // 63 IIC_IntMulLI
   { 1, 145, 146, 0, 0 }, // 64 IIC_VecPerm
-  { 1, 132, 133, 0, 0 }, // 65 IIC_LdStSTFD
-  { 1, 132, 133, 0, 0 }, // 66 IIC_LdStSTFDU
+  { 1, 133, 134, 0, 0 }, // 65 IIC_LdStSTFD
+  { 1, 133, 134, 0, 0 }, // 66 IIC_LdStSTFDU
   { 1, 128, 129, 0, 0 }, // 67 IIC_SprRFI
   { 0, 0, 0, 0, 0 }, // 68 IIC_IntRFID
   { 0, 0, 0, 0, 0 }, // 69 IIC_IntRotateD
@@ -2281,77 +2281,77 @@ static const llvm::InstrItinerary G4PlusItineraries[] = {
   { 0, 0, 0, 0, 0 }, // 77 IIC_SprSLBMTE
   { 0, 0, 0, 0, 0 }, // 78 IIC_SprSLBSYNC
   { 1, 146, 147, 0, 0 }, // 79 IIC_IntShift
-  { 1, 132, 133, 0, 0 }, // 80 IIC_LdStSTWCX
-  { 1, 132, 133, 0, 0 }, // 81 IIC_LdStStoreUpd
-  { 1, 132, 133, 0, 0 }, // 82 IIC_LdStSTD
-  { 1, 132, 133, 0, 0 }, // 83 IIC_LdStSTDCX
-  { 1, 132, 133, 0, 0 }, // 84 IIC_LdStSTDU
-  { 1, 132, 133, 0, 0 }, // 85 IIC_LdStSTDUX
+  { 1, 133, 134, 0, 0 }, // 80 IIC_LdStSTWCX
+  { 1, 133, 134, 0, 0 }, // 81 IIC_LdStStoreUpd
+  { 1, 133, 134, 0, 0 }, // 82 IIC_LdStSTD
+  { 1, 133, 134, 0, 0 }, // 83 IIC_LdStSTDCX
+  { 1, 133, 134, 0, 0 }, // 84 IIC_LdStSTDU
+  { 1, 133, 134, 0, 0 }, // 85 IIC_LdStSTDUX
   { 0, 0, 0, 0, 0 }, // 86 IIC_SprSTOP
   { 0, 0, 0, 0, 0 }, // 87 IIC_IntTrapD
   { 0, 0, 0, 0, 0 }, // 88 IIC_SprTLBIA
   { 0, 0, 0, 0, 0 }, // 89 IIC_SprTLBIE
   { 0, 0, 0, 0, 0 }, // 90 IIC_SprTLBIEL
-  { 1, 132, 133, 0, 0 }, // 91 IIC_SprTLBSYNC
+  { 1, 133, 134, 0, 0 }, // 91 IIC_SprTLBSYNC
   { 1, 146, 147, 0, 0 }, // 92 IIC_IntTrapW
   { 1, 147, 148, 0, 0 }, // 93 IIC_VecFPCompare
   { 1, 130, 131, 0, 0 }, // 94 VADDCUW_VAND_VANDC_VMRGEW_VMRGOW_VNOR_VOR_VSEL_VSUBCUW_VXOR_V_SET0B_V_SET0H_V_SET0_XVABSDP_XVABSSP_XVCPSGNDP_XVCPSGNSP_XVIEXPDP_XVNABSDP_XVNABSSP_XVNEGDP_XVNEGSP_XVXEXPDP
-  { 1, 143, 144, 0, 0 }, // 95 VADDUBM_VADDUDM_VADDUHM_VADDUWM_VEQV_VEXTSB2D_VEXTSB2W_VEXTSH2D_VEXTSH2W_VEXTSW2D_VNAND_VNEGD_VNEGW_VORC_VPOPCNTB_VPOPCNTH_VPOPCNTW_VSUBUBM_VSUBUDM_VSUBUHM_VSUBUWM_XXLAND_XXLANDC_XXLEQV_XXLNAND_XXLNOR_XXLOR_XXLORf_XXLORC_XXLXOR
+  { 1, 144, 145, 0, 0 }, // 95 VADDUBM_VADDUDM_VADDUHM_VADDUWM_VEQV_VEXTSB2D_VEXTSB2W_VEXTSH2D_VEXTSH2W_VEXTSW2D_VNAND_VNEGD_VNEGW_VORC_VPOPCNTB_VPOPCNTH_VPOPCNTW_VSUBUBM_VSUBUDM_VSUBUHM_VSUBUWM_XXLAND_XXLANDC_XXLEQV_XXLNAND_XXLNOR_XXLOR_XXLORf_XXLORC_XXLXOR
   { 1, 147, 148, 0, 0 }, // 96 VCMPEQUB_VCMPEQUBo_VCMPEQUD_VCMPEQUDo_VCMPEQUH_VCMPEQUHo_VCMPEQUW_VCMPEQUWo_VCMPGTSB_VCMPGTSBo_VCMPGTSD_VCMPGTSDo_VCMPGTSH_VCMPGTSHo_VCMPGTSW_VCMPGTSWo_VCMPGTUB_VCMPGTUBo_VCMPGTUD_VCMPGTUDo_VCMPGTUH_VCMPGTUHo_VCMPGTUW_VCMPGTUWo_VCMPNEB_VCMPNEBo_VCMPNEH_VCMPNEHo_VCMPNEW_VCMPNEWo_VCMPNEZB_VCMPNEZBo_VCMPNEZH_VCMPNEZHo_VCMPNEZW_VCMPNEZWo
   { 1, 145, 146, 0, 0 }, // 97 XXSEL
   { 1, 130, 131, 0, 0 }, // 98 XSABSQP_XSCPSGNQP_XSIEXPQP_XSNABSQP_XSNEGQP_XSXEXPQP_XSABSDP_XSCPSGNDP_XSIEXPDP_XSNABSDP_XSNEGDP_XSXEXPDP
   { 1, 130, 131, 0, 0 }, // 99 VMINSB_VMINSD_VMINSH_VMINSW_VMINUB_VMINUD_VMINUH_VMINUW_VRLB_VRLD_VRLDMI_VRLDNM_VRLH_VRLW_VRLWMI_VRLWNM_VSHASIGMAD_VSHASIGMAW_VSLB_VSLH_VSLW_VSRAB_VSRAH_VSRAW_VSRB_VSRH_VSRW_VSUBSBS_VSUBSHS_VSUBSWS_VSUBUBS_VSUBUHS_VSUBUWS_XSCVSPDPN_XSMAXCDP_XSMAXDP_XSMAXJDP_XSMINCDP_XSMINDP_XSMINJDP_XSTSTDCDP_XSTSTDCSP_XSXSIGDP_XVIEXPSP_XVMAXDP_XVMAXSP_XVMINDP_XVMINSP_XVTSTDCDP_XVTSTDCSP_XVXEXPSP_XVXSIGDP_XVXSIGSP
-  { 1, 143, 144, 0, 0 }, // 100 VPOPCNTD_VPRTYBD_VPRTYBW_VSLD_VSRAD_VSRD
-  { 1, 134, 135, 0, 0 }, // 101 XSCMPEQDP_XSCMPEXPDP_XSCMPGEDP_XSCMPGTDP_XSCMPODP_XSCMPUDP_XSTDIVDP_XSTSQRTDP_XVTDIVDP_XVTDIVSP_XVTSQRTDP_XVTSQRTSP
+  { 1, 144, 145, 0, 0 }, // 100 VPOPCNTD_VPRTYBD_VPRTYBW_VSLD_VSRAD_VSRD
+  { 1, 135, 136, 0, 0 }, // 101 XSCMPEQDP_XSCMPEXPDP_XSCMPGEDP_XSCMPGTDP_XSCMPODP_XSCMPUDP_XSTDIVDP_XSTSQRTDP_XVTDIVDP_XVTDIVSP_XVTSQRTDP_XVTSQRTSP
   { 1, 147, 148, 0, 0 }, // 102 XVCMPEQDP_XVCMPEQDPo_XVCMPEQSP_XVCMPEQSPo_XVCMPGEDP_XVCMPGEDPo_XVCMPGESP_XVCMPGESPo_XVCMPGTDP_XVCMPGTDPo_XVCMPGTSP_XVCMPGTSPo
-  { 1, 143, 144, 0, 0 }, // 103 VABSDUB_VABSDUH_VABSDUW_VCLZB_VCLZD_VCLZH_VCLZW_VCTZB_VCTZD_VCTZH_VCTZW
+  { 1, 144, 145, 0, 0 }, // 103 VABSDUB_VABSDUH_VABSDUW_VCLZB_VCLZD_VCLZH_VCLZW_VCTZB_VCTZD_VCTZH_VCTZW
   { 1, 130, 131, 0, 0 }, // 104 VADDSBS_VADDSHS_VADDSWS_VADDUBS_VADDUHS_VADDUWS_VAVGSB_VAVGSH_VAVGSW_VAVGUB_VAVGUH_VAVGUW_VBPERMD_VMAXFP_VMAXSB_VMAXSD_VMAXSH_VMAXSW_VMAXUB_VMAXUD_VMAXUH_VMAXUW_VMINFP
   { 1, 147, 148, 0, 0 }, // 105 VCMPBFP_VCMPBFPo_VCMPGTFP_VCMPGTFPo_VCMPEQFP_VCMPEQFPo_VCMPGEFP_VCMPGEFPo
   { 1, 130, 131, 0, 0 }, // 106 VADDFP_VCTSXS_VCTSXS_0_VCTUXS_VCTUXS_0_VEXPTEFP_VLOGEFP_VMADDFP_VMHADDSHS_VNMSUBFP_VREFP_VRFIM_VRFIN_VRFIP_VRFIZ_VRSQRTEFP_XVADDDP_XVADDSP_XVCVDPSP_XVCVDPSXDS_XVCVDPSXWS_XVCVDPUXDS_XVCVDPUXWS_XVCVHPSP_XVCVSPDP_XVCVSPHP_XVCVSPSXDS_XVCVSPSXWS_XVCVSPUXDS_XVCVSPUXWS_XVCVSXDDP_XVCVSXDSP_XVCVSXWDP_XVCVSXWSP_XVCVUXDDP_XVCVUXDSP_XVCVUXWDP_XVCVUXWSP_XVMADDADP_XVMADDASP_XVMADDMDP_XVMADDMSP_XVMSUBADP_XVMSUBASP_XVMSUBMDP_XVMSUBMSP_XVMULDP_XVMULSP_XVNMADDADP_XVNMADDASP_XVNMADDMDP_XVNMADDMSP_XVNMSUBADP_XVNMSUBASP_XVNMSUBMDP_XVNMSUBMSP_XVRDPI_XVRDPIC_XVRDPIM_XVRDPIP_XVRDPIZ_XVREDP_XVRESP_XVRSPI_XVRSPIC_XVRSPIM_XVRSPIP_XVRSPIZ_XVRSQRTEDP_XVRSQRTESP_XVSUBDP_XVSUBSP_VCFSX_VCFSX_0_VCFUX_VCFUX_0_VMHRADDSHS_VMLADDUHM_VMSUMMBM_VMSUMSHM_VMSUMSHS_VMSUMUBM_VMSUMUHM_VMSUMUHS_VMULESB_VMULESH_VMULESW_VMULEUB_VMULEUH_VMULEUW_VMULOSB_VMULOSH_VMULOSW_VMULOUB_VMULOUH_VMULOUW_VSUM2SWS_VSUM4SBS_VSUM4SHS_VSUM4UBS_VSUMSWS
-  { 1, 143, 144, 0, 0 }, // 107 VSUBFP_VMULUWM
+  { 1, 144, 145, 0, 0 }, // 107 VSUBFP_VMULUWM
   { 1, 130, 131, 0, 0 }, // 108 XSMADDADP_XSMADDASP_XSMADDMDP_XSMADDMSP_XSMSUBADP_XSMSUBASP_XSMSUBMDP_XSMSUBMSP_XSMULDP_XSMULSP_XSNMADDADP_XSNMADDASP_XSNMADDMDP_XSNMADDMSP_XSNMSUBADP_XSNMSUBASP_XSNMSUBMDP_XSNMSUBMSP
   { 1, 130, 131, 0, 0 }, // 109 XSADDDP_XSADDSP_XSCVDPHP_XSCVDPSP_XSCVDPSXDS_XSCVDPSXWS_XSCVDPUXDS_XSCVDPUXWS_XSCVHPDP_XSCVSPDP_XSCVSXDDP_XSCVSXDSP_XSCVUXDDP_XSCVUXDSP_XSRDPI_XSRDPIC_XSRDPIM_XSRDPIP_XSRDPIZ_XSREDP_XSRESP_XSRSQRTEDP_XSRSQRTESP_XSSUBDP_XSSUBSP_XSCVDPSPN
   { 1, 130, 131, 0, 0 }, // 110 VBPERMQ_VGBBD_VMRGHB_VMRGHH_VMRGHW_VMRGLB_VMRGLH_VMRGLW_VPERM_VPERMR_VPERMXOR_VPKPX_VPKSDSS_VPKSDUS_VPKSHSS_VPKSHUS_VPKSWSS_VPKSWUS_VPKUDUM_VPKUDUS_VPKUHUM_VPKUHUS_VPKUWUM_VPKUWUS_VSL_VSLDOI_VSLO_VSLV_VSR_VSRO_VSRV_VUPKHPX_VUPKHSB_VUPKHSH_VUPKHSW_VUPKLPX_VUPKLSB_VUPKLSH_VUPKLSW_XXBRD_XXBRH_XXBRQ_XXBRW_XXEXTRACTUW_XXINSERTW_VADDCUQ_VADDECUQ_VADDEUQM_VMUL10CUQ_VMUL10ECUQ_VMUL10EUQ_VMUL10UQ_VSUBCUQ_VSUBECUQ_VSUBEUQM_XSTSTDCQP_XSXSIGQP
-  { 1, 143, 144, 0, 0 }, // 111 VCLZLSBB_VCTZLSBB_VEXTRACTD_VEXTRACTUB_VEXTRACTUH_VEXTRACTUW_VEXTUBLX_VEXTUBRX_VEXTUHLX_VEXTUHRX_VEXTUWLX_VEXTUWRX_VINSERTB_VINSERTD_VINSERTH_VINSERTW_VPRTYBQ_VADDUQM_VSUBUQM
+  { 1, 144, 145, 0, 0 }, // 111 VCLZLSBB_VCTZLSBB_VEXTRACTD_VEXTRACTUB_VEXTRACTUH_VEXTRACTUW_VEXTUBLX_VEXTUBRX_VEXTUHLX_VEXTUHRX_VEXTUWLX_VEXTUWRX_VINSERTB_VINSERTD_VINSERTH_VINSERTW_VPRTYBQ_VADDUQM_VSUBUQM
   { 1, 145, 146, 0, 0 }, // 112 VSPLTB_VSPLTH_VSPLTISB_VSPLTISH_VSPLTISW_VSPLTW_XXMRGHW_XXMRGLW_XXPERM_XXPERMR_XXSLDWI_XXSPLTIB_XXSPLTW
-  { 1, 134, 135, 0, 0 }, // 113 XSCMPEXPQP_XSCMPOQP_XSCMPUQP
+  { 1, 135, 136, 0, 0 }, // 113 XSCMPEXPQP_XSCMPOQP_XSCMPUQP
   { 1, 130, 131, 0, 0 }, // 114 XSADDQP_XSADDQPO_XSCVDPQP_XSCVQPDP_XSCVQPDPO_XSCVQPSDZ_XSCVQPSWZ_XSCVQPUDZ_XSCVQPUWZ_XSCVSDQP_XSCVUDQP_XSRQPI_XSRQPXP_XSSUBQP_XSSUBQPO
   { 1, 130, 131, 0, 0 }, // 115 XSMADDQP_XSMADDQPO_XSMSUBQP_XSMSUBQPO_XSMULQP_XSMULQPO_XSNMADDQP_XSNMADDQPO_XSNMSUBQP_XSNMSUBQPO
   { 1, 130, 131, 0, 0 }, // 116 XSDIVQP_XSDIVQPO
   { 1, 130, 131, 0, 0 }, // 117 XSSQRTQP_XSSQRTQPO
-  { 1, 139, 140, 0, 0 }, // 118 LXSDX_LXVD2X_LXSIWZX_LXV_LXSD
-  { 1, 139, 140, 0, 0 }, // 119 LFIWZX_LFDX_LFD
-  { 1, 139, 140, 0, 0 }, // 120 LXSSPX_LXSIWAX_LXSSP
-  { 1, 139, 140, 0, 0 }, // 121 LFIWAX_LFSX_LFS
-  { 1, 139, 140, 0, 0 }, // 122 LXVDSX_LXVW4X
-  { 1, 132, 133, 0, 0 }, // 123 STFS_STFD_STFIWX_STFSX_STFDX_STXSDX_STXSSPX_STXSIWX
-  { 1, 132, 133, 0, 0 }, // 124 STXVD2X_STXVW4X
-  { 1, 133, 134, 0, 0 }, // 125 DIVW_DIVWU
-  { 1, 133, 134, 0, 0 }, // 126 DIVWE_DIVWEU
+  { 1, 140, 141, 0, 0 }, // 118 LXSDX_LXVD2X_LXSIWZX_LXV_LXSD
+  { 1, 140, 141, 0, 0 }, // 119 LFIWZX_LFDX_LFD
+  { 1, 140, 141, 0, 0 }, // 120 LXSSPX_LXSIWAX_LXSSP
+  { 1, 140, 141, 0, 0 }, // 121 LFIWAX_LFSX_LFS
+  { 1, 140, 141, 0, 0 }, // 122 LXVDSX_LXVW4X
+  { 1, 133, 134, 0, 0 }, // 123 STFS_STFD_STFIWX_STFSX_STFDX_STXSDX_STXSSPX_STXSIWX
+  { 1, 133, 134, 0, 0 }, // 124 STXVD2X_STXVW4X
+  { 1, 134, 135, 0, 0 }, // 125 DIVW_DIVWU
+  { 1, 134, 135, 0, 0 }, // 126 DIVWE_DIVWEU
   { 0, 0, 0, 0, 0 }, // 127 DIVD_DIVDU
   { 0, 0, 0, 0, 0 }, // 128 DIVDE_DIVDEU
-  { 1, 133, 134, 0, 0 }, // 129 DIVWEo_DIVWEUo
+  { 1, 134, 135, 0, 0 }, // 129 DIVWEo_DIVWEUo
   { 0, 0, 0, 0, 0 }, // 130 DIVDEo_DIVDEUo
   { 0, 0, 0, 0, 0 }, // 131 SLD_SRD_SRAD
   { 0, 0, 0, 0, 0 }, // 132 SRADI_RLDIC
   { 0, 0, 0, 0, 0 }, // 133 RLDCL_RLDCR
   { 0, 0, 0, 0, 0 }, // 134 RLDIMI_RLDICL_RLDICR_RLDICL_32_64
-  { 1, 131, 132, 0, 0 }, // 135 MTOCRF_MTOCRF8_MTCRF_MTCRF8
-  { 1, 131, 132, 0, 0 }, // 136 MCRF
-  { 1, 131, 132, 0, 0 }, // 137 MCRXRX
-  { 1, 131, 132, 0, 0 }, // 138 MCRFS
-  { 1, 135, 136, 0, 0 }, // 139 FDIV_XSDIVDP
-  { 1, 136, 137, 0, 0 }, // 140 FDIVS_XSDIVSP
-  { 1, 136, 137, 0, 0 }, // 141 XVDIVSP
-  { 1, 135, 136, 0, 0 }, // 142 XVDIVDP
-  { 1, 134, 135, 0, 0 }, // 143 FRSP_FRIND_FRINS_FRIPD_FRIPS_FRIZD_FRIZS_FRIMD_FRIMS_FRE_FRES_FRSQRTE_FRSQRTES_FMADDS_FMSUBS_FNMADDS_FNMSUBS_FSELD_FSELS_FADDS_FMULS_FSUBS_FCFID_FCTID_FCTIDZ_FCFIDU_FCFIDS_FCFIDUS_FCTIDUZ_FCTIWUZ_FCTIW_FCTIWZ
-  { 1, 134, 135, 0, 0 }, // 144 FMADD_FMSUB_FNMADD_FNMSUB_FMUL
-  { 1, 134, 135, 0, 0 }, // 145 FMR_FABSD_FABSS_FNABSD_FNABSS_FNEGD_FNEGS_FCPSGND_FCPSGNS
-  { 1, 134, 135, 0, 0 }, // 146 FCMPUS_FCMPUD
-  { 1, 139, 140, 0, 0 }, // 147 LFSU
-  { 1, 139, 140, 0, 0 }, // 148 LFSUX
-  { 1, 139, 140, 0, 0 }, // 149 LFDU
-  { 1, 139, 140, 0, 0 }, // 150 LFDUX
+  { 1, 132, 133, 0, 0 }, // 135 MTOCRF_MTOCRF8_MTCRF_MTCRF8
+  { 1, 132, 133, 0, 0 }, // 136 MCRF
+  { 1, 132, 133, 0, 0 }, // 137 MCRXRX
+  { 1, 132, 133, 0, 0 }, // 138 MCRFS
+  { 1, 136, 137, 0, 0 }, // 139 FDIV_XSDIVDP
+  { 1, 137, 138, 0, 0 }, // 140 FDIVS_XSDIVSP
+  { 1, 137, 138, 0, 0 }, // 141 XVDIVSP
+  { 1, 136, 137, 0, 0 }, // 142 XVDIVDP
+  { 1, 135, 136, 0, 0 }, // 143 FRSP_FRIND_FRINS_FRIPD_FRIPS_FRIZD_FRIZS_FRIMD_FRIMS_FRE_FRES_FRSQRTE_FRSQRTES_FMADDS_FMSUBS_FNMADDS_FNMSUBS_FSELD_FSELS_FADDS_FMULS_FSUBS_FCFID_FCTID_FCTIDZ_FCFIDU_FCFIDS_FCFIDUS_FCTIDUZ_FCTIWUZ_FCTIW_FCTIWZ
+  { 1, 135, 136, 0, 0 }, // 144 FMADD_FMSUB_FNMADD_FNMSUB_FMUL
+  { 1, 135, 136, 0, 0 }, // 145 FMR_FABSD_FABSS_FNABSD_FNABSS_FNEGD_FNEGS_FCPSGND_FCPSGNS
+  { 1, 135, 136, 0, 0 }, // 146 FCMPUS_FCMPUD
+  { 1, 140, 141, 0, 0 }, // 147 LFSU
+  { 1, 140, 141, 0, 0 }, // 148 LFSUX
+  { 1, 140, 141, 0, 0 }, // 149 LFDU
+  { 1, 140, 141, 0, 0 }, // 150 LFDUX
   { 0, ~0U, ~0U, ~0U, ~0U } // end marker
 };
 
@@ -2361,61 +2361,61 @@ static const llvm::InstrItinerary G5Itineraries[] = {
   { 1, 148, 149, 0, 0 }, // 2 IIC_IntGeneral
   { 1, 149, 150, 0, 0 }, // 3 IIC_BrB
   { 1, 150, 151, 0, 0 }, // 4 IIC_VecFP
-  { 1, 151, 152, 0, 0 }, // 5 IIC_IntCompare
-  { 0, 0, 0, 0, 0 }, // 6 IIC_SprABORT
-  { 0, 0, 0, 0, 0 }, // 7 IIC_LdStCOPY
-  { 0, 0, 0, 0, 0 }, // 8 IIC_LdStPASTE
-  { 1, 152, 153, 0, 0 }, // 9 IIC_BrCR
-  { 1, 153, 154, 0, 0 }, // 10 IIC_LdStDCBF
-  { 1, 153, 154, 0, 0 }, // 11 IIC_LdStLoad
-  { 1, 154, 155, 0, 0 }, // 12 IIC_IntDivD
-  { 1, 155, 156, 0, 0 }, // 13 IIC_IntDivW
-  { 1, 156, 157, 0, 0 }, // 14 IIC_FPGeneral
-  { 1, 156, 157, 0, 0 }, // 15 IIC_FPAddSub
-  { 1, 157, 158, 0, 0 }, // 16 IIC_FPCompare
-  { 1, 158, 159, 0, 0 }, // 17 IIC_FPDivD
-  { 1, 158, 159, 0, 0 }, // 18 IIC_FPDivS
-  { 1, 156, 157, 0, 0 }, // 19 IIC_FPFused
-  { 1, 159, 160, 0, 0 }, // 20 IIC_FPSqrtD
-  { 1, 159, 160, 0, 0 }, // 21 IIC_FPSqrtS
-  { 1, 160, 161, 0, 0 }, // 22 IIC_LdStICBI
-  { 1, 153, 154, 0, 0 }, // 23 IIC_LdStStore
-  { 0, 0, 0, 0, 0 }, // 24 IIC_IntISEL
-  { 1, 160, 161, 0, 0 }, // 25 IIC_SprISYNC
-  { 1, 161, 162, 0, 0 }, // 26 IIC_LdStLWARX
-  { 1, 153, 154, 0, 0 }, // 27 IIC_LdStLoadUpd
-  { 1, 153, 154, 0, 0 }, // 28 IIC_LdStLoadUpdX
-  { 1, 153, 154, 0, 0 }, // 29 IIC_LdStLD
-  { 1, 161, 162, 0, 0 }, // 30 IIC_LdStLDARX
-  { 1, 153, 154, 0, 0 }, // 31 IIC_LdStLDU
-  { 1, 153, 154, 0, 0 }, // 32 IIC_LdStLDUX
-  { 1, 153, 154, 0, 0 }, // 33 IIC_LdStLFD
-  { 1, 162, 163, 0, 0 }, // 34 IIC_LdStLFDU
-  { 1, 162, 163, 0, 0 }, // 35 IIC_LdStLFDUX
-  { 1, 162, 163, 0, 0 }, // 36 IIC_LdStLHA
-  { 1, 162, 163, 0, 0 }, // 37 IIC_LdStLHAU
-  { 1, 162, 163, 0, 0 }, // 38 IIC_LdStLHAUX
-  { 1, 163, 164, 0, 0 }, // 39 IIC_LdStLMW
-  { 1, 162, 163, 0, 0 }, // 40 IIC_LdStLWA
-  { 1, 164, 165, 0, 0 }, // 41 IIC_BrMCR
-  { 1, 165, 166, 0, 0 }, // 42 IIC_BrMCRX
-  { 1, 166, 167, 0, 0 }, // 43 IIC_SprMFCR
-  { 1, 167, 168, 0, 0 }, // 44 IIC_SprMFSPR
-  { 1, 168, 169, 0, 0 }, // 45 IIC_IntMFFS
-  { 1, 167, 168, 0, 0 }, // 46 IIC_SprMFMSR
-  { 1, 166, 167, 0, 0 }, // 47 IIC_SprMFCRF
-  { 0, 0, 0, 0, 0 }, // 48 IIC_SprMFPMR
-  { 1, 153, 154, 0, 0 }, // 49 IIC_SprMFSR
-  { 1, 169, 170, 0, 0 }, // 50 IIC_SprMFTB
-  { 1, 170, 171, 0, 0 }, // 51 IIC_VecGeneral
-  { 0, 0, 0, 0, 0 }, // 52 IIC_SprMSGSYNC
-  { 1, 171, 172, 0, 0 }, // 53 IIC_LdStSync
+  { 1, 151, 152, 0, 0 }, // 5 IIC_LdStSync
+  { 1, 152, 153, 0, 0 }, // 6 IIC_IntCompare
+  { 0, 0, 0, 0, 0 }, // 7 IIC_SprABORT
+  { 0, 0, 0, 0, 0 }, // 8 IIC_LdStCOPY
+  { 0, 0, 0, 0, 0 }, // 9 IIC_LdStPASTE
+  { 1, 153, 154, 0, 0 }, // 10 IIC_BrCR
+  { 1, 154, 155, 0, 0 }, // 11 IIC_LdStDCBF
+  { 1, 154, 155, 0, 0 }, // 12 IIC_LdStLoad
+  { 1, 155, 156, 0, 0 }, // 13 IIC_IntDivD
+  { 1, 156, 157, 0, 0 }, // 14 IIC_IntDivW
+  { 1, 157, 158, 0, 0 }, // 15 IIC_FPGeneral
+  { 1, 157, 158, 0, 0 }, // 16 IIC_FPAddSub
+  { 1, 158, 159, 0, 0 }, // 17 IIC_FPCompare
+  { 1, 159, 160, 0, 0 }, // 18 IIC_FPDivD
+  { 1, 159, 160, 0, 0 }, // 19 IIC_FPDivS
+  { 1, 157, 158, 0, 0 }, // 20 IIC_FPFused
+  { 1, 160, 161, 0, 0 }, // 21 IIC_FPSqrtD
+  { 1, 160, 161, 0, 0 }, // 22 IIC_FPSqrtS
+  { 1, 161, 162, 0, 0 }, // 23 IIC_LdStICBI
+  { 1, 154, 155, 0, 0 }, // 24 IIC_LdStStore
+  { 0, 0, 0, 0, 0 }, // 25 IIC_IntISEL
+  { 1, 161, 162, 0, 0 }, // 26 IIC_SprISYNC
+  { 1, 162, 163, 0, 0 }, // 27 IIC_LdStLWARX
+  { 1, 154, 155, 0, 0 }, // 28 IIC_LdStLoadUpd
+  { 1, 154, 155, 0, 0 }, // 29 IIC_LdStLoadUpdX
+  { 1, 154, 155, 0, 0 }, // 30 IIC_LdStLD
+  { 1, 162, 163, 0, 0 }, // 31 IIC_LdStLDARX
+  { 1, 154, 155, 0, 0 }, // 32 IIC_LdStLDU
+  { 1, 154, 155, 0, 0 }, // 33 IIC_LdStLDUX
+  { 1, 154, 155, 0, 0 }, // 34 IIC_LdStLFD
+  { 1, 163, 164, 0, 0 }, // 35 IIC_LdStLFDU
+  { 1, 163, 164, 0, 0 }, // 36 IIC_LdStLFDUX
+  { 1, 163, 164, 0, 0 }, // 37 IIC_LdStLHA
+  { 1, 163, 164, 0, 0 }, // 38 IIC_LdStLHAU
+  { 1, 163, 164, 0, 0 }, // 39 IIC_LdStLHAUX
+  { 1, 164, 165, 0, 0 }, // 40 IIC_LdStLMW
+  { 1, 163, 164, 0, 0 }, // 41 IIC_LdStLWA
+  { 1, 165, 166, 0, 0 }, // 42 IIC_BrMCR
+  { 1, 166, 167, 0, 0 }, // 43 IIC_BrMCRX
+  { 1, 167, 168, 0, 0 }, // 44 IIC_SprMFCR
+  { 1, 168, 169, 0, 0 }, // 45 IIC_SprMFSPR
+  { 1, 169, 170, 0, 0 }, // 46 IIC_IntMFFS
+  { 1, 168, 169, 0, 0 }, // 47 IIC_SprMFMSR
+  { 1, 167, 168, 0, 0 }, // 48 IIC_SprMFCRF
+  { 0, 0, 0, 0, 0 }, // 49 IIC_SprMFPMR
+  { 1, 154, 155, 0, 0 }, // 50 IIC_SprMFSR
+  { 1, 170, 171, 0, 0 }, // 51 IIC_SprMFTB
+  { 1, 171, 172, 0, 0 }, // 52 IIC_VecGeneral
+  { 0, 0, 0, 0, 0 }, // 53 IIC_SprMSGSYNC
   { 1, 172, 173, 0, 0 }, // 54 IIC_SprMTSPR
-  { 1, 156, 157, 0, 0 }, // 55 IIC_IntMTFSB0
-  { 1, 153, 154, 0, 0 }, // 56 IIC_SprMTMSR
+  { 1, 157, 158, 0, 0 }, // 55 IIC_IntMTFSB0
+  { 1, 154, 155, 0, 0 }, // 56 IIC_SprMTMSR
   { 0, 0, 0, 0, 0 }, // 57 IIC_SprMTMSRD
   { 0, 0, 0, 0, 0 }, // 58 IIC_SprMTPMR
-  { 1, 153, 154, 0, 0 }, // 59 IIC_SprMTSR
+  { 1, 154, 155, 0, 0 }, // 59 IIC_SprMTSR
   { 1, 173, 174, 0, 0 }, // 60 IIC_IntMulHW
   { 1, 173, 174, 0, 0 }, // 61 IIC_IntMulHWU
   { 1, 174, 175, 0, 0 }, // 62 IIC_IntMulHD
@@ -2436,77 +2436,77 @@ static const llvm::InstrItinerary G5Itineraries[] = {
   { 0, 0, 0, 0, 0 }, // 77 IIC_SprSLBMTE
   { 0, 0, 0, 0, 0 }, // 78 IIC_SprSLBSYNC
   { 1, 148, 149, 0, 0 }, // 79 IIC_IntShift
-  { 1, 161, 162, 0, 0 }, // 80 IIC_LdStSTWCX
-  { 1, 153, 154, 0, 0 }, // 81 IIC_LdStStoreUpd
-  { 1, 153, 154, 0, 0 }, // 82 IIC_LdStSTD
-  { 1, 161, 162, 0, 0 }, // 83 IIC_LdStSTDCX
-  { 1, 153, 154, 0, 0 }, // 84 IIC_LdStSTDU
-  { 1, 153, 154, 0, 0 }, // 85 IIC_LdStSTDUX
+  { 1, 162, 163, 0, 0 }, // 80 IIC_LdStSTWCX
+  { 1, 154, 155, 0, 0 }, // 81 IIC_LdStStoreUpd
+  { 1, 154, 155, 0, 0 }, // 82 IIC_LdStSTD
+  { 1, 162, 163, 0, 0 }, // 83 IIC_LdStSTDCX
+  { 1, 154, 155, 0, 0 }, // 84 IIC_LdStSTDU
+  { 1, 154, 155, 0, 0 }, // 85 IIC_LdStSTDUX
   { 0, 0, 0, 0, 0 }, // 86 IIC_SprSTOP
   { 1, 179, 180, 0, 0 }, // 87 IIC_IntTrapD
   { 0, 0, 0, 0, 0 }, // 88 IIC_SprTLBIA
   { 0, 0, 0, 0, 0 }, // 89 IIC_SprTLBIE
   { 0, 0, 0, 0, 0 }, // 90 IIC_SprTLBIEL
-  { 1, 153, 154, 0, 0 }, // 91 IIC_SprTLBSYNC
+  { 1, 154, 155, 0, 0 }, // 91 IIC_SprTLBSYNC
   { 1, 179, 180, 0, 0 }, // 92 IIC_IntTrapW
   { 1, 180, 181, 0, 0 }, // 93 IIC_VecFPCompare
   { 1, 150, 151, 0, 0 }, // 94 VADDCUW_VAND_VANDC_VMRGEW_VMRGOW_VNOR_VOR_VSEL_VSUBCUW_VXOR_V_SET0B_V_SET0H_V_SET0_XVABSDP_XVABSSP_XVCPSGNDP_XVCPSGNSP_XVIEXPDP_XVNABSDP_XVNABSSP_XVNEGDP_XVNEGSP_XVXEXPDP
-  { 1, 170, 171, 0, 0 }, // 95 VADDUBM_VADDUDM_VADDUHM_VADDUWM_VEQV_VEXTSB2D_VEXTSB2W_VEXTSH2D_VEXTSH2W_VEXTSW2D_VNAND_VNEGD_VNEGW_VORC_VPOPCNTB_VPOPCNTH_VPOPCNTW_VSUBUBM_VSUBUDM_VSUBUHM_VSUBUWM_XXLAND_XXLANDC_XXLEQV_XXLNAND_XXLNOR_XXLOR_XXLORf_XXLORC_XXLXOR
+  { 1, 171, 172, 0, 0 }, // 95 VADDUBM_VADDUDM_VADDUHM_VADDUWM_VEQV_VEXTSB2D_VEXTSB2W_VEXTSH2D_VEXTSH2W_VEXTSW2D_VNAND_VNEGD_VNEGW_VORC_VPOPCNTB_VPOPCNTH_VPOPCNTW_VSUBUBM_VSUBUDM_VSUBUHM_VSUBUWM_XXLAND_XXLANDC_XXLEQV_XXLNAND_XXLNOR_XXLOR_XXLORf_XXLORC_XXLXOR
   { 1, 180, 181, 0, 0 }, // 96 VCMPEQUB_VCMPEQUBo_VCMPEQUD_VCMPEQUDo_VCMPEQUH_VCMPEQUHo_VCMPEQUW_VCMPEQUWo_VCMPGTSB_VCMPGTSBo_VCMPGTSD_VCMPGTSDo_VCMPGTSH_VCMPGTSHo_VCMPGTSW_VCMPGTSWo_VCMPGTUB_VCMPGTUBo_VCMPGTUD_VCMPGTUDo_VCMPGTUH_VCMPGTUHo_VCMPGTUW_VCMPGTUWo_VCMPNEB_VCMPNEBo_VCMPNEH_VCMPNEHo_VCMPNEW_VCMPNEWo_VCMPNEZB_VCMPNEZBo_VCMPNEZH_VCMPNEZHo_VCMPNEZW_VCMPNEZWo
   { 1, 176, 177, 0, 0 }, // 97 XXSEL
   { 1, 150, 151, 0, 0 }, // 98 XSABSQP_XSCPSGNQP_XSIEXPQP_XSNABSQP_XSNEGQP_XSXEXPQP_XSABSDP_XSCPSGNDP_XSIEXPDP_XSNABSDP_XSNEGDP_XSXEXPDP
   { 1, 150, 151, 0, 0 }, // 99 VMINSB_VMINSD_VMINSH_VMINSW_VMINUB_VMINUD_VMINUH_VMINUW_VRLB_VRLD_VRLDMI_VRLDNM_VRLH_VRLW_VRLWMI_VRLWNM_VSHASIGMAD_VSHASIGMAW_VSLB_VSLH_VSLW_VSRAB_VSRAH_VSRAW_VSRB_VSRH_VSRW_VSUBSBS_VSUBSHS_VSUBSWS_VSUBUBS_VSUBUHS_VSUBUWS_XSCVSPDPN_XSMAXCDP_XSMAXDP_XSMAXJDP_XSMINCDP_XSMINDP_XSMINJDP_XSTSTDCDP_XSTSTDCSP_XSXSIGDP_XVIEXPSP_XVMAXDP_XVMAXSP_XVMINDP_XVMINSP_XVTSTDCDP_XVTSTDCSP_XVXEXPSP_XVXSIGDP_XVXSIGSP
-  { 1, 170, 171, 0, 0 }, // 100 VPOPCNTD_VPRTYBD_VPRTYBW_VSLD_VSRAD_VSRD
-  { 1, 157, 158, 0, 0 }, // 101 XSCMPEQDP_XSCMPEXPDP_XSCMPGEDP_XSCMPGTDP_XSCMPODP_XSCMPUDP_XSTDIVDP_XSTSQRTDP_XVTDIVDP_XVTDIVSP_XVTSQRTDP_XVTSQRTSP
+  { 1, 171, 172, 0, 0 }, // 100 VPOPCNTD_VPRTYBD_VPRTYBW_VSLD_VSRAD_VSRD
+  { 1, 158, 159, 0, 0 }, // 101 XSCMPEQDP_XSCMPEXPDP_XSCMPGEDP_XSCMPGTDP_XSCMPODP_XSCMPUDP_XSTDIVDP_XSTSQRTDP_XVTDIVDP_XVTDIVSP_XVTSQRTDP_XVTSQRTSP
   { 1, 180, 181, 0, 0 }, // 102 XVCMPEQDP_XVCMPEQDPo_XVCMPEQSP_XVCMPEQSPo_XVCMPGEDP_XVCMPGEDPo_XVCMPGESP_XVCMPGESPo_XVCMPGTDP_XVCMPGTDPo_XVCMPGTSP_XVCMPGTSPo
-  { 1, 170, 171, 0, 0 }, // 103 VABSDUB_VABSDUH_VABSDUW_VCLZB_VCLZD_VCLZH_VCLZW_VCTZB_VCTZD_VCTZH_VCTZW
+  { 1, 171, 172, 0, 0 }, // 103 VABSDUB_VABSDUH_VABSDUW_VCLZB_VCLZD_VCLZH_VCLZW_VCTZB_VCTZD_VCTZH_VCTZW
   { 1, 150, 151, 0, 0 }, // 104 VADDSBS_VADDSHS_VADDSWS_VADDUBS_VADDUHS_VADDUWS_VAVGSB_VAVGSH_VAVGSW_VAVGUB_VAVGUH_VAVGUW_VBPERMD_VMAXFP_VMAXSB_VMAXSD_VMAXSH_VMAXSW_VMAXUB_VMAXUD_VMAXUH_VMAXUW_VMINFP
   { 1, 180, 181, 0, 0 }, // 105 VCMPBFP_VCMPBFPo_VCMPGTFP_VCMPGTFPo_VCMPEQFP_VCMPEQFPo_VCMPGEFP_VCMPGEFPo
   { 1, 150, 151, 0, 0 }, // 106 VADDFP_VCTSXS_VCTSXS_0_VCTUXS_VCTUXS_0_VEXPTEFP_VLOGEFP_VMADDFP_VMHADDSHS_VNMSUBFP_VREFP_VRFIM_VRFIN_VRFIP_VRFIZ_VRSQRTEFP_XVADDDP_XVADDSP_XVCVDPSP_XVCVDPSXDS_XVCVDPSXWS_XVCVDPUXDS_XVCVDPUXWS_XVCVHPSP_XVCVSPDP_XVCVSPHP_XVCVSPSXDS_XVCVSPSXWS_XVCVSPUXDS_XVCVSPUXWS_XVCVSXDDP_XVCVSXDSP_XVCVSXWDP_XVCVSXWSP_XVCVUXDDP_XVCVUXDSP_XVCVUXWDP_XVCVUXWSP_XVMADDADP_XVMADDASP_XVMADDMDP_XVMADDMSP_XVMSUBADP_XVMSUBASP_XVMSUBMDP_XVMSUBMSP_XVMULDP_XVMULSP_XVNMADDADP_XVNMADDASP_XVNMADDMDP_XVNMADDMSP_XVNMSUBADP_XVNMSUBASP_XVNMSUBMDP_XVNMSUBMSP_XVRDPI_XVRDPIC_XVRDPIM_XVRDPIP_XVRDPIZ_XVREDP_XVRESP_XVRSPI_XVRSPIC_XVRSPIM_XVRSPIP_XVRSPIZ_XVRSQRTEDP_XVRSQRTESP_XVSUBDP_XVSUBSP_VCFSX_VCFSX_0_VCFUX_VCFUX_0_VMHRADDSHS_VMLADDUHM_VMSUMMBM_VMSUMSHM_VMSUMSHS_VMSUMUBM_VMSUMUHM_VMSUMUHS_VMULESB_VMULESH_VMULESW_VMULEUB_VMULEUH_VMULEUW_VMULOSB_VMULOSH_VMULOSW_VMULOUB_VMULOUH_VMULOUW_VSUM2SWS_VSUM4SBS_VSUM4SHS_VSUM4UBS_VSUMSWS
-  { 1, 170, 171, 0, 0 }, // 107 VSUBFP_VMULUWM
+  { 1, 171, 172, 0, 0 }, // 107 VSUBFP_VMULUWM
   { 1, 150, 151, 0, 0 }, // 108 XSMADDADP_XSMADDASP_XSMADDMDP_XSMADDMSP_XSMSUBADP_XSMSUBASP_XSMSUBMDP_XSMSUBMSP_XSMULDP_XSMULSP_XSNMADDADP_XSNMADDASP_XSNMADDMDP_XSNMADDMSP_XSNMSUBADP_XSNMSUBASP_XSNMSUBMDP_XSNMSUBMSP
   { 1, 150, 151, 0, 0 }, // 109 XSADDDP_XSADDSP_XSCVDPHP_XSCVDPSP_XSCVDPSXDS_XSCVDPSXWS_XSCVDPUXDS_XSCVDPUXWS_XSCVHPDP_XSCVSPDP_XSCVSXDDP_XSCVSXDSP_XSCVUXDDP_XSCVUXDSP_XSRDPI_XSRDPIC_XSRDPIM_XSRDPIP_XSRDPIZ_XSREDP_XSRESP_XSRSQRTEDP_XSRSQRTESP_XSSUBDP_XSSUBSP_XSCVDPSPN
   { 1, 150, 151, 0, 0 }, // 110 VBPERMQ_VGBBD_VMRGHB_VMRGHH_VMRGHW_VMRGLB_VMRGLH_VMRGLW_VPERM_VPERMR_VPERMXOR_VPKPX_VPKSDSS_VPKSDUS_VPKSHSS_VPKSHUS_VPKSWSS_VPKSWUS_VPKUDUM_VPKUDUS_VPKUHUM_VPKUHUS_VPKUWUM_VPKUWUS_VSL_VSLDOI_VSLO_VSLV_VSR_VSRO_VSRV_VUPKHPX_VUPKHSB_VUPKHSH_VUPKHSW_VUPKLPX_VUPKLSB_VUPKLSH_VUPKLSW_XXBRD_XXBRH_XXBRQ_XXBRW_XXEXTRACTUW_XXINSERTW_VADDCUQ_VADDECUQ_VADDEUQM_VMUL10CUQ_VMUL10ECUQ_VMUL10EUQ_VMUL10UQ_VSUBCUQ_VSUBECUQ_VSUBEUQM_XSTSTDCQP_XSXSIGQP
-  { 1, 170, 171, 0, 0 }, // 111 VCLZLSBB_VCTZLSBB_VEXTRACTD_VEXTRACTUB_VEXTRACTUH_VEXTRACTUW_VEXTUBLX_VEXTUBRX_VEXTUHLX_VEXTUHRX_VEXTUWLX_VEXTUWRX_VINSERTB_VINSERTD_VINSERTH_VINSERTW_VPRTYBQ_VADDUQM_VSUBUQM
+  { 1, 171, 172, 0, 0 }, // 111 VCLZLSBB_VCTZLSBB_VEXTRACTD_VEXTRACTUB_VEXTRACTUH_VEXTRACTUW_VEXTUBLX_VEXTUBRX_VEXTUHLX_VEXTUHRX_VEXTUWLX_VEXTUWRX_VINSERTB_VINSERTD_VINSERTH_VINSERTW_VPRTYBQ_VADDUQM_VSUBUQM
   { 1, 176, 177, 0, 0 }, // 112 VSPLTB_VSPLTH_VSPLTISB_VSPLTISH_VSPLTISW_VSPLTW_XXMRGHW_XXMRGLW_XXPERM_XXPERMR_XXSLDWI_XXSPLTIB_XXSPLTW
-  { 1, 157, 158, 0, 0 }, // 113 XSCMPEXPQP_XSCMPOQP_XSCMPUQP
+  { 1, 158, 159, 0, 0 }, // 113 XSCMPEXPQP_XSCMPOQP_XSCMPUQP
   { 1, 150, 151, 0, 0 }, // 114 XSADDQP_XSADDQPO_XSCVDPQP_XSCVQPDP_XSCVQPDPO_XSCVQPSDZ_XSCVQPSWZ_XSCVQPUDZ_XSCVQPUWZ_XSCVSDQP_XSCVUDQP_XSRQPI_XSRQPXP_XSSUBQP_XSSUBQPO
   { 1, 150, 151, 0, 0 }, // 115 XSMADDQP_XSMADDQPO_XSMSUBQP_XSMSUBQPO_XSMULQP_XSMULQPO_XSNMADDQP_XSNMADDQPO_XSNMSUBQP_XSNMSUBQPO
   { 1, 150, 151, 0, 0 }, // 116 XSDIVQP_XSDIVQPO
   { 1, 150, 151, 0, 0 }, // 117 XSSQRTQP_XSSQRTQPO
-  { 1, 153, 154, 0, 0 }, // 118 LXSDX_LXVD2X_LXSIWZX_LXV_LXSD
-  { 1, 153, 154, 0, 0 }, // 119 LFIWZX_LFDX_LFD
-  { 1, 153, 154, 0, 0 }, // 120 LXSSPX_LXSIWAX_LXSSP
-  { 1, 153, 154, 0, 0 }, // 121 LFIWAX_LFSX_LFS
-  { 1, 153, 154, 0, 0 }, // 122 LXVDSX_LXVW4X
+  { 1, 154, 155, 0, 0 }, // 118 LXSDX_LXVD2X_LXSIWZX_LXV_LXSD
+  { 1, 154, 155, 0, 0 }, // 119 LFIWZX_LFDX_LFD
+  { 1, 154, 155, 0, 0 }, // 120 LXSSPX_LXSIWAX_LXSSP
+  { 1, 154, 155, 0, 0 }, // 121 LFIWAX_LFSX_LFS
+  { 1, 154, 155, 0, 0 }, // 122 LXVDSX_LXVW4X
   { 1, 177, 178, 0, 0 }, // 123 STFS_STFD_STFIWX_STFSX_STFDX_STXSDX_STXSSPX_STXSIWX
   { 1, 177, 178, 0, 0 }, // 124 STXVD2X_STXVW4X
-  { 1, 155, 156, 0, 0 }, // 125 DIVW_DIVWU
-  { 1, 155, 156, 0, 0 }, // 126 DIVWE_DIVWEU
-  { 1, 154, 155, 0, 0 }, // 127 DIVD_DIVDU
-  { 1, 154, 155, 0, 0 }, // 128 DIVDE_DIVDEU
-  { 1, 155, 156, 0, 0 }, // 129 DIVWEo_DIVWEUo
-  { 1, 154, 155, 0, 0 }, // 130 DIVDEo_DIVDEUo
+  { 1, 156, 157, 0, 0 }, // 125 DIVW_DIVWU
+  { 1, 156, 157, 0, 0 }, // 126 DIVWE_DIVWEU
+  { 1, 155, 156, 0, 0 }, // 127 DIVD_DIVDU
+  { 1, 155, 156, 0, 0 }, // 128 DIVDE_DIVDEU
+  { 1, 156, 157, 0, 0 }, // 129 DIVWEo_DIVWEUo
+  { 1, 155, 156, 0, 0 }, // 130 DIVDEo_DIVDEUo
   { 1, 148, 149, 0, 0 }, // 131 SLD_SRD_SRAD
   { 1, 148, 149, 0, 0 }, // 132 SRADI_RLDIC
   { 1, 148, 149, 0, 0 }, // 133 RLDCL_RLDCR
   { 1, 148, 149, 0, 0 }, // 134 RLDIMI_RLDICL_RLDICR_RLDICL_32_64
-  { 1, 165, 166, 0, 0 }, // 135 MTOCRF_MTOCRF8_MTCRF_MTCRF8
-  { 1, 164, 165, 0, 0 }, // 136 MCRF
-  { 1, 165, 166, 0, 0 }, // 137 MCRXRX
-  { 1, 164, 165, 0, 0 }, // 138 MCRFS
-  { 1, 158, 159, 0, 0 }, // 139 FDIV_XSDIVDP
-  { 1, 158, 159, 0, 0 }, // 140 FDIVS_XSDIVSP
-  { 1, 158, 159, 0, 0 }, // 141 XVDIVSP
-  { 1, 158, 159, 0, 0 }, // 142 XVDIVDP
-  { 1, 156, 157, 0, 0 }, // 143 FRSP_FRIND_FRINS_FRIPD_FRIPS_FRIZD_FRIZS_FRIMD_FRIMS_FRE_FRES_FRSQRTE_FRSQRTES_FMADDS_FMSUBS_FNMADDS_FNMSUBS_FSELD_FSELS_FADDS_FMULS_FSUBS_FCFID_FCTID_FCTIDZ_FCFIDU_FCFIDS_FCFIDUS_FCTIDUZ_FCTIWUZ_FCTIW_FCTIWZ
-  { 1, 156, 157, 0, 0 }, // 144 FMADD_FMSUB_FNMADD_FNMSUB_FMUL
-  { 1, 156, 157, 0, 0 }, // 145 FMR_FABSD_FABSS_FNABSD_FNABSS_FNEGD_FNEGS_FCPSGND_FCPSGNS
-  { 1, 157, 158, 0, 0 }, // 146 FCMPUS_FCMPUD
-  { 1, 162, 163, 0, 0 }, // 147 LFSU
-  { 1, 162, 163, 0, 0 }, // 148 LFSUX
-  { 1, 162, 163, 0, 0 }, // 149 LFDU
-  { 1, 162, 163, 0, 0 }, // 150 LFDUX
+  { 1, 166, 167, 0, 0 }, // 135 MTOCRF_MTOCRF8_MTCRF_MTCRF8
+  { 1, 165, 166, 0, 0 }, // 136 MCRF
+  { 1, 166, 167, 0, 0 }, // 137 MCRXRX
+  { 1, 165, 166, 0, 0 }, // 138 MCRFS
+  { 1, 159, 160, 0, 0 }, // 139 FDIV_XSDIVDP
+  { 1, 159, 160, 0, 0 }, // 140 FDIVS_XSDIVSP
+  { 1, 159, 160, 0, 0 }, // 141 XVDIVSP
+  { 1, 159, 160, 0, 0 }, // 142 XVDIVDP
+  { 1, 157, 158, 0, 0 }, // 143 FRSP_FRIND_FRINS_FRIPD_FRIPS_FRIZD_FRIZS_FRIMD_FRIMS_FRE_FRES_FRSQRTE_FRSQRTES_FMADDS_FMSUBS_FNMADDS_FNMSUBS_FSELD_FSELS_FADDS_FMULS_FSUBS_FCFID_FCTID_FCTIDZ_FCFIDU_FCFIDS_FCFIDUS_FCTIDUZ_FCTIWUZ_FCTIW_FCTIWZ
+  { 1, 157, 158, 0, 0 }, // 144 FMADD_FMSUB_FNMADD_FNMSUB_FMUL
+  { 1, 157, 158, 0, 0 }, // 145 FMR_FABSD_FABSS_FNABSD_FNABSS_FNEGD_FNEGS_FCPSGND_FCPSGNS
+  { 1, 158, 159, 0, 0 }, // 146 FCMPUS_FCMPUD
+  { 1, 163, 164, 0, 0 }, // 147 LFSU
+  { 1, 163, 164, 0, 0 }, // 148 LFSUX
+  { 1, 163, 164, 0, 0 }, // 149 LFDU
+  { 1, 163, 164, 0, 0 }, // 150 LFDUX
   { 0, ~0U, ~0U, ~0U, ~0U } // end marker
 };
 
@@ -2516,55 +2516,55 @@ static const llvm::InstrItinerary PPCA2Itineraries[] = {
   { 1, 181, 182, 253, 256 }, // 2 IIC_IntGeneral
   { 1, 181, 182, 256, 259 }, // 3 IIC_BrB
   { 0, 0, 0, 0, 0 }, // 4 IIC_VecFP
-  { 1, 181, 182, 259, 262 }, // 5 IIC_IntCompare
-  { 0, 0, 0, 0, 0 }, // 6 IIC_SprABORT
-  { 0, 0, 0, 0, 0 }, // 7 IIC_LdStCOPY
-  { 0, 0, 0, 0, 0 }, // 8 IIC_LdStPASTE
-  { 1, 181, 182, 262, 265 }, // 9 IIC_BrCR
-  { 1, 181, 182, 265, 268 }, // 10 IIC_LdStDCBF
-  { 1, 181, 182, 268, 271 }, // 11 IIC_LdStLoad
-  { 1, 181, 182, 271, 274 }, // 12 IIC_IntDivD
-  { 1, 181, 182, 274, 277 }, // 13 IIC_IntDivW
-  { 1, 182, 183, 277, 280 }, // 14 IIC_FPGeneral
-  { 1, 182, 183, 280, 283 }, // 15 IIC_FPAddSub
-  { 1, 182, 183, 283, 286 }, // 16 IIC_FPCompare
-  { 1, 182, 183, 286, 289 }, // 17 IIC_FPDivD
-  { 1, 182, 183, 289, 292 }, // 18 IIC_FPDivS
-  { 1, 182, 183, 292, 296 }, // 19 IIC_FPFused
-  { 1, 182, 183, 296, 299 }, // 20 IIC_FPSqrtD
-  { 1, 182, 183, 299, 302 }, // 21 IIC_FPSqrtS
-  { 1, 181, 182, 302, 305 }, // 22 IIC_LdStICBI
-  { 1, 181, 182, 305, 308 }, // 23 IIC_LdStStore
-  { 1, 181, 182, 308, 312 }, // 24 IIC_IntISEL
-  { 1, 181, 182, 312, 313 }, // 25 IIC_SprISYNC
-  { 1, 181, 182, 313, 316 }, // 26 IIC_LdStLWARX
-  { 1, 181, 182, 316, 320 }, // 27 IIC_LdStLoadUpd
-  { 1, 181, 182, 320, 324 }, // 28 IIC_LdStLoadUpdX
-  { 0, 0, 0, 0, 0 }, // 29 IIC_LdStLD
-  { 0, 0, 0, 0, 0 }, // 30 IIC_LdStLDARX
-  { 1, 181, 182, 324, 327 }, // 31 IIC_LdStLDU
-  { 1, 181, 182, 327, 330 }, // 32 IIC_LdStLDUX
-  { 1, 181, 182, 330, 333 }, // 33 IIC_LdStLFD
-  { 1, 181, 182, 333, 337 }, // 34 IIC_LdStLFDU
-  { 1, 181, 182, 337, 341 }, // 35 IIC_LdStLFDUX
-  { 1, 181, 182, 341, 344 }, // 36 IIC_LdStLHA
-  { 1, 181, 182, 344, 348 }, // 37 IIC_LdStLHAU
-  { 1, 181, 182, 348, 352 }, // 38 IIC_LdStLHAUX
-  { 0, 0, 0, 0, 0 }, // 39 IIC_LdStLMW
-  { 0, 0, 0, 0, 0 }, // 40 IIC_LdStLWA
-  { 1, 181, 182, 352, 355 }, // 41 IIC_BrMCR
-  { 1, 181, 182, 355, 358 }, // 42 IIC_BrMCRX
-  { 1, 181, 182, 358, 360 }, // 43 IIC_SprMFCR
-  { 1, 181, 182, 360, 362 }, // 44 IIC_SprMFSPR
-  { 0, 0, 0, 0, 0 }, // 45 IIC_IntMFFS
-  { 1, 181, 182, 362, 364 }, // 46 IIC_SprMFMSR
-  { 1, 181, 182, 364, 366 }, // 47 IIC_SprMFCRF
-  { 0, 0, 0, 0, 0 }, // 48 IIC_SprMFPMR
-  { 0, 0, 0, 0, 0 }, // 49 IIC_SprMFSR
-  { 1, 181, 182, 366, 368 }, // 50 IIC_SprMFTB
-  { 0, 0, 0, 0, 0 }, // 51 IIC_VecGeneral
-  { 0, 0, 0, 0, 0 }, // 52 IIC_SprMSGSYNC
-  { 1, 181, 182, 368, 369 }, // 53 IIC_LdStSync
+  { 1, 181, 182, 259, 260 }, // 5 IIC_LdStSync
+  { 1, 181, 182, 260, 263 }, // 6 IIC_IntCompare
+  { 0, 0, 0, 0, 0 }, // 7 IIC_SprABORT
+  { 0, 0, 0, 0, 0 }, // 8 IIC_LdStCOPY
+  { 0, 0, 0, 0, 0 }, // 9 IIC_LdStPASTE
+  { 1, 181, 182, 263, 266 }, // 10 IIC_BrCR
+  { 1, 181, 182, 266, 269 }, // 11 IIC_LdStDCBF
+  { 1, 181, 182, 269, 272 }, // 12 IIC_LdStLoad
+  { 1, 181, 182, 272, 275 }, // 13 IIC_IntDivD
+  { 1, 181, 182, 275, 278 }, // 14 IIC_IntDivW
+  { 1, 182, 183, 278, 281 }, // 15 IIC_FPGeneral
+  { 1, 182, 183, 281, 284 }, // 16 IIC_FPAddSub
+  { 1, 182, 183, 284, 287 }, // 17 IIC_FPCompare
+  { 1, 182, 183, 287, 290 }, // 18 IIC_FPDivD
+  { 1, 182, 183, 290, 293 }, // 19 IIC_FPDivS
+  { 1, 182, 183, 293, 297 }, // 20 IIC_FPFused
+  { 1, 182, 183, 297, 300 }, // 21 IIC_FPSqrtD
+  { 1, 182, 183, 300, 303 }, // 22 IIC_FPSqrtS
+  { 1, 181, 182, 303, 306 }, // 23 IIC_LdStICBI
+  { 1, 181, 182, 306, 309 }, // 24 IIC_LdStStore
+  { 1, 181, 182, 309, 313 }, // 25 IIC_IntISEL
+  { 1, 181, 182, 313, 314 }, // 26 IIC_SprISYNC
+  { 1, 181, 182, 314, 317 }, // 27 IIC_LdStLWARX
+  { 1, 181, 182, 317, 321 }, // 28 IIC_LdStLoadUpd
+  { 1, 181, 182, 321, 325 }, // 29 IIC_LdStLoadUpdX
+  { 0, 0, 0, 0, 0 }, // 30 IIC_LdStLD
+  { 0, 0, 0, 0, 0 }, // 31 IIC_LdStLDARX
+  { 1, 181, 182, 325, 328 }, // 32 IIC_LdStLDU
+  { 1, 181, 182, 328, 331 }, // 33 IIC_LdStLDUX
+  { 1, 181, 182, 331, 334 }, // 34 IIC_LdStLFD
+  { 1, 181, 182, 334, 338 }, // 35 IIC_LdStLFDU
+  { 1, 181, 182, 338, 342 }, // 36 IIC_LdStLFDUX
+  { 1, 181, 182, 342, 345 }, // 37 IIC_LdStLHA
+  { 1, 181, 182, 345, 349 }, // 38 IIC_LdStLHAU
+  { 1, 181, 182, 349, 353 }, // 39 IIC_LdStLHAUX
+  { 0, 0, 0, 0, 0 }, // 40 IIC_LdStLMW
+  { 0, 0, 0, 0, 0 }, // 41 IIC_LdStLWA
+  { 1, 181, 182, 353, 356 }, // 42 IIC_BrMCR
+  { 1, 181, 182, 356, 359 }, // 43 IIC_BrMCRX
+  { 1, 181, 182, 359, 361 }, // 44 IIC_SprMFCR
+  { 1, 181, 182, 361, 363 }, // 45 IIC_SprMFSPR
+  { 0, 0, 0, 0, 0 }, // 46 IIC_IntMFFS
+  { 1, 181, 182, 363, 365 }, // 47 IIC_SprMFMSR
+  { 1, 181, 182, 365, 367 }, // 48 IIC_SprMFCRF
+  { 0, 0, 0, 0, 0 }, // 49 IIC_SprMFPMR
+  { 0, 0, 0, 0, 0 }, // 50 IIC_SprMFSR
+  { 1, 181, 182, 367, 369 }, // 51 IIC_SprMFTB
+  { 0, 0, 0, 0, 0 }, // 52 IIC_VecGeneral
+  { 0, 0, 0, 0, 0 }, // 53 IIC_SprMSGSYNC
   { 1, 181, 182, 369, 371 }, // 54 IIC_SprMTSPR
   { 0, 0, 0, 0, 0 }, // 55 IIC_IntMTFSB0
   { 1, 181, 182, 371, 373 }, // 56 IIC_SprMTMSR
@@ -2671,55 +2671,55 @@ static const llvm::InstrItinerary PPCE500mcItineraries[] = {
   { 1, 183, 185, 540, 543 }, // 2 IIC_IntGeneral
   { 1, 185, 187, 543, 545 }, // 3 IIC_BrB
   { 0, 0, 0, 0, 0 }, // 4 IIC_VecFP
-  { 1, 183, 185, 545, 548 }, // 5 IIC_IntCompare
-  { 0, 0, 0, 0, 0 }, // 6 IIC_SprABORT
-  { 0, 0, 0, 0, 0 }, // 7 IIC_LdStCOPY
-  { 0, 0, 0, 0, 0 }, // 8 IIC_LdStPASTE
-  { 1, 185, 187, 548, 551 }, // 9 IIC_BrCR
-  { 1, 187, 189, 551, 553 }, // 10 IIC_LdStDCBF
-  { 1, 187, 189, 553, 555 }, // 11 IIC_LdStLoad
-  { 0, 0, 0, 0, 0 }, // 12 IIC_IntDivD
-  { 1, 189, 192, 555, 558 }, // 13 IIC_IntDivW
-  { 1, 192, 194, 558, 561 }, // 14 IIC_FPGeneral
-  { 1, 194, 196, 561, 564 }, // 15 IIC_FPAddSub
-  { 1, 192, 194, 564, 567 }, // 16 IIC_FPCompare
-  { 1, 196, 198, 567, 570 }, // 17 IIC_FPDivD
-  { 1, 198, 200, 570, 573 }, // 18 IIC_FPDivS
-  { 1, 194, 196, 573, 577 }, // 19 IIC_FPFused
-  { 0, 0, 0, 0, 0 }, // 20 IIC_FPSqrtD
-  { 0, 0, 0, 0, 0 }, // 21 IIC_FPSqrtS
-  { 1, 187, 189, 577, 579 }, // 22 IIC_LdStICBI
-  { 1, 187, 189, 579, 581 }, // 23 IIC_LdStStore
-  { 1, 183, 185, 581, 585 }, // 24 IIC_IntISEL
-  { 0, 0, 0, 0, 0 }, // 25 IIC_SprISYNC
-  { 1, 200, 202, 585, 588 }, // 26 IIC_LdStLWARX
-  { 2, 202, 205, 588, 590 }, // 27 IIC_LdStLoadUpd
-  { 2, 202, 205, 590, 592 }, // 28 IIC_LdStLoadUpdX
-  { 0, 0, 0, 0, 0 }, // 29 IIC_LdStLD
-  { 0, 0, 0, 0, 0 }, // 30 IIC_LdStLDARX
-  { 0, 0, 0, 0, 0 }, // 31 IIC_LdStLDU
-  { 0, 0, 0, 0, 0 }, // 32 IIC_LdStLDUX
-  { 1, 187, 189, 592, 595 }, // 33 IIC_LdStLFD
-  { 2, 202, 205, 595, 598 }, // 34 IIC_LdStLFDU
-  { 2, 202, 205, 598, 601 }, // 35 IIC_LdStLFDUX
-  { 1, 187, 189, 601, 603 }, // 36 IIC_LdStLHA
-  { 1, 202, 205, 603, 605 }, // 37 IIC_LdStLHAU
-  { 1, 202, 205, 605, 607 }, // 38 IIC_LdStLHAUX
-  { 1, 187, 189, 607, 609 }, // 39 IIC_LdStLMW
-  { 0, 0, 0, 0, 0 }, // 40 IIC_LdStLWA
-  { 1, 185, 187, 609, 611 }, // 41 IIC_BrMCR
-  { 1, 183, 185, 611, 614 }, // 42 IIC_BrMCRX
-  { 1, 205, 207, 614, 616 }, // 43 IIC_SprMFCR
-  { 1, 183, 185, 616, 618 }, // 44 IIC_SprMFSPR
-  { 1, 207, 209, 618, 619 }, // 45 IIC_IntMFFS
-  { 1, 209, 211, 619, 621 }, // 46 IIC_SprMFMSR
-  { 1, 205, 207, 621, 623 }, // 47 IIC_SprMFCRF
-  { 1, 209, 211, 623, 625 }, // 48 IIC_SprMFPMR
-  { 1, 209, 211, 625, 627 }, // 49 IIC_SprMFSR
-  { 1, 209, 211, 627, 629 }, // 50 IIC_SprMFTB
-  { 0, 0, 0, 0, 0 }, // 51 IIC_VecGeneral
-  { 0, 0, 0, 0, 0 }, // 52 IIC_SprMSGSYNC
-  { 1, 187, 189, 0, 0 }, // 53 IIC_LdStSync
+  { 1, 187, 189, 0, 0 }, // 5 IIC_LdStSync
+  { 1, 183, 185, 545, 548 }, // 6 IIC_IntCompare
+  { 0, 0, 0, 0, 0 }, // 7 IIC_SprABORT
+  { 0, 0, 0, 0, 0 }, // 8 IIC_LdStCOPY
+  { 0, 0, 0, 0, 0 }, // 9 IIC_LdStPASTE
+  { 1, 185, 187, 548, 551 }, // 10 IIC_BrCR
+  { 1, 187, 189, 551, 553 }, // 11 IIC_LdStDCBF
+  { 1, 187, 189, 553, 555 }, // 12 IIC_LdStLoad
+  { 0, 0, 0, 0, 0 }, // 13 IIC_IntDivD
+  { 1, 189, 192, 555, 558 }, // 14 IIC_IntDivW
+  { 1, 192, 194, 558, 561 }, // 15 IIC_FPGeneral
+  { 1, 194, 196, 561, 564 }, // 16 IIC_FPAddSub
+  { 1, 192, 194, 564, 567 }, // 17 IIC_FPCompare
+  { 1, 196, 198, 567, 570 }, // 18 IIC_FPDivD
+  { 1, 198, 200, 570, 573 }, // 19 IIC_FPDivS
+  { 1, 194, 196, 573, 577 }, // 20 IIC_FPFused
+  { 0, 0, 0, 0, 0 }, // 21 IIC_FPSqrtD
+  { 0, 0, 0, 0, 0 }, // 22 IIC_FPSqrtS
+  { 1, 187, 189, 577, 579 }, // 23 IIC_LdStICBI
+  { 1, 187, 189, 579, 581 }, // 24 IIC_LdStStore
+  { 1, 183, 185, 581, 585 }, // 25 IIC_IntISEL
+  { 0, 0, 0, 0, 0 }, // 26 IIC_SprISYNC
+  { 1, 200, 202, 585, 588 }, // 27 IIC_LdStLWARX
+  { 2, 202, 205, 588, 590 }, // 28 IIC_LdStLoadUpd
+  { 2, 202, 205, 590, 592 }, // 29 IIC_LdStLoadUpdX
+  { 0, 0, 0, 0, 0 }, // 30 IIC_LdStLD
+  { 0, 0, 0, 0, 0 }, // 31 IIC_LdStLDARX
+  { 0, 0, 0, 0, 0 }, // 32 IIC_LdStLDU
+  { 0, 0, 0, 0, 0 }, // 33 IIC_LdStLDUX
+  { 1, 187, 189, 592, 595 }, // 34 IIC_LdStLFD
+  { 2, 202, 205, 595, 598 }, // 35 IIC_LdStLFDU
+  { 2, 202, 205, 598, 601 }, // 36 IIC_LdStLFDUX
+  { 1, 187, 189, 601, 603 }, // 37 IIC_LdStLHA
+  { 1, 202, 205, 603, 605 }, // 38 IIC_LdStLHAU
+  { 1, 202, 205, 605, 607 }, // 39 IIC_LdStLHAUX
+  { 1, 187, 189, 607, 609 }, // 40 IIC_LdStLMW
+  { 0, 0, 0, 0, 0 }, // 41 IIC_LdStLWA
+  { 1, 185, 187, 609, 611 }, // 42 IIC_BrMCR
+  { 1, 183, 185, 611, 614 }, // 43 IIC_BrMCRX
+  { 1, 205, 207, 614, 616 }, // 44 IIC_SprMFCR
+  { 1, 183, 185, 616, 618 }, // 45 IIC_SprMFSPR
+  { 1, 207, 209, 618, 619 }, // 46 IIC_IntMFFS
+  { 1, 209, 211, 619, 621 }, // 47 IIC_SprMFMSR
+  { 1, 205, 207, 621, 623 }, // 48 IIC_SprMFCRF
+  { 1, 209, 211, 623, 625 }, // 49 IIC_SprMFPMR
+  { 1, 209, 211, 625, 627 }, // 50 IIC_SprMFSR
+  { 1, 209, 211, 627, 629 }, // 51 IIC_SprMFTB
+  { 0, 0, 0, 0, 0 }, // 52 IIC_VecGeneral
+  { 0, 0, 0, 0, 0 }, // 53 IIC_SprMSGSYNC
   { 1, 183, 185, 629, 631 }, // 54 IIC_SprMTSPR
   { 1, 207, 209, 631, 634 }, // 55 IIC_IntMTFSB0
   { 1, 211, 213, 634, 636 }, // 56 IIC_SprMTMSR
@@ -2826,55 +2826,55 @@ static const llvm::InstrItinerary PPCE5500Itineraries[] = {
   { 1, 221, 223, 753, 756 }, // 2 IIC_IntGeneral
   { 1, 223, 225, 756, 758 }, // 3 IIC_BrB
   { 0, 0, 0, 0, 0 }, // 4 IIC_VecFP
-  { 1, 221, 223, 758, 761 }, // 5 IIC_IntCompare
-  { 0, 0, 0, 0, 0 }, // 6 IIC_SprABORT
-  { 0, 0, 0, 0, 0 }, // 7 IIC_LdStCOPY
-  { 0, 0, 0, 0, 0 }, // 8 IIC_LdStPASTE
-  { 1, 223, 225, 761, 764 }, // 9 IIC_BrCR
-  { 1, 225, 227, 764, 766 }, // 10 IIC_LdStDCBF
-  { 1, 225, 227, 766, 768 }, // 11 IIC_LdStLoad
-  { 1, 227, 230, 768, 771 }, // 12 IIC_IntDivD
-  { 1, 230, 233, 771, 774 }, // 13 IIC_IntDivW
-  { 1, 233, 235, 774, 777 }, // 14 IIC_FPGeneral
-  { 1, 233, 235, 777, 780 }, // 15 IIC_FPAddSub
-  { 1, 233, 235, 780, 783 }, // 16 IIC_FPCompare
-  { 1, 235, 237, 783, 786 }, // 17 IIC_FPDivD
-  { 1, 237, 239, 786, 789 }, // 18 IIC_FPDivS
-  { 1, 233, 235, 789, 793 }, // 19 IIC_FPFused
-  { 0, 0, 0, 0, 0 }, // 20 IIC_FPSqrtD
-  { 0, 0, 0, 0, 0 }, // 21 IIC_FPSqrtS
-  { 1, 225, 227, 793, 795 }, // 22 IIC_LdStICBI
-  { 1, 225, 227, 795, 797 }, // 23 IIC_LdStStore
-  { 1, 221, 223, 797, 801 }, // 24 IIC_IntISEL
-  { 0, 0, 0, 0, 0 }, // 25 IIC_SprISYNC
-  { 1, 239, 241, 801, 804 }, // 26 IIC_LdStLWARX
-  { 2, 241, 244, 804, 806 }, // 27 IIC_LdStLoadUpd
-  { 2, 241, 244, 806, 808 }, // 28 IIC_LdStLoadUpdX
-  { 1, 225, 227, 808, 810 }, // 29 IIC_LdStLD
-  { 1, 239, 241, 810, 812 }, // 30 IIC_LdStLDARX
-  { 2, 241, 244, 812, 814 }, // 31 IIC_LdStLDU
-  { 2, 241, 244, 814, 816 }, // 32 IIC_LdStLDUX
-  { 2, 225, 227, 816, 819 }, // 33 IIC_LdStLFD
-  { 2, 241, 244, 819, 822 }, // 34 IIC_LdStLFDU
-  { 2, 241, 244, 822, 825 }, // 35 IIC_LdStLFDUX
-  { 1, 225, 227, 825, 827 }, // 36 IIC_LdStLHA
-  { 2, 241, 244, 827, 829 }, // 37 IIC_LdStLHAU
-  { 2, 241, 244, 829, 831 }, // 38 IIC_LdStLHAUX
-  { 1, 244, 246, 831, 833 }, // 39 IIC_LdStLMW
-  { 0, 0, 0, 0, 0 }, // 40 IIC_LdStLWA
-  { 1, 223, 225, 833, 835 }, // 41 IIC_BrMCR
-  { 1, 246, 248, 835, 838 }, // 42 IIC_BrMCRX
-  { 1, 248, 250, 838, 840 }, // 43 IIC_SprMFCR
-  { 1, 246, 248, 840, 841 }, // 44 IIC_SprMFSPR
-  { 1, 233, 235, 841, 842 }, // 45 IIC_IntMFFS
-  { 0, 0, 0, 0, 0 }, // 46 IIC_SprMFMSR
-  { 1, 248, 250, 842, 844 }, // 47 IIC_SprMFCRF
-  { 1, 250, 252, 844, 846 }, // 48 IIC_SprMFPMR
-  { 0, 0, 0, 0, 0 }, // 49 IIC_SprMFSR
-  { 1, 250, 252, 846, 848 }, // 50 IIC_SprMFTB
-  { 0, 0, 0, 0, 0 }, // 51 IIC_VecGeneral
-  { 0, 0, 0, 0, 0 }, // 52 IIC_SprMSGSYNC
-  { 1, 225, 227, 0, 0 }, // 53 IIC_LdStSync
+  { 1, 225, 227, 0, 0 }, // 5 IIC_LdStSync
+  { 1, 221, 223, 758, 761 }, // 6 IIC_IntCompare
+  { 0, 0, 0, 0, 0 }, // 7 IIC_SprABORT
+  { 0, 0, 0, 0, 0 }, // 8 IIC_LdStCOPY
+  { 0, 0, 0, 0, 0 }, // 9 IIC_LdStPASTE
+  { 1, 223, 225, 761, 764 }, // 10 IIC_BrCR
+  { 1, 225, 227, 764, 766 }, // 11 IIC_LdStDCBF
+  { 1, 225, 227, 766, 768 }, // 12 IIC_LdStLoad
+  { 1, 227, 230, 768, 771 }, // 13 IIC_IntDivD
+  { 1, 230, 233, 771, 774 }, // 14 IIC_IntDivW
+  { 1, 233, 235, 774, 777 }, // 15 IIC_FPGeneral
+  { 1, 233, 235, 777, 780 }, // 16 IIC_FPAddSub
+  { 1, 233, 235, 780, 783 }, // 17 IIC_FPCompare
+  { 1, 235, 237, 783, 786 }, // 18 IIC_FPDivD
+  { 1, 237, 239, 786, 789 }, // 19 IIC_FPDivS
+  { 1, 233, 235, 789, 793 }, // 20 IIC_FPFused
+  { 0, 0, 0, 0, 0 }, // 21 IIC_FPSqrtD
+  { 0, 0, 0, 0, 0 }, // 22 IIC_FPSqrtS
+  { 1, 225, 227, 793, 795 }, // 23 IIC_LdStICBI
+  { 1, 225, 227, 795, 797 }, // 24 IIC_LdStStore
+  { 1, 221, 223, 797, 801 }, // 25 IIC_IntISEL
+  { 0, 0, 0, 0, 0 }, // 26 IIC_SprISYNC
+  { 1, 239, 241, 801, 804 }, // 27 IIC_LdStLWARX
+  { 2, 241, 244, 804, 806 }, // 28 IIC_LdStLoadUpd
+  { 2, 241, 244, 806, 808 }, // 29 IIC_LdStLoadUpdX
+  { 1, 225, 227, 808, 810 }, // 30 IIC_LdStLD
+  { 1, 239, 241, 810, 812 }, // 31 IIC_LdStLDARX
+  { 2, 241, 244, 812, 814 }, // 32 IIC_LdStLDU
+  { 2, 241, 244, 814, 816 }, // 33 IIC_LdStLDUX
+  { 2, 225, 227, 816, 819 }, // 34 IIC_LdStLFD
+  { 2, 241, 244, 819, 822 }, // 35 IIC_LdStLFDU
+  { 2, 241, 244, 822, 825 }, // 36 IIC_LdStLFDUX
+  { 1, 225, 227, 825, 827 }, // 37 IIC_LdStLHA
+  { 2, 241, 244, 827, 829 }, // 38 IIC_LdStLHAU
+  { 2, 241, 244, 829, 831 }, // 39 IIC_LdStLHAUX
+  { 1, 244, 246, 831, 833 }, // 40 IIC_LdStLMW
+  { 0, 0, 0, 0, 0 }, // 41 IIC_LdStLWA
+  { 1, 223, 225, 833, 835 }, // 42 IIC_BrMCR
+  { 1, 246, 248, 835, 838 }, // 43 IIC_BrMCRX
+  { 1, 248, 250, 838, 840 }, // 44 IIC_SprMFCR
+  { 1, 246, 248, 840, 841 }, // 45 IIC_SprMFSPR
+  { 1, 233, 235, 841, 842 }, // 46 IIC_IntMFFS
+  { 0, 0, 0, 0, 0 }, // 47 IIC_SprMFMSR
+  { 1, 248, 250, 842, 844 }, // 48 IIC_SprMFCRF
+  { 1, 250, 252, 844, 846 }, // 49 IIC_SprMFPMR
+  { 0, 0, 0, 0, 0 }, // 50 IIC_SprMFSR
+  { 1, 250, 252, 846, 848 }, // 51 IIC_SprMFTB
+  { 0, 0, 0, 0, 0 }, // 52 IIC_VecGeneral
+  { 0, 0, 0, 0, 0 }, // 53 IIC_SprMSGSYNC
   { 1, 246, 248, 848, 849 }, // 54 IIC_SprMTSPR
   { 1, 252, 254, 849, 852 }, // 55 IIC_IntMTFSB0
   { 1, 254, 256, 852, 854 }, // 56 IIC_SprMTMSR
@@ -2981,55 +2981,55 @@ static const llvm::InstrItinerary P8Itineraries[] = {
   { 1, 268, 270, 1006, 1009 }, // 2 IIC_IntGeneral
   { 1, 270, 272, 1009, 1012 }, // 3 IIC_BrB
   { 1, 272, 274, 1012, 1015 }, // 4 IIC_VecFP
-  { 1, 274, 276, 1015, 1018 }, // 5 IIC_IntCompare
-  { 0, 0, 0, 0, 0 }, // 6 IIC_SprABORT
-  { 0, 0, 0, 0, 0 }, // 7 IIC_LdStCOPY
-  { 0, 0, 0, 0, 0 }, // 8 IIC_LdStPASTE
-  { 1, 276, 278, 1018, 1021 }, // 9 IIC_BrCR
-  { 0, 0, 0, 0, 0 }, // 10 IIC_LdStDCBF
-  { 1, 278, 280, 1021, 1024 }, // 11 IIC_LdStLoad
-  { 1, 280, 282, 1024, 1027 }, // 12 IIC_IntDivD
-  { 1, 282, 284, 1027, 1030 }, // 13 IIC_IntDivW
-  { 1, 284, 286, 1030, 1033 }, // 14 IIC_FPGeneral
-  { 1, 284, 286, 1033, 1036 }, // 15 IIC_FPAddSub
-  { 1, 284, 286, 1036, 1039 }, // 16 IIC_FPCompare
-  { 1, 284, 286, 1039, 1042 }, // 17 IIC_FPDivD
-  { 1, 284, 286, 1042, 1045 }, // 18 IIC_FPDivS
-  { 1, 284, 286, 1045, 1049 }, // 19 IIC_FPFused
-  { 1, 284, 286, 1049, 1052 }, // 20 IIC_FPSqrtD
-  { 1, 284, 286, 1052, 1055 }, // 21 IIC_FPSqrtS
-  { 0, 0, 0, 0, 0 }, // 22 IIC_LdStICBI
-  { 1, 286, 289, 1055, 1058 }, // 23 IIC_LdStStore
-  { 1, 289, 292, 1058, 1062 }, // 24 IIC_IntISEL
-  { 0, 0, 0, 0, 0 }, // 25 IIC_SprISYNC
-  { 1, 292, 297, 1062, 1065 }, // 26 IIC_LdStLWARX
-  { 1, 297, 301, 1065, 1069 }, // 27 IIC_LdStLoadUpd
-  { 1, 297, 301, 1069, 1073 }, // 28 IIC_LdStLoadUpdX
-  { 1, 278, 280, 1073, 1076 }, // 29 IIC_LdStLD
-  { 1, 301, 308, 1076, 1079 }, // 30 IIC_LdStLDARX
-  { 1, 297, 301, 1079, 1083 }, // 31 IIC_LdStLDU
-  { 1, 297, 301, 1083, 1087 }, // 32 IIC_LdStLDUX
-  { 1, 308, 310, 1087, 1090 }, // 33 IIC_LdStLFD
-  { 1, 310, 314, 1090, 1094 }, // 34 IIC_LdStLFDU
-  { 1, 310, 314, 1094, 1098 }, // 35 IIC_LdStLFDUX
-  { 1, 314, 318, 1098, 1101 }, // 36 IIC_LdStLHA
-  { 1, 318, 323, 1101, 1105 }, // 37 IIC_LdStLHAU
-  { 1, 323, 332, 1105, 1109 }, // 38 IIC_LdStLHAUX
-  { 1, 278, 280, 1109, 1112 }, // 39 IIC_LdStLMW
-  { 1, 332, 336, 1112, 1115 }, // 40 IIC_LdStLWA
-  { 1, 336, 338, 1115, 1118 }, // 41 IIC_BrMCR
-  { 1, 338, 340, 1118, 1120 }, // 42 IIC_BrMCRX
-  { 1, 276, 278, 1120, 1122 }, // 43 IIC_SprMFCR
-  { 0, 0, 0, 0, 0 }, // 44 IIC_SprMFSPR
-  { 0, 0, 0, 0, 0 }, // 45 IIC_IntMFFS
-  { 0, 0, 0, 0, 0 }, // 46 IIC_SprMFMSR
-  { 1, 276, 278, 1122, 1124 }, // 47 IIC_SprMFCRF
-  { 0, 0, 0, 0, 0 }, // 48 IIC_SprMFPMR
-  { 0, 0, 0, 0, 0 }, // 49 IIC_SprMFSR
-  { 0, 0, 0, 0, 0 }, // 50 IIC_SprMFTB
-  { 1, 272, 274, 1124, 1127 }, // 51 IIC_VecGeneral
-  { 0, 0, 0, 0, 0 }, // 52 IIC_SprMSGSYNC
-  { 0, 0, 0, 0, 0 }, // 53 IIC_LdStSync
+  { 0, 0, 0, 0, 0 }, // 5 IIC_LdStSync
+  { 1, 274, 276, 1015, 1018 }, // 6 IIC_IntCompare
+  { 0, 0, 0, 0, 0 }, // 7 IIC_SprABORT
+  { 0, 0, 0, 0, 0 }, // 8 IIC_LdStCOPY
+  { 0, 0, 0, 0, 0 }, // 9 IIC_LdStPASTE
+  { 1, 276, 278, 1018, 1021 }, // 10 IIC_BrCR
+  { 0, 0, 0, 0, 0 }, // 11 IIC_LdStDCBF
+  { 1, 278, 280, 1021, 1024 }, // 12 IIC_LdStLoad
+  { 1, 280, 282, 1024, 1027 }, // 13 IIC_IntDivD
+  { 1, 282, 284, 1027, 1030 }, // 14 IIC_IntDivW
+  { 1, 284, 286, 1030, 1033 }, // 15 IIC_FPGeneral
+  { 1, 284, 286, 1033, 1036 }, // 16 IIC_FPAddSub
+  { 1, 284, 286, 1036, 1039 }, // 17 IIC_FPCompare
+  { 1, 284, 286, 1039, 1042 }, // 18 IIC_FPDivD
+  { 1, 284, 286, 1042, 1045 }, // 19 IIC_FPDivS
+  { 1, 284, 286, 1045, 1049 }, // 20 IIC_FPFused
+  { 1, 284, 286, 1049, 1052 }, // 21 IIC_FPSqrtD
+  { 1, 284, 286, 1052, 1055 }, // 22 IIC_FPSqrtS
+  { 0, 0, 0, 0, 0 }, // 23 IIC_LdStICBI
+  { 1, 286, 289, 1055, 1058 }, // 24 IIC_LdStStore
+  { 1, 289, 292, 1058, 1062 }, // 25 IIC_IntISEL
+  { 0, 0, 0, 0, 0 }, // 26 IIC_SprISYNC
+  { 1, 292, 297, 1062, 1065 }, // 27 IIC_LdStLWARX
+  { 1, 297, 301, 1065, 1069 }, // 28 IIC_LdStLoadUpd
+  { 1, 297, 301, 1069, 1073 }, // 29 IIC_LdStLoadUpdX
+  { 1, 278, 280, 1073, 1076 }, // 30 IIC_LdStLD
+  { 1, 301, 308, 1076, 1079 }, // 31 IIC_LdStLDARX
+  { 1, 297, 301, 1079, 1083 }, // 32 IIC_LdStLDU
+  { 1, 297, 301, 1083, 1087 }, // 33 IIC_LdStLDUX
+  { 1, 308, 310, 1087, 1090 }, // 34 IIC_LdStLFD
+  { 1, 310, 314, 1090, 1094 }, // 35 IIC_LdStLFDU
+  { 1, 310, 314, 1094, 1098 }, // 36 IIC_LdStLFDUX
+  { 1, 314, 318, 1098, 1101 }, // 37 IIC_LdStLHA
+  { 1, 318, 323, 1101, 1105 }, // 38 IIC_LdStLHAU
+  { 1, 323, 332, 1105, 1109 }, // 39 IIC_LdStLHAUX
+  { 1, 278, 280, 1109, 1112 }, // 40 IIC_LdStLMW
+  { 1, 332, 336, 1112, 1115 }, // 41 IIC_LdStLWA
+  { 1, 336, 338, 1115, 1118 }, // 42 IIC_BrMCR
+  { 1, 338, 340, 1118, 1120 }, // 43 IIC_BrMCRX
+  { 1, 276, 278, 1120, 1122 }, // 44 IIC_SprMFCR
+  { 0, 0, 0, 0, 0 }, // 45 IIC_SprMFSPR
+  { 0, 0, 0, 0, 0 }, // 46 IIC_IntMFFS
+  { 0, 0, 0, 0, 0 }, // 47 IIC_SprMFMSR
+  { 1, 276, 278, 1122, 1124 }, // 48 IIC_SprMFCRF
+  { 0, 0, 0, 0, 0 }, // 49 IIC_SprMFPMR
+  { 0, 0, 0, 0, 0 }, // 50 IIC_SprMFSR
+  { 0, 0, 0, 0, 0 }, // 51 IIC_SprMFTB
+  { 1, 272, 274, 1124, 1127 }, // 52 IIC_VecGeneral
+  { 0, 0, 0, 0, 0 }, // 53 IIC_SprMSGSYNC
   { 1, 338, 340, 1127, 1129 }, // 54 IIC_SprMTSPR
   { 0, 0, 0, 0, 0 }, // 55 IIC_IntMTFSB0
   { 0, 0, 0, 0, 0 }, // 56 IIC_SprMTMSR
@@ -3136,55 +3136,55 @@ static const llvm::InstrItinerary P7Itineraries[] = {
   { 1, 376, 378, 1349, 1352 }, // 2 IIC_IntGeneral
   { 1, 378, 380, 1352, 1355 }, // 3 IIC_BrB
   { 1, 380, 382, 1355, 1358 }, // 4 IIC_VecFP
-  { 1, 376, 378, 1358, 1361 }, // 5 IIC_IntCompare
-  { 0, 0, 0, 0, 0 }, // 6 IIC_SprABORT
-  { 0, 0, 0, 0, 0 }, // 7 IIC_LdStCOPY
-  { 0, 0, 0, 0, 0 }, // 8 IIC_LdStPASTE
-  { 1, 382, 384, 1361, 1364 }, // 9 IIC_BrCR
-  { 0, 0, 0, 0, 0 }, // 10 IIC_LdStDCBF
-  { 1, 384, 386, 1364, 1367 }, // 11 IIC_LdStLoad
-  { 1, 386, 389, 1367, 1370 }, // 12 IIC_IntDivD
-  { 1, 389, 392, 1370, 1373 }, // 13 IIC_IntDivW
-  { 1, 392, 394, 1373, 1376 }, // 14 IIC_FPGeneral
-  { 1, 392, 394, 1376, 1379 }, // 15 IIC_FPAddSub
-  { 1, 392, 394, 1379, 1382 }, // 16 IIC_FPCompare
-  { 1, 392, 394, 1382, 1385 }, // 17 IIC_FPDivD
-  { 1, 392, 394, 1385, 1388 }, // 18 IIC_FPDivS
-  { 1, 392, 394, 1388, 1392 }, // 19 IIC_FPFused
-  { 1, 392, 394, 1392, 1395 }, // 20 IIC_FPSqrtD
-  { 1, 392, 394, 1395, 1398 }, // 21 IIC_FPSqrtS
-  { 0, 0, 0, 0, 0 }, // 22 IIC_LdStICBI
-  { 1, 394, 397, 1398, 1401 }, // 23 IIC_LdStStore
-  { 1, 397, 400, 1401, 1405 }, // 24 IIC_IntISEL
-  { 0, 0, 0, 0, 0 }, // 25 IIC_SprISYNC
-  { 1, 400, 405, 1405, 1408 }, // 26 IIC_LdStLWARX
-  { 1, 405, 409, 1408, 1412 }, // 27 IIC_LdStLoadUpd
-  { 1, 409, 416, 1412, 1416 }, // 28 IIC_LdStLoadUpdX
-  { 1, 384, 386, 1416, 1419 }, // 29 IIC_LdStLD
-  { 1, 400, 405, 1419, 1422 }, // 30 IIC_LdStLDARX
-  { 1, 405, 409, 1422, 1426 }, // 31 IIC_LdStLDU
-  { 1, 409, 416, 1426, 1430 }, // 32 IIC_LdStLDUX
-  { 1, 384, 386, 1430, 1433 }, // 33 IIC_LdStLFD
-  { 1, 405, 409, 1433, 1437 }, // 34 IIC_LdStLFDU
-  { 1, 405, 409, 1437, 1441 }, // 35 IIC_LdStLFDUX
-  { 1, 416, 420, 1441, 1444 }, // 36 IIC_LdStLHA
-  { 1, 420, 425, 1444, 1448 }, // 37 IIC_LdStLHAU
-  { 1, 425, 433, 1448, 1452 }, // 38 IIC_LdStLHAUX
-  { 1, 384, 386, 1452, 1455 }, // 39 IIC_LdStLMW
-  { 1, 416, 420, 1455, 1458 }, // 40 IIC_LdStLWA
-  { 1, 378, 380, 1458, 1461 }, // 41 IIC_BrMCR
-  { 1, 433, 439, 1461, 1463 }, // 42 IIC_BrMCRX
-  { 1, 382, 384, 1463, 1465 }, // 43 IIC_SprMFCR
-  { 0, 0, 0, 0, 0 }, // 44 IIC_SprMFSPR
-  { 0, 0, 0, 0, 0 }, // 45 IIC_IntMFFS
-  { 0, 0, 0, 0, 0 }, // 46 IIC_SprMFMSR
-  { 1, 382, 384, 1465, 1467 }, // 47 IIC_SprMFCRF
-  { 0, 0, 0, 0, 0 }, // 48 IIC_SprMFPMR
-  { 0, 0, 0, 0, 0 }, // 49 IIC_SprMFSR
-  { 0, 0, 0, 0, 0 }, // 50 IIC_SprMFTB
-  { 1, 439, 441, 1467, 1470 }, // 51 IIC_VecGeneral
-  { 0, 0, 0, 0, 0 }, // 52 IIC_SprMSGSYNC
-  { 0, 0, 0, 0, 0 }, // 53 IIC_LdStSync
+  { 0, 0, 0, 0, 0 }, // 5 IIC_LdStSync
+  { 1, 376, 378, 1358, 1361 }, // 6 IIC_IntCompare
+  { 0, 0, 0, 0, 0 }, // 7 IIC_SprABORT
+  { 0, 0, 0, 0, 0 }, // 8 IIC_LdStCOPY
+  { 0, 0, 0, 0, 0 }, // 9 IIC_LdStPASTE
+  { 1, 382, 384, 1361, 1364 }, // 10 IIC_BrCR
+  { 0, 0, 0, 0, 0 }, // 11 IIC_LdStDCBF
+  { 1, 384, 386, 1364, 1367 }, // 12 IIC_LdStLoad
+  { 1, 386, 389, 1367, 1370 }, // 13 IIC_IntDivD
+  { 1, 389, 392, 1370, 1373 }, // 14 IIC_IntDivW
+  { 1, 392, 394, 1373, 1376 }, // 15 IIC_FPGeneral
+  { 1, 392, 394, 1376, 1379 }, // 16 IIC_FPAddSub
+  { 1, 392, 394, 1379, 1382 }, // 17 IIC_FPCompare
+  { 1, 392, 394, 1382, 1385 }, // 18 IIC_FPDivD
+  { 1, 392, 394, 1385, 1388 }, // 19 IIC_FPDivS
+  { 1, 392, 394, 1388, 1392 }, // 20 IIC_FPFused
+  { 1, 392, 394, 1392, 1395 }, // 21 IIC_FPSqrtD
+  { 1, 392, 394, 1395, 1398 }, // 22 IIC_FPSqrtS
+  { 0, 0, 0, 0, 0 }, // 23 IIC_LdStICBI
+  { 1, 394, 397, 1398, 1401 }, // 24 IIC_LdStStore
+  { 1, 397, 400, 1401, 1405 }, // 25 IIC_IntISEL
+  { 0, 0, 0, 0, 0 }, // 26 IIC_SprISYNC
+  { 1, 400, 405, 1405, 1408 }, // 27 IIC_LdStLWARX
+  { 1, 405, 409, 1408, 1412 }, // 28 IIC_LdStLoadUpd
+  { 1, 409, 416, 1412, 1416 }, // 29 IIC_LdStLoadUpdX
+  { 1, 384, 386, 1416, 1419 }, // 30 IIC_LdStLD
+  { 1, 400, 405, 1419, 1422 }, // 31 IIC_LdStLDARX
+  { 1, 405, 409, 1422, 1426 }, // 32 IIC_LdStLDU
+  { 1, 409, 416, 1426, 1430 }, // 33 IIC_LdStLDUX
+  { 1, 384, 386, 1430, 1433 }, // 34 IIC_LdStLFD
+  { 1, 405, 409, 1433, 1437 }, // 35 IIC_LdStLFDU
+  { 1, 405, 409, 1437, 1441 }, // 36 IIC_LdStLFDUX
+  { 1, 416, 420, 1441, 1444 }, // 37 IIC_LdStLHA
+  { 1, 420, 425, 1444, 1448 }, // 38 IIC_LdStLHAU
+  { 1, 425, 433, 1448, 1452 }, // 39 IIC_LdStLHAUX
+  { 1, 384, 386, 1452, 1455 }, // 40 IIC_LdStLMW
+  { 1, 416, 420, 1455, 1458 }, // 41 IIC_LdStLWA
+  { 1, 378, 380, 1458, 1461 }, // 42 IIC_BrMCR
+  { 1, 433, 439, 1461, 1463 }, // 43 IIC_BrMCRX
+  { 1, 382, 384, 1463, 1465 }, // 44 IIC_SprMFCR
+  { 0, 0, 0, 0, 0 }, // 45 IIC_SprMFSPR
+  { 0, 0, 0, 0, 0 }, // 46 IIC_IntMFFS
+  { 0, 0, 0, 0, 0 }, // 47 IIC_SprMFMSR
+  { 1, 382, 384, 1465, 1467 }, // 48 IIC_SprMFCRF
+  { 0, 0, 0, 0, 0 }, // 49 IIC_SprMFPMR
+  { 0, 0, 0, 0, 0 }, // 50 IIC_SprMFSR
+  { 0, 0, 0, 0, 0 }, // 51 IIC_SprMFTB
+  { 1, 439, 441, 1467, 1470 }, // 52 IIC_VecGeneral
+  { 0, 0, 0, 0, 0 }, // 53 IIC_SprMSGSYNC
   { 1, 441, 443, 1470, 1472 }, // 54 IIC_SprMTSPR
   { 0, 0, 0, 0, 0 }, // 55 IIC_IntMTFSB0
   { 0, 0, 0, 0, 0 }, // 56 IIC_SprMTMSR
@@ -3718,55 +3718,55 @@ static const llvm::MCSchedClassDesc P9ModelSchedClasses[] = {
   {DBGFIELD("IIC_IntGeneral")     1, false, false,  1, 4,  1, 4,  0, 0}, // #2
   {DBGFIELD("IIC_BrB")            0, false, false,  0, 0,  0, 0,  0, 0}, // #3
   {DBGFIELD("IIC_VecFP")          0, false, false,  0, 0,  0, 0,  0, 0}, // #4
-  {DBGFIELD("IIC_IntCompare")     1, false, false,  5, 4,  5, 4,  0, 0}, // #5
-  {DBGFIELD("IIC_SprABORT")       0, false, false,  0, 0,  0, 0,  0, 0}, // #6
-  {DBGFIELD("IIC_LdStCOPY")       0, false, false,  0, 0,  0, 0,  0, 0}, // #7
-  {DBGFIELD("IIC_LdStPASTE")      0, false, false,  0, 0,  0, 0,  0, 0}, // #8
-  {DBGFIELD("IIC_BrCR")           1, false, false,  9, 4,  9, 5,  0, 0}, // #9
-  {DBGFIELD("IIC_LdStDCBF")       0, false, false,  0, 0,  0, 0,  0, 0}, // #10
-  {DBGFIELD("IIC_LdStLoad")       1, false, false, 13, 3,  9, 4,  0, 0}, // #11
-  {DBGFIELD("IIC_IntDivD")        0, false, false,  0, 0,  0, 0,  0, 0}, // #12
-  {DBGFIELD("IIC_IntDivW")        0, false, false,  0, 0,  0, 0,  0, 0}, // #13
-  {DBGFIELD("IIC_FPGeneral")      1, false, false, 16, 4, 14, 5,  0, 0}, // #14
-  {DBGFIELD("IIC_FPAddSub")       1, false, false, 16, 4, 14, 5,  0, 0}, // #15
-  {DBGFIELD("IIC_FPCompare")      0, false, false,  0, 0,  0, 0,  0, 0}, // #16
-  {DBGFIELD("IIC_FPDivD")         0, false, false,  0, 0,  0, 0,  0, 0}, // #17
-  {DBGFIELD("IIC_FPDivS")         0, false, false,  0, 0,  0, 0,  0, 0}, // #18
-  {DBGFIELD("IIC_FPFused")        0, false, false,  0, 0,  0, 0,  0, 0}, // #19
-  {DBGFIELD("IIC_FPSqrtD")        1, false, false, 20, 3, 19, 2,  0, 0}, // #20
-  {DBGFIELD("IIC_FPSqrtS")        2, false, false, 23, 3, 21, 4,  0, 0}, // #21
-  {DBGFIELD("IIC_LdStICBI")       0, false, false,  0, 0,  0, 0,  0, 0}, // #22
-  {DBGFIELD("IIC_LdStStore")      1, false, false, 26, 4, 25, 6,  0, 0}, // #23
-  {DBGFIELD("IIC_IntISEL")        1, false, false,  9, 4, 31, 5,  0, 0}, // #24
-  {DBGFIELD("IIC_SprISYNC")       0, false, false,  0, 0,  0, 0,  0, 0}, // #25
-  {DBGFIELD("IIC_LdStLWARX")      1, false, false, 13, 3, 36, 4,  0, 0}, // #26
-  {DBGFIELD("IIC_LdStLoadUpd")    2, false, false, 30, 5, 40, 8,  0, 0}, // #27
-  {DBGFIELD("IIC_LdStLoadUpdX")   2, false, false, 35, 7, 40, 8,  0, 0}, // #28
-  {DBGFIELD("IIC_LdStLD")         1, false, false, 13, 3,  9, 4,  0, 0}, // #29
-  {DBGFIELD("IIC_LdStLDARX")      1, false, false, 13, 3, 36, 4,  0, 0}, // #30
-  {DBGFIELD("IIC_LdStLDU")        2, false, false, 30, 5, 40, 8,  0, 0}, // #31
-  {DBGFIELD("IIC_LdStLDUX")       2, false, false, 35, 7, 40, 8,  0, 0}, // #32
-  {DBGFIELD("IIC_LdStLFD")        0, false, false,  0, 0,  0, 0,  0, 0}, // #33
-  {DBGFIELD("IIC_LdStLFDU")       0, false, false,  0, 0,  0, 0,  0, 0}, // #34
-  {DBGFIELD("IIC_LdStLFDUX")      0, false, false,  0, 0,  0, 0,  0, 0}, // #35
-  {DBGFIELD("IIC_LdStLHA")        2, false, false, 42, 6, 48, 7,  0, 0}, // #36
-  {DBGFIELD("IIC_LdStLHAU")       3, false, false, 48, 6, 55, 11,  0, 0}, // #37
-  {DBGFIELD("IIC_LdStLHAUX")      3, false, false, 48, 6, 55, 11,  0, 0}, // #38
-  {DBGFIELD("IIC_LdStLMW")        1, false, false, 13, 3, 36, 4,  0, 0}, // #39
-  {DBGFIELD("IIC_LdStLWA")        2, false, false, 42, 6, 48, 7,  0, 0}, // #40
-  {DBGFIELD("IIC_BrMCR")          0, false, false,  0, 0,  0, 0,  0, 0}, // #41
-  {DBGFIELD("IIC_BrMCRX")         0, false, false,  0, 0,  0, 0,  0, 0}, // #42
-  {DBGFIELD("IIC_SprMFCR")        3, false, false, 54, 4, 66, 14,  0, 0}, // #43
-  {DBGFIELD("IIC_SprMFSPR")       0, false, false,  0, 0,  0, 0,  0, 0}, // #44
-  {DBGFIELD("IIC_IntMFFS")        0, false, false,  0, 0,  0, 0,  0, 0}, // #45
-  {DBGFIELD("IIC_SprMFMSR")       0, false, false,  0, 0,  0, 0,  0, 0}, // #46
-  {DBGFIELD("IIC_SprMFCRF")       3, false, false, 54, 4, 66, 14,  0, 0}, // #47
-  {DBGFIELD("IIC_SprMFPMR")       0, false, false,  0, 0,  0, 0,  0, 0}, // #48
-  {DBGFIELD("IIC_SprMFSR")        0, false, false,  0, 0,  0, 0,  0, 0}, // #49
-  {DBGFIELD("IIC_SprMFTB")        0, false, false,  0, 0,  0, 0,  0, 0}, // #50
-  {DBGFIELD("IIC_VecGeneral")     0, false, false,  0, 0,  0, 0,  0, 0}, // #51
-  {DBGFIELD("IIC_SprMSGSYNC")     0, false, false,  0, 0,  0, 0,  0, 0}, // #52
-  {DBGFIELD("IIC_LdStSync")       0, false, false,  0, 0,  0, 0,  0, 0}, // #53
+  {DBGFIELD("IIC_LdStSync")       0, false, false,  0, 0,  0, 0,  0, 0}, // #5
+  {DBGFIELD("IIC_IntCompare")     1, false, false,  5, 4,  5, 4,  0, 0}, // #6
+  {DBGFIELD("IIC_SprABORT")       0, false, false,  0, 0,  0, 0,  0, 0}, // #7
+  {DBGFIELD("IIC_LdStCOPY")       0, false, false,  0, 0,  0, 0,  0, 0}, // #8
+  {DBGFIELD("IIC_LdStPASTE")      0, false, false,  0, 0,  0, 0,  0, 0}, // #9
+  {DBGFIELD("IIC_BrCR")           1, false, false,  9, 4,  9, 5,  0, 0}, // #10
+  {DBGFIELD("IIC_LdStDCBF")       0, false, false,  0, 0,  0, 0,  0, 0}, // #11
+  {DBGFIELD("IIC_LdStLoad")       1, false, false, 13, 3,  9, 4,  0, 0}, // #12
+  {DBGFIELD("IIC_IntDivD")        0, false, false,  0, 0,  0, 0,  0, 0}, // #13
+  {DBGFIELD("IIC_IntDivW")        0, false, false,  0, 0,  0, 0,  0, 0}, // #14
+  {DBGFIELD("IIC_FPGeneral")      1, false, false, 16, 4, 14, 5,  0, 0}, // #15
+  {DBGFIELD("IIC_FPAddSub")       1, false, false, 16, 4, 14, 5,  0, 0}, // #16
+  {DBGFIELD("IIC_FPCompare")      0, false, false,  0, 0,  0, 0,  0, 0}, // #17
+  {DBGFIELD("IIC_FPDivD")         0, false, false,  0, 0,  0, 0,  0, 0}, // #18
+  {DBGFIELD("IIC_FPDivS")         0, false, false,  0, 0,  0, 0,  0, 0}, // #19
+  {DBGFIELD("IIC_FPFused")        0, false, false,  0, 0,  0, 0,  0, 0}, // #20
+  {DBGFIELD("IIC_FPSqrtD")        1, false, false, 20, 3, 19, 2,  0, 0}, // #21
+  {DBGFIELD("IIC_FPSqrtS")        2, false, false, 23, 3, 21, 4,  0, 0}, // #22
+  {DBGFIELD("IIC_LdStICBI")       0, false, false,  0, 0,  0, 0,  0, 0}, // #23
+  {DBGFIELD("IIC_LdStStore")      1, false, false, 26, 4, 25, 6,  0, 0}, // #24
+  {DBGFIELD("IIC_IntISEL")        1, false, false,  9, 4, 31, 5,  0, 0}, // #25
+  {DBGFIELD("IIC_SprISYNC")       0, false, false,  0, 0,  0, 0,  0, 0}, // #26
+  {DBGFIELD("IIC_LdStLWARX")      1, false, false, 13, 3, 36, 4,  0, 0}, // #27
+  {DBGFIELD("IIC_LdStLoadUpd")    2, false, false, 30, 5, 40, 8,  0, 0}, // #28
+  {DBGFIELD("IIC_LdStLoadUpdX")   2, false, false, 35, 7, 40, 8,  0, 0}, // #29
+  {DBGFIELD("IIC_LdStLD")         1, false, false, 13, 3,  9, 4,  0, 0}, // #30
+  {DBGFIELD("IIC_LdStLDARX")      1, false, false, 13, 3, 36, 4,  0, 0}, // #31
+  {DBGFIELD("IIC_LdStLDU")        2, false, false, 30, 5, 40, 8,  0, 0}, // #32
+  {DBGFIELD("IIC_LdStLDUX")       2, false, false, 35, 7, 40, 8,  0, 0}, // #33
+  {DBGFIELD("IIC_LdStLFD")        0, false, false,  0, 0,  0, 0,  0, 0}, // #34
+  {DBGFIELD("IIC_LdStLFDU")       0, false, false,  0, 0,  0, 0,  0, 0}, // #35
+  {DBGFIELD("IIC_LdStLFDUX")      0, false, false,  0, 0,  0, 0,  0, 0}, // #36
+  {DBGFIELD("IIC_LdStLHA")        2, false, false, 42, 6, 48, 7,  0, 0}, // #37
+  {DBGFIELD("IIC_LdStLHAU")       3, false, false, 48, 6, 55, 11,  0, 0}, // #38
+  {DBGFIELD("IIC_LdStLHAUX")      3, false, false, 48, 6, 55, 11,  0, 0}, // #39
+  {DBGFIELD("IIC_LdStLMW")        1, false, false, 13, 3, 36, 4,  0, 0}, // #40
+  {DBGFIELD("IIC_LdStLWA")        2, false, false, 42, 6, 48, 7,  0, 0}, // #41
+  {DBGFIELD("IIC_BrMCR")          0, false, false,  0, 0,  0, 0,  0, 0}, // #42
+  {DBGFIELD("IIC_BrMCRX")         0, false, false,  0, 0,  0, 0,  0, 0}, // #43
+  {DBGFIELD("IIC_SprMFCR")        3, false, false, 54, 4, 66, 14,  0, 0}, // #44
+  {DBGFIELD("IIC_SprMFSPR")       0, false, false,  0, 0,  0, 0,  0, 0}, // #45
+  {DBGFIELD("IIC_IntMFFS")        0, false, false,  0, 0,  0, 0,  0, 0}, // #46
+  {DBGFIELD("IIC_SprMFMSR")       0, false, false,  0, 0,  0, 0,  0, 0}, // #47
+  {DBGFIELD("IIC_SprMFCRF")       3, false, false, 54, 4, 66, 14,  0, 0}, // #48
+  {DBGFIELD("IIC_SprMFPMR")       0, false, false,  0, 0,  0, 0,  0, 0}, // #49
+  {DBGFIELD("IIC_SprMFSR")        0, false, false,  0, 0,  0, 0,  0, 0}, // #50
+  {DBGFIELD("IIC_SprMFTB")        0, false, false,  0, 0,  0, 0,  0, 0}, // #51
+  {DBGFIELD("IIC_VecGeneral")     0, false, false,  0, 0,  0, 0,  0, 0}, // #52
+  {DBGFIELD("IIC_SprMSGSYNC")     0, false, false,  0, 0,  0, 0,  0, 0}, // #53
   {DBGFIELD("IIC_SprMTSPR")       2, false, false, 58, 6, 48, 6,  0, 0}, // #54
   {DBGFIELD("IIC_IntMTFSB0")      1, false, false,  9, 4,  9, 5,  0, 0}, // #55
   {DBGFIELD("IIC_SprMTMSR")       0, false, false,  0, 0,  0, 0,  0, 0}, // #56

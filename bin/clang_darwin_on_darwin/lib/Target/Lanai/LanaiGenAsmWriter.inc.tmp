@@ -41,39 +41,40 @@ void LanaiInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
   /* 177 */ '#', 'A', 'D', 'J', 'C', 'A', 'L', 'L', 'S', 'T', 'A', 'C', 'K', 'D', 'O', 'W', 'N', 32, 0,
   /* 196 */ '#', 'A', 'D', 'J', 'C', 'A', 'L', 'L', 'S', 'T', 'A', 'C', 'K', 'U', 'P', 32, 0,
   /* 213 */ '#', 32, 'X', 'R', 'a', 'y', 32, 'F', 'u', 'n', 'c', 't', 'i', 'o', 'n', 32, 'P', 'a', 't', 'c', 'h', 'a', 'b', 'l', 'e', 32, 'R', 'E', 'T', '.', 0,
-  /* 244 */ 's', 'e', 'l', '.', 0,
-  /* 249 */ '#', 32, 'X', 'R', 'a', 'y', 32, 'F', 'u', 'n', 'c', 't', 'i', 'o', 'n', 32, 'E', 'n', 't', 'e', 'r', '.', 0,
-  /* 272 */ '#', 32, 'X', 'R', 'a', 'y', 32, 'T', 'a', 'i', 'l', 32, 'C', 'a', 'l', 'l', 32, 'E', 'x', 'i', 't', '.', 0,
-  /* 295 */ '#', 32, 'X', 'R', 'a', 'y', 32, 'F', 'u', 'n', 'c', 't', 'i', 'o', 'n', 32, 'E', 'x', 'i', 't', '.', 0,
-  /* 317 */ 'l', 'o', 'g', '_', '0', 0,
-  /* 323 */ 'l', 'o', 'g', '_', '1', 0,
-  /* 329 */ 'l', 'o', 'g', '_', '2', 0,
-  /* 335 */ 'l', 'o', 'g', '_', '3', 0,
-  /* 341 */ 'l', 'o', 'g', '_', '4', 0,
-  /* 347 */ 'L', 'I', 'F', 'E', 'T', 'I', 'M', 'E', '_', 'E', 'N', 'D', 0,
-  /* 360 */ 'B', 'U', 'N', 'D', 'L', 'E', 0,
-  /* 367 */ 'D', 'B', 'G', '_', 'V', 'A', 'L', 'U', 'E', 0,
-  /* 377 */ 'L', 'I', 'F', 'E', 'T', 'I', 'M', 'E', '_', 'S', 'T', 'A', 'R', 'T', 0,
-  /* 392 */ 's', 'h', 'a', 0,
-  /* 396 */ 's', 'u', 'b', 'b', 0,
-  /* 401 */ 's', 'u', 'b', 0,
-  /* 405 */ 'a', 'd', 'd', 'c', 0,
-  /* 410 */ 'a', 'd', 'd', 0,
-  /* 414 */ 'a', 'n', 'd', 0,
-  /* 418 */ 's', 'h', 'a', '.', 'f', 0,
-  /* 424 */ 's', 'u', 'b', 'b', '.', 'f', 0,
-  /* 431 */ 's', 'u', 'b', '.', 'f', 0,
-  /* 437 */ 'a', 'd', 'd', 'c', '.', 'f', 0,
-  /* 444 */ 'a', 'd', 'd', '.', 'f', 0,
-  /* 450 */ 'a', 'n', 'd', '.', 'f', 0,
-  /* 456 */ 's', 'h', '.', 'f', 0,
-  /* 461 */ 'x', 'o', 'r', '.', 'f', 0,
-  /* 467 */ 's', 'h', 0,
-  /* 470 */ '#', 32, 'F', 'E', 'n', 't', 'r', 'y', 32, 'c', 'a', 'l', 'l', 0,
-  /* 484 */ 'l', 'd', 9, '-', '4', '[', '%', 'f', 'p', ']', ',', 32, '%', 'p', 'c', 32, '!', 32, 'r', 'e', 't', 'u', 'r', 'n', 0,
-  /* 509 */ 'n', 'o', 'p', 0,
-  /* 513 */ 'x', 'o', 'r', 0,
-  /* 517 */ 's', 0,
+  /* 244 */ '#', 32, 'X', 'R', 'a', 'y', 32, 'C', 'u', 's', 't', 'o', 'm', 32, 'E', 'v', 'e', 'n', 't', 32, 'L', 'o', 'g', '.', 0,
+  /* 269 */ 's', 'e', 'l', '.', 0,
+  /* 274 */ '#', 32, 'X', 'R', 'a', 'y', 32, 'F', 'u', 'n', 'c', 't', 'i', 'o', 'n', 32, 'E', 'n', 't', 'e', 'r', '.', 0,
+  /* 297 */ '#', 32, 'X', 'R', 'a', 'y', 32, 'T', 'a', 'i', 'l', 32, 'C', 'a', 'l', 'l', 32, 'E', 'x', 'i', 't', '.', 0,
+  /* 320 */ '#', 32, 'X', 'R', 'a', 'y', 32, 'F', 'u', 'n', 'c', 't', 'i', 'o', 'n', 32, 'E', 'x', 'i', 't', '.', 0,
+  /* 342 */ 'l', 'o', 'g', '_', '0', 0,
+  /* 348 */ 'l', 'o', 'g', '_', '1', 0,
+  /* 354 */ 'l', 'o', 'g', '_', '2', 0,
+  /* 360 */ 'l', 'o', 'g', '_', '3', 0,
+  /* 366 */ 'l', 'o', 'g', '_', '4', 0,
+  /* 372 */ 'L', 'I', 'F', 'E', 'T', 'I', 'M', 'E', '_', 'E', 'N', 'D', 0,
+  /* 385 */ 'B', 'U', 'N', 'D', 'L', 'E', 0,
+  /* 392 */ 'D', 'B', 'G', '_', 'V', 'A', 'L', 'U', 'E', 0,
+  /* 402 */ 'L', 'I', 'F', 'E', 'T', 'I', 'M', 'E', '_', 'S', 'T', 'A', 'R', 'T', 0,
+  /* 417 */ 's', 'h', 'a', 0,
+  /* 421 */ 's', 'u', 'b', 'b', 0,
+  /* 426 */ 's', 'u', 'b', 0,
+  /* 430 */ 'a', 'd', 'd', 'c', 0,
+  /* 435 */ 'a', 'd', 'd', 0,
+  /* 439 */ 'a', 'n', 'd', 0,
+  /* 443 */ 's', 'h', 'a', '.', 'f', 0,
+  /* 449 */ 's', 'u', 'b', 'b', '.', 'f', 0,
+  /* 456 */ 's', 'u', 'b', '.', 'f', 0,
+  /* 462 */ 'a', 'd', 'd', 'c', '.', 'f', 0,
+  /* 469 */ 'a', 'd', 'd', '.', 'f', 0,
+  /* 475 */ 'a', 'n', 'd', '.', 'f', 0,
+  /* 481 */ 's', 'h', '.', 'f', 0,
+  /* 486 */ 'x', 'o', 'r', '.', 'f', 0,
+  /* 492 */ 's', 'h', 0,
+  /* 495 */ '#', 32, 'F', 'E', 'n', 't', 'r', 'y', 32, 'c', 'a', 'l', 'l', 0,
+  /* 509 */ 'l', 'd', 9, '-', '4', '[', '%', 'f', 'p', ']', ',', 32, '%', 'p', 'c', 32, '!', 32, 'r', 'e', 't', 'u', 'r', 'n', 0,
+  /* 534 */ 'n', 'o', 'p', 0,
+  /* 538 */ 'x', 'o', 'r', 0,
+  /* 542 */ 's', 0,
   };
 
   static const uint16_t OpInfo0[] = {
@@ -88,24 +89,25 @@ void LanaiInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// IMPLICIT_DEF
     0U,	// SUBREG_TO_REG
     0U,	// COPY_TO_REGCLASS
-    368U,	// DBG_VALUE
+    393U,	// DBG_VALUE
     0U,	// REG_SEQUENCE
     0U,	// COPY
-    361U,	// BUNDLE
-    378U,	// LIFETIME_START
-    348U,	// LIFETIME_END
+    386U,	// BUNDLE
+    403U,	// LIFETIME_START
+    373U,	// LIFETIME_END
     0U,	// STACKMAP
-    471U,	// FENTRY_CALL
+    496U,	// FENTRY_CALL
     0U,	// PATCHPOINT
     0U,	// LOAD_STACK_GUARD
     0U,	// STATEPOINT
     0U,	// LOCAL_ESCAPE
     0U,	// FAULTING_OP
     0U,	// PATCHABLE_OP
-    250U,	// PATCHABLE_FUNCTION_ENTER
+    275U,	// PATCHABLE_FUNCTION_ENTER
     214U,	// PATCHABLE_RET
-    296U,	// PATCHABLE_FUNCTION_EXIT
-    273U,	// PATCHABLE_TAIL_CALL
+    321U,	// PATCHABLE_FUNCTION_EXIT
+    298U,	// PATCHABLE_TAIL_CALL
+    245U,	// PATCHABLE_EVENT_CALL
     0U,	// G_ADD
     0U,	// G_SUB
     0U,	// G_MUL
@@ -175,33 +177,33 @@ void LanaiInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// G_SHUFFLE_VECTOR
     1103U,	// ADDC_F_I_HI
     17487U,	// ADDC_F_I_LO
-    2486U,	// ADDC_F_R
+    2511U,	// ADDC_F_R
     1054U,	// ADDC_I_HI
     17438U,	// ADDC_I_LO
-    2454U,	// ADDC_R
+    2479U,	// ADDC_R
     1111U,	// ADD_F_I_HI
     17495U,	// ADD_F_I_LO
-    2493U,	// ADD_F_R
+    2518U,	// ADD_F_R
     1066U,	// ADD_I_HI
     17450U,	// ADD_I_LO
-    2459U,	// ADD_R
+    2484U,	// ADD_R
     36018U,	// ADJCALLSTACKDOWN
-    52421U,	// ADJCALLSTACKUP
-    52388U,	// ADJDYNALLOC
-    1118U,	// AND_F_I_HI
-    17502U,	// AND_F_I_LO
-    2499U,	// AND_F_R
-    1076U,	// AND_I_HI
-    17460U,	// AND_I_LO
-    2463U,	// AND_R
-    37264U,	// BRCC
-    37264U,	// BRIND_CC
-    5520U,	// BRIND_CCA
-    53648U,	// BRR
-    35976U,	// BT
+    36037U,	// ADJCALLSTACKUP
+    36004U,	// ADJDYNALLOC
+    50270U,	// AND_F_I_HI
+    1118U,	// AND_F_I_LO
+    2524U,	// AND_F_R
+    50228U,	// AND_I_HI
+    1076U,	// AND_I_LO
+    2488U,	// AND_R
+    20905U,	// BRCC
+    20905U,	// BRIND_CC
+    5545U,	// BRIND_CCA
+    37289U,	// BRR
+    52360U,	// BT
     0U,	// CALL
     0U,	// CALLR
-    35976U,	// JR
+    52360U,	// JR
     6192U,	// LDADDR
     7175U,	// LDBs_RI
     8199U,	// LDBs_RR
@@ -215,37 +217,37 @@ void LanaiInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     8240U,	// LDW_RR
     8239U,	// LDWz_RR
     1173U,	// LEADZ
-    318U,	// LOG0
-    324U,	// LOG1
-    330U,	// LOG2
-    336U,	// LOG3
-    342U,	// LOG4
+    343U,	// LOG0
+    349U,	// LOG1
+    355U,	// LOG2
+    361U,	// LOG3
+    367U,	// LOG4
     10384U,	// MOVHI
-    510U,	// NOP
+    535U,	// NOP
     1132U,	// OR_F_I_HI
     17516U,	// OR_F_I_LO
-    2511U,	// OR_F_R
+    2536U,	// OR_F_R
     1156U,	// OR_I_HI
     17540U,	// OR_I_LO
-    2563U,	// OR_R
+    2588U,	// OR_R
     1060U,	// POPC
-    485U,	// RET
+    510U,	// RET
     17465U,	// SA_F_I
     17409U,	// SA_I
-    37382U,	// SCC
-    11509U,	// SELECT
+    21023U,	// SCC
+    11534U,	// SELECT
     19528U,	// SFSUB_F_RI_HI
     19528U,	// SFSUB_F_RI_LO
     19528U,	// SFSUB_F_RR
-    2505U,	// SHL_F_R
-    2516U,	// SHL_R
+    2530U,	// SHL_F_R
+    2541U,	// SHL_R
     1168U,	// SLI
     17509U,	// SL_F_I
     17535U,	// SL_I
-    2467U,	// SRA_F_R
-    2441U,	// SRA_R
-    2505U,	// SRL_F_R
-    2516U,	// SRL_R
+    2492U,	// SRA_F_R
+    2466U,	// SRA_R
+    2530U,	// SRL_F_R
+    2541U,	// SRL_R
     19596U,	// STADDR
     19469U,	// STB_RI
     19469U,	// STB_RR
@@ -253,25 +255,25 @@ void LanaiInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     19577U,	// STH_RR
     1088U,	// SUBB_F_I_HI
     17472U,	// SUBB_F_I_LO
-    2473U,	// SUBB_F_R
+    2498U,	// SUBB_F_R
     1043U,	// SUBB_I_HI
     17427U,	// SUBB_I_LO
-    2445U,	// SUBB_R
+    2470U,	// SUBB_R
     1096U,	// SUB_F_I_HI
     17480U,	// SUB_F_I_LO
-    2480U,	// SUB_F_R
+    2505U,	// SUB_F_R
     1049U,	// SUB_I_HI
     17433U,	// SUB_I_LO
-    2450U,	// SUB_R
+    2475U,	// SUB_R
     19596U,	// SW_RI
     19596U,	// SW_RR
     1180U,	// TRAILZ
     1131U,	// XOR_F_I_HI
     17515U,	// XOR_F_I_LO
-    2510U,	// XOR_F_R
+    2535U,	// XOR_F_R
     1155U,	// XOR_I_HI
     17539U,	// XOR_I_LO
-    2562U,	// XOR_R
+    2587U,	// XOR_R
   };
 
   static const uint8_t OpInfo1[] = {
@@ -304,6 +306,7 @@ void LanaiInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// PATCHABLE_RET
     0U,	// PATCHABLE_FUNCTION_EXIT
     0U,	// PATCHABLE_TAIL_CALL
+    0U,	// PATCHABLE_EVENT_CALL
     0U,	// G_ADD
     0U,	// G_SUB
     0U,	// G_MUL
@@ -386,20 +389,20 @@ void LanaiInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// ADJCALLSTACKDOWN
     0U,	// ADJCALLSTACKUP
     0U,	// ADJDYNALLOC
-    1U,	// AND_F_I_HI
+    0U,	// AND_F_I_HI
     1U,	// AND_F_I_LO
     0U,	// AND_F_R
-    1U,	// AND_I_HI
+    0U,	// AND_I_HI
     1U,	// AND_I_LO
     0U,	// AND_R
     1U,	// BRCC
     1U,	// BRIND_CC
     0U,	// BRIND_CCA
     1U,	// BRR
-    0U,	// BT
+    1U,	// BT
     0U,	// CALL
     0U,	// CALLR
-    0U,	// JR
+    1U,	// JR
     0U,	// LDADDR
     0U,	// LDBs_RI
     0U,	// LDBs_RR
@@ -589,39 +592,39 @@ void LanaiInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     return;
     break;
   case 2:
-    // ADJCALLSTACKDOWN, BT, JR
-    return;
-    break;
-  case 3:
-    // ADJCALLSTACKUP, ADJDYNALLOC
+    // ADJCALLSTACKDOWN, ADJCALLSTACKUP, ADJDYNALLOC
     O << ' ';
     printOperand(MI, 1, O);
     return;
     break;
-  case 4:
+  case 3:
     // AND_F_I_HI, AND_I_HI
     printHi16AndImmOperand(MI, 2, O);
     O << ", ";
     printOperand(MI, 0, O);
     return;
     break;
-  case 5:
+  case 4:
     // AND_F_I_LO, AND_I_LO
     printLo16AndImmOperand(MI, 2, O);
     O << ", ";
     printOperand(MI, 0, O);
     return;
     break;
-  case 6:
+  case 5:
     // BRCC, BRIND_CC, SCC
     O << "\t";
     printOperand(MI, 0, O);
     return;
     break;
-  case 7:
+  case 6:
     // BRR
     O << ".r\t";
     printOperand(MI, 0, O);
+    return;
+    break;
+  case 7:
+    // BT, JR
     return;
     break;
   case 8:

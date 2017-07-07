@@ -9,6 +9,9 @@
 static bool CC_AMDGPU(unsigned ValNo, MVT ValVT,
                       MVT LocVT, CCValAssign::LocInfo LocInfo,
                       ISD::ArgFlagsTy ArgFlags, CCState &State);
+static bool CC_AMDGPU_Func(unsigned ValNo, MVT ValVT,
+                           MVT LocVT, CCValAssign::LocInfo LocInfo,
+                           ISD::ArgFlagsTy ArgFlags, CCState &State);
 static bool CC_AMDGPU_Kernel(unsigned ValNo, MVT ValVT,
                              MVT LocVT, CCValAssign::LocInfo LocInfo,
                              ISD::ArgFlagsTy ArgFlags, CCState &State);
@@ -18,9 +21,12 @@ static bool CC_R600(unsigned ValNo, MVT ValVT,
 static bool CC_SI(unsigned ValNo, MVT ValVT,
                   MVT LocVT, CCValAssign::LocInfo LocInfo,
                   ISD::ArgFlagsTy ArgFlags, CCState &State);
-static bool RetCC_SI(unsigned ValNo, MVT ValVT,
-                     MVT LocVT, CCValAssign::LocInfo LocInfo,
-                     ISD::ArgFlagsTy ArgFlags, CCState &State);
+static bool RetCC_AMDGPU_Func(unsigned ValNo, MVT ValVT,
+                              MVT LocVT, CCValAssign::LocInfo LocInfo,
+                              ISD::ArgFlagsTy ArgFlags, CCState &State);
+static bool RetCC_SI_Shader(unsigned ValNo, MVT ValVT,
+                            MVT LocVT, CCValAssign::LocInfo LocInfo,
+                            ISD::ArgFlagsTy ArgFlags, CCState &State);
 
 
 static bool CC_AMDGPU(unsigned ValNo, MVT ValVT,
@@ -45,6 +51,119 @@ static bool CC_AMDGPU(unsigned ValNo, MVT ValVT,
   if (static_cast<const AMDGPUSubtarget&>(State.getMachineFunction().getSubtarget()).getGeneration() < AMDGPUSubtarget::SOUTHERN_ISLANDS) {
     if (!CC_R600(ValNo, ValVT, LocVT, LocInfo, ArgFlags, State))
       return false;
+  }
+
+  return true;  // CC didn't match.
+}
+
+
+static bool CC_AMDGPU_Func(unsigned ValNo, MVT ValVT,
+                           MVT LocVT, CCValAssign::LocInfo LocInfo,
+                           ISD::ArgFlagsTy ArgFlags, CCState &State) {
+
+  if (ArgFlags.isByVal()) {
+    State.HandleByVal(ValNo, ValVT, LocVT, LocInfo, 4, 4, ArgFlags);
+    return false;
+  }
+
+  if (LocVT == MVT::i1) {
+    LocVT = MVT::i32;
+    if (ArgFlags.isSExt())
+        LocInfo = CCValAssign::SExt;
+    else if (ArgFlags.isZExt())
+        LocInfo = CCValAssign::ZExt;
+    else
+        LocInfo = CCValAssign::AExt;
+  }
+
+  if (LocVT == MVT::i1 ||
+      LocVT == MVT::i8 ||
+      LocVT == MVT::i16) {
+    if (ArgFlags.isSExt() || ArgFlags.isZExt()) {
+      LocVT = MVT::i32;
+      if (ArgFlags.isSExt())
+            LocInfo = CCValAssign::SExt;
+      else if (ArgFlags.isZExt())
+            LocInfo = CCValAssign::ZExt;
+      else
+            LocInfo = CCValAssign::AExt;
+    }
+  }
+
+  if (LocVT == MVT::i32 ||
+      LocVT == MVT::f32 ||
+      LocVT == MVT::i16 ||
+      LocVT == MVT::f16 ||
+      LocVT == MVT::v2i16 ||
+      LocVT == MVT::v2f16 ||
+      LocVT == MVT::i1) {
+    static const MCPhysReg RegList1[] = {
+      AMDGPU::VGPR0, AMDGPU::VGPR1, AMDGPU::VGPR2, AMDGPU::VGPR3, AMDGPU::VGPR4, AMDGPU::VGPR5, AMDGPU::VGPR6, AMDGPU::VGPR7, AMDGPU::VGPR8, AMDGPU::VGPR9, AMDGPU::VGPR10, AMDGPU::VGPR11, AMDGPU::VGPR12, AMDGPU::VGPR13, AMDGPU::VGPR14, AMDGPU::VGPR15, AMDGPU::VGPR16, AMDGPU::VGPR17, AMDGPU::VGPR18, AMDGPU::VGPR19, AMDGPU::VGPR20, AMDGPU::VGPR21, AMDGPU::VGPR22, AMDGPU::VGPR23, AMDGPU::VGPR24, AMDGPU::VGPR25, AMDGPU::VGPR26, AMDGPU::VGPR27, AMDGPU::VGPR28, AMDGPU::VGPR29, AMDGPU::VGPR30, AMDGPU::VGPR31
+    };
+    if (unsigned Reg = State.AllocateReg(RegList1)) {
+      State.addLoc(CCValAssign::getReg(ValNo, ValVT, Reg, LocVT, LocInfo));
+      return false;
+    }
+  }
+
+  if (LocVT == MVT::i64 ||
+      LocVT == MVT::f64 ||
+      LocVT == MVT::v2i32 ||
+      LocVT == MVT::v2f32 ||
+      LocVT == MVT::v4i32 ||
+      LocVT == MVT::v4f32 ||
+      LocVT == MVT::v8i32 ||
+      LocVT == MVT::v8f32 ||
+      LocVT == MVT::v16i32 ||
+      LocVT == MVT::v16f32 ||
+      LocVT == MVT::v2i64 ||
+      LocVT == MVT::v2f64) {
+    if (allocateVGPRTuple(ValNo, ValVT, LocVT, LocInfo, ArgFlags, State))
+        return false;
+  }
+
+  if (LocVT == MVT::i32 ||
+      LocVT == MVT::f32 ||
+      LocVT == MVT::v2i16 ||
+      LocVT == MVT::v2f16 ||
+      LocVT == MVT::i16 ||
+      LocVT == MVT::f16 ||
+      LocVT == MVT::i1) {
+    unsigned Offset2 = State.AllocateStack(4, 4);
+    State.addLoc(CCValAssign::getMem(ValNo, ValVT, Offset2, LocVT, LocInfo));
+    return false;
+  }
+
+  if (LocVT == MVT::i64 ||
+      LocVT == MVT::f64 ||
+      LocVT == MVT::v2i32 ||
+      LocVT == MVT::v2f32) {
+    unsigned Offset3 = State.AllocateStack(8, 4);
+    State.addLoc(CCValAssign::getMem(ValNo, ValVT, Offset3, LocVT, LocInfo));
+    return false;
+  }
+
+  if (LocVT == MVT::v4i32 ||
+      LocVT == MVT::v4f32 ||
+      LocVT == MVT::v2i64 ||
+      LocVT == MVT::v2f64) {
+    unsigned Offset4 = State.AllocateStack(16, 4);
+    State.addLoc(CCValAssign::getMem(ValNo, ValVT, Offset4, LocVT, LocInfo));
+    return false;
+  }
+
+  if (LocVT == MVT::v8i32 ||
+      LocVT == MVT::v8f32) {
+    unsigned Offset5 = State.AllocateStack(32, 4);
+    State.addLoc(CCValAssign::getMem(ValNo, ValVT, Offset5, LocVT, LocInfo));
+    return false;
+  }
+
+  if (LocVT == MVT::v16i32 ||
+      LocVT == MVT::v16f32) {
+    unsigned Offset6 = State.AllocateStack(64, 4);
+    State.addLoc(CCValAssign::getMem(ValNo, ValVT, Offset6, LocVT, LocInfo));
+    return false;
   }
 
   return true;  // CC didn't match.
@@ -133,9 +252,71 @@ static bool CC_SI(unsigned ValNo, MVT ValVT,
 }
 
 
-static bool RetCC_SI(unsigned ValNo, MVT ValVT,
-                     MVT LocVT, CCValAssign::LocInfo LocInfo,
-                     ISD::ArgFlagsTy ArgFlags, CCState &State) {
+static bool RetCC_AMDGPU_Func(unsigned ValNo, MVT ValVT,
+                              MVT LocVT, CCValAssign::LocInfo LocInfo,
+                              ISD::ArgFlagsTy ArgFlags, CCState &State) {
+
+  if (LocVT == MVT::i1) {
+    LocVT = MVT::i32;
+    if (ArgFlags.isSExt())
+        LocInfo = CCValAssign::SExt;
+    else if (ArgFlags.isZExt())
+        LocInfo = CCValAssign::ZExt;
+    else
+        LocInfo = CCValAssign::AExt;
+  }
+
+  if (LocVT == MVT::i1 ||
+      LocVT == MVT::i16) {
+    if (ArgFlags.isSExt() || ArgFlags.isZExt()) {
+      LocVT = MVT::i32;
+      if (ArgFlags.isSExt())
+            LocInfo = CCValAssign::SExt;
+      else if (ArgFlags.isZExt())
+            LocInfo = CCValAssign::ZExt;
+      else
+            LocInfo = CCValAssign::AExt;
+    }
+  }
+
+  if (LocVT == MVT::i32 ||
+      LocVT == MVT::f32 ||
+      LocVT == MVT::i16 ||
+      LocVT == MVT::f16 ||
+      LocVT == MVT::v2i16 ||
+      LocVT == MVT::v2f16) {
+    static const MCPhysReg RegList1[] = {
+      AMDGPU::VGPR0, AMDGPU::VGPR1, AMDGPU::VGPR2, AMDGPU::VGPR3, AMDGPU::VGPR4, AMDGPU::VGPR5, AMDGPU::VGPR6, AMDGPU::VGPR7, AMDGPU::VGPR8, AMDGPU::VGPR9, AMDGPU::VGPR10, AMDGPU::VGPR11, AMDGPU::VGPR12, AMDGPU::VGPR13, AMDGPU::VGPR14, AMDGPU::VGPR15, AMDGPU::VGPR16, AMDGPU::VGPR17, AMDGPU::VGPR18, AMDGPU::VGPR19, AMDGPU::VGPR20, AMDGPU::VGPR21, AMDGPU::VGPR22, AMDGPU::VGPR23, AMDGPU::VGPR24, AMDGPU::VGPR25, AMDGPU::VGPR26, AMDGPU::VGPR27, AMDGPU::VGPR28, AMDGPU::VGPR29, AMDGPU::VGPR30, AMDGPU::VGPR31
+    };
+    if (unsigned Reg = State.AllocateReg(RegList1)) {
+      State.addLoc(CCValAssign::getReg(ValNo, ValVT, Reg, LocVT, LocInfo));
+      return false;
+    }
+  }
+
+  if (LocVT == MVT::i64 ||
+      LocVT == MVT::f64 ||
+      LocVT == MVT::v2i32 ||
+      LocVT == MVT::v2f32 ||
+      LocVT == MVT::v4i32 ||
+      LocVT == MVT::v4f32 ||
+      LocVT == MVT::v8i32 ||
+      LocVT == MVT::v8f32 ||
+      LocVT == MVT::v16i32 ||
+      LocVT == MVT::v16f32 ||
+      LocVT == MVT::v2i64 ||
+      LocVT == MVT::v2f64) {
+    if (allocateVGPRTuple(ValNo, ValVT, LocVT, LocInfo, ArgFlags, State))
+        return false;
+  }
+
+  return true;  // CC didn't match.
+}
+
+
+static bool RetCC_SI_Shader(unsigned ValNo, MVT ValVT,
+                            MVT LocVT, CCValAssign::LocInfo LocInfo,
+                            ISD::ArgFlagsTy ArgFlags, CCState &State) {
 
   if (LocVT == MVT::i32) {
     static const MCPhysReg RegList1[] = {

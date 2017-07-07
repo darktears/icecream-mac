@@ -22,38 +22,39 @@ enum {
   FeatureFPXX = 6,
   FeatureGP64Bit = 7,
   FeatureMSA = 8,
-  FeatureMicroMips = 9,
-  FeatureMips1 = 10,
-  FeatureMips2 = 11,
-  FeatureMips3 = 12,
-  FeatureMips3_32 = 13,
-  FeatureMips3_32r2 = 14,
-  FeatureMips4 = 15,
-  FeatureMips4_32 = 16,
-  FeatureMips4_32r2 = 17,
-  FeatureMips5 = 18,
-  FeatureMips5_32r2 = 19,
-  FeatureMips16 = 20,
-  FeatureMips32 = 21,
-  FeatureMips32r2 = 22,
-  FeatureMips32r3 = 23,
-  FeatureMips32r5 = 24,
-  FeatureMips32r6 = 25,
-  FeatureMips64 = 26,
-  FeatureMips64r2 = 27,
-  FeatureMips64r3 = 28,
-  FeatureMips64r5 = 29,
-  FeatureMips64r6 = 30,
-  FeatureNaN2008 = 31,
-  FeatureNoABICalls = 32,
-  FeatureNoOddSPReg = 33,
-  FeaturePTR64Bit = 34,
-  FeatureSingleFloat = 35,
-  FeatureSoftFloat = 36,
-  FeatureSym32 = 37,
-  FeatureUseTCCInDIV = 38,
-  FeatureVFPU = 39,
-  ImplP5600 = 40
+  FeatureMadd4 = 9,
+  FeatureMicroMips = 10,
+  FeatureMips1 = 11,
+  FeatureMips2 = 12,
+  FeatureMips3 = 13,
+  FeatureMips3_32 = 14,
+  FeatureMips3_32r2 = 15,
+  FeatureMips4 = 16,
+  FeatureMips4_32 = 17,
+  FeatureMips4_32r2 = 18,
+  FeatureMips5 = 19,
+  FeatureMips5_32r2 = 20,
+  FeatureMips16 = 21,
+  FeatureMips32 = 22,
+  FeatureMips32r2 = 23,
+  FeatureMips32r3 = 24,
+  FeatureMips32r5 = 25,
+  FeatureMips32r6 = 26,
+  FeatureMips64 = 27,
+  FeatureMips64r2 = 28,
+  FeatureMips64r3 = 29,
+  FeatureMips64r5 = 30,
+  FeatureMips64r6 = 31,
+  FeatureNaN2008 = 32,
+  FeatureNoABICalls = 33,
+  FeatureNoOddSPReg = 34,
+  FeaturePTR64Bit = 35,
+  FeatureSingleFloat = 36,
+  FeatureSoftFloat = 37,
+  FeatureSym32 = 38,
+  FeatureUseTCCInDIV = 39,
+  FeatureVFPU = 40,
+  ImplP5600 = 41
 };
 } // end namespace Mips
 } // end namespace llvm
@@ -100,6 +101,7 @@ extern const llvm::SubtargetFeatureKV MipsFeatureKV[] = {
   { "msa", "Mips MSA ASE", { Mips::FeatureMSA }, { } },
   { "nan2008", "IEEE 754-2008 NaN encoding", { Mips::FeatureNaN2008 }, { } },
   { "noabicalls", "Disable SVR4-style position-independent code", { Mips::FeatureNoABICalls }, { } },
+  { "nomadd4", "Disable 4-operand madd.fmt and related instructions", { Mips::FeatureMadd4 }, { } },
   { "nooddspreg", "Disable odd numbered single-precision registers", { Mips::FeatureNoOddSPReg }, { } },
   { "p5600", "The P5600 Processor", { Mips::ImplP5600 }, { Mips::FeatureMips32r5 } },
   { "ptr64", "Pointers are 64-bit wide", { Mips::FeaturePTR64Bit }, { } },
@@ -1965,6 +1967,7 @@ void llvm::MipsSubtarget::ParseSubtargetFeatures(StringRef CPU, StringRef FS) {
   if (Bits[Mips::FeatureFPXX]) IsFPXX = true;
   if (Bits[Mips::FeatureGP64Bit]) IsGP64bit = true;
   if (Bits[Mips::FeatureMSA]) HasMSA = true;
+  if (Bits[Mips::FeatureMadd4]) DisableMadd4 = true;
   if (Bits[Mips::FeatureMicroMips]) InMicroMipsMode = true;
   if (Bits[Mips::FeatureMips1] && MipsArchVersion < Mips1) MipsArchVersion = Mips1;
   if (Bits[Mips::FeatureMips2] && MipsArchVersion < Mips2) MipsArchVersion = Mips2;
@@ -2030,7 +2033,7 @@ extern const llvm::MCWriteProcResEntry MipsWriteProcResTable[];
 extern const llvm::MCWriteLatencyEntry MipsWriteLatencyTable[];
 extern const llvm::MCReadAdvanceEntry MipsReadAdvanceTable[];
 MipsGenSubtargetInfo::MipsGenSubtargetInfo(const Triple &TT, StringRef CPU, StringRef FS)
-  : TargetSubtargetInfo(TT, CPU, FS, makeArrayRef(MipsFeatureKV, 41), makeArrayRef(MipsSubTypeKV, 17), 
+  : TargetSubtargetInfo(TT, CPU, FS, makeArrayRef(MipsFeatureKV, 42), makeArrayRef(MipsSubTypeKV, 17), 
                         MipsProcSchedKV, MipsWriteProcResTable, MipsWriteLatencyTable, MipsReadAdvanceTable, 
                         nullptr, nullptr, nullptr) {}
 

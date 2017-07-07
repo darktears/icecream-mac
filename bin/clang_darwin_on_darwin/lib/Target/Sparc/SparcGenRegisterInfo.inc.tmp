@@ -269,11 +269,11 @@ enum {
   DFPRegsRegClassID = 5,
   I64RegsRegClassID = 6,
   CoprocPairRegClassID = 7,
-  DFPRegs_with_sub_evenRegClassID = 8,
-  IntPairRegClassID = 9,
+  IntPairRegClassID = 8,
+  LowDFPRegsRegClassID = 9,
   PRRegsRegClassID = 10,
   QFPRegsRegClassID = 11,
-  QFPRegs_with_sub_evenRegClassID = 12,
+  LowQFPRegsRegClassID = 12,
 
   };
 } // end namespace SP
@@ -1166,16 +1166,6 @@ namespace {     // Register classes...
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xf0, 0xff, 0x0f, 
   };
 
-  // DFPRegs_with_sub_even Register Class...
-  const MCPhysReg DFPRegs_with_sub_even[] = {
-    SP::D0, SP::D1, SP::D2, SP::D3, SP::D4, SP::D5, SP::D6, SP::D7, SP::D8, SP::D9, SP::D10, SP::D11, SP::D12, SP::D13, SP::D14, SP::D15, 
-  };
-
-  // DFPRegs_with_sub_even Bit set.
-  const uint8_t DFPRegs_with_sub_evenBits[] = {
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xff, 0xff, 
-  };
-
   // IntPair Register Class...
   const MCPhysReg IntPair[] = {
     SP::I0_I1, SP::I2_I3, SP::I4_I5, SP::I6_I7, SP::G0_G1, SP::G2_G3, SP::G4_G5, SP::G6_G7, SP::L0_L1, SP::L2_L3, SP::L4_L5, SP::L6_L7, SP::O0_O1, SP::O2_O3, SP::O4_O5, SP::O6_O7, 
@@ -1184,6 +1174,16 @@ namespace {     // Register classes...
   // IntPair Bit set.
   const uint8_t IntPairBits[] = {
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xf0, 0xff, 0x0f, 
+  };
+
+  // LowDFPRegs Register Class...
+  const MCPhysReg LowDFPRegs[] = {
+    SP::D0, SP::D1, SP::D2, SP::D3, SP::D4, SP::D5, SP::D6, SP::D7, SP::D8, SP::D9, SP::D10, SP::D11, SP::D12, SP::D13, SP::D14, SP::D15, 
+  };
+
+  // LowDFPRegs Bit set.
+  const uint8_t LowDFPRegsBits[] = {
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xff, 0xff, 
   };
 
   // PRRegs Register Class...
@@ -1206,47 +1206,45 @@ namespace {     // Register classes...
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xf0, 0xff, 0x0f, 
   };
 
-  // QFPRegs_with_sub_even Register Class...
-  const MCPhysReg QFPRegs_with_sub_even[] = {
+  // LowQFPRegs Register Class...
+  const MCPhysReg LowQFPRegs[] = {
     SP::Q0, SP::Q1, SP::Q2, SP::Q3, SP::Q4, SP::Q5, SP::Q6, SP::Q7, 
   };
 
-  // QFPRegs_with_sub_even Bit set.
-  const uint8_t QFPRegs_with_sub_evenBits[] = {
+  // LowQFPRegs Bit set.
+  const uint8_t LowQFPRegsBits[] = {
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xf0, 0x0f, 
   };
 
 } // end anonymous namespace
 
 extern const char SparcRegClassStrings[] = {
-  /* 0 */ 'D', 'F', 'P', 'R', 'e', 'g', 's', '_', 'w', 'i', 't', 'h', '_', 's', 'u', 'b', '_', 'e', 'v', 'e', 'n', 0,
-  /* 22 */ 'Q', 'F', 'P', 'R', 'e', 'g', 's', '_', 'w', 'i', 't', 'h', '_', 's', 'u', 'b', '_', 'e', 'v', 'e', 'n', 0,
-  /* 44 */ 'C', 'o', 'p', 'r', 'o', 'c', 'P', 'a', 'i', 'r', 0,
-  /* 55 */ 'I', 'n', 't', 'P', 'a', 'i', 'r', 0,
-  /* 63 */ 'I', '6', '4', 'R', 'e', 'g', 's', 0,
-  /* 71 */ 'F', 'C', 'C', 'R', 'e', 'g', 's', 0,
-  /* 79 */ 'D', 'F', 'P', 'R', 'e', 'g', 's', 0,
-  /* 87 */ 'Q', 'F', 'P', 'R', 'e', 'g', 's', 0,
-  /* 95 */ 'P', 'R', 'R', 'e', 'g', 's', 0,
-  /* 102 */ 'A', 'S', 'R', 'R', 'e', 'g', 's', 0,
-  /* 110 */ 'C', 'o', 'p', 'r', 'o', 'c', 'R', 'e', 'g', 's', 0,
-  /* 121 */ 'I', 'n', 't', 'R', 'e', 'g', 's', 0,
+  /* 0 */ 'C', 'o', 'p', 'r', 'o', 'c', 'P', 'a', 'i', 'r', 0,
+  /* 11 */ 'I', 'n', 't', 'P', 'a', 'i', 'r', 0,
+  /* 19 */ 'I', '6', '4', 'R', 'e', 'g', 's', 0,
+  /* 27 */ 'F', 'C', 'C', 'R', 'e', 'g', 's', 0,
+  /* 35 */ 'L', 'o', 'w', 'D', 'F', 'P', 'R', 'e', 'g', 's', 0,
+  /* 46 */ 'L', 'o', 'w', 'Q', 'F', 'P', 'R', 'e', 'g', 's', 0,
+  /* 57 */ 'P', 'R', 'R', 'e', 'g', 's', 0,
+  /* 64 */ 'A', 'S', 'R', 'R', 'e', 'g', 's', 0,
+  /* 72 */ 'C', 'o', 'p', 'r', 'o', 'c', 'R', 'e', 'g', 's', 0,
+  /* 83 */ 'I', 'n', 't', 'R', 'e', 'g', 's', 0,
 };
 
 extern const MCRegisterClass SparcMCRegisterClasses[] = {
-  { FCCRegs, FCCRegsBits, 71, 4, sizeof(FCCRegsBits), SP::FCCRegsRegClassID, 0, 1, true },
-  { ASRRegs, ASRRegsBits, 102, 32, sizeof(ASRRegsBits), SP::ASRRegsRegClassID, 4, 1, false },
-  { CoprocRegs, CoprocRegsBits, 110, 32, sizeof(CoprocRegsBits), SP::CoprocRegsRegClassID, 4, 1, false },
-  { FPRegs, FPRegsBits, 80, 32, sizeof(FPRegsBits), SP::FPRegsRegClassID, 4, 1, true },
-  { IntRegs, IntRegsBits, 121, 32, sizeof(IntRegsBits), SP::IntRegsRegClassID, 4, 1, true },
-  { DFPRegs, DFPRegsBits, 79, 32, sizeof(DFPRegsBits), SP::DFPRegsRegClassID, 8, 1, true },
-  { I64Regs, I64RegsBits, 63, 32, sizeof(I64RegsBits), SP::I64RegsRegClassID, 8, 1, true },
-  { CoprocPair, CoprocPairBits, 44, 16, sizeof(CoprocPairBits), SP::CoprocPairRegClassID, 8, 1, false },
-  { DFPRegs_with_sub_even, DFPRegs_with_sub_evenBits, 0, 16, sizeof(DFPRegs_with_sub_evenBits), SP::DFPRegs_with_sub_evenRegClassID, 8, 1, true },
-  { IntPair, IntPairBits, 55, 16, sizeof(IntPairBits), SP::IntPairRegClassID, 8, 1, true },
-  { PRRegs, PRRegsBits, 95, 15, sizeof(PRRegsBits), SP::PRRegsRegClassID, 8, 1, true },
-  { QFPRegs, QFPRegsBits, 87, 16, sizeof(QFPRegsBits), SP::QFPRegsRegClassID, 16, 1, true },
-  { QFPRegs_with_sub_even, QFPRegs_with_sub_evenBits, 22, 8, sizeof(QFPRegs_with_sub_evenBits), SP::QFPRegs_with_sub_evenRegClassID, 16, 1, true },
+  { FCCRegs, FCCRegsBits, 27, 4, sizeof(FCCRegsBits), SP::FCCRegsRegClassID, 0, 1, true },
+  { ASRRegs, ASRRegsBits, 64, 32, sizeof(ASRRegsBits), SP::ASRRegsRegClassID, 4, 1, false },
+  { CoprocRegs, CoprocRegsBits, 72, 32, sizeof(CoprocRegsBits), SP::CoprocRegsRegClassID, 4, 1, false },
+  { FPRegs, FPRegsBits, 39, 32, sizeof(FPRegsBits), SP::FPRegsRegClassID, 4, 1, true },
+  { IntRegs, IntRegsBits, 83, 32, sizeof(IntRegsBits), SP::IntRegsRegClassID, 4, 1, true },
+  { DFPRegs, DFPRegsBits, 38, 32, sizeof(DFPRegsBits), SP::DFPRegsRegClassID, 8, 1, true },
+  { I64Regs, I64RegsBits, 19, 32, sizeof(I64RegsBits), SP::I64RegsRegClassID, 8, 1, true },
+  { CoprocPair, CoprocPairBits, 0, 16, sizeof(CoprocPairBits), SP::CoprocPairRegClassID, 8, 1, false },
+  { IntPair, IntPairBits, 11, 16, sizeof(IntPairBits), SP::IntPairRegClassID, 8, 1, true },
+  { LowDFPRegs, LowDFPRegsBits, 35, 16, sizeof(LowDFPRegsBits), SP::LowDFPRegsRegClassID, 8, 1, true },
+  { PRRegs, PRRegsBits, 57, 15, sizeof(PRRegsBits), SP::PRRegsRegClassID, 8, 1, true },
+  { QFPRegs, QFPRegsBits, 49, 16, sizeof(QFPRegsBits), SP::QFPRegsRegClassID, 16, 1, true },
+  { LowQFPRegs, LowQFPRegsBits, 46, 8, sizeof(LowQFPRegsBits), SP::LowQFPRegsRegClassID, 16, 1, true },
 };
 
 // SP Dwarf<->LLVM register mappings.
@@ -1913,11 +1911,11 @@ namespace SP { // Register classes
   extern const TargetRegisterClass DFPRegsRegClass;
   extern const TargetRegisterClass I64RegsRegClass;
   extern const TargetRegisterClass CoprocPairRegClass;
-  extern const TargetRegisterClass DFPRegs_with_sub_evenRegClass;
   extern const TargetRegisterClass IntPairRegClass;
+  extern const TargetRegisterClass LowDFPRegsRegClass;
   extern const TargetRegisterClass PRRegsRegClass;
   extern const TargetRegisterClass QFPRegsRegClass;
-  extern const TargetRegisterClass QFPRegs_with_sub_evenRegClass;
+  extern const TargetRegisterClass LowQFPRegsRegClass;
 } // end namespace SP
 
 } // end namespace llvm
@@ -1983,42 +1981,42 @@ static const uint32_t CoprocRegsSubClassMask[] = {
 
 static const uint32_t FPRegsSubClassMask[] = {
   0x00000008, 
-  0x00001100, // sub_even
-  0x00001100, // sub_odd
+  0x00001200, // sub_even
+  0x00001200, // sub_odd
   0x00001000, // sub_odd64_then_sub_even
   0x00001000, // sub_odd64_then_sub_odd
 };
 
 static const uint32_t IntRegsSubClassMask[] = {
   0x00000050, 
-  0x00000200, // sub_even
-  0x00000200, // sub_odd
+  0x00000100, // sub_even
+  0x00000100, // sub_odd
 };
 
 static const uint32_t DFPRegsSubClassMask[] = {
-  0x00000120, 
+  0x00000220, 
   0x00001800, // sub_even64
   0x00001800, // sub_odd64
 };
 
 static const uint32_t I64RegsSubClassMask[] = {
   0x00000040, 
-  0x00000200, // sub_even
-  0x00000200, // sub_odd
+  0x00000100, // sub_even
+  0x00000100, // sub_odd
 };
 
 static const uint32_t CoprocPairSubClassMask[] = {
   0x00000080, 
 };
 
-static const uint32_t DFPRegs_with_sub_evenSubClassMask[] = {
+static const uint32_t IntPairSubClassMask[] = {
   0x00000100, 
-  0x00001000, // sub_even64
-  0x00001000, // sub_odd64
 };
 
-static const uint32_t IntPairSubClassMask[] = {
+static const uint32_t LowDFPRegsSubClassMask[] = {
   0x00000200, 
+  0x00001000, // sub_even64
+  0x00001000, // sub_odd64
 };
 
 static const uint32_t PRRegsSubClassMask[] = {
@@ -2029,7 +2027,7 @@ static const uint32_t QFPRegsSubClassMask[] = {
   0x00001800, 
 };
 
-static const uint32_t QFPRegs_with_sub_evenSubClassMask[] = {
+static const uint32_t LowQFPRegsSubClassMask[] = {
   0x00001000, 
 };
 
@@ -2044,12 +2042,12 @@ static const TargetRegisterClass *const I64RegsSuperclasses[] = {
   nullptr
 };
 
-static const TargetRegisterClass *const DFPRegs_with_sub_evenSuperclasses[] = {
+static const TargetRegisterClass *const LowDFPRegsSuperclasses[] = {
   &SP::DFPRegsRegClass,
   nullptr
 };
 
-static const TargetRegisterClass *const QFPRegs_with_sub_evenSuperclasses[] = {
+static const TargetRegisterClass *const LowQFPRegsSuperclasses[] = {
   &SP::QFPRegsRegClass,
   nullptr
 };
@@ -2176,21 +2174,6 @@ namespace SP {   // Register class instances
     nullptr
   };
 
-  extern const TargetRegisterClass DFPRegs_with_sub_evenRegClass = {
-    &SparcMCRegisterClasses[DFPRegs_with_sub_evenRegClassID],
-    8, /* SpillSize */
-    8, /* SpillAlignment */
-    VTLists + 9,
-    DFPRegs_with_sub_evenSubClassMask,
-    SuperRegIdxSeqs + 3,
-    LaneBitmask(0x00000003),
-    0,
-    true, /* HasDisjunctSubRegs */
-    true, /* CoveredBySubRegs */
-    DFPRegs_with_sub_evenSuperclasses,
-    nullptr
-  };
-
   extern const TargetRegisterClass IntPairRegClass = {
     &SparcMCRegisterClasses[IntPairRegClassID],
     8, /* SpillSize */
@@ -2203,6 +2186,21 @@ namespace SP {   // Register class instances
     true, /* HasDisjunctSubRegs */
     true, /* CoveredBySubRegs */
     NullRegClasses,
+    nullptr
+  };
+
+  extern const TargetRegisterClass LowDFPRegsRegClass = {
+    &SparcMCRegisterClasses[LowDFPRegsRegClassID],
+    8, /* SpillSize */
+    8, /* SpillAlignment */
+    VTLists + 9,
+    LowDFPRegsSubClassMask,
+    SuperRegIdxSeqs + 3,
+    LaneBitmask(0x00000003),
+    0,
+    true, /* HasDisjunctSubRegs */
+    true, /* CoveredBySubRegs */
+    LowDFPRegsSuperclasses,
     nullptr
   };
 
@@ -2236,18 +2234,18 @@ namespace SP {   // Register class instances
     nullptr
   };
 
-  extern const TargetRegisterClass QFPRegs_with_sub_evenRegClass = {
-    &SparcMCRegisterClasses[QFPRegs_with_sub_evenRegClassID],
+  extern const TargetRegisterClass LowQFPRegsRegClass = {
+    &SparcMCRegisterClasses[LowQFPRegsRegClassID],
     16, /* SpillSize */
     16, /* SpillAlignment */
     VTLists + 11,
-    QFPRegs_with_sub_evenSubClassMask,
+    LowQFPRegsSubClassMask,
     SuperRegIdxSeqs + 2,
     LaneBitmask(0x0000000F),
     0,
     true, /* HasDisjunctSubRegs */
     true, /* CoveredBySubRegs */
-    QFPRegs_with_sub_evenSuperclasses,
+    LowQFPRegsSuperclasses,
     nullptr
   };
 
@@ -2263,11 +2261,11 @@ namespace {
     &SP::DFPRegsRegClass,
     &SP::I64RegsRegClass,
     &SP::CoprocPairRegClass,
-    &SP::DFPRegs_with_sub_evenRegClass,
     &SP::IntPairRegClass,
+    &SP::LowDFPRegsRegClass,
     &SP::PRRegsRegClass,
     &SP::QFPRegsRegClass,
-    &SP::QFPRegs_with_sub_evenRegClass,
+    &SP::LowQFPRegsRegClass,
   };
 } // end anonymous namespace
 
@@ -2612,9 +2610,9 @@ const TargetRegisterClass *SparcGenRegisterInfo::getSubClassWithSubReg(const Tar
       0,	// sub_odd64_then_sub_odd
     },
     {	// DFPRegs
-      9,	// sub_even -> DFPRegs_with_sub_even
+      10,	// sub_even -> LowDFPRegs
       0,	// sub_even64
-      9,	// sub_odd -> DFPRegs_with_sub_even
+      10,	// sub_odd -> LowDFPRegs
       0,	// sub_odd64
       0,	// sub_odd64_then_sub_even
       0,	// sub_odd64_then_sub_odd
@@ -2635,18 +2633,18 @@ const TargetRegisterClass *SparcGenRegisterInfo::getSubClassWithSubReg(const Tar
       0,	// sub_odd64_then_sub_even
       0,	// sub_odd64_then_sub_odd
     },
-    {	// DFPRegs_with_sub_even
-      9,	// sub_even -> DFPRegs_with_sub_even
+    {	// IntPair
+      9,	// sub_even -> IntPair
       0,	// sub_even64
-      9,	// sub_odd -> DFPRegs_with_sub_even
+      9,	// sub_odd -> IntPair
       0,	// sub_odd64
       0,	// sub_odd64_then_sub_even
       0,	// sub_odd64_then_sub_odd
     },
-    {	// IntPair
-      10,	// sub_even -> IntPair
+    {	// LowDFPRegs
+      10,	// sub_even -> LowDFPRegs
       0,	// sub_even64
-      10,	// sub_odd -> IntPair
+      10,	// sub_odd -> LowDFPRegs
       0,	// sub_odd64
       0,	// sub_odd64_then_sub_even
       0,	// sub_odd64_then_sub_odd
@@ -2660,20 +2658,20 @@ const TargetRegisterClass *SparcGenRegisterInfo::getSubClassWithSubReg(const Tar
       0,	// sub_odd64_then_sub_odd
     },
     {	// QFPRegs
-      13,	// sub_even -> QFPRegs_with_sub_even
+      13,	// sub_even -> LowQFPRegs
       12,	// sub_even64 -> QFPRegs
-      13,	// sub_odd -> QFPRegs_with_sub_even
+      13,	// sub_odd -> LowQFPRegs
       12,	// sub_odd64 -> QFPRegs
-      13,	// sub_odd64_then_sub_even -> QFPRegs_with_sub_even
-      13,	// sub_odd64_then_sub_odd -> QFPRegs_with_sub_even
+      13,	// sub_odd64_then_sub_even -> LowQFPRegs
+      13,	// sub_odd64_then_sub_odd -> LowQFPRegs
     },
-    {	// QFPRegs_with_sub_even
-      13,	// sub_even -> QFPRegs_with_sub_even
-      13,	// sub_even64 -> QFPRegs_with_sub_even
-      13,	// sub_odd -> QFPRegs_with_sub_even
-      13,	// sub_odd64 -> QFPRegs_with_sub_even
-      13,	// sub_odd64_then_sub_even -> QFPRegs_with_sub_even
-      13,	// sub_odd64_then_sub_odd -> QFPRegs_with_sub_even
+    {	// LowQFPRegs
+      13,	// sub_even -> LowQFPRegs
+      13,	// sub_even64 -> LowQFPRegs
+      13,	// sub_odd -> LowQFPRegs
+      13,	// sub_odd64 -> LowQFPRegs
+      13,	// sub_odd64_then_sub_even -> LowQFPRegs
+      13,	// sub_odd64_then_sub_odd -> LowQFPRegs
     },
   };
   assert(RC && "Missing regclass");
@@ -2696,11 +2694,11 @@ getRegClassWeight(const TargetRegisterClass *RC) const {
     {2, 64},  	// DFPRegs
     {1, 32},  	// I64Regs
     {0, 0},  	// CoprocPair
-    {2, 32},  	// DFPRegs_with_sub_even
     {2, 32},  	// IntPair
+    {2, 32},  	// LowDFPRegs
     {1, 15},  	// PRRegs
     {4, 64},  	// QFPRegs
-    {4, 32},  	// QFPRegs_with_sub_even
+    {4, 32},  	// LowQFPRegs
   };
   return RCWeightTable[RC->getID()];
 }
@@ -2760,7 +2758,7 @@ static const int RCSetsTable[] = {
 const int* SparcGenRegisterInfo::
 getRegClassPressureSets(const TargetRegisterClass *RC) const {
   static const uint8_t RCSetStartTable[] = {
-    0,1,1,6,4,7,4,1,6,4,2,7,6,};
+    0,1,1,6,4,7,4,1,4,6,2,7,6,};
   return &RCSetsTable[RCSetStartTable[RC->getID()]];
 }
 

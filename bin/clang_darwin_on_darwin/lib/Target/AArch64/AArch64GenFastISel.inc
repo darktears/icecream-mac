@@ -1482,6 +1482,104 @@ unsigned fastEmit_AArch64ISD_UITOF_r(MVT VT, MVT RetVT, unsigned Op0, bool Op0Is
   }
 }
 
+// FastEmit functions for ISD::ABS.
+
+unsigned fastEmit_ISD_ABS_MVT_i64_r(MVT RetVT, unsigned Op0, bool Op0IsKill) {
+  if (RetVT.SimpleTy != MVT::i64)
+    return 0;
+  if ((Subtarget->hasNEON())) {
+    return fastEmitInst_r(AArch64::ABSv1i64, &AArch64::FPR64RegClass, Op0, Op0IsKill);
+  }
+  return 0;
+}
+
+unsigned fastEmit_ISD_ABS_MVT_v8i8_r(MVT RetVT, unsigned Op0, bool Op0IsKill) {
+  if (RetVT.SimpleTy != MVT::v8i8)
+    return 0;
+  if ((Subtarget->hasNEON())) {
+    return fastEmitInst_r(AArch64::ABSv8i8, &AArch64::FPR64RegClass, Op0, Op0IsKill);
+  }
+  return 0;
+}
+
+unsigned fastEmit_ISD_ABS_MVT_v16i8_r(MVT RetVT, unsigned Op0, bool Op0IsKill) {
+  if (RetVT.SimpleTy != MVT::v16i8)
+    return 0;
+  if ((Subtarget->hasNEON())) {
+    return fastEmitInst_r(AArch64::ABSv16i8, &AArch64::FPR128RegClass, Op0, Op0IsKill);
+  }
+  return 0;
+}
+
+unsigned fastEmit_ISD_ABS_MVT_v4i16_r(MVT RetVT, unsigned Op0, bool Op0IsKill) {
+  if (RetVT.SimpleTy != MVT::v4i16)
+    return 0;
+  if ((Subtarget->hasNEON())) {
+    return fastEmitInst_r(AArch64::ABSv4i16, &AArch64::FPR64RegClass, Op0, Op0IsKill);
+  }
+  return 0;
+}
+
+unsigned fastEmit_ISD_ABS_MVT_v8i16_r(MVT RetVT, unsigned Op0, bool Op0IsKill) {
+  if (RetVT.SimpleTy != MVT::v8i16)
+    return 0;
+  if ((Subtarget->hasNEON())) {
+    return fastEmitInst_r(AArch64::ABSv8i16, &AArch64::FPR128RegClass, Op0, Op0IsKill);
+  }
+  return 0;
+}
+
+unsigned fastEmit_ISD_ABS_MVT_v2i32_r(MVT RetVT, unsigned Op0, bool Op0IsKill) {
+  if (RetVT.SimpleTy != MVT::v2i32)
+    return 0;
+  if ((Subtarget->hasNEON())) {
+    return fastEmitInst_r(AArch64::ABSv2i32, &AArch64::FPR64RegClass, Op0, Op0IsKill);
+  }
+  return 0;
+}
+
+unsigned fastEmit_ISD_ABS_MVT_v4i32_r(MVT RetVT, unsigned Op0, bool Op0IsKill) {
+  if (RetVT.SimpleTy != MVT::v4i32)
+    return 0;
+  if ((Subtarget->hasNEON())) {
+    return fastEmitInst_r(AArch64::ABSv4i32, &AArch64::FPR128RegClass, Op0, Op0IsKill);
+  }
+  return 0;
+}
+
+unsigned fastEmit_ISD_ABS_MVT_v1i64_r(MVT RetVT, unsigned Op0, bool Op0IsKill) {
+  if (RetVT.SimpleTy != MVT::v1i64)
+    return 0;
+  if ((Subtarget->hasNEON())) {
+    return fastEmitInst_r(AArch64::ABSv1i64, &AArch64::FPR64RegClass, Op0, Op0IsKill);
+  }
+  return 0;
+}
+
+unsigned fastEmit_ISD_ABS_MVT_v2i64_r(MVT RetVT, unsigned Op0, bool Op0IsKill) {
+  if (RetVT.SimpleTy != MVT::v2i64)
+    return 0;
+  if ((Subtarget->hasNEON())) {
+    return fastEmitInst_r(AArch64::ABSv2i64, &AArch64::FPR128RegClass, Op0, Op0IsKill);
+  }
+  return 0;
+}
+
+unsigned fastEmit_ISD_ABS_r(MVT VT, MVT RetVT, unsigned Op0, bool Op0IsKill) {
+  switch (VT.SimpleTy) {
+  case MVT::i64: return fastEmit_ISD_ABS_MVT_i64_r(RetVT, Op0, Op0IsKill);
+  case MVT::v8i8: return fastEmit_ISD_ABS_MVT_v8i8_r(RetVT, Op0, Op0IsKill);
+  case MVT::v16i8: return fastEmit_ISD_ABS_MVT_v16i8_r(RetVT, Op0, Op0IsKill);
+  case MVT::v4i16: return fastEmit_ISD_ABS_MVT_v4i16_r(RetVT, Op0, Op0IsKill);
+  case MVT::v8i16: return fastEmit_ISD_ABS_MVT_v8i16_r(RetVT, Op0, Op0IsKill);
+  case MVT::v2i32: return fastEmit_ISD_ABS_MVT_v2i32_r(RetVT, Op0, Op0IsKill);
+  case MVT::v4i32: return fastEmit_ISD_ABS_MVT_v4i32_r(RetVT, Op0, Op0IsKill);
+  case MVT::v1i64: return fastEmit_ISD_ABS_MVT_v1i64_r(RetVT, Op0, Op0IsKill);
+  case MVT::v2i64: return fastEmit_ISD_ABS_MVT_v2i64_r(RetVT, Op0, Op0IsKill);
+  default: return 0;
+  }
+}
+
 // FastEmit functions for ISD::BITCAST.
 
 unsigned fastEmit_ISD_BITCAST_MVT_f64_MVT_v8i8_r(unsigned Op0, bool Op0IsKill) {
@@ -3918,6 +4016,7 @@ unsigned fastEmit_r(MVT VT, MVT RetVT, unsigned Opcode, unsigned Op0, bool Op0Is
   case AArch64ISD::REV64: return fastEmit_AArch64ISD_REV64_r(VT, RetVT, Op0, Op0IsKill);
   case AArch64ISD::SITOF: return fastEmit_AArch64ISD_SITOF_r(VT, RetVT, Op0, Op0IsKill);
   case AArch64ISD::UITOF: return fastEmit_AArch64ISD_UITOF_r(VT, RetVT, Op0, Op0IsKill);
+  case ISD::ABS: return fastEmit_ISD_ABS_r(VT, RetVT, Op0, Op0IsKill);
   case ISD::BITCAST: return fastEmit_ISD_BITCAST_r(VT, RetVT, Op0, Op0IsKill);
   case ISD::BITREVERSE: return fastEmit_ISD_BITREVERSE_r(VT, RetVT, Op0, Op0IsKill);
   case ISD::BRIND: return fastEmit_ISD_BRIND_r(VT, RetVT, Op0, Op0IsKill);

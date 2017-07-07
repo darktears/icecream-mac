@@ -81,36 +81,37 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
   /* 714 */ 'i', 'f', 32, '(', 'c', 'm', 'p', '.', 'g', 't', 'u', '(', 0,
   /* 727 */ 'm', 'e', 'm', 'w', '(', 0,
   /* 733 */ '#', 32, 'X', 'R', 'a', 'y', 32, 'F', 'u', 'n', 'c', 't', 'i', 'o', 'n', 32, 'P', 'a', 't', 'c', 'h', 'a', 'b', 'l', 'e', 32, 'R', 'E', 'T', '.', 0,
-  /* 764 */ '#', 32, 'X', 'R', 'a', 'y', 32, 'F', 'u', 'n', 'c', 't', 'i', 'o', 'n', 32, 'E', 'n', 't', 'e', 'r', '.', 0,
-  /* 787 */ '#', 32, 'X', 'R', 'a', 'y', 32, 'T', 'a', 'i', 'l', 32, 'C', 'a', 'l', 'l', 32, 'E', 'x', 'i', 't', '.', 0,
-  /* 810 */ '#', 32, 'X', 'R', 'a', 'y', 32, 'F', 'u', 'n', 'c', 't', 'i', 'o', 'n', 32, 'E', 'x', 'i', 't', '.', 0,
-  /* 832 */ ':', 'e', 'n', 'd', 'l', 'o', 'o', 'p', '0', 0,
-  /* 842 */ 'e', 'n', 'd', 'l', 'o', 'o', 'p', '0', '1', 0,
-  /* 852 */ 'i', 'f', 32, '(', '!', 'p', '0', ')', 32, 'j', 'u', 'm', 'p', 'r', 32, 'r', '3', '1', 0,
-  /* 871 */ 'i', 'f', 32, '(', 'p', '0', ')', 32, 'j', 'u', 'm', 'p', 'r', 32, 'r', '3', '1', 0,
-  /* 889 */ 'i', 'f', 32, '(', '!', 'p', '0', '.', 'n', 'e', 'w', ')', 32, 'j', 'u', 'm', 'p', 'r', ':', 'n', 't', 32, 'r', '3', '1', 0,
-  /* 915 */ 'i', 'f', 32, '(', 'p', '0', '.', 'n', 'e', 'w', ')', 32, 'j', 'u', 'm', 'p', 'r', ':', 'n', 't', 32, 'r', '3', '1', 0,
-  /* 940 */ ':', 'e', 'n', 'd', 'l', 'o', 'o', 'p', '1', 0,
-  /* 950 */ 'v', 'w', 'h', 'i', 's', 't', '2', '5', '6', 0,
-  /* 960 */ 'v', 'w', 'h', 'i', 's', 't', '1', '2', '8', 0,
-  /* 970 */ 'L', 'I', 'F', 'E', 'T', 'I', 'M', 'E', '_', 'E', 'N', 'D', 0,
-  /* 983 */ 'B', 'U', 'N', 'D', 'L', 'E', 0,
-  /* 990 */ 'D', 'B', 'G', '_', 'V', 'A', 'L', 'U', 'E', 0,
-  /* 1000 */ 'L', 'I', 'F', 'E', 'T', 'I', 'M', 'E', '_', 'S', 'T', 'A', 'R', 'T', 0,
-  /* 1015 */ 'D', 'U', 'P', 'L', 'E', 'X', 0,
-  /* 1022 */ 'i', 's', 'y', 'n', 'c', 0,
-  /* 1028 */ 'd', 'e', 'a', 'l', 'l', 'o', 'c', 'f', 'r', 'a', 'm', 'e', 0,
-  /* 1041 */ '#', 32, 'F', 'E', 'n', 't', 'r', 'y', 32, 'c', 'a', 'l', 'l', 0,
-  /* 1055 */ 'i', 'f', 32, '(', '!', 'p', '0', ')', 32, 'd', 'e', 'a', 'l', 'l', 'o', 'c', '_', 'r', 'e', 't', 'u', 'r', 'n', 0,
-  /* 1079 */ 'i', 'f', 32, '(', 'p', '0', ')', 32, 'd', 'e', 'a', 'l', 'l', 'o', 'c', '_', 'r', 'e', 't', 'u', 'r', 'n', 0,
-  /* 1102 */ 'n', 'o', 'p', 0,
-  /* 1106 */ 'b', 'a', 'r', 'r', 'i', 'e', 'r', 0,
-  /* 1114 */ 'v', 'w', 'h', 'i', 's', 't', '2', '5', '6', ':', 's', 'a', 't', 0,
-  /* 1128 */ 's', 'y', 'n', 'c', 'h', 't', 0,
-  /* 1135 */ 'i', 'f', 32, '(', '!', 'p', '0', '.', 'n', 'e', 'w', ')', 32, 'd', 'e', 'a', 'l', 'l', 'o', 'c', '_', 'r', 'e', 't', 'u', 'r', 'n', ':', 'n', 't', 0,
-  /* 1166 */ 'i', 'f', 32, '(', 'p', '0', '.', 'n', 'e', 'w', ')', 32, 'd', 'e', 'a', 'l', 'l', 'o', 'c', '_', 'r', 'e', 't', 'u', 'r', 'n', ':', 'n', 't', 0,
-  /* 1196 */ 'b', 'r', 'k', 'p', 't', 0,
-  /* 1202 */ 'v', 'h', 'i', 's', 't', 0,
+  /* 764 */ '#', 32, 'X', 'R', 'a', 'y', 32, 'C', 'u', 's', 't', 'o', 'm', 32, 'E', 'v', 'e', 'n', 't', 32, 'L', 'o', 'g', '.', 0,
+  /* 789 */ '#', 32, 'X', 'R', 'a', 'y', 32, 'F', 'u', 'n', 'c', 't', 'i', 'o', 'n', 32, 'E', 'n', 't', 'e', 'r', '.', 0,
+  /* 812 */ '#', 32, 'X', 'R', 'a', 'y', 32, 'T', 'a', 'i', 'l', 32, 'C', 'a', 'l', 'l', 32, 'E', 'x', 'i', 't', '.', 0,
+  /* 835 */ '#', 32, 'X', 'R', 'a', 'y', 32, 'F', 'u', 'n', 'c', 't', 'i', 'o', 'n', 32, 'E', 'x', 'i', 't', '.', 0,
+  /* 857 */ ':', 'e', 'n', 'd', 'l', 'o', 'o', 'p', '0', 0,
+  /* 867 */ 'e', 'n', 'd', 'l', 'o', 'o', 'p', '0', '1', 0,
+  /* 877 */ 'i', 'f', 32, '(', '!', 'p', '0', ')', 32, 'j', 'u', 'm', 'p', 'r', 32, 'r', '3', '1', 0,
+  /* 896 */ 'i', 'f', 32, '(', 'p', '0', ')', 32, 'j', 'u', 'm', 'p', 'r', 32, 'r', '3', '1', 0,
+  /* 914 */ 'i', 'f', 32, '(', '!', 'p', '0', '.', 'n', 'e', 'w', ')', 32, 'j', 'u', 'm', 'p', 'r', ':', 'n', 't', 32, 'r', '3', '1', 0,
+  /* 940 */ 'i', 'f', 32, '(', 'p', '0', '.', 'n', 'e', 'w', ')', 32, 'j', 'u', 'm', 'p', 'r', ':', 'n', 't', 32, 'r', '3', '1', 0,
+  /* 965 */ ':', 'e', 'n', 'd', 'l', 'o', 'o', 'p', '1', 0,
+  /* 975 */ 'v', 'w', 'h', 'i', 's', 't', '2', '5', '6', 0,
+  /* 985 */ 'v', 'w', 'h', 'i', 's', 't', '1', '2', '8', 0,
+  /* 995 */ 'L', 'I', 'F', 'E', 'T', 'I', 'M', 'E', '_', 'E', 'N', 'D', 0,
+  /* 1008 */ 'B', 'U', 'N', 'D', 'L', 'E', 0,
+  /* 1015 */ 'D', 'B', 'G', '_', 'V', 'A', 'L', 'U', 'E', 0,
+  /* 1025 */ 'L', 'I', 'F', 'E', 'T', 'I', 'M', 'E', '_', 'S', 'T', 'A', 'R', 'T', 0,
+  /* 1040 */ 'D', 'U', 'P', 'L', 'E', 'X', 0,
+  /* 1047 */ 'i', 's', 'y', 'n', 'c', 0,
+  /* 1053 */ 'd', 'e', 'a', 'l', 'l', 'o', 'c', 'f', 'r', 'a', 'm', 'e', 0,
+  /* 1066 */ '#', 32, 'F', 'E', 'n', 't', 'r', 'y', 32, 'c', 'a', 'l', 'l', 0,
+  /* 1080 */ 'i', 'f', 32, '(', '!', 'p', '0', ')', 32, 'd', 'e', 'a', 'l', 'l', 'o', 'c', '_', 'r', 'e', 't', 'u', 'r', 'n', 0,
+  /* 1104 */ 'i', 'f', 32, '(', 'p', '0', ')', 32, 'd', 'e', 'a', 'l', 'l', 'o', 'c', '_', 'r', 'e', 't', 'u', 'r', 'n', 0,
+  /* 1127 */ 'n', 'o', 'p', 0,
+  /* 1131 */ 'b', 'a', 'r', 'r', 'i', 'e', 'r', 0,
+  /* 1139 */ 'v', 'w', 'h', 'i', 's', 't', '2', '5', '6', ':', 's', 'a', 't', 0,
+  /* 1153 */ 's', 'y', 'n', 'c', 'h', 't', 0,
+  /* 1160 */ 'i', 'f', 32, '(', '!', 'p', '0', '.', 'n', 'e', 'w', ')', 32, 'd', 'e', 'a', 'l', 'l', 'o', 'c', '_', 'r', 'e', 't', 'u', 'r', 'n', ':', 'n', 't', 0,
+  /* 1191 */ 'i', 'f', 32, '(', 'p', '0', '.', 'n', 'e', 'w', ')', 32, 'd', 'e', 'a', 'l', 'l', 'o', 'c', '_', 'r', 'e', 't', 'u', 'r', 'n', ':', 'n', 't', 0,
+  /* 1221 */ 'b', 'r', 'k', 'p', 't', 0,
+  /* 1227 */ 'v', 'h', 'i', 's', 't', 0,
   };
 
   static const uint32_t OpInfo0[] = {
@@ -125,24 +126,25 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// IMPLICIT_DEF
     0U,	// SUBREG_TO_REG
     0U,	// COPY_TO_REGCLASS
-    991U,	// DBG_VALUE
+    1016U,	// DBG_VALUE
     0U,	// REG_SEQUENCE
     0U,	// COPY
-    984U,	// BUNDLE
-    1001U,	// LIFETIME_START
-    971U,	// LIFETIME_END
+    1009U,	// BUNDLE
+    1026U,	// LIFETIME_START
+    996U,	// LIFETIME_END
     0U,	// STACKMAP
-    1042U,	// FENTRY_CALL
+    1067U,	// FENTRY_CALL
     0U,	// PATCHPOINT
     0U,	// LOAD_STACK_GUARD
     0U,	// STATEPOINT
     0U,	// LOCAL_ESCAPE
     0U,	// FAULTING_OP
     0U,	// PATCHABLE_OP
-    765U,	// PATCHABLE_FUNCTION_ENTER
+    790U,	// PATCHABLE_FUNCTION_ENTER
     734U,	// PATCHABLE_RET
-    811U,	// PATCHABLE_FUNCTION_EXIT
-    788U,	// PATCHABLE_TAIL_CALL
+    836U,	// PATCHABLE_FUNCTION_EXIT
+    813U,	// PATCHABLE_TAIL_CALL
+    765U,	// PATCHABLE_EVENT_CALL
     0U,	// G_ADD
     0U,	// G_SUB
     0U,	// G_MUL
@@ -256,7 +258,7 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     198682U,	// A2_neg
     198682U,	// A2_negp
     16975898U,	// A2_negsat
-    1103U,	// A2_nop
+    1128U,	// A2_nop
     215066U,	// A2_not
     215066U,	// A2_notp
     50563098U,	// A2_or
@@ -558,7 +560,7 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     2086985U,	// CALLProfile
     2099226U,	// CONST32
     2115610U,	// CONST64
-    1016U,	// DUPLEX_Pseudo
+    1041U,	// DUPLEX_Pseudo
     0U,	// DuplexIClass0
     0U,	// DuplexIClass1
     0U,	// DuplexIClass2
@@ -576,8 +578,8 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// DuplexIClassE
     0U,	// DuplexIClassF
     2082908U,	// EH_RETURN_JMPR
-    833U,	// ENDLOOP0
-    941U,	// ENDLOOP1
+    858U,	// ENDLOOP0
+    966U,	// ENDLOOP1
     2131994U,	// F2_conv_d2df
     2148378U,	// F2_conv_d2sf
     2164762U,	// F2_conv_df2d
@@ -640,9 +642,9 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     2820195U,	// J2_callrf
     2820366U,	// J2_callrt
     2803982U,	// J2_callt
-    834U,	// J2_endloop0
-    843U,	// J2_endloop01
-    942U,	// J2_endloop1
+    859U,	// J2_endloop0
+    868U,	// J2_endloop01
+    967U,	// J2_endloop1
     2086991U,	// J2_jump
     2836579U,	// J2_jumpf
     2852963U,	// J2_jumpf_nopred_map
@@ -808,7 +810,7 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     3295840U,	// J4_tstbit0_tp0_jump_t
     3312237U,	// J4_tstbit0_tp1_jump_nt
     3328621U,	// J4_tstbit0_tp1_jump_t
-    1029U,	// L2_deallocframe
+    1054U,	// L2_deallocframe
     305334298U,	// L2_loadalignb_io
     36898842U,	// L2_loadalignb_pbr
     36898842U,	// L2_loadalignb_pci
@@ -1093,7 +1095,7 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     956551438U,	// L4_ploadruht_rr
     1225003278U,	// L4_ploadruhtnew_abs
     956567822U,	// L4_ploadruhtnew_rr
-    1065U,	// L4_return
+    1090U,	// L4_return
     3770467U,	// L4_return_f
     3786851U,	// L4_return_fnew_pnt
     3803235U,	// L4_return_fnew_pt
@@ -1466,8 +1468,8 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// PS_tailcall_i
     2082908U,	// PS_tailcall_r
     0U,	// PS_true
-    1U,	// PS_vloadrq_ai
-    1U,	// PS_vloadrq_ai_128B
+    0U,	// PS_vloadrq_ai
+    0U,	// PS_vloadrq_ai_128B
     0U,	// PS_vloadrw_ai
     0U,	// PS_vloadrw_ai_128B
     0U,	// PS_vloadrwu_ai
@@ -1476,8 +1478,8 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// PS_vmulw_acc
     0U,	// PS_vselect
     0U,	// PS_vselect_128B
-    1U,	// PS_vstorerq_ai
-    1U,	// PS_vstorerq_ai_128B
+    0U,	// PS_vstorerq_ai
+    0U,	// PS_vstorerq_ai_128B
     0U,	// PS_vstorerw_ai
     0U,	// PS_vstorerw_ai_128B
     0U,	// PS_vstorerwu_ai
@@ -2038,22 +2040,22 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     2086985U,	// SAVE_REGISTERS_CALL_V4_PIC
     808814618U,	// SL1_loadri_io
     808847386U,	// SL1_loadrub_io
-    1029U,	// SL2_deallocframe
-    862U,	// SL2_jumpr31
-    853U,	// SL2_jumpr31_f
-    890U,	// SL2_jumpr31_fnew
-    872U,	// SL2_jumpr31_t
-    916U,	// SL2_jumpr31_tnew
+    1054U,	// SL2_deallocframe
+    887U,	// SL2_jumpr31
+    878U,	// SL2_jumpr31_f
+    915U,	// SL2_jumpr31_fnew
+    897U,	// SL2_jumpr31_t
+    941U,	// SL2_jumpr31_tnew
     808716314U,	// SL2_loadrb_io
     7538714U,	// SL2_loadrd_sp
     808781850U,	// SL2_loadrh_io
     7555098U,	// SL2_loadri_sp
     808880154U,	// SL2_loadruh_io
-    1065U,	// SL2_return
-    1056U,	// SL2_return_f
-    1136U,	// SL2_return_fnew
-    1080U,	// SL2_return_t
-    1167U,	// SL2_return_tnew
+    1090U,	// SL2_return
+    1081U,	// SL2_return_f
+    1161U,	// SL2_return_fnew
+    1105U,	// SL2_return_t
+    1192U,	// SL2_return_tnew
     1530349976U,	// SS1_storeb_io
     1530350296U,	// SS1_storew_io
     1460388U,	// SS2_allocframe
@@ -2100,8 +2102,32 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     7686170U,	// V6_hi_128B
     7702554U,	// V6_ld0
     7702554U,	// V6_ld0_128B
-    1802864666U,	// V6_ldnt0
-    1802864666U,	// V6_ldnt0_128B
+    1795412067U,	// V6_ldcnp0
+    1795412067U,	// V6_ldcnp0_128B
+    1795412067U,	// V6_ldcnpnt0
+    1795412067U,	// V6_ldcnpnt0_128B
+    1795412238U,	// V6_ldcp0
+    1795412238U,	// V6_ldcp0_128B
+    1795412238U,	// V6_ldcpnt0
+    1795412238U,	// V6_ldcpnt0_128B
+    1812189283U,	// V6_ldnp0
+    1812189283U,	// V6_ldnp0_128B
+    1812189283U,	// V6_ldnpnt0
+    1812189283U,	// V6_ldnpnt0_128B
+    1836419098U,	// V6_ldnt0
+    1836419098U,	// V6_ldnt0_128B
+    1812189454U,	// V6_ldp0
+    1812189454U,	// V6_ldp0_128B
+    1812189454U,	// V6_ldpnt0
+    1812189454U,	// V6_ldpnt0_128B
+    1845743715U,	// V6_ldtnp0
+    1845743715U,	// V6_ldtnp0_128B
+    1845743715U,	// V6_ldtnpnt0
+    1845743715U,	// V6_ldtnpnt0_128B
+    1845743886U,	// V6_ldtp0
+    1845743886U,	// V6_ldtp0_128B
+    1845743886U,	// V6_ldtpnt0
+    1845743886U,	// V6_ldtpnt0_128B
     7718938U,	// V6_ldu0
     7718938U,	// V6_ldu0_128B
     7735322U,	// V6_lo
@@ -2130,8 +2156,8 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     1263642U,	// V6_pred_xor_128B
     91719706U,	// V6_shuffeqh
     91719706U,	// V6_shuffeqh_128B
-    1819789338U,	// V6_shuffeqw
-    1819789338U,	// V6_shuffeqw_128B
+    1870120986U,	// V6_shuffeqw
+    1870120986U,	// V6_shuffeqw_128B
     223480300U,	// V6_st0
     223480300U,	// V6_st0_128B
     1481771500U,	// V6_stn0
@@ -2172,110 +2198,110 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     813008922U,	// V6_vL32b_ai_128B
     813221914U,	// V6_vL32b_cur_ai
     813221914U,	// V6_vL32b_cur_ai_128B
-    1828966499U,	// V6_vL32b_cur_npred_ai
-    1828966499U,	// V6_vL32b_cur_npred_ai_128B
-    1828970595U,	// V6_vL32b_cur_npred_pi
-    1828970595U,	// V6_vL32b_cur_npred_pi_128B
-    1828970595U,	// V6_vL32b_cur_npred_ppu
-    1828970595U,	// V6_vL32b_cur_npred_ppu_128B
+    1795412067U,	// V6_vL32b_cur_npred_ai
+    1795412067U,	// V6_vL32b_cur_npred_ai_128B
+    1795416163U,	// V6_vL32b_cur_npred_pi
+    1795416163U,	// V6_vL32b_cur_npred_pi_128B
+    1795416163U,	// V6_vL32b_cur_npred_ppu
+    1795416163U,	// V6_vL32b_cur_npred_ppu_128B
     846776346U,	// V6_vL32b_cur_pi
     846776346U,	// V6_vL32b_cur_pi_128B
     829999130U,	// V6_vL32b_cur_ppu
     829999130U,	// V6_vL32b_cur_ppu_128B
-    1828966670U,	// V6_vL32b_cur_pred_ai
-    1828966670U,	// V6_vL32b_cur_pred_ai_128B
-    1828970766U,	// V6_vL32b_cur_pred_pi
-    1828970766U,	// V6_vL32b_cur_pred_pi_128B
-    1828970766U,	// V6_vL32b_cur_pred_ppu
-    1828970766U,	// V6_vL32b_cur_pred_ppu_128B
-    1845743715U,	// V6_vL32b_npred_ai
-    1845743715U,	// V6_vL32b_npred_ai_128B
-    1845747811U,	// V6_vL32b_npred_pi
-    1845747811U,	// V6_vL32b_npred_pi_128B
-    1845747811U,	// V6_vL32b_npred_ppu
-    1845747811U,	// V6_vL32b_npred_ppu_128B
+    1795412238U,	// V6_vL32b_cur_pred_ai
+    1795412238U,	// V6_vL32b_cur_pred_ai_128B
+    1795416334U,	// V6_vL32b_cur_pred_pi
+    1795416334U,	// V6_vL32b_cur_pred_pi_128B
+    1795416334U,	// V6_vL32b_cur_pred_ppu
+    1795416334U,	// V6_vL32b_cur_pred_ppu_128B
+    1812189283U,	// V6_vL32b_npred_ai
+    1812189283U,	// V6_vL32b_npred_ai_128B
+    1812193379U,	// V6_vL32b_npred_pi
+    1812193379U,	// V6_vL32b_npred_pi_128B
+    1812193379U,	// V6_vL32b_npred_ppu
+    1812193379U,	// V6_vL32b_npred_ppu_128B
     813008922U,	// V6_vL32b_nt_ai
     813008922U,	// V6_vL32b_nt_ai_128B
     813221914U,	// V6_vL32b_nt_cur_ai
     813221914U,	// V6_vL32b_nt_cur_ai_128B
-    1828966499U,	// V6_vL32b_nt_cur_npred_ai
-    1828966499U,	// V6_vL32b_nt_cur_npred_ai_128B
-    1828970595U,	// V6_vL32b_nt_cur_npred_pi
-    1828970595U,	// V6_vL32b_nt_cur_npred_pi_128B
-    1828970595U,	// V6_vL32b_nt_cur_npred_ppu
-    1828970595U,	// V6_vL32b_nt_cur_npred_ppu_128B
+    1795412067U,	// V6_vL32b_nt_cur_npred_ai
+    1795412067U,	// V6_vL32b_nt_cur_npred_ai_128B
+    1795416163U,	// V6_vL32b_nt_cur_npred_pi
+    1795416163U,	// V6_vL32b_nt_cur_npred_pi_128B
+    1795416163U,	// V6_vL32b_nt_cur_npred_ppu
+    1795416163U,	// V6_vL32b_nt_cur_npred_ppu_128B
     846776346U,	// V6_vL32b_nt_cur_pi
     846776346U,	// V6_vL32b_nt_cur_pi_128B
     829999130U,	// V6_vL32b_nt_cur_ppu
     829999130U,	// V6_vL32b_nt_cur_ppu_128B
-    1828966670U,	// V6_vL32b_nt_cur_pred_ai
-    1828966670U,	// V6_vL32b_nt_cur_pred_ai_128B
-    1828970766U,	// V6_vL32b_nt_cur_pred_pi
-    1828970766U,	// V6_vL32b_nt_cur_pred_pi_128B
-    1828970766U,	// V6_vL32b_nt_cur_pred_ppu
-    1828970766U,	// V6_vL32b_nt_cur_pred_ppu_128B
-    1845743715U,	// V6_vL32b_nt_npred_ai
-    1845743715U,	// V6_vL32b_nt_npred_ai_128B
-    1845747811U,	// V6_vL32b_nt_npred_pi
-    1845747811U,	// V6_vL32b_nt_npred_pi_128B
-    1845747811U,	// V6_vL32b_nt_npred_ppu
-    1845747811U,	// V6_vL32b_nt_npred_ppu_128B
+    1795412238U,	// V6_vL32b_nt_cur_pred_ai
+    1795412238U,	// V6_vL32b_nt_cur_pred_ai_128B
+    1795416334U,	// V6_vL32b_nt_cur_pred_pi
+    1795416334U,	// V6_vL32b_nt_cur_pred_pi_128B
+    1795416334U,	// V6_vL32b_nt_cur_pred_ppu
+    1795416334U,	// V6_vL32b_nt_cur_pred_ppu_128B
+    1812189283U,	// V6_vL32b_nt_npred_ai
+    1812189283U,	// V6_vL32b_nt_npred_ai_128B
+    1812193379U,	// V6_vL32b_nt_npred_pi
+    1812193379U,	// V6_vL32b_nt_npred_pi_128B
+    1812193379U,	// V6_vL32b_nt_npred_ppu
+    1812193379U,	// V6_vL32b_nt_npred_ppu_128B
     846563354U,	// V6_vL32b_nt_pi
     846563354U,	// V6_vL32b_nt_pi_128B
     829786138U,	// V6_vL32b_nt_ppu
     829786138U,	// V6_vL32b_nt_ppu_128B
-    1845743886U,	// V6_vL32b_nt_pred_ai
-    1845743886U,	// V6_vL32b_nt_pred_ai_128B
-    1845747982U,	// V6_vL32b_nt_pred_pi
-    1845747982U,	// V6_vL32b_nt_pred_pi_128B
-    1845747982U,	// V6_vL32b_nt_pred_ppu
-    1845747982U,	// V6_vL32b_nt_pred_ppu_128B
+    1812189454U,	// V6_vL32b_nt_pred_ai
+    1812189454U,	// V6_vL32b_nt_pred_ai_128B
+    1812193550U,	// V6_vL32b_nt_pred_pi
+    1812193550U,	// V6_vL32b_nt_pred_pi_128B
+    1812193550U,	// V6_vL32b_nt_pred_ppu
+    1812193550U,	// V6_vL32b_nt_pred_ppu_128B
     813238298U,	// V6_vL32b_nt_tmp_ai
     813238298U,	// V6_vL32b_nt_tmp_ai_128B
-    1862520931U,	// V6_vL32b_nt_tmp_npred_ai
-    1862520931U,	// V6_vL32b_nt_tmp_npred_ai_128B
-    1862525027U,	// V6_vL32b_nt_tmp_npred_pi
-    1862525027U,	// V6_vL32b_nt_tmp_npred_pi_128B
-    1862525027U,	// V6_vL32b_nt_tmp_npred_ppu
-    1862525027U,	// V6_vL32b_nt_tmp_npred_ppu_128B
+    1845743715U,	// V6_vL32b_nt_tmp_npred_ai
+    1845743715U,	// V6_vL32b_nt_tmp_npred_ai_128B
+    1845747811U,	// V6_vL32b_nt_tmp_npred_pi
+    1845747811U,	// V6_vL32b_nt_tmp_npred_pi_128B
+    1845747811U,	// V6_vL32b_nt_tmp_npred_ppu
+    1845747811U,	// V6_vL32b_nt_tmp_npred_ppu_128B
     846792730U,	// V6_vL32b_nt_tmp_pi
     846792730U,	// V6_vL32b_nt_tmp_pi_128B
     830015514U,	// V6_vL32b_nt_tmp_ppu
     830015514U,	// V6_vL32b_nt_tmp_ppu_128B
-    1862521102U,	// V6_vL32b_nt_tmp_pred_ai
-    1862521102U,	// V6_vL32b_nt_tmp_pred_ai_128B
-    1862525198U,	// V6_vL32b_nt_tmp_pred_pi
-    1862525198U,	// V6_vL32b_nt_tmp_pred_pi_128B
-    1862525198U,	// V6_vL32b_nt_tmp_pred_ppu
-    1862525198U,	// V6_vL32b_nt_tmp_pred_ppu_128B
+    1845743886U,	// V6_vL32b_nt_tmp_pred_ai
+    1845743886U,	// V6_vL32b_nt_tmp_pred_ai_128B
+    1845747982U,	// V6_vL32b_nt_tmp_pred_pi
+    1845747982U,	// V6_vL32b_nt_tmp_pred_pi_128B
+    1845747982U,	// V6_vL32b_nt_tmp_pred_ppu
+    1845747982U,	// V6_vL32b_nt_tmp_pred_ppu_128B
     846563354U,	// V6_vL32b_pi
     846563354U,	// V6_vL32b_pi_128B
     829786138U,	// V6_vL32b_ppu
     829786138U,	// V6_vL32b_ppu_128B
-    1845743886U,	// V6_vL32b_pred_ai
-    1845743886U,	// V6_vL32b_pred_ai_128B
-    1845747982U,	// V6_vL32b_pred_pi
-    1845747982U,	// V6_vL32b_pred_pi_128B
-    1845747982U,	// V6_vL32b_pred_ppu
-    1845747982U,	// V6_vL32b_pred_ppu_128B
+    1812189454U,	// V6_vL32b_pred_ai
+    1812189454U,	// V6_vL32b_pred_ai_128B
+    1812193550U,	// V6_vL32b_pred_pi
+    1812193550U,	// V6_vL32b_pred_pi_128B
+    1812193550U,	// V6_vL32b_pred_ppu
+    1812193550U,	// V6_vL32b_pred_ppu_128B
     813238298U,	// V6_vL32b_tmp_ai
     813238298U,	// V6_vL32b_tmp_ai_128B
-    1862520931U,	// V6_vL32b_tmp_npred_ai
-    1862520931U,	// V6_vL32b_tmp_npred_ai_128B
-    1862525027U,	// V6_vL32b_tmp_npred_pi
-    1862525027U,	// V6_vL32b_tmp_npred_pi_128B
-    1862525027U,	// V6_vL32b_tmp_npred_ppu
-    1862525027U,	// V6_vL32b_tmp_npred_ppu_128B
+    1845743715U,	// V6_vL32b_tmp_npred_ai
+    1845743715U,	// V6_vL32b_tmp_npred_ai_128B
+    1845747811U,	// V6_vL32b_tmp_npred_pi
+    1845747811U,	// V6_vL32b_tmp_npred_pi_128B
+    1845747811U,	// V6_vL32b_tmp_npred_ppu
+    1845747811U,	// V6_vL32b_tmp_npred_ppu_128B
     846792730U,	// V6_vL32b_tmp_pi
     846792730U,	// V6_vL32b_tmp_pi_128B
     830015514U,	// V6_vL32b_tmp_ppu
     830015514U,	// V6_vL32b_tmp_ppu_128B
-    1862521102U,	// V6_vL32b_tmp_pred_ai
-    1862521102U,	// V6_vL32b_tmp_pred_ai_128B
-    1862525198U,	// V6_vL32b_tmp_pred_pi
-    1862525198U,	// V6_vL32b_tmp_pred_pi_128B
-    1862525198U,	// V6_vL32b_tmp_pred_ppu
-    1862525198U,	// V6_vL32b_tmp_pred_ppu_128B
+    1845743886U,	// V6_vL32b_tmp_pred_ai
+    1845743886U,	// V6_vL32b_tmp_pred_ai_128B
+    1845747982U,	// V6_vL32b_tmp_pred_pi
+    1845747982U,	// V6_vL32b_tmp_pred_pi_128B
+    1845747982U,	// V6_vL32b_tmp_pred_ppu
+    1845747982U,	// V6_vL32b_tmp_pred_ppu_128B
     1530350234U,	// V6_vS32Ub_ai
     1530350234U,	// V6_vS32Ub_ai_128B
     41453667U,	// V6_vS32Ub_npred_ai
@@ -2633,19 +2659,19 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     8652826U,	// V6_vasrw_acc_alt_128B
     55969818U,	// V6_vasrw_alt
     55969818U,	// V6_vasrw_alt_128B
-    1820477466U,	// V6_vasrwh
-    1820477466U,	// V6_vasrwh_128B
+    1870809114U,	// V6_vasrwh
+    1870809114U,	// V6_vasrwh_128B
     8669210U,	// V6_vasrwh_alt
-    1820477466U,	// V6_vasrwhrndsat
-    1820477466U,	// V6_vasrwhrndsat_128B
+    1870809114U,	// V6_vasrwhrndsat
+    1870809114U,	// V6_vasrwhrndsat_128B
     293881882U,	// V6_vasrwhrndsat_alt
-    1820477466U,	// V6_vasrwhsat
-    1820477466U,	// V6_vasrwhsat_128B
+    1870809114U,	// V6_vasrwhsat
+    1870809114U,	// V6_vasrwhsat_128B
     25446426U,	// V6_vasrwhsat_alt
-    1820543002U,	// V6_vasrwuhrndsat
-    1820543002U,	// V6_vasrwuhrndsat_128B
-    1820543002U,	// V6_vasrwuhsat
-    1820543002U,	// V6_vasrwuhsat_128B
+    1870874650U,	// V6_vasrwuhrndsat
+    1870874650U,	// V6_vasrwuhrndsat_128B
+    1870874650U,	// V6_vasrwuhsat
+    1870874650U,	// V6_vasrwuhsat_128B
     8685594U,	// V6_vasrwuhsat_alt
     1937999898U,	// V6_vasrwv
     1937999898U,	// V6_vasrwv_128B
@@ -2817,14 +2843,14 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     91506714U,	// V6_veqh_or_128B
     91523098U,	// V6_veqh_xor
     91523098U,	// V6_veqh_xor_128B
-    1819527194U,	// V6_veqw
-    1819527194U,	// V6_veqw_128B
-    1819543578U,	// V6_veqw_and
-    1819543578U,	// V6_veqw_and_128B
-    1819559962U,	// V6_veqw_or
-    1819559962U,	// V6_veqw_or_128B
-    1819576346U,	// V6_veqw_xor
-    1819576346U,	// V6_veqw_xor_128B
+    1869858842U,	// V6_veqw
+    1869858842U,	// V6_veqw_128B
+    1869875226U,	// V6_veqw_and
+    1869875226U,	// V6_veqw_and_128B
+    1869891610U,	// V6_veqw_or
+    1869891610U,	// V6_veqw_or_128B
+    1869907994U,	// V6_veqw_xor
+    1869907994U,	// V6_veqw_xor_128B
     2240612378U,	// V6_vgtb
     2240612378U,	// V6_vgtb_128B
     2240628762U,	// V6_vgtb_and
@@ -2865,16 +2891,16 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     1787660314U,	// V6_vgtuw_or_128B
     1787676698U,	// V6_vgtuw_xor
     1787676698U,	// V6_vgtuw_xor_128B
-    1821181978U,	// V6_vgtw
-    1821181978U,	// V6_vgtw_128B
-    1821198362U,	// V6_vgtw_and
-    1821198362U,	// V6_vgtw_and_128B
-    1821214746U,	// V6_vgtw_or
-    1821214746U,	// V6_vgtw_or_128B
-    1821231130U,	// V6_vgtw_xor
-    1821231130U,	// V6_vgtw_xor_128B
-    1203U,	// V6_vhist
-    1203U,	// V6_vhist_128B
+    1871513626U,	// V6_vgtw
+    1871513626U,	// V6_vgtw_128B
+    1871530010U,	// V6_vgtw_and
+    1871530010U,	// V6_vgtw_and_128B
+    1871546394U,	// V6_vgtw_or
+    1871546394U,	// V6_vgtw_or_128B
+    1871562778U,	// V6_vgtw_xor
+    1871562778U,	// V6_vgtw_xor_128B
+    1228U,	// V6_vhist
+    1228U,	// V6_vhist_128B
     1460883U,	// V6_vhistq
     1460883U,	// V6_vhistq_128B
     9308186U,	// V6_vinsertwr
@@ -3313,8 +3339,8 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     11388954U,	// V6_vroundwh_128B
     11405338U,	// V6_vroundwh_alt
     11405338U,	// V6_vroundwh_alt_128B
-    1823295514U,	// V6_vroundwuh
-    1823295514U,	// V6_vroundwuh_128B
+    1873627162U,	// V6_vroundwuh
+    1873627162U,	// V6_vroundwuh_128B
     11421722U,	// V6_vroundwuh_alt
     11421722U,	// V6_vroundwuh_alt_128B
     11438106U,	// V6_vrsadubi
@@ -3545,18 +3571,18 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     12306458U,	// V6_vunpackuh_128B
     12322842U,	// V6_vunpackuh_alt
     12322842U,	// V6_vunpackuh_alt_128B
-    961U,	// V6_vwhist128
-    961U,	// V6_vwhist128_128B
+    986U,	// V6_vwhist128
+    986U,	// V6_vwhist128_128B
     1460362U,	// V6_vwhist128m
     1460362U,	// V6_vwhist128m_128B
     1460573U,	// V6_vwhist128q
     1460573U,	// V6_vwhist128q_128B
     3131741U,	// V6_vwhist128qm
     3131741U,	// V6_vwhist128qm_128B
-    951U,	// V6_vwhist256
-    951U,	// V6_vwhist256_128B
-    1115U,	// V6_vwhist256_sat
-    1115U,	// V6_vwhist256_sat_128B
+    976U,	// V6_vwhist256
+    976U,	// V6_vwhist256_128B
+    1140U,	// V6_vwhist256_sat
+    1140U,	// V6_vwhist256_sat_128B
     1460562U,	// V6_vwhist256q
     1460562U,	// V6_vwhist256q_128B
     12339538U,	// V6_vwhist256q_sat
@@ -3571,8 +3597,8 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     12404762U,	// V6_vzh_128B
     12421146U,	// V6_vzh_alt
     12421146U,	// V6_vzh_alt_128B
-    1107U,	// Y2_barrier
-    1197U,	// Y2_break
+    1132U,	// Y2_barrier
+    1222U,	// Y2_break
     1460584U,	// Y2_dccleana
     1460619U,	// Y2_dccleaninva
     1460694U,	// Y2_dcfetch
@@ -3580,8 +3606,8 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     1460603U,	// Y2_dcinva
     1460594U,	// Y2_dczeroa
     1460611U,	// Y2_icinva
-    1023U,	// Y2_isync
-    1129U,	// Y2_syncht
+    1048U,	// Y2_isync
+    1154U,	// Y2_syncht
     35260877U,	// Y4_l2fetch
     1460670U,	// Y4_trace
     35260877U,	// Y5_l2fetch
@@ -3620,6 +3646,7 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// PATCHABLE_RET
     0U,	// PATCHABLE_FUNCTION_EXIT
     0U,	// PATCHABLE_TAIL_CALL
+    0U,	// PATCHABLE_EVENT_CALL
     0U,	// G_ADD
     0U,	// G_SUB
     0U,	// G_MUL
@@ -5577,8 +5604,32 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// V6_hi_128B
     0U,	// V6_ld0
     0U,	// V6_ld0_128B
+    580U,	// V6_ldcnp0
+    580U,	// V6_ldcnp0_128B
+    2692U,	// V6_ldcnpnt0
+    2692U,	// V6_ldcnpnt0_128B
+    580U,	// V6_ldcp0
+    580U,	// V6_ldcp0_128B
+    2692U,	// V6_ldcpnt0
+    2692U,	// V6_ldcpnt0_128B
+    580U,	// V6_ldnp0
+    580U,	// V6_ldnp0_128B
+    2692U,	// V6_ldnpnt0
+    2692U,	// V6_ldnpnt0_128B
     0U,	// V6_ldnt0
     0U,	// V6_ldnt0_128B
+    580U,	// V6_ldp0
+    580U,	// V6_ldp0_128B
+    2692U,	// V6_ldpnt0
+    2692U,	// V6_ldpnt0_128B
+    580U,	// V6_ldtnp0
+    580U,	// V6_ldtnp0_128B
+    2692U,	// V6_ldtnpnt0
+    2692U,	// V6_ldtnpnt0_128B
+    580U,	// V6_ldtp0
+    580U,	// V6_ldtp0_128B
+    2692U,	// V6_ldtpnt0
+    2692U,	// V6_ldtpnt0_128B
     0U,	// V6_ldu0
     0U,	// V6_ldu0_128B
     0U,	// V6_lo
@@ -5607,8 +5658,8 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// V6_pred_xor_128B
     324U,	// V6_shuffeqh
     324U,	// V6_shuffeqh_128B
-    2692U,	// V6_shuffeqw
-    2692U,	// V6_shuffeqw_128B
+    2756U,	// V6_shuffeqw
+    2756U,	// V6_shuffeqw_128B
     0U,	// V6_st0
     0U,	// V6_st0_128B
     0U,	// V6_stn0
@@ -5653,8 +5704,8 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     1028U,	// V6_vL32b_cur_npred_ai_128B
     1116U,	// V6_vL32b_cur_npred_pi
     1116U,	// V6_vL32b_cur_npred_pi_128B
-    2780U,	// V6_vL32b_cur_npred_ppu
-    2780U,	// V6_vL32b_cur_npred_ppu_128B
+    2844U,	// V6_vL32b_cur_npred_ppu
+    2844U,	// V6_vL32b_cur_npred_ppu_128B
     11U,	// V6_vL32b_cur_pi
     11U,	// V6_vL32b_cur_pi_128B
     11U,	// V6_vL32b_cur_ppu
@@ -5663,14 +5714,14 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     1028U,	// V6_vL32b_cur_pred_ai_128B
     1116U,	// V6_vL32b_cur_pred_pi
     1116U,	// V6_vL32b_cur_pred_pi_128B
-    2780U,	// V6_vL32b_cur_pred_ppu
-    2780U,	// V6_vL32b_cur_pred_ppu_128B
+    2844U,	// V6_vL32b_cur_pred_ppu
+    2844U,	// V6_vL32b_cur_pred_ppu_128B
     1028U,	// V6_vL32b_npred_ai
     1028U,	// V6_vL32b_npred_ai_128B
     1116U,	// V6_vL32b_npred_pi
     1116U,	// V6_vL32b_npred_pi_128B
-    2780U,	// V6_vL32b_npred_ppu
-    2780U,	// V6_vL32b_npred_ppu_128B
+    2844U,	// V6_vL32b_npred_ppu
+    2844U,	// V6_vL32b_npred_ppu_128B
     44U,	// V6_vL32b_nt_ai
     44U,	// V6_vL32b_nt_ai_128B
     44U,	// V6_vL32b_nt_cur_ai
@@ -5679,8 +5730,8 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     50180U,	// V6_vL32b_nt_cur_npred_ai_128B
     50268U,	// V6_vL32b_nt_cur_npred_pi
     50268U,	// V6_vL32b_nt_cur_npred_pi_128B
-    51932U,	// V6_vL32b_nt_cur_npred_ppu
-    51932U,	// V6_vL32b_nt_cur_npred_ppu_128B
+    51996U,	// V6_vL32b_nt_cur_npred_ppu
+    51996U,	// V6_vL32b_nt_cur_npred_ppu_128B
     44U,	// V6_vL32b_nt_cur_pi
     44U,	// V6_vL32b_nt_cur_pi_128B
     44U,	// V6_vL32b_nt_cur_ppu
@@ -5689,14 +5740,14 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     50180U,	// V6_vL32b_nt_cur_pred_ai_128B
     50268U,	// V6_vL32b_nt_cur_pred_pi
     50268U,	// V6_vL32b_nt_cur_pred_pi_128B
-    51932U,	// V6_vL32b_nt_cur_pred_ppu
-    51932U,	// V6_vL32b_nt_cur_pred_ppu_128B
+    51996U,	// V6_vL32b_nt_cur_pred_ppu
+    51996U,	// V6_vL32b_nt_cur_pred_ppu_128B
     50180U,	// V6_vL32b_nt_npred_ai
     50180U,	// V6_vL32b_nt_npred_ai_128B
     50268U,	// V6_vL32b_nt_npred_pi
     50268U,	// V6_vL32b_nt_npred_pi_128B
-    51932U,	// V6_vL32b_nt_npred_ppu
-    51932U,	// V6_vL32b_nt_npred_ppu_128B
+    51996U,	// V6_vL32b_nt_npred_ppu
+    51996U,	// V6_vL32b_nt_npred_ppu_128B
     44U,	// V6_vL32b_nt_pi
     44U,	// V6_vL32b_nt_pi_128B
     44U,	// V6_vL32b_nt_ppu
@@ -5705,16 +5756,16 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     50180U,	// V6_vL32b_nt_pred_ai_128B
     50268U,	// V6_vL32b_nt_pred_pi
     50268U,	// V6_vL32b_nt_pred_pi_128B
-    51932U,	// V6_vL32b_nt_pred_ppu
-    51932U,	// V6_vL32b_nt_pred_ppu_128B
+    51996U,	// V6_vL32b_nt_pred_ppu
+    51996U,	// V6_vL32b_nt_pred_ppu_128B
     44U,	// V6_vL32b_nt_tmp_ai
     44U,	// V6_vL32b_nt_tmp_ai_128B
     50180U,	// V6_vL32b_nt_tmp_npred_ai
     50180U,	// V6_vL32b_nt_tmp_npred_ai_128B
     50268U,	// V6_vL32b_nt_tmp_npred_pi
     50268U,	// V6_vL32b_nt_tmp_npred_pi_128B
-    51932U,	// V6_vL32b_nt_tmp_npred_ppu
-    51932U,	// V6_vL32b_nt_tmp_npred_ppu_128B
+    51996U,	// V6_vL32b_nt_tmp_npred_ppu
+    51996U,	// V6_vL32b_nt_tmp_npred_ppu_128B
     44U,	// V6_vL32b_nt_tmp_pi
     44U,	// V6_vL32b_nt_tmp_pi_128B
     44U,	// V6_vL32b_nt_tmp_ppu
@@ -5723,8 +5774,8 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     50180U,	// V6_vL32b_nt_tmp_pred_ai_128B
     50268U,	// V6_vL32b_nt_tmp_pred_pi
     50268U,	// V6_vL32b_nt_tmp_pred_pi_128B
-    51932U,	// V6_vL32b_nt_tmp_pred_ppu
-    51932U,	// V6_vL32b_nt_tmp_pred_ppu_128B
+    51996U,	// V6_vL32b_nt_tmp_pred_ppu
+    51996U,	// V6_vL32b_nt_tmp_pred_ppu_128B
     11U,	// V6_vL32b_pi
     11U,	// V6_vL32b_pi_128B
     11U,	// V6_vL32b_ppu
@@ -5733,16 +5784,16 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     1028U,	// V6_vL32b_pred_ai_128B
     1116U,	// V6_vL32b_pred_pi
     1116U,	// V6_vL32b_pred_pi_128B
-    2780U,	// V6_vL32b_pred_ppu
-    2780U,	// V6_vL32b_pred_ppu_128B
+    2844U,	// V6_vL32b_pred_ppu
+    2844U,	// V6_vL32b_pred_ppu_128B
     11U,	// V6_vL32b_tmp_ai
     11U,	// V6_vL32b_tmp_ai_128B
     1028U,	// V6_vL32b_tmp_npred_ai
     1028U,	// V6_vL32b_tmp_npred_ai_128B
     1116U,	// V6_vL32b_tmp_npred_pi
     1116U,	// V6_vL32b_tmp_npred_pi_128B
-    2780U,	// V6_vL32b_tmp_npred_ppu
-    2780U,	// V6_vL32b_tmp_npred_ppu_128B
+    2844U,	// V6_vL32b_tmp_npred_ppu
+    2844U,	// V6_vL32b_tmp_npred_ppu_128B
     11U,	// V6_vL32b_tmp_pi
     11U,	// V6_vL32b_tmp_pi_128B
     11U,	// V6_vL32b_tmp_ppu
@@ -5751,8 +5802,8 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     1028U,	// V6_vL32b_tmp_pred_ai_128B
     1116U,	// V6_vL32b_tmp_pred_pi
     1116U,	// V6_vL32b_tmp_pred_pi_128B
-    2780U,	// V6_vL32b_tmp_pred_ppu
-    2780U,	// V6_vL32b_tmp_pred_ppu_128B
+    2844U,	// V6_vL32b_tmp_pred_ppu
+    2844U,	// V6_vL32b_tmp_pred_ppu_128B
     2180U,	// V6_vS32Ub_ai
     2180U,	// V6_vS32Ub_ai_128B
     40982U,	// V6_vS32Ub_npred_ai
@@ -6100,8 +6151,8 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     324U,	// V6_vasrhv_128B
     580U,	// V6_vasrhv_alt
     580U,	// V6_vasrhv_alt_128B
-    2820U,	// V6_vasruwuhrndsat
-    2820U,	// V6_vasruwuhrndsat_128B
+    2884U,	// V6_vasruwuhrndsat
+    2884U,	// V6_vasruwuhrndsat_128B
     0U,	// V6_vasrw
     0U,	// V6_vasrw_128B
     0U,	// V6_vasrw_acc
@@ -6110,19 +6161,19 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// V6_vasrw_acc_alt_128B
     580U,	// V6_vasrw_alt
     580U,	// V6_vasrw_alt_128B
-    2884U,	// V6_vasrwh
-    2884U,	// V6_vasrwh_128B
+    2948U,	// V6_vasrwh
+    2948U,	// V6_vasrwh_128B
     0U,	// V6_vasrwh_alt
-    6980U,	// V6_vasrwhrndsat
-    6980U,	// V6_vasrwhrndsat_128B
+    7044U,	// V6_vasrwhrndsat
+    7044U,	// V6_vasrwhrndsat_128B
     0U,	// V6_vasrwhrndsat_alt
-    6980U,	// V6_vasrwhsat
-    6980U,	// V6_vasrwhsat_128B
+    7044U,	// V6_vasrwhsat
+    7044U,	// V6_vasrwhsat_128B
     0U,	// V6_vasrwhsat_alt
-    6980U,	// V6_vasrwuhrndsat
-    6980U,	// V6_vasrwuhrndsat_128B
-    6980U,	// V6_vasrwuhsat
-    6980U,	// V6_vasrwuhsat_128B
+    7044U,	// V6_vasrwuhrndsat
+    7044U,	// V6_vasrwuhrndsat_128B
+    7044U,	// V6_vasrwuhsat
+    7044U,	// V6_vasrwuhsat_128B
     0U,	// V6_vasrwuhsat_alt
     0U,	// V6_vasrwv
     0U,	// V6_vasrwv_128B
@@ -6278,14 +6329,14 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// V6_vdsaduh_acc_alt_128B
     0U,	// V6_vdsaduh_alt
     0U,	// V6_vdsaduh_alt_128B
-    2948U,	// V6_veqb
-    2948U,	// V6_veqb_128B
-    2975U,	// V6_veqb_and
-    2975U,	// V6_veqb_and_128B
-    2975U,	// V6_veqb_or
-    2975U,	// V6_veqb_or_128B
-    2975U,	// V6_veqb_xor
-    2975U,	// V6_veqb_xor_128B
+    3012U,	// V6_veqb
+    3012U,	// V6_veqb_128B
+    3039U,	// V6_veqb_and
+    3039U,	// V6_veqb_and_128B
+    3039U,	// V6_veqb_or
+    3039U,	// V6_veqb_or_128B
+    3039U,	// V6_veqb_xor
+    3039U,	// V6_veqb_xor_128B
     324U,	// V6_veqh
     324U,	// V6_veqh_128B
     351U,	// V6_veqh_and
@@ -6294,22 +6345,22 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     351U,	// V6_veqh_or_128B
     351U,	// V6_veqh_xor
     351U,	// V6_veqh_xor_128B
-    2692U,	// V6_veqw
-    2692U,	// V6_veqw_128B
-    2719U,	// V6_veqw_and
-    2719U,	// V6_veqw_and_128B
-    2719U,	// V6_veqw_or
-    2719U,	// V6_veqw_or_128B
-    2719U,	// V6_veqw_xor
-    2719U,	// V6_veqw_xor_128B
-    2948U,	// V6_vgtb
-    2948U,	// V6_vgtb_128B
-    2975U,	// V6_vgtb_and
-    2975U,	// V6_vgtb_and_128B
-    2975U,	// V6_vgtb_or
-    2975U,	// V6_vgtb_or_128B
-    2975U,	// V6_vgtb_xor
-    2975U,	// V6_vgtb_xor_128B
+    2756U,	// V6_veqw
+    2756U,	// V6_veqw_128B
+    2783U,	// V6_veqw_and
+    2783U,	// V6_veqw_and_128B
+    2783U,	// V6_veqw_or
+    2783U,	// V6_veqw_or_128B
+    2783U,	// V6_veqw_xor
+    2783U,	// V6_veqw_xor_128B
+    3012U,	// V6_vgtb
+    3012U,	// V6_vgtb_128B
+    3039U,	// V6_vgtb_and
+    3039U,	// V6_vgtb_and_128B
+    3039U,	// V6_vgtb_or
+    3039U,	// V6_vgtb_or_128B
+    3039U,	// V6_vgtb_xor
+    3039U,	// V6_vgtb_xor_128B
     324U,	// V6_vgth
     324U,	// V6_vgth_128B
     351U,	// V6_vgth_and
@@ -6342,14 +6393,14 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     2655U,	// V6_vgtuw_or_128B
     2655U,	// V6_vgtuw_xor
     2655U,	// V6_vgtuw_xor_128B
-    2692U,	// V6_vgtw
-    2692U,	// V6_vgtw_128B
-    2719U,	// V6_vgtw_and
-    2719U,	// V6_vgtw_and_128B
-    2719U,	// V6_vgtw_or
-    2719U,	// V6_vgtw_or_128B
-    2719U,	// V6_vgtw_xor
-    2719U,	// V6_vgtw_xor_128B
+    2756U,	// V6_vgtw
+    2756U,	// V6_vgtw_128B
+    2783U,	// V6_vgtw_and
+    2783U,	// V6_vgtw_and_128B
+    2783U,	// V6_vgtw_or
+    2783U,	// V6_vgtw_or_128B
+    2783U,	// V6_vgtw_xor
+    2783U,	// V6_vgtw_xor_128B
     0U,	// V6_vhist
     0U,	// V6_vhist_128B
     0U,	// V6_vhistq
@@ -6380,8 +6431,8 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     580U,	// V6_vlsrwv_alt_128B
     607U,	// V6_vlutvvb
     607U,	// V6_vlutvvb_128B
-    3039U,	// V6_vlutvvb_nm
-    3039U,	// V6_vlutvvb_nm_128B
+    3103U,	// V6_vlutvvb_nm
+    3103U,	// V6_vlutvvb_nm_128B
     584U,	// V6_vlutvvb_oracc
     584U,	// V6_vlutvvb_oracc_128B
     584U,	// V6_vlutvvb_oracci
@@ -6390,8 +6441,8 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     607U,	// V6_vlutvvbi_128B
     607U,	// V6_vlutvwh
     607U,	// V6_vlutvwh_128B
-    3039U,	// V6_vlutvwh_nm
-    3039U,	// V6_vlutvwh_nm_128B
+    3103U,	// V6_vlutvwh_nm
+    3103U,	// V6_vlutvwh_nm_128B
     584U,	// V6_vlutvwh_oracc
     584U,	// V6_vlutvwh_oracc_128B
     584U,	// V6_vlutvwh_oracci
@@ -6454,42 +6505,42 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// V6_vmpabuuv_128B
     0U,	// V6_vmpabuuv_alt
     0U,	// V6_vmpabuuv_alt_128B
-    2948U,	// V6_vmpahb
-    2948U,	// V6_vmpahb_128B
-    2975U,	// V6_vmpahb_acc
-    2975U,	// V6_vmpahb_acc_128B
+    3012U,	// V6_vmpahb
+    3012U,	// V6_vmpahb_128B
+    3039U,	// V6_vmpahb_acc
+    3039U,	// V6_vmpahb_acc_128B
     0U,	// V6_vmpahb_acc_alt
     0U,	// V6_vmpahb_acc_alt_128B
     0U,	// V6_vmpahb_alt
     0U,	// V6_vmpahb_alt_128B
-    2948U,	// V6_vmpauhb
-    2948U,	// V6_vmpauhb_128B
-    2975U,	// V6_vmpauhb_acc
-    2975U,	// V6_vmpauhb_acc_128B
+    3012U,	// V6_vmpauhb
+    3012U,	// V6_vmpauhb_128B
+    3039U,	// V6_vmpauhb_acc
+    3039U,	// V6_vmpauhb_acc_128B
     0U,	// V6_vmpauhb_acc_alt
     0U,	// V6_vmpauhb_acc_alt_128B
     0U,	// V6_vmpauhb_alt
     0U,	// V6_vmpauhb_alt_128B
-    2948U,	// V6_vmpybus
-    2948U,	// V6_vmpybus_128B
-    2975U,	// V6_vmpybus_acc
-    2975U,	// V6_vmpybus_acc_128B
+    3012U,	// V6_vmpybus
+    3012U,	// V6_vmpybus_128B
+    3039U,	// V6_vmpybus_acc
+    3039U,	// V6_vmpybus_acc_128B
     0U,	// V6_vmpybus_acc_alt
     0U,	// V6_vmpybus_acc_alt_128B
     0U,	// V6_vmpybus_alt
     0U,	// V6_vmpybus_alt_128B
-    2948U,	// V6_vmpybusv
-    2948U,	// V6_vmpybusv_128B
-    2975U,	// V6_vmpybusv_acc
-    2975U,	// V6_vmpybusv_acc_128B
+    3012U,	// V6_vmpybusv
+    3012U,	// V6_vmpybusv_128B
+    3039U,	// V6_vmpybusv_acc
+    3039U,	// V6_vmpybusv_acc_128B
     0U,	// V6_vmpybusv_acc_alt
     0U,	// V6_vmpybusv_acc_alt_128B
     0U,	// V6_vmpybusv_alt
     0U,	// V6_vmpybusv_alt_128B
-    2948U,	// V6_vmpybv
-    2948U,	// V6_vmpybv_128B
-    2975U,	// V6_vmpybv_acc
-    2975U,	// V6_vmpybv_acc_128B
+    3012U,	// V6_vmpybv
+    3012U,	// V6_vmpybv_128B
+    3039U,	// V6_vmpybv_acc
+    3039U,	// V6_vmpybv_acc_128B
     0U,	// V6_vmpybv_acc_alt
     0U,	// V6_vmpybv_acc_alt_128B
     0U,	// V6_vmpybv_alt
@@ -6712,34 +6763,34 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// V6_vpopcounth_alt_128B
     0U,	// V6_vrdelta
     0U,	// V6_vrdelta_128B
-    2948U,	// V6_vrmpybus
-    2948U,	// V6_vrmpybus_128B
-    2975U,	// V6_vrmpybus_acc
-    2975U,	// V6_vrmpybus_acc_128B
+    3012U,	// V6_vrmpybus
+    3012U,	// V6_vrmpybus_128B
+    3039U,	// V6_vrmpybus_acc
+    3039U,	// V6_vrmpybus_acc_128B
     0U,	// V6_vrmpybus_acc_alt
     0U,	// V6_vrmpybus_acc_alt_128B
     0U,	// V6_vrmpybus_alt
     0U,	// V6_vrmpybus_alt_128B
-    23556U,	// V6_vrmpybusi
-    23556U,	// V6_vrmpybusi_128B
-    39967U,	// V6_vrmpybusi_acc
-    39967U,	// V6_vrmpybusi_acc_128B
+    23620U,	// V6_vrmpybusi
+    23620U,	// V6_vrmpybusi_128B
+    40031U,	// V6_vrmpybusi_acc
+    40031U,	// V6_vrmpybusi_acc_128B
     584U,	// V6_vrmpybusi_acc_alt
     584U,	// V6_vrmpybusi_acc_alt_128B
     607U,	// V6_vrmpybusi_alt
     607U,	// V6_vrmpybusi_alt_128B
-    2948U,	// V6_vrmpybusv
-    2948U,	// V6_vrmpybusv_128B
-    2975U,	// V6_vrmpybusv_acc
-    2975U,	// V6_vrmpybusv_acc_128B
+    3012U,	// V6_vrmpybusv
+    3012U,	// V6_vrmpybusv_128B
+    3039U,	// V6_vrmpybusv_acc
+    3039U,	// V6_vrmpybusv_acc_128B
     0U,	// V6_vrmpybusv_acc_alt
     0U,	// V6_vrmpybusv_acc_alt_128B
     0U,	// V6_vrmpybusv_alt
     0U,	// V6_vrmpybusv_alt_128B
-    2948U,	// V6_vrmpybv
-    2948U,	// V6_vrmpybv_128B
-    2975U,	// V6_vrmpybv_acc
-    2975U,	// V6_vrmpybv_acc_128B
+    3012U,	// V6_vrmpybv
+    3012U,	// V6_vrmpybv_128B
+    3039U,	// V6_vrmpybv_acc
+    3039U,	// V6_vrmpybv_acc_128B
     0U,	// V6_vrmpybv_acc_alt
     0U,	// V6_vrmpybv_acc_alt_128B
     0U,	// V6_vrmpybv_alt
@@ -6778,20 +6829,20 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     452U,	// V6_vroundhub_128B
     0U,	// V6_vroundhub_alt
     0U,	// V6_vroundhub_alt_128B
-    3140U,	// V6_vrounduhub
-    3140U,	// V6_vrounduhub_128B
+    3204U,	// V6_vrounduhub
+    3204U,	// V6_vrounduhub_128B
     0U,	// V6_vrounduhub_alt
     0U,	// V6_vrounduhub_alt_128B
-    3204U,	// V6_vrounduwuh
-    3204U,	// V6_vrounduwuh_128B
+    3268U,	// V6_vrounduwuh
+    3268U,	// V6_vrounduwuh_128B
     0U,	// V6_vrounduwuh_alt
     0U,	// V6_vrounduwuh_alt_128B
     0U,	// V6_vroundwh
     0U,	// V6_vroundwh_128B
     0U,	// V6_vroundwh_alt
     0U,	// V6_vroundwh_alt_128B
-    3268U,	// V6_vroundwuh
-    3268U,	// V6_vroundwuh_128B
+    3332U,	// V6_vroundwuh
+    3332U,	// V6_vroundwuh_128B
     0U,	// V6_vroundwuh_alt
     0U,	// V6_vroundwuh_alt_128B
     0U,	// V6_vrsadubi
@@ -6832,8 +6883,8 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// V6_vshuffb_128B
     0U,	// V6_vshuffb_alt
     0U,	// V6_vshuffb_alt_128B
-    2948U,	// V6_vshuffeb
-    2948U,	// V6_vshuffeb_128B
+    3012U,	// V6_vshuffeb
+    3012U,	// V6_vshuffeb_128B
     0U,	// V6_vshuffeb_alt
     0U,	// V6_vshuffeb_alt_128B
     0U,	// V6_vshuffh
@@ -6972,18 +7023,18 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// V6_vsubwsat_dv_alt_128B
     0U,	// V6_vswap
     0U,	// V6_vswap_128B
-    2948U,	// V6_vtmpyb
-    2948U,	// V6_vtmpyb_128B
-    2975U,	// V6_vtmpyb_acc
-    2975U,	// V6_vtmpyb_acc_128B
+    3012U,	// V6_vtmpyb
+    3012U,	// V6_vtmpyb_128B
+    3039U,	// V6_vtmpyb_acc
+    3039U,	// V6_vtmpyb_acc_128B
     0U,	// V6_vtmpyb_acc_alt
     0U,	// V6_vtmpyb_acc_alt_128B
     0U,	// V6_vtmpyb_alt
     0U,	// V6_vtmpyb_alt_128B
-    2948U,	// V6_vtmpybus
-    2948U,	// V6_vtmpybus_128B
-    2975U,	// V6_vtmpybus_acc
-    2975U,	// V6_vtmpybus_acc_128B
+    3012U,	// V6_vtmpybus
+    3012U,	// V6_vtmpybus_128B
+    3039U,	// V6_vtmpybus_acc
+    3039U,	// V6_vtmpybus_acc_128B
     0U,	// V6_vtmpybus_acc_alt
     0U,	// V6_vtmpybus_acc_alt_128B
     0U,	// V6_vtmpybus_alt
@@ -7097,6 +7148,7 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// PATCHABLE_RET
     0U,	// PATCHABLE_FUNCTION_EXIT
     0U,	// PATCHABLE_TAIL_CALL
+    0U,	// PATCHABLE_EVENT_CALL
     0U,	// G_ADD
     0U,	// G_SUB
     0U,	// G_MUL
@@ -9054,8 +9106,32 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// V6_hi_128B
     0U,	// V6_ld0
     0U,	// V6_ld0_128B
+    0U,	// V6_ldcnp0
+    0U,	// V6_ldcnp0_128B
+    0U,	// V6_ldcnpnt0
+    0U,	// V6_ldcnpnt0_128B
+    0U,	// V6_ldcp0
+    0U,	// V6_ldcp0_128B
+    0U,	// V6_ldcpnt0
+    0U,	// V6_ldcpnt0_128B
+    0U,	// V6_ldnp0
+    0U,	// V6_ldnp0_128B
+    0U,	// V6_ldnpnt0
+    0U,	// V6_ldnpnt0_128B
     0U,	// V6_ldnt0
     0U,	// V6_ldnt0_128B
+    0U,	// V6_ldp0
+    0U,	// V6_ldp0_128B
+    0U,	// V6_ldpnt0
+    0U,	// V6_ldpnt0_128B
+    0U,	// V6_ldtnp0
+    0U,	// V6_ldtnp0_128B
+    0U,	// V6_ldtnpnt0
+    0U,	// V6_ldtnpnt0_128B
+    0U,	// V6_ldtp0
+    0U,	// V6_ldtp0_128B
+    0U,	// V6_ldtpnt0
+    0U,	// V6_ldtpnt0_128B
     0U,	// V6_ldu0
     0U,	// V6_ldu0_128B
     0U,	// V6_lo
@@ -16735,25 +16811,25 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     O << ".uw,";
     break;
   case 107:
+    // V6_ldcnp0, V6_ldcnp0_128B, V6_ldcnpnt0, V6_ldcnpnt0_128B, V6_ldcp0, V6...
+    O << ".cur = vmem(";
+    break;
+  case 108:
+    // V6_ldnp0, V6_ldnp0_128B, V6_ldnpnt0, V6_ldnpnt0_128B, V6_ldp0, V6_ldp0...
+    O << " = vmem(";
+    break;
+  case 109:
     // V6_ldnt0, V6_ldnt0_128B
     O << "):nt";
     return;
     break;
-  case 108:
-    // V6_shuffeqw, V6_shuffeqw_128B, V6_vasrwh, V6_vasrwh_128B, V6_vasrwhrnd...
-    O << ".w,";
-    break;
-  case 109:
-    // V6_vL32b_cur_npred_ai, V6_vL32b_cur_npred_ai_128B, V6_vL32b_cur_npred_...
-    O << ".cur = vmem(";
-    break;
   case 110:
-    // V6_vL32b_npred_ai, V6_vL32b_npred_ai_128B, V6_vL32b_npred_pi, V6_vL32b...
-    O << " = vmem(";
+    // V6_ldtnp0, V6_ldtnp0_128B, V6_ldtnpnt0, V6_ldtnpnt0_128B, V6_ldtp0, V6...
+    O << ".tmp = vmem(";
     break;
   case 111:
-    // V6_vL32b_nt_tmp_npred_ai, V6_vL32b_nt_tmp_npred_ai_128B, V6_vL32b_nt_t...
-    O << ".tmp = vmem(";
+    // V6_shuffeqw, V6_shuffeqw_128B, V6_vasrwh, V6_vasrwh_128B, V6_vasrwhrnd...
+    O << ".w,";
     break;
   case 112:
     // V6_vS32b_nt_ai, V6_vS32b_nt_ai_128B, V6_vS32b_nt_new_ai, V6_vS32b_nt_n...
@@ -17230,7 +17306,7 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
   }
 
 
-  // Fragment 4 encoded into 6 bits for 52 unique commands.
+  // Fragment 4 encoded into 6 bits for 53 unique commands.
   switch ((Bits >> 38) & 63) {
   default: llvm_unreachable("Invalid command number.");
   case 0:
@@ -17443,52 +17519,57 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     return;
     break;
   case 42:
+    // V6_ldcnpnt0, V6_ldcnpnt0_128B, V6_ldcpnt0, V6_ldcpnt0_128B, V6_ldnpnt0...
+    O << "):nt";
+    return;
+    break;
+  case 43:
     // V6_shuffeqw, V6_shuffeqw_128B, V6_veqw, V6_veqw_128B, V6_veqw_and, V6_...
     O << ".w)";
     return;
     break;
-  case 43:
+  case 44:
     // V6_vL32b_cur_npred_ppu, V6_vL32b_cur_npred_ppu_128B, V6_vL32b_cur_pred...
     O << "++";
     printOperand(MI, 4, O);
     break;
-  case 44:
+  case 45:
     // V6_vasruwuhrndsat, V6_vasruwuhrndsat_128B
     O << ".uw,";
     printOperand(MI, 3, O);
     O << "):rnd:sat";
     return;
     break;
-  case 45:
+  case 46:
     // V6_vasrwh, V6_vasrwh_128B, V6_vasrwhrndsat, V6_vasrwhrndsat_128B, V6_v...
     O << ".w,";
     printOperand(MI, 3, O);
     break;
-  case 46:
+  case 47:
     // V6_veqb, V6_veqb_128B, V6_veqb_and, V6_veqb_and_128B, V6_veqb_or, V6_v...
     O << ".b)";
     return;
     break;
-  case 47:
+  case 48:
     // V6_vlutvvb_nm, V6_vlutvvb_nm_128B, V6_vlutvwh_nm, V6_vlutvwh_nm_128B
     O << "):nomatch";
     return;
     break;
-  case 48:
+  case 49:
     // V6_vrmpybusi, V6_vrmpybusi_128B, V6_vrmpybusi_acc, V6_vrmpybusi_acc_12...
     O << ".b,#";
     break;
-  case 49:
+  case 50:
     // V6_vrounduhub, V6_vrounduhub_128B
     O << ".uh):sat";
     return;
     break;
-  case 50:
+  case 51:
     // V6_vrounduwuh, V6_vrounduwuh_128B
     O << ".uw):sat";
     return;
     break;
-  case 51:
+  case 52:
     // V6_vroundwuh, V6_vroundwuh_128B
     O << ".w):sat";
     return;
@@ -17652,7 +17733,7 @@ void HexagonInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
 /// from the register set description.  This returns the assembler name
 /// for the specified register.
 const char *HexagonInstPrinter::getRegisterName(unsigned RegNo) {
-  assert(RegNo && RegNo < 142 && "Invalid register number!");
+  assert(RegNo && RegNo < 140 && "Invalid register number!");
 
   static const char AsmStrs[] = {
   /* 0 */ 'c', '1', '1', ':', '1', '0', 0,
@@ -17752,63 +17833,60 @@ const char *HexagonInstPrinter::getRegisterName(unsigned RegNo) {
   /* 432 */ 'c', '7', ':', '6', 0,
   /* 437 */ 'r', '7', ':', '6', 0,
   /* 442 */ 'v', '7', ':', '6', 0,
-  /* 447 */ 'c', '6', 0,
-  /* 450 */ 'r', '6', 0,
-  /* 453 */ 'v', '6', 0,
-  /* 456 */ 'r', '1', '7', 0,
-  /* 460 */ 'v', '1', '7', 0,
-  /* 464 */ 'r', '2', '7', 0,
-  /* 468 */ 'v', '2', '7', 0,
-  /* 472 */ 'c', '7', 0,
-  /* 475 */ 'r', '7', 0,
-  /* 478 */ 'v', '7', 0,
-  /* 481 */ 'c', '1', '9', ':', '1', '8', 0,
-  /* 488 */ 'r', '1', '9', ':', '1', '8', 0,
-  /* 495 */ 'v', '1', '9', ':', '1', '8', 0,
-  /* 502 */ 'r', '1', '8', 0,
-  /* 506 */ 'v', '1', '8', 0,
-  /* 510 */ 'r', '2', '9', ':', '2', '8', 0,
-  /* 517 */ 'v', '2', '9', ':', '2', '8', 0,
-  /* 524 */ 'r', '2', '8', 0,
-  /* 528 */ 'v', '2', '8', 0,
-  /* 532 */ 'c', '9', ':', '8', 0,
-  /* 537 */ 'r', '9', ':', '8', 0,
-  /* 542 */ 'v', '9', ':', '8', 0,
-  /* 547 */ 'c', '8', 0,
-  /* 550 */ 'r', '8', 0,
-  /* 553 */ 'v', '8', 0,
-  /* 556 */ 'r', '1', '9', 0,
-  /* 560 */ 'v', '1', '9', 0,
-  /* 564 */ 'r', '2', '9', 0,
-  /* 568 */ 'v', '2', '9', 0,
-  /* 572 */ 'r', '9', 0,
-  /* 575 */ 'v', '9', 0,
-  /* 578 */ 'p', 'c', 0,
-  /* 581 */ 'u', 's', 'r', '.', 'o', 'v', 'f', 0,
-  /* 589 */ 'u', 'p', 'c', 'y', 'c', 'l', 'e', 'h', 'i', 0,
-  /* 599 */ 'u', 't', 'i', 'm', 'e', 'r', 'h', 'i', 0,
-  /* 608 */ 'p', 'k', 't', 'c', 'o', 'u', 'n', 't', 'h', 'i', 0,
-  /* 619 */ 'u', 'p', 'c', 'y', 'c', 'l', 'e', 'l', 'o', 0,
-  /* 629 */ 'u', 't', 'i', 'm', 'e', 'r', 'l', 'o', 0,
-  /* 638 */ 'p', 'k', 't', 'c', 'o', 'u', 'n', 't', 'l', 'o', 0,
-  /* 649 */ 'u', 'g', 'p', 0,
-  /* 653 */ 'u', 's', 'r', 0,
-  /* 657 */ 'f', 'r', 'a', 'm', 'e', 'l', 'i', 'm', 'i', 't', 0,
-  /* 668 */ 'f', 'r', 'a', 'm', 'e', 'k', 'e', 'y', 0,
+  /* 447 */ 'r', '6', 0,
+  /* 450 */ 'v', '6', 0,
+  /* 453 */ 'r', '1', '7', 0,
+  /* 457 */ 'v', '1', '7', 0,
+  /* 461 */ 'r', '2', '7', 0,
+  /* 465 */ 'v', '2', '7', 0,
+  /* 469 */ 'r', '7', 0,
+  /* 472 */ 'v', '7', 0,
+  /* 475 */ 'c', '1', '9', ':', '1', '8', 0,
+  /* 482 */ 'r', '1', '9', ':', '1', '8', 0,
+  /* 489 */ 'v', '1', '9', ':', '1', '8', 0,
+  /* 496 */ 'r', '1', '8', 0,
+  /* 500 */ 'v', '1', '8', 0,
+  /* 504 */ 'r', '2', '9', ':', '2', '8', 0,
+  /* 511 */ 'v', '2', '9', ':', '2', '8', 0,
+  /* 518 */ 'r', '2', '8', 0,
+  /* 522 */ 'v', '2', '8', 0,
+  /* 526 */ 'c', '9', ':', '8', 0,
+  /* 531 */ 'r', '9', ':', '8', 0,
+  /* 536 */ 'v', '9', ':', '8', 0,
+  /* 541 */ 'c', '8', 0,
+  /* 544 */ 'r', '8', 0,
+  /* 547 */ 'v', '8', 0,
+  /* 550 */ 'r', '1', '9', 0,
+  /* 554 */ 'v', '1', '9', 0,
+  /* 558 */ 'r', '2', '9', 0,
+  /* 562 */ 'v', '2', '9', 0,
+  /* 566 */ 'r', '9', 0,
+  /* 569 */ 'v', '9', 0,
+  /* 572 */ 'p', 'c', 0,
+  /* 575 */ 'u', 's', 'r', '.', 'o', 'v', 'f', 0,
+  /* 583 */ 'u', 'p', 'c', 'y', 'c', 'l', 'e', 'h', 'i', 0,
+  /* 593 */ 'u', 't', 'i', 'm', 'e', 'r', 'h', 'i', 0,
+  /* 602 */ 'p', 'k', 't', 'c', 'o', 'u', 'n', 't', 'h', 'i', 0,
+  /* 613 */ 'u', 'p', 'c', 'y', 'c', 'l', 'e', 'l', 'o', 0,
+  /* 623 */ 'u', 't', 'i', 'm', 'e', 'r', 'l', 'o', 0,
+  /* 632 */ 'p', 'k', 't', 'c', 'o', 'u', 'n', 't', 'l', 'o', 0,
+  /* 643 */ 'u', 'g', 'p', 0,
+  /* 647 */ 'u', 's', 'r', 0,
+  /* 651 */ 'f', 'r', 'a', 'm', 'e', 'l', 'i', 'm', 'i', 't', 0,
+  /* 662 */ 'f', 'r', 'a', 'm', 'e', 'k', 'e', 'y', 0,
   };
 
   static const uint16_t RegAsmOffset[] = {
-    178, 668, 657, 650, 578, 481, 608, 638, 649, 284, 589, 619, 653, 581, 
-    51, 599, 629, 372, 447, 472, 547, 120, 171, 85, 234, 340, 437, 537, 
-    7, 185, 291, 388, 488, 29, 207, 313, 410, 510, 58, 104, 155, 108, 
-    159, 111, 162, 244, 272, 114, 165, 247, 275, 117, 168, 250, 278, 350, 
-    375, 450, 475, 550, 572, 21, 127, 199, 256, 305, 356, 402, 456, 502, 
-    556, 43, 135, 221, 264, 327, 364, 424, 464, 524, 564, 72, 143, 100, 
-    151, 124, 175, 253, 281, 353, 378, 453, 478, 553, 575, 25, 131, 203, 
-    260, 309, 360, 406, 460, 506, 560, 47, 139, 225, 268, 331, 368, 428, 
-    468, 528, 568, 76, 147, 90, 239, 345, 442, 542, 14, 192, 298, 395, 
-    495, 36, 214, 320, 417, 517, 65, 80, 229, 335, 432, 532, 0, 381, 
-    95, 
+    178, 662, 651, 644, 572, 475, 602, 632, 643, 284, 583, 613, 647, 575, 
+    51, 593, 623, 372, 541, 120, 171, 85, 234, 340, 437, 531, 7, 185, 
+    291, 388, 482, 29, 207, 313, 410, 504, 58, 104, 155, 108, 159, 111, 
+    162, 244, 272, 114, 165, 247, 275, 117, 168, 250, 278, 350, 375, 447, 
+    469, 544, 566, 21, 127, 199, 256, 305, 356, 402, 453, 496, 550, 43, 
+    135, 221, 264, 327, 364, 424, 461, 518, 558, 72, 143, 100, 151, 124, 
+    175, 253, 281, 353, 378, 450, 472, 547, 569, 25, 131, 203, 260, 309, 
+    360, 406, 457, 500, 554, 47, 139, 225, 268, 331, 368, 428, 465, 522, 
+    562, 76, 147, 90, 239, 345, 442, 536, 14, 192, 298, 395, 489, 36, 
+    214, 320, 417, 511, 65, 80, 229, 335, 432, 526, 0, 381, 95, 
   };
 
   assert (*(AsmStrs+RegAsmOffset[RegNo-1]) &&

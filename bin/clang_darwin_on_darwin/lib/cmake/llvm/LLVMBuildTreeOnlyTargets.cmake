@@ -16,7 +16,7 @@ set(CMAKE_IMPORT_FILE_VERSION 1)
 set(_targetsDefined)
 set(_targetsNotDefined)
 set(_expectedTargets)
-foreach(_expectedTarget gtest gtest_main)
+foreach(_expectedTarget LLVMTestingSupport gtest gtest_main)
   list(APPEND _expectedTargets ${_expectedTarget})
   if(NOT TARGET ${_expectedTarget})
     list(APPEND _targetsNotDefined ${_expectedTarget})
@@ -38,6 +38,13 @@ unset(_targetsNotDefined)
 unset(_expectedTargets)
 
 
+# Create imported target LLVMTestingSupport
+add_library(LLVMTestingSupport STATIC IMPORTED)
+
+set_target_properties(LLVMTestingSupport PROPERTIES
+  INTERFACE_LINK_LIBRARIES "LLVMSupport;\$<LINK_ONLY:gtest>"
+)
+
 # Create imported target gtest
 add_library(gtest STATIC IMPORTED)
 
@@ -51,6 +58,13 @@ add_library(gtest_main STATIC IMPORTED)
 set_target_properties(gtest_main PROPERTIES
   INTERFACE_LINK_LIBRARIES "gtest;LLVMSupport"
 )
+
+# Import target "LLVMTestingSupport" for configuration "Release"
+set_property(TARGET LLVMTestingSupport APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
+set_target_properties(LLVMTestingSupport PROPERTIES
+  IMPORTED_LINK_INTERFACE_LANGUAGES_RELEASE "CXX"
+  IMPORTED_LOCATION_RELEASE "/Users/alexisme/Development/chromium/src/third_party/llvm-build/Release+Asserts/lib/libLLVMTestingSupport.a"
+  )
 
 # Import target "gtest" for configuration "Release"
 set_property(TARGET gtest APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)

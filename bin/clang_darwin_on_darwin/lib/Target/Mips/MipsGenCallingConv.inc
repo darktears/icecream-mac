@@ -791,13 +791,15 @@ static bool RetCC_MipsO32(unsigned ValNo, MVT ValVT,
         LocInfo = CCValAssign::AExt;
   }
 
-  if (LocVT == MVT::i32) {
-    static const MCPhysReg RegList1[] = {
-      Mips::V0, Mips::V1, Mips::A0, Mips::A1
-    };
-    if (unsigned Reg = State.AllocateReg(RegList1)) {
-      State.addLoc(CCValAssign::getReg(ValNo, ValVT, Reg, LocVT, LocInfo));
-      return false;
+  if (!static_cast<MipsCCState *>(&State)->WasOriginalRetVectorFloat(ValNo)) {
+    if (LocVT == MVT::i32) {
+      static const MCPhysReg RegList1[] = {
+        Mips::V0, Mips::V1, Mips::A0, Mips::A1
+      };
+      if (unsigned Reg = State.AllocateReg(RegList1)) {
+        State.addLoc(CCValAssign::getReg(ValNo, ValVT, Reg, LocVT, LocInfo));
+        return false;
+      }
     }
   }
 

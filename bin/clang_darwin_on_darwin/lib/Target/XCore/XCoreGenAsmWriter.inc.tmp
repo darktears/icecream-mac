@@ -97,69 +97,70 @@ void XCoreInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
   /* 606 */ 'c', 'l', 'z', 32, 0,
   /* 611 */ '#', 32, 'S', 'E', 'L', 'E', 'C', 'T', '_', 'C', 'C', 32, 'P', 'S', 'E', 'U', 'D', 'O', '!', 0,
   /* 631 */ '#', 32, 'X', 'R', 'a', 'y', 32, 'F', 'u', 'n', 'c', 't', 'i', 'o', 'n', 32, 'P', 'a', 't', 'c', 'h', 'a', 'b', 'l', 'e', 32, 'R', 'E', 'T', '.', 0,
-  /* 662 */ '#', 32, 'X', 'R', 'a', 'y', 32, 'F', 'u', 'n', 'c', 't', 'i', 'o', 'n', 32, 'E', 'n', 't', 'e', 'r', '.', 0,
-  /* 685 */ '#', 32, 'X', 'R', 'a', 'y', 32, 'T', 'a', 'i', 'l', 32, 'C', 'a', 'l', 'l', 32, 'E', 'x', 'i', 't', '.', 0,
-  /* 708 */ '#', 32, 'X', 'R', 'a', 'y', 32, 'F', 'u', 'n', 'c', 't', 'i', 'o', 'n', 32, 'E', 'x', 'i', 't', '.', 0,
-  /* 730 */ 's', 'e', 't', 32, 'k', 'e', 'p', ',', 32, 'r', '1', '1', 0,
-  /* 743 */ 'L', 'I', 'F', 'E', 'T', 'I', 'M', 'E', '_', 'E', 'N', 'D', 0,
-  /* 756 */ 'B', 'U', 'N', 'D', 'L', 'E', 0,
-  /* 763 */ 'D', 'B', 'G', '_', 'V', 'A', 'L', 'U', 'E', 0,
-  /* 773 */ '#', 'M', 'E', 'M', 'B', 'A', 'R', 'R', 'I', 'E', 'R', 0,
-  /* 785 */ 'L', 'I', 'F', 'E', 'T', 'I', 'M', 'E', '_', 'S', 'T', 'A', 'R', 'T', 0,
-  /* 800 */ 'l', 'd', 'a', 'w', 32, 'r', '1', '1', ',', 32, 'c', 'p', '[', 0,
-  /* 814 */ 'l', 'd', 'w', 32, 'r', '1', '1', ',', 32, 'c', 'p', '[', 0,
-  /* 827 */ 'b', 'l', 'a', 32, 'c', 'p', '[', 0,
-  /* 835 */ 'm', 's', 'y', 'n', 'c', 32, 'r', 'e', 's', '[', 0,
-  /* 846 */ 's', 'e', 't', 'p', 's', 'c', 32, 'r', 'e', 's', '[', 0,
-  /* 858 */ 's', 'e', 't', 'c', 32, 'r', 'e', 's', '[', 0,
-  /* 868 */ 's', 'e', 't', 'd', 32, 'r', 'e', 's', '[', 0,
-  /* 878 */ 's', 'e', 't', 'c', 'l', 'k', 32, 'r', 'e', 's', '[', 0,
-  /* 890 */ 'm', 'j', 'o', 'i', 'n', 32, 'r', 'e', 's', '[', 0,
-  /* 901 */ 's', 'e', 't', 'n', 32, 'r', 'e', 's', '[', 0,
-  /* 911 */ 's', 'y', 'n', 'c', 'r', 32, 'r', 'e', 's', '[', 0,
-  /* 922 */ 'f', 'r', 'e', 'e', 'r', 32, 'r', 'e', 's', '[', 0,
-  /* 933 */ 'o', 'u', 't', 's', 'h', 'r', 32, 'r', 'e', 's', '[', 0,
-  /* 945 */ 'c', 'h', 'k', 'c', 't', 32, 'r', 'e', 's', '[', 0,
-  /* 956 */ 'o', 'u', 't', 'c', 't', 32, 'r', 'e', 's', '[', 0,
-  /* 967 */ 'c', 'l', 'r', 'p', 't', 32, 'r', 'e', 's', '[', 0,
-  /* 978 */ 's', 'e', 't', 'p', 't', 32, 'r', 'e', 's', '[', 0,
-  /* 989 */ 'o', 'u', 't', 't', 32, 'r', 'e', 's', '[', 0,
-  /* 999 */ 'o', 'u', 't', 32, 'r', 'e', 's', '[', 0,
-  /* 1008 */ 'e', 'd', 'u', 32, 'r', 'e', 's', '[', 0,
-  /* 1017 */ 'e', 'e', 'u', 32, 'r', 'e', 's', '[', 0,
-  /* 1026 */ 's', 'e', 't', 'e', 'v', 32, 'r', 'e', 's', '[', 0,
-  /* 1037 */ 's', 'e', 't', 'v', 32, 'r', 'e', 's', '[', 0,
-  /* 1047 */ 'o', 'u', 't', 'p', 'w', 32, 'r', 'e', 's', '[', 0,
-  /* 1058 */ 's', 'e', 't', 't', 'w', 32, 'r', 'e', 's', '[', 0,
-  /* 1069 */ 's', 'e', 't', 'r', 'd', 'y', 32, 'r', 'e', 's', '[', 0,
-  /* 1081 */ 's', 'e', 't', 32, 'p', 's', '[', 0,
-  /* 1089 */ 's', 'e', 't', 32, 't', '[', 0,
-  /* 1096 */ 'i', 'n', 'i', 't', 32, 't', '[', 0,
-  /* 1104 */ 's', 't', 'a', 'r', 't', 32, 't', '[', 0,
-  /* 1113 */ 'l', 'd', 'w', 32, 's', 'p', 'c', ',', 32, 's', 'p', '[', '1', ']', 0,
-  /* 1128 */ 's', 't', 'w', 32, 's', 'p', 'c', ',', 32, 's', 'p', '[', '1', ']', 0,
-  /* 1143 */ 'l', 'd', 'w', 32, 's', 's', 'r', ',', 32, 's', 'p', '[', '2', ']', 0,
-  /* 1158 */ 's', 't', 'w', 32, 's', 's', 'r', ',', 32, 's', 'p', '[', '2', ']', 0,
-  /* 1173 */ 'l', 'd', 'w', 32, 's', 'e', 'd', ',', 32, 's', 'p', '[', '3', ']', 0,
-  /* 1188 */ 's', 't', 'w', 32, 's', 'e', 'd', ',', 32, 's', 'p', '[', '3', ']', 0,
-  /* 1203 */ 'l', 'd', 'w', 32, 'e', 't', ',', 32, 's', 'p', '[', '4', ']', 0,
-  /* 1217 */ 's', 't', 'w', 32, 'e', 't', ',', 32, 's', 'p', '[', '4', ']', 0,
-  /* 1231 */ 's', 's', 'y', 'n', 'c', 0,
-  /* 1237 */ 'g', 'e', 't', 32, 'r', '1', '1', ',', 32, 'e', 'd', 0,
-  /* 1249 */ 'g', 'e', 't', 32, 'r', '1', '1', ',', 32, 'i', 'd', 0,
-  /* 1261 */ 'c', 'l', 'r', 'e', 0,
-  /* 1266 */ '#', 32, 'F', 'E', 'n', 't', 'r', 'y', 32, 'c', 'a', 'l', 'l', 0,
-  /* 1280 */ 'd', 'c', 'a', 'l', 'l', 0,
-  /* 1286 */ 'g', 'e', 't', 32, 'r', '1', '1', ',', 32, 'k', 'e', 'p', 0,
-  /* 1299 */ 'g', 'e', 't', 32, 'r', '1', '1', ',', 32, 'k', 's', 'p', 0,
-  /* 1312 */ 'd', 'e', 'n', 't', 's', 'p', 0,
-  /* 1319 */ 'd', 'r', 'e', 's', 't', 's', 'p', 0,
-  /* 1327 */ 't', 's', 'e', 't', 'm', 'r', 32, 'r', 0,
-  /* 1336 */ 'g', 'e', 't', 32, 'r', '1', '1', ',', 32, 'e', 't', 0,
-  /* 1348 */ 'f', 'r', 'e', 'e', 't', 0,
-  /* 1354 */ 'd', 'r', 'e', 't', 0,
-  /* 1359 */ 'k', 'r', 'e', 't', 0,
-  /* 1364 */ 'w', 'a', 'i', 't', 'e', 'u', 0,
+  /* 662 */ '#', 32, 'X', 'R', 'a', 'y', 32, 'C', 'u', 's', 't', 'o', 'm', 32, 'E', 'v', 'e', 'n', 't', 32, 'L', 'o', 'g', '.', 0,
+  /* 687 */ '#', 32, 'X', 'R', 'a', 'y', 32, 'F', 'u', 'n', 'c', 't', 'i', 'o', 'n', 32, 'E', 'n', 't', 'e', 'r', '.', 0,
+  /* 710 */ '#', 32, 'X', 'R', 'a', 'y', 32, 'T', 'a', 'i', 'l', 32, 'C', 'a', 'l', 'l', 32, 'E', 'x', 'i', 't', '.', 0,
+  /* 733 */ '#', 32, 'X', 'R', 'a', 'y', 32, 'F', 'u', 'n', 'c', 't', 'i', 'o', 'n', 32, 'E', 'x', 'i', 't', '.', 0,
+  /* 755 */ 's', 'e', 't', 32, 'k', 'e', 'p', ',', 32, 'r', '1', '1', 0,
+  /* 768 */ 'L', 'I', 'F', 'E', 'T', 'I', 'M', 'E', '_', 'E', 'N', 'D', 0,
+  /* 781 */ 'B', 'U', 'N', 'D', 'L', 'E', 0,
+  /* 788 */ 'D', 'B', 'G', '_', 'V', 'A', 'L', 'U', 'E', 0,
+  /* 798 */ '#', 'M', 'E', 'M', 'B', 'A', 'R', 'R', 'I', 'E', 'R', 0,
+  /* 810 */ 'L', 'I', 'F', 'E', 'T', 'I', 'M', 'E', '_', 'S', 'T', 'A', 'R', 'T', 0,
+  /* 825 */ 'l', 'd', 'a', 'w', 32, 'r', '1', '1', ',', 32, 'c', 'p', '[', 0,
+  /* 839 */ 'l', 'd', 'w', 32, 'r', '1', '1', ',', 32, 'c', 'p', '[', 0,
+  /* 852 */ 'b', 'l', 'a', 32, 'c', 'p', '[', 0,
+  /* 860 */ 'm', 's', 'y', 'n', 'c', 32, 'r', 'e', 's', '[', 0,
+  /* 871 */ 's', 'e', 't', 'p', 's', 'c', 32, 'r', 'e', 's', '[', 0,
+  /* 883 */ 's', 'e', 't', 'c', 32, 'r', 'e', 's', '[', 0,
+  /* 893 */ 's', 'e', 't', 'd', 32, 'r', 'e', 's', '[', 0,
+  /* 903 */ 's', 'e', 't', 'c', 'l', 'k', 32, 'r', 'e', 's', '[', 0,
+  /* 915 */ 'm', 'j', 'o', 'i', 'n', 32, 'r', 'e', 's', '[', 0,
+  /* 926 */ 's', 'e', 't', 'n', 32, 'r', 'e', 's', '[', 0,
+  /* 936 */ 's', 'y', 'n', 'c', 'r', 32, 'r', 'e', 's', '[', 0,
+  /* 947 */ 'f', 'r', 'e', 'e', 'r', 32, 'r', 'e', 's', '[', 0,
+  /* 958 */ 'o', 'u', 't', 's', 'h', 'r', 32, 'r', 'e', 's', '[', 0,
+  /* 970 */ 'c', 'h', 'k', 'c', 't', 32, 'r', 'e', 's', '[', 0,
+  /* 981 */ 'o', 'u', 't', 'c', 't', 32, 'r', 'e', 's', '[', 0,
+  /* 992 */ 'c', 'l', 'r', 'p', 't', 32, 'r', 'e', 's', '[', 0,
+  /* 1003 */ 's', 'e', 't', 'p', 't', 32, 'r', 'e', 's', '[', 0,
+  /* 1014 */ 'o', 'u', 't', 't', 32, 'r', 'e', 's', '[', 0,
+  /* 1024 */ 'o', 'u', 't', 32, 'r', 'e', 's', '[', 0,
+  /* 1033 */ 'e', 'd', 'u', 32, 'r', 'e', 's', '[', 0,
+  /* 1042 */ 'e', 'e', 'u', 32, 'r', 'e', 's', '[', 0,
+  /* 1051 */ 's', 'e', 't', 'e', 'v', 32, 'r', 'e', 's', '[', 0,
+  /* 1062 */ 's', 'e', 't', 'v', 32, 'r', 'e', 's', '[', 0,
+  /* 1072 */ 'o', 'u', 't', 'p', 'w', 32, 'r', 'e', 's', '[', 0,
+  /* 1083 */ 's', 'e', 't', 't', 'w', 32, 'r', 'e', 's', '[', 0,
+  /* 1094 */ 's', 'e', 't', 'r', 'd', 'y', 32, 'r', 'e', 's', '[', 0,
+  /* 1106 */ 's', 'e', 't', 32, 'p', 's', '[', 0,
+  /* 1114 */ 's', 'e', 't', 32, 't', '[', 0,
+  /* 1121 */ 'i', 'n', 'i', 't', 32, 't', '[', 0,
+  /* 1129 */ 's', 't', 'a', 'r', 't', 32, 't', '[', 0,
+  /* 1138 */ 'l', 'd', 'w', 32, 's', 'p', 'c', ',', 32, 's', 'p', '[', '1', ']', 0,
+  /* 1153 */ 's', 't', 'w', 32, 's', 'p', 'c', ',', 32, 's', 'p', '[', '1', ']', 0,
+  /* 1168 */ 'l', 'd', 'w', 32, 's', 's', 'r', ',', 32, 's', 'p', '[', '2', ']', 0,
+  /* 1183 */ 's', 't', 'w', 32, 's', 's', 'r', ',', 32, 's', 'p', '[', '2', ']', 0,
+  /* 1198 */ 'l', 'd', 'w', 32, 's', 'e', 'd', ',', 32, 's', 'p', '[', '3', ']', 0,
+  /* 1213 */ 's', 't', 'w', 32, 's', 'e', 'd', ',', 32, 's', 'p', '[', '3', ']', 0,
+  /* 1228 */ 'l', 'd', 'w', 32, 'e', 't', ',', 32, 's', 'p', '[', '4', ']', 0,
+  /* 1242 */ 's', 't', 'w', 32, 'e', 't', ',', 32, 's', 'p', '[', '4', ']', 0,
+  /* 1256 */ 's', 's', 'y', 'n', 'c', 0,
+  /* 1262 */ 'g', 'e', 't', 32, 'r', '1', '1', ',', 32, 'e', 'd', 0,
+  /* 1274 */ 'g', 'e', 't', 32, 'r', '1', '1', ',', 32, 'i', 'd', 0,
+  /* 1286 */ 'c', 'l', 'r', 'e', 0,
+  /* 1291 */ '#', 32, 'F', 'E', 'n', 't', 'r', 'y', 32, 'c', 'a', 'l', 'l', 0,
+  /* 1305 */ 'd', 'c', 'a', 'l', 'l', 0,
+  /* 1311 */ 'g', 'e', 't', 32, 'r', '1', '1', ',', 32, 'k', 'e', 'p', 0,
+  /* 1324 */ 'g', 'e', 't', 32, 'r', '1', '1', ',', 32, 'k', 's', 'p', 0,
+  /* 1337 */ 'd', 'e', 'n', 't', 's', 'p', 0,
+  /* 1344 */ 'd', 'r', 'e', 's', 't', 's', 'p', 0,
+  /* 1352 */ 't', 's', 'e', 't', 'm', 'r', 32, 'r', 0,
+  /* 1361 */ 'g', 'e', 't', 32, 'r', '1', '1', ',', 32, 'e', 't', 0,
+  /* 1373 */ 'f', 'r', 'e', 'e', 't', 0,
+  /* 1379 */ 'd', 'r', 'e', 't', 0,
+  /* 1384 */ 'k', 'r', 'e', 't', 0,
+  /* 1389 */ 'w', 'a', 'i', 't', 'e', 'u', 0,
   };
 
   static const uint32_t OpInfo0[] = {
@@ -174,24 +175,25 @@ void XCoreInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// IMPLICIT_DEF
     0U,	// SUBREG_TO_REG
     0U,	// COPY_TO_REGCLASS
-    764U,	// DBG_VALUE
+    789U,	// DBG_VALUE
     0U,	// REG_SEQUENCE
     0U,	// COPY
-    757U,	// BUNDLE
-    786U,	// LIFETIME_START
-    744U,	// LIFETIME_END
+    782U,	// BUNDLE
+    811U,	// LIFETIME_START
+    769U,	// LIFETIME_END
     0U,	// STACKMAP
-    1267U,	// FENTRY_CALL
+    1292U,	// FENTRY_CALL
     0U,	// PATCHPOINT
     0U,	// LOAD_STACK_GUARD
     0U,	// STATEPOINT
     0U,	// LOCAL_ESCAPE
     0U,	// FAULTING_OP
     0U,	// PATCHABLE_OP
-    663U,	// PATCHABLE_FUNCTION_ENTER
+    688U,	// PATCHABLE_FUNCTION_ENTER
     632U,	// PATCHABLE_RET
-    709U,	// PATCHABLE_FUNCTION_EXIT
-    686U,	// PATCHABLE_TAIL_CALL
+    734U,	// PATCHABLE_FUNCTION_EXIT
+    711U,	// PATCHABLE_TAIL_CALL
+    663U,	// PATCHABLE_EVENT_CALL
     0U,	// G_ADD
     0U,	// G_SUB
     0U,	// G_MUL
@@ -261,7 +263,7 @@ void XCoreInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     0U,	// G_SHUFFLE_VECTOR
     2250U,	// ADD_2rus
     2250U,	// ADD_3r
-    10363U,	// ADJCALLSTACKDOWN
+    2099323U,	// ADJCALLSTACKDOWN
     10383U,	// ADJCALLSTACKUP
     2361840U,	// ANDNOT_2r
     2255U,	// AND_3r
@@ -269,8 +271,8 @@ void XCoreInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     2404U,	// ASHR_l3r
     10769U,	// BAU_1r
     2099777U,	// BITREV_l2r
-    19260U,	// BLACP_lu10
-    19260U,	// BLACP_u10
+    19285U,	// BLACP_lu10
+    19285U,	// BLACP_u10
     10672U,	// BLAT_lu6
     10672U,	// BLAT_u6
     10425U,	// BLA_1r
@@ -294,10 +296,10 @@ void XCoreInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     553511U,	// BR_JT
     815655U,	// BR_JT32
     2099768U,	// BYTEREV_l2r
-    2132914U,	// CHKCT_2r
-    2132914U,	// CHKCT_rus
-    1262U,	// CLRE_0R
-    19400U,	// CLRPT_1R
+    2132939U,	// CHKCT_2r
+    2132939U,	// CHKCT_rus
+    1287U,	// CLRE_0R
+    19425U,	// CLRPT_1R
     10614U,	// CLRSR_branch_lu6
     10614U,	// CLRSR_branch_u6
     10614U,	// CLRSR_lu6
@@ -305,19 +307,19 @@ void XCoreInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     2099807U,	// CLZ_l2r
     5247047U,	// CRC8_l4r
     17041459U,	// CRC_l3r
-    1281U,	// DCALL_0R
-    1313U,	// DENTSP_0R
+    1306U,	// DCALL_0R
+    1338U,	// DENTSP_0R
     10488U,	// DGETREG_1r
     2474U,	// DIVS_l3r
     2610U,	// DIVU_l3r
-    1320U,	// DRESTSP_0R
-    1355U,	// DRET_0R
+    1345U,	// DRESTSP_0R
+    1380U,	// DRET_0R
     10475U,	// ECALLF_1r
     10723U,	// ECALLT_1r
-    19441U,	// EDU_1r
+    19466U,	// EDU_1r
     6334686U,	// EEF_2r
     6334929U,	// EET_2r
-    19450U,	// EEU_1r
+    19475U,	// EEU_1r
     2099310U,	// EH_RETURN
     6334765U,	// ENDIN_2r
     10569U,	// ENTSP_lu6
@@ -329,14 +331,14 @@ void XCoreInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     10585U,	// EXTSP_lu6
     10585U,	// EXTSP_u6
     10401U,	// FRAME_TO_ARGS_OFFSET
-    19355U,	// FREER_1r
-    1349U,	// FREET_0R
+    19380U,	// FREER_1r
+    1374U,	// FREET_0R
     6334676U,	// GETD_l2r
-    1238U,	// GETED_0R
-    1337U,	// GETET_0R
-    1250U,	// GETID_0R
-    1287U,	// GETKEP_0R
-    1300U,	// GETKSP_0R
+    1263U,	// GETED_0R
+    1362U,	// GETET_0R
+    1275U,	// GETID_0R
+    1312U,	// GETKEP_0R
+    1325U,	// GETKSP_0R
     6334772U,	// GETN_l2r
     51670U,	// GETPS_l2r
     2099588U,	// GETR_rus
@@ -345,16 +347,16 @@ void XCoreInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     6334968U,	// GETST_2r
     6334883U,	// GETTS_2r
     6334906U,	// INCT_2r
-    62537U,	// INITCP_2r
-    70729U,	// INITDP_2r
-    78921U,	// INITLR_l2r
-    87113U,	// INITPC_2r
-    95305U,	// INITSP_2r
+    62562U,	// INITCP_2r
+    70754U,	// INITDP_2r
+    78946U,	// INITLR_l2r
+    87138U,	// INITPC_2r
+    95330U,	// INITSP_2r
     8432212U,	// INPW_l2rus
     6596970U,	// INSHR_2r
     6334955U,	// INT_2r
     6334768U,	// IN_2r
-    774U,	// Int_MemBarrier
+    799U,	// Int_MemBarrier
     10528U,	// KCALL_1r
     10528U,	// KCALL_lu6
     10528U,	// KCALL_u6
@@ -362,7 +364,7 @@ void XCoreInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     10568U,	// KENTSP_u6
     10576U,	// KRESTSP_lu6
     10576U,	// KRESTSP_u6
-    1360U,	// KRET_0R
+    1385U,	// KRET_0R
     45093065U,	// LADD_l5r
     12585354U,	// LD16S_3r
     12585483U,	// LD8U_3r
@@ -375,8 +377,8 @@ void XCoreInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     10241U,	// LDAPF_u10
     14682697U,	// LDAWB_l2rus
     14682697U,	// LDAWB_l3r
-    19233U,	// LDAWCP_lu6
-    19233U,	// LDAWCP_u6
+    19258U,	// LDAWCP_lu6
+    19258U,	// LDAWCP_u6
     100937U,	// LDAWDP_lru6
     100937U,	// LDAWDP_ru6
     2099282U,	// LDAWFI
@@ -386,15 +388,15 @@ void XCoreInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     109129U,	// LDAWSP_ru6
     2099396U,	// LDC_lru6
     2099396U,	// LDC_ru6
-    1204U,	// LDET_0R
+    1229U,	// LDET_0R
     184551985U,	// LDIVU_l5r
-    1174U,	// LDSED_0R
-    1114U,	// LDSPC_0R
-    1144U,	// LDSSR_0R
+    1199U,	// LDSED_0R
+    1139U,	// LDSPC_0R
+    1169U,	// LDSSR_0R
     117327U,	// LDWCP_lru6
-    19247U,	// LDWCP_lu10
+    19272U,	// LDWCP_lu10
     117327U,	// LDWCP_ru6
-    19247U,	// LDWCP_u10
+    19272U,	// LDWCP_u10
     100943U,	// LDWDP_lru6
     100943U,	// LDWDP_ru6
     2099292U,	// LDWFI
@@ -408,60 +410,60 @@ void XCoreInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     2604U,	// LSU_3r
     452987281U,	// MACCS_l4r
     452987418U,	// MACCU_l4r
-    19323U,	// MJOIN_1r
+    19348U,	// MJOIN_1r
     2099463U,	// MKMSK_2r
     2099463U,	// MKMSK_rus
-    19268U,	// MSYNC_1r
+    19293U,	// MSYNC_1r
     2344U,	// MUL_l3r
     2099443U,	// NEG
     2099699U,	// NOT
     2418U,	// OR_3r
-    2132925U,	// OUTCT_2r
-    2132925U,	// OUTCT_rus
-    78681112U,	// OUTPW_l2rus
-    2136998U,	// OUTSHR_2r
-    2132958U,	// OUTT_2r
-    2132968U,	// OUT_2r
+    2132950U,	// OUTCT_2r
+    2132950U,	// OUTCT_rus
+    78681137U,	// OUTPW_l2rus
+    2137023U,	// OUTSHR_2r
+    2132983U,	// OUTT_2r
+    2132993U,	// OUT_2r
     6334721U,	// PEEK_2r
     2456U,	// REMS_l3r
     2593U,	// REMU_l3r
     10561U,	// RETSP_lu6
     10561U,	// RETSP_u6
     612U,	// SELECT_CC
-    2132847U,	// SETCLK_l2r
+    2132872U,	// SETCLK_l2r
     10264U,	// SETCP_1r
-    2132827U,	// SETC_l2r
-    2132827U,	// SETC_lru6
-    2132827U,	// SETC_ru6
+    2132852U,	// SETC_l2r
+    2132852U,	// SETC_lru6
+    2132852U,	// SETC_ru6
     10273U,	// SETDP_1r
-    2132837U,	// SETD_2r
-    125955U,	// SETEV_1r
-    731U,	// SETKEP_0R
-    2132870U,	// SETN_l2r
-    2132815U,	// SETPSC_2r
-    2133050U,	// SETPS_l2r
-    2132947U,	// SETPT_2r
-    2133038U,	// SETRDY_l2r
+    2132862U,	// SETD_2r
+    125980U,	// SETEV_1r
+    756U,	// SETKEP_0R
+    2132895U,	// SETN_l2r
+    2132840U,	// SETPSC_2r
+    2133075U,	// SETPS_l2r
+    2132972U,	// SETPT_2r
+    2133063U,	// SETRDY_l2r
     10282U,	// SETSP_1r
     10621U,	// SETSR_branch_lu6
     10621U,	// SETSR_branch_u6
     10621U,	// SETSR_lu6
     10621U,	// SETSR_u6
-    2133027U,	// SETTW_l2r
-    125966U,	// SETV_1r
+    2133052U,	// SETTW_l2r
+    125991U,	// SETV_1r
     2361855U,	// SEXT_2r
     2361855U,	// SEXT_rus
     2331U,	// SHL_2rus
     2331U,	// SHL_3r
     2405U,	// SHR_2rus
     2405U,	// SHR_3r
-    1232U,	// SSYNC_0r
+    1257U,	// SSYNC_0r
     12585025U,	// ST16_l3r
     12585037U,	// ST8_l3r
-    1218U,	// STET_0R
-    1189U,	// STSED_0R
-    1129U,	// STSPC_0R
-    1159U,	// STSSR_0R
+    1243U,	// STET_0R
+    1214U,	// STSED_0R
+    1154U,	// STSPC_0R
+    1184U,	// STSSR_0R
     100954U,	// STWDP_lru6
     100954U,	// STWDP_ru6
     2099301U,	// STWFI
@@ -471,16 +473,16 @@ void XCoreInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     12585562U,	// STW_l3r
     2239U,	// SUB_2rus
     2239U,	// SUB_3r
-    19344U,	// SYNCR_1r
+    19369U,	// SYNCR_1r
     6334912U,	// TESTCT_2r
     6334738U,	// TESTLCL_l2r
     6334920U,	// TESTWCT_2r
-    2100528U,	// TSETMR_2r
-    138306U,	// TSETR_3r
-    19537U,	// TSTART_1R
+    2100553U,	// TSETMR_2r
+    138331U,	// TSETR_3r
+    19562U,	// TSTART_1R
     10467U,	// WAITEF_1R
     10715U,	// WAITET_1R
-    1365U,	// WAITEU_0R
+    1390U,	// WAITEU_0R
     2417U,	// XOR_l3r
     2361861U,	// ZEXT_2r
     2361861U,	// ZEXT_rus
@@ -521,11 +523,11 @@ void XCoreInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
   switch ((Bits >> 13) & 31) {
   default: llvm_unreachable("Invalid command number.");
   case 0:
-    // ADD_2rus, ADD_3r, ANDNOT_2r, AND_3r, ASHR_l2rus, ASHR_l3r, BITREV_l2r,...
+    // ADD_2rus, ADD_3r, ADJCALLSTACKDOWN, ANDNOT_2r, AND_3r, ASHR_l2rus, ASH...
     O << ", ";
     break;
   case 1:
-    // ADJCALLSTACKDOWN, ADJCALLSTACKUP, BAU_1r, BLAT_lu6, BLAT_u6, BLA_1r, B...
+    // ADJCALLSTACKUP, BAU_1r, BLAT_lu6, BLAT_u6, BLA_1r, BLRB_lu10, BLRB_u10...
     return;
     break;
   case 2:
@@ -623,7 +625,7 @@ void XCoreInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
   switch ((Bits >> 18) & 7) {
   default: llvm_unreachable("Invalid command number.");
   case 0:
-    // ADD_2rus, ADD_3r, AND_3r, ASHR_l2rus, ASHR_l3r, BITREV_l2r, BRBF_lru6,...
+    // ADD_2rus, ADD_3r, ADJCALLSTACKDOWN, AND_3r, ASHR_l2rus, ASHR_l3r, BITR...
     printOperand(MI, 1, O);
     break;
   case 1:
@@ -656,7 +658,7 @@ void XCoreInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     O << ", ";
     break;
   case 1:
-    // ANDNOT_2r, BITREV_l2r, BRBF_lru6, BRBF_ru6, BRBT_lru6, BRBT_ru6, BRFF_...
+    // ADJCALLSTACKDOWN, ANDNOT_2r, BITREV_l2r, BRBF_lru6, BRBF_ru6, BRBT_lru...
     return;
     break;
   case 2:

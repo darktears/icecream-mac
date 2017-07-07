@@ -521,16 +521,17 @@ void AArch64InstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInf
   /* 3761 */ '.', 't', 'l', 's', 'd', 'e', 's', 'c', 'c', 'a', 'l', 'l', 32, 0,
   /* 3775 */ '#', 32, 'X', 'R', 'a', 'y', 32, 'F', 'u', 'n', 'c', 't', 'i', 'o', 'n', 32, 'P', 'a', 't', 'c', 'h', 'a', 'b', 'l', 'e', 32, 'R', 'E', 'T', '.', 0,
   /* 3806 */ 'b', '.', 0,
-  /* 3809 */ '#', 32, 'X', 'R', 'a', 'y', 32, 'F', 'u', 'n', 'c', 't', 'i', 'o', 'n', 32, 'E', 'n', 't', 'e', 'r', '.', 0,
-  /* 3832 */ '#', 32, 'X', 'R', 'a', 'y', 32, 'T', 'a', 'i', 'l', 32, 'C', 'a', 'l', 'l', 32, 'E', 'x', 'i', 't', '.', 0,
-  /* 3855 */ '#', 32, 'X', 'R', 'a', 'y', 32, 'F', 'u', 'n', 'c', 't', 'i', 'o', 'n', 32, 'E', 'x', 'i', 't', '.', 0,
-  /* 3877 */ 'L', 'I', 'F', 'E', 'T', 'I', 'M', 'E', '_', 'E', 'N', 'D', 0,
-  /* 3890 */ 'B', 'U', 'N', 'D', 'L', 'E', 0,
-  /* 3897 */ 'D', 'B', 'G', '_', 'V', 'A', 'L', 'U', 'E', 0,
-  /* 3907 */ 'L', 'I', 'F', 'E', 'T', 'I', 'M', 'E', '_', 'S', 'T', 'A', 'R', 'T', 0,
-  /* 3922 */ '#', 32, 'F', 'E', 'n', 't', 'r', 'y', 32, 'c', 'a', 'l', 'l', 0,
-  /* 3936 */ 'd', 'r', 'p', 's', 0,
-  /* 3941 */ 'e', 'r', 'e', 't', 0,
+  /* 3809 */ '#', 32, 'X', 'R', 'a', 'y', 32, 'C', 'u', 's', 't', 'o', 'm', 32, 'E', 'v', 'e', 'n', 't', 32, 'L', 'o', 'g', '.', 0,
+  /* 3834 */ '#', 32, 'X', 'R', 'a', 'y', 32, 'F', 'u', 'n', 'c', 't', 'i', 'o', 'n', 32, 'E', 'n', 't', 'e', 'r', '.', 0,
+  /* 3857 */ '#', 32, 'X', 'R', 'a', 'y', 32, 'T', 'a', 'i', 'l', 32, 'C', 'a', 'l', 'l', 32, 'E', 'x', 'i', 't', '.', 0,
+  /* 3880 */ '#', 32, 'X', 'R', 'a', 'y', 32, 'F', 'u', 'n', 'c', 't', 'i', 'o', 'n', 32, 'E', 'x', 'i', 't', '.', 0,
+  /* 3902 */ 'L', 'I', 'F', 'E', 'T', 'I', 'M', 'E', '_', 'E', 'N', 'D', 0,
+  /* 3915 */ 'B', 'U', 'N', 'D', 'L', 'E', 0,
+  /* 3922 */ 'D', 'B', 'G', '_', 'V', 'A', 'L', 'U', 'E', 0,
+  /* 3932 */ 'L', 'I', 'F', 'E', 'T', 'I', 'M', 'E', '_', 'S', 'T', 'A', 'R', 'T', 0,
+  /* 3947 */ '#', 32, 'F', 'E', 'n', 't', 'r', 'y', 32, 'c', 'a', 'l', 'l', 0,
+  /* 3961 */ 'd', 'r', 'p', 's', 0,
+  /* 3966 */ 'e', 'r', 'e', 't', 0,
   };
 
   static const uint32_t OpInfo0[] = {
@@ -545,24 +546,25 @@ void AArch64InstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInf
     0U,	// IMPLICIT_DEF
     0U,	// SUBREG_TO_REG
     0U,	// COPY_TO_REGCLASS
-    3898U,	// DBG_VALUE
+    3923U,	// DBG_VALUE
     0U,	// REG_SEQUENCE
     0U,	// COPY
-    3891U,	// BUNDLE
-    3908U,	// LIFETIME_START
-    3878U,	// LIFETIME_END
+    3916U,	// BUNDLE
+    3933U,	// LIFETIME_START
+    3903U,	// LIFETIME_END
     0U,	// STACKMAP
-    3923U,	// FENTRY_CALL
+    3948U,	// FENTRY_CALL
     0U,	// PATCHPOINT
     0U,	// LOAD_STACK_GUARD
     0U,	// STATEPOINT
     0U,	// LOCAL_ESCAPE
     0U,	// FAULTING_OP
     0U,	// PATCHABLE_OP
-    3810U,	// PATCHABLE_FUNCTION_ENTER
+    3835U,	// PATCHABLE_FUNCTION_ENTER
     3776U,	// PATCHABLE_RET
-    3856U,	// PATCHABLE_FUNCTION_EXIT
-    3833U,	// PATCHABLE_TAIL_CALL
+    3881U,	// PATCHABLE_FUNCTION_EXIT
+    3858U,	// PATCHABLE_TAIL_CALL
+    3810U,	// PATCHABLE_EVENT_CALL
     0U,	// G_ADD
     0U,	// G_SUB
     0U,	// G_MUL
@@ -907,11 +909,12 @@ void AArch64InstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInf
     17051078U,	// CSINVXr
     17049014U,	// CSNEGWr
     17049014U,	// CSNEGXr
+    0U,	// CompilerBarrier
     20524U,	// DCPS1
     20889U,	// DCPS2
     20938U,	// DCPS3
     41898U,	// DMB
-    3937U,	// DRPS
+    3962U,	// DRPS
     42049U,	// DSB
     553655131U,	// DUPv16i8gpr
     2147490651U,	// DUPv16i8lane
@@ -939,7 +942,7 @@ void AArch64InstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInf
     17050627U,	// EORXrs
     2147490819U,	// EORv16i8
     3759938563U,	// EORv8i8
-    3942U,	// ERET
+    3967U,	// ERET
     17050674U,	// EXTRWrri
     17050674U,	// EXTRXrri
     2147491133U,	// EXTv16i8
@@ -3455,6 +3458,7 @@ void AArch64InstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInf
     0U,	// PATCHABLE_RET
     0U,	// PATCHABLE_FUNCTION_EXIT
     0U,	// PATCHABLE_TAIL_CALL
+    0U,	// PATCHABLE_EVENT_CALL
     0U,	// G_ADD
     0U,	// G_SUB
     0U,	// G_MUL
@@ -3799,6 +3803,7 @@ void AArch64InstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInf
     10497U,	// CSINVXr
     10497U,	// CSNEGWr
     10497U,	// CSNEGXr
+    0U,	// CompilerBarrier
     0U,	// DCPS1
     0U,	// DCPS2
     0U,	// DCPS3
@@ -6347,6 +6352,7 @@ void AArch64InstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInf
     0U,	// PATCHABLE_RET
     0U,	// PATCHABLE_FUNCTION_EXIT
     0U,	// PATCHABLE_TAIL_CALL
+    0U,	// PATCHABLE_EVENT_CALL
     0U,	// G_ADD
     0U,	// G_SUB
     0U,	// G_MUL
@@ -6691,6 +6697,7 @@ void AArch64InstPrinter::printInstruction(const MCInst *MI, const MCSubtargetInf
     0U,	// CSINVXr
     0U,	// CSNEGWr
     0U,	// CSNEGXr
+    0U,	// CompilerBarrier
     0U,	// DCPS1
     0U,	// DCPS2
     0U,	// DCPS3

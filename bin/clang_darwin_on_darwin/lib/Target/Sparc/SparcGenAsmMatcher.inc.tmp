@@ -1617,11 +1617,11 @@ enum MatchClassKind {
   MCK_pn, // 'pn'
   MCK_pt, // 'pt'
   MCK_FCCRegs, // register class 'FCCRegs'
-  MCK_Reg8, // derived register class
+  MCK_LowQFPRegs, // register class 'LowQFPRegs'
   MCK_PRRegs, // register class 'PRRegs'
-  MCK_Reg5, // derived register class
   MCK_CoprocPair, // register class 'CoprocPair'
   MCK_IntPair, // register class 'IntPair'
+  MCK_LowDFPRegs, // register class 'LowDFPRegs'
   MCK_QFPRegs, // register class 'QFPRegs'
   MCK_ASRRegs, // register class 'ASRRegs'
   MCK_CoprocRegs, // register class 'CoprocRegs'
@@ -1745,10 +1745,10 @@ static bool isSubclass(MatchClassKind A, MatchClassKind B) {
   default:
     return false;
 
-  case MCK_Reg8:
+  case MCK_LowQFPRegs:
     return B == MCK_QFPRegs;
 
-  case MCK_Reg5:
+  case MCK_LowDFPRegs:
     return B == MCK_DFPRegs;
   }
 }
@@ -1901,22 +1901,22 @@ static unsigned validateOperandClass(MCParsedAsmOperand &GOp, MatchClassKind Kin
     case Sparc::F29: OpKind = MCK_FPRegs; break;
     case Sparc::F30: OpKind = MCK_FPRegs; break;
     case Sparc::F31: OpKind = MCK_FPRegs; break;
-    case Sparc::D0: OpKind = MCK_Reg5; break;
-    case Sparc::D1: OpKind = MCK_Reg5; break;
-    case Sparc::D2: OpKind = MCK_Reg5; break;
-    case Sparc::D3: OpKind = MCK_Reg5; break;
-    case Sparc::D4: OpKind = MCK_Reg5; break;
-    case Sparc::D5: OpKind = MCK_Reg5; break;
-    case Sparc::D6: OpKind = MCK_Reg5; break;
-    case Sparc::D7: OpKind = MCK_Reg5; break;
-    case Sparc::D8: OpKind = MCK_Reg5; break;
-    case Sparc::D9: OpKind = MCK_Reg5; break;
-    case Sparc::D10: OpKind = MCK_Reg5; break;
-    case Sparc::D11: OpKind = MCK_Reg5; break;
-    case Sparc::D12: OpKind = MCK_Reg5; break;
-    case Sparc::D13: OpKind = MCK_Reg5; break;
-    case Sparc::D14: OpKind = MCK_Reg5; break;
-    case Sparc::D15: OpKind = MCK_Reg5; break;
+    case Sparc::D0: OpKind = MCK_LowDFPRegs; break;
+    case Sparc::D1: OpKind = MCK_LowDFPRegs; break;
+    case Sparc::D2: OpKind = MCK_LowDFPRegs; break;
+    case Sparc::D3: OpKind = MCK_LowDFPRegs; break;
+    case Sparc::D4: OpKind = MCK_LowDFPRegs; break;
+    case Sparc::D5: OpKind = MCK_LowDFPRegs; break;
+    case Sparc::D6: OpKind = MCK_LowDFPRegs; break;
+    case Sparc::D7: OpKind = MCK_LowDFPRegs; break;
+    case Sparc::D8: OpKind = MCK_LowDFPRegs; break;
+    case Sparc::D9: OpKind = MCK_LowDFPRegs; break;
+    case Sparc::D10: OpKind = MCK_LowDFPRegs; break;
+    case Sparc::D11: OpKind = MCK_LowDFPRegs; break;
+    case Sparc::D12: OpKind = MCK_LowDFPRegs; break;
+    case Sparc::D13: OpKind = MCK_LowDFPRegs; break;
+    case Sparc::D14: OpKind = MCK_LowDFPRegs; break;
+    case Sparc::D15: OpKind = MCK_LowDFPRegs; break;
     case Sparc::C0: OpKind = MCK_CoprocRegs; break;
     case Sparc::C1: OpKind = MCK_CoprocRegs; break;
     case Sparc::C2: OpKind = MCK_CoprocRegs; break;
@@ -1965,14 +1965,14 @@ static unsigned validateOperandClass(MCParsedAsmOperand &GOp, MatchClassKind Kin
     case Sparc::D29: OpKind = MCK_DFPRegs; break;
     case Sparc::D30: OpKind = MCK_DFPRegs; break;
     case Sparc::D31: OpKind = MCK_DFPRegs; break;
-    case Sparc::Q0: OpKind = MCK_Reg8; break;
-    case Sparc::Q1: OpKind = MCK_Reg8; break;
-    case Sparc::Q2: OpKind = MCK_Reg8; break;
-    case Sparc::Q3: OpKind = MCK_Reg8; break;
-    case Sparc::Q4: OpKind = MCK_Reg8; break;
-    case Sparc::Q5: OpKind = MCK_Reg8; break;
-    case Sparc::Q6: OpKind = MCK_Reg8; break;
-    case Sparc::Q7: OpKind = MCK_Reg8; break;
+    case Sparc::Q0: OpKind = MCK_LowQFPRegs; break;
+    case Sparc::Q1: OpKind = MCK_LowQFPRegs; break;
+    case Sparc::Q2: OpKind = MCK_LowQFPRegs; break;
+    case Sparc::Q3: OpKind = MCK_LowQFPRegs; break;
+    case Sparc::Q4: OpKind = MCK_LowQFPRegs; break;
+    case Sparc::Q5: OpKind = MCK_LowQFPRegs; break;
+    case Sparc::Q6: OpKind = MCK_LowQFPRegs; break;
+    case Sparc::Q7: OpKind = MCK_LowQFPRegs; break;
     case Sparc::Q8: OpKind = MCK_QFPRegs; break;
     case Sparc::Q9: OpKind = MCK_QFPRegs; break;
     case Sparc::Q10: OpKind = MCK_QFPRegs; break;

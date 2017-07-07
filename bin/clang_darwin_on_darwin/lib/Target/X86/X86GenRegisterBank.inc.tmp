@@ -86,7 +86,7 @@ const uint32_t GPRRegBankCoverageData[] = {
     (1u << (X86::GR64_NOREX_NOSP_and_LOW32_ADDR_ACCESS_RBPRegClassID - 64)) |
     (1u << (X86::GR64_TC_and_GR64_NOSP_and_GR64_TCW64RegClassID - 64)) |
     (1u << (X86::GR64_with_sub_32bit_in_GR32_TCRegClassID - 64)) |
-    (1u << (X86::GR64_with_sub_32bit_in_GR32_ADRegClassID - 64)) |
+    (1u << (X86::GR64_ADRegClassID - 64)) |
     (1u << (X86::GR64_NOREX_NOSP_and_GR64_TCRegClassID - 64)) |
     (1u << (X86::GR64_ABCDRegClassID - 64)) |
     (1u << (X86::GR64_NOSP_and_GR64_TCW64RegClassID - 64)) |

@@ -984,6 +984,74 @@ unsigned fastEmit_ARMISD_WIN__DBZCHK_r(MVT VT, MVT RetVT, unsigned Op0, bool Op0
   }
 }
 
+// FastEmit functions for ISD::ABS.
+
+unsigned fastEmit_ISD_ABS_MVT_v8i8_r(MVT RetVT, unsigned Op0, bool Op0IsKill) {
+  if (RetVT.SimpleTy != MVT::v8i8)
+    return 0;
+  if ((Subtarget->hasNEON())) {
+    return fastEmitInst_r(ARM::VABSv8i8, &ARM::DPRRegClass, Op0, Op0IsKill);
+  }
+  return 0;
+}
+
+unsigned fastEmit_ISD_ABS_MVT_v16i8_r(MVT RetVT, unsigned Op0, bool Op0IsKill) {
+  if (RetVT.SimpleTy != MVT::v16i8)
+    return 0;
+  if ((Subtarget->hasNEON())) {
+    return fastEmitInst_r(ARM::VABSv16i8, &ARM::QPRRegClass, Op0, Op0IsKill);
+  }
+  return 0;
+}
+
+unsigned fastEmit_ISD_ABS_MVT_v4i16_r(MVT RetVT, unsigned Op0, bool Op0IsKill) {
+  if (RetVT.SimpleTy != MVT::v4i16)
+    return 0;
+  if ((Subtarget->hasNEON())) {
+    return fastEmitInst_r(ARM::VABSv4i16, &ARM::DPRRegClass, Op0, Op0IsKill);
+  }
+  return 0;
+}
+
+unsigned fastEmit_ISD_ABS_MVT_v8i16_r(MVT RetVT, unsigned Op0, bool Op0IsKill) {
+  if (RetVT.SimpleTy != MVT::v8i16)
+    return 0;
+  if ((Subtarget->hasNEON())) {
+    return fastEmitInst_r(ARM::VABSv8i16, &ARM::QPRRegClass, Op0, Op0IsKill);
+  }
+  return 0;
+}
+
+unsigned fastEmit_ISD_ABS_MVT_v2i32_r(MVT RetVT, unsigned Op0, bool Op0IsKill) {
+  if (RetVT.SimpleTy != MVT::v2i32)
+    return 0;
+  if ((Subtarget->hasNEON())) {
+    return fastEmitInst_r(ARM::VABSv2i32, &ARM::DPRRegClass, Op0, Op0IsKill);
+  }
+  return 0;
+}
+
+unsigned fastEmit_ISD_ABS_MVT_v4i32_r(MVT RetVT, unsigned Op0, bool Op0IsKill) {
+  if (RetVT.SimpleTy != MVT::v4i32)
+    return 0;
+  if ((Subtarget->hasNEON())) {
+    return fastEmitInst_r(ARM::VABSv4i32, &ARM::QPRRegClass, Op0, Op0IsKill);
+  }
+  return 0;
+}
+
+unsigned fastEmit_ISD_ABS_r(MVT VT, MVT RetVT, unsigned Op0, bool Op0IsKill) {
+  switch (VT.SimpleTy) {
+  case MVT::v8i8: return fastEmit_ISD_ABS_MVT_v8i8_r(RetVT, Op0, Op0IsKill);
+  case MVT::v16i8: return fastEmit_ISD_ABS_MVT_v16i8_r(RetVT, Op0, Op0IsKill);
+  case MVT::v4i16: return fastEmit_ISD_ABS_MVT_v4i16_r(RetVT, Op0, Op0IsKill);
+  case MVT::v8i16: return fastEmit_ISD_ABS_MVT_v8i16_r(RetVT, Op0, Op0IsKill);
+  case MVT::v2i32: return fastEmit_ISD_ABS_MVT_v2i32_r(RetVT, Op0, Op0IsKill);
+  case MVT::v4i32: return fastEmit_ISD_ABS_MVT_v4i32_r(RetVT, Op0, Op0IsKill);
+  default: return 0;
+  }
+}
+
 // FastEmit functions for ISD::ANY_EXTEND.
 
 unsigned fastEmit_ISD_ANY_EXTEND_MVT_v8i8_r(MVT RetVT, unsigned Op0, bool Op0IsKill) {
@@ -2414,6 +2482,7 @@ unsigned fastEmit_r(MVT VT, MVT RetVT, unsigned Opcode, unsigned Op0, bool Op0Is
   case ARMISD::VREV32: return fastEmit_ARMISD_VREV32_r(VT, RetVT, Op0, Op0IsKill);
   case ARMISD::VREV64: return fastEmit_ARMISD_VREV64_r(VT, RetVT, Op0, Op0IsKill);
   case ARMISD::WIN__DBZCHK: return fastEmit_ARMISD_WIN__DBZCHK_r(VT, RetVT, Op0, Op0IsKill);
+  case ISD::ABS: return fastEmit_ISD_ABS_r(VT, RetVT, Op0, Op0IsKill);
   case ISD::ANY_EXTEND: return fastEmit_ISD_ANY_EXTEND_r(VT, RetVT, Op0, Op0IsKill);
   case ISD::BITCAST: return fastEmit_ISD_BITCAST_r(VT, RetVT, Op0, Op0IsKill);
   case ISD::BITREVERSE: return fastEmit_ISD_BITREVERSE_r(VT, RetVT, Op0, Op0IsKill);
@@ -3137,6 +3206,24 @@ unsigned fastEmit_ARMISD_VMULLu_rr(MVT VT, MVT RetVT, unsigned Op0, bool Op0IsKi
   case MVT::v8i8: return fastEmit_ARMISD_VMULLu_MVT_v8i8_rr(RetVT, Op0, Op0IsKill, Op1, Op1IsKill);
   case MVT::v4i16: return fastEmit_ARMISD_VMULLu_MVT_v4i16_rr(RetVT, Op0, Op0IsKill, Op1, Op1IsKill);
   case MVT::v2i32: return fastEmit_ARMISD_VMULLu_MVT_v2i32_rr(RetVT, Op0, Op0IsKill, Op1, Op1IsKill);
+  default: return 0;
+  }
+}
+
+// FastEmit functions for ARMISD::VTBL1.
+
+unsigned fastEmit_ARMISD_VTBL1_MVT_v8i8_rr(MVT RetVT, unsigned Op0, bool Op0IsKill, unsigned Op1, bool Op1IsKill) {
+  if (RetVT.SimpleTy != MVT::v8i8)
+    return 0;
+  if ((Subtarget->hasNEON())) {
+    return fastEmitInst_rr(ARM::VTBL1, &ARM::DPRRegClass, Op0, Op0IsKill, Op1, Op1IsKill);
+  }
+  return 0;
+}
+
+unsigned fastEmit_ARMISD_VTBL1_rr(MVT VT, MVT RetVT, unsigned Op0, bool Op0IsKill, unsigned Op1, bool Op1IsKill) {
+  switch (VT.SimpleTy) {
+  case MVT::v8i8: return fastEmit_ARMISD_VTBL1_MVT_v8i8_rr(RetVT, Op0, Op0IsKill, Op1, Op1IsKill);
   default: return 0;
   }
 }
@@ -3999,7 +4086,7 @@ unsigned fastEmit_ISD_ROTR_rr(MVT VT, MVT RetVT, unsigned Op0, bool Op0IsKill, u
 unsigned fastEmit_ISD_SDIV_MVT_i32_rr(MVT RetVT, unsigned Op0, bool Op0IsKill, unsigned Op1, bool Op1IsKill) {
   if (RetVT.SimpleTy != MVT::i32)
     return 0;
-  if ((Subtarget->hasDivide()) && (Subtarget->hasV8MBaselineOps()) && (Subtarget->isThumb())) {
+  if ((Subtarget->hasDivideInThumbMode()) && (Subtarget->hasV8MBaselineOps()) && (Subtarget->isThumb())) {
     return fastEmitInst_rr(ARM::t2SDIV, &ARM::rGPRRegClass, Op0, Op0IsKill, Op1, Op1IsKill);
   }
   if ((Subtarget->hasDivideInARMMode()) && (!Subtarget->isThumb())) {
@@ -4323,7 +4410,7 @@ unsigned fastEmit_ISD_SUB_rr(MVT VT, MVT RetVT, unsigned Op0, bool Op0IsKill, un
 unsigned fastEmit_ISD_UDIV_MVT_i32_rr(MVT RetVT, unsigned Op0, bool Op0IsKill, unsigned Op1, bool Op1IsKill) {
   if (RetVT.SimpleTy != MVT::i32)
     return 0;
-  if ((Subtarget->hasDivide()) && (Subtarget->hasV8MBaselineOps()) && (Subtarget->isThumb())) {
+  if ((Subtarget->hasDivideInThumbMode()) && (Subtarget->hasV8MBaselineOps()) && (Subtarget->isThumb())) {
     return fastEmitInst_rr(ARM::t2UDIV, &ARM::rGPRRegClass, Op0, Op0IsKill, Op1, Op1IsKill);
   }
   if ((Subtarget->hasDivideInARMMode()) && (!Subtarget->isThumb())) {
@@ -4537,6 +4624,7 @@ unsigned fastEmit_rr(MVT VT, MVT RetVT, unsigned Opcode, unsigned Op0, bool Op0I
   case ARMISD::VMOVDRR: return fastEmit_ARMISD_VMOVDRR_rr(VT, RetVT, Op0, Op0IsKill, Op1, Op1IsKill);
   case ARMISD::VMULLs: return fastEmit_ARMISD_VMULLs_rr(VT, RetVT, Op0, Op0IsKill, Op1, Op1IsKill);
   case ARMISD::VMULLu: return fastEmit_ARMISD_VMULLu_rr(VT, RetVT, Op0, Op0IsKill, Op1, Op1IsKill);
+  case ARMISD::VTBL1: return fastEmit_ARMISD_VTBL1_rr(VT, RetVT, Op0, Op0IsKill, Op1, Op1IsKill);
   case ARMISD::VTST: return fastEmit_ARMISD_VTST_rr(VT, RetVT, Op0, Op0IsKill, Op1, Op1IsKill);
   case ISD::ADD: return fastEmit_ISD_ADD_rr(VT, RetVT, Op0, Op0IsKill, Op1, Op1IsKill);
   case ISD::AND: return fastEmit_ISD_AND_rr(VT, RetVT, Op0, Op0IsKill, Op1, Op1IsKill);

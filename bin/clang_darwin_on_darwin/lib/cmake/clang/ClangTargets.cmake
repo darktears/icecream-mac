@@ -63,7 +63,7 @@ set_target_properties(clangParse PROPERTIES
 add_library(clangAST STATIC IMPORTED)
 
 set_target_properties(clangAST PROPERTIES
-  INTERFACE_LINK_LIBRARIES "clangBasic;clangLex;LLVMSupport"
+  INTERFACE_LINK_LIBRARIES "clangBasic;clangLex;LLVMBinaryFormat;LLVMSupport"
 )
 
 # Create imported target clangDynamicASTMatchers
@@ -126,7 +126,7 @@ set_target_properties(clangARCMigrate PROPERTIES
 add_library(clangDriver STATIC IMPORTED)
 
 set_target_properties(clangDriver PROPERTIES
-  INTERFACE_LINK_LIBRARIES "clangBasic;LLVMOption;LLVMSupport"
+  INTERFACE_LINK_LIBRARIES "clangBasic;LLVMBinaryFormat;LLVMOption;LLVMSupport"
 )
 
 # Create imported target clangSerialization
@@ -140,7 +140,7 @@ set_target_properties(clangSerialization PROPERTIES
 add_library(clangRewriteFrontend STATIC IMPORTED)
 
 set_target_properties(clangRewriteFrontend PROPERTIES
-  INTERFACE_LINK_LIBRARIES "clangAST;clangBasic;clangEdit;clangFrontend;clangLex;clangRewrite;LLVMSupport"
+  INTERFACE_LINK_LIBRARIES "clangAST;clangBasic;clangEdit;clangFrontend;clangLex;clangRewrite;clangSerialization;LLVMSupport"
 )
 
 # Create imported target clangFrontend
@@ -433,7 +433,7 @@ set_target_properties(libclang PROPERTIES
 # Make sure the targets which have been exported in some other 
 # export set exist.
 unset(${CMAKE_FIND_PACKAGE_NAME}_NOT_FOUND_MESSAGE_targets)
-foreach(_target "LLVMCore" "LLVMMC" "LLVMSupport" "LLVMMCParser" "LLVMAnalysis" "LLVMBitReader" "LLVMBitWriter" "LLVMCoroutines" "LLVMCoverage" "LLVMipo" "LLVMIRReader" "LLVMInstCombine" "LLVMInstrumentation" "LLVMLTO" "LLVMLinker" "LLVMObjCARCOpts" "LLVMObject" "LLVMPasses" "LLVMProfileData" "LLVMScalarOpts" "LLVMTarget" "LLVMTransformUtils" "LLVMOption" "LLVMAArch64CodeGen" "LLVMAArch64AsmPrinter" "LLVMAArch64AsmParser" "LLVMAArch64Desc" "LLVMAArch64Info" "LLVMAArch64Disassembler" "LLVMAArch64Utils" "LLVMAMDGPUCodeGen" "LLVMAMDGPUAsmPrinter" "LLVMAMDGPUAsmParser" "LLVMAMDGPUDesc" "LLVMAMDGPUInfo" "LLVMAMDGPUDisassembler" "LLVMAMDGPUUtils" "LLVMARMCodeGen" "LLVMARMAsmPrinter" "LLVMARMAsmParser" "LLVMARMDesc" "LLVMARMInfo" "LLVMARMDisassembler" "LLVMBPFCodeGen" "LLVMBPFAsmPrinter" "LLVMBPFDesc" "LLVMBPFInfo" "LLVMBPFDisassembler" "LLVMHexagonCodeGen" "LLVMHexagonAsmParser" "LLVMHexagonDesc" "LLVMHexagonInfo" "LLVMHexagonDisassembler" "LLVMLanaiCodeGen" "LLVMLanaiAsmPrinter" "LLVMLanaiAsmParser" "LLVMLanaiDesc" "LLVMLanaiInfo" "LLVMLanaiDisassembler" "LLVMMipsCodeGen" "LLVMMipsAsmPrinter" "LLVMMipsAsmParser" "LLVMMipsDesc" "LLVMMipsInfo" "LLVMMipsDisassembler" "LLVMMSP430CodeGen" "LLVMMSP430AsmPrinter" "LLVMMSP430Desc" "LLVMMSP430Info" "LLVMNVPTXCodeGen" "LLVMNVPTXAsmPrinter" "LLVMNVPTXDesc" "LLVMNVPTXInfo" "LLVMPowerPCCodeGen" "LLVMPowerPCAsmPrinter" "LLVMPowerPCAsmParser" "LLVMPowerPCDesc" "LLVMPowerPCInfo" "LLVMPowerPCDisassembler" "LLVMRISCVCodeGen" "LLVMRISCVDesc" "LLVMRISCVInfo" "LLVMSparcCodeGen" "LLVMSparcAsmPrinter" "LLVMSparcAsmParser" "LLVMSparcDesc" "LLVMSparcInfo" "LLVMSparcDisassembler" "LLVMSystemZCodeGen" "LLVMSystemZAsmPrinter" "LLVMSystemZAsmParser" "LLVMSystemZDesc" "LLVMSystemZInfo" "LLVMSystemZDisassembler" "LLVMX86CodeGen" "LLVMX86AsmPrinter" "LLVMX86AsmParser" "LLVMX86Desc" "LLVMX86Info" "LLVMX86Disassembler" "LLVMX86Utils" "LLVMXCoreCodeGen" "LLVMXCoreAsmPrinter" "LLVMXCoreDesc" "LLVMXCoreInfo" "LLVMXCoreDisassembler" "LLVMCodeGen" "LLVMVectorize" )
+foreach(_target "LLVMCore" "LLVMMC" "LLVMSupport" "LLVMMCParser" "LLVMBinaryFormat" "LLVMAnalysis" "LLVMBitReader" "LLVMBitWriter" "LLVMCoroutines" "LLVMCoverage" "LLVMipo" "LLVMIRReader" "LLVMInstCombine" "LLVMInstrumentation" "LLVMLTO" "LLVMLinker" "LLVMObjCARCOpts" "LLVMObject" "LLVMPasses" "LLVMProfileData" "LLVMScalarOpts" "LLVMTarget" "LLVMTransformUtils" "LLVMOption" "LLVMAArch64CodeGen" "LLVMAArch64AsmPrinter" "LLVMAArch64AsmParser" "LLVMAArch64Desc" "LLVMAArch64Info" "LLVMAArch64Disassembler" "LLVMAArch64Utils" "LLVMAMDGPUCodeGen" "LLVMAMDGPUAsmPrinter" "LLVMAMDGPUAsmParser" "LLVMAMDGPUDesc" "LLVMAMDGPUInfo" "LLVMAMDGPUDisassembler" "LLVMAMDGPUUtils" "LLVMARMCodeGen" "LLVMARMAsmPrinter" "LLVMARMAsmParser" "LLVMARMDesc" "LLVMARMInfo" "LLVMARMDisassembler" "LLVMBPFCodeGen" "LLVMBPFAsmPrinter" "LLVMBPFDesc" "LLVMBPFInfo" "LLVMBPFDisassembler" "LLVMHexagonCodeGen" "LLVMHexagonAsmParser" "LLVMHexagonDesc" "LLVMHexagonInfo" "LLVMHexagonDisassembler" "LLVMLanaiCodeGen" "LLVMLanaiAsmPrinter" "LLVMLanaiAsmParser" "LLVMLanaiDesc" "LLVMLanaiInfo" "LLVMLanaiDisassembler" "LLVMMipsCodeGen" "LLVMMipsAsmPrinter" "LLVMMipsAsmParser" "LLVMMipsDesc" "LLVMMipsInfo" "LLVMMipsDisassembler" "LLVMMSP430CodeGen" "LLVMMSP430AsmPrinter" "LLVMMSP430Desc" "LLVMMSP430Info" "LLVMNVPTXCodeGen" "LLVMNVPTXAsmPrinter" "LLVMNVPTXDesc" "LLVMNVPTXInfo" "LLVMPowerPCCodeGen" "LLVMPowerPCAsmPrinter" "LLVMPowerPCAsmParser" "LLVMPowerPCDesc" "LLVMPowerPCInfo" "LLVMPowerPCDisassembler" "LLVMRISCVCodeGen" "LLVMRISCVDesc" "LLVMRISCVInfo" "LLVMSparcCodeGen" "LLVMSparcAsmPrinter" "LLVMSparcAsmParser" "LLVMSparcDesc" "LLVMSparcInfo" "LLVMSparcDisassembler" "LLVMSystemZCodeGen" "LLVMSystemZAsmPrinter" "LLVMSystemZAsmParser" "LLVMSystemZDesc" "LLVMSystemZInfo" "LLVMSystemZDisassembler" "LLVMX86CodeGen" "LLVMX86AsmPrinter" "LLVMX86AsmParser" "LLVMX86Desc" "LLVMX86Info" "LLVMX86Disassembler" "LLVMX86Utils" "LLVMXCoreCodeGen" "LLVMXCoreAsmPrinter" "LLVMXCoreDesc" "LLVMXCoreInfo" "LLVMXCoreDisassembler" "LLVMCodeGen" "LLVMVectorize" )
   if(NOT TARGET "${_target}" )
     set(${CMAKE_FIND_PACKAGE_NAME}_NOT_FOUND_MESSAGE_targets "${${CMAKE_FIND_PACKAGE_NAME}_NOT_FOUND_MESSAGE_targets} ${_target}")
   endif()

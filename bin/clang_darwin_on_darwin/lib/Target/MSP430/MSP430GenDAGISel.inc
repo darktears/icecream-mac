@@ -2886,296 +2886,300 @@ void SelectCode(SDNode *N) {
                 // Src: (ld:i16 addr:iPTR:$src)<<P:Predicate_unindexedload>><<P:Predicate_extload>><<P:Predicate_extloadi8>> - Complexity = 13
                 // Dst: (MOVZX16rm8:i16 addr:i16:$src)
 /*5771*/      0, /*End of Scope*/
-/*5772*/    /*SwitchOpcode*/ 23, TARGET_VAL(ISD::CALLSEQ_END),// ->5798
-/*5775*/      OPC_RecordNode, // #0 = 'MSP430callseq_end' chained node
-/*5776*/      OPC_CaptureGlueInput,
-/*5777*/      OPC_RecordChild1, // #1 = $amt1
-/*5778*/      OPC_MoveChild1,
-/*5779*/      OPC_CheckOpcode, TARGET_VAL(ISD::TargetConstant),
-/*5782*/      OPC_MoveParent,
-/*5783*/      OPC_RecordChild2, // #2 = $amt2
-/*5784*/      OPC_MoveChild2,
-/*5785*/      OPC_CheckOpcode, TARGET_VAL(ISD::TargetConstant),
-/*5788*/      OPC_MoveParent,
-/*5789*/      OPC_EmitMergeInputChains1_0,
-/*5790*/      OPC_MorphNodeTo1, TARGET_VAL(MSP430::ADJCALLSTACKUP), 0|OPFL_Chain|OPFL_GlueInput|OPFL_GlueOutput,
+/*5772*/    /*SwitchOpcode*/ 22, TARGET_VAL(ISD::CALLSEQ_START),// ->5797
+/*5775*/      OPC_RecordNode, // #0 = 'MSP430callseq_start' chained node
+/*5776*/      OPC_RecordChild1, // #1 = $amt1
+/*5777*/      OPC_MoveChild1,
+/*5778*/      OPC_CheckOpcode, TARGET_VAL(ISD::TargetConstant),
+/*5781*/      OPC_MoveParent,
+/*5782*/      OPC_RecordChild2, // #2 = $amt2
+/*5783*/      OPC_MoveChild2,
+/*5784*/      OPC_CheckOpcode, TARGET_VAL(ISD::TargetConstant),
+/*5787*/      OPC_MoveParent,
+/*5788*/      OPC_EmitMergeInputChains1_0,
+/*5789*/      OPC_MorphNodeTo1, TARGET_VAL(MSP430::ADJCALLSTACKDOWN), 0|OPFL_Chain|OPFL_GlueOutput,
                   MVT::i16, 2/*#Ops*/, 1, 2, 
-              // Src: (MSP430callseq_end (timm:i16):$amt1, (timm:i16):$amt2) - Complexity = 9
-              // Dst: (ADJCALLSTACKUP:i16 (timm:i16):$amt1, (timm:i16):$amt2)
-/*5798*/    /*SwitchOpcode*/ 15, TARGET_VAL(ISD::CALLSEQ_START),// ->5816
-/*5801*/      OPC_RecordNode, // #0 = 'MSP430callseq_start' chained node
-/*5802*/      OPC_RecordChild1, // #1 = $amt
+              // Src: (MSP430callseq_start (timm:i16):$amt1, (timm:i16):$amt2) - Complexity = 9
+              // Dst: (ADJCALLSTACKDOWN:i16 (timm:i16):$amt1, (timm:i16):$amt2)
+/*5797*/    /*SwitchOpcode*/ 23, TARGET_VAL(ISD::CALLSEQ_END),// ->5823
+/*5800*/      OPC_RecordNode, // #0 = 'MSP430callseq_end' chained node
+/*5801*/      OPC_CaptureGlueInput,
+/*5802*/      OPC_RecordChild1, // #1 = $amt1
 /*5803*/      OPC_MoveChild1,
 /*5804*/      OPC_CheckOpcode, TARGET_VAL(ISD::TargetConstant),
 /*5807*/      OPC_MoveParent,
-/*5808*/      OPC_EmitMergeInputChains1_0,
-/*5809*/      OPC_MorphNodeTo1, TARGET_VAL(MSP430::ADJCALLSTACKDOWN), 0|OPFL_Chain|OPFL_GlueOutput,
-                  MVT::i16, 1/*#Ops*/, 1, 
-              // Src: (MSP430callseq_start (timm:i16):$amt) - Complexity = 6
-              // Dst: (ADJCALLSTACKDOWN:i16 (timm:i16):$amt)
-/*5816*/    /*SwitchOpcode*/ 24, TARGET_VAL(MSP430ISD::BR_CC),// ->5843
-/*5819*/      OPC_RecordNode, // #0 = 'MSP430brcc' chained node
-/*5820*/      OPC_CaptureGlueInput,
-/*5821*/      OPC_RecordChild1, // #1 = $dst
-/*5822*/      OPC_MoveChild1,
-/*5823*/      OPC_CheckOpcode, TARGET_VAL(ISD::BasicBlock),
-/*5826*/      OPC_MoveParent,
-/*5827*/      OPC_RecordChild2, // #2 = $cc
-/*5828*/      OPC_MoveChild2,
-/*5829*/      OPC_CheckOpcode, TARGET_VAL(ISD::Constant),
-/*5832*/      OPC_MoveParent,
-/*5833*/      OPC_EmitMergeInputChains1_0,
-/*5834*/      OPC_EmitConvertToTarget, 2,
-/*5836*/      OPC_MorphNodeTo0, TARGET_VAL(MSP430::JCC), 0|OPFL_Chain|OPFL_GlueInput,
+/*5808*/      OPC_RecordChild2, // #2 = $amt2
+/*5809*/      OPC_MoveChild2,
+/*5810*/      OPC_CheckOpcode, TARGET_VAL(ISD::TargetConstant),
+/*5813*/      OPC_MoveParent,
+/*5814*/      OPC_EmitMergeInputChains1_0,
+/*5815*/      OPC_MorphNodeTo1, TARGET_VAL(MSP430::ADJCALLSTACKUP), 0|OPFL_Chain|OPFL_GlueInput|OPFL_GlueOutput,
+                  MVT::i16, 2/*#Ops*/, 1, 2, 
+              // Src: (MSP430callseq_end (timm:i16):$amt1, (timm:i16):$amt2) - Complexity = 9
+              // Dst: (ADJCALLSTACKUP:i16 (timm:i16):$amt1, (timm:i16):$amt2)
+/*5823*/    /*SwitchOpcode*/ 24, TARGET_VAL(MSP430ISD::BR_CC),// ->5850
+/*5826*/      OPC_RecordNode, // #0 = 'MSP430brcc' chained node
+/*5827*/      OPC_CaptureGlueInput,
+/*5828*/      OPC_RecordChild1, // #1 = $dst
+/*5829*/      OPC_MoveChild1,
+/*5830*/      OPC_CheckOpcode, TARGET_VAL(ISD::BasicBlock),
+/*5833*/      OPC_MoveParent,
+/*5834*/      OPC_RecordChild2, // #2 = $cc
+/*5835*/      OPC_MoveChild2,
+/*5836*/      OPC_CheckOpcode, TARGET_VAL(ISD::Constant),
+/*5839*/      OPC_MoveParent,
+/*5840*/      OPC_EmitMergeInputChains1_0,
+/*5841*/      OPC_EmitConvertToTarget, 2,
+/*5843*/      OPC_MorphNodeTo0, TARGET_VAL(MSP430::JCC), 0|OPFL_Chain|OPFL_GlueInput,
                   2/*#Ops*/, 1, 3, 
               // Src: (MSP430brcc (bb:Other):$dst, (imm:i8):$cc) - Complexity = 6
               // Dst: (JCC (bb:Other):$dst, (imm:i8):$cc)
-/*5843*/    /*SwitchOpcode*/ 48, TARGET_VAL(ISD::ZERO_EXTEND),// ->5894
-/*5846*/      OPC_Scope, 13, /*->5861*/ // 2 children in Scope
-/*5848*/        OPC_MoveChild0,
-/*5849*/        OPC_CheckOpcode, TARGET_VAL(ISD::TRUNCATE),
-/*5852*/        OPC_RecordChild0, // #0 = $src
-/*5853*/        OPC_MoveParent,
-/*5854*/        OPC_MorphNodeTo1, TARGET_VAL(MSP430::ZEXT16r), 0,
+/*5850*/    /*SwitchOpcode*/ 48, TARGET_VAL(ISD::ZERO_EXTEND),// ->5901
+/*5853*/      OPC_Scope, 13, /*->5868*/ // 2 children in Scope
+/*5855*/        OPC_MoveChild0,
+/*5856*/        OPC_CheckOpcode, TARGET_VAL(ISD::TRUNCATE),
+/*5859*/        OPC_RecordChild0, // #0 = $src
+/*5860*/        OPC_MoveParent,
+/*5861*/        OPC_MorphNodeTo1, TARGET_VAL(MSP430::ZEXT16r), 0,
                     MVT::i16, 1/*#Ops*/, 0, 
                 // Src: (zext:i16 (trunc:i8 GR16:i16:$src)) - Complexity = 6
                 // Dst: (ZEXT16r:i16 GR16:i16:$src)
-/*5861*/      /*Scope*/ 31, /*->5893*/
-/*5862*/        OPC_RecordChild0, // #0 = $src
-/*5863*/        OPC_Scope, 19, /*->5884*/ // 2 children in Scope
-/*5865*/          OPC_MoveChild0,
-/*5866*/          OPC_CheckPredicate, 8, // Predicate_def8
-/*5868*/          OPC_MoveParent,
-/*5869*/          OPC_EmitInteger, MVT::i16, 0, 
-/*5872*/          OPC_EmitInteger, MVT::i32, MSP430::subreg_8bit,
-/*5875*/          OPC_MorphNodeTo1, TARGET_VAL(TargetOpcode::SUBREG_TO_REG), 0,
+/*5868*/      /*Scope*/ 31, /*->5900*/
+/*5869*/        OPC_RecordChild0, // #0 = $src
+/*5870*/        OPC_Scope, 19, /*->5891*/ // 2 children in Scope
+/*5872*/          OPC_MoveChild0,
+/*5873*/          OPC_CheckPredicate, 8, // Predicate_def8
+/*5875*/          OPC_MoveParent,
+/*5876*/          OPC_EmitInteger, MVT::i16, 0, 
+/*5879*/          OPC_EmitInteger, MVT::i32, MSP430::subreg_8bit,
+/*5882*/          OPC_MorphNodeTo1, TARGET_VAL(TargetOpcode::SUBREG_TO_REG), 0,
                       MVT::i16, 3/*#Ops*/, 1, 0, 2, 
                   // Src: (zext:i16 GR8:i8<<P:Predicate_def8>>:$src) - Complexity = 4
                   // Dst: (SUBREG_TO_REG:i16 0:i16, GR8:i8:$src, subreg_8bit:i32)
-/*5884*/        /*Scope*/ 7, /*->5892*/
-/*5885*/          OPC_MorphNodeTo1, TARGET_VAL(MSP430::MOVZX16rr8), 0,
+/*5891*/        /*Scope*/ 7, /*->5899*/
+/*5892*/          OPC_MorphNodeTo1, TARGET_VAL(MSP430::MOVZX16rr8), 0,
                       MVT::i16, 1/*#Ops*/, 0, 
                   // Src: (zext:i16 GR8:i8:$src) - Complexity = 3
                   // Dst: (MOVZX16rr8:i16 GR8:i8:$src)
-/*5892*/        0, /*End of Scope*/
-/*5893*/      0, /*End of Scope*/
-/*5894*/    /*SwitchOpcode*/ 43, TARGET_VAL(MSP430ISD::Wrapper),// ->5940
-/*5897*/      OPC_RecordChild0, // #0 = $dst
-/*5898*/      OPC_MoveChild0,
-/*5899*/      OPC_SwitchOpcode /*3 cases */, 10, TARGET_VAL(ISD::TargetGlobalAddress),// ->5913
-/*5903*/        OPC_MoveParent,
-/*5904*/        OPC_CheckType, MVT::i16,
-/*5906*/        OPC_MorphNodeTo1, TARGET_VAL(MSP430::MOV16ri), 0,
+/*5899*/        0, /*End of Scope*/
+/*5900*/      0, /*End of Scope*/
+/*5901*/    /*SwitchOpcode*/ 43, TARGET_VAL(MSP430ISD::Wrapper),// ->5947
+/*5904*/      OPC_RecordChild0, // #0 = $dst
+/*5905*/      OPC_MoveChild0,
+/*5906*/      OPC_SwitchOpcode /*3 cases */, 10, TARGET_VAL(ISD::TargetGlobalAddress),// ->5920
+/*5910*/        OPC_MoveParent,
+/*5911*/        OPC_CheckType, MVT::i16,
+/*5913*/        OPC_MorphNodeTo1, TARGET_VAL(MSP430::MOV16ri), 0,
                     MVT::i16, 1/*#Ops*/, 0, 
                 // Src: (MSP430Wrapper:i16 (tglobaladdr:i16):$dst) - Complexity = 6
                 // Dst: (MOV16ri:i16 (tglobaladdr:i16):$dst)
-/*5913*/      /*SwitchOpcode*/ 10, TARGET_VAL(ISD::TargetExternalSymbol),// ->5926
-/*5916*/        OPC_MoveParent,
-/*5917*/        OPC_CheckType, MVT::i16,
-/*5919*/        OPC_MorphNodeTo1, TARGET_VAL(MSP430::MOV16ri), 0,
+/*5920*/      /*SwitchOpcode*/ 10, TARGET_VAL(ISD::TargetExternalSymbol),// ->5933
+/*5923*/        OPC_MoveParent,
+/*5924*/        OPC_CheckType, MVT::i16,
+/*5926*/        OPC_MorphNodeTo1, TARGET_VAL(MSP430::MOV16ri), 0,
                     MVT::i16, 1/*#Ops*/, 0, 
                 // Src: (MSP430Wrapper:i16 (texternalsym:i16):$dst) - Complexity = 6
                 // Dst: (MOV16ri:i16 (texternalsym:i16):$dst)
-/*5926*/      /*SwitchOpcode*/ 10, TARGET_VAL(ISD::TargetBlockAddress),// ->5939
-/*5929*/        OPC_MoveParent,
-/*5930*/        OPC_CheckType, MVT::i16,
-/*5932*/        OPC_MorphNodeTo1, TARGET_VAL(MSP430::MOV16ri), 0,
+/*5933*/      /*SwitchOpcode*/ 10, TARGET_VAL(ISD::TargetBlockAddress),// ->5946
+/*5936*/        OPC_MoveParent,
+/*5937*/        OPC_CheckType, MVT::i16,
+/*5939*/        OPC_MorphNodeTo1, TARGET_VAL(MSP430::MOV16ri), 0,
                     MVT::i16, 1/*#Ops*/, 0, 
                 // Src: (MSP430Wrapper:i16 (tblockaddress:i16):$dst) - Complexity = 6
                 // Dst: (MOV16ri:i16 (tblockaddress:i16):$dst)
-/*5939*/      0, // EndSwitchOpcode
-/*5940*/    /*SwitchOpcode*/ 37, TARGET_VAL(MSP430ISD::SELECT_CC),// ->5980
-/*5943*/      OPC_CaptureGlueInput,
-/*5944*/      OPC_RecordChild0, // #0 = $src
-/*5945*/      OPC_RecordChild1, // #1 = $src2
-/*5946*/      OPC_RecordChild2, // #2 = $cc
-/*5947*/      OPC_MoveChild2,
-/*5948*/      OPC_CheckOpcode, TARGET_VAL(ISD::Constant),
-/*5951*/      OPC_MoveParent,
-/*5952*/      OPC_SwitchType /*2 cases */, 11, MVT::i8,// ->5966
-/*5955*/        OPC_EmitConvertToTarget, 2,
-/*5957*/        OPC_MorphNodeTo1, TARGET_VAL(MSP430::Select8), 0|OPFL_GlueInput,
+/*5946*/      0, // EndSwitchOpcode
+/*5947*/    /*SwitchOpcode*/ 37, TARGET_VAL(MSP430ISD::SELECT_CC),// ->5987
+/*5950*/      OPC_CaptureGlueInput,
+/*5951*/      OPC_RecordChild0, // #0 = $src
+/*5952*/      OPC_RecordChild1, // #1 = $src2
+/*5953*/      OPC_RecordChild2, // #2 = $cc
+/*5954*/      OPC_MoveChild2,
+/*5955*/      OPC_CheckOpcode, TARGET_VAL(ISD::Constant),
+/*5958*/      OPC_MoveParent,
+/*5959*/      OPC_SwitchType /*2 cases */, 11, MVT::i8,// ->5973
+/*5962*/        OPC_EmitConvertToTarget, 2,
+/*5964*/        OPC_MorphNodeTo1, TARGET_VAL(MSP430::Select8), 0|OPFL_GlueInput,
                     MVT::i8, 3/*#Ops*/, 0, 1, 3, 
                 // Src: (MSP430selectcc:i8 GR8:i8:$src, GR8:i8:$src2, (imm:i8):$cc) - Complexity = 6
                 // Dst: (Select8:i8 GR8:i8:$src, GR8:i8:$src2, (imm:i8):$cc)
-/*5966*/      /*SwitchType*/ 11, MVT::i16,// ->5979
-/*5968*/        OPC_EmitConvertToTarget, 2,
-/*5970*/        OPC_MorphNodeTo1, TARGET_VAL(MSP430::Select16), 0|OPFL_GlueInput,
+/*5973*/      /*SwitchType*/ 11, MVT::i16,// ->5986
+/*5975*/        OPC_EmitConvertToTarget, 2,
+/*5977*/        OPC_MorphNodeTo1, TARGET_VAL(MSP430::Select16), 0|OPFL_GlueInput,
                     MVT::i16, 3/*#Ops*/, 0, 1, 3, 
                 // Src: (MSP430selectcc:i16 GR16:i16:$src, GR16:i16:$src2, (imm:i8):$cc) - Complexity = 6
                 // Dst: (Select16:i16 GR16:i16:$src, GR16:i16:$src2, (imm:i8):$cc)
-/*5979*/      0, // EndSwitchType
-/*5980*/    /*SwitchOpcode*/ 8, TARGET_VAL(MSP430ISD::RET_FLAG),// ->5991
-/*5983*/      OPC_RecordNode, // #0 = 'MSP430retflag' chained node
-/*5984*/      OPC_CaptureGlueInput,
-/*5985*/      OPC_EmitMergeInputChains1_0,
-/*5986*/      OPC_MorphNodeTo0, TARGET_VAL(MSP430::RET), 0|OPFL_Chain|OPFL_GlueInput|OPFL_Variadic0,
+/*5986*/      0, // EndSwitchType
+/*5987*/    /*SwitchOpcode*/ 8, TARGET_VAL(MSP430ISD::RET_FLAG),// ->5998
+/*5990*/      OPC_RecordNode, // #0 = 'MSP430retflag' chained node
+/*5991*/      OPC_CaptureGlueInput,
+/*5992*/      OPC_EmitMergeInputChains1_0,
+/*5993*/      OPC_MorphNodeTo0, TARGET_VAL(MSP430::RET), 0|OPFL_Chain|OPFL_GlueInput|OPFL_Variadic0,
                   0/*#Ops*/, 
               // Src: (MSP430retflag) - Complexity = 3
               // Dst: (RET)
-/*5991*/    /*SwitchOpcode*/ 8, TARGET_VAL(MSP430ISD::RETI_FLAG),// ->6002
-/*5994*/      OPC_RecordNode, // #0 = 'MSP430retiflag' chained node
-/*5995*/      OPC_CaptureGlueInput,
-/*5996*/      OPC_EmitMergeInputChains1_0,
-/*5997*/      OPC_MorphNodeTo0, TARGET_VAL(MSP430::RETI), 0|OPFL_Chain|OPFL_GlueInput|OPFL_Variadic0,
+/*5998*/    /*SwitchOpcode*/ 8, TARGET_VAL(MSP430ISD::RETI_FLAG),// ->6009
+/*6001*/      OPC_RecordNode, // #0 = 'MSP430retiflag' chained node
+/*6002*/      OPC_CaptureGlueInput,
+/*6003*/      OPC_EmitMergeInputChains1_0,
+/*6004*/      OPC_MorphNodeTo0, TARGET_VAL(MSP430::RETI), 0|OPFL_Chain|OPFL_GlueInput|OPFL_Variadic0,
                   0/*#Ops*/, 
               // Src: (MSP430retiflag) - Complexity = 3
               // Dst: (RETI)
-/*6002*/    /*SwitchOpcode*/ 14, TARGET_VAL(ISD::BR),// ->6019
-/*6005*/      OPC_RecordNode, // #0 = 'br' chained node
-/*6006*/      OPC_RecordChild1, // #1 = $dst
-/*6007*/      OPC_MoveChild1,
-/*6008*/      OPC_CheckOpcode, TARGET_VAL(ISD::BasicBlock),
-/*6011*/      OPC_MoveParent,
-/*6012*/      OPC_EmitMergeInputChains1_0,
-/*6013*/      OPC_MorphNodeTo0, TARGET_VAL(MSP430::JMP), 0|OPFL_Chain,
+/*6009*/    /*SwitchOpcode*/ 14, TARGET_VAL(ISD::BR),// ->6026
+/*6012*/      OPC_RecordNode, // #0 = 'br' chained node
+/*6013*/      OPC_RecordChild1, // #1 = $dst
+/*6014*/      OPC_MoveChild1,
+/*6015*/      OPC_CheckOpcode, TARGET_VAL(ISD::BasicBlock),
+/*6018*/      OPC_MoveParent,
+/*6019*/      OPC_EmitMergeInputChains1_0,
+/*6020*/      OPC_MorphNodeTo0, TARGET_VAL(MSP430::JMP), 0|OPFL_Chain,
                   1/*#Ops*/, 1, 
               // Src: (br (bb:Other):$dst) - Complexity = 3
               // Dst: (JMP (bb:Other):$dst)
-/*6019*/    /*SwitchOpcode*/ 25, TARGET_VAL(ISD::Constant),// ->6047
-/*6022*/      OPC_RecordNode, // #0 = $src
-/*6023*/      OPC_SwitchType /*2 cases */, 9, MVT::i8,// ->6035
-/*6026*/        OPC_EmitConvertToTarget, 0,
-/*6028*/        OPC_MorphNodeTo1, TARGET_VAL(MSP430::MOV8ri), 0,
+/*6026*/    /*SwitchOpcode*/ 25, TARGET_VAL(ISD::Constant),// ->6054
+/*6029*/      OPC_RecordNode, // #0 = $src
+/*6030*/      OPC_SwitchType /*2 cases */, 9, MVT::i8,// ->6042
+/*6033*/        OPC_EmitConvertToTarget, 0,
+/*6035*/        OPC_MorphNodeTo1, TARGET_VAL(MSP430::MOV8ri), 0,
                     MVT::i8, 1/*#Ops*/, 1, 
                 // Src: (imm:i8):$src - Complexity = 3
                 // Dst: (MOV8ri:i8 (imm:i8):$src)
-/*6035*/      /*SwitchType*/ 9, MVT::i16,// ->6046
-/*6037*/        OPC_EmitConvertToTarget, 0,
-/*6039*/        OPC_MorphNodeTo1, TARGET_VAL(MSP430::MOV16ri), 0,
+/*6042*/      /*SwitchType*/ 9, MVT::i16,// ->6053
+/*6044*/        OPC_EmitConvertToTarget, 0,
+/*6046*/        OPC_MorphNodeTo1, TARGET_VAL(MSP430::MOV16ri), 0,
                     MVT::i16, 1/*#Ops*/, 1, 
                 // Src: (imm:i16):$src - Complexity = 3
                 // Dst: (MOV16ri:i16 (imm:i16):$src)
-/*6046*/      0, // EndSwitchType
-/*6047*/    /*SwitchOpcode*/ 23, TARGET_VAL(MSP430ISD::RRA),// ->6073
-/*6050*/      OPC_RecordChild0, // #0 = $src
-/*6051*/      OPC_SwitchType /*2 cases */, 8, MVT::i8,// ->6062
-/*6054*/        OPC_MorphNodeTo2, TARGET_VAL(MSP430::SAR8r1), 0,
+/*6053*/      0, // EndSwitchType
+/*6054*/    /*SwitchOpcode*/ 23, TARGET_VAL(MSP430ISD::RRA),// ->6080
+/*6057*/      OPC_RecordChild0, // #0 = $src
+/*6058*/      OPC_SwitchType /*2 cases */, 8, MVT::i8,// ->6069
+/*6061*/        OPC_MorphNodeTo2, TARGET_VAL(MSP430::SAR8r1), 0,
                     MVT::i8, MVT::i16, 1/*#Ops*/, 0, 
                 // Src: (MSP430rra:i8 GR8:i8:$src) - Complexity = 3
                 // Dst: (SAR8r1:i8:i16 GR8:i8:$src)
-/*6062*/      /*SwitchType*/ 8, MVT::i16,// ->6072
-/*6064*/        OPC_MorphNodeTo2, TARGET_VAL(MSP430::SAR16r1), 0,
+/*6069*/      /*SwitchType*/ 8, MVT::i16,// ->6079
+/*6071*/        OPC_MorphNodeTo2, TARGET_VAL(MSP430::SAR16r1), 0,
                     MVT::i16, MVT::i16, 1/*#Ops*/, 0, 
                 // Src: (MSP430rra:i16 GR16:i16:$src) - Complexity = 3
                 // Dst: (SAR16r1:i16:i16 GR16:i16:$src)
-/*6072*/      0, // EndSwitchType
-/*6073*/    /*SwitchOpcode*/ 23, TARGET_VAL(MSP430ISD::RLA),// ->6099
-/*6076*/      OPC_RecordChild0, // #0 = $src
-/*6077*/      OPC_SwitchType /*2 cases */, 8, MVT::i8,// ->6088
-/*6080*/        OPC_MorphNodeTo2, TARGET_VAL(MSP430::SHL8r1), 0,
+/*6079*/      0, // EndSwitchType
+/*6080*/    /*SwitchOpcode*/ 23, TARGET_VAL(MSP430ISD::RLA),// ->6106
+/*6083*/      OPC_RecordChild0, // #0 = $src
+/*6084*/      OPC_SwitchType /*2 cases */, 8, MVT::i8,// ->6095
+/*6087*/        OPC_MorphNodeTo2, TARGET_VAL(MSP430::SHL8r1), 0,
                     MVT::i8, MVT::i16, 1/*#Ops*/, 0, 
                 // Src: (MSP430rla:i8 GR8:i8:$src) - Complexity = 3
                 // Dst: (SHL8r1:i8:i16 GR8:i8:$src)
-/*6088*/      /*SwitchType*/ 8, MVT::i16,// ->6098
-/*6090*/        OPC_MorphNodeTo2, TARGET_VAL(MSP430::SHL16r1), 0,
+/*6095*/      /*SwitchType*/ 8, MVT::i16,// ->6105
+/*6097*/        OPC_MorphNodeTo2, TARGET_VAL(MSP430::SHL16r1), 0,
                     MVT::i16, MVT::i16, 1/*#Ops*/, 0, 
                 // Src: (MSP430rla:i16 GR16:i16:$src) - Complexity = 3
                 // Dst: (SHL16r1:i16:i16 GR16:i16:$src)
-/*6098*/      0, // EndSwitchType
-/*6099*/    /*SwitchOpcode*/ 23, TARGET_VAL(MSP430ISD::RRC),// ->6125
-/*6102*/      OPC_RecordChild0, // #0 = $src
-/*6103*/      OPC_SwitchType /*2 cases */, 8, MVT::i8,// ->6114
-/*6106*/        OPC_MorphNodeTo2, TARGET_VAL(MSP430::SAR8r1c), 0,
+/*6105*/      0, // EndSwitchType
+/*6106*/    /*SwitchOpcode*/ 23, TARGET_VAL(MSP430ISD::RRC),// ->6132
+/*6109*/      OPC_RecordChild0, // #0 = $src
+/*6110*/      OPC_SwitchType /*2 cases */, 8, MVT::i8,// ->6121
+/*6113*/        OPC_MorphNodeTo2, TARGET_VAL(MSP430::SAR8r1c), 0,
                     MVT::i8, MVT::i16, 1/*#Ops*/, 0, 
                 // Src: (MSP430rrc:i8 GR8:i8:$src) - Complexity = 3
                 // Dst: (SAR8r1c:i8:i16 GR8:i8:$src)
-/*6114*/      /*SwitchType*/ 8, MVT::i16,// ->6124
-/*6116*/        OPC_MorphNodeTo2, TARGET_VAL(MSP430::SAR16r1c), 0,
+/*6121*/      /*SwitchType*/ 8, MVT::i16,// ->6131
+/*6123*/        OPC_MorphNodeTo2, TARGET_VAL(MSP430::SAR16r1c), 0,
                     MVT::i16, MVT::i16, 1/*#Ops*/, 0, 
                 // Src: (MSP430rrc:i16 GR16:i16:$src) - Complexity = 3
                 // Dst: (SAR16r1c:i16:i16 GR16:i16:$src)
-/*6124*/      0, // EndSwitchType
-/*6125*/    /*SwitchOpcode*/ 13, TARGET_VAL(ISD::SIGN_EXTEND_INREG),// ->6141
-/*6128*/      OPC_RecordChild0, // #0 = $src
-/*6129*/      OPC_MoveChild1,
-/*6130*/      OPC_CheckValueType, MVT::i8,
-/*6132*/      OPC_MoveParent,
-/*6133*/      OPC_MorphNodeTo2, TARGET_VAL(MSP430::SEXT16r), 0,
+/*6131*/      0, // EndSwitchType
+/*6132*/    /*SwitchOpcode*/ 13, TARGET_VAL(ISD::SIGN_EXTEND_INREG),// ->6148
+/*6135*/      OPC_RecordChild0, // #0 = $src
+/*6136*/      OPC_MoveChild1,
+/*6137*/      OPC_CheckValueType, MVT::i8,
+/*6139*/      OPC_MoveParent,
+/*6140*/      OPC_MorphNodeTo2, TARGET_VAL(MSP430::SEXT16r), 0,
                   MVT::i16, MVT::i16, 1/*#Ops*/, 0, 
               // Src: (sext_inreg:i16 GR16:i16:$src, i8:Other) - Complexity = 3
               // Dst: (SEXT16r:i16:i16 GR16:i16:$src)
-/*6141*/    /*SwitchOpcode*/ 10, TARGET_VAL(ISD::BSWAP),// ->6154
-/*6144*/      OPC_RecordChild0, // #0 = $src
-/*6145*/      OPC_CheckType, MVT::i16,
-/*6147*/      OPC_MorphNodeTo1, TARGET_VAL(MSP430::SWPB16r), 0,
+/*6148*/    /*SwitchOpcode*/ 10, TARGET_VAL(ISD::BSWAP),// ->6161
+/*6151*/      OPC_RecordChild0, // #0 = $src
+/*6152*/      OPC_CheckType, MVT::i16,
+/*6154*/      OPC_MorphNodeTo1, TARGET_VAL(MSP430::SWPB16r), 0,
                   MVT::i16, 1/*#Ops*/, 0, 
               // Src: (bswap:i16 GR16:i16:$src) - Complexity = 3
               // Dst: (SWPB16r:i16 GR16:i16:$src)
-/*6154*/    /*SwitchOpcode*/ 16, TARGET_VAL(ISD::ANY_EXTEND),// ->6173
-/*6157*/      OPC_RecordChild0, // #0 = $src
-/*6158*/      OPC_EmitInteger, MVT::i16, 0, 
-/*6161*/      OPC_EmitInteger, MVT::i32, MSP430::subreg_8bit,
-/*6164*/      OPC_MorphNodeTo1, TARGET_VAL(TargetOpcode::SUBREG_TO_REG), 0,
+/*6161*/    /*SwitchOpcode*/ 16, TARGET_VAL(ISD::ANY_EXTEND),// ->6180
+/*6164*/      OPC_RecordChild0, // #0 = $src
+/*6165*/      OPC_EmitInteger, MVT::i16, 0, 
+/*6168*/      OPC_EmitInteger, MVT::i32, MSP430::subreg_8bit,
+/*6171*/      OPC_MorphNodeTo1, TARGET_VAL(TargetOpcode::SUBREG_TO_REG), 0,
                   MVT::i16, 3/*#Ops*/, 1, 0, 2, 
               // Src: (anyext:i16 GR8:i8:$src) - Complexity = 3
               // Dst: (SUBREG_TO_REG:i16 0:i16, GR8:i8:$src, subreg_8bit:i32)
-/*6173*/    /*SwitchOpcode*/ 12, TARGET_VAL(ISD::TRUNCATE),// ->6188
-/*6176*/      OPC_RecordChild0, // #0 = $src
-/*6177*/      OPC_EmitInteger, MVT::i32, MSP430::subreg_8bit,
-/*6180*/      OPC_MorphNodeTo1, TARGET_VAL(TargetOpcode::EXTRACT_SUBREG), 0,
+/*6180*/    /*SwitchOpcode*/ 12, TARGET_VAL(ISD::TRUNCATE),// ->6195
+/*6183*/      OPC_RecordChild0, // #0 = $src
+/*6184*/      OPC_EmitInteger, MVT::i32, MSP430::subreg_8bit,
+/*6187*/      OPC_MorphNodeTo1, TARGET_VAL(TargetOpcode::EXTRACT_SUBREG), 0,
                   MVT::i8, 2/*#Ops*/, 0, 1, 
               // Src: (trunc:i8 GR16:i16:$src) - Complexity = 3
               // Dst: (EXTRACT_SUBREG:i8 GR16:i16:$src, subreg_8bit:i32)
-/*6188*/    /*SwitchOpcode*/ 26, TARGET_VAL(MSP430ISD::SHL),// ->6217
-/*6191*/      OPC_RecordChild0, // #0 = $src
-/*6192*/      OPC_RecordChild1, // #1 = $cnt
-/*6193*/      OPC_SwitchType /*2 cases */, 9, MVT::i8,// ->6205
-/*6196*/        OPC_MorphNodeTo2, TARGET_VAL(MSP430::Shl8), 0,
+/*6195*/    /*SwitchOpcode*/ 26, TARGET_VAL(MSP430ISD::SHL),// ->6224
+/*6198*/      OPC_RecordChild0, // #0 = $src
+/*6199*/      OPC_RecordChild1, // #1 = $cnt
+/*6200*/      OPC_SwitchType /*2 cases */, 9, MVT::i8,// ->6212
+/*6203*/        OPC_MorphNodeTo2, TARGET_VAL(MSP430::Shl8), 0,
                     MVT::i8, MVT::i16, 2/*#Ops*/, 0, 1, 
                 // Src: (MSP430shl:i8 GR8:i8:$src, GR8:i8:$cnt) - Complexity = 3
                 // Dst: (Shl8:i8:i16 GR8:i8:$src, GR8:i8:$cnt)
-/*6205*/      /*SwitchType*/ 9, MVT::i16,// ->6216
-/*6207*/        OPC_MorphNodeTo2, TARGET_VAL(MSP430::Shl16), 0,
+/*6212*/      /*SwitchType*/ 9, MVT::i16,// ->6223
+/*6214*/        OPC_MorphNodeTo2, TARGET_VAL(MSP430::Shl16), 0,
                     MVT::i16, MVT::i16, 2/*#Ops*/, 0, 1, 
                 // Src: (MSP430shl:i16 GR16:i16:$src, GR8:i8:$cnt) - Complexity = 3
                 // Dst: (Shl16:i16:i16 GR16:i16:$src, GR8:i8:$cnt)
-/*6216*/      0, // EndSwitchType
-/*6217*/    /*SwitchOpcode*/ 26, TARGET_VAL(MSP430ISD::SRA),// ->6246
-/*6220*/      OPC_RecordChild0, // #0 = $src
-/*6221*/      OPC_RecordChild1, // #1 = $cnt
-/*6222*/      OPC_SwitchType /*2 cases */, 9, MVT::i8,// ->6234
-/*6225*/        OPC_MorphNodeTo2, TARGET_VAL(MSP430::Sra8), 0,
+/*6223*/      0, // EndSwitchType
+/*6224*/    /*SwitchOpcode*/ 26, TARGET_VAL(MSP430ISD::SRA),// ->6253
+/*6227*/      OPC_RecordChild0, // #0 = $src
+/*6228*/      OPC_RecordChild1, // #1 = $cnt
+/*6229*/      OPC_SwitchType /*2 cases */, 9, MVT::i8,// ->6241
+/*6232*/        OPC_MorphNodeTo2, TARGET_VAL(MSP430::Sra8), 0,
                     MVT::i8, MVT::i16, 2/*#Ops*/, 0, 1, 
                 // Src: (MSP430sra:i8 GR8:i8:$src, GR8:i8:$cnt) - Complexity = 3
                 // Dst: (Sra8:i8:i16 GR8:i8:$src, GR8:i8:$cnt)
-/*6234*/      /*SwitchType*/ 9, MVT::i16,// ->6245
-/*6236*/        OPC_MorphNodeTo2, TARGET_VAL(MSP430::Sra16), 0,
+/*6241*/      /*SwitchType*/ 9, MVT::i16,// ->6252
+/*6243*/        OPC_MorphNodeTo2, TARGET_VAL(MSP430::Sra16), 0,
                     MVT::i16, MVT::i16, 2/*#Ops*/, 0, 1, 
                 // Src: (MSP430sra:i16 GR16:i16:$src, GR8:i8:$cnt) - Complexity = 3
                 // Dst: (Sra16:i16:i16 GR16:i16:$src, GR8:i8:$cnt)
-/*6245*/      0, // EndSwitchType
-/*6246*/    /*SwitchOpcode*/ 26, TARGET_VAL(MSP430ISD::SRL),// ->6275
-/*6249*/      OPC_RecordChild0, // #0 = $src
-/*6250*/      OPC_RecordChild1, // #1 = $cnt
-/*6251*/      OPC_SwitchType /*2 cases */, 9, MVT::i8,// ->6263
-/*6254*/        OPC_MorphNodeTo2, TARGET_VAL(MSP430::Srl8), 0,
+/*6252*/      0, // EndSwitchType
+/*6253*/    /*SwitchOpcode*/ 26, TARGET_VAL(MSP430ISD::SRL),// ->6282
+/*6256*/      OPC_RecordChild0, // #0 = $src
+/*6257*/      OPC_RecordChild1, // #1 = $cnt
+/*6258*/      OPC_SwitchType /*2 cases */, 9, MVT::i8,// ->6270
+/*6261*/        OPC_MorphNodeTo2, TARGET_VAL(MSP430::Srl8), 0,
                     MVT::i8, MVT::i16, 2/*#Ops*/, 0, 1, 
                 // Src: (MSP430srl:i8 GR8:i8:$src, GR8:i8:$cnt) - Complexity = 3
                 // Dst: (Srl8:i8:i16 GR8:i8:$src, GR8:i8:$cnt)
-/*6263*/      /*SwitchType*/ 9, MVT::i16,// ->6274
-/*6265*/        OPC_MorphNodeTo2, TARGET_VAL(MSP430::Srl16), 0,
+/*6270*/      /*SwitchType*/ 9, MVT::i16,// ->6281
+/*6272*/        OPC_MorphNodeTo2, TARGET_VAL(MSP430::Srl16), 0,
                     MVT::i16, MVT::i16, 2/*#Ops*/, 0, 1, 
                 // Src: (MSP430srl:i16 GR16:i16:$src, GR8:i8:$cnt) - Complexity = 3
                 // Dst: (Srl16:i16:i16 GR16:i16:$src, GR8:i8:$cnt)
-/*6274*/      0, // EndSwitchType
-/*6275*/    0, // EndSwitchOpcode
+/*6281*/      0, // EndSwitchType
+/*6282*/    0, // EndSwitchOpcode
     0
-  }; // Total Array size is 6277 bytes
+  }; // Total Array size is 6284 bytes
 
   // Opcode Histogram:
   // #OPC_Scope                          = 71
   // #OPC_RecordNode                     = 71
-  // #OPC_RecordChild                    = 170
+  // #OPC_RecordChild                    = 171
   // #OPC_RecordMemRef                   = 58
   // #OPC_CaptureGlueInput               = 10
-  // #OPC_MoveChild                      = 102
-  // #OPC_MoveParent                     = 210
+  // #OPC_MoveChild                      = 103
+  // #OPC_MoveParent                     = 211
   // #OPC_CheckSame                      = 0
   // #OPC_CheckChildSame                 = 82
   // #OPC_CheckPatternPredicate          = 0
   // #OPC_CheckPredicate                 = 308
-  // #OPC_CheckOpcode                    = 90
+  // #OPC_CheckOpcode                    = 91
   // #OPC_SwitchOpcode                   = 11
   // #OPC_CheckType                      = 50
   // #OPC_SwitchType                     = 75

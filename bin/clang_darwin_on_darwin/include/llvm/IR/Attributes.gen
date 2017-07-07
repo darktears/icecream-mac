@@ -42,6 +42,7 @@ SafeStack,
 SanitizeAddress,
 SanitizeMemory,
 SanitizeThread,
+Speculatable,
 StackAlignment,
 StackProtect,
 StackProtectReq,
@@ -99,6 +100,7 @@ static Attribute::AttrKind getAttrKindFromName(StringRef AttrName) {
     .Case("sanitize_address", Attribute::SanitizeAddress)
     .Case("sanitize_memory", Attribute::SanitizeMemory)
     .Case("sanitize_thread", Attribute::SanitizeThread)
+    .Case("speculatable", Attribute::Speculatable)
     .Case("alignstack", Attribute::StackAlignment)
     .Case("ssp", Attribute::StackProtect)
     .Case("sspreq", Attribute::StackProtectReq)
@@ -352,6 +354,11 @@ struct SanitizeMemoryAttr : EnumAttr {
 struct SanitizeThreadAttr : EnumAttr {
   static enum Attribute::AttrKind getKind() {
     return llvm::Attribute::SanitizeThread;
+  }
+};
+struct SpeculatableAttr : EnumAttr {
+  static enum Attribute::AttrKind getKind() {
+    return llvm::Attribute::Speculatable;
   }
 };
 struct StackAlignmentAttr : EnumAttr {

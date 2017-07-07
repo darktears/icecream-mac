@@ -1,4 +1,4 @@
 #!/bin/bash
 
 source ~/.bashrc
-/Applications/Icemon.app/Contents/MacOS/monitor
+/Applications/Icemon.app/Contents/MacOS/monitor -s $USE_SCHEDULER

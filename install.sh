@@ -31,8 +31,8 @@ cat > "$PLIST" << EOF
     <string>org.icecream.iceccd</string>
     <key>ProgramArguments</key>
     <array>
-        <string>$DIR/bin/icecc/iceccd</string>
-	<string>-s</string>
+        <string>$DIR/icecc/iceccd</string>
+        <string>-s</string>
         <string>$1</string>
     </array>
     <key>KeepAlive</key>

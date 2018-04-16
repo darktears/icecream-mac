@@ -33,9 +33,9 @@ With this the icecream daemon is launched when macOS starts or if it stops.
 You now need to setup some environment variable. In your .bashrc add :
 
 ```bash
-$ export ICECC_VERSION=Darwin16_x86_64:/path/to/chromium/src/icecream/clang_darwin_on_darwin.tar.gz,x86_64:/path/to/chromium/src/icecream/clang_darwin_on_linux.tar.gz
+$ export ICECC_VERSION=Darwin17_x86_64:/path/to/chromium/src/icecream/clang_darwin_on_darwin.tar.gz,x86_64:/path/to/chromium/src/icecream/clang_darwin_on_linux.tar.gz
 $ export ICECC_CLANG_REMOTE_CPP=1
-$ export PATH=path/to/chromium/src/icecream/bin/icecc/:$PATH
+$ export PATH=path/to/chromium/src/icecream/icecc/:$PATH
 ```
 
 Setup your args.gn

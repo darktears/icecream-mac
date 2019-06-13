@@ -683,7 +683,7 @@ inline _LIBCPP_INLINE_VISIBILITY
 _ValueType __libcpp_relaxed_load(_ValueType const* __value) {
 #if !defined(_LIBCPP_HAS_NO_THREADS) && \
     defined(__ATOMIC_RELAXED) &&        \
-    (__has_builtin(__atomic_load_n) || _GNUC_VER >= 407)
+    (__has_builtin(__atomic_load_n) || defined(_LIBCPP_COMPILER_GCC))
     return __atomic_load_n(__value, __ATOMIC_RELAXED);
 #else
     return *__value;
@@ -695,7 +695,7 @@ inline _LIBCPP_INLINE_VISIBILITY
 _ValueType __libcpp_acquire_load(_ValueType const* __value) {
 #if !defined(_LIBCPP_HAS_NO_THREADS) && \
     defined(__ATOMIC_ACQUIRE) &&        \
-    (__has_builtin(__atomic_load_n) || _GNUC_VER >= 407)
+    (__has_builtin(__atomic_load_n) || defined(_LIBCPP_COMPILER_GCC))
     return __atomic_load_n(__value, __ATOMIC_ACQUIRE);
 #else
     return *__value;
@@ -3466,7 +3466,7 @@ uninitialized_move_n(_InputIt __first, _Size __n, _ForwardIt __first_res) {
                        && defined(__ATOMIC_RELAXED)                  \
                        && defined(__ATOMIC_ACQ_REL)
 #   define _LIBCPP_HAS_BUILTIN_ATOMIC_SUPPORT
-#elif !defined(__clang__) && defined(_GNUC_VER) && _GNUC_VER >= 407
+#elif defined(_LIBCPP_COMPILER_GCC)
 #   define _LIBCPP_HAS_BUILTIN_ATOMIC_SUPPORT
 #endif
 
@@ -5667,6 +5667,52 @@ struct __is_allocator<_Alloc,
        typename __void_t<decltype(_VSTD::declval<_Alloc&>().allocate(size_t(0)))>::type
      >
    : true_type {};
+
+// __builtin_new_allocator -- A non-templated helper for allocating and
+// deallocating memory using __builtin_operator_new and
+// __builtin_operator_delete. It should be used in preference to
+// `std::allocator<T>` to avoid additional instantiations.
+struct __builtin_new_allocator {
+  struct __builtin_new_deleter {
+    typedef void* pointer_type;
+
+    _LIBCPP_CONSTEXPR explicit __builtin_new_deleter(size_t __size, size_t __align)
+        : __size_(__size), __align_(__align) {}
+
+    void operator()(void* p) const _NOEXCEPT {
+        std::__libcpp_deallocate(p, __size_, __align_);
+    }
+
+   private:
+    size_t __size_;
+    size_t __align_;
+  };
+
+  typedef unique_ptr<void, __builtin_new_deleter> __holder_t;
+
+  static __holder_t __allocate_bytes(size_t __s, size_t __align) {
+      return __holder_t(std::__libcpp_allocate(__s, __align),
+                     __builtin_new_deleter(__s, __align));
+  }
+
+  static void __deallocate_bytes(void* __p, size_t __s,
+                                 size_t __align) _NOEXCEPT {
+      std::__libcpp_deallocate(__p, __s, __align);
+  }
+
+  template <class _Tp>
+  _LIBCPP_NODEBUG _LIBCPP_ALWAYS_INLINE
+  static __holder_t __allocate_type(size_t __n) {
+      return __allocate_bytes(__n * sizeof(_Tp), _LIBCPP_ALIGNOF(_Tp));
+  }
+
+  template <class _Tp>
+  _LIBCPP_NODEBUG _LIBCPP_ALWAYS_INLINE
+  static void __deallocate_type(void* __p, size_t __n) _NOEXCEPT {
+      __deallocate_bytes(__p, __n * sizeof(_Tp), _LIBCPP_ALIGNOF(_Tp));
+  }
+};
+
 
 _LIBCPP_END_NAMESPACE_STD
 
